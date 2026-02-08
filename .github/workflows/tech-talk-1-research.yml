@@ -140,7 +140,7 @@ jobs:
 
       - name: Extract code examples from research
         env:
-          GITHUB_TOKEN: ${{ secrets.COPILOT_GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
         run: |
           TOPIC="${{ steps.extract.outputs.topic }}"
 

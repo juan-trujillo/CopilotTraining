@@ -94,7 +94,7 @@ jobs:
 
       - name: Run Copilot CLI for content generation
         env:
-          GITHUB_TOKEN: ${{ secrets.COPILOT_GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
         run: |
           TOPIC="${{ steps.extract.outputs.topic }}"
 
