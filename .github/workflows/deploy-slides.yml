@@ -28,69 +28,14 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 2 # Need previous commit to detect changes
-
-      - name: Detect changed slides
-        id: changes
-        working-directory: ./slides
-        run: |
-          echo "🔍 Detecting changed files..."
-
-          # Get changed files between HEAD^ and HEAD
-          # For workflow_dispatch or first commit, build all
-          if ! git rev-parse HEAD^ >/dev/null 2>&1; then
-            echo "📦 First commit or shallow clone - building all slides"
-            echo "full_rebuild=true" >> $GITHUB_OUTPUT
-            exit 0
-          fi
-
-          CHANGED_FILES=$(git diff --name-only HEAD^ HEAD -- . || echo "")
-
-          # Check if shared files or workflow changed (require full rebuild)
-          SHARED_PATTERNS="slides/package.json|slides/package-lock.json|slides/style.css|slides/global-top.vue|slides/global-bottom.vue|slides/layouts/|slides/components/|slides/setup/|\.github/workflows/deploy-slides\.yml"
-          if echo "$CHANGED_FILES" | grep -qE "$SHARED_PATTERNS"; then
-            echo "🔄 Shared files or workflow changed - full rebuild required"
-            echo "full_rebuild=true" >> $GITHUB_OUTPUT
-            exit 0
-          fi
-
-          # Extract changed slide .md files (paths include slides/ prefix from git)
-          CHANGED_SLIDES=$(echo "$CHANGED_FILES" | grep -E "^slides/(workshop|tech-talks|exec-talks)/.*\.md$" | sed 's#^slides/##' || echo "")
-
-          if [ -z "$CHANGED_SLIDES" ]; then
-            echo "📭 No slide files changed"
-            echo "full_rebuild=false" >> $GITHUB_OUTPUT
-            echo "changed_slides=" >> $GITHUB_OUTPUT
-          else
-            echo "📝 Changed slides:"
-            echo "$CHANGED_SLIDES"
-            echo "full_rebuild=false" >> $GITHUB_OUTPUT
-            # Convert to space-separated for easier iteration
-            echo "changed_slides<<EOF" >> $GITHUB_OUTPUT
-            echo "$CHANGED_SLIDES" >> $GITHUB_OUTPUT
-            echo "EOF" >> $GITHUB_OUTPUT
-          fi
 
       - name: Restore previous build cache
-        id: dist-cache
         uses: actions/cache@v4
         with:
           path: ./slides/dist
           key: slides-dist-${{ github.sha }}
           restore-keys: |
             slides-dist-
-
-      - name: Check previous build
-        id: prev-build
-        run: |
-          if [ -f ./slides/dist/.build-manifest.json ]; then
-            echo "has_previous=true" >> $GITHUB_OUTPUT
-            echo "✅ Previous build cache restored"
-          else
-            echo "has_previous=false" >> $GITHUB_OUTPUT
-            echo "📋 No previous build found — will build all"
-          fi
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -125,135 +70,60 @@ jobs:
         if: steps.playwright-cache.outputs.cache-hit == 'true'
         run: npx playwright install-deps chromium
 
-      - name: Build presentations (incremental)
-        if: steps.changes.outputs.full_rebuild != 'true' && steps.changes.outputs.changed_slides != '' && steps.prev-build.outputs.has_previous == 'true'
-        working-directory: ./slides
-        run: |
-          echo "🚀 Building changed slides only..."
-
-          # Ensure dist directories exist
-          mkdir -p dist/workshop dist/tech-talks dist/exec-talks
-
-          # Build only changed slides
-          mkdir -p dist/.build-logs
-          while IFS= read -r SLIDE_FILE; do
-            if [ -n "$SLIDE_FILE" ] && [ -f "$SLIDE_FILE" ]; then
-              # Extract category and basename
-              CATEGORY=$(dirname "$SLIDE_FILE")
-              BASENAME=$(basename "$SLIDE_FILE" .md)
-              LOG_FILE="dist/.build-logs/${CATEGORY}--${BASENAME}.log"
-
-              echo "🔨 Building ${CATEGORY}/${BASENAME}..."
-
-              if ! npx slidev build "$SLIDE_FILE" \
-                --base "/CopilotTraining/${CATEGORY}/${BASENAME}/" \
-                --out "$(pwd)/dist/${CATEGORY}/${BASENAME}" \
-                > "$LOG_FILE" 2>&1; then
-                echo "::error::Build failed for ${CATEGORY}/${BASENAME}. See log:"
-                tail -20 "$LOG_FILE"
-                exit 1
-              fi
-
-              echo "✅ ${CATEGORY}/${BASENAME} built successfully"
-            fi
-          done <<< "${{ steps.changes.outputs.changed_slides }}"
-
-          # Ensure index.html and 404.html exist
-          if [ ! -f dist/index.html ]; then
-            cp index-custom.html dist/index.html
-          fi
-          cp 404.html dist/404.html
-
-          echo "✨ Incremental build complete!"
-
-      - name: Build all presentations (full rebuild)
-        if: steps.changes.outputs.full_rebuild == 'true' || steps.prev-build.outputs.has_previous != 'true'
+      - name: Build slides
         working-directory: ./slides
         shell: bash {0}
         run: |
-          echo "🚀 Building all Slidev presentations..."
-
-          mkdir -p dist/workshop dist/tech-talks dist/exec-talks
+          mkdir -p dist/workshop dist/tech-talks dist/exec-talks dist/.build-logs
 
           MAX_JOBS=4
           PIDS=()
           LABELS=()
           FAILED=0
           SKIPPED=0
-          REBUILT=0
 
-          # Check if a slide has status: archived in frontmatter
-          is_archived() {
-            head -20 "$1" | grep -q '^status: archived$'
-          }
-
-          # Extract 'updated' date from frontmatter
+          # Extract 'updated' date from frontmatter (first 20 lines)
           get_updated() {
             head -20 "$1" | sed -n 's/^updated: *//p'
           }
 
-          # Load previous build manifest (written by prior deploy)
-          MANIFEST_FILE="dist/.build-manifest.json"
+          # Load previous build manifest
           declare -A PREV_UPDATED
-          if [ -f "$MANIFEST_FILE" ]; then
+          if [ -f "dist/.build-manifest.json" ]; then
             while IFS='=' read -r key val; do
               PREV_UPDATED["$key"]="$val"
             done < <(python3 -c "
-          import json, sys
-          with open('$MANIFEST_FILE') as f:
+          import json
+          with open('dist/.build-manifest.json') as f:
               m = json.load(f)
           for k, v in m.items():
               print(f'{k}={v}')
           " 2>/dev/null || true)
-            echo "📋 Loaded build manifest with ${#PREV_UPDATED[@]} entries"
+            echo "📋 Loaded manifest with ${#PREV_UPDATED[@]} entries"
           else
-            echo "📋 No previous build manifest found — building all"
+            echo "📋 No manifest — building all slides"
           fi
 
-          # Check if slide needs rebuilding based on 'updated' field
+          # Decide if a slide needs building: compare updated date vs manifest
           needs_build() {
-            local SLIDE_FILE="$1"
-            local CATEGORY=$(dirname "$SLIDE_FILE")
-            local BASENAME=$(basename "$SLIDE_FILE" .md)
-            local KEY="${CATEGORY}/${BASENAME}"
-
-            # No previous build dir? Must build
-            [ ! -d "dist/${KEY}" ] && return 0
-
-            # No previous manifest entry? Must build
-            [ -z "${PREV_UPDATED[$KEY]+x}" ] && return 0
-
-            # Compare updated dates
-            local CURRENT_UPDATED=$(get_updated "$SLIDE_FILE")
-            [ -z "$CURRENT_UPDATED" ] && return 0  # No updated field? Build to be safe
-
-            if [ "$CURRENT_UPDATED" = "${PREV_UPDATED[$KEY]}" ]; then
-              return 1  # Same date — skip
-            fi
-            return 0  # Different date — rebuild
+            local KEY="$1"
+            local CURRENT_DATE="$2"
+            [ ! -d "dist/${KEY}" ] && return 0                    # No dist output
+            [ -z "${PREV_UPDATED[$KEY]+x}" ] && return 0          # Not in manifest
+            [ -z "$CURRENT_DATE" ] && return 0                    # No updated field
+            [ "$CURRENT_DATE" != "${PREV_UPDATED[$KEY]}" ]        # Date changed
           }
 
-          # Track new manifest entries
-          declare -A NEW_MANIFEST
-
+          # Build with retry
           build_slide() {
             local SLIDE_FILE="$1"
             local CATEGORY=$(dirname "$SLIDE_FILE")
             local BASENAME=$(basename "$SLIDE_FILE" .md)
             local LOG_FILE="dist/.build-logs/${CATEGORY}--${BASENAME}.log"
-            local MAX_RETRIES=2
-            local ATTEMPT=0
 
-            mkdir -p "$(dirname "$LOG_FILE")"
-
-            while [ $ATTEMPT -lt $MAX_RETRIES ]; do
-              ATTEMPT=$((ATTEMPT + 1))
-              if [ $ATTEMPT -eq 1 ]; then
-                echo "🔨 Building ${CATEGORY}/${BASENAME}..."
-              else
-                echo "🔄 Retrying ${CATEGORY}/${BASENAME} (attempt ${ATTEMPT}/${MAX_RETRIES})..."
-              fi
-
+            for ATTEMPT in 1 2; do
+              [ $ATTEMPT -eq 1 ] && echo "🔨 Building ${CATEGORY}/${BASENAME}..." \
+                                 || echo "🔄 Retrying ${CATEGORY}/${BASENAME} (attempt 2)..."
               if npx slidev build "$SLIDE_FILE" \
                 --base "/CopilotTraining/${CATEGORY}/${BASENAME}/" \
                 --out "$(pwd)/dist/${CATEGORY}/${BASENAME}" \
@@ -261,105 +131,79 @@ jobs:
                 return 0
               fi
             done
-
-            echo "::error::Build failed for ${CATEGORY}/${BASENAME} after ${MAX_RETRIES} attempts. See log:"
+            echo "::error::Build failed for ${CATEGORY}/${BASENAME}. Log:"
             tail -20 "$LOG_FILE"
             return 1
           }
 
+          # Wait for a parallel slot to free up
           wait_for_slot() {
             while [ ${#PIDS[@]} -ge $MAX_JOBS ]; do
-              NEW_PIDS=()
-              NEW_LABELS=()
+              NEW_PIDS=(); NEW_LABELS=()
               for i in "${!PIDS[@]}"; do
                 if kill -0 "${PIDS[$i]}" 2>/dev/null; then
-                  NEW_PIDS+=("${PIDS[$i]}")
-                  NEW_LABELS+=("${LABELS[$i]}")
+                  NEW_PIDS+=("${PIDS[$i]}"); NEW_LABELS+=("${LABELS[$i]}")
                 else
-                  wait "${PIDS[$i]}" && echo "✅ ${LABELS[$i]} built successfully" || { echo "❌ ${LABELS[$i]} FAILED"; FAILED=1; }
+                  wait "${PIDS[$i]}" && echo "✅ ${LABELS[$i]} built successfully" \
+                                     || { echo "❌ ${LABELS[$i]} FAILED"; FAILED=1; }
                 fi
               done
-              PIDS=("${NEW_PIDS[@]}")
-              LABELS=("${NEW_LABELS[@]}")
+              PIDS=("${NEW_PIDS[@]}"); LABELS=("${NEW_LABELS[@]}")
               [ ${#PIDS[@]} -ge $MAX_JOBS ] && sleep 1
             done
           }
 
-          # Queue all slide builds (skip archived & unchanged slides)
+          # Iterate all slides — build only what's needed
+          declare -A NEW_MANIFEST
           for SLIDE_FILE in workshop/*.md tech-talks/*.md exec-talks/*.md; do
-            if [ -f "$SLIDE_FILE" ]; then
-              CATEGORY=$(dirname "$SLIDE_FILE")
-              BASENAME=$(basename "$SLIDE_FILE" .md)
-              KEY="${CATEGORY}/${BASENAME}"
-              CURRENT_UPDATED=$(get_updated "$SLIDE_FILE")
+            [ -f "$SLIDE_FILE" ] || continue
+            CATEGORY=$(dirname "$SLIDE_FILE")
+            BASENAME=$(basename "$SLIDE_FILE" .md)
+            KEY="${CATEGORY}/${BASENAME}"
+            CURRENT_UPDATED=$(get_updated "$SLIDE_FILE")
 
-              # Track in manifest regardless of build/skip
-              [ -n "$CURRENT_UPDATED" ] && NEW_MANIFEST["$KEY"]="$CURRENT_UPDATED"
+            # Always track in manifest
+            [ -n "$CURRENT_UPDATED" ] && NEW_MANIFEST["$KEY"]="$CURRENT_UPDATED"
 
-              # Skip archived slides with existing builds
-              if is_archived "$SLIDE_FILE"; then
-                if [ -d "dist/${KEY}" ]; then
-                  echo "⏭️  Skipping archived: ${KEY} (reusing previous build)"
-                  SKIPPED=$((SKIPPED + 1))
-                  continue
-                else
-                  echo "⚠️  Archived slide ${KEY} has no previous build — rebuilding"
-                fi
-              # Skip unchanged slides with existing builds
-              elif ! needs_build "$SLIDE_FILE"; then
-                echo "⏭️  Skipping unchanged: ${KEY} (updated: ${CURRENT_UPDATED})"
-                SKIPPED=$((SKIPPED + 1))
-                continue
-              fi
-
-              wait_for_slot
-              build_slide "$SLIDE_FILE" &
-              PIDS+=($!)
-              LABELS+=("${CATEGORY}/${BASENAME}")
-              REBUILT=$((REBUILT + 1))
+            # Skip if updated date matches and dist exists
+            if ! needs_build "$KEY" "$CURRENT_UPDATED"; then
+              echo "⏭️  ${KEY} (updated: ${CURRENT_UPDATED}) — up to date"
+              SKIPPED=$((SKIPPED + 1))
+              continue
             fi
+
+            wait_for_slot
+            build_slide "$SLIDE_FILE" &
+            PIDS+=($!)
+            LABELS+=("${KEY}")
           done
 
-          # Wait for remaining jobs
+          # Wait for remaining builds
           for i in "${!PIDS[@]}"; do
-            wait "${PIDS[$i]}" && echo "✅ ${LABELS[$i]} built successfully" || { echo "❌ ${LABELS[$i]} FAILED"; FAILED=1; }
+            wait "${PIDS[$i]}" && echo "✅ ${LABELS[$i]} built successfully" \
+                               || { echo "❌ ${LABELS[$i]} FAILED"; FAILED=1; }
           done
 
           [ $FAILED -eq 1 ] && { echo "❌ Some builds failed"; exit 1; }
 
-          # Write build manifest for next run
+          # Write manifest for next run
           python3 -c "
           import json, sys
           manifest = {}
           for line in sys.stdin:
-              k, v = line.strip().split('=', 1)
-              manifest[k] = v
+              if '=' in line:
+                  k, v = line.strip().split('=', 1)
+                  manifest[k] = v
           with open('dist/.build-manifest.json', 'w') as f:
               json.dump(manifest, f, indent=2, sort_keys=True)
           " <<< "$(for key in "${!NEW_MANIFEST[@]}"; do echo "${key}=${NEW_MANIFEST[$key]}"; done)"
-          echo "📋 Build manifest written with ${#NEW_MANIFEST[@]} entries"
 
-          TOTAL=$((REBUILT + SKIPPED))
-          echo "📊 ${TOTAL} slides total: ${REBUILT} built, ${SKIPPED} skipped (archived/unchanged)"
-
-          # Copy custom index.html and 404.html to dist root
-          echo "📄 Copying index.html and 404.html to dist root..."
+          # Copy index and 404
           cp index-custom.html dist/index.html
           cp 404.html dist/404.html
 
-          echo "✨ All presentations built successfully!"
-
-      - name: Verify build output
-        if: steps.changes.outputs.full_rebuild != 'true' && steps.changes.outputs.changed_slides == '' && steps.prev-build.outputs.has_previous == 'true'
-        working-directory: ./slides
-        run: |
-          echo "⏭️ No slide changes detected - using previous build"
-          # Verify we have a valid dist directory
-          if [ ! -d dist ] || [ ! -f dist/index.html ]; then
-            echo "❌ Error: No valid dist directory found and no slides to build"
-            exit 1
-          fi
-          echo "✅ Previous build is valid"
+          BUILT=${#LABELS[@]}
+          echo "📊 ${BUILT} built, ${SKIPPED} skipped (up to date)"
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
