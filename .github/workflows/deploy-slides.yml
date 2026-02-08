@@ -179,11 +179,61 @@ jobs:
           LABELS=()
           FAILED=0
           SKIPPED=0
+          REBUILT=0
 
           # Check if a slide has status: archived in frontmatter
           is_archived() {
             head -20 "$1" | grep -q '^status: archived$'
           }
+
+          # Extract 'updated' date from frontmatter
+          get_updated() {
+            head -20 "$1" | sed -n 's/^updated: *//p'
+          }
+
+          # Load previous build manifest (written by prior deploy)
+          MANIFEST_FILE="dist/.build-manifest.json"
+          declare -A PREV_UPDATED
+          if [ -f "$MANIFEST_FILE" ]; then
+            while IFS='=' read -r key val; do
+              PREV_UPDATED["$key"]="$val"
+            done < <(python3 -c "
+          import json, sys
+          with open('$MANIFEST_FILE') as f:
+              m = json.load(f)
+          for k, v in m.items():
+              print(f'{k}={v}')
+          " 2>/dev/null || true)
+            echo "📋 Loaded build manifest with ${#PREV_UPDATED[@]} entries"
+          else
+            echo "📋 No previous build manifest found — building all"
+          fi
+
+          # Check if slide needs rebuilding based on 'updated' field
+          needs_build() {
+            local SLIDE_FILE="$1"
+            local CATEGORY=$(dirname "$SLIDE_FILE")
+            local BASENAME=$(basename "$SLIDE_FILE" .md)
+            local KEY="${CATEGORY}/${BASENAME}"
+
+            # No previous build dir? Must build
+            [ ! -d "dist/${KEY}" ] && return 0
+
+            # No previous manifest entry? Must build
+            [ -z "${PREV_UPDATED[$KEY]+x}" ] && return 0
+
+            # Compare updated dates
+            local CURRENT_UPDATED=$(get_updated "$SLIDE_FILE")
+            [ -z "$CURRENT_UPDATED" ] && return 0  # No updated field? Build to be safe
+
+            if [ "$CURRENT_UPDATED" = "${PREV_UPDATED[$KEY]}" ]; then
+              return 1  # Same date — skip
+            fi
+            return 0  # Different date — rebuild
+          }
+
+          # Track new manifest entries
+          declare -A NEW_MANIFEST
 
           build_slide() {
             local SLIDE_FILE="$1"
@@ -234,23 +284,29 @@ jobs:
             done
           }
 
-          # Queue all slide builds (skip archived slides that already exist from gh-pages)
+          # Queue all slide builds (skip archived & unchanged slides)
           for SLIDE_FILE in workshop/*.md tech-talks/*.md exec-talks/*.md; do
             if [ -f "$SLIDE_FILE" ]; then
               CATEGORY=$(dirname "$SLIDE_FILE")
               BASENAME=$(basename "$SLIDE_FILE" .md)
+              KEY="${CATEGORY}/${BASENAME}"
+              CURRENT_UPDATED=$(get_updated "$SLIDE_FILE")
 
+              # Track in manifest regardless of build/skip
+              [ -n "$CURRENT_UPDATED" ] && NEW_MANIFEST["$KEY"]="$CURRENT_UPDATED"
+
+              # Skip archived slides with existing builds
               if is_archived "$SLIDE_FILE"; then
-                if [ -d "dist/${CATEGORY}/${BASENAME}" ]; then
-                  echo "⏭️  Skipping archived: ${CATEGORY}/${BASENAME} (reusing previous build)"
-                else
-                  echo "⚠️  Archived slide ${CATEGORY}/${BASENAME} has no previous build — rebuilding"
-                  wait_for_slot
-                  build_slide "$SLIDE_FILE" &
-                  PIDS+=($!)
-                  LABELS+=("${CATEGORY}/${BASENAME}")
+                if [ -d "dist/${KEY}" ]; then
+                  echo "⏭️  Skipping archived: ${KEY} (reusing previous build)"
+                  SKIPPED=$((SKIPPED + 1))
                   continue
+                else
+                  echo "⚠️  Archived slide ${KEY} has no previous build — rebuilding"
                 fi
+              # Skip unchanged slides with existing builds
+              elif ! needs_build "$SLIDE_FILE"; then
+                echo "⏭️  Skipping unchanged: ${KEY} (updated: ${CURRENT_UPDATED})"
                 SKIPPED=$((SKIPPED + 1))
                 continue
               fi
@@ -259,6 +315,7 @@ jobs:
               build_slide "$SLIDE_FILE" &
               PIDS+=($!)
               LABELS+=("${CATEGORY}/${BASENAME}")
+              REBUILT=$((REBUILT + 1))
             fi
           done
 
@@ -269,7 +326,20 @@ jobs:
 
           [ $FAILED -eq 1 ] && { echo "❌ Some builds failed"; exit 1; }
 
-          echo "📊 Built $((${#LABELS[@]} + SKIPPED)) slides: ${#LABELS[@]} built, ${SKIPPED} archived (reused)"
+          # Write build manifest for next run
+          python3 -c "
+          import json, sys
+          manifest = {}
+          for line in sys.stdin:
+              k, v = line.strip().split('=', 1)
+              manifest[k] = v
+          with open('dist/.build-manifest.json', 'w') as f:
+              json.dump(manifest, f, indent=2, sort_keys=True)
+          " <<< "$(for key in "${!NEW_MANIFEST[@]}"; do echo "${key}=${NEW_MANIFEST[$key]}"; done)"
+          echo "📋 Build manifest written with ${#NEW_MANIFEST[@]} entries"
+
+          TOTAL=$((REBUILT + SKIPPED))
+          echo "📊 ${TOTAL} slides total: ${REBUILT} built, ${SKIPPED} skipped (archived/unchanged)"
 
           # Copy custom index.html and 404.html to dist root
           echo "📄 Copying index.html and 404.html to dist root..."
