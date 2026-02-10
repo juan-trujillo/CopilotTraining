@@ -21,7 +21,7 @@ AGENTS.md: https://agents.md/
 Using agents in Visual Studio Code: https://code.visualstudio.com/docs/copilot/agents/overview#_types-of-agents
 
 ---
-
+Built a repo: copilot-usage.  Need to create PAT and test.
 new tech talk for reporting based on https://docs.github.com/en/enterprise-cloud@latest/rest/copilot/copilot-usage-metrics?apiVersion=2022-11-28
 "how to hold developers/managers accountable for copilot usage?" "how to measure the impact of copilot on your org?"  "what metrics should you be looking at to understand usage and impact?"  "how to set goals for copilot usage and track progress towards those goals?"
 
@@ -30,5 +30,5 @@ new tech talk for reporting based on https://docs.github.com/en/enterprise-cloud
 investigate this :  https://search.app/1fZRT
 
 ---
-
+built a repo: cli-acp.  works.  good scenario.  maybe add another sccenario like "Update logging across all repos to make it consistent."
 build tech-talk for multi-repo workspaces in VS Code.  how to set them up, best practices for using them, how they can help with working across multiple related repositories (e.g. microservices, frontend/backend, etc.) Answers the question of "how do I use copilot agents across multiple repositories?" and "how do I set up my environment to work with multiple repos at once?"  also covers the new multi-repo features in VS Code that make this easier, and any tips/tricks for getting the most out of it.
