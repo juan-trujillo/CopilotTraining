@@ -12,5 +12,8 @@
   "search.exclude": {
     "**/slides/screenshots": true,
     "**/slides/verification-reports": true
+  },
+  "[markdown]": {
+    "editor.formatOnSave": false
   }
 }
