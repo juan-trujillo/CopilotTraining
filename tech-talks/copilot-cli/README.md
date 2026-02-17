@@ -2,6 +2,22 @@
 status: active
 updated: 2026-02-10
 section: "Copilot Surfaces"
+references:
+  - url: https://docs.github.com/en/copilot/concepts/agents/about-copilot-cli
+    label: "About GitHub Copilot CLI"
+    verified: 2026-02-10
+  - url: https://docs.github.com/en/copilot/how-tos/use-copilot-agents/use-copilot-cli
+    label: "Use Copilot CLI"
+    verified: 2026-02-10
+  - url: https://docs.github.com/en/copilot/how-tos/set-up/install-copilot-cli
+    label: "Install Copilot CLI"
+    verified: 2026-02-10
+  - url: https://docs.github.com/en/copilot/how-tos/use-copilot-agents/use-copilot-cli#use-custom-instructions
+    label: "Copilot CLI custom instructions"
+    verified: 2026-02-10
+  - url: https://docs.github.com/en/copilot/how-tos/use-copilot-agents/use-copilot-cli#add-an-mcp-server
+    label: "Add an MCP server to Copilot CLI"
+    verified: 2026-02-10
 ---
 
 # GitHub Copilot CLI: Terminal-Native AI for DevOps Automation

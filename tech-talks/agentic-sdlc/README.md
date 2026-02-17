@@ -2,6 +2,19 @@
 status: active
 updated: 2026-02-01
 section: "Agentic Transformation"
+references:
+  - url: https://docs.github.com/en/actions
+    label: "GitHub Actions documentation"
+    verified: 2026-02-01
+  - url: https://docs.github.com/en/actions/using-workflows/caching-dependencies-to-speed-up-workflows
+    label: "GitHub Actions caching guide"
+    verified: 2026-02-01
+  - url: https://nx.dev/
+    label: "Nx monorepo tools"
+    verified: 2026-02-01
+  - url: https://slsa.dev/
+    label: "SLSA supply chain security framework"
+    verified: 2026-02-01
 ---
 
 # Agentic SDLC: Infrastructure for AI Velocity

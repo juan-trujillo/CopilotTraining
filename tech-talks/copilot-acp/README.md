@@ -2,6 +2,28 @@
 status: active
 updated: 2026-02-11
 section: "Context & Customization"
+references:
+  - url: https://docs.github.com/en/copilot/reference/acp-server
+    label: "Copilot CLI ACP Server reference"
+    verified: 2026-02-11
+  - url: https://docs.github.com/en/copilot/how-tos/copilot-cli/cli-getting-started
+    label: "Getting started with Copilot CLI"
+    verified: 2026-02-11
+  - url: https://agentclientprotocol.com/protocol/overview
+    label: "ACP protocol specification overview"
+    verified: 2026-02-11
+  - url: https://github.com/agentclientprotocol/agent-client-protocol
+    label: "ACP spec repository and SDKs"
+    verified: 2026-02-11
+  - url: https://agentclientprotocol.com/get-started/architecture
+    label: "ACP four-layer architecture"
+    verified: 2026-02-11
+  - url: https://github.blog/changelog/2026-01-28-acp-support-in-copilot-cli-is-now-in-public-preview/
+    label: "ACP support in Copilot CLI public preview announcement"
+    verified: 2026-02-11
+  - url: https://github.blog/ai-and-ml/github-copilot/power-agentic-workflows-in-your-terminal-with-github-copilot-cli/
+    label: "Power agentic workflows in your terminal"
+    verified: 2026-02-11
 ---
 
 # GitHub Copilot ACP: The Agent Client Protocol for Universal AI Integration

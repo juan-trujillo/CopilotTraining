@@ -2,6 +2,19 @@
 status: active
 updated: 2026-02-01
 section: "Copilot Surfaces"
+references:
+  - url: https://code.visualstudio.com/docs/copilot/chat/copilot-chat-context
+    label: "Copilot Chat context management"
+    verified: 2026-02-01
+  - url: https://code.visualstudio.com/docs/copilot/copilot-chat
+    label: "Copilot Chat interface overview"
+    verified: 2026-02-01
+  - url: https://code.visualstudio.com/docs/copilot/reference/copilot-vscode-features#_chat-tools
+    label: "Chat tools reference"
+    verified: 2026-02-01
+  - url: https://code.visualstudio.com/docs/copilot/reference/workspace-context
+    label: "Workspace context and semantic search"
+    verified: 2026-02-01
 ---
 
 # Copilot Chat: Context Mastery for AI Collaboration

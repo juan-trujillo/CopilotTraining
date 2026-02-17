@@ -2,6 +2,22 @@
 status: active
 updated: 2026-02-01
 section: "Context & Customization"
+references:
+  - url: https://github.com/github/copilot-sdk
+    label: "GitHub Copilot SDK repository"
+    verified: 2026-02-01
+  - url: https://github.blog/news-insights/company-news/build-an-agent-into-any-app-with-the-github-copilot-sdk/
+    label: "Build an agent into any app with the Copilot SDK"
+    verified: 2026-02-01
+  - url: https://docs.github.com/en/copilot/using-github-copilot/using-github-copilot-in-the-command-line
+    label: "Using Copilot in the command line"
+    verified: 2026-02-01
+  - url: https://github.com/github/awesome-copilot/blob/main/cookbook/copilot-sdk/python/README.md
+    label: "Python SDK cookbook"
+    verified: 2026-02-01
+  - url: https://docs.github.com/en/copilot/concepts/billing/copilot-requests
+    label: "Copilot requests and billing"
+    verified: 2026-02-01
 ---
 
 # GitHub Copilot SDK: Build AI-Powered Tools for Your Workflows

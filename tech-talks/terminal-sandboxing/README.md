@@ -2,6 +2,13 @@
 status: active
 updated: 2026-02-01
 section: "Copilot Surfaces"
+references:
+  - url: https://code.visualstudio.com/docs/copilot/reference/copilot-settings
+    label: "Copilot settings reference (terminal sandbox settings)"
+    verified: 2026-02-01
+  - url: https://code.visualstudio.com/updates/v1_109#_terminal-sandbox
+    label: "VS Code v1.109 terminal sandbox"
+    verified: 2026-02-01
 ---
 
 # Terminal Sandboxing: Safe Agentic Execution

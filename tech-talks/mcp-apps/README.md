@@ -2,6 +2,22 @@
 status: active
 updated: 2026-02-01
 section: "Context & Customization"
+references:
+  - url: https://code.visualstudio.com/blogs/2026/01/26/mcp-apps-support
+    label: "MCP Apps support in VS Code"
+    verified: 2026-02-01
+  - url: https://code.visualstudio.com/docs/copilot/customization/mcp-servers
+    label: "MCP servers documentation in VS Code"
+    verified: 2026-02-01
+  - url: https://modelcontextprotocol.io/
+    label: "Model Context Protocol specification"
+    verified: 2026-02-01
+  - url: https://github.com/modelcontextprotocol/servers
+    label: "MCP servers repository"
+    verified: 2026-02-01
+  - url: https://github.com/modelcontextprotocol/typescript-sdk
+    label: "MCP TypeScript SDK"
+    verified: 2026-02-01
 ---
 
 # MCP Apps: Rich Interactive UI in Chat

@@ -2,6 +2,28 @@
 status: active
 updated: 2026-02-12
 section: "Copilot Surfaces"
+references:
+  - url: https://code.visualstudio.com/updates/v1_109
+    label: "VS Code release notes: January 2026 (v1.109)"
+    verified: 2026-02-12
+  - url: https://code.visualstudio.com/updates/v1_108
+    label: "VS Code release notes: December 2025 (v1.108)"
+    verified: 2026-02-12
+  - url: https://code.visualstudio.com/updates/v1_107
+    label: "VS Code release notes: November 2025 (v1.107)"
+    verified: 2026-02-12
+  - url: https://code.visualstudio.com/docs/copilot/overview
+    label: "GitHub Copilot in VS Code documentation"
+    verified: 2026-02-12
+  - url: https://github.blog/changelog/2026-02-04-github-copilot-in-visual-studio-code-v1-109-january-release/
+    label: "GitHub Blog: Copilot in VS Code v1.109"
+    verified: 2026-02-12
+  - url: https://code.visualstudio.com/docs/copilot/customization/agent-skills
+    label: "Agent Skills documentation"
+    verified: 2026-02-12
+  - url: https://code.visualstudio.com/docs/copilot/agents/background-agents
+    label: "Background Agents documentation"
+    verified: 2026-02-12
 ---
 
 # What's New in Copilot for VS Code: v1.107 – v1.109

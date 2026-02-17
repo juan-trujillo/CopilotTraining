@@ -2,6 +2,19 @@
 status: active
 updated: 2026-02-12
 section: "Agent Architecture"
+references:
+  - url: https://code.visualstudio.com/docs/copilot/customization/custom-agents
+    label: "Custom agents in VS Code"
+    verified: 2026-02-12
+  - url: https://code.visualstudio.com/docs/copilot/agents/subagents
+    label: "Subagent invocation and parallel execution"
+    verified: 2026-02-12
+  - url: https://code.visualstudio.com/updates/v1_109#_agent-orchestration
+    label: "VS Code v1.109 agent orchestration features"
+    verified: 2026-02-12
+  - url: https://github.com/bradygaster/squad
+    label: "Squad — production-ready agent team system"
+    verified: 2026-02-12
 ---
 
 # Agent Teams: Coordinating Specialized AI Roles for Complex Development

@@ -2,6 +2,22 @@
 status: active
 updated: 2026-02-01
 section: "Copilot Surfaces"
+references:
+  - url: https://code.visualstudio.com/docs/copilot/chat/chat-debug-view
+    label: "Copilot Chat debug view"
+    verified: 2026-02-01
+  - url: https://code.visualstudio.com/docs/copilot/troubleshooting
+    label: "Copilot troubleshooting guide"
+    verified: 2026-02-01
+  - url: https://code.visualstudio.com/docs/copilot/customization/mcp-servers
+    label: "MCP server configuration in VS Code"
+    verified: 2026-02-01
+  - url: https://code.visualstudio.com/docs/copilot/customization/custom-instructions
+    label: "Custom instructions in VS Code"
+    verified: 2026-02-01
+  - url: https://code.visualstudio.com/docs/copilot/customization/custom-agents
+    label: "Custom agents in VS Code"
+    verified: 2026-02-01
 ---
 
 # Copilot Chat Internals: Debugging AI Interactions

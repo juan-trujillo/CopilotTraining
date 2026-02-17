@@ -2,6 +2,16 @@
 status: active
 updated: 2026-02-01
 section: "Agentic Transformation"
+references:
+  - url: https://docs.github.com/en/copilot/managing-copilot/managing-github-copilot-in-your-organization
+    label: "Managing Copilot in your organization"
+    verified: 2026-02-01
+  - url: https://docs.github.com/en/copilot/customizing-copilot/adding-custom-instructions-for-github-copilot#adding-organization-wide-custom-instructions
+    label: "Adding organization-wide custom instructions"
+    verified: 2026-02-01
+  - url: https://docs.github.com/en/rest/copilot/copilot-metrics
+    label: "Copilot metrics REST API"
+    verified: 2026-02-01
 ---
 
 # Scaling GitHub Copilot Across Organizations

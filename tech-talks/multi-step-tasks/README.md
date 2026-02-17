@@ -2,6 +2,22 @@
 status: active
 updated: 2026-02-01
 section: "Agent Architecture"
+references:
+  - url: https://code.visualstudio.com/docs/copilot/agents/subagents
+    label: "Subagents documentation"
+    verified: 2026-02-01
+  - url: https://code.visualstudio.com/docs/copilot/customization/custom-agents
+    label: "Custom agents in VS Code"
+    verified: 2026-02-01
+  - url: https://code.visualstudio.com/docs/copilot/agents/overview
+    label: "Agents overview in VS Code"
+    verified: 2026-02-01
+  - url: https://code.visualstudio.com/docs/copilot/chat/chat-sessions
+    label: "Chat sessions guide"
+    verified: 2026-02-01
+  - url: https://code.visualstudio.com/docs/copilot/customization/prompt-files
+    label: "Prompt files documentation"
+    verified: 2026-02-01
 ---
 
 # Multi-Step Tasks: Context Isolation with Subagents

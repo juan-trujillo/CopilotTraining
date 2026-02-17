@@ -2,6 +2,28 @@
 status: active
 updated: 2026-02-08
 section: "Context & Customization"
+references:
+  - url: https://code.visualstudio.com/docs/copilot/copilot-customization
+    label: "Customize AI in Visual Studio Code"
+    verified: 2026-02-08
+  - url: https://code.visualstudio.com/docs/copilot/customization/custom-instructions
+    label: "Use custom instructions in VS Code"
+    verified: 2026-02-08
+  - url: https://code.visualstudio.com/docs/copilot/customization/prompt-files
+    label: "Use prompt files in VS Code"
+    verified: 2026-02-08
+  - url: https://code.visualstudio.com/docs/copilot/customization/agent-skills
+    label: "Use Agent Skills in VS Code"
+    verified: 2026-02-08
+  - url: https://code.visualstudio.com/docs/copilot/customization/custom-agents
+    label: "Custom agents in VS Code"
+    verified: 2026-02-08
+  - url: https://docs.github.com/en/copilot/customizing-copilot/adding-repository-custom-instructions-for-github-copilot
+    label: "Adding repository custom instructions for GitHub Copilot"
+    verified: 2026-02-08
+  - url: https://docs.github.com/en/copilot/reference/custom-instructions-support
+    label: "Custom instructions support reference"
+    verified: 2026-02-08
 ---
 
 # Copilot Configuration Primitives: Making AI Understand Your Codebase

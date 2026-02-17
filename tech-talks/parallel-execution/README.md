@@ -2,6 +2,19 @@
 status: active
 updated: 2026-02-01
 section: "Agent Architecture"
+references:
+  - url: https://code.visualstudio.com/docs/copilot/agents/background-agents
+    label: "Background agents documentation"
+    verified: 2026-02-01
+  - url: https://git-scm.com/docs/git-worktree
+    label: "Git worktrees reference"
+    verified: 2026-02-01
+  - url: https://code.visualstudio.com/updates/v1_109#_agent-session-management
+    label: "VS Code v1.109 agent session management"
+    verified: 2026-02-01
+  - url: https://code.visualstudio.com/docs/copilot/agents/cloud-agents
+    label: "Cloud agents guide"
+    verified: 2026-02-01
 ---
 
 # Parallel Execution: Autonomous Agents Working Simultaneously

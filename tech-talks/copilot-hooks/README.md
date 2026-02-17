@@ -2,6 +2,19 @@
 status: active
 updated: 2026-02-11
 section: "Context & Customization"
+references:
+  - url: https://code.visualstudio.com/docs/copilot/customization/hooks
+    label: "Agent hooks configuration in VS Code"
+    verified: 2026-02-11
+  - url: https://docs.github.com/en/copilot/concepts/agents/coding-agent/about-hooks
+    label: "About Copilot hooks"
+    verified: 2026-02-11
+  - url: https://docs.github.com/en/copilot/reference/hooks-configuration
+    label: "Hooks configuration reference"
+    verified: 2026-02-11
+  - url: https://docs.github.com/en/copilot/how-tos/use-copilot-agents/coding-agent/use-hooks
+    label: "Using hooks with coding agent"
+    verified: 2026-02-11
 ---
 
 # GitHub Copilot Hooks: Programmable Governance for Agent Workflows

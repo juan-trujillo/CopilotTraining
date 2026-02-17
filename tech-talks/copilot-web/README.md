@@ -2,6 +2,22 @@
 status: active
 updated: 2026-02-01
 section: "Copilot Surfaces"
+references:
+  - url: https://docs.github.com/en/copilot/github-copilot-chat/copilot-chat-in-github/using-github-copilot-chat-in-githubcom
+    label: "Using Copilot Chat on GitHub.com"
+    verified: 2026-02-01
+  - url: https://docs.github.com/en/copilot/github-copilot-chat/copilot-chat-in-github-mobile/using-github-copilot-chat-in-github-mobile
+    label: "Copilot Chat in GitHub Mobile"
+    verified: 2026-02-01
+  - url: https://docs.github.com/en/copilot/get-started/quickstart?tool=webui
+    label: "Copilot web quickstart"
+    verified: 2026-02-01
+  - url: https://docs.github.com/en/copilot/concepts/coding-agent/coding-agent
+    label: "Copilot coding agent documentation"
+    verified: 2026-02-01
+  - url: https://github.blog/ai-and-ml/github-copilot/how-to-use-github-copilot-on-github-com-a-power-users-guide/
+    label: "Power user's guide to Copilot on GitHub.com"
+    verified: 2026-02-01
 ---
 
 # GitHub Copilot on the Web: AI Assistance Beyond the IDE

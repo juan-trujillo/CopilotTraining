@@ -2,6 +2,19 @@
 status: active
 updated: 2026-02-01
 section: "Agentic Transformation"
+references:
+  - url: https://docs.github.com/en/copilot
+    label: "GitHub Copilot documentation"
+    verified: 2026-02-01
+  - url: https://docs.github.com/en/copilot/concepts/coding-agent/coding-agent
+    label: "Copilot coding agent for pull requests"
+    verified: 2026-02-01
+  - url: https://docs.github.com/en/copilot/using-github-copilot/using-github-copilot-in-the-command-line
+    label: "Using Copilot in the command line"
+    verified: 2026-02-01
+  - url: https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions
+    label: "GitHub Actions workflow syntax reference"
+    verified: 2026-02-01
 ---
 
 # The Agentic Journey: Incremental Path from Issue to PR Automation

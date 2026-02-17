@@ -2,6 +2,13 @@
 status: active
 updated: 2026-02-01
 section: "Copilot Surfaces"
+references:
+  - url: https://docs.github.com/en/copilot/how-tos/use-copilot-agents/copilot-memory
+    label: "Copilot Memory documentation"
+    verified: 2026-02-01
+  - url: https://code.visualstudio.com/docs/copilot/customization/custom-instructions
+    label: "Custom instructions in VS Code"
+    verified: 2026-02-01
 ---
 
 # Copilot Memory: Stateful AI That Remembers Your Preferences
