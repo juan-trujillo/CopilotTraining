@@ -13,7 +13,7 @@ title: GitHub Copilot SDK
 module: tech-talks/copilot-sdk
 mdc: true
 status: active
-updated: 2026-02-01
+updated: 2026-02-18
 ---
 
 <div class="h-full flex flex-col items-center justify-center relative overflow-hidden">
@@ -96,7 +96,7 @@ layout: center
   <div @click="$nav.go(19)" class="cursor-pointer p-6 bg-gradient-to-br from-cyan-500/10 to-cyan-600/5 rounded-xl border border-cyan-500/30 hover:border-cyan-400/60 transition-all hover:scale-105">
     <div class="text-3xl mb-2">⚡</div>
     <div class="font-semibold text-lg">Advanced Features</div>
-    <div class="text-sm opacity-70 mt-2">MCP, memory, and production patterns</div>
+    <div class="text-sm opacity-70 mt-2">MCP, BYOK, and production patterns</div>
   </div>
 </div>
 
@@ -380,7 +380,7 @@ from github_copilot_sdk import CopilotClient
 
 client = CopilotClient(
     allowed_tools=[
-        'file_read', 
+        'file_read',
         'git_log'
     ],  # Read-only operations
     working_directory='/safe/dir'
@@ -437,10 +437,11 @@ Restrict to least-privilege operations
 - Multi-turn = separate requests per turn
 - Streaming doesn't count as multiple
 
-**BYOK option available**
-- Bring Your Own Key
-- Use your own LLM API keys
-- Bypass GitHub quota
+**BYOK (Bring Your Own Key)**
+- Azure AI Foundry, OpenAI, Anthropic, Ollama
+- Bypasses GitHub Copilot auth entirely
+- BYOK requests exempt from Copilot quotas
+- ⚡ See: Advanced Features → BYOK slides
 
 </div>
 
@@ -629,281 +630,44 @@ name: integration-patterns
 
 <!-- 🎬 MAJOR SECTION: Integration Patterns -->
 
-# 🔧 Integration Pattern 1: CLI Tool
+# 🔧 Integration Patterns
 
-<div class="grid grid-cols-2 gap-4 mt-2">
+<div class="grid grid-cols-2 gap-5 mt-6">
 
-<div>
-
-### Release Notes Generator
-
-```python
-#!/usr/bin/env python3
-import argparse
-from github_copilot_sdk import CopilotClient
-
-def main():
-    parser = argparse.ArgumentParser()
-    parser.add_argument('--from-tag', 
-                        required=True)
-    parser.add_argument('--to-tag', 
-                        default='HEAD')
-    args = parser.parse_args()
-
-    client = CopilotClient()
-    
-    prompt = f"""
-    Generate release notes from 
-    {args.from_tag} to {args.to_tag}.
-    
-    Format with sections:
-    - Features (customer value)
-    - Fixes (user impact)
-    - Breaking Changes
-    - Security Updates
-    """
-    
-    response = client.chat(prompt)
-    print(response.text)
-
-if __name__ == '__main__':
-    main()
-```
-
+<div class="p-5 bg-gradient-to-br from-green-900/40 to-green-800/20 rounded-lg border border-green-500/40">
+<div class="text-2xl mb-2">⌨️ CLI Tool</div>
+<div class="font-bold text-green-300 text-sm">Release Notes Generator</div>
+<div class="text-xs text-gray-300 mt-2">Reads git commits, generates categorized customer-facing release notes automatically</div>
+<div class="mt-3 p-2 bg-green-900/50 rounded text-xs">
+  <span class="text-green-400 font-bold">2 hours → 10 min</span> &nbsp;·&nbsp; 92% time reduction per release
+</div>
 </div>
 
-<div>
-
-### Usage
-
-```bash
-$ python release-notes.py \
-  --from-tag v1.2.0 \
-  --to-tag v1.3.0
-
-# Output in 10-15 seconds:
-## Release Notes: v1.3.0
-
-### Features
-- Added OAuth support for 
-  third-party integrations
-- Improved dashboard 
-  performance by 40%
-
-### Fixes
-- Fixed authentication timeout
-  on slow connections
-...
-```
-
-<div class="text-sm mt-4 p-3 bg-green-600/20 rounded border border-green-500/30">
-<strong>Before:</strong> 2 hours manual<br/>
-<strong>After:</strong> 10 minutes automated<br/>
-<strong>Savings:</strong> 92%
+<div class="p-5 bg-gradient-to-br from-blue-900/40 to-blue-800/20 rounded-lg border border-blue-500/40">
+<div class="text-2xl mb-2">🌐 Web API</div>
+<div class="font-bold text-blue-300 text-sm">PR Code Review Endpoint</div>
+<div class="text-xs text-gray-300 mt-2">REST endpoint accepts a diff, returns security, logic, and quality analysis inline</div>
+<div class="mt-3 p-2 bg-blue-900/50 rounded text-xs">
+  <span class="text-blue-400 font-bold">PR throughput doubled</span> &nbsp;·&nbsp; instant feedback on every PR
+</div>
 </div>
 
+<div class="p-5 bg-gradient-to-br from-indigo-900/40 to-indigo-800/20 rounded-lg border border-indigo-500/40">
+<div class="text-2xl mb-2">⏰ Scheduled Automation</div>
+<div class="font-bold text-indigo-300 text-sm">Overnight Test Failure Analysis</div>
+<div class="text-xs text-gray-300 mt-2">Runs nightly, identifies root causes, flags flaky tests, creates Jira tickets automatically</div>
+<div class="mt-3 p-2 bg-indigo-900/50 rounded text-xs">
+  <span class="text-indigo-400 font-bold">45 min → 5 min</span> &nbsp;·&nbsp; 60% less CI blockage time
+</div>
 </div>
 
+<div class="p-5 bg-gradient-to-br from-purple-900/40 to-purple-800/20 rounded-lg border border-purple-500/40">
+<div class="text-2xl mb-2">🤖 Custom Agent Config</div>
+<div class="font-bold text-purple-300 text-sm">Domain-Specific Agents</div>
+<div class="text-xs text-gray-300 mt-2">Specialized agents with scoped tools, skills, and team standards baked in — shareable and version-controlled</div>
+<div class="mt-3 p-2 bg-purple-900/50 rounded text-xs">
+  <span class="text-purple-400 font-bold">Consistent quality</span> &nbsp;·&nbsp; reusable across the org
 </div>
-
----
-
-# Integration Pattern 2: Web API
-
-<div class="grid grid-cols-2 gap-4 mt-2">
-
-<div>
-
-### Flask API Endpoint
-
-```python
-from flask import Flask, request, jsonify
-from github_copilot_sdk import CopilotClient
-
-app = Flask(__name__)
-client = CopilotClient(
-    allowed_tools=['file_read'],
-    working_directory='/tmp/pr-diffs'
-)
-
-@app.route('/api/analyze-pr', 
-           methods=['POST'])
-def analyze_pr():
-    pr_diff = request.json.get('diff')
-    
-    if not pr_diff:
-        return jsonify({
-            'error': 'Missing diff'
-        }), 400
-
-    prompt = f"""
-    Review this PR for:
-    - Security vulnerabilities
-    - Logic errors
-    - Performance concerns
-    - Code quality
-    
-    {pr_diff}
-    """
-    
-    try:
-        response = client.chat(prompt)
-        return jsonify({
-            'analysis': response.text
-        })
-    except Exception as e:
-        return jsonify({
-            'error': str(e)
-        }), 500
-```
-
-</div>
-
-<div>
-
-### REST API Usage
-
-```bash
-$ curl -X POST \
-  http://localhost:5000/api/analyze-pr \
-  -H "Content-Type: application/json" \
-  -d '{
-    "diff": "diff --git a/auth.py..."
-  }'
-
-# Response:
-{
-  "analysis": "## Security Review
-  
-  ⚠️ **HIGH**: SQL injection risk
-  Line 42: Unsanitized input...
-  
-  ✅ Good: Authentication check...
-  
-  💡 Suggested fix:
-  Use parameterized queries..."
-}
-```
-
-<div class="text-sm mt-4 p-3 bg-blue-600/20 rounded border border-blue-500/30">
-Integrate AI review into CI/CD pipeline or GitHub webhooks
-</div>
-
-</div>
-
-</div>
-
----
-
-# Integration Pattern 3: Scheduled Automation
-
-```python
-import schedule
-import time
-from github_copilot_sdk import CopilotClient
-
-def analyze_test_failures():
-    """Runs every morning to analyze overnight test failures"""
-    client = CopilotClient()
-    
-    # Fetch test reports from CI
-    report = fetch_latest_test_report()
-    
-    prompt = f"""
-    Analyze test failures from last 24 hours:
-    1. Root causes with confidence scores
-    2. Flaky tests based on patterns
-    3. Specific code locations to investigate
-    4. Suggested fixes
-    
-    Test Report: {json.dumps(report)}
-    """
-    
-    analysis = client.chat(prompt)
-    
-    # Notify team and create tickets
-    notify_team_slack(analysis.text)
-    create_jira_tickets(parse_issues(analysis.text))
-
-# Schedule daily at 9:00 AM
-schedule.every().day.at("09:00").do(analyze_test_failures)
-
-while True:
-    schedule.run_pending()
-    time.sleep(60)
-```
-
----
-
-# Integration Pattern 4: Custom Agent Config
-
-<div class="grid grid-cols-2 gap-6 mt-4">
-
-<div>
-
-### Specialized Agent
-
-```python
-from github_copilot_sdk import CopilotClient
-
-client = CopilotClient(
-    agent_config={
-        'name': 'release-engineer',
-        'description': 'Specialized in '
-                      'release management',
-        'skills': [
-            'git-analysis',
-            'changelog-generation'
-        ],
-        'tools': [
-            'git_log',
-            'file_read',
-            'file_write'
-        ]
-    }
-)
-
-response = client.chat("""
-Analyze commits from v1.5.0 to HEAD.
-
-Generate release notes:
-- Categorize by type
-- Explain customer value
-- Highlight migration steps
-""")
-
-print(response.text)
-```
-
-</div>
-
-<div>
-
-### Benefits
-
-<div class="text-sm space-y-3 mt-4">
-
-**Domain expertise:**
-- Agent knows release workflows
-- Follows organization standards
-- Uses consistent terminology
-
-**Tool restrictions:**
-- Only release-relevant tools
-- Read-only Git operations
-- Controlled file writes
-
-**Reusable configuration:**
-- Share across team
-- Version control config
-- Consistent behavior
-
-</div>
-
-<div class="mt-4 p-3 bg-purple-600/20 rounded border border-purple-500/30 text-sm">
-Custom agents = domain-specific AI assistants
-</div>
-
 </div>
 
 </div>
@@ -1067,15 +831,15 @@ from tenacity import retry, stop_after_attempt, wait_exponential
 )
 def ai_analysis_with_retry(prompt: str) -> str:
     client = CopilotClient()
-    
+
     try:
         response = client.chat(prompt, timeout=30)
         return response.text
-        
+
     except TimeoutError:
         # API rate limit or slow response
         raise  # Retry via tenacity
-        
+
     except Exception as e:
         # Log error for observability
         logger.error(f"SDK error: {e}")
@@ -1091,66 +855,50 @@ except Exception:
 
 ---
 
-# Real-World Use Case 1: Release Automation
+# Advanced Feature 4: BYOK — Bring Your Own Key
 
-<div class="grid grid-cols-2 gap-4 mt-3">
+<div class="grid grid-cols-2 gap-6 mt-4">
 
-<div class="text-sm">
+<div>
 
-### The Problem
+### What & Why
 
-**Manual release process:**
-- 2 hours reviewing 200+ commits
-- Categorizing changes manually
-- Writing customer-facing summaries
-- Formatting for GitHub releases
-- Error-prone, inconsistent
+BYOK uses your own model provider API keys, **bypassing GitHub Copilot auth entirely**.
 
-**Pain points:**
-- Blocks deployment pipeline
-- Release manager bottleneck
-- Inconsistent note quality
-- Delayed customer communication
+<div class="text-sm space-y-2 mt-3">
+
+**When to use BYOK:**
+- Enterprise deployment on Azure AI Foundry
+- Direct billing with your cloud provider
+- Local models via Ollama (no key needed)
+- Models outside Copilot's catalog
+
+**BYOK requests do NOT count against**
+**Copilot premium request quotas**
 
 </div>
 
-<div class="text-sm">
+</div>
 
-### The SDK Solution
+<div>
 
-```python
-from github_copilot_sdk import CopilotClient
+### Supported Providers
 
-def generate_release_notes(
-    from_tag: str, 
-    to_tag: str
-) -> str:
-    client = CopilotClient(
-        allowed_tools=['git_log']
-    )
-    
-    return client.chat(f"""
-    Generate release notes 
-    {from_tag} to {to_tag}.
-    
-    Categories:
-    - Features (customer value)
-    - Fixes (user impact)
-    - Breaking Changes (migration)
-    - Security Updates
-    """).text
+<div class="text-sm mt-3">
 
-# Automated in CI/CD pipeline
-notes = generate_release_notes(
-    'v1.2.0', 'v1.3.0'
-)
-create_github_release(notes)
-```
+| Provider | `type` |
+|---------|--------|
+| OpenAI + compatible | `"openai"` |
+| Azure AI Foundry | `"openai"` |
+| Azure OpenAI (native) | `"azure"` |
+| Anthropic / Claude | `"anthropic"` |
+| Ollama (local) | `"openai"` |
 
-**Outcome:**
-- 2 hours → 10 minutes (92% faster)
-- Consistent format
-- Customer-focused language
+</div>
+
+<div class="mt-3 p-2 bg-yellow-600/20 rounded border border-yellow-500/30 text-xs">
+⚠️ <code>model</code> is required when using BYOK — always specify it
+</div>
 
 </div>
 
@@ -1158,121 +906,101 @@ create_github_release(notes)
 
 ---
 
-# Real-World Use Case 2: Test Failure Analysis
-
-<div class="text-sm space-y-3">
-
-### The Problem
-Test infrastructure team manually analyzes failure patterns across builds — 45 minutes per failed CI run. Identify flaky tests, correlate errors, suggest fixes.
-
-### The Solution
-
-```python
-from github_copilot_sdk import CopilotClient
-
-def analyze_test_failures(test_report: dict) -> dict:
-    client = CopilotClient()
-    
-    response = client.chat(f"""
-    Analyze test failures and identify:
-    1. Root causes (high/medium/low confidence)
-    2. Flaky tests based on failure patterns
-    3. Specific code locations to investigate
-    4. Suggested fixes for each failure
-    
-    Test Report: {json.dumps(test_report, indent=2)}
-    """)
-    
-    return parse_analysis(response.text)
-
-# Runs automatically after each CI build
-analysis = analyze_test_failures(fetch_ci_report())
-post_to_slack(analysis)
-create_jira_tickets_for_blockers(analysis)
-```
-
-**Outcome:** 45 minutes → 5 minutes per analysis. Faster root cause identification. Fewer escalations.
-
-</div>
-
----
-
-# Real-World Use Case 3: Code Review Bot
+# BYOK: Azure AI Foundry Quick Start
 
 <div class="grid grid-cols-2 gap-4 mt-2">
 
-<div class="text-sm">
+<div>
 
-### Implementation
+### Python Example
 
 ```python
-from github_copilot_sdk import CopilotClient
-import os
+from copilot import CopilotClient
 
-def review_pr(
-    repo: str, 
-    pr_number: int,
-    github_token: str
-):
-    # Fetch PR diff
-    diff = get_pr_diff(
-        repo, pr_number, github_token
-    )
-    
-    client = CopilotClient(
-        allowed_tools=['file_read']
-    )
-    
-    response = client.chat(f"""
-    Review PR for:
-    - Security (SQL injection, XSS)
-    - Logic errors and edge cases
-    - Performance (N+1, loops)
-    - Code quality
-    
-    {diff}
-    """)
-    
-    # Post blocking issues as comments
-    issues = parse_review_issues(
-        response.text
-    )
-    for issue in issues:
-        if issue['severity'] == 'blocking':
-            post_github_review_comment(
-                repo, pr_number, issue
-            )
+FOUNDRY_URL = (
+  "https://your-resource"
+  ".openai.azure.com/openai/v1/"
+)
+
+client = CopilotClient()
+session = await client.create_session({
+    "model": "gpt-5.2-codex",
+    "provider": {
+        "type": "openai",  # Foundry = openai
+        "base_url": FOUNDRY_URL,
+        "wire_api": "responses",
+        "api_key": os.environ["FOUNDRY_API_KEY"],
+    },
+})
 ```
 
 </div>
 
-<div class="text-sm">
+<div>
 
-### Integration
+### Config Reference
 
-**Webhook handler:**
-```python
-@app.route('/github/pr', 
-           methods=['POST'])
-def handle_pr_webhook():
-    payload = request.json
-    
-    if payload['action'] == 'opened':
-        review_pr(
-            payload['repository']['full_name'],
-            payload['pull_request']['number'],
-            os.environ['GITHUB_TOKEN']
-        )
-    
-    return '', 200
-```
+<div class="text-xs mt-2">
 
-**Outcome:**
-- Review time cut by 50%
-- PR throughput doubled
-- Instant feedback for juniors
-- Seniors focus on architecture
+| Field | Notes |
+|-------|-------|
+| `type` | `"openai"` \| `"azure"` \| `"anthropic"` |
+| `baseUrl` | Full endpoint URL |
+| `apiKey` | Your provider API key |
+| `bearerToken` | Static token (no auto-refresh) |
+| `wireApi` | `"responses"` for GPT-5 series |
 
+</div>
+
+### Identity Limitations
+
+<div class="text-sm space-y-1 mt-2">
+
+- ❌ Microsoft Entra ID / Azure AD
+- ❌ Managed identities or OIDC
+- ✅ Static API keys and bearer tokens only
+
+</div>
+
+<div class="mt-2 p-2 bg-red-600/20 rounded border border-red-500/30 text-xs">
+Entra tokens expire ~1h; SDK has no refresh callback
+</div>
+
+</div>
+
+</div>
+
+---
+
+# 🌍 Real-World Use Cases
+
+<div class="grid grid-cols-3 gap-5 mt-6">
+
+<div class="p-5 bg-gradient-to-br from-green-900/40 to-green-800/20 rounded-lg border border-green-500/40">
+<div class="text-2xl mb-2">📋 Release Automation</div>
+<div class="text-xs text-gray-300 mt-2">Release manager reviews 200+ commits to write customer-facing notes — manual, inconsistent, and bottlenecked</div>
+<div class="mt-3 text-xs text-gray-400">SDK analyzes commits, categorizes by Features / Fixes / Breaking Changes, outputs markdown for GitHub releases</div>
+<div class="mt-3 p-2 bg-green-900/50 rounded text-xs">
+  <span class="text-green-400 font-bold">2 hours → 10 min</span> &nbsp;·&nbsp; 92% faster · consistent quality
+</div>
+</div>
+
+<div class="p-5 bg-gradient-to-br from-indigo-900/40 to-indigo-800/20 rounded-lg border border-indigo-500/40">
+<div class="text-2xl mb-2">🧪 Test Failure Analysis</div>
+<div class="text-xs text-gray-300 mt-2">Infra team manually triage failure logs across builds — 45 min per failed CI run, flaky tests missed until 3rd failure</div>
+<div class="mt-3 text-xs text-gray-400">SDK runs nightly, identifies root causes with confidence scores, flags flaky patterns, creates Jira tickets automatically</div>
+<div class="mt-3 p-2 bg-indigo-900/50 rounded text-xs">
+  <span class="text-indigo-400 font-bold">45 min → 5 min</span> &nbsp;·&nbsp; 60% less CI blockage time
+</div>
+</div>
+
+<div class="p-5 bg-gradient-to-br from-blue-900/40 to-blue-800/20 rounded-lg border border-blue-500/40">
+<div class="text-2xl mb-2">🔍 Code Review Bot</div>
+<div class="text-xs text-gray-300 mt-2">Juniors wait 2–3 days for senior review of issues that could be caught automatically — seniors bottlenecked on standards</div>
+<div class="mt-3 text-xs text-gray-400">Webhook-triggered bot reviews PR diffs for security, logic, and quality — posts inline GitHub comments before human review</div>
+<div class="mt-3 p-2 bg-blue-900/50 rounded text-xs">
+  <span class="text-blue-400 font-bold">Review time −50%</span> &nbsp;·&nbsp; PR throughput doubled
+</div>
 </div>
 
 </div>
@@ -1441,14 +1169,14 @@ SDK = Programmatic AI for developer tools
 🎓 **[Python SDK Cookbook](https://github.com/github/awesome-copilot/blob/main/cookbook/copilot-sdk/python/README.md)**
 - Python-specific patterns
 
-🔧 **[SDK Custom Instructions](https://github.com/github/awesome-copilot/blob/main/collections/copilot-sdk.md)**
-- Speed up SDK development
+📖 **[BYOK Documentation](https://github.com/github/copilot-sdk/blob/main/docs/auth/byok.md)**
+- Azure AI Foundry, providers, limitations
+
+📖 **[Authentication Overview](https://github.com/github/copilot-sdk/blob/main/docs/auth/index.md)**
+- GitHub OAuth, env vars, BYOK comparison
 
 📋 **[Copilot Requests Docs](https://docs.github.com/en/copilot/concepts/billing/copilot-requests)**
-- Billing and quotas
-
-🐙 **[SDK Examples Repository](https://github.com/github/copilot-sdk)**
-- Working code samples
+- Billing, quotas, BYOK exemption
 
 </div>
 
@@ -1463,24 +1191,20 @@ class: text-center
 
 <div class="relative">
   <div class="absolute inset-0 bg-gradient-to-br from-purple-900/30 via-indigo-900/20 to-blue-900/30 blur-3xl"></div>
-  
+
   <div class="relative z-10">
     <div class="text-6xl mb-8">✅</div>
-    
     <h1 class="!text-5xl !font-bold bg-gradient-to-r from-purple-400 via-indigo-400 to-blue-400 bg-clip-text text-transparent mb-6">
       You're Ready to Build with Copilot SDK
     </h1>
-    
     <div class="text-xl opacity-80 mb-8">
       Transform custom workflows with programmatic AI
     </div>
-    
     <div class="flex justify-center gap-4 text-sm">
       <div class="px-6 py-3 bg-purple-600/20 rounded-lg border border-purple-500/30">
         Install SDK → Write code → Automate workflows
       </div>
     </div>
-    
     <div class="mt-8 text-sm opacity-60">
       Questions? Explore the <a href="https://github.com/github/copilot-sdk" class="text-purple-400">SDK repository</a>
     </div>

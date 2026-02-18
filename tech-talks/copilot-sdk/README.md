@@ -1,6 +1,6 @@
 ---
 status: active
-updated: 2026-02-01
+updated: 2026-02-18
 section: "Context & Customization"
 references:
   - url: https://github.com/github/copilot-sdk
@@ -18,6 +18,12 @@ references:
   - url: https://docs.github.com/en/copilot/concepts/billing/copilot-requests
     label: "Copilot requests and billing"
     verified: 2026-02-01
+  - url: https://github.com/github/copilot-sdk/blob/main/docs/auth/byok.md
+    label: "BYOK (Bring Your Own Key) documentation"
+    verified: 2026-02-18
+  - url: https://github.com/github/copilot-sdk/blob/main/docs/auth/index.md
+    label: "Copilot SDK Authentication overview"
+    verified: 2026-02-18
 ---
 
 # GitHub Copilot SDK: Build AI-Powered Tools for Your Workflows
@@ -675,34 +681,182 @@ response = client.chat("Write a database query for user lookup")
 
 ### BYOK (Bring Your Own Key)
 
-Use your own LLM provider API keys:
+BYOK allows you to use the Copilot SDK with your own API keys from model providers, **bypassing GitHub Copilot authentication entirely**. This is useful for enterprise deployments, custom model hosting, or when you want direct billing with your model provider.
+
+**Key benefits:**
+- No GitHub Copilot subscription required for model access
+- Use enterprise model deployments (Azure AI Foundry, private OpenAI)
+- Direct billing with your model provider
+- Support for local models (Ollama) with no API key at all
+- Premium requests do not count against Copilot premium request quotas
+
+#### Supported Providers
+
+| Provider | `type` value | Notes |
+|----------|-------------|-------|
+| OpenAI | `"openai"` | OpenAI API and OpenAI-compatible endpoints |
+| Azure OpenAI / Azure AI Foundry | `"azure"` or `"openai"` | See type-specific notes below |
+| Anthropic | `"anthropic"` | Claude models |
+| Ollama | `"openai"` | Local models via OpenAI-compatible API |
+| Other OpenAI-compatible | `"openai"` | vLLM, LiteLLM, etc. |
+
+#### Quick Start: Azure AI Foundry
+
+Azure AI Foundry is the most common BYOK deployment target for enterprises:
 
 ```python
-from github_copilot_sdk import CopilotClient
+import asyncio
+import os
+from copilot import CopilotClient
 
-client = CopilotClient(
-    byok_config={
-        'provider': 'openai',
-        'api_key': 'sk-...',
-        'model': 'gpt-4-turbo'
-    }
-)
+FOUNDRY_MODEL_URL = "https://your-resource.openai.azure.com/openai/v1/"
 
-# SDK routes requests to your OpenAI account
-response = client.chat("Analyze this codebase")
+async def main():
+    client = CopilotClient()
+    await client.start()
+
+    session = await client.create_session({
+        "model": "gpt-5.2-codex",  # Your deployment name
+        "provider": {
+            "type": "openai",           # Use "openai" for Foundry's OpenAI-compatible endpoint
+            "base_url": FOUNDRY_MODEL_URL,
+            "wire_api": "responses",    # Use "completions" for older models
+            "api_key": os.environ["FOUNDRY_API_KEY"],
+        },
+    })
+
+    response = await session.send_and_wait({"prompt": "What is 2+2?"})
+    print(response.data.content)
+
+    await session.destroy()
+    await client.stop()
+
+asyncio.run(main())
 ```
 
-**Supported providers:**
-- OpenAI (GPT-4, GPT-3.5)
-- Anthropic (Claude 3/4)
-- Azure OpenAI
-- Custom endpoints (OpenAI-compatible APIs)
+**TypeScript equivalent:**
+
+```typescript
+import { CopilotClient } from "@github/copilot-sdk";
+
+const client = new CopilotClient();
+const session = await client.createSession({
+    model: "gpt-5.2-codex",
+    provider: {
+        type: "openai",
+        baseUrl: "https://your-resource.openai.azure.com/openai/v1/",
+        apiKey: process.env.FOUNDRY_API_KEY,
+        wireApi: "responses",  // For GPT-5 series models
+    },
+});
+
+const response = await session.sendAndWait({ prompt: "What is 2+2?" });
+console.log(response?.data.content);
+await client.stop();
+```
+
+#### ProviderConfig Fields Reference
+
+| Field | Values | Description |
+|-------|--------|-------------|
+| `type` | `"openai"` \| `"azure"` \| `"anthropic"` | Provider type (default: `"openai"`) |
+| `baseUrl` / `base_url` | string | **Required.** API endpoint URL |
+| `apiKey` / `api_key` | string | API key (optional for local providers like Ollama) |
+| `bearerToken` / `bearer_token` | string | Bearer token auth (takes precedence over `apiKey`) |
+| `wireApi` / `wire_api` | `"completions"` \| `"responses"` | API format (default: `"completions"`) |
+| `azure.apiVersion` | string | Azure API version (default: `"2024-10-21"`) |
+
+**Wire API format:**
+- `"completions"` (default) — Chat Completions API (`/chat/completions`). Use for most models.
+- `"responses"` — Responses API. Use for GPT-5 series models.
+
+#### Example Configurations
+
+**OpenAI Direct:**
+```typescript
+provider: {
+    type: "openai",
+    baseUrl: "https://api.openai.com/v1",
+    apiKey: process.env.OPENAI_API_KEY,
+}
+```
+
+**Azure OpenAI (native `*.openai.azure.com` endpoint):**
+```typescript
+provider: {
+    type: "azure",              // Use "azure" for native Azure endpoints
+    baseUrl: "https://my-resource.openai.azure.com",  // Just the host — no path
+    apiKey: process.env.AZURE_OPENAI_KEY,
+    azure: { apiVersion: "2024-10-21" },
+}
+```
+
+> ⚠️ **Azure endpoint type confusion is a common mistake.** For `*.openai.azure.com` native endpoints use `type: "azure"`. For Azure AI Foundry deployments with an `/openai/v1/` path, use `type: "openai"`.
+
+**Anthropic:**
+```typescript
+provider: {
+    type: "anthropic",
+    baseUrl: "https://api.anthropic.com",
+    apiKey: process.env.ANTHROPIC_API_KEY,
+}
+```
+
+**Ollama (local, no API key needed):**
+```typescript
+provider: {
+    type: "openai",
+    baseUrl: "http://localhost:11434/v1",
+    // No apiKey needed for local Ollama
+}
+```
+
+**Bearer token authentication:**
+```typescript
+provider: {
+    type: "openai",
+    baseUrl: "https://my-custom-endpoint.example.com/v1",
+    bearerToken: process.env.MY_BEARER_TOKEN,  // Sets Authorization header
+}
+```
+
+> ⚠️ **`bearerToken` accepts a static string only.** The SDK does not refresh tokens automatically. If your token expires, requests will fail and you'll need a new session.
+
+**Required: always specify `model` with BYOK:**
+```typescript
+// ❌ Error: model required with custom provider
+const session = await client.createSession({
+    provider: { type: "openai", baseUrl: "..." },
+});
+
+// ✅ Correct
+const session = await client.createSession({
+    model: "gpt-4",
+    provider: { type: "openai", baseUrl: "..." },
+});
+```
+
+#### BYOK Limitations
+
+**Identity limitations — static credentials only:**
+- ❌ Microsoft Entra ID (Azure AD) — no managed identities or service principals
+- ❌ OIDC, SAML, or other federated identity
+- ❌ Azure Managed Identity
+
+Entra ID tokens are short-lived (~1 hour) and require automatic refresh. The `bearerToken` option accepts only a static string with no callback mechanism for token refresh. For long-running workloads requiring Entra authentication, implement your own token refresh logic and create new sessions with updated tokens.
+
+**Feature limitations:**
+- Model availability — only models supported by your provider are available
+- Rate limiting — subject to your provider's rate limits, not Copilot's
+- Usage tracking — tracked by your provider, not GitHub Copilot
+- Premium request quotas — BYOK requests do **not** count against Copilot premium request quotas
 
 **When to use BYOK:**
+- Enterprise deployments requiring private model hosting (Azure AI Foundry)
 - Need higher rate limits than Copilot quota provides
-- Want direct cost control and billing visibility
-- Prefer specific model versions or providers
-- Testing unreleased models
+- Want direct cost control and billing visibility with your cloud provider
+- Local development with Ollama (no API key or subscription needed)
+- Testing specific model versions or providers
 
 ### Production-Ready Error Handling
 
