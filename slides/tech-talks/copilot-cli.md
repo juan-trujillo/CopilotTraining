@@ -4,7 +4,7 @@ class: text-center
 highlighter: shiki
 lineNumbers: false
 info: |
-  ## Copilot CLI: Terminal-Native AI for DevOps Automation
+  ## Copilot CLI: Terminal-Native AI for Developers and DevOps
   CopilotTraining Tech Talk
 drawings:
   persist: false
@@ -13,7 +13,7 @@ title: Copilot CLI - Terminal AI
 module: tech-talks/copilot-cli
 mdc: true
 status: active
-updated: 2026-02-10
+updated: 2026-02-18
 ---
 
 <div class="h-full flex flex-col items-center justify-center relative overflow-hidden">
@@ -39,13 +39,13 @@ updated: 2026-02-10
   <!-- Pill subtitle -->
   <div class="mt-4 relative z-10">
     <span class="px-6 py-2 bg-gradient-to-r from-emerald-600/80 to-teal-600/80 rounded-full text-white text-xl font-medium shadow-lg shadow-emerald-500/25">
-      Terminal-Native AI for DevOps Automation
+      Terminal-Native AI for Developers and DevOps
     </span>
   </div>
 
   <!-- Tagline -->
   <div class="mt-8 text-lg opacity-70 relative z-10">
-    ⏰ <strong>45 minutes</strong> • DevOps Engineers • Infrastructure Teams • CLI Power Users
+    ⏰ <strong>45 minutes</strong> • Software Developers • DevOps Engineers • CLI Power Users
   </div>
 
   <!-- Decorative line -->
@@ -57,15 +57,26 @@ updated: 2026-02-10
 # The Central Question
 
 <div class="h-full flex items-center justify-center">
-  <div class="max-w-4xl">
-    <div class="text-6xl text-center mb-8">🤔</div>
-    <div class="text-4xl font-bold text-center bg-gradient-to-r from-emerald-400 to-teal-400 bg-clip-text text-transparent mb-6">
-      "How do I get Copilot assistance without leaving the terminal?"
-    </div>
-    <div class="text-xl text-center opacity-80 mt-8">
-      Infrastructure lives in terminals — context-switching to IDE/web breaks flow
-    </div>
-  </div>
+<div class="max-w-4xl">
+<div class="text-6xl text-center mb-8">🤔</div>
+<div class="text-3xl font-bold text-center bg-gradient-to-r from-emerald-400 to-teal-400 bg-clip-text text-transparent mb-6 leading-snug">
+"How do I bring AI into my terminal workflow — whether I'm building something new, debugging my own code, or managing infrastructure?"
+</div>
+<div class="mt-8 flex gap-6 justify-center text-sm">
+<div class="px-4 py-2 bg-emerald-900/40 rounded-lg border border-emerald-500/50 text-center">
+<div class="font-bold text-emerald-300">👩‍💻 Developers</div>
+<div class="text-xs opacity-80 mt-1">Greenfield work &amp; debugging</div>
+</div>
+<div class="px-4 py-2 bg-teal-900/40 rounded-lg border border-teal-500/50 text-center">
+<div class="font-bold text-teal-300">⚙️ DevOps</div>
+<div class="text-xs opacity-80 mt-1">Infrastructure &amp; CI/CD</div>
+</div>
+<div class="px-4 py-2 bg-cyan-900/40 rounded-lg border border-cyan-500/50 text-center">
+<div class="font-bold text-cyan-300">⚡ CLI Power Users</div>
+<div class="text-xs opacity-80 mt-1">Automation &amp; scripting</div>
+</div>
+</div>
+</div>
 </div>
 
 ---
@@ -75,25 +86,25 @@ layout: center
 # 📖 Table of Contents
 
 <div class="grid grid-cols-2 gap-6 mt-8">
-  <div @click="$nav.go(8)" class="cursor-pointer p-6 bg-gradient-to-br from-emerald-500/10 to-emerald-600/5 rounded-xl border border-emerald-500/30 hover:border-emerald-400/60 transition-all hover:scale-105">
+  <div @click="$nav.go(10)" class="cursor-pointer p-6 bg-gradient-to-br from-emerald-500/10 to-emerald-600/5 rounded-xl border border-emerald-500/30 hover:border-emerald-400/60 transition-all hover:scale-105">
     <div class="text-3xl mb-2">🎯</div>
     <div class="font-semibold text-lg">Plan Mode & Steering</div>
     <div class="text-sm opacity-70 mt-2">Collaborative planning before implementation</div>
   </div>
 
-  <div @click="$nav.go(11)" class="cursor-pointer p-6 bg-gradient-to-br from-teal-500/10 to-teal-600/5 rounded-xl border border-teal-500/30 hover:border-teal-400/60 transition-all hover:scale-105">
+  <div @click="$nav.go(15)" class="cursor-pointer p-6 bg-gradient-to-br from-teal-500/10 to-teal-600/5 rounded-xl border border-teal-500/30 hover:border-teal-400/60 transition-all hover:scale-105">
     <div class="text-3xl mb-2">⚙️</div>
     <div class="font-semibold text-lg">Operating Modes</div>
     <div class="text-sm opacity-70 mt-2">Interactive vs programmatic vs cloud delegation</div>
   </div>
 
-  <div @click="$nav.go(14)" class="cursor-pointer p-6 bg-gradient-to-br from-cyan-500/10 to-cyan-600/5 rounded-xl border border-cyan-500/30 hover:border-cyan-400/60 transition-all hover:scale-105">
+  <div @click="$nav.go(19)" class="cursor-pointer p-6 bg-gradient-to-br from-cyan-500/10 to-cyan-600/5 rounded-xl border border-cyan-500/30 hover:border-cyan-400/60 transition-all hover:scale-105">
     <div class="text-3xl mb-2">🧠</div>
     <div class="font-semibold text-lg">Context Management</div>
     <div class="text-sm opacity-70 mt-2">Infinite sessions with repository memory</div>
   </div>
 
-  <div @click="$nav.go(16)" class="cursor-pointer p-6 bg-gradient-to-br from-blue-500/10 to-blue-600/5 rounded-xl border border-blue-500/30 hover:border-blue-400/60 transition-all hover:scale-105">
+  <div @click="$nav.go(22)" class="cursor-pointer p-6 bg-gradient-to-br from-blue-500/10 to-blue-600/5 rounded-xl border border-blue-500/30 hover:border-blue-400/60 transition-all hover:scale-105">
     <div class="text-3xl mb-2">🤖</div>
     <div class="font-semibold text-lg">Built-in Agents</div>
     <div class="text-sm opacity-70 mt-2">Explore, Task, Plan, Code-review</div>
@@ -104,156 +115,84 @@ layout: center
 
 # The Problem
 
-<div class="grid grid-cols-2 gap-6 mt-6">
-
-<div>
-
-### Terminal-Centric Workflows
-
-<div class="text-sm space-y-3 mt-4">
-
-**Infrastructure lives in terminals**
-- DevOps happens at command line
-- Not in IDEs or web interfaces
-
-**Manual investigation overhead**
-- Docker debugging: 45+ minutes
-- Log analysis: repetitive, error-prone
-- Traditional tools can't adapt to context
-
+<div class="grid grid-cols-2 gap-4 mt-4 text-xs">
+<div class="p-4 bg-red-900/30 rounded-lg border-l-4 border-red-500">
+<div class="font-bold text-red-300 mb-2">🌱 Greenfield Development is Decision-Dense</div>
+<div class="text-gray-300">Library choices, architecture, patterns — every hour brings decisions with no one to consult. Developers spend 90+ minutes reading competing docs before writing a line of code</div>
 </div>
-
+<div class="p-4 bg-orange-900/30 rounded-lg border-l-4 border-orange-500">
+<div class="font-bold text-orange-300 mb-2">🔇 Terminal is Powerful but Silent</div>
+<div class="text-gray-300">Developers scaffold projects, debug failures, and explore APIs all from terminals — but must leave to get AI help, forcing them to re-explain context that's already at their fingertips</div>
 </div>
-
-<div>
-
-### Context Switching Breaks Flow
-
-<div class="text-sm space-y-3 mt-4">
-
-**The dilemma engineers face:**
-- Continue manual work (slow, tedious)
-- Switch to IDE/web for AI help (loses context)
-
-**Cost of context switching:**
-- 5-10 minutes per switch
-- Re-explain problem each time
-- Disrupts concentration and flow
-
+<div class="p-4 bg-yellow-900/30 rounded-lg border-l-4 border-yellow-500">
+<div class="font-bold text-yellow-300 mb-2">🐌 Manual Investigation Overhead</div>
+<div class="text-gray-300">Docker debugging: 45+ minutes manually parsing stack traces, checking config files, verifying env vars, searching docs — traditional tools can't adapt to context</div>
 </div>
-
+<div class="p-4 bg-amber-900/30 rounded-lg border-l-4 border-amber-500">
+<div class="font-bold text-amber-300 mb-2">🔄 Context Switching Breaks Flow</div>
+<div class="text-gray-300">Moving between terminal and IDE/web for AI assistance costs 5-10 minutes per switch, disrupts concentration, and forces re-explaining what's already present</div>
 </div>
-
 </div>
-
-<div class="mt-6 p-5 bg-gradient-to-r from-red-600/40 to-orange-600/40 rounded-xl border border-red-500/50">
-<div class="font-bold text-center">Modern infrastructure needs conversational AI that lives in the terminal</div>
+<div class="mt-4 p-3 bg-gradient-to-r from-red-600/40 to-orange-600/40 rounded-xl border border-red-500/50 text-center text-sm">
+<div class="font-bold">Both developers and DevOps engineers need conversational AI that lives where they already work</div>
 </div>
 
 ---
 
 # The Solution: GitHub Copilot CLI
 
-<div class="text-sm space-y-4 mt-6">
+<div class="text-sm space-y-4 mt-4">
 
-**Conversational AI directly in terminal workflows**
+**Conversational AI directly in terminal workflows — interactive, autonomous, and IDE-independent**
 
-<div class="grid grid-cols-2 gap-6 mt-4">
+<div class="grid grid-cols-3 gap-4 mt-4">
 
-<div class="p-4 bg-emerald-900/40 rounded-lg border border-emerald-500/50">
-<div class="text-2xl mb-2">💬</div>
-<div class="font-semibold mb-2">Interactive Mode</div>
-<div class="text-xs opacity-90">
-Terminal-native conversations with persistent context — perfect for "figure this out" scenarios
-</div>
+<div class="p-3 bg-emerald-900/40 rounded-lg border border-emerald-500/50">
+<div class="text-xl mb-1">🤝</div>
+<div class="font-semibold mb-1">Plan Mode</div>
+<div class="text-xs opacity-90">Collaborative planning with clarifying questions before code — reduces iterations from 8 to 2</div>
 </div>
 
-<div class="p-4 bg-teal-900/40 rounded-lg border border-teal-500/50">
-<div class="text-2xl mb-2">🤝</div>
-<div class="font-semibold mb-2">Plan Mode</div>
-<div class="text-xs opacity-90">
-Collaborative planning with clarifying questions before code — reduces iterations from 8 to 2
-</div>
+<div class="p-3 bg-teal-900/40 rounded-lg border border-teal-500/50">
+<div class="text-xl mb-1">💬</div>
+<div class="font-semibold mb-1">Interactive Mode</div>
+<div class="text-xs opacity-90">Terminal-native conversations with persistent context — perfect for "figure this out" scenarios</div>
 </div>
 
-<div class="p-4 bg-cyan-900/40 rounded-lg border border-cyan-500/50">
-<div class="text-2xl mb-2">🔄</div>
-<div class="font-semibold mb-2">Programmatic Mode</div>
-<div class="text-xs opacity-90">
-Single-command execution for CI/CD pipelines — headless automation
-</div>
+<div class="p-3 bg-cyan-900/40 rounded-lg border border-cyan-500/50">
+<div class="text-xl mb-1">🔄</div>
+<div class="font-semibold mb-1">Programmatic Mode</div>
+<div class="text-xs opacity-90">Single-command headless execution for CI/CD pipelines — structured output for scripts</div>
 </div>
 
-<div class="p-4 bg-blue-900/40 rounded-lg border border-blue-500/50">
-<div class="text-2xl mb-2">☁️</div>
-<div class="font-semibold mb-2">Cloud Delegation</div>
-<div class="text-xs opacity-90">
-Background execution with `&` prefix — terminal stays free while agents work
-</div>
+<div class="p-3 bg-blue-900/40 rounded-lg border border-blue-500/50">
+<div class="text-xl mb-1">☁️</div>
+<div class="font-semibold mb-1">Cloud Delegation</div>
+<div class="text-xs opacity-90"><code>&</code> prefix offloads long tasks to GitHub's agent — IDE and terminal both stay completely free</div>
 </div>
 
+<div class="p-3 bg-violet-900/40 rounded-lg border border-violet-500/50">
+<div class="text-xl mb-1">🤖</div>
+<div class="font-semibold mb-1">Built-in Agents</div>
+<div class="text-xs opacity-90">Explore, Task, Plan, Code-review — routed automatically based on intent, run in parallel</div>
 </div>
 
+<div class="p-3 bg-indigo-900/40 rounded-lg border border-indigo-500/50">
+<div class="text-xl mb-1">🪟</div>
+<div class="font-semibold mb-1">IDE Bridge <code>/ide</code></div>
+<div class="text-xs opacity-90">Open any file in VS Code mid-session — CLI context and conversation stay fully alive</div>
 </div>
 
----
-
-# Key Capabilities
-
-<div class="grid grid-cols-2 gap-6 mt-6 text-sm">
-
-<div class="space-y-4">
-
-<div class="flex gap-3">
-<div class="text-2xl">🎯</div>
-<div>
-<div class="font-semibold">Plan Mode</div>
-<div class="text-xs opacity-80">Catch misunderstandings early, reduce iteration cycles</div>
-</div>
+<div class="p-3 bg-sky-900/40 rounded-lg border border-sky-500/50 col-span-2">
+<div class="text-xl mb-1">🧠</div>
+<div class="font-semibold mb-1">Repository Memory + Auto-Compaction</div>
+<div class="text-xs opacity-90">AI learns your conventions across sessions; auto-compaction at 95% token limit makes sessions virtually infinite</div>
 </div>
 
-<div class="flex gap-3">
-<div class="text-2xl">🤖</div>
-<div>
-<div class="font-semibold">Built-in Agents</div>
-<div class="text-xs opacity-80">Explore, Task, Plan, Code-review automatically handle common patterns</div>
-</div>
-</div>
-
-<div class="flex gap-3">
-<div class="text-2xl">🧠</div>
-<div>
-<div class="font-semibold">Repository Memory</div>
-<div class="text-xs opacity-80">AI remembers team conventions across sessions</div>
-</div>
-</div>
-
-</div>
-
-<div class="space-y-4">
-
-<div class="flex gap-3">
-<div class="text-2xl">☁️</div>
-<div>
-<div class="font-semibold">Cloud Delegation</div>
-<div class="text-xs opacity-80">Background execution with `&` prefix frees terminal</div>
-</div>
-</div>
-
-<div class="flex gap-3">
-<div class="text-2xl">♾️</div>
-<div>
-<div class="font-semibold">Auto-Compaction</div>
-<div class="text-xs opacity-80">95% token limit triggers smart context compression</div>
-</div>
-</div>
-
-<div class="flex gap-3">
-<div class="text-2xl">🔄</div>
-<div>
-<div class="font-semibold">Programmatic Mode</div>
-<div class="text-xs opacity-80">Structured output for CI/CD automation</div>
-</div>
+<div class="p-3 bg-slate-900/40 rounded-lg border border-slate-500/50">
+<div class="text-xl mb-1">🧩</div>
+<div class="font-semibold mb-1">MCP Integration</div>
+<div class="text-xs opacity-90">Discover and connect external tools via GitHub MCP Registry with org-level governance</div>
 </div>
 
 </div>
@@ -264,7 +203,7 @@ Background execution with `&` prefix — terminal stays free while agents work
 
 # Latest CLI Updates
 
-<div class="grid grid-cols-3 gap-4 mt-6 text-xs">
+<div class="grid grid-cols-2 gap-6 mt-6 text-xs">
 
 <div class="p-4 bg-emerald-900/40 rounded-lg border border-emerald-500/50">
 <div class="text-2xl mb-2">🧠</div>
@@ -275,13 +214,7 @@ Background execution with `&` prefix — terminal stays free while agents work
 <div class="p-4 bg-teal-900/40 rounded-lg border border-teal-500/50">
 <div class="text-2xl mb-2">⚡</div>
 <div class="font-bold mb-2">Performance & UX Upgrades</div>
-<div class="opacity-90">Faster, more concise output plus improved diffs/timelines and Windows/PowerShell polish</div>
-</div>
-
-<div class="p-4 bg-cyan-900/40 rounded-lg border border-cyan-500/50">
-<div class="text-2xl mb-2">🧩</div>
-<div class="font-bold mb-2">MCP Registry Integration</div>
-<div class="opacity-90">Discover tools/agents via GitHub MCP Registry with org-level governance controls</div>
+<div class="opacity-90">~45% faster output, richer diffs/timelines, prefix-aware history filtering, Windows/PowerShell polish</div>
 </div>
 
 </div>
@@ -681,108 +614,158 @@ name: built-in-agents
 
 <div class="mt-4 text-center text-sm">
 <div class="font-semibold">✨ Copilot automatically routes tasks to the right agent — no explicit calls needed</div>
+<div class="text-xs opacity-70 mt-1">Use <code>/ide &lt;file&gt;</code> at any point to open a file in VS Code — CLI conversation stays alive, use both tools simultaneously</div>
 </div>
 
 ---
 
-# Real-World Use Cases
+# Real-World Use Cases (1 of 2)
 
-<div class="grid grid-cols-2 gap-5 mt-6 text-xs">
-
+<div class="grid grid-cols-2 gap-4 mt-6 text-xs">
 <div class="p-4 bg-emerald-900/40 rounded-lg border border-emerald-500/50">
-<div class="font-bold text-sm mb-2">🐳 Docker Debugging</div>
+<div class="font-bold text-sm mb-2">🌱 Greenfield Project Scaffolding</div>
+<div class="opacity-90 mb-2">AI as thought partner for new projects</div>
+<div class="space-y-1">
+<div>⏱️ <strong>90 min → 15 min</strong> library research &amp; setup</div>
+<div>🎯 <strong>Documented rationale</strong> for each decision</div>
+<div>✅ Plan Mode clarifies requirements before code</div>
+</div>
+</div>
+<div class="p-4 bg-teal-900/40 rounded-lg border border-teal-500/50">
+<div class="font-bold text-sm mb-2">🐛 Debugging Your Own Failing Code</div>
+<div class="opacity-90 mb-2">Async, CI vs local, intermittent failures</div>
+<div class="space-y-1">
+<div>⏱️ <strong>30 min → 5 min</strong> to root cause</div>
+<div>🎯 <strong>Reads your actual code</strong>, not a description</div>
+<div>✅ Fix + prevention, no re-explaining context</div>
+</div>
+</div>
+<div class="p-4 bg-cyan-900/40 rounded-lg border border-cyan-500/50">
+<div class="font-bold text-sm mb-2">🐳 Docker Debugging with Plan Mode</div>
 <div class="opacity-90 mb-2">Container won't start investigation</div>
 <div class="space-y-1">
 <div>⏱️ <strong>45 min → 8 min</strong> (83% reduction)</div>
 <div>🎯 <strong>8 attempts → 2 attempts</strong></div>
-<div>✅ Automated log analysis with reasoning</div>
+<div>✅ Collaborative strategy before execution</div>
 </div>
 </div>
-
-<div class="p-4 bg-teal-900/40 rounded-lg border border-teal-500/50">
-<div class="font-bold text-sm mb-2">🔄 CI/CD Build Failures</div>
-<div class="opacity-90 mb-2">Programmatic failure analysis</div>
+<div class="p-4 bg-blue-900/40 rounded-lg border border-blue-500/50">
+<div class="font-bold text-sm mb-2">🔄 CI/CD Build Failure Analysis</div>
+<div class="opacity-90 mb-2">Programmatic automation in pipelines</div>
 <div class="space-y-1">
 <div>⏱️ <strong>25 min → 5 min</strong> investigation</div>
 <div>🎯 <strong>12 steps → 3 automated steps</strong></div>
-<div>✅ Pattern recognition across failures</div>
+<div>✅ Pattern recognition across historical failures</div>
+</div>
 </div>
 </div>
 
-<div class="p-4 bg-cyan-900/40 rounded-lg border border-cyan-500/50">
-<div class="font-bold text-sm mb-2">📚 Infrastructure Docs</div>
-<div class="opacity-90 mb-2">Auto-generated from IaC</div>
+---
+
+# Real-World Use Cases (2 of 2)
+
+<div class="grid grid-cols-2 gap-4 mt-6 text-xs">
+<div class="p-4 bg-indigo-900/40 rounded-lg border border-indigo-500/50">
+<div class="font-bold text-sm mb-2">📚 Infrastructure Documentation</div>
+<div class="opacity-90 mb-2">Auto-generated from docker-compose &amp; IaC</div>
 <div class="space-y-1">
 <div>⏱️ <strong>3 days → 30 min</strong> documentation</div>
-<div>🎯 <strong>Automated diagram generation</strong></div>
+<div>🎯 <strong>Automated diagram generation</strong> from config</div>
 <div>✅ Always-current architecture docs</div>
 </div>
 </div>
-
-<div class="p-4 bg-blue-900/40 rounded-lg border border-blue-500/50">
-<div class="font-bold text-sm mb-2">🧠 Team Onboarding</div>
-<div class="opacity-90 mb-2">Repository memory accumulation</div>
+<div class="p-4 bg-purple-900/40 rounded-lg border border-purple-500/50">
+<div class="font-bold text-sm mb-2">🧠 Team Onboarding via Repository Memory</div>
+<div class="opacity-90 mb-2">Institutional knowledge that compounds</div>
 <div class="space-y-1">
-<div>⏱️ <strong>2 weeks → 3 days</strong> productivity</div>
+<div>⏱️ <strong>2 weeks → 3 days</strong> to productivity</div>
 <div>🎯 <strong>5-6 explanations → 1 explanation</strong></div>
-<div>✅ Institutional knowledge persists</div>
+<div>✅ AI retains conventions learned from senior engineers</div>
 </div>
 </div>
-
+</div>
+<div class="mt-4 p-4 bg-gradient-to-r from-emerald-600/40 to-teal-600/40 rounded-xl">
+<div class="font-bold text-sm mb-2">Aggregate Impact</div>
+<div class="grid grid-cols-4 gap-2 text-xs text-center">
+<div class="p-2 bg-black/30 rounded">
+<div class="font-bold text-emerald-300">75 min saved</div>
+<div class="opacity-70">per greenfield project</div>
+</div>
+<div class="p-2 bg-black/30 rounded">
+<div class="font-bold text-teal-300">83% faster</div>
+<div class="opacity-70">Docker debugging</div>
+</div>
+<div class="p-2 bg-black/30 rounded">
+<div class="font-bold text-cyan-300">80% less</div>
+<div class="opacity-70">CI investigation time</div>
+</div>
+<div class="p-2 bg-black/30 rounded">
+<div class="font-bold text-blue-300">~11 days</div>
+<div class="opacity-70">faster onboarding</div>
+</div>
+</div>
 </div>
 
 ---
 
 # Mental Model Shift
 
-<div class="grid grid-cols-2 gap-6 mt-6 text-sm">
-
-<div class="space-y-4">
-
-### ✅ Move Toward
-
-<div class="space-y-2 text-xs">
-<div class="flex gap-2">
-<span>✓</span>
-<div><strong>Collaborative Planning:</strong> Use Plan Mode before coding → 75% fewer iterations</div>
-</div>
-<div class="flex gap-2">
-<span>✓</span>
-<div><strong>Terminal as Collaboration Space:</strong> Eliminate context-switching overhead</div>
-</div>
-<div class="flex gap-2">
-<span>✓</span>
-<div><strong>Programmatic AI:</strong> copilot -p in CI/CD for intelligent analysis</div>
-</div>
-<div class="flex gap-2">
-<span>✓</span>
-<div><strong>Cloud Delegation:</strong> Background execution with & prefix</div>
-</div>
+<div class="text-xs mt-2 mb-4 px-4 py-2 bg-gradient-to-r from-slate-700/60 to-slate-600/40 rounded-lg border border-slate-500/40 italic opacity-90 text-center">
+From "execute commands manually and search docs when stuck" → "collaborate with AI in the terminal — whether building something new, debugging failing code, or running autonomous agents independently of your IDE"
 </div>
 
+<div class="grid grid-cols-2 gap-4 text-xs">
+
+<div class="space-y-2">
+<div class="text-sm font-bold text-emerald-300 flex items-center gap-2 mb-3">
+  <span class="px-2 py-0.5 bg-emerald-500/20 rounded-full border border-emerald-500/40">✅ Move Toward</span>
 </div>
 
-<div class="space-y-4">
+<div class="p-2.5 bg-emerald-900/30 rounded-lg border border-emerald-500/30 flex gap-3 items-start">
+  <span class="text-lg flex-shrink-0">🌱</span>
+  <div><span class="font-semibold text-emerald-300">AI as Greenfield Thought Partner</span><br><span class="opacity-80">Explore library choices before committing → minutes vs hours of rework</span></div>
+</div>
 
-### 🛑 Move Against
+<div class="p-2.5 bg-emerald-900/30 rounded-lg border border-emerald-500/30 flex gap-3 items-start">
+  <span class="text-lg flex-shrink-0">🤝</span>
+  <div><span class="font-semibold text-emerald-300">Collaborative Planning First</span><br><span class="opacity-80">Plan Mode before coding → reduces debugging cycles from 8 to 2</span></div>
+</div>
 
-<div class="space-y-2 text-xs">
-<div class="flex gap-2">
-<span>✗</span>
-<div><strong>Interactive Mode in CI/CD:</strong> Use copilot -p instead</div>
+<div class="p-2.5 bg-emerald-900/30 rounded-lg border border-emerald-500/30 flex gap-3 items-start">
+  <span class="text-lg flex-shrink-0">💻</span>
+  <div><span class="font-semibold text-emerald-300">Terminal as Collaboration Space</span><br><span class="opacity-80">Eliminate 5-10 min context-switching overhead per switch</span></div>
 </div>
-<div class="flex gap-2">
-<span>✗</span>
-<div><strong>Over-Approving Permissions:</strong> Avoid --yolo in production</div>
+
+<div class="p-2.5 bg-emerald-900/30 rounded-lg border border-emerald-500/30 flex gap-3 items-start">
+  <span class="text-lg flex-shrink-0">☁️</span>
+  <div><span class="font-semibold text-emerald-300">Cloud Delegation for Long Tasks</span><br><span class="opacity-80"><code>&</code> prefix runs agents independently — IDE and terminal both stay free</span></div>
 </div>
-<div class="flex gap-2">
-<span>✗</span>
-<div><strong>Ignoring Repository Memory:</strong> Leverage learned conventions</div>
+
 </div>
-<div class="flex gap-2">
-<span>✗</span>
-<div><strong>Context-Switching for AI Help:</strong> Stay in terminal workflow</div>
+
+<div class="space-y-2">
+<div class="text-sm font-bold text-red-300 flex items-center gap-2 mb-3">
+  <span class="px-2 py-0.5 bg-red-500/20 rounded-full border border-red-500/40">🛑 Move Against</span>
 </div>
+
+<div class="p-2.5 bg-red-900/25 rounded-lg border border-red-500/30 flex gap-3 items-start">
+  <span class="text-lg flex-shrink-0">⚡</span>
+  <div><span class="font-semibold text-red-300">Jumping to Implementation</span><br><span class="opacity-80">On greenfield work, explore options first — wrong library choice costs hours</span></div>
+</div>
+
+<div class="p-2.5 bg-red-900/25 rounded-lg border border-red-500/30 flex gap-3 items-start">
+  <span class="text-lg flex-shrink-0">🔁</span>
+  <div><span class="font-semibold text-red-300">Interactive Mode in CI/CD</span><br><span class="opacity-80">Builds break when it prompts for input → use <code>copilot -p</code></span></div>
+</div>
+
+<div class="p-2.5 bg-red-900/25 rounded-lg border border-red-500/30 flex gap-3 items-start">
+  <span class="text-lg flex-shrink-0">⚠️</span>
+  <div><span class="font-semibold text-red-300">Over-Approving Permissions</span><br><span class="opacity-80">Avoid <code>--yolo</code> in production — use targeted <code>--allow-tool</code></span></div>
+</div>
+
+<div class="p-2.5 bg-red-900/25 rounded-lg border border-red-500/30 flex gap-3 items-start">
+  <span class="text-lg flex-shrink-0">🔀</span>
+  <div><span class="font-semibold text-red-300">Context-Switching for AI Help</span><br><span class="opacity-80">Use <code>/ide</code> to bridge to VS Code mid-session instead</span></div>
 </div>
 
 </div>
@@ -802,11 +785,11 @@ name: built-in-agents
 ### ✅ Use This Pattern When
 
 <div class="text-xs space-y-2">
-<div>✓ DevOps work happens in terminals</div>
-<div>✓ Debugging complex Docker/networking issues</div>
+<div>✓ Building something new and want a thought partner for options</div>
+<div>✓ Debugging your own failing code, tests, or build environment</div>
+<div>✓ DevOps and infrastructure work happens in terminals</div>
 <div>✓ Automating CI/CD build failure analysis</div>
-<div>✓ Need terminal-native AI assistance</div>
-<div>✓ Want AI to remember team conventions</div>
+<div>✓ Want AI to remember team conventions across sessions</div>
 </div>
 
 </div>
@@ -842,39 +825,36 @@ name: built-in-agents
 # ✅ What You Can Do Today
 
 <div class="grid grid-cols-3 gap-4 mt-6 text-xs">
-
 <div class="p-5 bg-blue-900/40 rounded-lg border border-blue-500/50">
 <div class="text-2xl mb-3">⚡</div>
 <div class="font-bold mb-3">Immediate (15 min)</div>
 <div class="space-y-2">
 <div>□ Install: <code class="text-xs">gh copilot</code></div>
-<div>□ Try interactive mode</div>
+<div>□ Ask about your current project</div>
 <div>□ Test Plan Mode (Shift+Tab)</div>
+<div>□ Try <code>/ide</code> to open a file in VS Code</div>
 </div>
 </div>
-
 <div class="p-5 bg-indigo-900/40 rounded-lg border border-indigo-500/50">
 <div class="text-2xl mb-3">🚀</div>
 <div class="font-bold mb-3">Short-term (1 hour)</div>
 <div class="space-y-2">
+<div>□ Scaffold next project interactively</div>
+<div>□ Debug next failing test with Copilot</div>
+<div>□ Create <code>.github/copilot-instructions.md</code></div>
 <div>□ Add to one CI/CD pipeline</div>
-<div>□ Try cloud delegation with &</div>
-<div>□ Create .github/copilot-instructions.md</div>
-<div>□ Run /context and /usage</div>
 </div>
 </div>
-
 <div class="p-5 bg-purple-900/40 rounded-lg border border-purple-500/50">
 <div class="text-2xl mb-3">🎓</div>
 <div class="font-bold mb-3">Advanced (2-4 hours)</div>
 <div class="space-y-2">
+<div>□ Create custom agents in <code>.github/agents/</code></div>
 <div>□ Configure all CI/CD workflows</div>
-<div>□ Create custom agents</div>
-<div>□ Set up MCP servers</div>
-<div>□ Measure ROI metrics</div>
+<div>□ Set up MCP servers via Registry</div>
+<div>□ Measure ROI: track before/after metrics</div>
 </div>
 </div>
-
 </div>
 
 <div class="mt-6 p-4 bg-gradient-to-r from-emerald-600 to-teal-600 rounded-xl text-center">
@@ -885,43 +865,48 @@ name: built-in-agents
 
 # Related Patterns
 
-<div class="grid grid-cols-2 gap-6 mt-6 text-sm">
+<div class="grid grid-cols-2 gap-4 mt-6 text-xs">
 
-<div class="space-y-4">
+<div class="space-y-3">
+<div class="text-sm font-bold opacity-60 mb-3 uppercase tracking-wider">Complementary Features</div>
 
-### Complementary Features
-
-<div class="space-y-3 text-xs">
-<div class="flex gap-2">
-<div class="text-lg">🪝</div>
-<div><strong>Copilot Hooks:</strong> Add validation, logging, security scanning at execution points</div>
-</div>
-<div class="flex gap-2">
-<div class="text-lg">🔌</div>
-<div><strong>MCP Apps:</strong> Extend CLI with external tools via Model Context Protocol</div>
-</div>
-<div class="flex gap-2">
-<div class="text-lg">🔒</div>
-<div><strong>Terminal Sandboxing:</strong> Secure execution for untrusted operations</div>
-</div>
+<div class="p-3 bg-violet-900/35 rounded-lg border border-violet-500/40 flex gap-3 items-start">
+  <span class="text-xl flex-shrink-0">🪝</span>
+  <div><span class="font-semibold text-violet-300">Copilot Hooks</span><br><span class="opacity-80">Add validation, logging, and security scanning at key execution points in CLI workflows</span></div>
 </div>
 
+<div class="p-3 bg-blue-900/35 rounded-lg border border-blue-500/40 flex gap-3 items-start">
+  <span class="text-xl flex-shrink-0">🔌</span>
+  <div><span class="font-semibold text-blue-300">MCP Apps</span><br><span class="opacity-80">Extend Copilot CLI with external tools and data sources via Model Context Protocol</span></div>
 </div>
 
-<div class="space-y-4">
+<div class="p-3 bg-amber-900/35 rounded-lg border border-amber-500/40 flex gap-3 items-start">
+  <span class="text-xl flex-shrink-0">🔒</span>
+  <div><span class="font-semibold text-amber-300">Terminal Sandboxing</span><br><span class="opacity-80">Secure execution environments for untrusted Copilot CLI operations</span></div>
+</div>
 
-### Decision Flow
+<div class="p-3 bg-teal-900/35 rounded-lg border border-teal-500/40 flex gap-3 items-start">
+  <span class="text-xl flex-shrink-0">📡</span>
+  <div><span class="font-semibold text-teal-300">Copilot CLI ACP</span><br><span class="opacity-80">Drive Copilot CLI programmatically via the Agent Client Protocol — embed it in your own tooling or automation</span></div>
+</div>
 
-<div class="text-xs space-y-2 font-mono bg-black/40 p-4 rounded">
-<div>Q: What's your actual goal?</div>
-<div>├─ In-editor assistance</div>
-<div>│  → VS Code Copilot</div>
-<div>├─ Cross-repo analysis</div>
-<div>│  → Copilot Web</div>
-<div>├─ Organization governance</div>
-<div>│  → Copilot Hooks</div>
-<div>└─ Extending with tools</div>
-<div>   → MCP Apps</div>
+</div>
+
+<div class="space-y-3">
+<div class="text-sm font-bold opacity-60 mb-3 uppercase tracking-wider">Decision Flow</div>
+
+<div class="font-mono bg-black/50 p-4 rounded-lg border border-slate-600/40 text-xs space-y-1 leading-relaxed">
+  <div class="opacity-70">Q: What's your actual goal?</div>
+  <div class="flex gap-2"><span class="opacity-40">├─</span><span>In-editor code assistance</span></div>
+  <div class="flex gap-2"><span class="opacity-40">│ </span><span class="text-emerald-400">→ VS Code Copilot</span></div>
+  <div class="flex gap-2"><span class="opacity-40">├─</span><span>Cross-repo analysis</span></div>
+  <div class="flex gap-2"><span class="opacity-40">│ </span><span class="text-emerald-400">→ Copilot Web</span></div>
+  <div class="flex gap-2"><span class="opacity-40">├─</span><span>Organization-wide governance</span></div>
+  <div class="flex gap-2"><span class="opacity-40">│ </span><span class="text-emerald-400">→ Copilot Hooks</span></div>
+  <div class="flex gap-2"><span class="opacity-40">├─</span><span>Extending with external tools</span></div>
+  <div class="flex gap-2"><span class="opacity-40">│ </span><span class="text-emerald-400">→ MCP Apps</span></div>
+  <div class="flex gap-2"><span class="opacity-40">└─</span><span>Embed CLI in your own tooling</span></div>
+  <div class="flex gap-2"><span class="opacity-40">  </span><span class="text-emerald-400">→ Copilot CLI ACP, Copilot SDK</span></div>
 </div>
 
 </div>
@@ -974,7 +959,7 @@ class: text-center
 # Thank You!
 
 <div class="text-2xl mt-6 opacity-80">
-  Terminal-Native AI for DevOps Automation
+  Terminal-Native AI for Developers and DevOps
 </div>
 
 <div class="mt-8 text-lg">
