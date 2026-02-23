@@ -13,7 +13,7 @@ title: Copilot CLI - Terminal AI
 module: tech-talks/copilot-cli
 mdc: true
 status: active
-updated: 2026-02-18
+updated: 2026-02-23
 ---
 
 <div class="h-full flex flex-col items-center justify-center relative overflow-hidden">
@@ -85,29 +85,41 @@ layout: center
 
 # 📖 Table of Contents
 
-<div class="grid grid-cols-2 gap-6 mt-8">
-  <div @click="$nav.go(10)" class="cursor-pointer p-6 bg-gradient-to-br from-emerald-500/10 to-emerald-600/5 rounded-xl border border-emerald-500/30 hover:border-emerald-400/60 transition-all hover:scale-105">
-    <div class="text-3xl mb-2">🎯</div>
-    <div class="font-semibold text-lg">Plan Mode & Steering</div>
-    <div class="text-sm opacity-70 mt-2">Collaborative planning before implementation</div>
+<div class="grid grid-cols-3 gap-4 mt-8">
+  <div @click="$nav.go(10)" class="cursor-pointer p-4 bg-gradient-to-br from-emerald-500/10 to-emerald-600/5 rounded-xl border border-emerald-500/30 hover:border-emerald-400/60 transition-all hover:scale-105">
+    <div class="text-2xl mb-2">🎯</div>
+    <div class="font-semibold">Plan Mode & Steering</div>
+    <div class="text-xs opacity-70 mt-1">Collaborative planning</div>
   </div>
 
-  <div @click="$nav.go(15)" class="cursor-pointer p-6 bg-gradient-to-br from-teal-500/10 to-teal-600/5 rounded-xl border border-teal-500/30 hover:border-teal-400/60 transition-all hover:scale-105">
-    <div class="text-3xl mb-2">⚙️</div>
-    <div class="font-semibold text-lg">Operating Modes</div>
-    <div class="text-sm opacity-70 mt-2">Interactive vs programmatic vs cloud delegation</div>
+  <div @click="$nav.go(15)" class="cursor-pointer p-4 bg-gradient-to-br from-teal-500/10 to-teal-600/5 rounded-xl border border-teal-500/30 hover:border-teal-400/60 transition-all hover:scale-105">
+    <div class="text-2xl mb-2">⚙️</div>
+    <div class="font-semibold">Operating Modes</div>
+    <div class="text-xs opacity-70 mt-1">Interactive, programmatic, cloud</div>
   </div>
 
-  <div @click="$nav.go(19)" class="cursor-pointer p-6 bg-gradient-to-br from-cyan-500/10 to-cyan-600/5 rounded-xl border border-cyan-500/30 hover:border-cyan-400/60 transition-all hover:scale-105">
-    <div class="text-3xl mb-2">🧠</div>
-    <div class="font-semibold text-lg">Context Management</div>
-    <div class="text-sm opacity-70 mt-2">Infinite sessions with repository memory</div>
+  <div @click="$nav.go(19)" class="cursor-pointer p-4 bg-gradient-to-br from-cyan-500/10 to-cyan-600/5 rounded-xl border border-cyan-500/30 hover:border-cyan-400/60 transition-all hover:scale-105">
+    <div class="text-2xl mb-2">🧠</div>
+    <div class="font-semibold">Context Management</div>
+    <div class="text-xs opacity-70 mt-1">Infinite sessions + memory</div>
   </div>
 
-  <div @click="$nav.go(22)" class="cursor-pointer p-6 bg-gradient-to-br from-blue-500/10 to-blue-600/5 rounded-xl border border-blue-500/30 hover:border-blue-400/60 transition-all hover:scale-105">
-    <div class="text-3xl mb-2">🤖</div>
-    <div class="font-semibold text-lg">Built-in Agents</div>
-    <div class="text-sm opacity-70 mt-2">Explore, Task, Plan, Code-review</div>
+  <div @click="$nav.go(22)" class="cursor-pointer p-4 bg-gradient-to-br from-blue-500/10 to-blue-600/5 rounded-xl border border-blue-500/30 hover:border-blue-400/60 transition-all hover:scale-105">
+    <div class="text-2xl mb-2">🤖</div>
+    <div class="font-semibold">Built-in Agents</div>
+    <div class="text-xs opacity-70 mt-1">Explore, Task, Plan, Code-review</div>
+  </div>
+
+  <div @click="$nav.go(25)" class="cursor-pointer p-4 bg-gradient-to-br from-violet-500/10 to-violet-600/5 rounded-xl border border-violet-500/30 hover:border-violet-400/60 transition-all hover:scale-105">
+    <div class="text-2xl mb-2">🔌</div>
+    <div class="font-semibold">Plugins</div>
+    <div class="text-xs opacity-70 mt-1">Extend with community packages</div>
+  </div>
+
+  <div @click="$nav.go(27)" class="cursor-pointer p-4 bg-gradient-to-br from-pink-500/10 to-pink-600/5 rounded-xl border border-pink-500/30 hover:border-pink-400/60 transition-all hover:scale-105">
+    <div class="text-2xl mb-2">🧪</div>
+    <div class="font-semibold">Use Cases</div>
+    <div class="text-xs opacity-70 mt-1">Real-world examples</div>
   </div>
 </div>
 
@@ -618,6 +630,85 @@ name: built-in-agents
 </div>
 
 ---
+layout: center
+name: plugins
+---
+
+<!-- 🎬 MAJOR SECTION: Plugins -->
+
+<div class="text-center">
+  <div class="text-6xl mb-6">🔌</div>
+  <h1 class="text-5xl font-bold bg-gradient-to-r from-violet-400 to-purple-400 bg-clip-text text-transparent">
+    Plugins
+  </h1>
+  <div class="text-2xl mt-4 opacity-80">
+    Extend CLI with Community Packages
+  </div>
+</div>
+
+---
+
+# Plugins: Extending Copilot CLI
+
+<div class="grid grid-cols-2 gap-6 mt-6 text-xs">
+
+<div class="space-y-4">
+
+### What Plugins Are
+
+<div class="opacity-90">
+Packages that extend Copilot CLI's functionality beyond built-in capabilities — new tools, specialized workflows, domain-specific knowledge.
+</div>
+
+### Default Marketplaces
+
+<div class="space-y-2 mt-3">
+<div class="p-3 bg-violet-900/40 rounded-lg border border-violet-500/50">
+<div class="font-bold">copilot-plugins</div>
+<div class="text-xs opacity-80">GitHub's official plugin collection</div>
+</div>
+<div class="p-3 bg-purple-900/40 rounded-lg border border-purple-500/50">
+<div class="font-bold">awesome-copilot</div>
+<div class="text-xs opacity-80">Community-curated plugins</div>
+</div>
+</div>
+
+</div>
+
+<div class="space-y-4">
+
+### Finding & Installing
+
+```bash
+# List registered marketplaces
+copilot plugin marketplace list
+
+# Browse a marketplace
+copilot plugin marketplace browse awesome-copilot
+
+# Install from marketplace
+copilot plugin install database-data-management@awesome-copilot
+
+# Install from GitHub repo
+copilot plugin install OWNER/REPO
+
+# Install from local path
+copilot plugin install ./path/to/plugin
+```
+
+### Managing Plugins
+
+```bash
+copilot plugin list       # View installed
+copilot plugin update X   # Update plugin
+copilot plugin uninstall X
+```
+
+</div>
+
+</div>
+
+---
 
 # Real-World Use Cases (1 of 2)
 
@@ -851,7 +942,7 @@ From "execute commands manually and search docs when stuck" → "collaborate wit
 <div class="space-y-2">
 <div>□ Create custom agents in <code>.github/agents/</code></div>
 <div>□ Configure all CI/CD workflows</div>
-<div>□ Set up MCP servers via Registry</div>
+<div>□ Browse plugins: <code>copilot plugin marketplace browse</code></div>
 <div>□ Measure ROI: track before/after metrics</div>
 </div>
 </div>

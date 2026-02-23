@@ -1,6 +1,6 @@
 ---
 status: active
-updated: 2026-02-18
+updated: 2026-02-23
 section: "Copilot Surfaces"
 references:
   - url: https://docs.github.com/en/copilot/concepts/agents/about-copilot-cli
@@ -18,6 +18,12 @@ references:
   - url: https://docs.github.com/en/copilot/how-tos/use-copilot-agents/use-copilot-cli#add-an-mcp-server
     label: "Add an MCP server to Copilot CLI"
     verified: 2026-02-10
+  - url: https://docs.github.com/en/copilot/how-tos/copilot-cli/customize-copilot/plugins-finding-installing
+    label: "Finding and installing plugins for Copilot CLI"
+    verified: 2026-02-23
+  - url: https://docs.github.com/en/copilot/concepts/agents/copilot-cli/about-cli-plugins
+    label: "About plugins for Copilot CLI"
+    verified: 2026-02-23
 ---
 
 # GitHub Copilot CLI: Terminal-Native AI for Developers and DevOps
@@ -70,6 +76,7 @@ references:
 <!-- 🎬 MAJOR SECTION: Operating Modes -->
 <!-- 🎬 MAJOR SECTION: Context Management -->
 <!-- 🎬 MAJOR SECTION: Built-in Agents -->
+<!-- 🎬 MAJOR SECTION: Plugins -->
 ```
 
 ---
@@ -117,6 +124,7 @@ GitHub Copilot CLI brings conversational AI directly into terminal workflows wit
 - **Repository Memory**: AI remembers team conventions, patterns, and preferences across sessions
 - **Performance & UX Upgrades**: Faster, more concise responses with improved diff/timeline views and better Windows/PowerShell support
 - **MCP Registry Integration**: Discover and connect external tools/agents via GitHub MCP Registry with organization-level controls
+- **Plugin Ecosystem**: Install community and team-created plugins from marketplaces — extend CLI functionality with specialized capabilities
 
 ### Architecture Overview
 
@@ -635,6 +643,132 @@ For more information, see [Creating custom agents](https://docs.github.com/en/co
 
 ---
 
+<!-- 🎬 MAJOR SECTION: Plugins -->
+## Plugins: Extending Copilot CLI
+
+*Install community and team-created plugins to add specialized capabilities*
+
+### What Plugins Are
+
+Plugins are packages that extend Copilot CLI's functionality beyond its built-in capabilities. They can add new tools, specialized workflows, or domain-specific knowledge. Plugins are installed from marketplaces or directly from Git repositories.
+
+### Finding Plugins via Marketplaces
+
+Copilot CLI comes with two default marketplaces pre-registered:
+- **`copilot-plugins`** — GitHub's official plugin collection
+- **`awesome-copilot`** — Community-curated plugins
+
+**Browse available marketplaces:**
+```bash
+# List registered marketplaces
+copilot plugin marketplace list
+
+# Or in an interactive session
+/plugin marketplace list
+```
+
+**Browse plugins in a marketplace:**
+```bash
+# Browse a specific marketplace
+copilot plugin marketplace browse awesome-copilot
+```
+
+### Installing Plugins
+
+**From a registered marketplace:**
+```bash
+# Install from marketplace
+copilot plugin install database-data-management@awesome-copilot
+
+# Or in an interactive session
+/plugin install database-data-management@awesome-copilot
+```
+
+**Directly from a GitHub repository:**
+```bash
+# From GitHub
+copilot plugin install OWNER/REPO
+
+# From any Git repository
+copilot plugin install https://gitlab.com/OWNER/REPO.git
+```
+
+**From a subdirectory in a repository** (e.g., marketplace repos with multiple plugins):
+```bash
+copilot plugin install anthropics/claude-code:plugins/frontend-design
+```
+
+**From a local path:**
+```bash
+copilot plugin install ./path/to/my-plugin
+```
+
+> **Note:** For direct repository installs to work, the repository must contain a `plugin.json` file in `.github/plugin/`, `.claude-plugin/`, or the repository root.
+
+### Managing Installed Plugins
+
+```bash
+copilot plugin list                    # View installed plugins
+copilot plugin update PLUGIN-NAME      # Update plugin to latest version
+copilot plugin uninstall PLUGIN-NAME   # Remove plugin completely
+```
+
+### Where Plugins Are Stored
+
+Plugins are stored locally under `~/.copilot/installed-plugins/`:
+
+```
+~/.copilot/installed-plugins/
+├── awesome-copilot/              # Plugins from marketplace
+│   └── database-data-management/
+├── copilot-plugins/
+│   └── another-plugin/
+└── _direct/                      # Plugins installed directly
+    └── my-local-plugin/
+```
+
+### Adding and Removing Plugin Marketplaces
+
+**Add a marketplace:**
+```bash
+# Add from GitHub repository
+copilot plugin marketplace add anthropics/claude-code
+
+# Add from any Git URL
+copilot plugin marketplace add https://gitlab.com/OWNER/REPO.git
+
+# Add from local path
+copilot plugin marketplace add /path/to/marketplace-directory
+```
+
+**Remove a marketplace:**
+```bash
+# Remove by marketplace name (not OWNER/REPO)
+copilot plugin marketplace remove MARKETPLACE-NAME
+
+# Force remove (also uninstalls all plugins from that marketplace)
+copilot plugin marketplace remove MARKETPLACE-NAME --force
+```
+
+### Example: Adding a Database Plugin
+
+```bash
+$ copilot plugin marketplace browse awesome-copilot
+# Browse available plugins...
+
+$ copilot plugin install database-data-management@awesome-copilot
+Installing database-data-management from awesome-copilot...
+✅ Plugin installed successfully.
+
+$ copilot
+> "Show me the schema for the users table"
+# Plugin provides database introspection capabilities
+```
+
+**Outcome:** Extend Copilot CLI with specialized domain capabilities without writing custom agents — leverage the community ecosystem.
+
+---
+
 ## Real-World Use Cases
 
 ### Use Case 1: Scaffolding a New Project with AI as Thought Partner
@@ -842,6 +976,7 @@ $ copilot
 - [ ] Create custom agents in `.github/agents/` for specialized workflows
 - [ ] Configure automatic build failure analysis in all CI/CD workflows
 - [ ] Set up MCP servers via the GitHub MCP Registry (`/mcp add`)
+- [ ] Browse and install plugins: `copilot plugin marketplace browse awesome-copilot`
 - [ ] Measure ROI: Track before/after metrics for debugging time and iteration cycles
 
 **Next:** Review [Copilot CLI Best Practices](https://docs.github.com/en/copilot/how-tos/copilot-cli/cli-best-practices) · Share time-savings wins · Explore [Copilot Hooks](../copilot-hooks/) for governance
@@ -885,6 +1020,10 @@ See [DECISION-GUIDE.md](../DECISION-GUIDE.md) for complete navigation help.
 - 🎓 [Adding Custom Instructions for Copilot CLI](https://docs.github.com/en/copilot/how-tos/copilot-cli/add-custom-instructions) — Repository-specific behavior configuration
 - 🔧 [GitHub Copilot CLI Command Reference](https://docs.github.com/en/copilot/reference/cli-command-reference) — Complete slash command and option reference
 - 🔧 [Copilot CLI ACP Server](https://docs.github.com/en/copilot/reference/acp-server) — Using Copilot CLI via Agent Client Protocol
+- 🔌 [Finding and Installing Plugins](https://docs.github.com/en/copilot/how-tos/copilot-cli/customize-copilot/plugins-finding-installing) — Plugin discovery, installation, and marketplace management
+- 🔌 [About Plugins for Copilot CLI](https://docs.github.com/en/copilot/concepts/agents/copilot-cli/about-cli-plugins) — Plugin concepts and capabilities
+- 🔌 [Creating a Plugin](https://docs.github.com/en/copilot/how-tos/copilot-cli/customize-copilot/plugins-creating) — Build your own plugins
+- 🔌 [Creating a Plugin Marketplace](https://docs.github.com/en/copilot/how-tos/copilot-cli/customize-copilot/plugins-marketplace) — Host your team's or organization's plugins
 
 **GitHub Resources:**
 - 📋 [GitHub Blog: Plan Mode Announcement](https://github.blog/changelog/2026-01-21-github-copilot-cli-plan-before-you-build-steer-as-you-go/) — Plan Mode, reasoning models, and latest features

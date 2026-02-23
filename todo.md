@@ -22,3 +22,15 @@ add some meat around the statement "Guidance over Governance".  EAs seems to wan
 evergreen process: using Actions to view all changesets at PR approval and updating agents/instructions/docs each time.  maybe refernce https://github.blog/ai-and-ml/automate-repository-tasks-with-github-agentic-workflows/
 
 ---
+
+let's implement functionality for one-off talks/slidevs.  never published to pages, just live locally in the repo to be run manually.
+
+---
+
+lots of temp work around copilot-cli.  look in "harness" folder
+
+---
+
+either fix or delete the ISSUE-based generation.  Probably delete, it breaks promises.
+
+---
