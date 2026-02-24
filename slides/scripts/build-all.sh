@@ -21,9 +21,9 @@ for arg in "$@"; do
 done
 
 # Validate folder if specified
-if [[ -n "$FOLDER" && "$FOLDER" != "workshop" && "$FOLDER" != "tech-talks" && "$FOLDER" != "exec-talks" ]]; then
+if [[ -n "$FOLDER" && "$FOLDER" != "workshop" && "$FOLDER" != "tech-talks" && "$FOLDER" != "exec-talks" && "$FOLDER" != "intro-talks" ]]; then
     echo "❌ Unknown folder: $FOLDER"
-    echo "   Valid options: workshop, tech-talks, exec-talks"
+    echo "   Valid options: workshop, tech-talks, exec-talks, intro-talks"
     exit 1
 fi
 
@@ -47,6 +47,7 @@ echo ""
 mkdir -p "${OUTPUT_DIR}/workshop"
 mkdir -p "${OUTPUT_DIR}/tech-talks"
 mkdir -p "${OUTPUT_DIR}/exec-talks"
+mkdir -p "${OUTPUT_DIR}/intro-talks"
 
 TOTAL_BUILT=0
 
@@ -137,6 +138,24 @@ if [[ -z "$FOLDER" || "$FOLDER" == "exec-talks" ]]; then
                 continue
             fi
             build_slide "exec-talks" "${BASENAME}"
+            TOTAL_BUILT=$((TOTAL_BUILT + 1))
+        fi
+    done
+    echo ""
+fi
+
+# Build intro-talks slides
+if [[ -z "$FOLDER" || "$FOLDER" == "intro-talks" ]]; then
+    echo "🎤 Building intro-talks slides..."
+    for SLIDE_FILE in "${SLIDES_DIR}"/intro-talks/*.md; do
+        if [ -f "$SLIDE_FILE" ]; then
+            BASENAME=$(basename "$SLIDE_FILE" .md)
+            if is_archived "$SLIDE_FILE"; then
+                echo "   ⏭️  Skipping archived: intro-talks/${BASENAME}"
+                TOTAL_SKIPPED=$((TOTAL_SKIPPED + 1))
+                continue
+            fi
+            build_slide "intro-talks" "${BASENAME}"
             TOTAL_BUILT=$((TOTAL_BUILT + 1))
         fi
     done

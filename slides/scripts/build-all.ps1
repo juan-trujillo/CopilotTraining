@@ -9,7 +9,7 @@
 
 param(
     [switch]$Verbose,
-    [ValidateSet('workshop', 'tech-talks', 'exec-talks')]
+    [ValidateSet('workshop', 'tech-talks', 'exec-talks', 'intro-talks')]
     [string]$Folder
 )
 
@@ -38,6 +38,7 @@ Write-Host ""
 New-Item -ItemType Directory -Force -Path "$OutputDir/workshop" | Out-Null
 New-Item -ItemType Directory -Force -Path "$OutputDir/tech-talks" | Out-Null
 New-Item -ItemType Directory -Force -Path "$OutputDir/exec-talks" | Out-Null
+New-Item -ItemType Directory -Force -Path "$OutputDir/intro-talks" | Out-Null
 
 $TotalBuilt = 0
 $TotalSkipped = 0
@@ -135,6 +136,23 @@ if (-not $Folder -or $Folder -eq 'exec-talks') {
             continue
         }
         Build-Slide -Category "exec-talks" -BaseName $BaseName
+        $TotalBuilt++
+    }
+    Write-Host ""
+}
+
+# Build intro-talks slides
+if (-not $Folder -or $Folder -eq 'intro-talks') {
+    Write-Host "🎤 Building intro-talks slides..." -ForegroundColor Cyan
+    $IntroTalksSlides = Get-ChildItem -Path "$SlidesDir/intro-talks" -Filter "*.md" -File
+    foreach ($SlideFile in $IntroTalksSlides) {
+        $BaseName = $SlideFile.BaseName
+        if (Test-Archived $SlideFile.FullName) {
+            Write-Host "   ⏭️  Skipping archived: intro-talks/$BaseName" -ForegroundColor DarkGray
+            $TotalSkipped++
+            continue
+        }
+        Build-Slide -Category "intro-talks" -BaseName $BaseName
         $TotalBuilt++
     }
     Write-Host ""

@@ -74,7 +74,7 @@ jobs:
         working-directory: ./slides
         shell: bash {0}
         run: |
-          mkdir -p dist/workshop dist/tech-talks dist/exec-talks dist/.build-logs
+          mkdir -p dist/workshop dist/tech-talks dist/exec-talks dist/intro-talks dist/.build-logs
 
           MAX_JOBS=4
           PIDS=()
@@ -155,7 +155,7 @@ jobs:
 
           # Iterate all slides — build only what's needed
           declare -A NEW_MANIFEST
-          for SLIDE_FILE in workshop/*.md tech-talks/*.md exec-talks/*.md; do
+          for SLIDE_FILE in workshop/*.md tech-talks/*.md exec-talks/*.md intro-talks/*.md; do
             [ -f "$SLIDE_FILE" ] || continue
             CATEGORY=$(dirname "$SLIDE_FILE")
             BASENAME=$(basename "$SLIDE_FILE" .md)
