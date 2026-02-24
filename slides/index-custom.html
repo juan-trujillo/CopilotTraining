@@ -85,6 +85,17 @@
       -webkit-text-fill-color: transparent;
       background-clip: text;
     }
+    /* Intro-talks: teal → cyan → blue */
+    .section.intro-talks {
+      border-color: rgba(20, 184, 166, 0.3);
+      background: linear-gradient(135deg, rgba(20, 184, 166, 0.05) 0%, rgba(34, 211, 238, 0.03) 50%, rgba(59, 130, 246, 0.03) 100%);
+    }
+    .section.intro-talks .section-title {
+      background: linear-gradient(135deg, #14b8a6 0%, #22d3ee 50%, #3b82f6 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
     /* Exec-talks: blue → cyan → green */
     .section.exec-talks {
       border-color: rgba(59, 130, 246, 0.3);
@@ -133,6 +144,17 @@
     }
     .section.tech-talks .card h2 {
       background: linear-gradient(135deg, #22d3ee 0%, #3b82f6 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    /* Intro-talks card styles: teal → cyan → blue */
+    .section.intro-talks .card:hover {
+      border-color: rgba(20, 184, 166, 0.6);
+      box-shadow: 0 4px 20px rgba(20, 184, 166, 0.2);
+    }
+    .section.intro-talks .card h2 {
+      background: linear-gradient(135deg, #14b8a6 0%, #22d3ee 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
@@ -256,6 +278,23 @@
   <div class="container">
     <h1>CopilotTraining</h1>
     <p class="subtitle">Presentations</p>
+
+    <!-- Intro Talks Section -->
+    <div class="section intro-talks">
+      <div class="section-header">
+        <span class="section-icon">🚀</span>
+        <div>
+          <h2 class="section-title">Intro Talks</h2>
+          <p class="section-description">Introductory overview presentations for developers starting with GitHub Copilot</p>
+        </div>
+      </div>
+      <div class="grid">
+        <a href="/CopilotTraining/intro-talks/copilot-intro/" class="card">
+          <h2>GitHub Copilot: Your AI Pair Programmer</h2>
+          <p>Broad overview of Copilot surfaces — completions, chat, CLI, code review, and customization — for experienced developers starting their AI-assisted development journey.</p>
+        </a>
+      </div>
+    </div>
 
     <!-- Tech Talks Section -->
     <div class="section tech-talks">
@@ -532,6 +571,7 @@
       'copilot-cli': '2026-02-23',
       'copilot-code-review': '2026-02-17',
       'copilot-hooks': '2026-02-11',
+      'copilot-intro': '2026-02-23',
       'copilot-memory': '2026-02-01',
       'copilot-primitives': '2026-02-08',
       'copilot-sdk': '2026-02-18',
