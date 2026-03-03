@@ -31,11 +31,13 @@ lots of temp work around copilot-cli.  look in "harness" folder
 
 ---
 
-
+HERE
 
 re-brand using things using https://primer.style/.  Add my contact info, calendar link. make it clear I'm Microsoft
 
 ---
+
+In-Flight : agent-visualizer
 
 This is a great idea, let's build it
 
@@ -45,3 +47,26 @@ This is a great idea, let's build it
         </a>
 
 ---
+
+new talk on agentic workflows: Create a workflow for GitHub Agentic Workflows using https://github.com/github/gh-aw/blob/main/create.md
+
+  The purpose of the workflow is to
+gh-aw/create.md at main · github/gh-aw
+GitHub Agentic Workflows. Contribute to github/gh-aw development by creating an account on GitHub.
+
+---
+
+METRICS:
+https://github.blog/changelog/2026-02-27-copilot-metrics-is-now-generally-available/
+https://microsoft.sharepoint.com/:w:/s/GitHubHelp/IQCnHadAR7j0RIuemY_5lEQpAebwTKXugI4TBgsPhjvt6i0?e=paySaK
+https://microsoft.sharepoint.com/:p:/s/GitHubHelp/IQDE4mYaDTASQJ4R73B2GQCaAWJmn7IxA4Rp_gJi4FJL1PY?e=0Gu7do
+https://github.com/congiuluc/premium-request-csv-viewer/
+
+
+---
+
+AGENT FACTORY:
+https://github.github.com/gh-aw/blog/2026-01-12-welcome-to-pelis-agent-factory/
+https://github.com/github/gh-aw/blob/main/create.md
+https://github.github.io/gh-aw/reference/safe-outputs/
+https://github.com/Sentry01/AgentCouncil

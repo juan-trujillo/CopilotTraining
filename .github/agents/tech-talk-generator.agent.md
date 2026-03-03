@@ -6,9 +6,9 @@ tools:
     "read",
     "edit/createFile",
     "edit/editFiles",
-    "web_search",
+    "github/web_search",
     "listDir",
-    "fetch",
+    "web/fetch",
   ]
 model: Claude Sonnet 4.5
 argument-hint: Provide tech talk topic and source URLs
@@ -16,10 +16,6 @@ handoffs:
   - label: Generate Slides
     agent: Slide Generator
     prompt: Generate slides for the tech talk I just created
-    send: false
-  - label: Verify Slides
-    agent: Slide Manager
-    prompt: Generate and verify slides for the tech talk I just created
     send: false
 ---
 

@@ -1,7 +1,6 @@
 ---
 name: tech-talk-author
 description: Generates tech talk content (research.md, plan.md, README.md) following a 3-phase workflow. Does NOT generate slides — use Slide Generator or Slide Manager agents for that.
-infer: true
 ---
 
 # Tech Talk Author Skill

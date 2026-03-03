@@ -5,7 +5,7 @@ tools:
   [
     "read",
     "search",
-    "web_search",
+    "github/web_search",
     "web/githubRepo",
     "edit/createFile",
     "edit/editFiles",
@@ -16,10 +16,6 @@ handoffs:
   - label: Generate Slides
     agent: Slide Generator
     prompt: Generate slides for the tech talk I just created
-    send: false
-  - label: Verify Slides
-    agent: Slide Manager
-    prompt: Generate and verify slides for the tech talk I just created
     send: false
 ---
 
@@ -65,6 +61,7 @@ When given a URL (blog post, docs, GitHub announcement):
 **CRITICAL**: Use **web_search** for all URL research. Do NOT use web_fetch (fails with DNS errors in sandbox).
 
 **For large content (>20K characters):**
+
 - Process in logical sections (introduction, features, examples, etc.)
 - Extract key technical details from each section
 - Synthesize findings into cohesive document
