@@ -109,6 +109,80 @@ updated: 2026-03-03
 ---
 
 <div class="h-full flex flex-col justify-center px-16" style="background: #0d1117;">
+  <h1 class="!text-4xl !font-bold mb-6" style="color: #e6edf3;">Why Use Plugins?</h1>
+  <p class="text-base mb-8" style="color: #8b949e;">Plugins solve real problems when scaling AI-assisted workflows:</p>
+  <div class="grid grid-cols-2 gap-5">
+    <div class="p-5 rounded-lg border" style="background: #161b22; border-color: #30363d;">
+      <div class="text-2xl mb-3">🔄</div>
+      <h3 class="!text-lg !font-semibold mb-2" style="color: #58a6ff;">Reusability Across Projects</h3>
+      <p class="text-sm" style="color: #8b949e;">Install once, use everywhere — no copy-pasting config files between repos</p>
+    </div>
+    <div class="p-5 rounded-lg border" style="background: #161b22; border-color: #30363d;">
+      <div class="text-2xl mb-3">👥</div>
+      <h3 class="!text-lg !font-semibold mb-2" style="color: #3fb950;">Team Standardization</h3>
+      <p class="text-sm" style="color: #8b949e;">Everyone on the team gets the same agents, skills, and hooks with a single install command</p>
+    </div>
+    <div class="p-5 rounded-lg border" style="background: #161b22; border-color: #30363d;">
+      <div class="text-2xl mb-3">🧠</div>
+      <h3 class="!text-lg !font-semibold mb-2" style="color: #d29922;">Share Domain Expertise</h3>
+      <p class="text-sm" style="color: #8b949e;">Package the knowledge of a Rails expert, a K8s specialist, or a security reviewer into a shareable plugin</p>
+    </div>
+    <div class="p-5 rounded-lg border" style="background: #161b22; border-color: #30363d;">
+      <div class="text-2xl mb-3">📦</div>
+      <h3 class="!text-lg !font-semibold mb-2" style="color: #a371f7;">Encapsulate Complexity</h3>
+      <p class="text-sm" style="color: #8b949e;">Wrap complex MCP server setups, multi-agent configurations, and hook chains into one installable unit</p>
+    </div>
+  </div>
+</div>
+
+---
+
+<div class="h-full flex flex-col justify-center px-16" style="background: #0d1117;">
+  <h1 class="!text-4xl !font-bold mb-6" style="color: #e6edf3;">Plugins vs Manual Config</h1>
+  <p class="text-base mb-6" style="color: #8b949e;">Anything a plugin does, you <em>could</em> do manually. But plugins make it better:</p>
+  <div class="overflow-x-auto">
+    <table class="w-full text-sm" style="color: #e6edf3;">
+      <thead>
+        <tr style="border-bottom: 2px solid #30363d;">
+          <th class="text-left py-3 pr-6" style="color: #8b949e;">Feature</th>
+          <th class="text-left py-3 px-4" style="color: #8b949e;">Manual Configuration</th>
+          <th class="text-left py-3 px-4" style="color: #3fb950;">Plugin</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="border-bottom: 1px solid #21262d;">
+          <td class="py-3 pr-6 font-medium" style="color: #e6edf3;">Scope</td>
+          <td class="py-3 px-4" style="color: #8b949e;">Single repository</td>
+          <td class="py-3 px-4" style="color: #3fb950;">Any project ✅</td>
+        </tr>
+        <tr style="border-bottom: 1px solid #21262d;">
+          <td class="py-3 pr-6 font-medium" style="color: #e6edf3;">Sharing</td>
+          <td class="py-3 px-4" style="color: #8b949e;">Manual copy/paste</td>
+          <td class="py-3 px-4" style="color: #3fb950;"><code>copilot plugin install</code> ✅</td>
+        </tr>
+        <tr style="border-bottom: 1px solid #21262d;">
+          <td class="py-3 pr-6 font-medium" style="color: #e6edf3;">Versioning</td>
+          <td class="py-3 px-4" style="color: #8b949e;">Git history</td>
+          <td class="py-3 px-4" style="color: #3fb950;">Marketplace versions ✅</td>
+        </tr>
+        <tr>
+          <td class="py-3 pr-6 font-medium" style="color: #e6edf3;">Discovery</td>
+          <td class="py-3 px-4" style="color: #8b949e;">Search repositories</td>
+          <td class="py-3 px-4" style="color: #3fb950;">Marketplace browsing ✅</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="mt-8 p-4 rounded-lg" style="background: #238636;">
+    <p class="text-sm text-center font-medium" style="color: #fff;">
+      Think of plugins as <strong>npm packages for your AI assistant</strong> — portable, versioned, discoverable.
+    </p>
+  </div>
+</div>
+
+---
+
+<div class="h-full flex flex-col justify-center px-16" style="background: #0d1117;">
   <h1 class="!text-4xl !font-bold mb-6" style="color: #e6edf3;">Plugin Anatomy</h1>
   <div class="p-6 rounded-lg border font-mono text-sm leading-relaxed" style="background: #161b22; border-color: #30363d; color: #e6edf3;">
     <div>my-plugin/</div>
