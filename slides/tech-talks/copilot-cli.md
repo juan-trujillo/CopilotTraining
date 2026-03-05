@@ -1022,9 +1022,9 @@ From "execute commands manually and search docs when stuck" → "collaborate wit
 ### Primary Docs
 
 <div class="text-xs space-y-2">
-<div>📖 <strong>About GitHub Copilot CLI</strong><br/>Core concepts, capabilities, modes</div>
-<div>📖 <strong>Using GitHub Copilot CLI</strong><br/>Command syntax, options, workflows</div>
-<div>📖 <strong>Installing GitHub Copilot CLI</strong><br/>Setup for npm, Homebrew, WinGet</div>
+<div>📖 <a href="https://docs.github.com/en/copilot/concepts/agents/copilot-cli/about-copilot-cli" target="_blank" class="no-underline" style="color: #58a6ff;"><strong>About GitHub Copilot CLI</strong></a><br/>Core concepts, capabilities, modes</div>
+<div>📖 <a href="https://docs.github.com/en/copilot/how-tos/copilot-cli/using-copilot-cli" target="_blank" class="no-underline" style="color: #58a6ff;"><strong>Using GitHub Copilot CLI</strong></a><br/>Command syntax, options, workflows</div>
+<div>📖 <a href="https://docs.github.com/en/copilot/how-tos/copilot-cli/installing-copilot-cli" target="_blank" class="no-underline" style="color: #58a6ff;"><strong>Installing GitHub Copilot CLI</strong></a><br/>Setup for npm, Homebrew, WinGet</div>
 </div>
 
 </div>
@@ -1034,9 +1034,10 @@ From "execute commands manually and search docs when stuck" → "collaborate wit
 ### Additional Resources
 
 <div class="text-xs space-y-2">
-<div>🎓 <strong>CLI Best Practices</strong><br/>Optimization patterns and anti-patterns</div>
-<div>🎓 <strong>Custom Instructions</strong><br/>Repository-specific configuration</div>
-<div>📋 <strong>GitHub Blog</strong><br/>Plan Mode announcement and features</div>
+<div>🎓 <a href="https://docs.github.com/en/copilot/how-tos/copilot-cli/using-copilot-cli/best-practices" target="_blank" class="no-underline" style="color: #58a6ff;"><strong>CLI Best Practices</strong></a><br/>Optimization patterns and anti-patterns</div>
+<div>🎓 <a href="https://docs.github.com/en/copilot/how-tos/copilot-cli/customize-copilot/custom-instructions" target="_blank" class="no-underline" style="color: #58a6ff;"><strong>Custom Instructions</strong></a><br/>Repository-specific configuration</div>
+<div>📋 <a href="https://github.blog/changelog/2026-02-25-github-copilot-cli-is-now-generally-available/" target="_blank" class="no-underline" style="color: #58a6ff;"><strong>GitHub Blog — GA Announcement</strong></a><br/>General availability and latest features</div>
+<div>🔌 <a href="https://docs.github.com/en/copilot/how-tos/copilot-cli/customize-copilot/plugins-finding-installing" target="_blank" class="no-underline" style="color: #58a6ff;"><strong>Plugins & Marketplaces</strong></a><br/>Finding, installing, and creating plugins</div>
 </div>
 
 </div>
