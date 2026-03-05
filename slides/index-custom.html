@@ -211,24 +211,16 @@
       background: linear-gradient(90deg, rgba(255,255,255,0.1) 0%, transparent 100%);
       margin-left: 0.5rem;
     }
-    /* Archived: muted slate */
-    .section.archived {
-      border-color: rgba(100, 116, 139, 0.2);
-      background: rgba(100, 116, 139, 0.03);
+    /* Related Repos: purple → pink → rose */
+    .section.repos {
+      border-color: rgba(168, 85, 247, 0.3);
+      background: linear-gradient(135deg, rgba(168, 85, 247, 0.05) 0%, rgba(236, 72, 153, 0.03) 50%, rgba(251, 113, 133, 0.03) 100%);
     }
-    .section.archived .section-title {
-      color: #64748b;
-    }
-    .section.archived .card {
-      opacity: 0.7;
-    }
-    .section.archived .card:hover {
-      opacity: 1;
-      border-color: rgba(100, 116, 139, 0.5);
-      box-shadow: 0 4px 20px rgba(100, 116, 139, 0.15);
-    }
-    .section.archived .card h2 {
-      color: #94a3b8;
+    .section.repos .section-title {
+      background: linear-gradient(135deg, #a855f7 0%, #ec4899 50%, #fb7185 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
     }
     .note {
       margin-top: 1.5rem;
@@ -504,48 +496,27 @@
       </div>
     </div>
 
-    <!-- Archived Talks Section -->
-    <div class="section archived">
+    <!-- Related Repos Section -->
+    <div class="section repos">
       <div class="section-header">
-        <span class="section-icon">📦</span>
+        <span class="section-icon">🔗</span>
         <div>
-          <h2 class="section-title">Archived</h2>
-          <p class="section-description">Previous talks — content folded into other modules or superseded</p>
+          <h2 class="section-title">Related Repos</h2>
+          <p class="section-description">Companion repositories with working examples and reference implementations</p>
         </div>
       </div>
       <div class="grid">
-        <a href="/CopilotTraining/tech-talks/copilot-sdk-cloudops-short/" class="card">
-          <h2>Copilot SDK — CloudOps Edition</h2>
-          <p>5-minute chat for CloudOps/SRE teams. Incident triage, drift patrol, SLO RCA, cost anomalies, and CI flake busting
-            — toil slashed with Copilot SDK.</p>
+        <a href="https://github.com/rbmathis/Animalia" class="card" target="_blank" rel="noopener">
+          <h2>Animalia 🦁</h2>
+          <p>3M LoC C# codebase for stress-testing Copilot on large repos. Breadcrumb navigation, harness benchmarks, and customization patterns at scale.</p>
         </a>
-        <a href="/CopilotTraining/tech-talks/agent-orchestration/" class="card">
-          <h2>Agent Orchestration</h2>
-          <p>Multi-agent workflows in VS Code. Design coordinated agent systems where specialized agents collaborate.</p>
+        <a href="https://github.com/MSBart2/FanHub" class="card" target="_blank" rel="noopener">
+          <h2>FanHub 🎬</h2>
+          <p>Intentionally broken workshop starter in 4 languages (Node, .NET, Java, Go). 180+ seeded bugs to fix with Copilot — the messiness is the point.</p>
         </a>
-        <a href="/CopilotTraining/tech-talks/subagents/" class="card">
-          <h2>Subagents</h2>
-          <p>Autonomous agents with isolated context windows. Solve context bloat and parallelize research.</p>
-        </a>
-        <a href="/CopilotTraining/tech-talks/agentic-ci/" class="card">
-          <h2>Agentic CI</h2>
-          <p>The Trust Factory. How AI agents transform CI from quality gate to trust manufacturing at scale.</p>
-        </a>
-        <a href="/CopilotTraining/tech-talks/agentic-prs/" class="card">
-          <h2>Agentic PRs</h2>
-          <p>Intent-based governance for large AI-generated diffs. When AI generates feature-scale code, how do you review it?</p>
-        </a>
-        <a href="/CopilotTraining/tech-talks/agentic-repos/" class="card">
-          <h2>Agentic Repos</h2>
-          <p>Rewiring repository topology for AI-as-labor. From quarterly releases to daily agent-driven delivery.</p>
-        </a>
-        <a href="/CopilotTraining/tech-talks/agentic-sessions/" class="card">
-          <h2>Agentic Sessions</h2>
-          <p>Multi-environment agent orchestration. Delegate, monitor, and switch between local, background, and cloud agents.</p>
-        </a>
-        <a href="/CopilotTraining/tech-talks/context-engineering-foundations/" class="card">
-          <h2>Context Engineering Foundations</h2>
-          <p>The foundation that unlocks everything. Master context primitives, persistent layers, and enforcement patterns for expert-level AI assistance.</p>
+        <a href="https://github.com/MSBart2/cli-acp" class="card" target="_blank" rel="noopener">
+          <h2>ACP Orchestrator 🎛️</h2>
+          <p>Web UI for orchestrating Copilot CLI agents across multiple repos via Agent Client Protocol. Broadcast prompts, coalesce results, coordinate cross-repo work.</p>
         </a>
       </div>
     </div>

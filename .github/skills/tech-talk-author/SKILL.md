@@ -1,12 +1,11 @@
 ---
 name: tech-talk-author
-description: Generates tech talk content (research.md, plan.md, README.md) using the same phased workflow as the GitHub Issue pipeline. Does NOT generate slides — use Slide Generator or Slide Manager agents for that.
-infer: true
+description: Generates tech talk content (research.md, plan.md, README.md) following a 3-phase workflow. Does NOT generate slides — use Slide Generator or Slide Manager agents for that.
 ---
 
 # Tech Talk Author Skill
 
-Generate tech talks following the same 4-phase structure as the GitHub Issue workflow.
+Generate tech talks following a 3-phase structure: Research → Plan → Build.
 
 ## Usage
 
@@ -16,11 +15,9 @@ Generate tech talks following the same 4-phase structure as the GitHub Issue wor
 
 ## Process
 
-Follow the prompt templates in `.github/prompts/tech-talk/`:
-
-1. **Research** (`research-instructions.md`) — Fetch URLs + web search for additional references → `research.md`
-2. **Plan** (`planning-instructions.md`) — Create near-final prose for all sections → `plan.md` (300+ lines). Create any missing examples identified in gaps.
-3. **Build** (`build-instructions.md`) — Assemble README.md incrementally (scaffold → major sections → closing). Plan already has the content; build adds formatting, transitions, and artifact embedding.
+1. **Research** — Fetch URLs + web search for additional references → `research.md`
+2. **Plan** — Create near-final prose for all sections → `plan.md` (300+ lines). Create any missing examples identified in gaps.
+3. **Build** — Assemble README.md incrementally (scaffold → major sections → closing). Plan already has the content; build adds formatting, transitions, and artifact embedding.
 
 > **Note:** Slides are generated separately via the Slide Generator or Slide Manager agents after reviewing the completed tech talk.
 

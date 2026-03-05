@@ -6,9 +6,9 @@ tools:
     "read",
     "edit/createFile",
     "edit/editFiles",
-    "web_search",
+    "github/web_search",
     "listDir",
-    "fetch",
+    "web/fetch",
   ]
 model: Claude Sonnet 4.5
 argument-hint: Provide tech talk topic and source URLs
@@ -17,30 +17,21 @@ handoffs:
     agent: Slide Generator
     prompt: Generate slides for the tech talk I just created
     send: false
-  - label: Verify Slides
-    agent: Slide Manager
-    prompt: Generate and verify slides for the tech talk I just created
-    send: false
 ---
 
 # Tech Talk Generator Agent
 
-Generates tech talks using the **same structure and prompts** as the GitHub Issue workflow (3 phases: Research → Plan → Build). This ensures consistency between IDE-generated and pipeline-generated content.
+Generates tech talks using a 3-phase workflow: Research → Plan → Build.
 
 You do **NOT** create slides — that's for the Slide Generator or Slide Manager agents. Use the handoff buttons after completing the tech talk to generate slides as a separate step.
 
-## Shared Resources
-
-All generation follows:
+## Template Reference
 
 - **TEMPLATE:** `tech-talks/TEMPLATE.md` — structure and section requirements
-- **Prompts:** `.github/prompts/tech-talk/` — same instructions used by the GitHub Actions workflow
 
 ## Workflow
 
 ### Phase 1: Research
-
-Follow `.github/prompts/tech-talk/research-instructions.md`.
 
 1. Fetch and read all provided source URLs
 2. **Web search** for additional authoritative references (official docs, blog posts, tutorials, community discussions)
@@ -54,8 +45,6 @@ Follow `.github/prompts/tech-talk/research-instructions.md`.
 
 ### Phase 2: Plan
 
-Follow `.github/prompts/tech-talk/planning-instructions.md`.
-
 1. Read `research.md`, review images and examples
 2. Generate `tech-talks/{topic}/plan.md` with **near-final prose** for every section
 3. Map each artifact and reference to its target section
@@ -68,7 +57,7 @@ The plan should be 300+ lines and contain ready-to-assemble prose for Problem, S
 
 ### Phase 3: Build (Incremental Assembly)
 
-Follow `.github/prompts/tech-talk/build-instructions.md`. **Build the README in sections, not as one massive generation.** This is critical for performance — writing incrementally avoids the bottleneck of generating 800+ lines in a single pass.
+**Build the README in sections, not as one massive generation.** This is critical for performance — writing incrementally avoids the bottleneck of generating 800+ lines in a single pass.
 
 #### Step 3a: Scaffold + Front Sections
 
@@ -109,7 +98,6 @@ Follow `.github/prompts/tech-talk/build-instructions.md`. **Build the README in 
 
 ## Key Principles
 
-- **Same prompts, same output** — IDE and pipeline produce identical structure
 - **References throughout** — every major claim cites its source
 - **Intermediate artifacts** — research.md and plan.md are preserved for reviewability
 - **Pause for review** — don't skip from research straight to final output
