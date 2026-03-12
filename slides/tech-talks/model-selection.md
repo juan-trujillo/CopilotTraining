@@ -1,5 +1,6 @@
 ---
 theme: default
+colorSchema: dark
 class: text-center
 highlighter: shiki
 lineNumbers: false
@@ -13,7 +14,7 @@ title: Model Selection - Right Model, Right Task
 module: tech-talks/model-selection
 mdc: true
 status: active
-updated: 2026-03-11
+updated: 2026-03-12
 ---
 
 <div class="h-full flex flex-col items-center justify-center relative overflow-hidden" style="background: #0d1117;">
@@ -608,3 +609,76 @@ layout: end
   <p class="mt-4" style="color: #8b949e;">Right Model, Right Task</p>
   <div class="mt-8 text-sm" style="color: #484f58;">CopilotTraining · Tech Talk</div>
 </div>
+
+<style>
+/* GitHub Primer Brand — Dark Theme Override */
+:root {
+  --slidev-theme-background: #0d1117;
+  --slidev-theme-foreground: #e6edf3;
+}
+
+.slidev-layout {
+  background: #0d1117 !important;
+  color: #e6edf3 !important;
+}
+
+.slidev-page {
+  background: #0d1117 !important;
+}
+
+/* Typography */
+h1, h2, h3 {
+  color: #e6edf3 !important;
+}
+
+p, li, span {
+  color: #e6edf3;
+}
+
+a {
+  color: #58a6ff !important;
+}
+
+/* Tables — GitHub Primer dark style */
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th {
+  color: #e6edf3 !important;
+  background: #161b22 !important;
+  border-bottom: 2px solid #30363d !important;
+  padding: 0.5rem 0.75rem;
+}
+
+td {
+  color: #8b949e !important;
+  background: #0d1117 !important;
+  border-bottom: 1px solid #21262d !important;
+  padding: 0.5rem 0.75rem;
+}
+
+tr:hover td {
+  background: #161b22 !important;
+}
+
+/* Code blocks */
+code {
+  background: #161b22 !important;
+  color: #e6edf3 !important;
+  border-radius: 6px;
+}
+
+/* Slide number overlay (override global white bg) */
+.slidev-page::after {
+  background: #161b22 !important;
+  color: #8b949e !important;
+  border: 1px solid #30363d;
+}
+
+/* Primer accent colors for emphasis */
+strong, b {
+  color: #e6edf3;
+}
+</style>
