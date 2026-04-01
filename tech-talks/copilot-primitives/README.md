@@ -1,29 +1,35 @@
 ---
 status: active
-updated: 2026-02-08
+updated: 2026-03-30
 section: "Context & Customization"
 references:
   - url: https://code.visualstudio.com/docs/copilot/copilot-customization
     label: "Customize AI in Visual Studio Code"
-    verified: 2026-02-08
+    verified: 2026-03-30
   - url: https://code.visualstudio.com/docs/copilot/customization/custom-instructions
     label: "Use custom instructions in VS Code"
-    verified: 2026-02-08
+    verified: 2026-03-30
   - url: https://code.visualstudio.com/docs/copilot/customization/prompt-files
     label: "Use prompt files in VS Code"
-    verified: 2026-02-08
+    verified: 2026-03-30
   - url: https://code.visualstudio.com/docs/copilot/customization/agent-skills
     label: "Use Agent Skills in VS Code"
-    verified: 2026-02-08
+    verified: 2026-03-30
   - url: https://code.visualstudio.com/docs/copilot/customization/custom-agents
     label: "Custom agents in VS Code"
-    verified: 2026-02-08
+    verified: 2026-03-30
   - url: https://docs.github.com/en/copilot/customizing-copilot/adding-repository-custom-instructions-for-github-copilot
     label: "Adding repository custom instructions for GitHub Copilot"
-    verified: 2026-02-08
+    verified: 2026-03-30
   - url: https://docs.github.com/en/copilot/reference/custom-instructions-support
     label: "Custom instructions support reference"
-    verified: 2026-02-08
+    verified: 2026-03-30
+  - url: https://code.visualstudio.com/docs/copilot/customization/agent-plugins
+    label: "Agent Plugins in VS Code"
+    verified: 2026-03-30
+  - url: https://code.visualstudio.com/docs/copilot/customization/hooks
+    label: "Agent hooks in VS Code"
+    verified: 2026-03-30
 ---
 
 # Copilot Configuration Primitives: Making AI Understand Your Codebase
@@ -235,7 +241,7 @@ Q: What kind of customization do you need?
 | **Scope** | Every request | When relevant | Single task | Full session |
 | **File Path** | `.github/copilot-instructions.md` | `.github/skills/*/SKILL.md` | `.github/prompts/*.prompt.md` | `.github/agents/*.agent.md` |
 | **Can Include** | Markdown text | Scripts, examples, resources | Variables, tool specs | Tool restrictions, handoffs |
-| **Portability** | VS Code + GitHub.com | VS Code + CLI + coding agent | VS Code | VS Code |
+| **Portability** | VS Code + GitHub.com | VS Code + CLI + coding agent + extensions | VS Code (syncs across devices) | VS Code + coding agent |
 | **Best For** | Coding standards | Specialized capabilities | Repeatable workflows | Role-based personas |
 | **Setup Time** | 5 minutes | 15 minutes | 10 minutes | 20 minutes |
 
@@ -318,6 +324,34 @@ Path-specific instructions are stored in `.github/instructions/` and only activa
 - Personal instructions > repository instructions > organization instructions (priority order)
 - Use the `/init` command to auto-generate instructions from your workspace[^2]
 
+### Multi-Agent Instruction Files
+
+VS Code now recognizes **AGENTS.md** and **CLAUDE.md** files alongside `copilot-instructions.md`[^2]:
+
+- **`AGENTS.md`** — Placed at workspace root (or in subfolders with the experimental `chat.useNestedAgentsMdFiles` setting), recognized by multiple AI agents. Useful when teams work with VS Code, Claude Code, and other AI tools simultaneously.
+- **`CLAUDE.md`** — For compatibility with Claude Code. Detected in workspace root, `.claude/` folder, or user home directory.
+
+Both formats are always-on, like `copilot-instructions.md`, and combine additively.
+
+### Organization-Level Instructions
+
+Instructions can now be defined at the **GitHub organization level**, applying shared standards across multiple repositories without duplicating files[^2].
+
+### Parent Repository Discovery
+
+In monorepo setups, enable `chat.useCustomizationsInParentRepositories` to discover customizations from parent repository roots. VS Code walks up the folder hierarchy to find `.git` and collects all customization files between your workspace folder and the repo root[^1].
+
+### AI-Assisted Generation
+
+Type **`/create-instruction`** in chat to generate a targeted instructions file with AI assistance. Describe the convention you want to enforce, and Copilot generates the `.instructions.md` file with appropriate `applyTo` pattern. You can also extract instructions from an ongoing conversation — correct Copilot's style during chat, then ask "extract an instruction from this"[^2].
+
+### New Instruction File Fields
+
+Instructions files now support additional frontmatter fields[^2]:
+- **`name`** — Display name shown in the UI (defaults to file name)
+- **`description`** — Short description shown on hover in the Chat view
+- **`applyTo`** — Glob pattern (unchanged, but now also supports `**` to match all files)
+
 ---
 
 <!-- 🎬 MAJOR SECTION: Skills -->
@@ -385,6 +419,38 @@ Agent Skills work across VS Code, GitHub Copilot CLI, and GitHub Copilot coding 
 - Can include executable scripts, test templates, and reference examples
 - Portable across VS Code, Copilot CLI, and Copilot coding agent[^7]
 - Store project skills in `.github/skills/`, personal skills in `~/.copilot/skills/`
+
+### New Skill Frontmatter Fields
+
+Skills now support additional control over visibility and invocation[^4]:
+
+- **`argument-hint`** — Hint text shown in the chat input when the skill is invoked as a slash command
+- **`user-invocable`** — Controls whether the skill appears as a `/` slash command (default: `true`). Set to `false` to hide from the menu while still allowing automatic loading.
+- **`disable-model-invocation`** — Controls whether the agent can auto-load the skill based on relevance (default: `false`). Set to `true` to require manual `/` invocation only.
+
+### Extension-Contributed Skills
+
+VS Code extensions can now contribute skills using the `chatSkills` contribution point in `package.json`[^4]. The skill directory must contain a `SKILL.md` file following the Agent Skills specification, and the `name` field must match the parent directory name.
+
+### AI-Assisted Generation
+
+Type **`/create-skill`** in chat and describe the capability you want. Copilot generates a `SKILL.md` file with the directory structure, instructions, and frontmatter. You can also extract a skill from an ongoing conversation — after a multi-turn debugging session, ask "create a skill from how we just debugged that"[^4].
+
+### New Skill Frontmatter Fields
+
+Skills now support additional control over visibility and invocation[^4]:
+
+- **`argument-hint`** — Hint text shown in the chat input when the skill is invoked as a slash command
+- **`user-invocable`** — Controls whether the skill appears as a `/` slash command (default: `true`). Set to `false` to hide from the menu while still allowing automatic loading.
+- **`disable-model-invocation`** — Controls whether the agent can auto-load the skill based on relevance (default: `false`). Set to `true` to require manual `/` invocation only.
+
+### Extension-Contributed Skills
+
+VS Code extensions can now contribute skills using the `chatSkills` contribution point in `package.json`[^4]. The skill directory must contain a `SKILL.md` file following the Agent Skills specification, and the `name` field must match the parent directory name.
+
+### AI-Assisted Skill Generation
+
+Type **`/create-skill`** in chat and describe the capability you want. Copilot generates a `SKILL.md` file with the directory structure, instructions, and frontmatter. You can also extract a skill from an ongoing conversation — after a multi-turn debugging session, ask "create a skill from how we just debugged that"[^4].
 
 ---
 
@@ -454,6 +520,28 @@ model: Claude Sonnet 4 (copilot)
 - Support variables: `${selection}`, `${file}`, `${input:name:placeholder}`
 - Specify tools and agent to constrain execution
 - Store in `.github/prompts/` (workspace) or user profile (global)
+
+### New Prompt Features
+
+- **`argument-hint`** — Hint text shown in the chat input field to guide users on how to interact with the prompt[^3]
+- **`vscode/askQuestions` tool** — Prompts can use this tool to interactively ask users for inputs during execution[^3]
+- **Settings Sync** — User prompt files can now sync across devices via VS Code Settings Sync[^3]
+- **Prompt Recommendations** — Use `chat.promptFilesRecommendations` to show prompts as recommended actions when starting a new chat session[^3]
+
+### AI-Assisted Generation
+
+Type **`/create-prompt`** in chat to generate a prompt file. You can also extract a reusable prompt from an ongoing conversation — after a multi-turn session, ask "turn this into a reusable prompt"[^3].
+
+### New Prompt Features
+
+- **`argument-hint`** — Hint text shown in the chat input field to guide users on how to interact with the prompt[^3]
+- **`vscode/askQuestions` tool** — Prompts can use this tool to interactively ask users for inputs during execution[^3]
+- **Settings Sync** — User prompt files can now sync across devices via VS Code Settings Sync[^3]
+- **Prompt Recommendations** — Use `chat.promptFilesRecommendations` to show prompts as recommended actions when starting a new chat session[^3]
+
+### AI-Assisted Prompt Generation
+
+Type **`/create-prompt`** in chat to generate a prompt file. You can also extract a reusable prompt from an ongoing conversation — after a multi-turn session, ask "turn this into a reusable prompt"[^3].
 
 ---
 
@@ -536,6 +624,80 @@ The database agent in [`examples/database.agent.md`](examples/database.agent.md)
 - Subagents can run as delegated tasks within an agent session[^5]
 - Store in `.github/agents/` (workspace) or user profile (global)
 
+### New Agent Capabilities (March 2026)
+
+**Model priority lists** — The `model` field now accepts an array of models. The system tries each in order until an available one is found[^5]:
+
+```yaml
+model: ['Claude Opus 4.5', 'GPT-5.2', 'Claude Sonnet 4']
+```
+
+**Visibility and invocation control:**
+- **`user-invocable`** — Controls whether the agent appears in the agents dropdown (default: `true`). Set to `false` to create agents only accessible as subagents. Replaces the deprecated `infer` field.
+- **`disable-model-invocation`** — Prevents the agent from being invoked as a subagent by other agents (default: `false`).
+
+**Subagent orchestration** — The `agents` field lists which agents can be used as subagents within this agent[^5]:
+
+```yaml
+agents: ['Researcher', 'Implementer']  # Only these subagents allowed
+```
+
+Use `*` to allow all agents, or `[]` to prevent any subagent use.
+
+**Agent-scoped hooks (Preview)** — Define hooks directly in agent frontmatter that only run when that agent is active[^5]:
+
+```yaml
+hooks:
+  PostToolUse:
+    - type: command
+      command: "./scripts/format-changed-files.sh"
+```
+
+**Handoff model override** — Each handoff can now specify its own `model` to use when the handoff executes[^5].
+
+**Target environments** — The `target` field specifies `vscode` or `github-copilot` for agents that work with the Copilot coding agent[^5].
+
+### AI-Assisted Generation
+
+Type **`/create-agent`** in chat to generate a custom agent file with AI assistance[^5].
+
+### New Agent Capabilities (March 2026)
+
+**Model priority lists** — The `model` field now accepts an array of models. The system tries each in order until an available one is found[^5]:
+
+```yaml
+model: ['Claude Opus 4.5', 'GPT-5.2', 'Claude Sonnet 4']
+```
+
+**Visibility and invocation control:**
+- **`user-invocable`** — Controls whether the agent appears in the agents dropdown (default: `true`). Set to `false` to create agents only accessible as subagents. Replaces the deprecated `infer` field.
+- **`disable-model-invocation`** — Prevents the agent from being invoked as a subagent by other agents (default: `false`).
+
+**Subagent orchestration** — The `agents` field lists which agents can be used as subagents within this agent[^5]:
+
+```yaml
+agents: ['Researcher', 'Implementer']  # Only these subagents allowed
+```
+
+Use `*` to allow all agents, or `[]` to prevent any subagent use.
+
+**Agent-scoped hooks (Preview)** — Define hooks directly in agent frontmatter that only run when that agent is active[^5]:
+
+```yaml
+hooks:
+  PostToolUse:
+    - type: command
+      command: "./scripts/format-changed-files.sh"
+```
+
+**Handoff model override** — Each handoff can now specify its own `model` to use when the handoff executes[^5].
+
+**Target environments** — The `target` field specifies `vscode` or `github-copilot` for agents that work with the Copilot coding agent[^5].
+
+### AI-Assisted Agent Generation
+
+Type **`/create-agent`** in chat to generate a custom agent file with AI assistance[^5].
+
 ---
 
 <!-- 🎬 MAJOR SECTION: Choosing the Right Primitive -->
@@ -562,6 +724,70 @@ Most teams should follow this progression:
 | Task-specific instructions | Bloats every request with irrelevant context | Use prompts for tasks |
 | Duplicating rules across files | Creates maintenance burden and conflicts | Reference instructions from prompts |
 | Skipping configuration entirely | Leaves 80% of Copilot's value unused | Spend 5 minutes on instructions |
+
+---
+
+## Beyond the 4 Primitives
+
+The four primitives are the core configuration layer, but several adjacent features enhance and extend them:
+
+### Chat Customizations Editor (Preview)
+
+A centralized UI for creating and managing all customizations in one place[^1]. Open it via the gear icon in Chat view or run **Chat: Open Chat Customizations**. The editor provides tabs for Instructions, Skills, Prompts, Agents, Plugins, and MCP Servers — with embedded code editing and AI generation capabilities.
+
+AI-assisted generation commands are available for all primitive types: `/create-instruction`, `/create-prompt`, `/create-skill`, `/create-agent`, and `/create-hook`.
+
+### Agent Hooks (Preview)
+
+Hooks execute shell commands at key lifecycle points during agent sessions[^13]. Unlike instructions that guide behavior, hooks provide **deterministic, code-driven automation**:
+
+| Hook Event | When It Fires | Use Case |
+|-----------|--------------|----------|
+| `SessionStart` | First prompt submitted | Initialize resources |
+| `UserPromptSubmit` | User sends a prompt | Audit, inject context |
+| `PreToolUse` | Before any tool invocation | Block dangerous operations |
+| `PostToolUse` | After tool completes | Run formatters, linters |
+| `SubagentStart/Stop` | Subagent lifecycle | Track nested agent usage |
+| `Stop` | Session ends | Generate reports, cleanup |
+
+Hooks are configured in `.github/hooks/*.json` and can also be scoped to specific agents via agent frontmatter. Use `/create-hook` to generate hook configuration with AI assistance.
+
+### Agent Plugins (Preview)
+
+Prepackaged bundles of customizations installable from plugin marketplaces[^14]. A single plugin can provide slash commands, skills, custom agents, hooks, and MCP servers. Discover plugins via `@agentPlugins` in the Extensions view or from the Chat Customizations editor.
+
+Default marketplaces include [copilot-plugins](https://github.com/github/copilot-plugins) and [awesome-copilot](https://github.com/github/awesome-copilot/).
+
+---
+
+## Beyond the 4 Primitives
+
+The four primitives are the core configuration layer, but several adjacent features enhance and extend them:
+
+### Chat Customizations Editor (Preview)
+
+A centralized UI for creating and managing all customizations in one place[^1]. Open it via the gear icon in Chat view or run **Chat: Open Chat Customizations**. The editor provides tabs for Instructions, Skills, Prompts, Agents, Plugins, and MCP Servers — with embedded code editing and AI generation capabilities.
+
+### Agent Hooks (Preview)
+
+Hooks execute shell commands at key lifecycle points during agent sessions[^13]. Unlike instructions that guide behavior, hooks provide **deterministic, code-driven automation**:
+
+| Hook Event | When It Fires | Use Case |
+|-----------|--------------|----------|
+| `SessionStart` | First prompt submitted | Initialize resources |
+| `UserPromptSubmit` | User sends a prompt | Audit, inject context |
+| `PreToolUse` | Before any tool invocation | Block dangerous operations |
+| `PostToolUse` | After tool completes | Run formatters, linters |
+| `SubagentStart/Stop` | Subagent lifecycle | Track nested agent usage |
+| `Stop` | Session ends | Generate reports, cleanup |
+
+Hooks are configured in `.github/hooks/*.json` and can also be scoped to specific agents via agent frontmatter.
+
+### Agent Plugins (Preview)
+
+Prepackaged bundles of customizations installable from plugin marketplaces[^14]. A single plugin can provide slash commands, skills, custom agents, hooks, and MCP servers. Discover plugins via `@agentPlugins` in the Extensions view or from the Chat Customizations editor.
+
+Default marketplaces include [copilot-plugins](https://github.com/github/copilot-plugins) and [awesome-copilot](https://github.com/github/awesome-copilot/).
 
 ---
 
@@ -680,6 +906,10 @@ See [DECISION-GUIDE.md](../DECISION-GUIDE.md) for complete navigation help.
 [^10]: **Custom instructions support reference** — https://docs.github.com/en/copilot/reference/custom-instructions-support — Which GitHub features support which instruction types
 [^11]: **Custom instructions library** — https://docs.github.com/en/copilot/tutorials/customization-library/custom-instructions — Curated examples of working instructions
 [^12]: **VS Code Copilot Chat documentation** — https://code.visualstudio.com/docs/copilot/chat/copilot-chat — Chat interface and context management
+[^13]: **Agent hooks in VS Code** — https://code.visualstudio.com/docs/copilot/customization/hooks — Lifecycle automation with shell commands at key agent events
+[^14]: **Agent Plugins in VS Code** — https://code.visualstudio.com/docs/copilot/customization/agent-plugins — Prepackaged bundles of customizations from plugin marketplaces
+[^13]: **Agent hooks in VS Code** — https://code.visualstudio.com/docs/copilot/customization/hooks — Lifecycle automation with shell commands at key agent events
+[^14]: **Agent Plugins in VS Code** — https://code.visualstudio.com/docs/copilot/customization/agent-plugins — Prepackaged bundles of customizations from plugin marketplaces
 
 ---
 
@@ -691,6 +921,10 @@ See [DECISION-GUIDE.md](../DECISION-GUIDE.md) for complete navigation help.
 - 📖 [Prompt Files](https://code.visualstudio.com/docs/copilot/customization/prompt-files) — Reusable task templates with variable support
 - 📖 [Custom Agents](https://code.visualstudio.com/docs/copilot/customization/custom-agents) — Specialized AI personas with tool constraints
 - 📖 [GitHub Repository Instructions](https://docs.github.com/en/copilot/customizing-copilot/adding-repository-custom-instructions-for-github-copilot) — GitHub-side configuration
+- 📖 [Agent Hooks](https://code.visualstudio.com/docs/copilot/customization/hooks) — Lifecycle automation with shell commands
+- 📖 [Agent Plugins](https://code.visualstudio.com/docs/copilot/customization/agent-plugins) — Prepackaged customization bundles from marketplaces
+- 📖 [Agent Hooks](https://code.visualstudio.com/docs/copilot/customization/hooks) — Lifecycle automation with shell commands
+- 📖 [Agent Plugins](https://code.visualstudio.com/docs/copilot/customization/agent-plugins) — Prepackaged customization bundles from marketplaces
 
 ---
 
@@ -706,6 +940,10 @@ Understanding the loading order clarifies why the layered architecture matters:
 4. **Skill Match**: If a skill description matches, its full `SKILL.md` body is loaded into context (Level 2)
 5. **Agent Selection**: When user switches to a custom agent, its instructions and tool constraints replace defaults
 6. **Prompt Invocation**: When user types `/command`, prompt file merges with current instructions + agent context
+7. **Hook Execution**: At each lifecycle point (PreToolUse, PostToolUse, etc.), registered hooks execute shell commands deterministically
+8. **Plugin Discovery**: Installed agent plugins contribute additional skills, agents, hooks, and MCP servers alongside local customizations
+7. **Hook Execution**: At each lifecycle point (PreToolUse, PostToolUse, etc.), registered hooks execute shell commands deterministically
+8. **Plugin Discovery**: Installed agent plugins contribute additional skills, agents, hooks, and MCP servers alongside local customizations
 
 ### Context Budget Management
 
