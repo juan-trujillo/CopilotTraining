@@ -60,6 +60,7 @@ Technical presentations for practitioners exploring specific capabilities and pa
 | [Copilot Hooks](tech-talks/copilot-hooks/) | Programmable governance — prevention, audit trails, compliance |
 | [Copilot SDK](tech-talks/copilot-sdk/) | Embedding AI agents in custom tools and applications |
 | [Copilot Primitives](tech-talks/copilot-primitives/) | The 4 configuration primitives — instructions, prompts, skills, agents |
+| [Customization Best Practices](tech-talks/customization-best-practices/) | How to write great instructions, prompts, skills & agents — patterns from 2,500+ repos |
 | [MCP Apps](tech-talks/mcp-apps/) | Rich UI in chat responses with component-based MCP tools |
 
 #### 🤖 Agent Architecture
