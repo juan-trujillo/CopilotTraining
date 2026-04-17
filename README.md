@@ -61,6 +61,7 @@ Technical presentations for practitioners exploring specific capabilities and pa
 | [Copilot SDK](tech-talks/copilot-sdk/) | Embedding AI agents in custom tools and applications |
 | [Copilot Primitives](tech-talks/copilot-primitives/) | The 4 configuration primitives — instructions, prompts, skills, agents |
 | [Customization Best Practices](tech-talks/customization-best-practices/) | How to write great instructions, prompts, skills & agents — patterns from 2,500+ repos |
+| [APM: Agent Package Manager](tech-talks/apm/) | Dependency management for AI agent configuration — versioning, composition, security |
 | [MCP Apps](tech-talks/mcp-apps/) | Rich UI in chat responses with component-based MCP tools |
 
 #### 🤖 Agent Architecture
