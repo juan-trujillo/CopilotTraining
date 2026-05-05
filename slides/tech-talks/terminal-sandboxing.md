@@ -13,7 +13,7 @@ transition: slide-left
 title: Terminal Sandboxing - Safe Agentic Execution
 module: tech-talks/terminal-sandboxing
 mdc: true
-status: active
+status: archived
 updated: 2026-02-01
 ---
 

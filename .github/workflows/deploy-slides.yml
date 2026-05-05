@@ -87,6 +87,11 @@ jobs:
             head -20 "$1" | sed -n 's/^updated: *//p'
           }
 
+          # Check if slide is archived (skip archived decks)
+          is_archived() {
+            head -20 "$1" | grep -q '^status: *archived'
+          }
+
           # Load previous build manifest
           declare -A PREV_UPDATED
           if [ -f "dist/.build-manifest.json" ]; then
@@ -160,6 +165,14 @@ jobs:
             CATEGORY=$(dirname "$SLIDE_FILE")
             BASENAME=$(basename "$SLIDE_FILE" .md)
             KEY="${CATEGORY}/${BASENAME}"
+
+            # Skip archived slides
+            if is_archived "$SLIDE_FILE"; then
+              echo "📦 ${KEY} — archived, skipping"
+              SKIPPED=$((SKIPPED + 1))
+              continue
+            fi
+
             CURRENT_UPDATED=$(get_updated "$SLIDE_FILE")
 
             # Always track in manifest
