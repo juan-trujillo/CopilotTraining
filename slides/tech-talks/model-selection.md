@@ -14,7 +14,7 @@ title: Model Selection - Right Model, Right Task
 module: tech-talks/model-selection
 mdc: true
 status: active
-updated: 2026-03-12
+updated: 2026-05-12
 ---
 
 <div class="h-full flex flex-col items-center justify-center relative overflow-hidden" style="background: #0d1117;">
@@ -41,6 +41,50 @@ updated: 2026-03-12
     <div class="px-5 py-2 rounded-md text-sm font-medium border" style="border-color: #30363d; color: #e6edf3;">
       Engineering Leaders
     </div>
+  </div>
+</div>
+
+---
+layout: center
+---
+
+# 📖 Table of Contents
+
+<div class="grid grid-cols-2 gap-4 mt-8">
+  <div @click="$nav.go(3)" class="cursor-pointer p-4 rounded-xl border transition-all hover:scale-105" style="background: #161b22; border-color: #30363d;">
+    <div class="text-2xl mb-2">🎯</div>
+    <div class="font-semibold" style="color: #e6edf3;">The 3-Step Framework</div>
+    <div class="text-xs mt-1" style="color: #8b949e;">Classify the task, identify constraints, select the tier</div>
+  </div>
+
+  <div @click="$nav.go(10)" class="cursor-pointer p-4 rounded-xl border transition-all hover:scale-105" style="background: #161b22; border-color: #30363d;">
+    <div class="text-2xl mb-2">🌐</div>
+    <div class="font-semibold" style="color: #e6edf3;">The Model Landscape</div>
+    <div class="text-xs mt-1" style="color: #8b949e;">GPT-5.5, Claude Opus 4.7, Gemini 3.1 — strengths and tradeoffs</div>
+  </div>
+
+  <div @click="$nav.go(13)" class="cursor-pointer p-4 rounded-xl border transition-all hover:scale-105" style="background: #161b22; border-color: #30363d;">
+    <div class="text-2xl mb-2">📊</div>
+    <div class="font-semibold" style="color: #e6edf3;">Model-Task Matrix</div>
+    <div class="text-xs mt-1" style="color: #8b949e;">Which model wins for which task</div>
+  </div>
+
+  <div @click="$nav.go(15)" class="cursor-pointer p-4 rounded-xl border transition-all hover:scale-105" style="background: #161b22; border-color: #30363d;">
+    <div class="text-2xl mb-2">💡</div>
+    <div class="font-semibold" style="color: #e6edf3;">Tier Strategy & Cost</div>
+    <div class="text-xs mt-1" style="color: #8b949e;">Real-world cost examples and savings</div>
+  </div>
+
+  <div @click="$nav.go(18)" class="cursor-pointer p-4 rounded-xl border transition-all hover:scale-105" style="background: #161b22; border-color: #30363d;">
+    <div class="text-2xl mb-2">🔧</div>
+    <div class="font-semibold" style="color: #e6edf3;">Practical Patterns</div>
+    <div class="text-xs mt-1" style="color: #8b949e;">Fallback chains, task decomposition, evaluation</div>
+  </div>
+
+  <div @click="$nav.go(24)" class="cursor-pointer p-4 rounded-xl border transition-all hover:scale-105" style="background: #161b22; border-color: #30363d;">
+    <div class="text-2xl mb-2">✅</div>
+    <div class="font-semibold" style="color: #e6edf3;">What You Can Do Today</div>
+    <div class="text-xs mt-1" style="color: #8b949e;">Actionable next steps for this afternoon, week, and month</div>
   </div>
 </div>
 
@@ -106,62 +150,187 @@ updated: 2026-03-12
 <div class="p-4 rounded-lg border" style="background: #161b22; border-color: #238636;">
 <div class="text-lg font-bold mb-3" style="color: #3fb950;">A 3-Step Framework</div>
 <div style="color: #e6edf3;">
-<div class="mb-2">🎯 <b>Step 1: Classify the task</b> — Reason, code, write, classify, analyze, or process images?</div>
-<div class="mb-2">⚖️ <b>Step 2: Identify the constraint</b> — Quality, speed, cost, context window, or safety?</div>
-<div>🏷️ <b>Step 3: Select the tier</b> — Premium, Standard, or Fast based on constraint match</div>
+<div class="mb-2">🎯 <b>Step 1: Classify the task</b> — What are you actually asking the model to do?</div>
+<div class="mb-2">⚖️ <b>Step 2: Identify the constraint</b> — What matters most for THIS task?</div>
+<div>🏷️ <b>Step 3: Select the tier</b> — Match to the capability tier that fits</div>
 </div>
 </div>
 
 <div class="grid grid-cols-3 gap-4 mt-4">
 <div class="p-3 rounded-lg border" style="background: #161b22; border-color: #30363d;">
 <div class="text-xl mb-1">🏆</div>
-<div class="font-semibold mb-1" style="color: #e6edf3;">Premium</div>
-<div class="text-xs" style="color: #8b949e;">Complex reasoning, architecture, security. High cost, highest quality.</div>
+<div class="font-semibold mb-1" style="color: #e6edf3;">Capability</div>
+<div class="text-xs" style="color: #8b949e;">Complex reasoning, architecture, security. Highest quality, highest cost.</div>
 </div>
 <div class="p-3 rounded-lg border" style="background: #161b22; border-color: #30363d;">
 <div class="text-xl mb-1">⚡</div>
-<div class="font-semibold mb-1" style="color: #e6edf3;">Standard</div>
-<div class="text-xs" style="color: #8b949e;">Daily coding, writing, general tasks. Balanced cost and quality.</div>
+<div class="font-semibold mb-1" style="color: #e6edf3;">Balanced</div>
+<div class="text-xs" style="color: #8b949e;">Daily coding, writing, general tasks. Best cost-quality tradeoff.</div>
 </div>
 <div class="p-3 rounded-lg border" style="background: #161b22; border-color: #30363d;">
 <div class="text-xl mb-1">🚀</div>
-<div class="font-semibold mb-1" style="color: #e6edf3;">Fast / Cheap</div>
-<div class="text-xs" style="color: #8b949e;">Classification, triage, log parsing. Low cost, high volume.</div>
+<div class="font-semibold mb-1" style="color: #e6edf3;">Speed / Cost</div>
+<div class="text-xs" style="color: #8b949e;">Classification, triage, log parsing. High volume, low complexity.</div>
+</div>
+</div>
+
+<div class="mt-3 p-2 rounded text-xs" style="background: #0d1117; border-left: 3px solid #238636; color: #8b949e;">
+  Provider-agnostic — this framework works regardless of which models ship next quarter.
+</div>
+
+</div>
+
+---
+
+# Step 1: Classify the Task
+
+<div class="mt-3" style="background: #0d1117;">
+
+<div class="text-xs mb-3" style="color: #8b949e;">What are you actually asking the model to do? Seven categories:</div>
+
+<div class="grid grid-cols-2 gap-2 text-xs">
+<div class="p-3 rounded-lg border" style="background: #161b22; border-color: #30363d;">
+  <div class="font-bold mb-1" style="color: #d29922;">🧠 Reasoning</div>
+  <div style="color: #8b949e;">Multi-step logic, abstract problem-solving</div>
+  <div class="mt-1 text-xs italic" style="color: #484f58;">Architecture decisions, root cause analysis</div>
+</div>
+<div class="p-3 rounded-lg border" style="background: #161b22; border-color: #30363d;">
+  <div class="font-bold mb-1" style="color: #a78bfa;">💻 Coding</div>
+  <div style="color: #8b949e;">Code generation, refactoring, debugging</div>
+  <div class="mt-1 text-xs italic" style="color: #484f58;">Multi-file changes, test generation</div>
+</div>
+<div class="p-3 rounded-lg border" style="background: #161b22; border-color: #30363d;">
+  <div class="font-bold mb-1" style="color: #58a6ff;">✍️ Writing</div>
+  <div style="color: #8b949e;">Prose, brand voice, documentation</div>
+  <div class="mt-1 text-xs italic" style="color: #484f58;">Blog posts, user-facing copy</div>
+</div>
+<div class="p-3 rounded-lg border" style="background: #161b22; border-color: #30363d;">
+  <div class="font-bold mb-1" style="color: #3fb950;">🏷️ Classification</div>
+  <div style="color: #8b949e;">Categorization, triage, labeling</div>
+  <div class="mt-1 text-xs italic" style="color: #484f58;">Ticket routing, sentiment analysis</div>
+</div>
+<div class="p-3 rounded-lg border" style="background: #161b22; border-color: #30363d;">
+  <div class="font-bold mb-1" style="color: #58a6ff;">🖼️ Multimodal</div>
+  <div style="color: #8b949e;">Vision, audio, video processing</div>
+  <div class="mt-1 text-xs italic" style="color: #484f58;">Image analysis, diagram interpretation</div>
+</div>
+<div class="p-3 rounded-lg border" style="background: #161b22; border-color: #30363d;">
+  <div class="font-bold mb-1" style="color: #d29922;">📊 Analysis</div>
+  <div style="color: #8b949e;">Long-document processing, data extraction</div>
+  <div class="mt-1 text-xs italic" style="color: #484f58;">Contract review, log analysis</div>
+</div>
+<div class="p-3 rounded-lg border col-span-2" style="background: #161b22; border-color: #238636;">
+  <div class="font-bold mb-1" style="color: #3fb950;">🤖 Agentic</div>
+  <div style="color: #8b949e;">Multi-step, tool-using, autonomous workflows — distinct because reliability and instruction-following matter more than raw benchmark scores</div>
+  <div class="mt-1 text-xs italic" style="color: #484f58;">Issue-to-PR, CI pipeline debugging, multi-step research</div>
 </div>
 </div>
 
 </div>
 
 ---
-layout: center
+
+# Step 2: Identify the Constraint
+
+<div class="mt-3" style="background: #0d1117;">
+
+<div class="text-xs mb-3" style="color: #8b949e;">What matters most for THIS specific task? Resolve deployment first — it narrows your candidate list:</div>
+
+<div class="space-y-2 text-xs">
+<div class="p-3 rounded-lg border" style="background: #161b22; border-color: #d29922;">
+  <div class="flex items-center gap-2">
+    <span class="font-bold" style="color: #d29922;">🔓 Deployment Model</span>
+    <span class="px-2 py-0.5 rounded text-xs" style="background: #d29922; color: #0d1117;">RESOLVE FIRST</span>
+  </div>
+  <div class="mt-1" style="color: #8b949e;">Public API / private cloud (Bedrock, Vertex, Azure) / self-hosted? This determines what's even available based on data residency and compliance.</div>
+</div>
+<div class="p-3 rounded-lg border" style="background: #161b22; border-color: #30363d;">
+  <div class="font-bold" style="color: #f85149;">🎯 Accuracy</div>
+  <div class="mt-1" style="color: #8b949e;">What's the cost of a wrong answer? High-stakes = premium tier, low-stakes = fast tier.</div>
+</div>
+<div class="p-3 rounded-lg border" style="background: #161b22; border-color: #30363d;">
+  <div class="font-bold" style="color: #3fb950;">⚡ Latency</div>
+  <div class="mt-1" style="color: #8b949e;">Does it need to respond in real-time? Interactive UX demands fast models.</div>
+</div>
+<div class="p-3 rounded-lg border" style="background: #161b22; border-color: #30363d;">
+  <div class="font-bold" style="color: #58a6ff;">💰 Cost / Volume</div>
+  <div class="mt-1" style="color: #8b949e;">10 requests/day or 10,000? Volume changes the math completely.</div>
+</div>
+<div class="p-3 rounded-lg border" style="background: #161b22; border-color: #30363d;">
+  <div class="font-bold" style="color: #a78bfa;">📐 Context Size</div>
+  <div class="mt-1" style="color: #8b949e;">How much input at once? 4K, 128K, 1M, 2M — each unlocks different strategies.</div>
+</div>
+<div class="p-3 rounded-lg border" style="background: #161b22; border-color: #30363d;">
+  <div class="font-bold" style="color: #d29922;">🛡️ Safety</div>
+  <div class="mt-1" style="color: #8b949e;">Security-sensitive or handling PII? Prompt injection resistance becomes critical.</div>
+</div>
+</div>
+
+</div>
+
 ---
 
-# 📖 Table of Contents
+# Step 3: Select the Tier
 
-<div class="grid grid-cols-2 gap-4 mt-8">
-  <div @click="$nav.go(7)" class="cursor-pointer p-4 rounded-xl border transition-all hover:scale-105" style="background: #161b22; border-color: #30363d;">
-    <div class="text-2xl mb-2">🌐</div>
-    <div class="font-semibold" style="color: #e6edf3;">The Model Landscape</div>
-    <div class="text-xs mt-1" style="color: #8b949e;">GPT-5, Claude 4, Gemini 3 — strengths and tradeoffs</div>
-  </div>
+<div class="mt-3" style="background: #0d1117;">
 
-  <div @click="$nav.go(10)" class="cursor-pointer p-4 rounded-xl border transition-all hover:scale-105" style="background: #161b22; border-color: #30363d;">
-    <div class="text-2xl mb-2">📊</div>
-    <div class="font-semibold" style="color: #e6edf3;">Model-Task Matrix</div>
-    <div class="text-xs mt-1" style="color: #8b949e;">Which model wins for which task</div>
-  </div>
+<div class="text-xs mb-3" style="color: #8b949e;">Match your task + constraint to a vendor-neutral capability tier (not a pricing row):</div>
 
-  <div @click="$nav.go(12)" class="cursor-pointer p-4 rounded-xl border transition-all hover:scale-105" style="background: #161b22; border-color: #30363d;">
-    <div class="text-2xl mb-2">💡</div>
-    <div class="font-semibold" style="color: #e6edf3;">Decision Framework</div>
-    <div class="text-xs mt-1" style="color: #8b949e;">Tier strategy with real-world cost examples</div>
+<div class="space-y-2 text-xs">
+<div class="p-4 rounded-lg border" style="background: #161b22; border-color: #d29922;">
+  <div class="flex items-center justify-between">
+    <div>
+      <div class="font-bold text-sm" style="color: #d29922;">🏆 Capability Tier</div>
+      <div class="mt-1" style="color: #8b949e;">Complex reasoning, architecture, security review, multi-file refactoring</div>
+    </div>
+    <div class="text-right" style="color: #484f58;">
+      <div class="font-mono">Opus 4.7 · GPT-5.5</div>
+      <div class="text-xs">as of May 2026</div>
+    </div>
   </div>
+</div>
+<div class="p-4 rounded-lg border" style="background: #161b22; border-color: #58a6ff;">
+  <div class="flex items-center justify-between">
+    <div>
+      <div class="font-bold text-sm" style="color: #58a6ff;">⚡ Balanced Tier</div>
+      <div class="mt-1" style="color: #8b949e;">Daily coding, writing, general tasks — strong across most tasks</div>
+    </div>
+    <div class="text-right" style="color: #484f58;">
+      <div class="font-mono">Sonnet 4.6 · GPT-5.4</div>
+      <div class="text-xs">as of May 2026</div>
+    </div>
+  </div>
+</div>
+<div class="p-4 rounded-lg border" style="background: #161b22; border-color: #3fb950;">
+  <div class="flex items-center justify-between">
+    <div>
+      <div class="font-bold text-sm" style="color: #3fb950;">🚀 Speed / Cost Tier</div>
+      <div class="mt-1" style="color: #8b949e;">Classification, triage, log parsing, simple code — high volume</div>
+    </div>
+    <div class="text-right" style="color: #484f58;">
+      <div class="font-mono">Haiku 4.5 · GPT-5.4 mini</div>
+      <div class="text-xs">as of May 2026</div>
+    </div>
+  </div>
+</div>
+<div class="p-4 rounded-lg border" style="background: #161b22; border-color: #8b949e;">
+  <div class="flex items-center justify-between">
+    <div>
+      <div class="font-bold text-sm" style="color: #8b949e;">🔓 Self-Hosted Tier</div>
+      <div class="mt-1" style="color: #8b949e;">Data sovereignty, no per-token cost, full control — evaluate, don't assume quality</div>
+    </div>
+    <div class="text-right" style="color: #484f58;">
+      <div class="font-mono">Gemma 4 · Llama 4</div>
+      <div class="text-xs">as of May 2026</div>
+    </div>
+  </div>
+</div>
+</div>
 
-  <div @click="$nav.go(15)" class="cursor-pointer p-4 rounded-xl border transition-all hover:scale-105" style="background: #161b22; border-color: #30363d;">
-    <div class="text-2xl mb-2">🔧</div>
-    <div class="font-semibold" style="color: #e6edf3;">Practical Patterns</div>
-    <div class="text-xs mt-1" style="color: #8b949e;">Fallback chains, task decomposition, evaluation</div>
-  </div>
+<div class="mt-3 p-2 rounded text-xs" style="background: #0d1117; border-left: 3px solid #d29922; color: #8b949e;">
+  <b style="color: #d29922;">⚠️</b> Label specific model names as "example as of [date]" — the landscape shifts quarterly.
+</div>
+
 </div>
 
 ---
@@ -206,7 +375,7 @@ layout: center
 
 ---
 
-# The Big Three (March 2026)
+# The Big Three (May 2026)
 
 <div class="mt-2 grid grid-cols-3 gap-3 text-xs" style="background: #0d1117;">
 
@@ -214,54 +383,54 @@ layout: center
   <div class="font-bold text-base mb-2" style="color: #3fb950;">OpenAI — GPT-5</div>
   <div class="space-y-2">
     <div class="p-2 rounded" style="background: #0d1117; color: #8b949e;">
+      <b style="color: #3fb950;">GPT-5.5</b> <span style="color: #3fb950; font-size: 0.65rem;">NEW</span><br/>
+      Best agentic workflows, 1M context, omnimodal, 74 tok/sec
+    </div>
+    <div class="p-2 rounded" style="background: #0d1117; color: #8b949e;">
       <b style="color: #3fb950;">GPT-5.4</b><br/>
-      Top math reasoning (100% AIME), best general knowledge (83% GDPval), strongest memory
+      Top math reasoning (100% AIME), 83% GDPval knowledge
     </div>
     <div class="p-2 rounded" style="background: #0d1117; color: #8b949e;">
-      <b style="color: #3fb950;">GPT-5.3 Codex</b><br/>
-      Specialized code generation
-    </div>
-    <div class="p-2 rounded" style="background: #0d1117; color: #8b949e;">
-      <b style="color: #3fb950;">GPT-5-mini</b><br/>
-      Fast/cheap classification tier
+      <b style="color: #3fb950;">GPT-5.4 mini</b><br/>
+      Fast/cheap tier, 0.33x request cost
     </div>
   </div>
-  <div class="mt-2 font-medium" style="color: #3fb950;">🏆 Best at: Reasoning, knowledge</div>
+  <div class="mt-2 font-medium" style="color: #3fb950;">🏆 Best at: Agentic, reasoning, speed</div>
 </div>
 
 <div class="p-3 rounded-lg border" style="background: #161b22; border-color: #8b5cf6;">
   <div class="font-bold text-base mb-2" style="color: #a78bfa;">Anthropic — Claude 4</div>
   <div class="space-y-2">
     <div class="p-2 rounded" style="background: #0d1117; color: #8b949e;">
-      <b style="color: #a78bfa;">Opus 4.6</b><br/>
-      #1 SWE-bench (80.8%), lowest prompt injection, safest
+      <b style="color: #a78bfa;">Opus 4.7</b> <span style="color: #a78bfa; font-size: 0.65rem;">NEW</span><br/>
+      1M context, best agentic chaining, 15x premium request cost
     </div>
     <div class="p-2 rounded" style="background: #0d1117; color: #8b949e;">
       <b style="color: #a78bfa;">Sonnet 4.6</b><br/>
-      Best writing, most natural prose
+      Best writing, most natural prose, 1x cost
     </div>
     <div class="p-2 rounded" style="background: #0d1117; color: #8b949e;">
       <b style="color: #a78bfa;">Haiku 4.5</b><br/>
-      Fast triage, classification, simple code
+      Fast triage, classification, 0.33x cost
     </div>
   </div>
-  <div class="mt-2 font-medium" style="color: #a78bfa;">🏆 Best at: Coding, safety, writing</div>
+  <div class="mt-2 font-medium" style="color: #a78bfa;">🏆 Best at: Coding, safety, precision</div>
 </div>
 
 <div class="p-3 rounded-lg border" style="background: #161b22; border-color: #58a6ff;">
-  <div class="font-bold text-base mb-2" style="color: #58a6ff;">Google — Gemini 3</div>
+  <div class="font-bold text-base mb-2" style="color: #58a6ff;">Google — Gemini 3.1</div>
   <div class="space-y-2">
     <div class="p-2 rounded" style="background: #0d1117; color: #8b949e;">
-      <b style="color: #58a6ff;">Gemini 3 Pro</b><br/>
-      1M–2M token context, best multimodal (vision/audio/video)
+      <b style="color: #58a6ff;">Gemini 3.1 Pro</b> <span style="color: #58a6ff; font-size: 0.65rem;">NEW</span><br/>
+      2M context, 2x reasoning vs 3.0, best multimodal
     </div>
     <div class="p-2 rounded" style="background: #0d1117; color: #8b949e;">
-      <b style="color: #58a6ff;">Gemini 3 Flash</b><br/>
-      Ultra-fast, lowest $/token
+      <b style="color: #58a6ff;">Gemini 3.1 Flash</b><br/>
+      Ultra-fast, lowest $/token, Copilot-supported
     </div>
-    <div class="p-2 rounded opacity-60" style="background: #0d1117; color: #8b949e;">
-      <b>+ Workspace integration</b><br/>
-      Native Google Docs, Drive, Sheets
+    <div class="p-2 rounded" style="background: #0d1117; color: #8b949e;">
+      <b style="color: #58a6ff;">Gemma 4 (open)</b><br/>
+      Leading open-weight model for on-premise
     </div>
   </div>
   <div class="mt-2 font-medium" style="color: #58a6ff;">🏆 Best at: Multimodal, context, cost</div>
@@ -277,16 +446,16 @@ layout: center
 
 <div class="text-xs">
 
-| Dimension | GPT-5.4 | Claude Opus 4.6 | Gemini 3 Pro |
-|-----------|---------|-----------------|--------------|
-| **Math / Reasoning** | 🥇 100% AIME | 🥈 Strong | 🥉 Good |
-| **Coding (SWE-bench)** | 🥈 ~75% | 🥇 80.8% | 🥉 ~70% |
-| **Writing Quality** | 🥈 Good | 🥇 Most natural | 🥉 Generic feel |
-| **Context Window** | 128K | 200K (1M beta) | 🥇 1M–2M |
-| **Multimodal** | 🥈 Good | 🥉 Text-focused | 🥇 Best vision+audio |
+| Dimension | GPT-5.5 | Claude Opus 4.7 | Gemini 3.1 Pro |
+|-----------|---------|-----------------|----------------|
+| **Agentic / Multi-step** | 🥇 Best autonomy | 🥇 Best chaining | 🥉 Good |
+| **Coding (SWE-bench)** | 🥈 ~78% | 🥇 83%+ | 🥉 ~72% |
+| **Math / Reasoning** | 🥇 100% AIME | 🥈 Strong | 🥈 2x improved |
+| **Context Window** | 1M | 1M | 🥇 2M |
+| **Multimodal** | 🥇 Omnimodal | 🥉 Text-focused | 🥇 Best vision+audio |
+| **Speed (tokens/sec)** | 🥇 74 tok/s | 🥉 50 tok/s | 🥈 Fast |
 | **Safety / Injection** | 🥈 Strong | 🥇 Lowest risk | 🥉 Good |
-| **Speed (tokens/sec)** | 🥈 Fast | 🥉 Quality-first | 🥇 Fastest |
-| **Cost ($/M tokens)** | 🥈 Moderate | 🥉 Premium | 🥇 Lowest |
+| **Cost ($/M tokens)** | 🥈 Moderate | 🥉 Premium (15x) | 🥇 Lowest |
 
 </div>
 
@@ -316,15 +485,15 @@ layout: center
 
 | Task | Top Pick | Runner-Up | Why This One Wins |
 |------|----------|-----------|-------------------|
-| **Code generation & refactoring** | Claude Opus 4.6 | GPT-5.3 Codex | #1 multi-file accuracy (80.8% SWE-bench) |
-| **Mathematical reasoning** | GPT-5.4 | Gemini 3 Pro | 100% AIME, top ARC-AGI-2 |
-| **Long-document analysis** | Gemini 3 Pro | Claude Opus 4.6 | 1M–2M token native context window |
-| **Multimodal (vision/audio)** | Gemini 3 Pro | GPT-5.4 | Best image/video/audio integration |
-| **Writing & brand voice** | Claude Sonnet 4.6 | GPT-5.4 | Human-preferred, most natural prose |
-| **General knowledge work** | GPT-5.4 | Claude Opus 4.6 | 83% GDPval across 44 occupations |
-| **Security-sensitive tasks** | Claude Opus 4.6 | GPT-5.4 | Lowest prompt injection rate |
-| **Speed & cost at scale** | Gemini 3 Flash | Haiku 4.5 | Fastest throughput, lowest $/token |
-| **Data extraction** | GPT-5.4 | Gemini 3 Pro | Strongest structured output |
+| **Code generation & refactoring** | Claude Opus 4.7 | GPT-5.5 | 83% SWE-bench, best multi-file accuracy |
+| **Agentic multi-step workflows** | GPT-5.5 | Claude Opus 4.7 | Best autonomy, tool-use, omnimodal |
+| **Mathematical reasoning** | GPT-5.5 | Gemini 3.1 Pro | 100% AIME, top ARC-AGI-2 |
+| **Long-document analysis** | Gemini 3.1 Pro | Claude Opus 4.7 | 2M token native context window |
+| **Multimodal (vision/audio)** | Gemini 3.1 Pro | GPT-5.5 | Best image/video/audio integration |
+| **Writing & brand voice** | Claude Sonnet 4.6 | GPT-5.5 | Human-preferred, most natural prose |
+| **Security-sensitive tasks** | Claude Opus 4.7 | GPT-5.5 | Lowest prompt injection rate |
+| **Speed & cost at scale** | Gemini 3.1 Flash | GPT-5.4 mini | Fastest throughput, lowest $/token |
+| **Data extraction** | GPT-5.5 | Gemini 3.1 Pro | Strongest structured output |
 
 </div>
 
@@ -355,7 +524,7 @@ layout: center
     <span class="text-2xl">🏆</span>
     <div>
       <div class="font-bold" style="color: #d29922;">Premium Tier</div>
-      <div class="text-xs" style="color: #8b949e;">Opus 4.6 · GPT-5.4</div>
+      <div class="text-xs" style="color: #8b949e;">Opus 4.7 · GPT-5.5</div>
     </div>
   </div>
   <div class="mt-2" style="color: #8b949e;">Complex reasoning, architecture, security review, multi-file refactoring. High $/token but prevents costly mistakes.</div>
@@ -366,7 +535,7 @@ layout: center
     <span class="text-2xl">⚡</span>
     <div>
       <div class="font-bold" style="color: #58a6ff;">Standard Tier</div>
-      <div class="text-xs" style="color: #8b949e;">Sonnet 4.6 · GPT-5.2 · Gemini 3 Pro</div>
+      <div class="text-xs" style="color: #8b949e;">Sonnet 4.6 · GPT-5.4 · Gemini 3.1 Pro</div>
     </div>
   </div>
   <div class="mt-2" style="color: #8b949e;">Daily coding, writing, general tasks, document analysis. Balanced cost and quality for 60% of workloads.</div>
@@ -377,7 +546,7 @@ layout: center
     <span class="text-2xl">🚀</span>
     <div>
       <div class="font-bold" style="color: #3fb950;">Fast / Cheap Tier</div>
-      <div class="text-xs" style="color: #8b949e;">Haiku 4.5 · GPT-5-mini · Gemini Flash</div>
+      <div class="text-xs" style="color: #8b949e;">Haiku 4.5 · GPT-5.4 mini · Gemini 3.1 Flash</div>
     </div>
   </div>
   <div class="mt-2" style="color: #8b949e;">Classification, triage, log parsing, simple code, bulk processing. 80% of volume should run here.</div>
@@ -479,6 +648,142 @@ layout: center
     <div>4. Choose the cost/quality sweet spot</div>
   </div>
   <div class="mt-2 font-medium" style="color: #d29922;">Best for: Production deployment</div>
+</div>
+
+</div>
+
+---
+
+# 1️⃣ Fallback Chains — Deep Dive
+
+<div class="mt-3 grid grid-cols-2 gap-4 text-xs" style="background: #0d1117;">
+
+<div class="space-y-3">
+  <div class="p-3 rounded-lg border" style="background: #161b22; border-color: #3fb950;">
+    <div class="font-bold mb-2" style="color: #3fb950;">How It Works</div>
+    <div class="space-y-1" style="color: #8b949e;">
+      <div>1. Route every request to the <b style="color: #e6edf3;">fast tier</b> first</div>
+      <div>2. Evaluate confidence score of response</div>
+      <div>3. If below threshold → retry with <b style="color: #e6edf3;">standard tier</b></div>
+      <div>4. If still uncertain → escalate to <b style="color: #e6edf3;">premium tier</b></div>
+    </div>
+  </div>
+  <div class="p-3 rounded-lg border" style="background: #161b22; border-color: #30363d;">
+    <div class="font-bold mb-2" style="color: #d29922;">When to Use</div>
+    <div style="color: #8b949e;">High-volume APIs, customer support, code review triage, log analysis — anywhere 80%+ of requests are routine</div>
+  </div>
+</div>
+
+<div class="space-y-3">
+  <div class="p-3 rounded-lg" style="background: #161b22;">
+    <div class="font-bold mb-2" style="color: #e6edf3;">Example Flow</div>
+    <div class="font-mono space-y-1" style="color: #8b949e;">
+      <div style="color: #3fb950;">→ Haiku 4.5</div>
+      <div>&nbsp;&nbsp;✓ confidence 0.92 → return</div>
+      <div style="color: #3fb950;">→ Haiku 4.5</div>
+      <div>&nbsp;&nbsp;✗ confidence 0.61 → escalate</div>
+      <div style="color: #58a6ff;">&nbsp;&nbsp;→ Sonnet 4.6</div>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;✓ confidence 0.88 → return</div>
+    </div>
+  </div>
+  <div class="p-3 rounded-lg border" style="background: #161b22; border-color: #238636;">
+    <div class="font-bold" style="color: #3fb950;">💰 Result</div>
+    <div class="mt-1" style="color: #8b949e;">80% at fast-tier pricing, 15% standard, only 5% premium. <b style="color: #e6edf3;">~70% cost reduction</b> vs always-premium.</div>
+  </div>
+</div>
+
+</div>
+
+---
+
+# 2️⃣ Task Decomposition — Deep Dive
+
+<div class="mt-3 grid grid-cols-2 gap-4 text-xs" style="background: #0d1117;">
+
+<div class="space-y-3">
+  <div class="p-3 rounded-lg border" style="background: #161b22; border-color: #58a6ff;">
+    <div class="font-bold mb-2" style="color: #58a6ff;">How It Works</div>
+    <div class="space-y-1" style="color: #8b949e;">
+      <div>1. <b style="color: #e6edf3;">Analyze</b> incoming task complexity</div>
+      <div>2. <b style="color: #e6edf3;">Decompose</b> into subtasks by tier need</div>
+      <div>3. <b style="color: #e6edf3;">Route</b> each subtask to appropriate model</div>
+      <div>4. <b style="color: #e6edf3;">Compose</b> results into final output</div>
+    </div>
+  </div>
+  <div class="p-3 rounded-lg border" style="background: #161b22; border-color: #30363d;">
+    <div class="font-bold mb-2" style="color: #d29922;">When to Use</div>
+    <div style="color: #8b949e;">Complex projects with mixed requirements — agent orchestration, PR reviews, feature development where planning ≠ implementation ≠ testing</div>
+  </div>
+</div>
+
+<div class="space-y-3">
+  <div class="p-3 rounded-lg" style="background: #161b22;">
+    <div class="font-bold mb-2" style="color: #e6edf3;">Feature Build Example</div>
+    <div class="space-y-2" style="color: #8b949e;">
+      <div class="p-2 rounded" style="background: #0d1117;">
+        <span style="color: #d29922;">🏆 Opus 4.7</span> → Architecture plan, API design
+      </div>
+      <div class="p-2 rounded" style="background: #0d1117;">
+        <span style="color: #58a6ff;">⚡ GPT-5.4</span> → Implementation, code generation
+      </div>
+      <div class="p-2 rounded" style="background: #0d1117;">
+        <span style="color: #3fb950;">🚀 Haiku 4.5</span> → Tests, docs, boilerplate
+      </div>
+    </div>
+  </div>
+  <div class="p-3 rounded-lg border" style="background: #161b22; border-color: #238636;">
+    <div class="font-bold" style="color: #3fb950;">💰 Result</div>
+    <div class="mt-1" style="color: #8b949e;">Premium only for the 10% that needs it. <b style="color: #e6edf3;">~60% savings</b> vs premium-for-all, no quality gap where it counts.</div>
+  </div>
+</div>
+
+</div>
+
+---
+
+# 3️⃣ Evaluation-Driven — Deep Dive
+
+<div class="mt-3 grid grid-cols-2 gap-4 text-xs" style="background: #0d1117;">
+
+<div class="space-y-3">
+  <div class="p-3 rounded-lg border" style="background: #161b22; border-color: #d29922;">
+    <div class="font-bold mb-2" style="color: #d29922;">How It Works</div>
+    <div class="space-y-1" style="color: #8b949e;">
+      <div>1. Curate <b style="color: #e6edf3;">50-100 examples</b> from your domain</div>
+      <div>2. Define scoring rubric (accuracy, latency, cost)</div>
+      <div>3. Run <b style="color: #e6edf3;">2-3 candidate models</b> on same inputs</div>
+      <div>4. Pick the <b style="color: #e6edf3;">cost/quality sweet spot</b></div>
+      <div>5. Re-run quarterly as models evolve</div>
+    </div>
+  </div>
+  <div class="p-3 rounded-lg border" style="background: #161b22; border-color: #30363d;">
+    <div class="font-bold mb-2" style="color: #d29922;">When to Use</div>
+    <div style="color: #8b949e;">Production deployment decisions, high-stakes use cases, compliance environments — anywhere you need data-backed model selection, not vibes</div>
+  </div>
+</div>
+
+<div class="space-y-3">
+  <div class="p-3 rounded-lg" style="background: #161b22;">
+    <div class="font-bold mb-2" style="color: #e6edf3;">Sample Eval Results</div>
+    <div class="space-y-1 font-mono" style="color: #8b949e;">
+      <div class="flex justify-between p-1 rounded" style="background: #0d1117;">
+        <span>Opus 4.7</span>
+        <span style="color: #a78bfa;">97.2% · $4.80 · 3.1s</span>
+      </div>
+      <div class="flex justify-between p-1 rounded" style="background: #0d1117;">
+        <span>GPT-5.5</span>
+        <span style="color: #3fb950;">95.8% · $1.20 · 1.4s</span>
+      </div>
+      <div class="flex justify-between p-1 rounded" style="background: #0d1117;">
+        <span>Haiku 4.5</span>
+        <span style="color: #58a6ff;">91.4% · $0.08 · 0.3s</span>
+      </div>
+    </div>
+  </div>
+  <div class="p-3 rounded-lg border" style="background: #161b22; border-color: #238636;">
+    <div class="font-bold" style="color: #3fb950;">💡 Insight</div>
+    <div class="mt-1" style="color: #8b949e;">Public benchmarks ≠ your workload. A 1.4% accuracy gap might justify <b style="color: #e6edf3;">4x cost savings</b> — or might be unacceptable. Only YOUR data tells you.</div>
+  </div>
 </div>
 
 </div>
