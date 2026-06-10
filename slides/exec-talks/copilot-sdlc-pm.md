@@ -13,7 +13,7 @@ title: Your Team's New Teammate — GitHub Copilot for PMs & POs
 module: exec-talks/copilot-sdlc-pm
 mdc: true
 status: active
-updated: 2026-06-10
+updated: 2026-06-11
 ---
 
 <div class="h-full flex flex-col items-center justify-center relative overflow-hidden" style="background: #0d1117;">
