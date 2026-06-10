@@ -14,7 +14,7 @@
     "test:404": "node scripts/test-404-redirect.mjs"
   },
   "dependencies": {
-    "@slidev/cli": "^52.11.5",
+    "@slidev/cli": "52.12.0",
     "@slidev/theme-default": "latest",
     "@slidev/theme-seriph": "^0.25.0"
   },
