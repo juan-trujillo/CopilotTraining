@@ -18,25 +18,30 @@ updated: 2026-06-10
 ---
 
 <div class="h-full flex flex-col items-center justify-center relative overflow-hidden" style="background: #0d1117;">
-  <div class="relative z-10">
-    <div class="absolute inset-0 blur-2xl opacity-50">
-      <img src="./sdp-logo.png" class="w-72" alt="" />
-    </div>
-    <img src="./sdp-logo.png" class="w-72 relative" alt="SDP Logo" />
+  <div class="flex items-center gap-2 mb-6">
+    <img src="./sdp-logo.png" class="w-6 h-6" alt="" />
+    <span class="text-sm font-medium tracking-wide uppercase" style="color: #8b949e;">GitHub Copilot</span>
   </div>
-  <h1 class="!text-5xl !font-bold !mt-8 relative z-10" style="background: linear-gradient(135deg, #bc8cff 0%, #79c0ff 50%, #3fb950 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
+  <h1 class="!text-6xl !font-bold !leading-tight text-center max-w-4xl" style="color: #e6edf3;">
     Your Team's New Teammate
   </h1>
-  <div class="mt-4 relative z-10">
-    <span class="px-6 py-2 rounded-full text-xl font-medium" style="background: linear-gradient(135deg, rgba(110,64,201,0.8) 0%, rgba(33,136,255,0.8) 100%); color: #e6edf3;">
-      GitHub Copilot Across the Delivery Lifecycle
-    </span>
+  <p class="mt-6 text-xl text-center max-w-2xl" style="color: #8b949e;">
+    GitHub Copilot Across the Delivery Lifecycle
+  </p>
+  <div class="mt-8 flex gap-4">
+    <div class="px-5 py-2 rounded-md text-sm font-medium" style="background: #238636; color: #ffffff;">
+      45 Minutes
+    </div>
+    <div class="px-5 py-2 rounded-md text-sm font-medium border" style="border-color: #30363d; color: #e6edf3;">
+      Product Owners
+    </div>
+    <div class="px-5 py-2 rounded-md text-sm font-medium border" style="border-color: #30363d; color: #e6edf3;">
+      Project Managers
+    </div>
+    <div class="px-5 py-2 rounded-md text-sm font-medium border" style="border-color: #30363d; color: #e6edf3;">
+      Engineering Leaders
+    </div>
   </div>
-  <div class="mt-8 w-32 h-1 rounded-full relative z-10" style="background: linear-gradient(to right, transparent, #bc8cff, transparent);"></div>
-</div>
-
-<div class="abs-br m-6 flex gap-2">
-  <span class="text-sm opacity-50">For Product Owners & Project Managers · 45 min</span>
 </div>
 
 ---
