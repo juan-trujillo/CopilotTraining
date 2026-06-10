@@ -1,7 +1,6 @@
 ---
 theme: default
 colorSchema: dark
-class: text-center
 highlighter: shiki
 lineNumbers: false
 info: |
@@ -46,32 +45,31 @@ updated: 2026-06-10
 
 ---
 layout: center
-class: text-center
 ---
 
 # The Four Questions This Talk Answers
 
 <div class="grid grid-cols-2 gap-5 mt-8 max-w-3xl mx-auto text-left">
 
-<div class="p-5 rounded-xl border" style="background: #161b22; border-color: #30363d;">
+<div @click="$nav.go(4)" class="cursor-pointer p-5 rounded-xl border transition-all hover:scale-105" style="background: #161b22; border-color: #30363d;">
   <div class="text-3xl mb-3">🤔</div>
   <div class="text-lg font-bold mb-1" style="color: #79c0ff;">Why should my team use this?</div>
   <div class="text-sm" style="color: #8b949e;">Evidence-backed business case</div>
 </div>
 
-<div class="p-5 rounded-xl border" style="background: #161b22; border-color: #30363d;">
+<div @click="$nav.go(5)" class="cursor-pointer p-5 rounded-xl border transition-all hover:scale-105" style="background: #161b22; border-color: #30363d;">
   <div class="text-3xl mb-3">📣</div>
   <div class="text-lg font-bold mb-1" style="color: #79c0ff;">Why should I encourage adoption?</div>
   <div class="text-sm" style="color: #8b949e;">Competitive reality & team health</div>
 </div>
 
-<div class="p-5 rounded-xl border" style="background: #161b22; border-color: #30363d;">
+<div @click="$nav.go(10)" class="cursor-pointer p-5 rounded-xl border transition-all hover:scale-105" style="background: #161b22; border-color: #30363d;">
   <div class="text-3xl mb-3">🎯</div>
   <div class="text-lg font-bold mb-1" style="color: #3fb950;">What features should we encourage?</div>
   <div class="text-sm" style="color: #8b949e;">Practical adoption roadmap</div>
 </div>
 
-<div class="p-5 rounded-xl border" style="background: #161b22; border-color: #30363d;">
+<div @click="$nav.go(12)" class="cursor-pointer p-5 rounded-xl border transition-all hover:scale-105" style="background: #161b22; border-color: #30363d;">
   <div class="text-3xl mb-3">📊</div>
   <div class="text-lg font-bold mb-1" style="color: #bc8cff;">How do I measure the value?</div>
   <div class="text-sm" style="color: #8b949e;">Metrics framework & ROI</div>
@@ -80,10 +78,20 @@ class: text-center
 </div>
 
 ---
+layout: center
+---
+
+<div style="background: #0d1117;">
+  <div class="text-6xl mb-6">📊</div>
+  <h1 class="!text-4xl !font-bold" style="color: #e6edf3;">The Business Case</h1>
+  <p class="mt-4 text-lg" style="color: #8b949e;">Evidence, competitive context, and what it means for your team</p>
+</div>
+
+---
 
 # 🌐 The Window for "Wait and See" Has Closed
 
-<div style="background: #0d1117;">
+<div class="mt-3" style="background: #0d1117;">
 <div class="grid grid-cols-3 gap-4 mt-6">
 <div class="p-5 rounded-xl border text-center" style="background: #161b22; border-color: #30363d;">
   <div class="text-5xl font-bold mb-2" style="color: #e6edf3;">15M+</div>
@@ -118,7 +126,7 @@ class: text-center
 
 # 📊 The Research Is In — And It's Not Vendor Marketing
 
-<div style="background: #0d1117;">
+<div class="mt-3 text-sm" style="background: #0d1117;">
 <div class="space-y-2 mt-2 text-sm">
 
 <div class="p-2.5 rounded-lg flex items-center justify-between" style="background: #161b22; border-left: 4px solid #79c0ff;">
@@ -176,7 +184,7 @@ class: text-center
 
 # 💼 What This Means for Your Delivery Cycle
 
-<div style="background: #0d1117;">
+<div class="mt-3" style="background: #0d1117;">
 <div class="grid grid-cols-2 gap-5 mt-4 text-sm">
 
 <div>
@@ -227,10 +235,20 @@ class: text-center
 </div>
 
 ---
+layout: center
+---
+
+<div style="background: #0d1117;">
+  <div class="text-6xl mb-6">🗺️</div>
+  <h1 class="!text-4xl !font-bold" style="color: #e6edf3;">How Copilot Works</h1>
+  <p class="mt-4 text-lg" style="color: #8b949e;">Across every phase of your delivery lifecycle</p>
+</div>
+
+---
 
 # 🗺️ Copilot Touches Every Phase of the SDLC
 
-<div style="background: #0d1117;">
+<div class="mt-3" style="background: #0d1117;">
 <div class="grid grid-cols-5 gap-2 mt-3 text-xs">
 
 <div class="p-2 rounded-lg border text-center" style="background: #161b22; border-color: #30363d;">
@@ -287,7 +305,7 @@ class: text-center
 
 # ⚡ The Coding Agent: Assign Issues to Copilot
 
-<div style="background: #0d1117;">
+<div class="mt-3" style="background: #0d1117;">
 <div class="grid grid-cols-2 gap-6 mt-3">
 
 <div>
@@ -350,7 +368,7 @@ class: text-center
 
 # 🎯 Features to Encourage — Phased Adoption Roadmap
 
-<div style="background: #0d1117;">
+<div class="mt-3" style="background: #0d1117;">
 <div class="grid grid-cols-3 gap-4 mt-3 text-xs">
 
 <div class="p-3 rounded-xl border-2" style="background: #161b22; border-color: #30363d;">
@@ -414,10 +432,20 @@ class: text-center
 </div>
 
 ---
+layout: center
+---
+
+<div style="background: #0d1117;">
+  <div class="text-6xl mb-6">📈</div>
+  <h1 class="!text-4xl !font-bold" style="color: #e6edf3;">Measuring Impact</h1>
+  <p class="mt-4 text-lg" style="color: #8b949e;">Metrics, DORA, and your 90-day measurement plan</p>
+</div>
+
+---
 
 # 📈 Measuring Value: The GitHub Metrics Dashboard
 
-<div style="background: #0d1117;">
+<div class="mt-3" style="background: #0d1117;">
 <div class="grid grid-cols-2 gap-6 mt-4">
 
 <div>
@@ -478,7 +506,7 @@ class: text-center
 
 # 📅 Your 90-Day Measurement Plan
 
-<div style="background: #0d1117;">
+<div class="mt-3" style="background: #0d1117;">
 <div class="grid grid-cols-3 gap-4 mt-4 text-xs">
 
 <div class="p-4 rounded-xl border" style="background: #161b22; border-color: #30363d;">
@@ -536,13 +564,12 @@ class: text-center
 </div>
 
 ---
-layout: center
-class: text-center
----
 
 # 🤝 The Human in the Loop
 
-<div class="mt-6 grid grid-cols-2 gap-8 max-w-3xl mx-auto text-left">
+<div class="h-full flex flex-col items-center justify-center" style="background: #0d1117;">
+<div class="max-w-3xl w-full">
+<div class="mt-6 grid grid-cols-2 gap-8 text-left">
 
 <div class="p-5 rounded-xl border" style="background: #161b22; border-color: #30363d;">
   <h3 class="text-lg font-bold mb-3" style="color: #79c0ff;">🤖 What AI Does Better</h3>
@@ -568,16 +595,28 @@ class: text-center
 
 </div>
 
-<div class="mt-6 p-4 rounded-xl border max-w-2xl mx-auto text-sm" style="background: #161b22; border-color: #30363d;">
+<div class="mt-6 p-4 rounded-xl border text-sm" style="background: #161b22; border-color: #30363d;">
   <span class="font-bold" style="color: #e6edf3;">Your new superpower as a PO: </span>
   <span style="color: #8b949e;">Well-written stories with clear acceptance criteria now have a direct multiplier on delivery speed. Invest in story quality.</span>
+</div>
+</div>
+</div>
+
+---
+layout: center
+---
+
+<div style="background: #0d1117;">
+  <div class="text-6xl mb-6">➡️</div>
+  <h1 class="!text-4xl !font-bold" style="color: #e6edf3;">Your Action Plan</h1>
+  <p class="mt-4 text-lg" style="color: #8b949e;">Three horizons: this week, this month, this quarter</p>
 </div>
 
 ---
 
 # ➡️ Your Next Steps
 
-<div style="background: #0d1117;">
+<div class="mt-3 text-sm" style="background: #0d1117;">
 <div class="grid grid-cols-3 gap-4 mt-4 text-sm">
 
 <div class="p-4 rounded-xl border" style="background: #161b22; border-color: #30363d;">
@@ -626,7 +665,6 @@ class: text-center
 
 ---
 layout: center
-class: text-center
 ---
 
 # 📚 Sources & Further Reading
