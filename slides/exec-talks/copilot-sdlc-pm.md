@@ -13,7 +13,7 @@ title: Your Team's New Teammate — GitHub Copilot for PMs & POs
 module: exec-talks/copilot-sdlc-pm
 mdc: true
 status: active
-updated: 2026-06-12
+updated: 2026-06-13
 ---
 
 <div class="h-full flex flex-col items-center justify-center relative overflow-hidden" style="background: #0d1117;">
@@ -672,39 +672,39 @@ layout: center
 <div class="grid grid-cols-2 gap-4 mt-6 max-w-3xl mx-auto text-xs text-left">
 
 <div class="space-y-2">
-  <div class="p-3 rounded-lg" style="background: #161b22;">
+  <a href="https://cacm.acm.org/research/measuring-github-copilots-impact-on-productivity/" target="_blank" rel="noopener noreferrer" class="block p-3 rounded-lg no-underline hover:opacity-80 transition-opacity" style="background: #161b22;">
     <div class="font-bold" style="color: #79c0ff;">ACM: Measuring Copilot's Impact (2024)</div>
     <div style="color: #8b949e;">26% faster completion · RCT with 4,867 devs</div>
-    <div class="mt-1" style="color: #8b949e;">cacm.acm.org</div>
-  </div>
-  <div class="p-3 rounded-lg" style="background: #161b22;">
+    <div class="mt-1" style="color: #8b949e;">cacm.acm.org ↗</div>
+  </a>
+  <a href="https://mit-genai.pubpub.org/pub/v5iixksv" target="_blank" rel="noopener noreferrer" class="block p-3 rounded-lg no-underline hover:opacity-80 transition-opacity" style="background: #161b22;">
     <div class="font-bold" style="color: #79c0ff;">MIT GenAI Field Experiment (2024)</div>
     <div style="color: #8b949e;">12–22% more PRs/week · Microsoft & Accenture</div>
-    <div class="mt-1" style="color: #8b949e;">mit-genai.pubpub.org</div>
-  </div>
-  <div class="p-3 rounded-lg" style="background: #161b22;">
+    <div class="mt-1" style="color: #8b949e;">mit-genai.pubpub.org ↗</div>
+  </a>
+  <a href="https://docs.github.com/en/copilot/concepts/copilot-usage-metrics/copilot-metrics" target="_blank" rel="noopener noreferrer" class="block p-3 rounded-lg no-underline hover:opacity-80 transition-opacity" style="background: #161b22;">
     <div class="font-bold" style="color: #3fb950;">GitHub Copilot Usage Metrics Docs</div>
     <div style="color: #8b949e;">Dashboard guide & REST API reference</div>
-    <div class="mt-1" style="color: #8b949e;">docs.github.com/en/copilot</div>
-  </div>
+    <div class="mt-1" style="color: #8b949e;">docs.github.com/en/copilot ↗</div>
+  </a>
 </div>
 
 <div class="space-y-2">
-  <div class="p-3 rounded-lg" style="background: #161b22;">
+  <a href="https://github.blog/ai-and-ml/github-copilot/github-copilot-coding-agent-101-getting-started-with-agentic-workflows-on-github/" target="_blank" rel="noopener noreferrer" class="block p-3 rounded-lg no-underline hover:opacity-80 transition-opacity" style="background: #161b22;">
     <div class="font-bold" style="color: #bc8cff;">Copilot Coding Agent 101 (GitHub Blog)</div>
     <div style="color: #8b949e;">Getting started with agentic workflows</div>
-    <div class="mt-1" style="color: #8b949e;">github.blog</div>
-  </div>
-  <div class="p-3 rounded-lg" style="background: #161b22;">
+    <div class="mt-1" style="color: #8b949e;">github.blog ↗</div>
+  </a>
+  <a href="https://www.devops-research.com/research.html" target="_blank" rel="noopener noreferrer" class="block p-3 rounded-lg no-underline hover:opacity-80 transition-opacity" style="background: #161b22;">
     <div class="font-bold" style="color: #d29922;">DORA Research</div>
     <div style="color: #8b949e;">Gold-standard DevOps delivery metrics</div>
-    <div class="mt-1" style="color: #8b949e;">devops-research.com</div>
-  </div>
-  <div class="p-3 rounded-lg" style="background: #161b22;">
+    <div class="mt-1" style="color: #8b949e;">devops-research.com ↗</div>
+  </a>
+  <a href="https://www.secondtalent.com/resources/github-copilot-statistics/" target="_blank" rel="noopener noreferrer" class="block p-3 rounded-lg no-underline hover:opacity-80 transition-opacity" style="background: #161b22;">
     <div class="font-bold" style="color: #f85149;">Second Talent: Copilot Stats 2025</div>
     <div style="color: #8b949e;">84% more successful builds · 15M users</div>
-    <div class="mt-1" style="color: #8b949e;">secondtalent.com</div>
-  </div>
+    <div class="mt-1" style="color: #8b949e;">secondtalent.com ↗</div>
+  </a>
 </div>
 
 </div>
