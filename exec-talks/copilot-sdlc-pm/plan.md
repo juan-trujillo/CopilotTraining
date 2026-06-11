@@ -59,7 +59,7 @@ AI-assisted development is no longer experimental. It is the new standard of pra
 
 ### Talking Points
 
-- **The shift is already happening.** GitHub Copilot has over **15 million users** and is deployed at **90% of Fortune 100 companies** — this is mainstream, not emerging tech.
+- **The shift is already happening.** GitHub's Octoverse 2025 reports that **80% of new developers** joining GitHub adopt Copilot in their first week, **50% of open-source projects** have at least one Copilot-using maintainer, and the Coding Agent opened **1M+ pull requests** in its first 4 months — this is mainstream, not emerging tech.
 - **What is GitHub Copilot, really?** Not just a spell-checker for code. It is an AI system that works alongside developers — suggesting code, reviewing pull requests, writing tests, and even independently picking up and completing tasks from a backlog.
 - **What is "Agentic" development?** The next evolution: instead of just suggesting the next line of code, AI agents can be *assigned* a task from your GitHub issues and autonomously write, test, and propose a solution — like having an asynchronous team member who works while others sleep.
 - **The reframe for PMs and POs:** You don't need to understand how the AI works. You need to understand what it *delivers* — and how to create the conditions where your team uses it well.
@@ -76,31 +76,56 @@ The productivity and quality data is real. Teams using Copilot ship more, ship f
 
 ### Key Statistics & Evidence
 
-#### Productivity Gains
+> **Note (2026-06-11 refresh):** Slide 6 of the deck now uses 2025-2026 first-party evidence (GitHub + Microsoft Research) instead of the 2024 stats. The table below mirrors what the audience sees on the slide.
+
+#### Productivity & Throughput Evidence (2025-2026)
+
+| Study / Source | Finding | Source |
+|---|---|---|
+| **GitHub Octoverse 2025** (platform telemetry, 180M+ devs) | **1M+ pull requests** opened by Copilot Coding Agent in 4 months on established projects | [Octoverse 2025](https://github.blog/news-insights/octoverse/octoverse-a-new-developer-joins-github-every-second-as-ai-leads-typescript-to-1/) |
+| **GitHub Octoverse 2025** | **+23% YoY** PR throughput (43.2M PRs merged/month avg); **986M commits** in 2025 | [Octoverse 2025](https://github.blog/news-insights/octoverse/octoverse-a-new-developer-joins-github-every-second-as-ai-leads-typescript-to-1/) |
+| **GitHub Code Review Study** (mid-2025, in-depth interviews) | **72.6%** of Copilot code review users report **improved effectiveness**; ~33% reduction in PR back-and-forth | [GitHub Blog](https://github.blog/ai-and-ml/generative-ai/code-review-in-the-age-of-ai-why-developers-will-always-own-the-merge-button/) |
+| **Echoes of AI** (Borg et al., July 2025) — N=151 RCT | **30.7% median time reduction** on dev tasks with Copilot+Cursor; **no maintainability harm** in Phase 2 | [arXiv:2507.00788](https://arxiv.org/abs/2507.00788) |
+| **Microsoft Research — SPACE of AI** (Aug 2025, N>500) | Broad efficiency and satisfaction gains; benefits scale with task routineness, not raw seniority | [arXiv:2508.00178](https://arxiv.org/abs/2508.00178) |
+
+#### Counter-Evidence & Caveats (Use This for Honest Framing)
+
 | Study | Finding | Source |
-|-------|---------|--------|
-| GitHub/MIT/Wharton RCT (n=4,867 devs) | **26% faster** task completion on average | [ACM, 2024](https://cacm.acm.org/research/measuring-github-copilots-impact-on-productivity/) |
-| GitHub Internal Experiment | **55% faster** task completion (78 min vs 161 min); 78% task completion rate vs 70% | [Worklytics Analysis](https://www.worklytics.co/blog/the-roi-of-github-copilot-for-your-organization-a-metrics-driven-analysis) |
-| Microsoft & Accenture Field Trial (n=1,974) | **12.9–21.8%** more pull requests per week at Microsoft; **7.5–8.7%** at Accenture | [MIT GenAI, 2024](https://mit-genai.pubpub.org/pub/v5iixksv) |
-| Industry Survey 2025 | **84% increase** in successful builds; **88% code retention** rate | [Second Talent, 2025](https://www.secondtalent.com/resources/github-copilot-statistics/) |
+|---|---|---|
+| **METR — Counter-Evidence RCT** (July 2025) | Senior OSS devs were **19% slower** with Cursor + Claude on familiar codebases — even though they *believed* they were 20% faster | [arXiv:2507.09089](https://arxiv.org/abs/2507.09089) |
+| **NAV IT Longitudinal** (Stray et al., Sept 2025) | **No statistically significant** change in commit activity for Copilot users over 2 years (note: commit count is the wrong metric) | [arXiv:2509.20353](https://arxiv.org/abs/2509.20353) |
+| **Tomaz et al. — Agile Teams** (13 months, Feb 2026) | Performance and Efficiency rose; commit/story-point Activity stayed flat — *value density* up, not raw volume | [arXiv:2602.13766](https://arxiv.org/abs/2602.13766) |
+| **AgenticFlict — Merge Conflicts** (April 2026) | **27.67%** of agentic PRs have at least one merge conflict — hidden integration overhead | [arXiv:2604.03551](https://arxiv.org/abs/2604.03551) |
+| **MS Research — Human Oversight** (June 2026) | Identifies four hidden "oversight tax" workstreams that erode raw output gains | [arXiv:2606.05391](https://arxiv.org/abs/2606.05391) |
+
+#### Agentic-Specific Evidence
+
+| Study | Finding | Source |
+|---|---|---|
+| **GitHub Octoverse 2025** | Coding Agent rolled out on **established** projects (high stars, size, age) — not throwaways | [Octoverse 2025](https://github.blog/news-insights/octoverse/octoverse-a-new-developer-joins-github-every-second-as-ai-leads-typescript-to-1/) |
+| **Watanabe et al.** (Sept 2025) | **83.8%** of Claude Code agentic PRs accepted; **54.9%** merged with no human modification — refactor/docs/tests dominate | [arXiv:2509.14745](https://arxiv.org/abs/2509.14745) |
+| **GitHub Coding Agent Launch** (May 2025) | Carvana, EY (2,000 devs), Avanade enterprise rollouts with executive testimony | [GitHub Blog](https://github.blog/news-insights/product-news/github-copilot-meet-the-new-coding-agent/) |
+| **GitHub Copilot App / Build 2026** (June 2026) | GitHub commits doubled YoY to **1.4B/month**; agentic mode mainstream | [GitHub Blog](https://github.blog/news-insights/product-news/github-copilot-app-the-agent-native-desktop-experience/) |
 
 #### Developer Experience
-- **88% of developers** say they feel more productive with Copilot (GitHub Developer Survey)
-- Junior and mid-level developers see the **largest gains** — exactly the population that creates the most PM/PO coordination overhead
-- Improvements observed across throughput, cycle time, code quality, defect rates, and satisfaction (SPACE framework)
+- Microsoft SPACE-of-AI: efficiency and satisfaction up; **collaboration metrics flat** — AI doesn't (yet) measurably help team-level coordination
+- The clearest gains are on **routine tasks** for **less-familiar** code — invest in onboarding, docs, and tests first
+- Junior and mid-level developers see the largest gains (consistent across multiple studies); senior devs on their own mature code are the population most at risk of *slowdown*
 
 #### What This Means for PMs/POs
-- **Faster sprint completion** → more predictable release cadence
+- **Faster sprint completion** for routine work → more predictable release cadence
 - **Fewer blockers from boilerplate work** → developers freed for complex, creative tasks
-- **Reduced bug escape rates** → fewer hot-fixes derailing next-sprint planning
-- **Better onboarding velocity** → new team members contribute faster, reducing PM risk during ramp-up
+- **Reduced bug escape rates** through automated review → fewer hot-fixes derailing planning
+- **Better onboarding velocity** → new team members contribute faster
+- **Don't measure success in commit volume** — the value-density studies (Tomaz, NAV IT, SPACE-of-AI) all show output volume can stay flat while delivered value rises
 
 ### Talking Points
 
-- The data comes from independent, peer-reviewed research — not just vendor marketing. MIT, Wharton, and ACM have published results.
-- Gains compound: better quality code → fewer production incidents → fewer unplanned emergency sprints.
-- The cost of *not* adopting: competitors whose teams are shipping 20-55% faster while your team is running at the old baseline.
-- Frame this as a force multiplier, not a replacement: your same team delivers more value in the same time.
+- The data comes from a mix of GitHub's first-party platform telemetry, **Microsoft Research published studies**, and independent peer-reviewed RCTs — not vendor marketing
+- Gains compound: better quality code → fewer production incidents → fewer unplanned emergency sprints
+- The cost of *not* adopting: GitHub's Octoverse 2025 platform-wide PR throughput is **+23% YoY**; teams not on board are increasingly the outliers
+- Frame this as a force multiplier, not a replacement: your same team delivers more value in the same time
+- **Be honest about the caveats:** the METR study is the most-cited counter-evidence in 2025 industry discussion. Acknowledge it openly — it strengthens credibility and explains why measurement matters
 
 ### PO/PM Pain Points Directly Addressed
 | Pain Point | How Copilot Helps |
@@ -288,9 +313,11 @@ AI doesn't replace your team — it amplifies them. The PM/PO role doesn't shrin
 
 ## Key Sources & References
 
+> **Refresh note (2026-06-11):** Sources reorganized to prioritize 2025–2026 first-party (GitHub + Microsoft Research) and peer-reviewed evidence. The deck (slide 17) reflects this same set.
+
 ### Official GitHub / Microsoft Documentation
 | Source | URL | Topic |
-|--------|-----|-------|
+|---|---|---|
 | GitHub Copilot Docs | https://docs.github.com/en/copilot | Official overview of all Copilot features |
 | Copilot Usage Metrics | https://docs.github.com/en/copilot/concepts/copilot-usage-metrics/copilot-metrics | Metrics dashboard and API |
 | Copilot Metrics REST API | https://docs.github.com/en/enterprise-cloud@latest/rest/copilot/copilot-usage-metrics | Programmatic access to usage data |
@@ -298,22 +325,31 @@ AI doesn't replace your team — it amplifies them. The PM/PO role doesn't shrin
 | AI Adoption Cohorts API | https://github.blog/changelog/2026-05-29-copilot-usage-metrics-api-adds-cohorts-for-ai-adoption/ | Cohort tracking for maturity |
 | Copilot Coding Agent 101 | https://github.blog/ai-and-ml/github-copilot/github-copilot-coding-agent-101-getting-started-with-agentic-workflows-on-github/ | Agentic workflows overview |
 
-### Research & Studies
-| Study | Key Finding | URL |
-|-------|-------------|-----|
-| ACM: Measuring Copilot's Impact (2024) | 26% faster task completion; SPACE framework results | https://cacm.acm.org/research/measuring-github-copilots-impact-on-productivity/ |
-| MIT GenAI Field Experiment (2024) | 12.9–21.8% more PRs/week (Microsoft); 7.5–8.7% (Accenture) | https://mit-genai.pubpub.org/pub/v5iixksv |
-| GitHub Internal Experiment | 55% task time reduction; 88% feel more productive | https://www.worklytics.co/blog/the-roi-of-github-copilot-for-your-organization-a-metrics-driven-analysis |
-| arXiv Longitudinal Study (2025) | Measured commit-based activity before/after adoption | https://arxiv.org/abs/2509.20353 |
-| Second Talent: Copilot Statistics 2025 | 84% more successful builds; 15M users; 90% Fortune 100 | https://www.secondtalent.com/resources/github-copilot-statistics/ |
-| AMCIS 2024: SPACE Framework Case Study | Multi-dimensional productivity analysis | https://aisel.aisnet.org/amcis2024/ai_aa/ai_aa/10/ |
+### GitHub First-Party Research & Announcements (2025–2026)
+| Source | Key Finding | URL |
+|---|---|---|
+| **GitHub Octoverse 2025** | 1M+ Coding Agent PRs in 4 months; +23% YoY PR throughput; 80% of new devs adopt Copilot in week 1 | https://github.blog/news-insights/octoverse/octoverse-a-new-developer-joins-github-every-second-as-ai-leads-typescript-to-1/ |
+| **Coding Agent — GA Launch** (May 2025) | Launch announcement + Carvana, EY, Avanade enterprise testimonials | https://github.blog/news-insights/product-news/github-copilot-meet-the-new-coding-agent/ |
+| **GitHub Code Review Study** (mid-2025) | 72.6% report effectiveness gains; ~33% reduction in PR back-and-forth | https://github.blog/ai-and-ml/generative-ai/code-review-in-the-age-of-ai-why-developers-will-always-own-the-merge-button/ |
+| **GitHub Copilot App / Build 2026** (June 2026) | 1.4B commits/month; agent-native desktop experience | https://github.blog/news-insights/product-news/github-copilot-app-the-agent-native-desktop-experience/ |
+| **EY customer story** | 150-dev pilot → 2,000-dev rollout; 1.2M lines of Copilot-generated code in weeks | https://github.com/customer-stories/ey |
+
+### Microsoft Research & Independent Peer-Reviewed Studies (2025–2026)
+| Source | Key Finding | URL |
+|---|---|---|
+| **Microsoft Research — SPACE of AI** (Aug 2025, N>500) | Broad efficiency and satisfaction gains; collaboration metrics flat; benefits heterogeneous | https://arxiv.org/abs/2508.00178 |
+| **Microsoft Research — Human Oversight of Agentic Systems** (June 2026) | Identifies 4 hidden "oversight tax" workstreams that erode raw output gains | https://arxiv.org/abs/2606.05391 |
+| **Echoes of AI** (Borg et al., July 2025) — N=151 RCT | 30.7% median time reduction in feature work; no maintainability harm | https://arxiv.org/abs/2507.00788 |
+| **METR — Counter-Evidence RCT** (July 2025) | Senior OSS devs 19% slower with Cursor + Claude on familiar code (despite perceiving 20% speedup) | https://arxiv.org/abs/2507.09089 |
+| **NAV IT Longitudinal Copilot Study** (Stray et al., Sept 2025) | 26K commits over 2 years; no significant change in commit activity | https://arxiv.org/abs/2509.20353 |
+| **Watanabe et al. — Claude Code Agentic PRs** (Sept 2025) | 83.8% acceptance rate across 567 PRs / 157 OSS projects | https://arxiv.org/abs/2509.14745 |
+| **Tomaz et al. — Agile Teams 13-month study** (Feb 2026) | Performance up; commit-volume Activity flat → "value density" rises | https://arxiv.org/abs/2602.13766 |
+| **AgenticFlict — Merge Conflicts at Scale** (April 2026) | 27.67% of agentic PRs have merge conflicts; significant agent-to-agent variation | https://arxiv.org/abs/2604.03551 |
 
 ### Industry Context
 | Source | Topic | URL |
-|--------|-------|-----|
-| InfoQ: RCT Productivity Study | Independent developer study | https://www.infoq.com/news/2024/09/copilot-developer-productivity/ |
-| DORA Research | Gold standard DevOps metrics | https://www.devops-research.com/research.html |
-| Index.dev ROI Survey 2025 | 20–51% productivity improvements across teams | https://www.index.dev/blog/ai-coding-assistants-roi-productivity |
+|---|---|---|
+| DORA Research | Gold-standard DevOps metrics | https://www.devops-research.com/research.html |
 
 ---
 
@@ -321,7 +357,7 @@ AI doesn't replace your team — it amplifies them. The PM/PO role doesn't shrin
 
 | Objection | Response |
 |-----------|----------|
-| *"My team is already productive enough"* | The question isn't whether your team is good — it's whether your competitors' teams are getting *better faster*. 90% of Fortune 100 companies are already investing. |
+| *"My team is already productive enough"* | The question isn't whether your team is good — it's whether your competitors' teams are getting *better faster*. Octoverse 2025 reports +23% YoY platform-wide PR throughput and 1M+ Coding Agent PRs in 4 months on established projects. |
 | *"AI-generated code might be wrong or insecure"* | Copilot generates drafts; developers review, own, and are responsible for all code. The Coding Agent requires human approval before any code is merged. Security scanning is built in. |
 | *"This will make developers lazy"* | Research shows developers use the time saved on *more complex, higher-value work* — not less work. Satisfaction scores go up alongside productivity scores. |
 | *"We don't have budget"* | GitHub Copilot Business starts at ~$19/developer/month. At even 2 hours saved/week per developer, this delivers ROI in the first week of use. |
@@ -332,7 +368,7 @@ AI doesn't replace your team — it amplifies them. The PM/PO role doesn't shrin
 
 ## Visual / Slide Concepts
 
-1. **Opening slide:** "What if you could make every sprint 20-55% more productive — without hiring anyone new?"
+1. **Opening slide:** "What if every routine sprint task could be drafted, tested, and PR'd while your team focuses on judgment work?" (citing Octoverse 2025: 1M+ Coding Agent PRs in 4 months)
 2. **The SDLC Map:** Each phase (Requirements → Dev → Review → Test → Deploy) with Copilot touchpoints highlighted
 3. **The Research Data:** Clean table with study names, sample sizes, and key findings
 4. **The Feature Tier List:** Visual grid of features with recommended adoption timeline
