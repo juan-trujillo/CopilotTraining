@@ -1,29 +1,62 @@
 ---
 status: active
-updated: 2026-06-10
+updated: 2026-06-13
 section: "Executive Talks"
 references:
   - url: https://docs.github.com/en/copilot
     label: "GitHub Copilot official documentation"
-    verified: 2026-06-10
+    verified: 2026-06-11
   - url: https://docs.github.com/en/copilot/concepts/copilot-usage-metrics/copilot-metrics
     label: "Copilot Usage Metrics — concepts"
-    verified: 2026-06-10
+    verified: 2026-06-11
   - url: https://docs.github.com/en/enterprise-cloud@latest/rest/copilot/copilot-usage-metrics
     label: "Copilot Usage Metrics REST API"
-    verified: 2026-06-10
+    verified: 2026-06-11
   - url: https://github.blog/changelog/2026-02-27-copilot-metrics-is-now-generally-available/
     label: "Copilot Metrics GA announcement"
-    verified: 2026-06-10
+    verified: 2026-06-11
   - url: https://github.blog/ai-and-ml/github-copilot/github-copilot-coding-agent-101-getting-started-with-agentic-workflows-on-github/
     label: "Copilot Coding Agent 101"
-    verified: 2026-06-10
-  - url: https://cacm.acm.org/research/measuring-github-copilots-impact-on-productivity/
-    label: "ACM: Measuring Copilot's Impact on Productivity (2024)"
-    verified: 2026-06-10
-  - url: https://mit-genai.pubpub.org/pub/v5iixksv
-    label: "MIT GenAI Field Experiment — Microsoft & Accenture (2024)"
-    verified: 2026-06-10
+    verified: 2026-06-11
+  - url: https://github.blog/news-insights/octoverse/octoverse-a-new-developer-joins-github-every-second-as-ai-leads-typescript-to-1/
+    label: "GitHub Octoverse 2025 — annual data report"
+    verified: 2026-06-11
+  - url: https://github.blog/news-insights/product-news/github-copilot-meet-the-new-coding-agent/
+    label: "Copilot Coding Agent — GA launch (May 2025)"
+    verified: 2026-06-11
+  - url: https://github.blog/ai-and-ml/generative-ai/code-review-in-the-age-of-ai-why-developers-will-always-own-the-merge-button/
+    label: "GitHub Code Review study (mid-2025)"
+    verified: 2026-06-11
+  - url: https://github.blog/news-insights/product-news/github-copilot-app-the-agent-native-desktop-experience/
+    label: "GitHub Copilot App — Build 2026 announcement"
+    verified: 2026-06-11
+  - url: https://arxiv.org/abs/2508.00178
+    label: "Microsoft Research — The SPACE of AI (Aug 2025)"
+    verified: 2026-06-11
+  - url: https://arxiv.org/abs/2606.05391
+    label: "Microsoft Research — Human Oversight of Agentic Systems (June 2026)"
+    verified: 2026-06-11
+  - url: https://arxiv.org/abs/2507.00788
+    label: "Echoes of AI — Two-Phase RCT (Borg et al., 2025)"
+    verified: 2026-06-11
+  - url: https://arxiv.org/abs/2507.09089
+    label: "METR — Counter-Evidence RCT (July 2025)"
+    verified: 2026-06-11
+  - url: https://arxiv.org/abs/2509.20353
+    label: "NAV IT Longitudinal Copilot Study (Sept 2025)"
+    verified: 2026-06-11
+  - url: https://arxiv.org/abs/2509.14745
+    label: "Claude Code Agentic PRs Empirical Study (Sept 2025)"
+    verified: 2026-06-11
+  - url: https://arxiv.org/abs/2604.03551
+    label: "AgenticFlict — Merge Conflicts in Agentic PRs (April 2026)"
+    verified: 2026-06-11
+  - url: https://arxiv.org/abs/2602.13766
+    label: "Tomaz et al. — GenAI in Agile Teams (Feb 2026)"
+    verified: 2026-06-11
+  - url: https://www.devops-research.com/research.html
+    label: "DORA DevOps research"
+    verified: 2026-06-11
 ---
 
 # Your Team's New Teammate: GitHub Copilot Across the Delivery Lifecycle
