@@ -13,7 +13,7 @@ title: Your Team's New Teammate — GitHub Copilot for PMs & POs
 module: exec-talks/copilot-sdlc-pm
 mdc: true
 status: active
-updated: 2026-06-13
+updated: 2026-06-14
 ---
 
 <div class="h-full flex flex-col items-center justify-center relative overflow-hidden" style="background: #0d1117;">
@@ -124,59 +124,59 @@ layout: center
 
 ---
 
-# 📊 The Research Is In — And It's Not Vendor Marketing
+# 📊 The Research Is In — Fresh Evidence From 2025–2026
 
 <div class="mt-3 text-sm" style="background: #0d1117;">
 <div class="space-y-2 mt-2 text-sm">
 
 <div class="p-2.5 rounded-lg flex items-center justify-between" style="background: #161b22; border-left: 4px solid #79c0ff;">
   <div>
-    <div class="font-bold" style="color: #79c0ff;">MIT / Wharton / GitHub — Randomized Controlled Trial</div>
-    <div style="color: #8b949e;">4,867 developers across 3 companies · Peer-reviewed · 2024</div>
+    <div class="font-bold" style="color: #79c0ff;">GitHub Octoverse 2025 — Platform Telemetry (180M+ devs)</div>
+    <div style="color: #8b949e;">Coding Agent rolled out in May 2025 · Sept 2024–Aug 2025 data window</div>
   </div>
   <div class="text-right ml-6 shrink-0">
-    <div class="text-2xl font-bold" style="color: #e6edf3;">26%</div>
-    <div class="text-xs" style="color: #79c0ff;">faster task completion</div>
+    <div class="text-2xl font-bold" style="color: #e6edf3;">1M+</div>
+    <div class="text-xs" style="color: #79c0ff;">PRs from Coding Agent in 4 months</div>
   </div>
 </div>
 
 <div class="p-2.5 rounded-lg flex items-center justify-between" style="background: #161b22; border-left: 4px solid #79c0ff;">
   <div>
-    <div class="font-bold" style="color: #79c0ff;">GitHub Internal Experiment</div>
-    <div style="color: #8b949e;">2,000+ developers · 78 min vs. 161 min average task time</div>
+    <div class="font-bold" style="color: #79c0ff;">Octoverse 2025 — Platform-Wide Throughput</div>
+    <div style="color: #8b949e;">43.2M PRs merged/month avg · 986M commits in 2025</div>
   </div>
   <div class="text-right ml-6 shrink-0">
-    <div class="text-2xl font-bold" style="color: #e6edf3;">55%</div>
-    <div class="text-xs" style="color: #79c0ff;">faster task completion</div>
+    <div class="text-2xl font-bold" style="color: #e6edf3;">+23%</div>
+    <div class="text-xs" style="color: #79c0ff;">PR throughput year over year</div>
   </div>
 </div>
 
 <div class="p-2.5 rounded-lg flex items-center justify-between" style="background: #161b22; border-left: 4px solid #3fb950;">
   <div>
-    <div class="font-bold" style="color: #3fb950;">Microsoft & Accenture Field Trial</div>
-    <div style="color: #8b949e;">1,974 developers · Pull requests per week measured</div>
+    <div class="font-bold" style="color: #3fb950;">GitHub Code Review Study (mid-2025)</div>
+    <div style="color: #8b949e;">In-depth interviews with developers using Copilot code review</div>
   </div>
   <div class="text-right ml-6 shrink-0">
-    <div class="text-2xl font-bold" style="color: #e6edf3;">+22%</div>
-    <div class="text-xs" style="color: #3fb950;">more PRs merged/week</div>
+    <div class="text-2xl font-bold" style="color: #e6edf3;">72.6%</div>
+    <div class="text-xs" style="color: #3fb950;">report improved effectiveness</div>
   </div>
 </div>
 
 <div class="p-2.5 rounded-lg flex items-center justify-between" style="background: #161b22; border-left: 4px solid #bc8cff;">
   <div>
-    <div class="font-bold" style="color: #bc8cff;">Industry-Wide Survey 2025</div>
-    <div style="color: #8b949e;">15M users · 50K organizations · All industries</div>
+    <div class="font-bold" style="color: #bc8cff;">Echoes of AI — Independent RCT (Borg et al. 2025)</div>
+    <div style="color: #8b949e;">N=151 professional developers · GitHub Copilot + Cursor · Java tasks</div>
   </div>
   <div class="text-right ml-6 shrink-0">
-    <div class="text-2xl font-bold" style="color: #e6edf3;">84%</div>
-    <div class="text-xs" style="color: #bc8cff;">more successful builds</div>
+    <div class="text-2xl font-bold" style="color: #e6edf3;">30.7%</div>
+    <div class="text-xs" style="color: #bc8cff;">median time reduction on dev tasks</div>
   </div>
 </div>
 
 </div>
 
 <div class="mt-2 p-2.5 rounded-xl border text-center text-sm" style="background: #161b22; border-color: #30363d;">
-  <span class="font-bold" style="color: #e6edf3;">88% of developers</span><span style="color: #8b949e;"> report feeling more productive · Junior developers see the largest individual gains</span>
+  <span class="font-bold" style="color: #e6edf3;">Microsoft Research, SPACE of AI (Aug 2025, N&gt;500): </span><span style="color: #8b949e;">efficiency &amp; satisfaction up across teams · benefits scale with task routineness, not raw seniority</span>
 </div>
 </div>
 
@@ -659,7 +659,7 @@ layout: center
 
 <div class="mt-4 p-4 rounded-xl border text-center text-sm" style="background: #161b22; border-color: #30363d;">
   <span class="font-bold" style="color: #d29922;">The competitive risk of inaction: </span>
-  <span style="color: #8b949e;">Teams using Copilot are shipping 20–55% faster. Every sprint without adoption is a sprint where the gap widens.</span>
+  <span style="color: #8b949e;">Octoverse 2025 logged 1M+ Copilot Coding Agent PRs in 4 months and +23% YoY platform-wide PR throughput. Every sprint without adoption is a sprint where the gap widens.</span>
 </div>
 </div>
 
@@ -667,20 +667,25 @@ layout: center
 layout: center
 ---
 
-# 📚 Sources & Further Reading
+# 📚 Sources & Further Reading — 2025–2026 Evidence
 
-<div class="grid grid-cols-2 gap-4 mt-6 max-w-3xl mx-auto text-xs text-left">
+<div class="grid grid-cols-2 gap-4 mt-6 max-w-4xl mx-auto text-xs text-left">
 
 <div class="space-y-2">
-  <a href="https://cacm.acm.org/research/measuring-github-copilots-impact-on-productivity/" target="_blank" rel="noopener noreferrer" class="block p-3 rounded-lg no-underline hover:opacity-80 transition-opacity" style="background: #161b22;">
-    <div class="font-bold" style="color: #79c0ff;">ACM: Measuring Copilot's Impact (2024)</div>
-    <div style="color: #8b949e;">26% faster completion · RCT with 4,867 devs</div>
-    <div class="mt-1" style="color: #8b949e;">cacm.acm.org ↗</div>
+  <a href="https://github.blog/news-insights/octoverse/octoverse-a-new-developer-joins-github-every-second-as-ai-leads-typescript-to-1/" target="_blank" rel="noopener noreferrer" class="block p-3 rounded-lg no-underline hover:opacity-80 transition-opacity" style="background: #161b22;">
+    <div class="font-bold" style="color: #79c0ff;">GitHub Octoverse 2025</div>
+    <div style="color: #8b949e;">1M+ Coding Agent PRs in 4 months · +23% YoY PR throughput</div>
+    <div class="mt-1" style="color: #8b949e;">github.blog/news-insights/octoverse ↗</div>
   </a>
-  <a href="https://mit-genai.pubpub.org/pub/v5iixksv" target="_blank" rel="noopener noreferrer" class="block p-3 rounded-lg no-underline hover:opacity-80 transition-opacity" style="background: #161b22;">
-    <div class="font-bold" style="color: #79c0ff;">MIT GenAI Field Experiment (2024)</div>
-    <div style="color: #8b949e;">12–22% more PRs/week · Microsoft & Accenture</div>
-    <div class="mt-1" style="color: #8b949e;">mit-genai.pubpub.org ↗</div>
+  <a href="https://github.blog/news-insights/product-news/github-copilot-meet-the-new-coding-agent/" target="_blank" rel="noopener noreferrer" class="block p-3 rounded-lg no-underline hover:opacity-80 transition-opacity" style="background: #161b22;">
+    <div class="font-bold" style="color: #79c0ff;">Copilot Coding Agent — GA Launch (May 2025)</div>
+    <div style="color: #8b949e;">Carvana, EY, Avanade enterprise rollouts</div>
+    <div class="mt-1" style="color: #8b949e;">github.blog/news-insights/product-news ↗</div>
+  </a>
+  <a href="https://github.blog/ai-and-ml/generative-ai/code-review-in-the-age-of-ai-why-developers-will-always-own-the-merge-button/" target="_blank" rel="noopener noreferrer" class="block p-3 rounded-lg no-underline hover:opacity-80 transition-opacity" style="background: #161b22;">
+    <div class="font-bold" style="color: #3fb950;">GitHub Code Review Study (mid-2025)</div>
+    <div style="color: #8b949e;">72.6% report effectiveness gains · ~33% less PR back-and-forth</div>
+    <div class="mt-1" style="color: #8b949e;">github.blog/ai-and-ml ↗</div>
   </a>
   <a href="https://docs.github.com/en/copilot/concepts/copilot-usage-metrics/copilot-metrics" target="_blank" rel="noopener noreferrer" class="block p-3 rounded-lg no-underline hover:opacity-80 transition-opacity" style="background: #161b22;">
     <div class="font-bold" style="color: #3fb950;">GitHub Copilot Usage Metrics Docs</div>
@@ -690,25 +695,30 @@ layout: center
 </div>
 
 <div class="space-y-2">
-  <a href="https://github.blog/ai-and-ml/github-copilot/github-copilot-coding-agent-101-getting-started-with-agentic-workflows-on-github/" target="_blank" rel="noopener noreferrer" class="block p-3 rounded-lg no-underline hover:opacity-80 transition-opacity" style="background: #161b22;">
-    <div class="font-bold" style="color: #bc8cff;">Copilot Coding Agent 101 (GitHub Blog)</div>
-    <div style="color: #8b949e;">Getting started with agentic workflows</div>
-    <div class="mt-1" style="color: #8b949e;">github.blog ↗</div>
+  <a href="https://arxiv.org/abs/2508.00178" target="_blank" rel="noopener noreferrer" class="block p-3 rounded-lg no-underline hover:opacity-80 transition-opacity" style="background: #161b22;">
+    <div class="font-bold" style="color: #bc8cff;">Microsoft Research — SPACE of AI (Aug 2025)</div>
+    <div style="color: #8b949e;">N&gt;500 developers · efficiency & satisfaction up; benefits heterogeneous</div>
+    <div class="mt-1" style="color: #8b949e;">arxiv.org/abs/2508.00178 ↗</div>
+  </a>
+  <a href="https://arxiv.org/abs/2507.00788" target="_blank" rel="noopener noreferrer" class="block p-3 rounded-lg no-underline hover:opacity-80 transition-opacity" style="background: #161b22;">
+    <div class="font-bold" style="color: #bc8cff;">Echoes of AI — Two-Phase RCT (Borg et al. 2025)</div>
+    <div style="color: #8b949e;">N=151 professionals · 30.7% time reduction · no maintainability harm</div>
+    <div class="mt-1" style="color: #8b949e;">arxiv.org/abs/2507.00788 ↗</div>
+  </a>
+  <a href="https://arxiv.org/abs/2507.09089" target="_blank" rel="noopener noreferrer" class="block p-3 rounded-lg no-underline hover:opacity-80 transition-opacity" style="background: #161b22;">
+    <div class="font-bold" style="color: #d29922;">METR — Counter-Evidence RCT (July 2025)</div>
+    <div style="color: #8b949e;">Senior OSS devs 19% slower on familiar code · context matters</div>
+    <div class="mt-1" style="color: #8b949e;">arxiv.org/abs/2507.09089 ↗</div>
   </a>
   <a href="https://www.devops-research.com/research.html" target="_blank" rel="noopener noreferrer" class="block p-3 rounded-lg no-underline hover:opacity-80 transition-opacity" style="background: #161b22;">
-    <div class="font-bold" style="color: #d29922;">DORA Research</div>
-    <div style="color: #8b949e;">Gold-standard DevOps delivery metrics</div>
+    <div class="font-bold" style="color: #f85149;">DORA Research</div>
+    <div style="color: #8b949e;">Gold-standard DevOps delivery metrics framework</div>
     <div class="mt-1" style="color: #8b949e;">devops-research.com ↗</div>
   </a>
-  <a href="https://www.secondtalent.com/resources/github-copilot-statistics/" target="_blank" rel="noopener noreferrer" class="block p-3 rounded-lg no-underline hover:opacity-80 transition-opacity" style="background: #161b22;">
-    <div class="font-bold" style="color: #f85149;">Second Talent: Copilot Stats 2025</div>
-    <div style="color: #8b949e;">84% more successful builds · 15M users</div>
-    <div class="mt-1" style="color: #8b949e;">secondtalent.com ↗</div>
-  </a>
 </div>
 
 </div>
 
-<div class="mt-6 text-xs" style="color: #8b949e;">
+<div class="mt-4 text-xs text-center" style="color: #8b949e;">
   Full reference list at <span style="color: #79c0ff;">exec-talks/copilot-sdlc-pm/README.md</span>
 </div>
