@@ -13,7 +13,7 @@ title: Copilot Configuration Primitives - Making AI Understand Your Codebase
 module: tech-talks/copilot-primitives
 mdc: true
 status: active
-updated: 2026-03-30
+updated: 2026-06-22
 ---
 
 
