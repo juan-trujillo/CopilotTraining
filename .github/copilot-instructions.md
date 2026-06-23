@@ -1,5 +1,27 @@
 # Copilot Instructions for CopilotTraining Content Development
 
+## Git Remotes & PR Targets
+
+This clone is the **juan-trujillo fork**. All commits, branches, and PRs go to
+`juan-trujillo/CopilotTraining` — **never** `MSBart2/CopilotTraining` (the
+upstream source).
+
+- `origin` → `https://github.com/juan-trujillo/CopilotTraining.git` (fetch + push)
+- `upstream` → `https://github.com/MSBart2/CopilotTraining` (fetch only; push URL is
+  deliberately set to `DISABLED_no_push`)
+
+When opening PRs, always explicitly target the fork:
+
+```bash
+gh pr create --repo juan-trujillo/CopilotTraining --base main --head <branch> ...
+```
+
+**Before any commit / push / PR-creation operation, echo the target repo URL in
+your response so the user can confirm.** The user has had to correct the agent
+about wrong-repo targeting multiple times across past sessions.
+
+---
+
 ## Repository Structure
 
 This repository contains three types of content, each with different purposes and guidelines:
@@ -213,3 +235,52 @@ When calling subagents (via `runSubagent`), keep prompts minimal:
 **Good example:**
 
 > "Generate slides for workshop/03-custom-prompts"
+
+---
+
+## Slidev Build & Deployment Gotchas
+
+**Pinned versions — do NOT loosen:**
+
+- `slides/package.json`: `@slidev/cli` pinned to `52.12.0` (fixes the GitHub
+  Pages arrow-key 404 routing bug introduced in `52.13+`).
+- `slides/package.json` `overrides`: `fuse.js` pinned to `7.1.0` (fixes a stuck
+  Goto-slide dropdown).
+
+**Build-manifest skip — most common cause of "navigation is broken" reports:**
+
+The deploy workflow (`.github/workflows/deploy-slides.yml`) uses a date-based
+skip manifest. If a deck's frontmatter `updated:` field matches the previous
+build entry, the cached `dist/` is reused — even after dependency pins changed.
+Decks built before the Slidev pin landed will keep serving the broken `52.16.0`
+build until their `updated:` date changes.
+
+**Diagnostic:** view-source on the deployed deck and check the
+`<meta property="slidev:version" content="...">` tag. Anything other than
+`52.12.0` means the deck was never rebuilt with the current pin.
+
+**Fix pattern (single deck):**
+
+1. Bump `updated:` to today in `slides/<category>/<deck>.md` frontmatter.
+2. Sync the matching entry in `slides/index-custom.html` `SLIDE_DATES` map
+   (or run `node slides/scripts/sync-index-dates.mjs`).
+3. Commit, push, merge — the deploy workflow rebuilds only that deck.
+
+This exact pattern was used in PRs #4 (copilot-sdlc-pm), #9 (agentic-sdlc),
+and #10 (copilot-primitives).
+
+---
+
+## gh CLI Gotchas
+
+- `gh pr create --body "..."` fails when the body contains escaped quotes (`\"`).
+  For any non-trivial PR body, write to a temp file and use `--body-file`.
+- `gh pr merge` requires a positional `<number>` argument when `--repo` is used:
+
+  ```bash
+  gh pr merge 10 --repo juan-trujillo/CopilotTraining --squash --delete-branch
+  ```
+
+- If `git push` returns a 403 with an unexpected username (e.g.
+  `testuser2_*`), run `gh auth setup-git` to wire the active `gh` token into
+  git's credential helper.
