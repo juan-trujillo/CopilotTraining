@@ -269,6 +269,37 @@ build until their `updated:` date changes.
 This exact pattern was used in PRs #4 (copilot-sdlc-pm), #9 (agentic-sdlc),
 and #10 (copilot-primitives).
 
+**`setup/main.ts` must be colocated with each category — second-most common
+cause of "deep links land on slide 1":**
+
+Slidev resolves the `setup/` directory relative to each **deck file's parent
+directory**, NOT the project root or cwd. A single `slides/setup/main.ts` at
+the project root is silently ignored when decks live in
+`slides/<category>/<deck>.md` (which all of them do).
+
+The canonical setup at `slides/setup/main.ts` contains the `?slide=N`
+query-param handler that turns the GitHub-Pages 404 redirect
+(`/deck/22` → `/deck/?slide=22`) back into a real `router.replace('/22')`.
+Without it, every deep link silently lands on slide 1 and the URL ends up
+ugly (`/1?slide=22`).
+
+**The fix is a 1-line re-export shim per category:**
+
+```ts
+// slides/<category>/setup/main.ts
+export { default } from '../../setup/main'
+```
+
+These shims exist in `tech-talks/`, `intro-talks/`, `exec-talks/`, and
+`workshop/`. **If you add a new category dir, you MUST add its setup shim**
+or every deep link in that category will break. Verify a build picked up the
+setup by grepping `dist/assets/*.js` for `slide-number-overlay` (only present
+when setup is loaded). Bundle size also grows by ~1 kB.
+
+This shim pattern landed alongside a one-time bump of the deploy workflow
+cache-key prefix (`slides-dist-` → `slides-dist-v2-`) so all 35 cached decks
+were forced to rebuild against the new setup.
+
 ---
 
 ## gh CLI Gotchas
