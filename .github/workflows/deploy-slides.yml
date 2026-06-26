@@ -33,9 +33,13 @@ jobs:
         uses: actions/cache@v4
         with:
           path: ./slides/dist
-          key: slides-dist-${{ github.sha }}
+          # Cache key prefix bumped to v2 to force a one-time full rebuild of all
+          # decks after adding per-category setup/main.ts shims (fix for deep-link
+          # navigation). Without this bump the build manifest would skip decks
+          # whose `updated:` hasn't changed, leaving them without the setup code.
+          key: slides-dist-v2-${{ github.sha }}
           restore-keys: |
-            slides-dist-
+            slides-dist-v2-
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
