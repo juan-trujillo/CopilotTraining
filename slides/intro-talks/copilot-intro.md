@@ -13,7 +13,7 @@ title: GitHub Copilot - Your AI Pair Programmer
 module: intro-talks/copilot-intro
 mdc: true
 status: active
-updated: 2026-02-24
+updated: 2026-06-26
 ---
 
 <div class="h-full flex flex-col items-center justify-center relative overflow-hidden" style="background: #0d1117;">
