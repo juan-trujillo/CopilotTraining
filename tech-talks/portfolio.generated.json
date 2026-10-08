@@ -1,0 +1,1985 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-10-08T15:27:57.944Z",
+  "source": "tech-talks/*/README.md",
+  "counts": {
+    "totalTalks": 29,
+    "practitionerTalks": 20,
+    "archivedTalks": 9,
+    "deployedTalks": 19,
+    "candidateTalks": 1,
+    "catalogCards": 20,
+    "validTalks": 29
+  },
+  "warnings": [],
+  "ghostDirectories": [],
+  "orphanedCards": [],
+  "redirects": [
+    {
+      "source": "context-engineering",
+      "status": "merged",
+      "target": "copilot-primitives",
+      "reason": "Context placement and verification now support the practical four-primitive configuration tutorial.",
+      "decisionId": "primitives-restoration"
+    },
+    {
+      "source": "copilot-memory",
+      "status": "merged",
+      "target": "copilot-primitives",
+      "reason": "Owner, lifetime, selector, and evidence boundaries now sit inside Copilot Primitives.",
+      "decisionId": "primitives-restoration"
+    },
+    {
+      "source": "copilot-chat-internals",
+      "status": "merged",
+      "target": "copilot-primitives",
+      "reason": "Delivery inspection and first-boundary repair now sit inside Copilot Primitives.",
+      "decisionId": "primitives-restoration"
+    },
+    {
+      "source": "copilot-code-review",
+      "status": "merged",
+      "target": "pr-trust-stack",
+      "reason": "AI review findings now sit inside one governed pre-merge evidence stack.",
+      "decisionId": "pr-trust-stack"
+    },
+    {
+      "source": "copilot-code-quality",
+      "status": "merged",
+      "target": "pr-trust-stack",
+      "reason": "Deterministic quality gates now sit inside one governed pre-merge evidence stack.",
+      "decisionId": "pr-trust-stack"
+    },
+    {
+      "source": "agentic-journey",
+      "status": "merged",
+      "target": "agentic-lifecycle",
+      "reason": "The issue-to-PR state machine is now owned by Agentic Lifecycle Orchestration.",
+      "decisionId": "adoption-pathway"
+    },
+    {
+      "source": "agent-teams",
+      "status": "merged",
+      "target": "multi-agent-coordination",
+      "reason": "Specialist composition, isolation, handoffs, and integration now share one coordination decision model.",
+      "decisionId": "multi-agent-coordination"
+    },
+    {
+      "source": "copilot-app",
+      "status": "merged",
+      "target": "multi-agent-coordination",
+      "reason": "Fleet operation is now taught as a concrete surface within the broader split-steer-integrate model.",
+      "decisionId": "multi-agent-coordination"
+    },
+    {
+      "source": "agentic-workflows",
+      "status": "merged",
+      "target": "agentic-lifecycle",
+      "reason": "Workflow selection, compilation, permissions, and safe outputs are now owned by Agentic Lifecycle Orchestration.",
+      "decisionId": "workflow-lifecycle"
+    }
+  ],
+  "supplementalTalks": [
+    "agentic-skill-lifecycle",
+    "apm",
+    "copilot-auto-mode",
+    "customization-best-practices",
+    "model-selection"
+  ],
+  "redirectErrors": [],
+  "talks": [
+    {
+      "slug": "agent-dev-loop",
+      "title": "The Agent Dev Loop: From Repo to Feature with Copilot in VS Code",
+      "status": "active",
+      "portfolioState": "deployed",
+      "updated": "2026-09-16",
+      "section": "Delegate and Coordinate",
+      "audience": [
+        "developer",
+        "team-lead"
+      ],
+      "level": "applied",
+      "duration": 45,
+      "format": "core-talk",
+      "decision": "How does completed work become reusable team capability?",
+      "prerequisites": [
+        "copilot-primitives"
+      ],
+      "related": [
+        "copilot-web",
+        "multi-agent-coordination"
+      ],
+      "deckSection": "Delegate and Coordinate",
+      "cataloged": true,
+      "files": {
+        "readme": {
+          "path": "tech-talks/agent-dev-loop/README.md",
+          "exists": true,
+          "bytes": 32790,
+          "modified": "2026-10-08T14:59:45.524Z"
+        },
+        "recipe": {
+          "path": "tech-talks/agent-dev-loop/deck.recipe.yml",
+          "exists": true,
+          "bytes": 6388,
+          "modified": "2026-10-08T14:59:45.525Z"
+        },
+        "deck": {
+          "path": "slides/tech-talks/agent-dev-loop.md",
+          "exists": true,
+          "bytes": 31620,
+          "modified": "2026-10-08T14:59:45.414Z"
+        },
+        "agendaMarkdown": {
+          "path": "slides/companions/tech-talks/agent-dev-loop/agenda.md",
+          "exists": true,
+          "bytes": 419,
+          "modified": "2026-10-08T14:59:44.445Z"
+        },
+        "agendaHtml": {
+          "path": "slides/companions/tech-talks/agent-dev-loop/agenda.html",
+          "exists": true,
+          "bytes": 6080,
+          "modified": "2026-10-08T14:59:44.444Z"
+        },
+        "deckPdf": {
+          "path": "slides/companions/tech-talks/agent-dev-loop/deck.pdf",
+          "exists": true,
+          "bytes": 2421817,
+          "modified": "2026-10-08T14:59:44.474Z"
+        }
+      },
+      "errors": []
+    },
+    {
+      "slug": "agent-teams",
+      "title": "Building Agent Systems: Subagents, Teams, and Autonomous Execution",
+      "status": "archived",
+      "portfolioState": "deployed",
+      "updated": "2026-09-16",
+      "section": "Delegate and Coordinate",
+      "audience": [
+        "developer",
+        "team-lead",
+        "architect"
+      ],
+      "level": "advanced",
+      "duration": 60,
+      "format": "core-talk",
+      "decision": "When should work be split among specialized agents?",
+      "prerequisites": [
+        "agent-dev-loop"
+      ],
+      "related": [
+        "loopy-agents",
+        "copilot-app",
+        "agentic-sdlc"
+      ],
+      "deckSection": "Delegate and Coordinate",
+      "cataloged": false,
+      "files": {
+        "readme": {
+          "path": "tech-talks/agent-teams/README.md",
+          "exists": true,
+          "bytes": 44740,
+          "modified": "2026-10-08T14:59:45.526Z"
+        },
+        "recipe": {
+          "path": "tech-talks/agent-teams/deck.recipe.yml",
+          "exists": true,
+          "bytes": 7534,
+          "modified": "2026-10-08T14:59:45.527Z"
+        },
+        "deck": {
+          "path": "slides/tech-talks/agent-teams.md",
+          "exists": true,
+          "bytes": 27401,
+          "modified": "2026-10-08T14:59:45.416Z"
+        },
+        "agendaMarkdown": {
+          "path": "slides/companions/tech-talks/agent-teams/agenda.md",
+          "exists": true,
+          "bytes": 403,
+          "modified": "2026-10-08T14:59:44.476Z"
+        },
+        "agendaHtml": {
+          "path": "slides/companions/tech-talks/agent-teams/agenda.html",
+          "exists": true,
+          "bytes": 6064,
+          "modified": "2026-10-08T14:59:44.475Z"
+        },
+        "deckPdf": {
+          "path": "slides/companions/tech-talks/agent-teams/deck.pdf",
+          "exists": true,
+          "bytes": 1889389,
+          "modified": "2026-10-08T14:59:44.496Z"
+        }
+      },
+      "errors": []
+    },
+    {
+      "slug": "agentic-journey",
+      "title": "The Agentic Journey: Incremental Path from Issue to PR Automation",
+      "status": "archived",
+      "portfolioState": "deployed",
+      "updated": "2026-09-15",
+      "section": "Delegate and Coordinate",
+      "audience": [
+        "developer",
+        "team-lead",
+        "engineering-leader"
+      ],
+      "level": "applied",
+      "duration": 45,
+      "format": "core-talk",
+      "decision": "How should an issue move through intake, planning, coding, and review?",
+      "prerequisites": [
+        "agent-dev-loop",
+        "copilot-web"
+      ],
+      "related": [
+        "agentic-workflows",
+        "agentic-sdlc"
+      ],
+      "deckSection": "Delegate and Coordinate",
+      "cataloged": false,
+      "files": {
+        "readme": {
+          "path": "tech-talks/agentic-journey/README.md",
+          "exists": true,
+          "bytes": 36017,
+          "modified": "2026-10-08T14:59:45.528Z"
+        },
+        "recipe": {
+          "path": "tech-talks/agentic-journey/deck.recipe.yml",
+          "exists": true,
+          "bytes": 8979,
+          "modified": "2026-10-08T14:59:45.529Z"
+        },
+        "deck": {
+          "path": "slides/tech-talks/agentic-journey.md",
+          "exists": true,
+          "bytes": 25602,
+          "modified": "2026-10-08T14:59:45.417Z"
+        },
+        "agendaMarkdown": {
+          "path": "slides/companions/tech-talks/agentic-journey/agenda.md",
+          "exists": true,
+          "bytes": 405,
+          "modified": "2026-10-08T14:59:44.498Z"
+        },
+        "agendaHtml": {
+          "path": "slides/companions/tech-talks/agentic-journey/agenda.html",
+          "exists": true,
+          "bytes": 6066,
+          "modified": "2026-10-08T14:59:44.497Z"
+        },
+        "deckPdf": {
+          "path": "slides/companions/tech-talks/agentic-journey/deck.pdf",
+          "exists": true,
+          "bytes": 1785166,
+          "modified": "2026-10-08T14:59:44.517Z"
+        }
+      },
+      "errors": []
+    },
+    {
+      "slug": "agentic-lifecycle",
+      "title": "Agentic Lifecycle Orchestration",
+      "status": "active",
+      "portfolioState": "deployed",
+      "updated": "2026-10-06",
+      "section": "Delegate and Coordinate",
+      "audience": [
+        "developer",
+        "team-lead",
+        "platform-engineer"
+      ],
+      "level": "advanced",
+      "duration": 55,
+      "format": "core-talk",
+      "decision": "How can a team turn an issue into a tested fix and reviewed draft PR through human-requested agentic workflows?",
+      "prerequisites": [
+        "agent-dev-loop",
+        "copilot-web"
+      ],
+      "related": [
+        "surfaces",
+        "multi-agent-coordination",
+        "agentic-sdlc"
+      ],
+      "deckSection": "Delegate and Coordinate",
+      "cataloged": true,
+      "files": {
+        "readme": {
+          "path": "tech-talks/agentic-lifecycle/README.md",
+          "exists": true,
+          "bytes": 27472,
+          "modified": "2026-10-08T14:59:45.530Z"
+        },
+        "recipe": {
+          "path": "tech-talks/agentic-lifecycle/deck.recipe.yml",
+          "exists": true,
+          "bytes": 5180,
+          "modified": "2026-10-08T14:59:45.531Z"
+        },
+        "deck": {
+          "path": "slides/tech-talks/agentic-lifecycle.md",
+          "exists": true,
+          "bytes": 27196,
+          "modified": "2026-10-08T14:59:45.418Z"
+        },
+        "agendaMarkdown": {
+          "path": "slides/companions/tech-talks/agentic-lifecycle/agenda.md",
+          "exists": true,
+          "bytes": 458,
+          "modified": "2026-10-08T14:59:44.519Z"
+        },
+        "agendaHtml": {
+          "path": "slides/companions/tech-talks/agentic-lifecycle/agenda.html",
+          "exists": true,
+          "bytes": 6115,
+          "modified": "2026-10-08T14:59:44.518Z"
+        },
+        "deckPdf": {
+          "path": "slides/companions/tech-talks/agentic-lifecycle/deck.pdf",
+          "exists": true,
+          "bytes": 2091254,
+          "modified": "2026-10-08T14:59:44.533Z"
+        }
+      },
+      "errors": []
+    },
+    {
+      "slug": "agentic-sdlc",
+      "title": "Agentic SDLC: Infrastructure for AI Velocity",
+      "status": "active",
+      "portfolioState": "deployed",
+      "updated": "2026-09-16",
+      "section": "Verify and Govern",
+      "audience": [
+        "platform-engineer",
+        "architect",
+        "engineering-leader"
+      ],
+      "level": "advanced",
+      "duration": 90,
+      "format": "core-talk",
+      "decision": "What repository and CI infrastructure creates trustworthy agent throughput?",
+      "prerequisites": [
+        "agentic-workflows"
+      ],
+      "related": [
+        "copilot-hooks",
+        "enterprise-patterns",
+        "loopy-agents"
+      ],
+      "deckSection": "Verify and Govern",
+      "cataloged": true,
+      "files": {
+        "readme": {
+          "path": "tech-talks/agentic-sdlc/README.md",
+          "exists": true,
+          "bytes": 79392,
+          "modified": "2026-10-08T14:59:45.544Z"
+        },
+        "recipe": {
+          "path": "tech-talks/agentic-sdlc/deck.recipe.yml",
+          "exists": true,
+          "bytes": 7340,
+          "modified": "2026-10-08T14:59:45.546Z"
+        },
+        "deck": {
+          "path": "slides/tech-talks/agentic-sdlc.md",
+          "exists": true,
+          "bytes": 26006,
+          "modified": "2026-10-08T15:01:39.274Z"
+        },
+        "agendaMarkdown": {
+          "path": "slides/companions/tech-talks/agentic-sdlc/agenda.md",
+          "exists": true,
+          "bytes": 394,
+          "modified": "2026-10-08T15:19:53.587Z"
+        },
+        "agendaHtml": {
+          "path": "slides/companions/tech-talks/agentic-sdlc/agenda.html",
+          "exists": true,
+          "bytes": 5869,
+          "modified": "2026-10-08T15:20:06.633Z"
+        },
+        "deckPdf": {
+          "path": "slides/companions/tech-talks/agentic-sdlc/deck.pdf",
+          "exists": true,
+          "bytes": 1947610,
+          "modified": "2026-10-08T15:23:11.946Z"
+        }
+      },
+      "errors": []
+    },
+    {
+      "slug": "agentic-workflows",
+      "title": "GitHub Agentic Workflows: Repository Automation with AI Agents",
+      "status": "archived",
+      "portfolioState": "deployed",
+      "updated": "2026-09-16",
+      "section": "Delegate and Coordinate",
+      "audience": [
+        "developer",
+        "team-lead",
+        "platform-engineer"
+      ],
+      "level": "advanced",
+      "duration": 50,
+      "format": "core-talk",
+      "decision": "Which recurring repository judgments should run as workflows?",
+      "prerequisites": [
+        "copilot-web"
+      ],
+      "related": [
+        "copilot-hooks",
+        "agentic-sdlc"
+      ],
+      "deckSection": "Delegate and Coordinate",
+      "cataloged": false,
+      "files": {
+        "readme": {
+          "path": "tech-talks/agentic-workflows/README.md",
+          "exists": true,
+          "bytes": 50744,
+          "modified": "2026-10-08T14:59:45.548Z"
+        },
+        "recipe": {
+          "path": "tech-talks/agentic-workflows/deck.recipe.yml",
+          "exists": true,
+          "bytes": 9482,
+          "modified": "2026-10-08T14:59:45.551Z"
+        },
+        "deck": {
+          "path": "slides/tech-talks/agentic-workflows.md",
+          "exists": true,
+          "bytes": 29526,
+          "modified": "2026-10-08T14:59:45.422Z"
+        },
+        "agendaMarkdown": {
+          "path": "slides/companions/tech-talks/agentic-workflows/agenda.md",
+          "exists": true,
+          "bytes": 422,
+          "modified": "2026-10-08T14:59:44.557Z"
+        },
+        "agendaHtml": {
+          "path": "slides/companions/tech-talks/agentic-workflows/agenda.html",
+          "exists": true,
+          "bytes": 6087,
+          "modified": "2026-10-08T14:59:44.556Z"
+        },
+        "deckPdf": {
+          "path": "slides/companions/tech-talks/agentic-workflows/deck.pdf",
+          "exists": true,
+          "bytes": 2042045,
+          "modified": "2026-10-08T14:59:44.580Z"
+        }
+      },
+      "errors": []
+    },
+    {
+      "slug": "context-engineering",
+      "title": "Copilot Context Engineering",
+      "status": "archived",
+      "portfolioState": "deployed",
+      "updated": "2026-09-16",
+      "section": "Choose and Configure",
+      "audience": [
+        "developer",
+        "team-lead",
+        "platform-engineer"
+      ],
+      "level": "applied",
+      "duration": 55,
+      "format": "core-talk",
+      "decision": "Where should Copilot context live, how should it be encoded, and how do we verify it was used?",
+      "prerequisites": [
+        "surfaces"
+      ],
+      "related": [
+        "agent-dev-loop",
+        "copilot-hooks",
+        "enterprise-patterns"
+      ],
+      "deckSection": "Choose and Configure",
+      "cataloged": false,
+      "files": {
+        "readme": {
+          "path": "tech-talks/context-engineering/README.md",
+          "exists": true,
+          "bytes": 23581,
+          "modified": "2026-10-08T14:59:45.563Z"
+        },
+        "recipe": {
+          "path": "tech-talks/context-engineering/deck.recipe.yml",
+          "exists": true,
+          "bytes": 4217,
+          "modified": "2026-10-08T14:59:45.564Z"
+        },
+        "deck": {
+          "path": "slides/tech-talks/context-engineering.md",
+          "exists": true,
+          "bytes": 23642,
+          "modified": "2026-10-08T14:59:45.446Z"
+        },
+        "agendaMarkdown": {
+          "path": "slides/companions/tech-talks/context-engineering/agenda.md",
+          "exists": true,
+          "bytes": 437,
+          "modified": "2026-10-08T14:59:44.583Z"
+        },
+        "agendaHtml": {
+          "path": "slides/companions/tech-talks/context-engineering/agenda.html",
+          "exists": true,
+          "bytes": 6098,
+          "modified": "2026-10-08T14:59:44.582Z"
+        },
+        "deckPdf": {
+          "path": "slides/companions/tech-talks/context-engineering/deck.pdf",
+          "exists": true,
+          "bytes": 1785458,
+          "modified": "2026-10-08T14:59:44.601Z"
+        }
+      },
+      "errors": []
+    },
+    {
+      "slug": "copilot-acp",
+      "title": "GitHub Copilot ACP: Your Tool Just Got an AI Agent",
+      "status": "active",
+      "portfolioState": "deployed",
+      "updated": "2025-07-25",
+      "section": "Extend and Embed",
+      "audience": [
+        "developer",
+        "platform-engineer",
+        "architect"
+      ],
+      "level": "advanced",
+      "duration": 45,
+      "format": "core-talk",
+      "decision": "When should an external client connect to a Copilot agent?",
+      "prerequisites": [
+        "copilot-sdk"
+      ],
+      "related": [
+        "mcp-apps",
+        "copilot-plugins"
+      ],
+      "deckSection": "Extend and Embed",
+      "cataloged": true,
+      "files": {
+        "readme": {
+          "path": "tech-talks/copilot-acp/README.md",
+          "exists": true,
+          "bytes": 20025,
+          "modified": "2026-10-08T14:59:45.570Z"
+        },
+        "recipe": {
+          "path": "tech-talks/copilot-acp/deck.recipe.yml",
+          "exists": true,
+          "bytes": 5589,
+          "modified": "2026-10-08T14:59:45.571Z"
+        },
+        "deck": {
+          "path": "slides/tech-talks/copilot-acp.md",
+          "exists": true,
+          "bytes": 18892,
+          "modified": "2026-10-08T14:59:45.448Z"
+        },
+        "agendaMarkdown": {
+          "path": "slides/companions/tech-talks/copilot-acp/agenda.md",
+          "exists": true,
+          "bytes": 379,
+          "modified": "2026-10-08T14:59:44.603Z"
+        },
+        "agendaHtml": {
+          "path": "slides/companions/tech-talks/copilot-acp/agenda.html",
+          "exists": true,
+          "bytes": 6036,
+          "modified": "2026-10-08T14:59:44.603Z"
+        },
+        "deckPdf": {
+          "path": "slides/companions/tech-talks/copilot-acp/deck.pdf",
+          "exists": true,
+          "bytes": 1415320,
+          "modified": "2026-10-08T14:59:44.613Z"
+        }
+      },
+      "errors": []
+    },
+    {
+      "slug": "copilot-app",
+      "title": "The GitHub Copilot App: Running a Fleet of Agents",
+      "status": "archived",
+      "portfolioState": "deployed",
+      "updated": "2026-09-16",
+      "section": "Delegate and Coordinate",
+      "audience": [
+        "developer",
+        "team-lead"
+      ],
+      "level": "advanced",
+      "duration": 45,
+      "format": "core-talk",
+      "decision": "When does work require fleet coordination across sessions?",
+      "prerequisites": [
+        "surfaces",
+        "copilot-web"
+      ],
+      "related": [
+        "agent-teams",
+        "loopy-agents"
+      ],
+      "deckSection": "Delegate and Coordinate",
+      "cataloged": false,
+      "files": {
+        "readme": {
+          "path": "tech-talks/copilot-app/README.md",
+          "exists": true,
+          "bytes": 33012,
+          "modified": "2026-10-08T14:59:45.573Z"
+        },
+        "recipe": {
+          "path": "tech-talks/copilot-app/deck.recipe.yml",
+          "exists": true,
+          "bytes": 16203,
+          "modified": "2026-10-08T14:59:45.575Z"
+        },
+        "deck": {
+          "path": "slides/tech-talks/copilot-app.md",
+          "exists": true,
+          "bytes": 29158,
+          "modified": "2026-10-08T14:59:45.449Z"
+        },
+        "agendaMarkdown": {
+          "path": "slides/companions/tech-talks/copilot-app/agenda.md",
+          "exists": true,
+          "bytes": 400,
+          "modified": "2026-10-08T14:59:44.616Z"
+        },
+        "agendaHtml": {
+          "path": "slides/companions/tech-talks/copilot-app/agenda.html",
+          "exists": true,
+          "bytes": 6061,
+          "modified": "2026-10-08T14:59:44.615Z"
+        },
+        "deckPdf": {
+          "path": "slides/companions/tech-talks/copilot-app/deck.pdf",
+          "exists": true,
+          "bytes": 1984471,
+          "modified": "2026-10-08T14:59:44.641Z"
+        }
+      },
+      "errors": []
+    },
+    {
+      "slug": "copilot-azure-mcp",
+      "title": "GitHub Copilot + Azure Skills Plugin: Conversational Azure Prototyping and Deployment",
+      "status": "active",
+      "portfolioState": "deployed",
+      "updated": "2026-09-16",
+      "section": "Extend and Embed",
+      "audience": [
+        "platform-engineer",
+        "architect",
+        "security"
+      ],
+      "level": "applied",
+      "duration": 45,
+      "format": "case-study",
+      "decision": "How should agents act on live domain state with least-privilege authority?",
+      "prerequisites": [
+        "copilot-cli"
+      ],
+      "related": [
+        "mcp-apps",
+        "copilot-with-foundry"
+      ],
+      "deckSection": "Extend and Embed",
+      "cataloged": true,
+      "files": {
+        "readme": {
+          "path": "tech-talks/copilot-azure-mcp/README.md",
+          "exists": true,
+          "bytes": 60658,
+          "modified": "2026-10-08T14:59:45.577Z"
+        },
+        "recipe": {
+          "path": "tech-talks/copilot-azure-mcp/deck.recipe.yml",
+          "exists": true,
+          "bytes": 9340,
+          "modified": "2026-10-08T14:59:45.577Z"
+        },
+        "deck": {
+          "path": "slides/tech-talks/copilot-azure-mcp.md",
+          "exists": true,
+          "bytes": 28030,
+          "modified": "2026-10-08T14:59:45.450Z"
+        },
+        "agendaMarkdown": {
+          "path": "slides/companions/tech-talks/copilot-azure-mcp/agenda.md",
+          "exists": true,
+          "bytes": 454,
+          "modified": "2026-10-08T14:59:44.643Z"
+        },
+        "agendaHtml": {
+          "path": "slides/companions/tech-talks/copilot-azure-mcp/agenda.html",
+          "exists": true,
+          "bytes": 6115,
+          "modified": "2026-10-08T14:59:44.642Z"
+        },
+        "deckPdf": {
+          "path": "slides/companions/tech-talks/copilot-azure-mcp/deck.pdf",
+          "exists": true,
+          "bytes": 2056359,
+          "modified": "2026-10-08T14:59:44.664Z"
+        }
+      },
+      "errors": []
+    },
+    {
+      "slug": "copilot-chat-internals",
+      "title": "Copilot Chat Internals: Debugging AI Interactions",
+      "status": "archived",
+      "portfolioState": "deployed",
+      "updated": "2026-09-15",
+      "section": "Choose and Configure",
+      "audience": [
+        "developer",
+        "team-lead",
+        "platform-engineer"
+      ],
+      "level": "applied",
+      "duration": 25,
+      "format": "clinic",
+      "decision": "How do I inspect the context Copilot used and diagnose unexpected behavior?",
+      "prerequisites": [
+        "copilot-primitives"
+      ],
+      "related": [
+        "copilot-memory",
+        "copilot-hooks"
+      ],
+      "deckSection": "Choose and Configure",
+      "cataloged": false,
+      "files": {
+        "readme": {
+          "path": "tech-talks/copilot-chat-internals/README.md",
+          "exists": true,
+          "bytes": 44284,
+          "modified": "2026-10-08T14:59:45.579Z"
+        },
+        "recipe": {
+          "path": "tech-talks/copilot-chat-internals/deck.recipe.yml",
+          "exists": true,
+          "bytes": 3492,
+          "modified": "2026-10-08T14:59:45.580Z"
+        },
+        "deck": {
+          "path": "slides/tech-talks/copilot-chat-internals.md",
+          "exists": true,
+          "bytes": 25445,
+          "modified": "2026-10-08T14:59:45.451Z"
+        },
+        "agendaMarkdown": {
+          "path": "slides/companions/tech-talks/copilot-chat-internals/agenda.md",
+          "exists": true,
+          "bytes": 423,
+          "modified": "2026-10-08T14:59:44.667Z"
+        },
+        "agendaHtml": {
+          "path": "slides/companions/tech-talks/copilot-chat-internals/agenda.html",
+          "exists": true,
+          "bytes": 6084,
+          "modified": "2026-10-08T14:59:44.666Z"
+        },
+        "deckPdf": {
+          "path": "slides/companions/tech-talks/copilot-chat-internals/deck.pdf",
+          "exists": true,
+          "bytes": 1741140,
+          "modified": "2026-10-08T14:59:44.682Z"
+        }
+      },
+      "errors": []
+    },
+    {
+      "slug": "copilot-cli",
+      "title": "GitHub Copilot CLI: AI at the Point of Work",
+      "status": "active",
+      "portfolioState": "deployed",
+      "updated": "2026-09-15",
+      "section": "Choose and Configure",
+      "audience": [
+        "developer",
+        "platform-engineer"
+      ],
+      "level": "applied",
+      "duration": 45,
+      "format": "core-talk",
+      "decision": "When is the terminal the correct Copilot control surface?",
+      "prerequisites": [
+        "surfaces"
+      ],
+      "related": [
+        "copilot-web",
+        "copilot-azure-mcp"
+      ],
+      "deckSection": "Choose and Configure",
+      "cataloged": true,
+      "files": {
+        "readme": {
+          "path": "tech-talks/copilot-cli/README.md",
+          "exists": true,
+          "bytes": 73907,
+          "modified": "2026-10-08T14:59:45.581Z"
+        },
+        "recipe": {
+          "path": "tech-talks/copilot-cli/deck.recipe.yml",
+          "exists": true,
+          "bytes": 6504,
+          "modified": "2026-10-08T14:59:45.583Z"
+        },
+        "deck": {
+          "path": "slides/tech-talks/copilot-cli.md",
+          "exists": true,
+          "bytes": 25966,
+          "modified": "2026-10-08T15:01:39.282Z"
+        },
+        "agendaMarkdown": {
+          "path": "slides/companions/tech-talks/copilot-cli/agenda.md",
+          "exists": true,
+          "bytes": 435,
+          "modified": "2026-10-08T15:19:53.595Z"
+        },
+        "agendaHtml": {
+          "path": "slides/companions/tech-talks/copilot-cli/agenda.html",
+          "exists": true,
+          "bytes": 5910,
+          "modified": "2026-10-08T15:20:06.776Z"
+        },
+        "deckPdf": {
+          "path": "slides/companions/tech-talks/copilot-cli/deck.pdf",
+          "exists": true,
+          "bytes": 3210684,
+          "modified": "2026-10-08T15:25:15.284Z"
+        }
+      },
+      "errors": []
+    },
+    {
+      "slug": "copilot-code-quality",
+      "title": "GitHub Code Quality: Turning Maintainability Into a Merge Gate",
+      "status": "archived",
+      "portfolioState": "deployed",
+      "updated": "2026-09-15",
+      "section": "Verify and Govern",
+      "audience": [
+        "developer",
+        "team-lead",
+        "platform-engineer"
+      ],
+      "level": "applied",
+      "duration": 40,
+      "format": "core-talk",
+      "decision": "Which deterministic quality signals should block merge?",
+      "prerequisites": [
+        "copilot-web"
+      ],
+      "related": [
+        "copilot-code-review",
+        "agentic-sdlc"
+      ],
+      "deckSection": "Verify and Govern",
+      "cataloged": false,
+      "files": {
+        "readme": {
+          "path": "tech-talks/copilot-code-quality/README.md",
+          "exists": true,
+          "bytes": 26188,
+          "modified": "2026-10-08T14:59:45.585Z"
+        },
+        "recipe": {
+          "path": "tech-talks/copilot-code-quality/deck.recipe.yml",
+          "exists": true,
+          "bytes": 7030,
+          "modified": "2026-10-08T14:59:45.588Z"
+        },
+        "deck": {
+          "path": "slides/tech-talks/copilot-code-quality.md",
+          "exists": true,
+          "bytes": 24373,
+          "modified": "2026-10-08T14:59:45.456Z"
+        },
+        "agendaMarkdown": {
+          "path": "slides/companions/tech-talks/copilot-code-quality/agenda.md",
+          "exists": true,
+          "bytes": 455,
+          "modified": "2026-10-08T14:59:44.716Z"
+        },
+        "agendaHtml": {
+          "path": "slides/companions/tech-talks/copilot-code-quality/agenda.html",
+          "exists": true,
+          "bytes": 6116,
+          "modified": "2026-10-08T14:59:44.715Z"
+        },
+        "deckPdf": {
+          "path": "slides/companions/tech-talks/copilot-code-quality/deck.pdf",
+          "exists": true,
+          "bytes": 1745997,
+          "modified": "2026-10-08T14:59:44.736Z"
+        }
+      },
+      "errors": []
+    },
+    {
+      "slug": "copilot-code-review",
+      "title": "GitHub Copilot Code Review: From Bottleneck to Accelerator",
+      "status": "archived",
+      "portfolioState": "deployed",
+      "updated": "2026-09-15",
+      "section": "Verify and Govern",
+      "audience": [
+        "developer",
+        "team-lead",
+        "security"
+      ],
+      "level": "applied",
+      "duration": 40,
+      "format": "core-talk",
+      "decision": "How should AI findings enter human review?",
+      "prerequisites": [
+        "copilot-web"
+      ],
+      "related": [
+        "copilot-code-quality",
+        "agentic-sdlc"
+      ],
+      "deckSection": "Verify and Govern",
+      "cataloged": false,
+      "files": {
+        "readme": {
+          "path": "tech-talks/copilot-code-review/README.md",
+          "exists": true,
+          "bytes": 68293,
+          "modified": "2026-10-08T14:59:45.591Z"
+        },
+        "recipe": {
+          "path": "tech-talks/copilot-code-review/deck.recipe.yml",
+          "exists": true,
+          "bytes": 5281,
+          "modified": "2026-10-08T14:59:45.593Z"
+        },
+        "deck": {
+          "path": "slides/tech-talks/copilot-code-review.md",
+          "exists": true,
+          "bytes": 25346,
+          "modified": "2026-10-08T14:59:45.457Z"
+        },
+        "agendaMarkdown": {
+          "path": "slides/companions/tech-talks/copilot-code-review/agenda.md",
+          "exists": true,
+          "bytes": 452,
+          "modified": "2026-10-08T14:59:44.738Z"
+        },
+        "agendaHtml": {
+          "path": "slides/companions/tech-talks/copilot-code-review/agenda.html",
+          "exists": true,
+          "bytes": 6113,
+          "modified": "2026-10-08T14:59:44.737Z"
+        },
+        "deckPdf": {
+          "path": "slides/companions/tech-talks/copilot-code-review/deck.pdf",
+          "exists": true,
+          "bytes": 1806968,
+          "modified": "2026-10-08T14:59:44.757Z"
+        }
+      },
+      "errors": []
+    },
+    {
+      "slug": "copilot-governance",
+      "title": "Useful Autonomy, Clear Authority: GitHub Copilot Governance",
+      "status": "active",
+      "portfolioState": "candidate",
+      "updated": "2026-09-18",
+      "section": "Verify and Govern",
+      "audience": [
+        "platform-engineer",
+        "security",
+        "architect"
+      ],
+      "level": "advanced",
+      "duration": 60,
+      "format": "core-talk",
+      "decision": "How can a platform team give developers useful Copilot autonomy while keeping execution and merge authority explicit?",
+      "prerequisites": [
+        "copilot-cli"
+      ],
+      "related": [
+        "copilot-hooks",
+        "enterprise-patterns",
+        "pr-trust-stack"
+      ],
+      "deckSection": "Verify and Govern",
+      "cataloged": true,
+      "files": {
+        "readme": {
+          "path": "tech-talks/copilot-governance/README.md",
+          "exists": true,
+          "bytes": 25900,
+          "modified": "2026-10-08T14:59:45.608Z"
+        },
+        "recipe": {
+          "path": "tech-talks/copilot-governance/deck.recipe.yml",
+          "exists": true,
+          "bytes": 5600,
+          "modified": "2026-10-08T14:59:45.609Z"
+        },
+        "deck": {
+          "path": "slides/tech-talks/copilot-governance.md",
+          "exists": true,
+          "bytes": 33314,
+          "modified": "2026-10-08T14:59:45.462Z"
+        },
+        "agendaMarkdown": {
+          "path": "slides/companions/tech-talks/copilot-governance/agenda.md",
+          "exists": true,
+          "bytes": 421,
+          "modified": "2026-10-08T14:59:44.760Z"
+        },
+        "agendaHtml": {
+          "path": "slides/companions/tech-talks/copilot-governance/agenda.html",
+          "exists": true,
+          "bytes": 5928,
+          "modified": "2026-10-08T14:59:44.759Z"
+        },
+        "deckPdf": {
+          "path": "slides/companions/tech-talks/copilot-governance/deck.pdf",
+          "exists": true,
+          "bytes": 2460038,
+          "modified": "2026-10-08T14:59:44.790Z"
+        }
+      },
+      "errors": []
+    },
+    {
+      "slug": "copilot-hooks",
+      "title": "GitHub Copilot Hooks: Programmable Governance for Agent Workflows",
+      "status": "active",
+      "portfolioState": "deployed",
+      "updated": "2026-09-16",
+      "section": "Verify and Govern",
+      "audience": [
+        "platform-engineer",
+        "security"
+      ],
+      "level": "advanced",
+      "duration": 45,
+      "format": "core-talk",
+      "decision": "Which agent actions should policy allow or deny at execution time?",
+      "prerequisites": [
+        "copilot-primitives"
+      ],
+      "related": [
+        "agentic-lifecycle",
+        "agentic-sdlc",
+        "enterprise-patterns"
+      ],
+      "deckSection": "Verify and Govern",
+      "cataloged": true,
+      "files": {
+        "readme": {
+          "path": "tech-talks/copilot-hooks/README.md",
+          "exists": true,
+          "bytes": 59346,
+          "modified": "2026-10-08T14:59:45.617Z"
+        },
+        "recipe": {
+          "path": "tech-talks/copilot-hooks/deck.recipe.yml",
+          "exists": true,
+          "bytes": 3499,
+          "modified": "2026-10-08T14:59:45.619Z"
+        },
+        "deck": {
+          "path": "slides/tech-talks/copilot-hooks.md",
+          "exists": true,
+          "bytes": 26103,
+          "modified": "2026-10-08T14:59:45.463Z"
+        },
+        "agendaMarkdown": {
+          "path": "slides/companions/tech-talks/copilot-hooks/agenda.md",
+          "exists": true,
+          "bytes": 442,
+          "modified": "2026-10-08T14:59:44.793Z"
+        },
+        "agendaHtml": {
+          "path": "slides/companions/tech-talks/copilot-hooks/agenda.html",
+          "exists": true,
+          "bytes": 6103,
+          "modified": "2026-10-08T14:59:44.792Z"
+        },
+        "deckPdf": {
+          "path": "slides/companions/tech-talks/copilot-hooks/deck.pdf",
+          "exists": true,
+          "bytes": 2024628,
+          "modified": "2026-10-08T14:59:44.813Z"
+        }
+      },
+      "errors": []
+    },
+    {
+      "slug": "copilot-memory",
+      "title": "Copilot Memory: Stateful AI That Remembers Your Preferences",
+      "status": "archived",
+      "portfolioState": "deployed",
+      "updated": "2026-09-15",
+      "section": "Choose and Configure",
+      "audience": [
+        "developer",
+        "team-lead"
+      ],
+      "level": "applied",
+      "duration": 25,
+      "format": "clinic",
+      "decision": "Where should durable personal knowledge live, and when should it expire?",
+      "prerequisites": [
+        "copilot-primitives"
+      ],
+      "related": [
+        "copilot-chat-internals",
+        "copilot-with-foundry"
+      ],
+      "deckSection": "Choose and Configure",
+      "cataloged": false,
+      "files": {
+        "readme": {
+          "path": "tech-talks/copilot-memory/README.md",
+          "exists": true,
+          "bytes": 36248,
+          "modified": "2026-10-08T14:59:45.620Z"
+        },
+        "recipe": {
+          "path": "tech-talks/copilot-memory/deck.recipe.yml",
+          "exists": true,
+          "bytes": 3549,
+          "modified": "2026-10-08T14:59:45.621Z"
+        },
+        "deck": {
+          "path": "slides/tech-talks/copilot-memory.md",
+          "exists": true,
+          "bytes": 21366,
+          "modified": "2026-10-08T14:59:45.464Z"
+        },
+        "agendaMarkdown": {
+          "path": "slides/companions/tech-talks/copilot-memory/agenda.md",
+          "exists": true,
+          "bytes": 460,
+          "modified": "2026-10-08T14:59:44.816Z"
+        },
+        "agendaHtml": {
+          "path": "slides/companions/tech-talks/copilot-memory/agenda.html",
+          "exists": true,
+          "bytes": 6121,
+          "modified": "2026-10-08T14:59:44.815Z"
+        },
+        "deckPdf": {
+          "path": "slides/companions/tech-talks/copilot-memory/deck.pdf",
+          "exists": true,
+          "bytes": 1699561,
+          "modified": "2026-10-08T14:59:44.841Z"
+        }
+      },
+      "errors": []
+    },
+    {
+      "slug": "copilot-plugins",
+      "title": "Copilot Plugins & APM: Composable AI Extensions",
+      "status": "active",
+      "portfolioState": "deployed",
+      "updated": "2026-08-10",
+      "section": "Extend and Embed",
+      "audience": [
+        "developer",
+        "platform-engineer"
+      ],
+      "level": "applied",
+      "duration": 25,
+      "format": "core-talk",
+      "decision": "How should Copilot extensions and configuration be packaged and distributed?",
+      "prerequisites": [
+        "copilot-primitives"
+      ],
+      "related": [
+        "copilot-sdk",
+        "mcp-apps"
+      ],
+      "deckSection": "Extend and Embed",
+      "cataloged": true,
+      "files": {
+        "readme": {
+          "path": "tech-talks/copilot-plugins/README.md",
+          "exists": true,
+          "bytes": 27555,
+          "modified": "2026-10-08T14:59:45.622Z"
+        },
+        "recipe": {
+          "path": "tech-talks/copilot-plugins/deck.recipe.yml",
+          "exists": true,
+          "bytes": 5118,
+          "modified": "2026-10-08T14:59:45.625Z"
+        },
+        "deck": {
+          "path": "slides/tech-talks/copilot-plugins.md",
+          "exists": true,
+          "bytes": 25027,
+          "modified": "2026-10-08T14:59:45.465Z"
+        },
+        "agendaMarkdown": {
+          "path": "slides/companions/tech-talks/copilot-plugins/agenda.md",
+          "exists": true,
+          "bytes": 421,
+          "modified": "2026-10-08T14:59:44.842Z"
+        },
+        "agendaHtml": {
+          "path": "slides/companions/tech-talks/copilot-plugins/agenda.html",
+          "exists": true,
+          "bytes": 6090,
+          "modified": "2026-10-08T14:59:44.842Z"
+        },
+        "deckPdf": {
+          "path": "slides/companions/tech-talks/copilot-plugins/deck.pdf",
+          "exists": true,
+          "bytes": 1985439,
+          "modified": "2026-10-08T14:59:44.863Z"
+        }
+      },
+      "errors": []
+    },
+    {
+      "slug": "copilot-primitives",
+      "title": "Copilot Configuration Primitives: Making AI Understand Your Codebase",
+      "status": "active",
+      "portfolioState": "deployed",
+      "updated": "2026-09-16",
+      "section": "Choose and Configure",
+      "audience": [
+        "developer",
+        "team-lead",
+        "platform-engineer"
+      ],
+      "level": "foundational",
+      "duration": 50,
+      "format": "core-talk",
+      "decision": "How should shared Copilot behavior be encoded?",
+      "prerequisites": [
+        "surfaces"
+      ],
+      "related": [
+        "agent-dev-loop",
+        "copilot-hooks",
+        "enterprise-patterns"
+      ],
+      "deckSection": "Choose and Configure",
+      "cataloged": true,
+      "files": {
+        "readme": {
+          "path": "tech-talks/copilot-primitives/README.md",
+          "exists": true,
+          "bytes": 43369,
+          "modified": "2026-10-08T15:02:45.095Z"
+        },
+        "recipe": {
+          "path": "tech-talks/copilot-primitives/deck.recipe.yml",
+          "exists": true,
+          "bytes": 3871,
+          "modified": "2026-10-08T14:59:45.628Z"
+        },
+        "deck": {
+          "path": "slides/tech-talks/copilot-primitives.md",
+          "exists": true,
+          "bytes": 36359,
+          "modified": "2026-10-08T15:01:39.288Z"
+        },
+        "agendaMarkdown": {
+          "path": "slides/companions/tech-talks/copilot-primitives/agenda.md",
+          "exists": true,
+          "bytes": 424,
+          "modified": "2026-10-08T15:19:53.607Z"
+        },
+        "agendaHtml": {
+          "path": "slides/companions/tech-talks/copilot-primitives/agenda.html",
+          "exists": true,
+          "bytes": 5899,
+          "modified": "2026-10-08T15:20:06.935Z"
+        },
+        "deckPdf": {
+          "path": "slides/companions/tech-talks/copilot-primitives/deck.pdf",
+          "exists": true,
+          "bytes": 2745832,
+          "modified": "2026-10-08T15:25:46.126Z"
+        }
+      },
+      "errors": []
+    },
+    {
+      "slug": "copilot-sdk",
+      "title": "GitHub Copilot SDK: Build AI-Powered Tools for Your Workflows",
+      "status": "active",
+      "portfolioState": "deployed",
+      "updated": "2026-09-16",
+      "section": "Extend and Embed",
+      "audience": [
+        "developer",
+        "platform-engineer",
+        "architect"
+      ],
+      "level": "advanced",
+      "duration": 45,
+      "format": "core-talk",
+      "decision": "When should an application own the agent runtime?",
+      "prerequisites": [
+        "surfaces"
+      ],
+      "related": [
+        "copilot-acp",
+        "mcp-apps",
+        "copilot-plugins"
+      ],
+      "deckSection": "Extend and Embed",
+      "cataloged": true,
+      "files": {
+        "readme": {
+          "path": "tech-talks/copilot-sdk/README.md",
+          "exists": true,
+          "bytes": 51448,
+          "modified": "2026-10-08T14:59:45.631Z"
+        },
+        "recipe": {
+          "path": "tech-talks/copilot-sdk/deck.recipe.yml",
+          "exists": true,
+          "bytes": 8174,
+          "modified": "2026-10-08T14:59:45.632Z"
+        },
+        "deck": {
+          "path": "slides/tech-talks/copilot-sdk.md",
+          "exists": true,
+          "bytes": 23675,
+          "modified": "2026-10-08T14:59:45.468Z"
+        },
+        "agendaMarkdown": {
+          "path": "slides/companions/tech-talks/copilot-sdk/agenda.md",
+          "exists": true,
+          "bytes": 420,
+          "modified": "2026-10-08T14:59:44.904Z"
+        },
+        "agendaHtml": {
+          "path": "slides/companions/tech-talks/copilot-sdk/agenda.html",
+          "exists": true,
+          "bytes": 6085,
+          "modified": "2026-10-08T14:59:44.903Z"
+        },
+        "deckPdf": {
+          "path": "slides/companions/tech-talks/copilot-sdk/deck.pdf",
+          "exists": true,
+          "bytes": 1871316,
+          "modified": "2026-10-08T14:59:44.923Z"
+        }
+      },
+      "errors": []
+    },
+    {
+      "slug": "copilot-web",
+      "title": "From Issue to Pull Request: GitHub Copilot's Coding Agent in Practice",
+      "status": "active",
+      "portfolioState": "deployed",
+      "updated": "2026-09-16",
+      "section": "Delegate and Coordinate",
+      "audience": [
+        "developer",
+        "team-lead"
+      ],
+      "level": "applied",
+      "duration": 40,
+      "format": "core-talk",
+      "decision": "What repository work is bounded enough to delegate through GitHub?",
+      "prerequisites": [
+        "agent-dev-loop"
+      ],
+      "related": [
+        "agentic-lifecycle",
+        "pr-trust-stack"
+      ],
+      "deckSection": "Delegate and Coordinate",
+      "cataloged": true,
+      "files": {
+        "readme": {
+          "path": "tech-talks/copilot-web/README.md",
+          "exists": true,
+          "bytes": 45804,
+          "modified": "2026-10-08T14:59:45.633Z"
+        },
+        "recipe": {
+          "path": "tech-talks/copilot-web/deck.recipe.yml",
+          "exists": true,
+          "bytes": 8295,
+          "modified": "2026-10-08T14:59:45.635Z"
+        },
+        "deck": {
+          "path": "slides/tech-talks/copilot-web.md",
+          "exists": true,
+          "bytes": 25503,
+          "modified": "2026-10-08T14:59:45.469Z"
+        },
+        "agendaMarkdown": {
+          "path": "slides/companions/tech-talks/copilot-web/agenda.md",
+          "exists": true,
+          "bytes": 422,
+          "modified": "2026-10-08T14:59:44.925Z"
+        },
+        "agendaHtml": {
+          "path": "slides/companions/tech-talks/copilot-web/agenda.html",
+          "exists": true,
+          "bytes": 6083,
+          "modified": "2026-10-08T14:59:44.925Z"
+        },
+        "deckPdf": {
+          "path": "slides/companions/tech-talks/copilot-web/deck.pdf",
+          "exists": true,
+          "bytes": 1937138,
+          "modified": "2026-10-08T14:59:44.941Z"
+        }
+      },
+      "errors": []
+    },
+    {
+      "slug": "copilot-with-foundry",
+      "title": "GitHub Copilot with Microsoft Foundry: Organizational Memory for Coding Agents",
+      "status": "active",
+      "portfolioState": "deployed",
+      "updated": "2026-07-24",
+      "section": "Extend and Embed",
+      "audience": [
+        "platform-engineer",
+        "architect",
+        "engineering-leader"
+      ],
+      "level": "advanced",
+      "duration": 45,
+      "format": "case-study",
+      "decision": "When is repository context insufficient for organizational knowledge?",
+      "prerequisites": [
+        "copilot-sdk"
+      ],
+      "related": [
+        "copilot-azure-mcp",
+        "enterprise-patterns"
+      ],
+      "deckSection": "Extend and Embed",
+      "cataloged": true,
+      "files": {
+        "readme": {
+          "path": "tech-talks/copilot-with-foundry/README.md",
+          "exists": true,
+          "bytes": 37537,
+          "modified": "2026-10-08T14:59:45.637Z"
+        },
+        "recipe": {
+          "path": "tech-talks/copilot-with-foundry/deck.recipe.yml",
+          "exists": true,
+          "bytes": 8310,
+          "modified": "2026-10-08T14:59:45.638Z"
+        },
+        "deck": {
+          "path": "slides/tech-talks/copilot-with-foundry.md",
+          "exists": true,
+          "bytes": 25170,
+          "modified": "2026-10-08T14:59:45.470Z"
+        },
+        "agendaMarkdown": {
+          "path": "slides/companions/tech-talks/copilot-with-foundry/agenda.md",
+          "exists": true,
+          "bytes": 483,
+          "modified": "2026-10-08T14:59:44.944Z"
+        },
+        "agendaHtml": {
+          "path": "slides/companions/tech-talks/copilot-with-foundry/agenda.html",
+          "exists": true,
+          "bytes": 6144,
+          "modified": "2026-10-08T14:59:44.943Z"
+        },
+        "deckPdf": {
+          "path": "slides/companions/tech-talks/copilot-with-foundry/deck.pdf",
+          "exists": true,
+          "bytes": 1995563,
+          "modified": "2026-10-08T14:59:44.966Z"
+        }
+      },
+      "errors": []
+    },
+    {
+      "slug": "enterprise-patterns",
+      "title": "Scaling GitHub Copilot Across Organizations",
+      "status": "active",
+      "portfolioState": "deployed",
+      "updated": "2026-09-16",
+      "section": "Verify and Govern",
+      "audience": [
+        "platform-engineer",
+        "security",
+        "architect",
+        "engineering-leader"
+      ],
+      "level": "strategic",
+      "duration": 60,
+      "format": "core-talk",
+      "decision": "How should organizations standardize, govern, and measure Copilot adoption?",
+      "prerequisites": [],
+      "related": [
+        "copilot-hooks",
+        "agentic-sdlc",
+        "copilot-plugins"
+      ],
+      "deckSection": "Verify and Govern",
+      "cataloged": true,
+      "files": {
+        "readme": {
+          "path": "tech-talks/enterprise-patterns/README.md",
+          "exists": true,
+          "bytes": 62869,
+          "modified": "2026-10-08T14:59:45.643Z"
+        },
+        "recipe": {
+          "path": "tech-talks/enterprise-patterns/deck.recipe.yml",
+          "exists": true,
+          "bytes": 6753,
+          "modified": "2026-10-08T14:59:45.645Z"
+        },
+        "deck": {
+          "path": "slides/tech-talks/enterprise-patterns.md",
+          "exists": true,
+          "bytes": 28482,
+          "modified": "2026-10-08T14:59:45.471Z"
+        },
+        "agendaMarkdown": {
+          "path": "slides/companions/tech-talks/enterprise-patterns/agenda.md",
+          "exists": true,
+          "bytes": 496,
+          "modified": "2026-10-08T14:59:44.968Z"
+        },
+        "agendaHtml": {
+          "path": "slides/companions/tech-talks/enterprise-patterns/agenda.html",
+          "exists": true,
+          "bytes": 6169,
+          "modified": "2026-10-08T14:59:44.967Z"
+        },
+        "deckPdf": {
+          "path": "slides/companions/tech-talks/enterprise-patterns/deck.pdf",
+          "exists": true,
+          "bytes": 2249791,
+          "modified": "2026-10-08T14:59:44.999Z"
+        }
+      },
+      "errors": []
+    },
+    {
+      "slug": "loopy-agents",
+      "title": "Loop Engineering: Designing Agent Systems That Run Reliably",
+      "status": "active",
+      "portfolioState": "deployed",
+      "updated": "2026-09-16",
+      "section": "Delegate and Coordinate",
+      "audience": [
+        "platform-engineer",
+        "architect",
+        "security"
+      ],
+      "level": "advanced",
+      "duration": 45,
+      "format": "core-talk",
+      "decision": "How should an autonomous loop verify progress and stop safely?",
+      "prerequisites": [
+        "agent-teams"
+      ],
+      "related": [
+        "agentic-lifecycle",
+        "copilot-hooks",
+        "agentic-sdlc"
+      ],
+      "deckSection": "Delegate and Coordinate",
+      "cataloged": true,
+      "files": {
+        "readme": {
+          "path": "tech-talks/loopy-agents/README.md",
+          "exists": true,
+          "bytes": 59599,
+          "modified": "2026-10-08T14:59:45.659Z"
+        },
+        "recipe": {
+          "path": "tech-talks/loopy-agents/deck.recipe.yml",
+          "exists": true,
+          "bytes": 7746,
+          "modified": "2026-10-08T14:59:45.659Z"
+        },
+        "deck": {
+          "path": "slides/tech-talks/loopy-agents.md",
+          "exists": true,
+          "bytes": 28222,
+          "modified": "2026-10-08T14:59:45.476Z"
+        },
+        "agendaMarkdown": {
+          "path": "slides/companions/tech-talks/loopy-agents/agenda.md",
+          "exists": true,
+          "bytes": 402,
+          "modified": "2026-10-08T14:59:45.090Z"
+        },
+        "agendaHtml": {
+          "path": "slides/companions/tech-talks/loopy-agents/agenda.html",
+          "exists": true,
+          "bytes": 6063,
+          "modified": "2026-10-08T14:59:45.090Z"
+        },
+        "deckPdf": {
+          "path": "slides/companions/tech-talks/loopy-agents/deck.pdf",
+          "exists": true,
+          "bytes": 2053042,
+          "modified": "2026-10-08T14:59:45.111Z"
+        }
+      },
+      "errors": []
+    },
+    {
+      "slug": "mcp-apps",
+      "title": "MCP Apps: Rich Interactive UI in Chat",
+      "status": "active",
+      "portfolioState": "deployed",
+      "updated": "2026-02-01",
+      "section": "Extend and Embed",
+      "audience": [
+        "developer",
+        "platform-engineer"
+      ],
+      "level": "advanced",
+      "duration": 40,
+      "format": "clinic",
+      "decision": "When does an MCP response need an interactive interface?",
+      "prerequisites": [
+        "copilot-sdk"
+      ],
+      "related": [
+        "copilot-acp",
+        "copilot-azure-mcp"
+      ],
+      "deckSection": "Extend and Embed",
+      "cataloged": true,
+      "files": {
+        "readme": {
+          "path": "tech-talks/mcp-apps/README.md",
+          "exists": true,
+          "bytes": 40716,
+          "modified": "2026-10-08T14:59:45.661Z"
+        },
+        "recipe": {
+          "path": "tech-talks/mcp-apps/deck.recipe.yml",
+          "exists": true,
+          "bytes": 6475,
+          "modified": "2026-10-08T14:59:45.662Z"
+        },
+        "deck": {
+          "path": "slides/tech-talks/mcp-apps.md",
+          "exists": true,
+          "bytes": 27725,
+          "modified": "2026-10-08T14:59:45.477Z"
+        },
+        "agendaMarkdown": {
+          "path": "slides/companions/tech-talks/mcp-apps/agenda.md",
+          "exists": true,
+          "bytes": 364,
+          "modified": "2026-10-08T14:59:45.114Z"
+        },
+        "agendaHtml": {
+          "path": "slides/companions/tech-talks/mcp-apps/agenda.html",
+          "exists": true,
+          "bytes": 6025,
+          "modified": "2026-10-08T14:59:45.113Z"
+        },
+        "deckPdf": {
+          "path": "slides/companions/tech-talks/mcp-apps/deck.pdf",
+          "exists": true,
+          "bytes": 2165713,
+          "modified": "2026-10-08T14:59:45.133Z"
+        }
+      },
+      "errors": []
+    },
+    {
+      "slug": "multi-agent-coordination",
+      "title": "Multi-Agent Coordination: Split, Steer, Integrate",
+      "status": "active",
+      "portfolioState": "deployed",
+      "updated": "2026-09-16",
+      "section": "Delegate and Coordinate",
+      "audience": [
+        "developer",
+        "team-lead",
+        "architect",
+        "platform-engineer"
+      ],
+      "level": "advanced",
+      "duration": 55,
+      "format": "core-talk",
+      "decision": "When should work be split across agents, and how should isolated workstreams be steered and integrated?",
+      "prerequisites": [
+        "agent-dev-loop"
+      ],
+      "related": [
+        "agent-dev-loop",
+        "agentic-lifecycle",
+        "agentic-sdlc",
+        "copilot-primitives"
+      ],
+      "deckSection": "Delegate and Coordinate",
+      "cataloged": true,
+      "files": {
+        "readme": {
+          "path": "tech-talks/multi-agent-coordination/README.md",
+          "exists": true,
+          "bytes": 26264,
+          "modified": "2026-10-08T14:59:45.664Z"
+        },
+        "recipe": {
+          "path": "tech-talks/multi-agent-coordination/deck.recipe.yml",
+          "exists": true,
+          "bytes": 4251,
+          "modified": "2026-10-08T14:59:45.665Z"
+        },
+        "deck": {
+          "path": "slides/tech-talks/multi-agent-coordination.md",
+          "exists": true,
+          "bytes": 24811,
+          "modified": "2026-10-08T14:59:45.478Z"
+        },
+        "agendaMarkdown": {
+          "path": "slides/companions/tech-talks/multi-agent-coordination/agenda.md",
+          "exists": true,
+          "bytes": 486,
+          "modified": "2026-10-08T14:59:45.135Z"
+        },
+        "agendaHtml": {
+          "path": "slides/companions/tech-talks/multi-agent-coordination/agenda.html",
+          "exists": true,
+          "bytes": 6139,
+          "modified": "2026-10-08T14:59:45.134Z"
+        },
+        "deckPdf": {
+          "path": "slides/companions/tech-talks/multi-agent-coordination/deck.pdf",
+          "exists": true,
+          "bytes": 1947941,
+          "modified": "2026-10-08T14:59:45.151Z"
+        }
+      },
+      "errors": []
+    },
+    {
+      "slug": "pr-trust-stack",
+      "title": "PR Trust Stack: Evidence and Authority Before Merge",
+      "status": "active",
+      "portfolioState": "deployed",
+      "updated": "2026-09-15",
+      "section": "Verify and Govern",
+      "audience": [
+        "developer",
+        "team-lead",
+        "platform-engineer",
+        "security"
+      ],
+      "level": "applied",
+      "duration": 50,
+      "format": "core-talk",
+      "decision": "Which signals should advise, which should block, and who accepts residual risk before merge?",
+      "prerequisites": [
+        "copilot-web"
+      ],
+      "related": [
+        "copilot-hooks",
+        "agentic-sdlc"
+      ],
+      "deckSection": "Verify and Govern",
+      "cataloged": true,
+      "files": {
+        "readme": {
+          "path": "tech-talks/pr-trust-stack/README.md",
+          "exists": true,
+          "bytes": 28735,
+          "modified": "2026-10-08T14:59:45.668Z"
+        },
+        "recipe": {
+          "path": "tech-talks/pr-trust-stack/deck.recipe.yml",
+          "exists": true,
+          "bytes": 4206,
+          "modified": "2026-10-08T14:59:45.670Z"
+        },
+        "deck": {
+          "path": "slides/tech-talks/pr-trust-stack.md",
+          "exists": true,
+          "bytes": 25074,
+          "modified": "2026-10-08T14:59:45.478Z"
+        },
+        "agendaMarkdown": {
+          "path": "slides/companions/tech-talks/pr-trust-stack/agenda.md",
+          "exists": true,
+          "bytes": 387,
+          "modified": "2026-10-08T14:59:45.154Z"
+        },
+        "agendaHtml": {
+          "path": "slides/companions/tech-talks/pr-trust-stack/agenda.html",
+          "exists": true,
+          "bytes": 6048,
+          "modified": "2026-10-08T14:59:45.153Z"
+        },
+        "deckPdf": {
+          "path": "slides/companions/tech-talks/pr-trust-stack/deck.pdf",
+          "exists": true,
+          "bytes": 1894775,
+          "modified": "2026-10-08T14:59:45.171Z"
+        }
+      },
+      "errors": []
+    },
+    {
+      "slug": "surfaces",
+      "title": "Which Copilot Where? A Practical Surface Router",
+      "status": "active",
+      "portfolioState": "deployed",
+      "updated": "2026-09-16",
+      "section": "Choose and Configure",
+      "audience": [
+        "developer",
+        "team-lead",
+        "platform-engineer",
+        "architect"
+      ],
+      "level": "foundational",
+      "duration": 45,
+      "format": "core-talk",
+      "decision": "Which Copilot surface fits this work, context, and reviewer?",
+      "prerequisites": [],
+      "related": [
+        "copilot-cli",
+        "copilot-web",
+        "multi-agent-coordination"
+      ],
+      "deckSection": "Choose and Configure",
+      "cataloged": true,
+      "files": {
+        "readme": {
+          "path": "tech-talks/surfaces/README.md",
+          "exists": true,
+          "bytes": 34032,
+          "modified": "2026-10-08T14:59:45.678Z"
+        },
+        "recipe": {
+          "path": "tech-talks/surfaces/deck.recipe.yml",
+          "exists": true,
+          "bytes": 4596,
+          "modified": "2026-10-08T14:59:45.679Z"
+        },
+        "deck": {
+          "path": "slides/tech-talks/surfaces.md",
+          "exists": true,
+          "bytes": 26398,
+          "modified": "2026-10-08T14:59:45.481Z"
+        },
+        "agendaMarkdown": {
+          "path": "slides/companions/tech-talks/surfaces/agenda.md",
+          "exists": true,
+          "bytes": 399,
+          "modified": "2026-10-08T14:59:45.174Z"
+        },
+        "agendaHtml": {
+          "path": "slides/companions/tech-talks/surfaces/agenda.html",
+          "exists": true,
+          "bytes": 6052,
+          "modified": "2026-10-08T14:59:45.173Z"
+        },
+        "deckPdf": {
+          "path": "slides/companions/tech-talks/surfaces/deck.pdf",
+          "exists": true,
+          "bytes": 2105832,
+          "modified": "2026-10-08T14:59:45.194Z"
+        }
+      },
+      "errors": []
+    },
+    {
+      "slug": "vscode-latest",
+      "title": "VS Code Copilot Through 1.139: Agent Infrastructure, Open Models, and Closed-Loop Delivery",
+      "status": "active",
+      "portfolioState": "deployed",
+      "updated": "2026-09-25",
+      "section": "Choose and Configure",
+      "audience": [
+        "developer",
+        "team-lead"
+      ],
+      "level": "applied",
+      "duration": 50,
+      "format": "release-brief",
+      "decision": "Which recent VS Code Copilot changes alter a durable workflow decision?",
+      "prerequisites": [
+        "surfaces"
+      ],
+      "related": [
+        "copilot-primitives",
+        "agent-dev-loop",
+        "multi-agent-coordination"
+      ],
+      "deckSection": "Choose and Configure",
+      "cataloged": true,
+      "files": {
+        "readme": {
+          "path": "tech-talks/vscode-latest/README.md",
+          "exists": true,
+          "bytes": 45682,
+          "modified": "2026-10-08T14:59:45.686Z"
+        },
+        "recipe": {
+          "path": "tech-talks/vscode-latest/deck.recipe.yml",
+          "exists": true,
+          "bytes": 15636,
+          "modified": "2026-10-08T14:59:45.689Z"
+        },
+        "deck": {
+          "path": "slides/tech-talks/vscode-latest.md",
+          "exists": true,
+          "bytes": 26610,
+          "modified": "2026-10-08T14:59:45.483Z"
+        },
+        "agendaMarkdown": {
+          "path": "slides/companions/tech-talks/vscode-latest/agenda.md",
+          "exists": true,
+          "bytes": 506,
+          "modified": "2026-10-08T14:59:45.197Z"
+        },
+        "agendaHtml": {
+          "path": "slides/companions/tech-talks/vscode-latest/agenda.html",
+          "exists": true,
+          "bytes": 6167,
+          "modified": "2026-10-08T14:59:45.196Z"
+        },
+        "deckPdf": {
+          "path": "slides/companions/tech-talks/vscode-latest/deck.pdf",
+          "exists": true,
+          "bytes": 2076245,
+          "modified": "2026-10-08T14:59:45.213Z"
+        }
+      },
+      "errors": []
+    }
+  ]
+}

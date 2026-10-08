@@ -9,575 +9,461 @@ info: |
 drawings:
   persist: false
 transition: slide-left
-title: Copilot Code Review
-module: tech-talks/copilot-code-review
+title: GitHub Copilot Code Review
 mdc: true
-status: active
-updated: 2026-02-17
+section: Verify and Govern
+status: archived
+updated: 2026-09-15
 ---
 
-<div class="h-full flex flex-col items-center justify-center relative overflow-hidden">
-<div class="absolute inset-0 bg-gradient-to-br from-cyan-900/20 via-blue-900/10 to-indigo-900/20"></div>
-<div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-gradient-to-r from-cyan-500/20 via-blue-500/20 to-indigo-500/20 rounded-full blur-3xl"></div>
-<div class="relative z-10">
-<div class="absolute inset-0 blur-2xl opacity-50">
-<img src="./sdp-logo.png" class="w-64" alt="" />
-</div>
-<img src="./sdp-logo.png" class="w-64 relative" alt="SDP Logo" />
-</div>
-<h1 class="!text-5xl !font-bold !mt-8 bg-gradient-to-r from-cyan-400 via-blue-400 to-indigo-400 bg-clip-text text-transparent relative z-10">
-Copilot Code Review
-</h1>
-<div class="mt-4 relative z-10">
-<span class="px-6 py-2 bg-gradient-to-r from-cyan-600/80 to-blue-600/80 rounded-full text-white text-xl font-medium shadow-lg shadow-cyan-500/25">
-Accelerating PR Velocity & Maximizing ROI
-</span>
-</div>
-<div class="mt-8 text-lg opacity-70 relative z-10">
-⏰ <strong>30-40 minutes</strong> · Developers · DevOps Teams · Engineering Managers
-</div>
-<div class="mt-6 w-32 h-1 bg-gradient-to-r from-transparent via-cyan-400 to-transparent rounded-full relative z-10"></div>
-</div>
+<script setup>
+import TitleSlide from './components/structure/TitleSlide.vue'
+import CoreQuestionSlide from './components/structure/CoreQuestionSlide.vue'
+import TocSlide from './components/structure/TocSlide.vue'
+import SectionOpenerSlide from './components/structure/SectionOpenerSlide.vue'
+import BeforeAfterSlide from './components/structure/BeforeAfterSlide.vue'
+import WhatYouCanDoTodaySlide from './components/structure/WhatYouCanDoTodaySlide.vue'
+import ReferencesSlide from './components/structure/ReferencesSlide.vue'
+import ThankYouSlide from './components/structure/ThankYouSlide.vue'
+import WorkflowShowdownStepsSlide from './components/WorkflowShowdownStepsSlide.vue'
+import TwoColPairedConceptsSlide from './components/TwoColPairedConceptsSlide.vue'
+import CodeWithFeaturesSlide from './components/CodeWithFeaturesSlide.vue'
+import FourCardGridSlide from './components/FourCardGridSlide.vue'
+import FrameworkMappingRowsSlide from './components/FrameworkMappingRowsSlide.vue'
+import ThreeColumnCardSlide from './components/ThreeColumnCardSlide.vue'
+import MaturityJourneyRoadmapSlide from './components/MaturityJourneyRoadmapSlide.vue'
+import HeroStatSlide from './components/HeroStatSlide.vue'
+import BeforeAfterMetricsSlide from './components/BeforeAfterMetricsSlide.vue'
+import AITerminalTranscriptSlide from './components/AITerminalTranscriptSlide.vue'
+</script>
 
----
-
-# The Central Question
-
-<div class="h-full flex items-center justify-center">
-<div class="max-w-4xl">
-<div class="text-6xl text-center mb-8">🤔</div>
-<div class="text-4xl font-bold text-center bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent mb-6">
-"How can Copilot Code Review reduce PR review time by 40-60% while delivering measurable ROI?"
-</div>
-<div class="text-xl text-center opacity-80 mt-8">
-PRs sit for days. Reviewers are overwhelmed. Quality vs. speed is a false choice.
-</div>
-</div>
-</div>
-
----
-layout: center
----
-
-# 📖 Navigate by Section
-
-<div class="grid grid-cols-2 gap-6 mt-8">
-<div @click="$nav.go(5)" class="cursor-pointer p-6 bg-cyan-900/40 rounded-lg border-2 border-cyan-500 hover:bg-cyan-900/60 transition-all">
-<div class="text-2xl mb-2">⚙️</div>
-<div class="text-lg font-bold text-cyan-300">Setup & Configuration</div>
-<div class="text-sm text-gray-300 mt-1">From zero to first review in 15 min</div>
-<div class="text-xs text-gray-400 mt-2">YAML config + status checks</div>
-</div>
-<div @click="$nav.go(8)" class="cursor-pointer p-6 bg-blue-900/40 rounded-lg border-2 border-blue-500 hover:bg-blue-900/60 transition-all">
-<div class="text-2xl mb-2">🔒</div>
-<div class="text-lg font-bold text-blue-300">Compliance & Security</div>
-<div class="text-sm text-gray-300 mt-1">Custom rulesets for HIPAA, PCI, SOC2</div>
-<div class="text-xs text-gray-400 mt-2">Automated audit trails</div>
-</div>
-<div @click="$nav.go(11)" class="cursor-pointer p-6 bg-indigo-900/40 rounded-lg border-2 border-indigo-500 hover:bg-indigo-900/60 transition-all">
-<div class="text-2xl mb-2">📊</div>
-<div class="text-lg font-bold text-indigo-300">ROI Metrics</div>
-<div class="text-sm text-gray-300 mt-1">Track savings and prove business value</div>
-<div class="text-xs text-gray-400 mt-2">$15K+ monthly savings / 10-person team</div>
-</div>
-<div @click="$nav.go(14)" class="cursor-pointer p-6 bg-purple-900/40 rounded-lg border-2 border-purple-500 hover:bg-purple-900/60 transition-all">
-<div class="text-2xl mb-2">🚀</div>
-<div class="text-lg font-bold text-purple-300">Team Adoption</div>
-<div class="text-sm text-gray-300 mt-1">Phased rollout and best practices</div>
-<div class="text-xs text-gray-400 mt-2">Avoid alert fatigue pitfalls</div>
-</div>
-</div>
-
-<div class="mt-8 p-4 bg-gradient-to-r from-cyan-900/30 to-purple-900/30 rounded-lg text-center">
-<span class="text-white font-bold">💡 Click any section to jump directly there</span>
-</div>
+# Title
+<TitleSlide
+  title="GitHub Copilot Code Review"
+  subtitle="From Bottleneck to Accelerator"
+  tagline="Reduce PR review time while maintaining code quality and compliance"
+  meta="35-40 min | Engineering Managers · DevOps Leads · Development Teams"
+/>
 
 ---
 
-# ❌ The Problem: PR Review Bottleneck
-
-<div class="grid grid-cols-2 gap-6 mt-6">
-<div class="p-4 bg-red-900/30 rounded-lg border-l-4 border-red-500">
-<div class="text-lg font-bold text-red-300 mb-3">⏳ Capacity Crunch</div>
-<div class="text-sm text-gray-300 space-y-2">
-<div>• 50-100+ PRs/week with 2-3 senior reviewers</div>
-<div>• Average <strong>3.2 days</strong> to merge</div>
-<div>• 30% of senior dev time spent reviewing</div>
-</div>
-</div>
-<div class="p-4 bg-red-900/30 rounded-lg border-l-4 border-red-500">
-<div class="text-lg font-bold text-red-300 mb-3">💸 Hidden Costs</div>
-<div class="text-sm text-gray-300 space-y-2">
-<div>• 15-20 min context-switch per PR</div>
-<div>• Security issues missed 40-60% under pressure</div>
-<div>• New devs wait 6-8 weeks to learn standards</div>
-</div>
-</div>
-</div>
-
-<div class="mt-6 p-4 bg-gradient-to-r from-red-900/40 to-gray-800 rounded-lg text-center">
-<span class="text-white font-bold">⚠️ Organizations face a painful choice: sacrifice speed for quality, or ship fast and accept risk</span>
-</div>
-
----
-layout: center
-name: setup
----
-
-# ⚙️ Setup & Configuration
-
-<div class="text-5xl font-bold bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">
-From Zero to First Review
-</div>
-
-<div class="mt-6 text-xl opacity-80">
-15 minutes to automated code review
-</div>
-
-<div class="mt-8 text-sm opacity-60">
-Section 1 of 4 · Basic config to required status checks
-</div>
+# Core Question
+<CoreQuestionSlide
+  question="How can Copilot Code Review reduce PR review time while maintaining quality and compliance?"
+  subtext="68% of developers cite code review as a major bottleneck"
+  highlight="Let AI handle the mechanical checks so humans own architecture and strategy"
+  :cards='[
+    { icon: "👩‍💻", title: "Developer", description: "Immediate feedback without waiting days for human review" },
+    { icon: "🏗️", title: "Engineering Manager", description: "Measure cycle-time reduction and ROI with real PR analytics" },
+    { icon: "🔒", title: "Security or Platform Team", description: "Enforce compliance rules consistently across every PR" },
+    { title: "3.2 days", description: "Average PR merge time — most of it is waiting, not reviewing" },
+    { title: "30% of time", description: "Senior developers spend on reviews instead of building features" },
+    { title: "40-60%", description: "Reduction in PR review cycle time with Copilot Code Review" }
+  ]'
+/>
 
 ---
 
-# ⚙️ Quick Start: 3 Ways to Activate
-
-<div class="grid grid-cols-3 gap-4 mt-6">
-<div class="p-4 bg-cyan-900/40 rounded-lg border-2 border-cyan-500">
-<div class="text-2xl mb-2">👤</div>
-<div class="text-sm font-bold text-cyan-300">Manual Request</div>
-<div class="text-xs text-gray-300 mt-2 space-y-1">
-<div>• Open any PR on GitHub</div>
-<div>• Select <strong>Copilot</strong> from Reviewers</div>
-<div>• Review arrives in ~30 seconds</div>
-</div>
-</div>
-<div class="p-4 bg-blue-900/40 rounded-lg border-2 border-blue-500">
-<div class="text-2xl mb-2">📋</div>
-<div class="text-sm font-bold text-blue-300">Repo Ruleset</div>
-<div class="text-xs text-gray-300 mt-2 space-y-1">
-<div>• Settings → Rules → Rulesets</div>
-<div>• New branch ruleset</div>
-<div>• Enable "Auto request Copilot review"</div>
-</div>
-</div>
-<div class="p-4 bg-indigo-900/40 rounded-lg border-2 border-indigo-500">
-<div class="text-2xl mb-2">🏢</div>
-<div class="text-sm font-bold text-indigo-300">Org-Wide Ruleset</div>
-<div class="text-xs text-gray-300 mt-2 space-y-1">
-<div>• Org Settings → Repository → Rulesets</div>
-<div>• Target repos by name pattern</div>
-<div>• Enforces across all matching repos</div>
-</div>
-</div>
-</div>
-
-<div class="mt-4 p-3 bg-gradient-to-r from-cyan-900/30 to-indigo-900/30 rounded-lg text-center">
-<span class="text-white text-sm">📖 <a href="https://docs.github.com/en/copilot/how-tos/use-copilot-agents/request-a-code-review/configure-automatic-review" class="text-cyan-300 underline">Configure automatic review docs</a> · Customize via <code>.github/copilot-instructions.md</code></span>
-</div>
+# Table of Contents
+<TocSlide
+  :sections='[
+    { icon: "⚡", title: "Configuration and Quick Start", subtitle: "Zero to first review in 5 minutes", blurb: "Rulesets, Lite/Balanced effort, org defaults, custom instructions", slide: 4 },
+    { icon: "🎯", title: "Best Practices and Adoption", subtitle: "Six capabilities, hybrid analysis, phased rollout", blurb: "Equip teams to own the rollout and frame it for stakeholders", slide: 9 },
+    { icon: "📊", title: "ROI and Business Impact", subtitle: "Interactive calculator, cycle-time metrics", blurb: "Turn real PR analytics into exec-ready savings numbers", slide: 13 },
+    { icon: "🔒", title: "Compliance Patterns", subtitle: "HIPAA, PCI-DSS, SOC2 instruction files", blurb: "Encode regulatory requirements with a full audit trail", slide: 18 }
+  ]'
+/>
 
 ---
 
-# 🏗️ Architecture: How It Works
-
-<div class="flex flex-col items-center gap-3 mt-4">
-<div class="p-3 bg-cyan-900/40 rounded-lg border-2 border-cyan-500 w-80 text-center">
-<div class="text-sm font-bold text-cyan-300">PR Event (create / update / @mention)</div>
-</div>
-<div class="text-2xl text-gray-400">↓</div>
-<div class="grid grid-cols-3 gap-3 w-full">
-<div class="p-3 bg-blue-900/40 rounded-lg border border-blue-500 text-center">
-<div class="text-xs font-bold text-blue-300">🔍 Static Analysis</div>
-<div class="text-xs text-gray-400 mt-1">Linting, patterns</div>
-</div>
-<div class="p-3 bg-indigo-900/40 rounded-lg border border-indigo-500 text-center">
-<div class="text-xs font-bold text-indigo-300">🌳 AST Parsing</div>
-<div class="text-xs text-gray-400 mt-1">Structural issues</div>
-</div>
-<div class="p-3 bg-purple-900/40 rounded-lg border border-purple-500 text-center">
-<div class="text-xs font-bold text-purple-300">🧠 LLM Semantic</div>
-<div class="text-xs text-gray-400 mt-1">Contextual understanding</div>
-</div>
-</div>
-<div class="text-2xl text-gray-400">↓</div>
-<div class="p-3 bg-green-900/40 rounded-lg border-2 border-green-500 w-96 text-center">
-<div class="text-sm font-bold text-green-300">Inline PR Comments · Categorized by Severity</div>
-</div>
-</div>
-
-<div class="mt-4 p-3 bg-gradient-to-r from-cyan-600/80 to-blue-600/80 rounded-lg text-center">
-<span class="text-white font-bold text-sm">Full repo context: commit history, file relationships, test suites</span>
-</div>
-
----
-layout: center
-name: compliance
----
-
-# 🔒 Compliance & Security
-
-<div class="text-5xl font-bold bg-gradient-to-r from-blue-400 to-indigo-400 bg-clip-text text-transparent">
-Custom Rulesets for Your Organization
-</div>
-
-<div class="mt-6 text-xl opacity-80">
-HIPAA · PCI-DSS · SOC2 · Custom Standards
-</div>
-
-<div class="mt-8 text-sm opacity-60">
-Section 2 of 4 · Automated compliance enforcement
-</div>
+# Part 1 — Configuration and Quick Start
+<SectionOpenerSlide
+  :partNumber="1"
+  title="Configuration and Quick Start"
+  subtitle="5-minute setup win — Lite and Balanced effort levels, org defaults, per-review choice, visible PR timeline signals"
+  :cards='[
+    { icon: "⚡", title: "5-Minute Setup", blurb: "Zero config — Ruleset UI only" },
+    { icon: "🎚️", title: "Lite vs Balanced", blurb: "Match review depth to change risk" },
+    { icon: "📋", title: "Custom Instructions", blurb: "Encode team standards in Markdown" }
+  ]'
+  :terminal='{ context: "Enable via Rulesets — no YAML required", detail: "First automated review in under 5 minutes" }'
+/>
 
 ---
 
-# 🔒 Custom Review Instructions
-
-<div class="grid grid-cols-2 gap-6 mt-4">
-<div>
-
-```markdown
-<!-- .github/copilot-instructions.md -->
-
-When performing a code review, apply the
-checks in /security/security-checklist.md.
-
-When performing a code review, ensure all
-API endpoints use try/catch with structured
-error logging and appropriate status codes.
-
-When performing a code review, verify that
-PII fields (email, SSN, DOB) are encrypted
-using approved libraries before storage.
-
-When performing a code review, flag any
-multi-table database operations that lack
-transaction wrappers.
-```
-
-</div>
-<div class="space-y-3">
-<div class="p-3 bg-red-900/30 rounded-lg border-l-4 border-red-500">
-<div class="text-sm font-bold text-red-300">🛡️ PII Protection</div>
-<div class="text-xs text-gray-300 mt-1">Natural language rules Copilot applies to every review</div>
-</div>
-<div class="p-3 bg-yellow-900/30 rounded-lg border-l-4 border-yellow-500">
-<div class="text-sm font-bold text-yellow-300">⚡ Error Handling</div>
-<div class="text-xs text-gray-300 mt-1">Reference external checklists for detailed standards</div>
-</div>
-<div class="p-3 bg-orange-900/30 rounded-lg border-l-4 border-orange-500">
-<div class="text-sm font-bold text-orange-300">📁 Path-Specific Rules</div>
-<div class="text-xs text-gray-300 mt-1">Use .github/instructions/**/*.instructions.md for scoped rules</div>
-</div>
-</div>
-</div>
-
-<div class="mt-4 p-3 bg-gradient-to-r from-cyan-900/30 to-indigo-900/30 rounded-lg text-center">
-<span class="text-white text-sm">📖 <a href="https://docs.github.com/en/copilot/how-tos/use-copilot-agents/request-a-code-review/use-code-review#customizing-copilots-reviews-with-custom-instructions" class="text-cyan-300 underline">Customizing Copilot reviews docs</a></span>
-</div>
+# Manual Review vs. Copilot Review
+<WorkflowShowdownStepsSlide
+  :partNumber="1"
+  pillIcon="⚡"
+  pillLabel="Quick Start: The Shift"
+  title="Manual Review Workflow vs. Copilot-Automated Review"
+  subtitle="From days waiting to minutes reviewing"
+  leftLabel="Manual Review Workflow"
+  rightLabel="With Copilot Code Review"
+  :steps='[
+    { left: { label: "Submit PR", note: "Wait for reviewer availability" }, right: { label: "Submit PR", note: "Copilot reviews automatically on push" } },
+    { left: { label: "Wait 3+ days", note: "Reviewer has 15 other PRs queued" }, right: { label: "Feedback in 2 minutes", note: "Inline comments with explanations and fixes" } },
+    { left: { label: "Context lost", note: "Reviewer rebuilds context: 15-20 min" }, right: { label: "Address findings", note: "Critical and high severity resolved first" } },
+    { left: { label: "Re-review loop", note: "Repeat until findings cleared" }, right: { label: "Human review", note: "Reviewer focuses on business logic only" } }
+  ]'
+  :outcomeLeft='{ icon: "⏳", label: "3+ days — PR waits for available reviewer capacity" }'
+  :outcomeRight='{ icon: "✅", label: "2 minutes — first feedback on push" }'
+  summaryMetric="3+ days waiting → 2 minutes for first review"
+  :progressDots='{ current: 1, total: 4, activeColor: "bg-cyan-400 shadow-lg shadow-cyan-500/50" }'
+/>
 
 ---
 
-# 🔒 Security Detection Capabilities
-
-<div class="grid grid-cols-3 gap-4 mt-6">
-<div class="p-3 bg-red-900/30 rounded-lg text-center">
-<div class="text-2xl mb-2">💉</div>
-<div class="text-sm font-bold text-red-300">Injection Attacks</div>
-<div class="text-xs text-gray-400 mt-1">SQL injection, XSS, command injection</div>
-</div>
-<div class="p-3 bg-orange-900/30 rounded-lg text-center">
-<div class="text-2xl mb-2">🔑</div>
-<div class="text-sm font-bold text-orange-300">Secrets & Auth</div>
-<div class="text-xs text-gray-400 mt-1">Hardcoded creds, weak authentication</div>
-</div>
-<div class="p-3 bg-yellow-900/30 rounded-lg text-center">
-<div class="text-2xl mb-2">📦</div>
-<div class="text-sm font-bold text-yellow-300">Dependencies</div>
-<div class="text-xs text-gray-400 mt-1">Insecure packages, CVE detection</div>
-</div>
-</div>
-
-<div class="grid grid-cols-2 gap-4 mt-4">
-<div class="p-3 bg-blue-900/30 rounded-lg text-center">
-<div class="text-2xl mb-2">🧪</div>
-<div class="text-sm font-bold text-blue-300">Test Coverage</div>
-<div class="text-xs text-gray-400 mt-1">Missing tests, weak assertions, edge cases</div>
-</div>
-<div class="p-3 bg-purple-900/30 rounded-lg text-center">
-<div class="text-2xl mb-2">⚡</div>
-<div class="text-sm font-bold text-purple-300">Performance</div>
-<div class="text-xs text-gray-400 mt-1">N+1 queries, memory leaks, complexity</div>
-</div>
-</div>
-
-<div class="mt-4 p-3 bg-gradient-to-r from-blue-600/80 to-indigo-600/80 rounded-lg text-center">
-<span class="text-white font-bold text-sm">90%+ reduction in security-related production incidents</span>
-</div>
-
----
-layout: center
-name: roi
----
-
-# 📊 ROI Metrics
-
-<div class="text-5xl font-bold bg-gradient-to-r from-indigo-400 to-purple-400 bg-clip-text text-transparent">
-Measuring Business Impact
-</div>
-
-<div class="mt-6 text-xl opacity-80">
-Prove the value with concrete numbers
-</div>
-
-<div class="mt-8 text-sm opacity-60">
-Section 3 of 4 · Time savings, quality gains, cost-benefit
-</div>
+# Lite vs Balanced: Match Review Depth to Change Risk
+<TwoColPairedConceptsSlide
+  :partNumber="1"
+  pillIcon="🎚️"
+  pillLabel="Quick Start: Effort Levels"
+  title="Lite vs Balanced: Match Review Depth to Change Risk"
+  :left='{
+    header: "Lite",
+    icon: "⚡",
+    items: [
+      { title: "Routine changes", detail: "Dependency bumps, docs, small fixes" },
+      "Lighter, faster analysis with focused feedback",
+      "Inherits organization default effort setting",
+      "Per-review choice — applies only to that review"
+    ]
+  }'
+  :right='{
+    header: "Balanced",
+    icon: "🔬",
+    items: [
+      { title: "Complex or sensitive changes", detail: "New features, security paths, large diffs" },
+      "Deeper analysis and more thorough coverage",
+      "Set as org default — repos inherit without override",
+      "Timeline and PR overview show effort level used"
+    ]
+  }'
+  :progressDots='{ current: 2, total: 4, activeColor: "bg-cyan-400 shadow-lg shadow-cyan-500/50" }'
+/>
 
 ---
 
-# 📊 Before vs. After
-
-<div class="grid grid-cols-2 gap-6 mt-6">
-<div class="p-4 bg-red-900/30 rounded-lg border-l-4 border-red-500">
-<div class="text-lg font-bold text-red-300 mb-3">❌ Before Copilot Review</div>
-<div class="text-sm text-gray-300 space-y-2">
-<div>• PR merge time: <strong>3.2 days</strong> average</div>
-<div>• Security issues missed: <strong>40-60%</strong></div>
-<div>• Review coverage: <strong>30%</strong> of PRs</div>
-<div>• New dev onboarding: <strong>6-8 weeks</strong></div>
-</div>
-</div>
-<div class="p-4 bg-green-900/30 rounded-lg border-l-4 border-green-500">
-<div class="text-lg font-bold text-green-300 mb-3">✅ After Copilot Review</div>
-<div class="text-sm text-gray-300 space-y-2">
-<div>• PR merge time: <strong>same day</strong></div>
-<div>• Security issues caught: <strong>90%+</strong></div>
-<div>• Review coverage: <strong>100%</strong> of PRs</div>
-<div>• New dev onboarding: <strong>3-4 weeks</strong></div>
-</div>
-</div>
-</div>
-
-<div class="mt-6 p-4 bg-gradient-to-r from-green-600/80 to-blue-600/80 rounded-lg text-center">
-<span class="text-white font-bold">40-60% reduction in review cycle time · 25-35% higher first-submission acceptance</span>
-</div>
+# Custom Instructions: Encode Your Review Standards
+<CodeWithFeaturesSlide
+  :partNumber="1"
+  pillIcon="📋"
+  pillLabel="Quick Start: Custom Instructions"
+  title="Custom Instructions: Encode Your Review Standards"
+  codePosition="left"
+  :code='{ language: "markdown", filename: ".github/copilot-instructions.md", content: "## Security Standards\n- Flag hardcoded secrets and API keys\n- Require parameterized queries (no SQL concatenation)\n- Check input validation on user-facing code\n\n## Code Quality\n- Suggest refactoring for functions exceeding 50 lines\n- Flag unclear variable names\n\n## Testing\n- Note missing unit tests for new functions\n- Flag assertions that do not validate the logic" }'
+  :features='[
+    { icon: "🎯", title: "Prioritize top rules", description: "Copilot processes first ~4000 chars — keep guidance concise and focused" },
+    { icon: "📁", title: "Language-specific files", description: ".github/instructions/*.instructions.md with applyTo patterns" },
+    { icon: "🏢", title: "Org inheritance", description: "Organization template → each repo adds language-specific guidance on top" }
+  ]'
+  :progressDots='{ current: 3, total: 4, activeColor: "bg-cyan-400 shadow-lg shadow-cyan-500/50" }'
+/>
 
 ---
 
-# 💰 Cost-Benefit Analysis
-
-<div class="grid grid-cols-3 gap-4 mt-6">
-<div class="p-4 bg-green-900/40 rounded-lg text-center">
-<div class="text-3xl font-bold text-green-300">$150/hr</div>
-<div class="text-sm text-gray-400 mt-2">Developer time saved</div>
-<div class="text-xs text-gray-500 mt-1">Context switching + review hours</div>
-</div>
-<div class="p-4 bg-cyan-900/40 rounded-lg text-center">
-<div class="text-3xl font-bold text-cyan-300">$39/mo</div>
-<div class="text-sm text-gray-400 mt-2">License cost per user</div>
-<div class="text-xs text-gray-500 mt-1">Copilot Enterprise tier</div>
-</div>
-<div class="p-4 bg-purple-900/40 rounded-lg text-center">
-<div class="text-3xl font-bold text-purple-300">$15K+</div>
-<div class="text-sm text-gray-400 mt-2">Monthly savings</div>
-<div class="text-xs text-gray-500 mt-1">For a 10-person team</div>
-</div>
-</div>
-
-<div class="mt-6 p-3 bg-gray-800 rounded-lg">
-
-```sql
--- ROI = (time_saved * hourly_rate) - (users * license_cost)
-SELECT (avg_hours_saved * 150) - (team_size * 39)
-  AS monthly_roi FROM review_metrics;
-```
-
-</div>
-
----
-layout: center
-name: adoption
----
-
-# 🚀 Team Adoption
-
-<div class="text-5xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
-Best Practices & Rollout
-</div>
-
-<div class="mt-6 text-xl opacity-80">
-Technology creates value only when people use it well
-</div>
-
-<div class="mt-8 text-sm opacity-60">
-Section 4 of 4 · Phased rollout, training, iteration
-</div>
+# Four Ways to Deploy Copilot Code Review
+<FourCardGridSlide
+  :partNumber="1"
+  pillIcon="🏗️"
+  pillLabel="Quick Start: Deployment Patterns"
+  title="Four Ways to Deploy Copilot Code Review"
+  :cards='[
+    { icon: "📦", title: "Repository Ruleset", description: "Enable in Settings → Rules → Rulesets — automatic review on every PR to target branch" },
+    { icon: "🏢", title: "Organization Default", description: "Set default effort level in org settings — all repos inherit unless overridden locally" },
+    { icon: "🔒", title: "Branch Protection", description: "Add Copilot review as required status check — blocks merge until critical findings resolved" },
+    { icon: "💬", title: "Manual Request", description: "Mention @github-copilot in any PR comment for targeted focused analysis on demand" }
+  ]'
+  :progressDots='{ current: 4, total: 4, activeColor: "bg-cyan-400 shadow-lg shadow-cyan-500/50" }'
+/>
 
 ---
 
-# 🚀 Phased Rollout Strategy
-
-<div class="grid grid-cols-3 gap-4 mt-6">
-<div class="p-4 bg-cyan-900/40 rounded-lg border-2 border-cyan-500">
-<div class="text-2xl mb-2">1️⃣</div>
-<div class="text-sm font-bold text-cyan-300">Pilot (Week 1-2)</div>
-<div class="text-xs text-gray-300 mt-2 space-y-1">
-<div>• Enable on 1 team repo</div>
-<div>• Default configuration</div>
-<div>• Gather baseline metrics</div>
-</div>
-</div>
-<div class="p-4 bg-blue-900/40 rounded-lg border-2 border-blue-500">
-<div class="text-2xl mb-2">2️⃣</div>
-<div class="text-sm font-bold text-blue-300">Expand (Week 3-4)</div>
-<div class="text-xs text-gray-300 mt-2 space-y-1">
-<div>• Add custom rulesets</div>
-<div>• Tune severity thresholds</div>
-<div>• Train team on @mentions</div>
-</div>
-</div>
-<div class="p-4 bg-indigo-900/40 rounded-lg border-2 border-indigo-500">
-<div class="text-2xl mb-2">3️⃣</div>
-<div class="text-sm font-bold text-indigo-300">Scale (Month 2+)</div>
-<div class="text-xs text-gray-300 mt-2 space-y-1">
-<div>• Organization-wide deploy</div>
-<div>• Required status checks</div>
-<div>• ROI dashboards live</div>
-</div>
-</div>
-</div>
-
-<div class="mt-6 p-3 bg-gradient-to-r from-cyan-900/30 to-indigo-900/30 rounded-lg text-center">
-<span class="text-white font-bold text-sm">💡 Start small, measure, then scale with data</span>
-</div>
+# Part 2 — Best Practices and Team Adoption
+<SectionOpenerSlide
+  :partNumber="2"
+  title="Best Practices and Team Adoption"
+  subtitle="Six capability categories, hybrid analysis approach — equip teams to own the rollout and frame it for stakeholders"
+  :cards='[
+    { icon: "🧩", title: "Six Capabilities", blurb: "Security to architecture consistency" },
+    { icon: "🔬", title: "Hybrid Analysis", blurb: "Static + AST + LLM layered review" },
+    { icon: "📈", title: "Phased Rollout", blurb: "Pilot to org-wide in four phases" }
+  ]'
+  :terminal='{ context: "AI handles mechanical checks automatically", detail: "Humans redirect to architecture and strategy" }'
+/>
 
 ---
 
-# 🧠 Mental Model Shift
-
-<div class="grid grid-cols-2 gap-6 mt-6">
-<div class="p-4 bg-green-900/30 rounded-lg border-l-4 border-green-500">
-<div class="text-sm font-bold text-green-300 mb-2">✅ Move Toward</div>
-<div class="text-xs text-gray-300 space-y-2">
-<div>• <strong>Immediate feedback</strong> over delayed review</div>
-<div>• <strong>Consistent enforcement</strong> over variable quality</div>
-<div>• <strong>Educational review</strong> over gatekeeping</div>
-<div>• <strong>Measurable ROI</strong> over qualitative value</div>
-</div>
-</div>
-<div class="p-4 bg-red-900/30 rounded-lg border-l-4 border-red-500">
-<div class="text-sm font-bold text-red-300 mb-2">🛑 Move Away From</div>
-<div class="text-xs text-gray-300 space-y-2">
-<div>• Manual-only review for all code</div>
-<div>• Rubber-stamping under deadline pressure</div>
-<div>• Inconsistent standards across teams</div>
-<div>• Learning through production incidents</div>
-</div>
-</div>
-</div>
-
-<div class="mt-6 p-4 bg-gradient-to-r from-blue-600/80 to-indigo-600/80 rounded-lg text-center">
-<span class="text-white font-bold text-sm">🧠 From "review as manual quality gate" → "review as automated continuous feedback"</span>
-</div>
+# Six Capability Categories
+<FrameworkMappingRowsSlide
+  :partNumber="2"
+  pillIcon="🧩"
+  pillLabel="Adoption: Capabilities"
+  title="Six Capability Categories in Every Review"
+  subtitle="What Copilot checks on every pull request"
+  :rows='[
+    { label: "Security", description: "SQL injection, XSS, hardcoded secrets — auto-flagged with fixes", tag: "Always On" },
+    { label: "Code Quality", description: "Complexity, naming, duplication with refactoring suggestions", tag: "Configurable" },
+    { label: "Test Coverage", description: "Missing tests, weak assertions, edge cases detected", tag: "Configurable" },
+    { label: "Performance", description: "N+1 queries, memory leaks, inefficient algorithms spotted", tag: "Configurable" },
+    { label: "Compliance", description: "Custom rulesets for GDPR, HIPAA, SOC2 with audit trail", tag: "Custom" },
+    { label: "Architecture", description: "Ensures new code aligns with existing patterns", tag: "Contextual" }
+  ]'
+  footnote="Configure scope via custom instructions — prioritize what matters most for your codebase."
+  :progressDots='{ current: 1, total: 3, activeColor: "bg-blue-400 shadow-lg shadow-blue-500/50" }'
+/>
 
 ---
 
-# 🌍 Real-World Use Cases
-
-<div class="grid grid-cols-2 gap-4 mt-6">
-<div class="p-3 bg-cyan-900/30 rounded-lg border-l-4 border-cyan-400">
-<div class="text-sm font-bold text-cyan-300">🛒 E-Commerce · PCI-DSS</div>
-<div class="text-xs text-gray-300 mt-1">Security review: 30% → 100% coverage</div>
-<div class="text-xs text-gray-400 mt-1">Critical vulns to prod: 8/qtr → 0/qtr</div>
-</div>
-<div class="p-3 bg-blue-900/30 rounded-lg border-l-4 border-blue-400">
-<div class="text-sm font-bold text-blue-300">💰 FinTech · Onboarding</div>
-<div class="text-xs text-gray-300 mt-1">Onboarding time: 6-8 weeks → 3-4 weeks</div>
-<div class="text-xs text-gray-400 mt-1">Revert rate for new devs: 15% → 4%</div>
-</div>
-<div class="p-3 bg-indigo-900/30 rounded-lg border-l-4 border-indigo-400">
-<div class="text-sm font-bold text-indigo-300">🌐 Open Source · Scale</div>
-<div class="text-xs text-gray-300 mt-1">PR backlog: 150 → 25 pending</div>
-<div class="text-xs text-gray-400 mt-1">Velocity: 25 → 65 PRs merged/month</div>
-</div>
-<div class="p-3 bg-purple-900/30 rounded-lg border-l-4 border-purple-400">
-<div class="text-sm font-bold text-purple-300">🏥 Healthcare · HIPAA</div>
-<div class="text-xs text-gray-300 mt-1">HIPAA violations: 25/qtr → 1/qtr</div>
-<div class="text-xs text-gray-400 mt-1">Audit prep: 200 hrs → 40 hrs</div>
-</div>
-</div>
-
-<div class="mt-4 p-3 bg-gradient-to-r from-cyan-600/80 to-purple-600/80 rounded-lg text-center">
-<span class="text-white font-bold text-sm">Proven across industries: security, compliance, velocity, onboarding</span>
-</div>
+# The Hybrid Analysis Approach
+<ThreeColumnCardSlide
+  :partNumber="2"
+  pillIcon="🔬"
+  pillLabel="Adoption: How It Works"
+  title="The Hybrid Analysis Approach"
+  :columns='[
+    { icon: "⚡", title: "Static Analysis", description: "Pattern matching in under 1 second — syntax, style, obvious anti-patterns", items: ["60% of issues caught", "Zero LLM cost", "Deterministic accuracy"] },
+    { icon: "🔍", title: "AST Semantic Parsing", description: "Structural analysis — data flow, variable scope, unreachable code, call graphs", items: ["Logical error detection", "1-5 second execution", "No false positives for known patterns"] },
+    { icon: "🧠", title: "LLM Contextual Analysis", description: "Full repository context — architectural consistency, semantics, educational feedback", items: ["73% fewer false positives", "10-30 second analysis", "Explains why, not just what"] }
+  ]'
+  :progressDots='{ current: 2, total: 3, activeColor: "bg-blue-400 shadow-lg shadow-blue-500/50" }'
+/>
 
 ---
 
-# 🔄 Decision Guide: When to Use What
+# Phased Rollout: Pilot to Organization
+<MaturityJourneyRoadmapSlide
+  :partNumber="2"
+  pillIcon="📈"
+  pillLabel="Adoption: Phased Rollout"
+  title="Phased Rollout: Pilot to Organization"
+  subtitle="Four phases from first review to org-wide standard"
+  :stages='[
+    { label: "Week 1-2", name: "Pilot", description: "1-2 low-risk repos — informational reviews, gather daily feedback", icon: "🔬", isTarget: false },
+    { label: "Week 3-4", name: "Tune", description: "Custom instructions, language files, baseline ROI metrics established", icon: "🎚️", isTarget: false },
+    { label: "Week 5-8", name: "Expand", description: "50% of repos with required status check, internal docs and training", icon: "📈", isTarget: false },
+    { label: "Week 9-12", name: "Standardize", description: "Org-wide with quarterly rule review and ROI presented to leadership", icon: "🏢", isTarget: true }
+  ]'
+  caption="Start informational — only enforce required status check after Tune phase validates accuracy"
+  :progressDots='{ current: 3, total: 3, activeColor: "bg-blue-400 shadow-lg shadow-blue-500/50" }'
+/>
 
-<div class="mt-4">
+---
 
-| Aspect       |  Copilot Review  | GitHub Advanced Security | Manual Review  |
-| ------------ | :--------------: | :----------------------: | :------------: |
-| **Best For** | Holistic quality |  Deep security scanning  | Business logic |
-| **Speed**    |     1-2 min      |         5-10 min         | Hours to days  |
-| **Cost**     |   $39/user/mo    |       $49/user/mo        |    $150+/hr    |
-| **Setup**    |     5-10 min     |        1-2 hours         |      N/A       |
-
-</div>
-
-<div class="mt-4 p-3 bg-gradient-to-r from-green-900/40 to-blue-900/40 rounded-lg text-center">
-<span class="text-white font-bold text-sm">✅ Use all three together: Copilot handles mechanical, GHAS handles CVEs, humans handle strategy</span>
-</div>
+# Part 3 — Measuring ROI and Business Impact
+<SectionOpenerSlide
+  :partNumber="3"
+  title="Measuring ROI and Business Impact"
+  subtitle="Persuasion peak — interactive calculator, 40-60% cycle-time reduction, 90%+ security violations, exec business case"
+  :cards='[
+    { icon: "🧮", title: "Interactive Calculator", blurb: "Real PR data → exec-ready savings" },
+    { icon: "⏱️", title: "Cycle-Time Impact", blurb: "40-60% review time reduction" },
+    { icon: "📊", title: "Quality Metrics", blurb: "Incidents, reverts, onboarding speed" }
+  ]'
+  :terminal='{ context: "Input real PR data → get executive summary", detail: "78.9% cycle-time improvement in live example" }'
+/>
 
 ---
 
-# ✅ Actionable Next Steps
-
-<div class="grid grid-cols-3 gap-4 mt-6">
-<div class="p-4 bg-green-900/40 rounded-lg border-2 border-green-500">
-<div class="text-sm font-bold text-green-300 mb-2">⚡ 15 Minutes</div>
-<div class="text-xs text-gray-300 space-y-1">
-<div>• Enable on a pilot repo</div>
-<div>• Create basic YAML config</div>
-<div>• Submit a test PR</div>
-</div>
-</div>
-<div class="p-4 bg-blue-900/40 rounded-lg border-2 border-blue-500">
-<div class="text-sm font-bold text-blue-300 mb-2">🔧 1 Hour</div>
-<div class="text-xs text-gray-300 space-y-1">
-<div>• Configure file pattern filtering</div>
-<div>• Set up required status checks</div>
-<div>• Establish baseline metrics</div>
-</div>
-</div>
-<div class="p-4 bg-purple-900/40 rounded-lg border-2 border-purple-500">
-<div class="text-sm font-bold text-purple-300 mb-2">📐 Half Day</div>
-<div class="text-xs text-gray-300 space-y-1">
-<div>• Build custom compliance rulesets</div>
-<div>• Deploy ROI tracking workflow</div>
-<div>• Org-wide rollout plan</div>
-</div>
-</div>
-</div>
-
-<div class="mt-6 p-3 bg-gradient-to-r from-green-600/80 to-purple-600/80 rounded-lg text-center">
-<span class="text-white font-bold text-sm">All example configs available in examples/ — copy, customize, deploy</span>
-</div>
+# Interactive Time-Savings Calculator
+<HeroStatSlide
+  :partNumber="3"
+  pillIcon="🧮"
+  pillLabel="ROI: Calculator"
+  title="Interactive Time-Savings Calculator"
+  subtitle="Real PR analytics → exec-ready savings summary"
+  :hero='{ value: "78.9%", label: "cycle-time improvement in live March 2026 example", source: "Copilot Code Review Time Savings Calculator" }'
+  :supporting='[
+    { icon: "📊", title: "Input customer PR data", description: "Month/quarter from any PR analytics source" },
+    { icon: "⚙️", title: "Set model parameters", description: "Baseline review minutes, developer cost, work hours" },
+    { icon: "📋", title: "Review generated results", description: "Cycle-time, adoption, hours saved, cost savings" },
+    { icon: "📤", title: "Copy executive summary", description: "Prewritten narrative ready for stakeholder follow-up" }
+  ]'
+  :insight='{ icon: "💡", text: "Separates cycle-time (days open) from review effort (minutes) — makes savings claims defensible to engineering leadership." }'
+  :progressDots='{ current: 1, total: 4, activeColor: "bg-indigo-400 shadow-lg shadow-indigo-500/50" }'
+/>
 
 ---
-layout: end
+
+# PR Cycle Time: Before and After
+<BeforeAfterMetricsSlide
+  :partNumber="3"
+  pillIcon="📊"
+  pillLabel="ROI: Cycle Time"
+  title="PR Cycle Time: Before and After Copilot Review"
+  :before='{
+    header: "Without Copilot Review",
+    items: [
+      { title: "19 days open", detail: "Waiting for reviewer availability" },
+      "Manual review: 45+ min per PR",
+      "Context rebuild: 15-20 min per reviewer switch",
+      "Security gaps discovered post-merge"
+    ]
+  }'
+  :after='{
+    header: "With Copilot Review",
+    items: [
+      { title: "4 days to merge", detail: "78.9% cycle-time improvement" },
+      "Copilot reviews in under 2 minutes",
+      "Developer addresses findings while context is fresh",
+      "Security caught before merge with inline fixes"
+    ]
+  }'
+  :metrics='[
+    { value: "78.9%", label: "cycle-time improvement" },
+    { value: "1,229", label: "hours saved/month" },
+    { value: "$88,594", label: "current monthly savings" }
+  ]'
+  :progressDots='{ current: 2, total: 4, activeColor: "bg-indigo-400 shadow-lg shadow-indigo-500/50" }'
+/>
+
+---
+
+# Quality Metrics Beyond Cycle Time
+<FourCardGridSlide
+  :partNumber="3"
+  pillIcon="📈"
+  pillLabel="ROI: Quality Metrics"
+  title="Quality Metrics Beyond Cycle Time"
+  :cards='[
+    { icon: "🚨", title: "Production Incidents", description: "83% reduction — quality incidents drop from 12/month to 2/month after adoption" },
+    { icon: "↩️", title: "Revert Rate", description: "62% improvement — PRs merged then reverted drop from 8% to 3% of total PRs" },
+    { icon: "🔐", title: "Security Violations", description: "90%+ reduction — critical issues caught before merge, not discovered in production" },
+    { icon: "⏱️", title: "Onboarding Speed", description: "50% faster — new hires productive in 3-4 weeks instead of 6-8 weeks to first PR" }
+  ]'
+  :progressDots='{ current: 3, total: 4, activeColor: "bg-indigo-400 shadow-lg shadow-indigo-500/50" }'
+/>
+
+---
+
+# From PR Data to Executive Summary
+<AITerminalTranscriptSlide
+  :partNumber="3"
+  pillIcon="📤"
+  pillLabel="ROI: Executive Summary"
+  title="From PR Data to Executive Summary"
+  subtitle="What the interactive calculator produces"
+  :transcript='[
+    { type: "prompt", text: "copilot-code-review-calculator" },
+    { type: "user", text: "Analyze March 2026: 32,196 PRs, 15.3% CCR adoption, 19d to 4d cycle time" },
+    { type: "thinking", label: "🧮 Calculator:" },
+    { type: "response", lines: ["Cycle-time improvement: 78.9% (19.0 → 4.0 days)", "Current hours saved: 1,229 per month", "Incremental opportunity: 6,821 hours if all PRs use CCR"] },
+    { type: "divider" },
+    { type: "outcome", text: "Current savings: $88,594 for the observed month" },
+    { type: "outcome", text: "Incremental upside: $491,863 if adoption expands to all PRs" }
+  ]'
+  footerMetric="Real PR data in → exec-ready narrative out"
+  :progressDots='{ current: 4, total: 4, activeColor: "bg-indigo-400 shadow-lg shadow-indigo-500/50" }'
+/>
+
+---
+
+# Part 4 — Advanced Patterns: Compliance and Regulatory Guidance
+<SectionOpenerSlide
+  :partNumber="4"
+  title="Compliance and Regulatory Guidance"
+  subtitle="HIPAA, PCI-DSS, and SOC2 instruction patterns with audit trail — deliberately paced for regulated-industry teams"
+  :cards='[
+    { icon: "🏥", title: "HIPAA", blurb: "PHI encryption and audit logging" },
+    { icon: "💳", title: "PCI-DSS", blurb: "Payment data handling enforcement" },
+    { icon: "🔒", title: "SOC2", blurb: "Access controls and audit trail" }
+  ]'
+  :terminal='{ context: "Custom instructions encode compliance rules", detail: "96% reduction in HIPAA violations in production" }'
+/>
+
+---
+
+# Three Regulatory Frameworks, One Pattern
+<ThreeColumnCardSlide
+  :partNumber="4"
+  pillIcon="⚖️"
+  pillLabel="Compliance: Frameworks"
+  title="Three Regulatory Frameworks, One Pattern"
+  :columns='[
+    { icon: "🏥", title: "HIPAA (Healthcare)", description: "PHI encryption, access logging, data retention — audit trail for all PHI operations", items: ["AES-256 for PHI at rest", "TLS 1.2+ for PHI in transit", "Audit logs retained 6 years"] },
+    { icon: "💳", title: "PCI-DSS (Payments)", description: "No stored card data, tokenization required, payment webhook signatures validated", items: ["Never log card numbers or CVV", "Tokenize via compliant gateway", "Role-based access for payment ops"] },
+    { icon: "🔒", title: "SOC2 (SaaS)", description: "Audit logging for all sensitive data access, structured errors, no PII in responses", items: ["Log who accessed what and when", "Consistent error codes 200-500", "Never expose stack traces"] }
+  ]'
+  :progressDots='{ current: 1, total: 2, activeColor: "bg-purple-400 shadow-lg shadow-purple-500/50" }'
+/>
+
+---
+
+# Compliance Instruction File Pattern
+<CodeWithFeaturesSlide
+  :partNumber="4"
+  pillIcon="📝"
+  pillLabel="Compliance: Instruction File"
+  title="Compliance Instruction File Pattern"
+  codePosition="left"
+  :code='{ language: "markdown", filename: ".github/instructions/hipaa.instructions.md", content: "# .github/instructions/hipaa.instructions.md\n\n## HIPAA Requirements\n- All PHI encrypted at rest with AES-256\n- Require TLS 1.2+ for any PHI transmission\n- Flag PHI exposure in logs, errors, or UI\n- Audit log: who accessed PHI and when\n- Retain audit logs for at least 6 years\n\n## Transmission Security\n- Flag hardcoded encryption keys\n- Validate all external calls carry TLS" }'
+  :features='[
+    { icon: "📂", title: "applyTo pattern", description: "Scopes rules to specific file types or directories in the repository" },
+    { icon: "🔍", title: "Automatic detection", description: "Violations flagged inline with educational context and suggested code fixes" },
+    { icon: "📋", title: "Permanent audit trail", description: "Every review creates a timestamped PR record for compliance reporting and audits" }
+  ]'
+  :progressDots='{ current: 2, total: 2, activeColor: "bg-purple-400 shadow-lg shadow-purple-500/50" }'
+/>
+
+---
+
+# Before and After
+<BeforeAfterSlide
+  header="From Manual Reviews to Scalable Quality"
+  :leftItems='["PRs wait 3+ days for first human review", "Senior devs spend 30% of time on reviews", "Security gaps missed under deadline pressure", "Inconsistent standards across teams and reviewers"]'
+  :rightItems='["Automated feedback in under 2 minutes per PR", "Senior devs focus on architecture and strategy", "Security violations caught and flagged before merge", "Consistent enforcement on every PR via Rulesets"]'
+  :metrics='[
+    { value: "40-60%", detail: "reduction in PR review cycle time" },
+    { value: "90%+", detail: "fewer security violations reaching production" },
+    { value: "50%", detail: "faster developer onboarding" }
+  ]'
+/>
+
+---
+
+# What You Can Do Today
+<WhatYouCanDoTodaySlide
+  :today='["Enable via Rulesets in repository Settings", "Choose Lite for routine, Balanced for complex changes", "Submit a test PR and observe feedback quality"]'
+  :thisWeek='["Create .github/copilot-instructions.md with team standards", "Set up branch protection requiring Copilot review", "Train team on targeted @github-copilot review requests"]'
+  :thisMonth='["Run ROI calculator with real PR analytics", "Add language-specific instruction files", "Deploy org-wide with standardized Rulesets"]'
+  footer="Start with Lite effort on one repository today — first automated review in under 5 minutes."
+/>
+
+---
+
+# References
+<ReferencesSlide
+  :groups='[
+    { title: "📖 Official Documentation", color: "cyan", items: [
+      { href: "https://docs.github.com/en/copilot/concepts/agents/code-review", label: "GitHub Copilot Code Review - Concepts", description: "Core concepts, agent capabilities, and workflow integration" },
+      { href: "https://docs.github.com/en/copilot/how-tos/use-copilot-agents/request-a-code-review/configure-automatic-review", label: "Configure Automatic Code Review", description: "Setup guide for enabling automatic reviews at repository and organization level" },
+      { href: "https://docs.github.com/en/copilot/how-tos/use-copilot-agents/request-a-code-review/use-code-review", label: "Using Copilot Code Review", description: "Practical usage guide for requesting reviews and interpreting feedback" }
+    ] },
+    { title: "📣 Announcements", color: "blue", items: [
+      { href: "https://github.blog/changelog/2026-08-07-copilot-code-review-effort-levels-are-generally-available", label: "Copilot code review effort levels are generally available", description: "GA names, configuration migration, org inheritance, per-review scope, plan availability" },
+      { href: "https://github.blog/2024-02-14-github-copilot-code-review-now-generally-available/", label: "GitHub Copilot Code Review GA", description: "Official announcement with beta results and 43% review time reduction" }
+    ] },
+    { title: "🧮 Interactive Tools", color: "indigo", items: [
+      { href: "https://copilot-code-review--clee1211.github.app/", label: "Copilot Code Review Time Savings Calculator", description: "PR analytics + review-time assumptions → cycle-time, labor-savings, exec summary" }
+    ] },
+    { title: "🛠️ Related Content", color: "purple", items: [
+      { label: "GitHub Advanced Security", description: "In-depth security scanning with CVE tracking — complements Copilot Code Review" },
+      { label: "GitHub Copilot Enterprise Patterns", description: "Org-wide deployment patterns and governance for regulated environments" }
+    ] }
+  ]'
+/>
+
 ---
 
 # Thank You
-
-<div class="text-center">
-<div class="text-6xl mb-4">🔍</div>
-<div class="text-2xl font-bold bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">
-Copilot Code Review
-</div>
-<div class="text-lg opacity-80 mt-2">Accelerating PR Velocity & Maximizing ROI</div>
-<div class="mt-6 text-sm opacity-60">
-Examples: tech-talks/copilot-code-review/examples/
-</div>
-</div>
+<ThankYouSlide
+  title="GitHub Copilot Code Review"
+  subtitle="From Bottleneck to Accelerator"
+  :cards="[
+    { value: '40-60%', detail: 'reduction in PR review cycle time' },
+    { value: '90%+', detail: 'fewer security violations in production' },
+    { value: '5 min', detail: 'from Ruleset UI to first automated review' }
+  ]"
+  prompt="What would 40-60% faster code review unlock for your team?"
+/>

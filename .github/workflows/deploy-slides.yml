@@ -27,10 +27,10 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Restore previous build cache
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: ./slides/dist
           # Cache key prefix bumped to v2 to force a one-time full rebuild of all
@@ -42,37 +42,15 @@ jobs:
             slides-dist-v2-
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v5
         with:
-          node-version: "20"
-
-      - name: Cache node_modules
-        id: npm-cache
-        uses: actions/cache@v4
-        with:
-          path: ./slides/node_modules
-          key: npm-${{ runner.os }}-${{ hashFiles('slides/package.json') }}
+          node-version: "24"
+          cache: npm
+          cache-dependency-path: slides/package-lock.json
 
       - name: Install dependencies
-        if: steps.npm-cache.outputs.cache-hit != 'true'
         working-directory: ./slides
-        run: npm install
-
-      - name: Cache Playwright browsers
-        id: playwright-cache
-        uses: actions/cache@v4
-        with:
-          path: ~/.cache/ms-playwright
-          key: playwright-${{ runner.os }}-${{ hashFiles('slides/package.json') }}
-
-      - name: Install Playwright browsers
-        if: steps.playwright-cache.outputs.cache-hit != 'true'
-        working-directory: ./slides
-        run: npx playwright install chromium --with-deps
-
-      - name: Install Playwright system deps only
-        if: steps.playwright-cache.outputs.cache-hit == 'true'
-        run: npx playwright install-deps chromium
+        run: npm ci
 
       - name: Build slides
         working-directory: ./slides
@@ -86,6 +64,15 @@ jobs:
           FAILED=0
           SKIPPED=0
 
+          # Shared slide infrastructure changes must rebuild every deck, even if
+          # individual frontmatter dates did not change.
+          SHARED_FINGERPRINT=$({
+            printf '%s\0' style.css vite.config.ts package.json package-lock.json global-top.vue global-bottom.vue
+            find components layouts setup -type f -print0
+            find workshop tech-talks exec-talks intro-talks -type f \( -path '*/setup/*' -o -path '*/components/*' -o -path '*/layouts/*' -o -name 'global-*.vue' -o -name 'sdp-logo.png' \) -print0
+          } | xargs -0 sha256sum | sha256sum | cut -d' ' -f1)
+          echo "🧩 Shared fingerprint: ${SHARED_FINGERPRINT}"
+
           # Extract 'updated' date from frontmatter (first 20 lines)
           get_updated() {
             head -20 "$1" | sed -n 's/^updated: *//p'
@@ -98,9 +85,14 @@ jobs:
 
           # Load previous build manifest
           declare -A PREV_UPDATED
+          PREV_SHARED_FINGERPRINT=""
           if [ -f "dist/.build-manifest.json" ]; then
             while IFS='=' read -r key val; do
-              PREV_UPDATED["$key"]="$val"
+              if [ "$key" = "__shared_fingerprint" ]; then
+                PREV_SHARED_FINGERPRINT="$val"
+              else
+                PREV_UPDATED["$key"]="$val"
+              fi
             done < <(python3 -c "
           import json
           with open('dist/.build-manifest.json') as f:
@@ -109,6 +101,9 @@ jobs:
               print(f'{k}={v}')
           " 2>/dev/null || true)
             echo "📋 Loaded manifest with ${#PREV_UPDATED[@]} entries"
+            if [ "$SHARED_FINGERPRINT" != "$PREV_SHARED_FINGERPRINT" ]; then
+              echo "🔁 Shared slide infrastructure changed — forcing rebuild of all decks"
+            fi
           else
             echo "📋 No manifest — building all slides"
           fi
@@ -117,6 +112,7 @@ jobs:
           needs_build() {
             local KEY="$1"
             local CURRENT_DATE="$2"
+            [ "$SHARED_FINGERPRINT" != "$PREV_SHARED_FINGERPRINT" ] && return 0  # shared dependency changed
             [ ! -d "dist/${KEY}" ] && return 0                    # No dist output
             [ -z "${PREV_UPDATED[$KEY]+x}" ] && return 0          # Not in manifest
             [ -z "$CURRENT_DATE" ] && return 0                    # No updated field
@@ -140,8 +136,10 @@ jobs:
                 return 0
               fi
             done
-            echo "::error::Build failed for ${CATEGORY}/${BASENAME}. Log:"
-            tail -20 "$LOG_FILE"
+            echo "::error::Build failed for ${CATEGORY}/${BASENAME}. Log (head):"
+            head -40 "$LOG_FILE"
+            echo "--- (tail) ---"
+            tail -10 "$LOG_FILE"
             return 1
           }
 
@@ -164,6 +162,7 @@ jobs:
 
           # Iterate all slides — build only what's needed
           declare -A NEW_MANIFEST
+          NEW_MANIFEST["__shared_fingerprint"]="$SHARED_FINGERPRINT"
           for SLIDE_FILE in workshop/*.md tech-talks/*.md exec-talks/*.md intro-talks/*.md; do
             [ -f "$SLIDE_FILE" ] || continue
             CATEGORY=$(dirname "$SLIDE_FILE")
@@ -215,15 +214,29 @@ jobs:
               json.dump(manifest, f, indent=2, sort_keys=True)
           " <<< "$(for key in "${!NEW_MANIFEST[@]}"; do echo "${key}=${NEW_MANIFEST[$key]}"; done)"
 
-          # Copy index and 404
+          # Copy index, 404, and shared assets
           cp index-custom.html dist/index.html
           cp 404.html dist/404.html
+          mkdir -p dist/tech-talks
+          cp tech-talks/sdp-logo.png dist/tech-talks/sdp-logo.png
+
+          # Ship pre-inspected companions (agenda.html / agenda.md / deck.pdf).
+          # Do NOT generate agendas or PDFs in CI — authors build those locally
+          # via the Deploy agent / npm run generate-agendas + export-pdf.
+          # Companions must be committed under slides/companions/ to ship.
+          node scripts/copy-companions.mjs
+
+          # Soft report only (CI cannot regenerate PDFs if stale).
+          node scripts/check-companions.mjs || true
+
+          # Hard check: every file under companions/ must land in dist/.
+          node scripts/verify-companions-dist.mjs
 
           BUILT=${#LABELS[@]}
           echo "📊 ${BUILT} built, ${SKIPPED} skipped (up to date)"
 
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v5
         with:
           path: ./slides/dist
 
@@ -236,4 +249,4 @@ jobs:
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5

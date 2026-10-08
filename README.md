@@ -1,188 +1,66 @@
-# GitHub Copilot Training & Thought Leadership
+# CopilotTraining
 
-> Hands-on training, technical deep-dives, and executive strategy for AI-assisted development
+> Open training content for teams adopting GitHub Copilot, customizations, agent workflows, and AI-assisted software delivery.
 
----
+## Start Here
 
-## 🎯 What's Inside
+The easiest way to use this repository is the live site:
 
-Three content tracks for different audiences, each with accompanying [Slidev presentations](slides/):
+- [Browse CopilotTraining on GitHub Pages](https://juan-trujillo.github.io/CopilotTraining/)
 
-### 🏗️ [Workshop Training](workshop/) — 7 Modules
+That is the fastest way to find the right workshop module, tech talk, or executive talk without learning the repository structure first.
 
-Hands-on, story-driven training with progressive skill-building for developers and teams.
+## Choose Your Path
 
-| Module | Topic |
-|--------|-------|
-| [00 — Orientation](workshop/00-orientation/) | Training philosophy and the Shift |
-| [01 — Instructions](workshop/01-instructions/) | Repository instructions and architecture docs |
-| [02 — Agent Plan Mode](workshop/02-agent-plan-mode/) | Structured AI collaboration |
-| [03 — Custom Prompts](workshop/03-custom-prompts/) | Reusable prompt workflows |
-| [04 — Agent Skills](workshop/04-agent-skills/) | Skills for targeted capabilities |
-| [05 — MCP Servers](workshop/05-mcp-servers/) | External system integration |
-| [06 — Custom Agents](workshop/06-custom-agents/) | Autonomous agent workflows |
+| If you are trying to... | Start here | Why |
+|-------------------------|------------|-----|
+| Build hands-on skill with Copilot customizations and agent workflows | [Workshop](workshop/) | Best for structured learning, team training, and experiential practice |
+| Understand a specific capability or technical pattern | [Tech Talks](tech-talks/) | Best for engineers, architects, and technical champions who need depth |
+| Explain the organizational or economic implications to leadership | [Executive Talks](exec-talks/) | Best for leaders making adoption, investment, and operating-model decisions |
+| Just browse the material quickly | [Live Site](https://juan-trujillo.github.io/CopilotTraining/) | Best for first-time visitors who want the easiest navigation |
 
-Uses persona-driven narratives and a production application template ([FanHub](https://github.com/MSBart2/FanHub)).
+If you want the simplest recommendation: start on the live site, then choose a workshop, tech talk, or executive talk based on your audience.
 
----
+## Why This Repo Exists
 
-### 💼 [Executive Talks](exec-talks/) — 3 Talks
+Most Copilot material explains features one at a time. This repository is organized around a more useful question: **how do teams actually get better results from AI-assisted development?**
 
-Thought leadership for technical leaders making strategic decisions about AI adoption.
+Copilot becomes much more valuable when people move beyond one-off prompting and start shaping context, workflows, guardrails, and operating models. The bottleneck is no longer only code production — it is clarity, context, judgment, and system design. The content here reflects that: instructions, prompts, skills, agents, workflows, repository design, and operating models.
 
-| Talk | Focus |
-|------|-------|
-| [Agentic Delivery](exec-talks/agentic-delivery/) | Agents with instruments and guardrails |
-| [Agentic Labor](exec-talks/agentic-labor/) | What missions agents can fly beyond code generation |
-| [Agentic Economics](exec-talks/agentic-economics/) | Economic models for AI-assisted development ROI |
+## Live Site vs. Repository
 
----
+Use the [live site](https://juan-trujillo.github.io/CopilotTraining/) for the easiest browsing experience. Use the repository directly to read source Markdown, adapt material for your team, or contribute new content.
 
-### 🔧 [Technical Deep-Dives](tech-talks/)
+## Repository Layout
 
-Technical presentations for practitioners exploring specific capabilities and patterns.
+| Path | Purpose |
+|------|---------|
+| [workshop](workshop/) | Hands-on training modules and persona-driven exercises |
+| [tech-talks](tech-talks/) | Reader-first technical deep dives |
+| [exec-talks](exec-talks/) | Leadership-focused thought leadership content |
+| [slides](slides/) | Slidev slide decks for workshop, tech talks, and executive talks |
+| [docs](docs/) | Supporting authoring documentation and internal guides |
 
-#### 💬 Copilot Surfaces
+## For Contributors
 
-| Talk | Focus |
-|------|-------|
-| [Copilot Chat](tech-talks/copilot-chat/) | Context mastery for AI collaboration — #file, @workspace, #codebase |
-| [Copilot Chat Internals](tech-talks/copilot-chat-internals/) | Under the hood diagnostics and Chat Debug View |
-| [Copilot CLI](tech-talks/copilot-cli/) | Natural language to shell commands and scripting workflows |
-| [Copilot Web](tech-talks/copilot-web/) | AI assistance beyond the IDE — PR reviews, issue triage |
-| [Copilot Memory](tech-talks/copilot-memory/) | Cross-session context persistence and workflow patterns |
-| [Terminal Sandboxing](tech-talks/terminal-sandboxing/) | Safe agentic execution with network and filesystem controls |
+- [tech-talks/README.md](tech-talks/README.md) — tech talk authoring workflow
+- [docs/announcement-feed/README.md](docs/announcement-feed/README.md) — feed-driven refresh workflow for existing tech talks
+- [.github/skills/content-refresh/SKILL.md](.github/skills/content-refresh/SKILL.md) — verify feed items and draft a talk refresh plan
+- [.github/skills/ledger-tech-talk-refresh/SKILL.md](.github/skills/ledger-tech-talk-refresh/SKILL.md) — intake routing queue, approval flow, and full talk refresh execution
+- [slides/TEMPLATE.md](slides/TEMPLATE.md) — slide design patterns
+- [AGENTS.md](AGENTS.md) — repo-wide Copilot guidance
+- [workshop/README.md](workshop/README.md) — workshop narrative and module structure
 
-#### 🧩 Context & Customization
+### First step for existing tech talks
 
-| Talk | Focus |
-|------|-------|
-| [Copilot Hooks](tech-talks/copilot-hooks/) | Programmable governance — prevention, audit trails, compliance |
-| [Copilot SDK](tech-talks/copilot-sdk/) | Embedding AI agents in custom tools and applications |
-| [Copilot Primitives](tech-talks/copilot-primitives/) | The 4 configuration primitives — instructions, prompts, skills, agents |
-| [Customization Best Practices](tech-talks/customization-best-practices/) | How to write great instructions, prompts, skills & agents — patterns from 2,500+ repos |
-| [APM: Agent Package Manager](tech-talks/apm/) | Dependency management for AI agent configuration — versioning, composition, security |
-| [MCP Apps](tech-talks/mcp-apps/) | Rich UI in chat responses with component-based MCP tools |
+When a live talk may be stale, start with the announcement-feed refresh workflow before writing anything:
 
-#### 🤖 Agent Architecture
+```bash
+npm run content:route
+```
 
-| Talk | Focus |
-|------|-------|
-| [Agent Teams](tech-talks/agent-teams/) | Coordinated specialists — planners, reviewers, testers collaborating |
-| [Multi-Step Tasks](tech-talks/multi-step-tasks/) | Context isolation with subagents for complex workflows |
-| [Parallel Execution](tech-talks/parallel-execution/) | Simultaneous agents on different branches via Git worktree |
+Then review the generated report and the routing ledger, and use the `content-refresh` or `ledger-tech-talk-refresh` skill to decide whether a talk needs a README, recipe, or slide refresh.
 
-#### 🚀 Agentic Transformation
-
-| Talk | Focus |
-|------|-------|
-| [Agentic Journey](tech-talks/agentic-journey/) | The 5-phase path from "assign to copilot" to full SDLC automation |
-| [Agentic SDLC](tech-talks/agentic-sdlc/) | Rewire repos, PRs, and CI/CD for AI-as-labor delivery agents |
-| [Enterprise Patterns](tech-talks/enterprise-patterns/) | Scaling Copilot across organizations with measurable ROI |
-
-See [DECISION-GUIDE.md](tech-talks/DECISION-GUIDE.md) for choosing the right talk for your audience.
-
----
-
-## 📽️ Slide Decks
-
-All content has accompanying [Slidev presentations](slides/) deployed to [GitHub Pages](https://MSBart2.github.io/CopilotTraining/).
-
-| Category | Decks | Live URL Pattern |
-|----------|-------|-----------------|
-| Workshop | 7 | `/CopilotTraining/workshop/{module}/` |
-| Tech Talks | 16 | `/CopilotTraining/tech-talks/{topic}/` |
-| Exec Talks | 3 | `/CopilotTraining/exec-talks/{topic}/` |
-
-Slides are built and deployed automatically on push to `main`. PRs that touch slides are validated with a build check before merge.
-
----
-
-## 🚀 Getting Started
-
-| If you want to... | Start here |
-|-------------------|------------|
-| Build hands-on AI skills | [Workshop Module 00](workshop/00-orientation/) |
-| Understand strategic implications | [Agentic Delivery](exec-talks/agentic-delivery/) |
-| Deep-dive a specific capability | [Tech Talk Decision Guide](tech-talks/DECISION-GUIDE.md) |
-
----
-
-## 🏗️ Training Philosophy
-
-### The Shift: Syntax Wizards → Markdown Whisperers
-
-| Old Metrics | New Metrics |
-|------------|-------------|
-| Syntax memorization | Clear articulation of intent |
-| Clever code only you understand | Code anyone can maintain |
-| Fast typing | Fast thinking and design |
-| Being the "only expert" | Scaling knowledge across the team |
-
-In the age of AI assistance, the bottleneck isn't "can you write the code?" — it's "do you know what to build?"
-
-> 💡 **Markdown Is the Medium**: Every `.md` file you write—instructions, prompts, agents, skills—is a direct conversation with AI. The most effective teams won't be those with the most elegant syntax; they'll be those with the best prose. Syntax is what AI writes for you. Markdown is what you write for AI.
-
-### Four Principles
-
-| Principle | Core Message |
-|-----------|-------------|
-| 🔍 **Clarity Beats Cleverness** | Understandable code trumps clever code |
-| 🎯 **Intent Over Implementation** | Describe WHAT, not HOW |
-| 📚 **Documentation Is Leverage** | Write once, benefit infinitely |
-| ⚖️ **Human Judgment Is Non-Negotiable** | AI proposes, you decide |
-
----
-
-## 🔧 Content Development
-
-New tech talks are generated through an automated 4-phase workflow:
-
-1. **Research** — Copilot CLI gathers source material and examples from URLs
-2. **Plan** — Content outline committed for review
-3. **Build** — README.md generated from approved plan (`/approve-plan`)
-4. **Slides** — Slidev deck generated from README
-
-See the [Tech Talks Creation Guide](tech-talks/README.md) for detailed instructions on both the issue-based and local IDE workflows.
-
-### Copilot Agents & Skills
-
-Content development is powered by custom Copilot agents and skills that run inside VS Code:
-
-| Agent / Skill | Purpose |
-|---------------|--------|
-| `@Module Creator` | End-to-end workshop module generation |
-| `@Module Planner` | Research and plan module outlines |
-| `@Tech Talk Generator` | Research and generate tech talk content |
-| `@Slide Generator` | Create Slidev slides from README files |
-| `@exercise-author` skill | Create exercise files from module plans |
-
-Agent definitions live in `.github/agents/` and skills in `.github/skills/`.
-
-### Authoring Resources
-
-- [Tech Talk Template](tech-talks/TEMPLATE.md) — Structure and guidelines for tech talks
-- [Tech Talk Decision Guide](tech-talks/DECISION-GUIDE.md) — Choosing the right talk for your audience
-- [Workshop Personas](workshop/00-orientation/PERSONAS.md) — Meet the training team members
-- [Slide Deployment](slides/DEPLOYMENT.md) — How slides are built and deployed
-- [Copilot Instructions](.github/copilot-instructions.md) — Repo-level conventions for Copilot
-
----
-
-## 📚 Official Documentation
-
-- [GitHub Copilot Documentation](https://docs.github.com/en/copilot)
-- [Custom Instructions for Repositories](https://docs.github.com/en/copilot/how-tos/configure-custom-instructions/add-repository-instructions)
-- [Custom Prompt Files](https://code.visualstudio.com/docs/copilot/customization/prompt-files)
-- [Creating Custom Agents](https://docs.github.com/en/copilot/how-tos/use-copilot-agents/coding-agent/create-custom-agents)
-- [Copilot CLI](https://docs.github.com/en/copilot/github-copilot-in-the-cli)
-
----
-
-## 📜 License
+## License
 
 This content is open source under the MIT License.
-
----
-
-**Built with ❤️ by developers who believe clarity beats cleverness**

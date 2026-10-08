@@ -1,6 +1,11 @@
-// Slidev resolves `setup/main.ts` relative to each deck file's directory,
-// not the project root. This re-export ensures the canonical setup at
-// slides/setup/main.ts is picked up by every deck under tech-talks/.
-// Keep all four category shims (tech-talks, intro-talks, exec-talks, workshop)
-// pointing at the same file. See slides/setup/main.ts for the actual logic.
-export { default } from '../../setup/main'
+import { defineAppSetup } from '@slidev/types'
+import sharedSetup from '../../setup/main'
+import ThankYouSlide from '../components/structure/ThankYouSlide.vue'
+import TitleSlide from '../components/structure/TitleSlide.vue'
+
+export default defineAppSetup((context) => {
+  sharedSetup(context)
+  const { app } = context
+  app.component('ThankYouSlide', ThankYouSlide)
+  app.component('TitleSlide', TitleSlide)
+})

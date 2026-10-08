@@ -4,1153 +4,488 @@ class: text-center
 highlighter: shiki
 lineNumbers: false
 info: |
-  ## GitHub Copilot on the Web
-  45-minute technical presentation about multi-interface AI assistance
+  ## From Issue to Pull Request
+  CopilotTraining Tech Talk
 drawings:
   persist: false
 transition: slide-left
-title: GitHub Copilot on the Web
-module: tech-talks/copilot-web
+title: From Issue to Pull Request
 mdc: true
+section: Delegate and Coordinate
 status: active
-updated: 2026-02-01
+updated: 2026-08-11
 ---
 
-<div class="h-full flex flex-col items-center justify-center relative overflow-hidden">
-  <!-- Gradient background -->
-  <div class="absolute inset-0 bg-gradient-to-br from-cyan-900/20 via-blue-900/10 to-indigo-900/20"></div>
+<script setup>
+import TitleSlide from './components/structure/TitleSlide.vue'
+import CoreQuestionSlide from './components/structure/CoreQuestionSlide.vue'
+import TocSlide from './components/structure/TocSlide.vue'
+import SectionOpenerSlide from './components/structure/SectionOpenerSlide.vue'
+import BeforeAfterSlide from './components/structure/BeforeAfterSlide.vue'
+import WhatYouCanDoTodaySlide from './components/structure/WhatYouCanDoTodaySlide.vue'
+import ReferencesSlide from './components/structure/ReferencesSlide.vue'
+import ThankYouSlide from './components/structure/ThankYouSlide.vue'
+import HeroStatSlide from './components/HeroStatSlide.vue'
+import TwoColPairedConceptsSlide from './components/TwoColPairedConceptsSlide.vue'
+import ThreeColumnCardSlide from './components/ThreeColumnCardSlide.vue'
+import FrameworkMappingRowsSlide from './components/FrameworkMappingRowsSlide.vue'
+import BeforeAfterPanelsSlide from './components/BeforeAfterPanelsSlide.vue'
+import ProblemSolutionOutcomeSlide from './components/ProblemSolutionOutcomeSlide.vue'
+import BeforeAfterMetricsSlide from './components/BeforeAfterMetricsSlide.vue'
+import CodeWithFeaturesSlide from './components/CodeWithFeaturesSlide.vue'
+</script>
 
-  <!-- Glowing orb -->
-  <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-gradient-to-r from-cyan-500/20 via-blue-500/20 to-indigo-500/20 rounded-full blur-3xl"></div>
-
-  <!-- Logo with glow -->
-  <div class="relative z-10">
-    <div class="absolute inset-0 blur-2xl opacity-50">
-      <img src="./sdp-logo.png" class="w-64" alt="" />
-    </div>
-    <img src="./sdp-logo.png" class="w-64 relative" alt="SDP Logo" />
-  </div>
-
-  <!-- Gradient text title -->
-  <h1 class="!text-5xl !font-bold !mt-8 bg-gradient-to-r from-cyan-400 via-blue-400 to-indigo-400 bg-clip-text text-transparent relative z-10">
-    GitHub Copilot on the Web
-  </h1>
-
-  <!-- Pill subtitle -->
-  <div class="mt-4 relative z-10">
-    <span class="px-6 py-2 bg-gradient-to-r from-cyan-600/80 to-blue-600/80 rounded-full text-white text-lg font-medium shadow-lg shadow-cyan-500/25">
-      Multi-Interface AI Assistance
-    </span>
-  </div>
-
-  <!-- Decorative line -->
-  <div class="mt-8 w-32 h-1 bg-gradient-to-r from-transparent via-cyan-400 to-transparent rounded-full relative z-10"></div>
-</div>
-
-<div class="abs-br m-6 flex gap-2">
-  <span class="text-sm opacity-50">45-minute Tech Talk</span>
-</div>
+# Title
+<TitleSlide
+  title="From Issue to Pull Request"
+  subtitle="GitHub Copilot's Coding Agent in Practice"
+  tagline="What if filing an issue was the same as fixing it?"
+  meta="CopilotTraining Tech Talk · August 2026"
+/>
 
 ---
 
-# The Interface Problem
-
-<div class="grid grid-cols-2 gap-8 mt-8">
-
-<div class="p-6 bg-red-900/40 rounded-lg border-2 border-red-500">
-  <h3 class="text-xl font-bold text-red-400 mb-4">❌ Current Reality</h3>
-  <ul class="text-sm space-y-2">
-    <li>🖥️ AI assistance constrained to IDE</li>
-    <li>📱 Work happens everywhere</li>
-    <li>🔄 Context-switching overhead</li>
-    <li>🔒 Customizations trapped in VS Code</li>
-  </ul>
-</div>
-
-<div class="p-6 bg-green-900/40 rounded-lg border-2 border-green-500">
-  <h3 class="text-xl font-bold text-green-400 mb-4">✨ The Reality</h3>
-  <ul class="text-sm space-y-2">
-    <li>💼 PR reviews in browsers</li>
-    <li>📊 Issue triage on mobile</li>
-    <li>🤝 Stakeholder discussions without laptops</li>
-    <li>⚡ AI needed everywhere, not just IDE</li>
-  </ul>
-</div>
-
-</div>
-
-<div class="mt-8 p-5 bg-gradient-to-r from-blue-600 to-blue-800 rounded-xl shadow-lg text-center">
-  <div class="text-xl font-bold text-white">Modern development extends far beyond coding</div>
-</div>
-
----
-layout: center
----
-
-# The Insight
-
-<div class="text-3xl text-center leading-relaxed">
-  <span class="text-blue-400">AI assistance</span> traditionally lives exclusively in the <span class="text-purple-400">IDE</span>,<br/>
-  forcing <span class="text-red-400">awkward context switches</span> or<br/>
-  <span class="text-yellow-400">abandoning AI help entirely</span>
-</div>
-
-<div class="text-2xl text-gray-400 text-center mt-8">↓</div>
-
-<div class="mt-8 p-6 bg-gradient-to-r from-green-600 to-green-800 rounded-xl shadow-lg text-center">
-  <div class="text-2xl font-bold text-white">
-    GitHub Copilot on the Web brings full AI capabilities—<br/>
-    including all repository customizations—<br/>
-    to browser and mobile interfaces
-  </div>
-</div>
+# Core Question
+<CoreQuestionSlide
+  question="What if you could delegate an issue and get back a reviewed pull request?"
+  subtext="GitHub Copilot's coding agent handles the implementation loop —"
+  highlight="leaving the hard decisions to humans, by design."
+  :cards='[
+    { icon: "👩‍💻", title: "Developer", description: "Delegate bounded tasks, stay in flow while agent builds PRs" },
+    { icon: "👥", title: "Tech Lead", description: "Govern what the agent can touch with firewall and branch rules" },
+    { icon: "🏗️", title: "Platform Engineer", description: "Set up the environment agents use — CI parity from day one" },
+    { title: "12 min", description: "total human time for a lodash upgrade across 23 files" },
+    { title: "95% detail", description: "captured via image-based issue creation vs manual transcription" },
+    { title: "Platform-enforced", description: "assigner cannot approve their own PR — by GitHub design" }
+  ]'
+/>
 
 ---
 
-# Architecture: Same AI, Different Interface
-
-<div class="grid grid-cols-2 gap-6 mt-6">
-
-<div class="space-y-3">
-  <div class="p-4 bg-blue-900/60 rounded-lg border-2 border-blue-400">
-    <div class="text-lg font-bold text-blue-300 mb-2">🧠 Same AI</div>
-    <div class="text-sm text-gray-300">Identical model access as VS Code</div>
-  </div>
-
-  <div class="p-4 bg-green-900/60 rounded-lg border-2 border-green-400">
-    <div class="text-lg font-bold text-green-300 mb-2">🔧 Full Portability</div>
-    <div class="text-sm text-gray-300">Repository instructions, skills, agents work identically</div>
-  </div>
-</div>
-
-<div class="space-y-3">
-  <div class="p-4 bg-purple-900/60 rounded-lg border-2 border-purple-400">
-    <div class="text-lg font-bold text-purple-300 mb-2">🛠️ Adapted Tools</div>
-    <div class="text-sm text-gray-300">Code analysis, issue/PR creation, cross-repo queries</div>
-  </div>
-
-  <div class="p-4 bg-orange-900/60 rounded-lg border-2 border-orange-400">
-    <div class="text-lg font-bold text-orange-300 mb-2">📱 Mobile-First</div>
-    <div class="text-sm text-gray-300">Responsive UI for reviews and triage from phones</div>
-  </div>
-</div>
-
-</div>
-
-<div class="mt-6 p-5 bg-gradient-to-r from-blue-600 to-blue-800 rounded-xl shadow-lg text-center">
-  <div class="text-xl font-bold text-white">Not a limited browser version—the complete AI platform with interface-appropriate tooling</div>
-</div>
+# Table of Contents
+<TocSlide
+  :sections='[
+    { icon: "🔄", title: "Delegation Loop", subtitle: "The full loop from trigger to reviewed draft PR", blurb: "Mental model for all downstream sections", slide: 4 },
+    { icon: "📝", title: "Writing Issues", subtitle: "Structure issues to maximize PR quality", blurb: "The most learnable skill you can apply today", slide: 9 },
+    { icon: "🔒", title: "Trust and Configuration", subtitle: "CI parity, firewall controls, and audit trail", blurb: "Answer the safety objection with evidence", slide: 14 },
+    { icon: "✅", title: "Review Workflow", subtitle: "Evidence-first review from any device", blurb: "Framework for what to delegate and what to keep", slide: 17 }
+  ]'
+/>
 
 ---
 
-# What Works on Web
-
-<div class="grid grid-cols-3 gap-4 mt-6">
-
-<div class="p-4 bg-blue-900/40 rounded-lg border-l-4 border-blue-400">
-  <div class="text-2xl mb-2">📚</div>
-  <div class="font-bold text-blue-300 mb-2">Repository Instructions</div>
-  <div class="text-xs text-gray-400">
-    <code>.github/copilot-instructions.md</code>
-    <div class="mt-2">✓ Auto-loads</div>
-    <div>✓ Same standards</div>
-    <div>✓ Zero config</div>
-  </div>
-</div>
-
-<div class="p-4 bg-green-900/40 rounded-lg border-l-4 border-green-400">
-  <div class="text-2xl mb-2">🎯</div>
-  <div class="font-bold text-green-300 mb-2">Agent Skills</div>
-  <div class="text-xs text-gray-400">
-    <code>.github/skills/</code>
-    <div class="mt-2">✓ Web accessible</div>
-    <div>✓ Identical execution</div>
-    <div>✓ Natural language</div>
-  </div>
-</div>
-
-<div class="p-4 bg-purple-900/40 rounded-lg border-l-4 border-purple-400">
-  <div class="text-2xl mb-2">🤖</div>
-  <div class="font-bold text-purple-300 mb-2">Custom Agents</div>
-  <div class="text-xs text-gray-400">
-    <code>@review-enforcer</code>
-    <div class="mt-2">✓ Agent dropdown</div>
-    <div>✓ Same behavior</div>
-    <div>✓ Mobile ready</div>
-  </div>
-</div>
-
-</div>
-
-<div class="mt-8 p-5 bg-gradient-to-r from-green-600 to-green-800 rounded-xl shadow-lg text-center">
-  <div class="text-2xl font-bold text-white">Create once, use everywhere—maximize ROI on customization</div>
-</div>
+# Part 1 — Delegation Loop
+<SectionOpenerSlide
+  :partNumber="1"
+  title="Delegation Loop"
+  subtitle="Establish the full loop end-to-end: trigger, sandbox execution, evidence bundle, draft PR, and human review."
+  :cards='[
+    { icon: "🔄", title: "The Full Loop", blurb: "Trigger to draft PR in one complete arc" },
+    { icon: "🏗️", title: "Three Layers", blurb: "Intelligence, Environment, Governance" },
+    { icon: "🛡️", title: "Draft PR Boundary", blurb: "Agent opens — platform enforces no self-merge" }
+  ]'
+  :terminal='{ context: "GitHub-enforced separation of duties", detail: "Assigner ≠ Approver — by platform constraint" }'
+/>
 
 ---
 
-# Web-Specific Capabilities
-
-<div class="grid grid-cols-2 gap-4 mt-4 text-sm">
-
-<div class="p-3 bg-gray-800 rounded-lg flex items-center gap-3">
-  <span class="text-3xl">🖼️</span>
-  <div>
-    <div class="text-white font-bold">Issue Creation from Images</div>
-    <div class="text-gray-400">Drag screenshots, AI extracts details, generates structured issues</div>
-  </div>
-</div>
-
-<div class="p-3 bg-gray-800 rounded-lg flex items-center gap-3">
-  <span class="text-3xl">🌐</span>
-  <div>
-    <div class="text-white font-bold">Cross-Repository Access</div>
-    <div class="text-gray-400">Query any repo without cloning, track work across org</div>
-  </div>
-</div>
-
-<div class="p-3 bg-gray-800 rounded-lg flex items-center gap-3">
-  <span class="text-3xl">📱</span>
-  <div>
-    <div class="text-white font-bold">Mobile PR Reviews</div>
-    <div class="text-gray-400">Invoke custom agents from phone, unblock teams immediately</div>
-  </div>
-</div>
-
-<div class="p-3 bg-gray-800 rounded-lg flex items-center gap-3">
-  <span class="text-3xl">⚡</span>
-  <div>
-    <div class="text-white font-bold">GitHub Spark Prototyping</div>
-    <div class="text-gray-400">Generate interactive UI prototypes, share live previews</div>
-  </div>
-</div>
-
-<div class="p-3 bg-gray-800 rounded-lg flex items-center gap-3">
-  <span class="text-3xl">🤖</span>
-  <div>
-    <div class="text-white font-bold">Coding Agent Delegation</div>
-    <div class="text-gray-400">Assign routine tasks, monitor progress, review results</div>
-  </div>
-</div>
-
-<div class="p-3 bg-gray-800 rounded-lg flex items-center gap-3">
-  <span class="text-3xl">📝</span>
-  <div>
-    <div class="text-white font-bold">Documentation Generation</div>
-    <div class="text-gray-400">Create user docs from code without context switch</div>
-  </div>
-</div>
-
-</div>
-
-<div class="mt-6 text-center text-gray-400 italic text-sm">
-  Workflows impossible in IDE-only environments
-</div>
+# The Three-Layer Architecture
+<FrameworkMappingRowsSlide
+  :partNumber="1"
+  pillIcon="🏗️"
+  pillLabel="Delegation Loop: Architecture"
+  title="Three Layers Every Agent Session Uses"
+  subtitle="Intelligence, Environment, and Governance — the backbone all other sections reference"
+  :rows='[
+    { label: "Intelligence", description: "Model access, repo instructions, and agent skills — interface-agnostic", tag: "GPT-4.1 · Claude" },
+    { label: "Environment", description: "Ephemeral GitHub Actions runner, fresh per session via setup-steps.yml", tag: "Ubuntu · CI parity" },
+    { label: "Governance", description: "Agent Firewall, branch protection, and enforced separation of duties", tag: "Firewall · Reviews" }
+  ]'
+  footnote="The customization investment compounds — instructions and skills written for VS Code apply identically here"
+  :progressDots='{ current: 1, total: 4, activeColor: "bg-cyan-400 shadow-lg shadow-cyan-500/50" }'
+/>
 
 ---
 
-# Use Case: Mobile PR Reviews
-
-<div class="grid grid-cols-2 gap-8 mt-6">
-
-<div>
-  <h3 class="text-xl font-bold text-red-400 mb-4">❌ The Problem</h3>
-  <div class="space-y-3 text-sm">
-    <div class="p-3 bg-red-900/30 rounded-lg">
-      <div class="font-bold text-white">Team Blocking</div>
-      <div class="text-gray-400">PRs wait hours for reviewers to return to desk</div>
-    </div>
-    <div class="p-3 bg-red-900/30 rounded-lg">
-      <div class="font-bold text-white">Quick Approvals</div>
-      <div class="text-gray-400">Skip analysis to unblock team, risk bugs</div>
-    </div>
-    <div class="p-3 bg-red-900/30 rounded-lg">
-      <div class="font-bold text-white">Context Loss</div>
-      <div class="text-gray-400">Delayed reviews lose architectural context</div>
-    </div>
-  </div>
-</div>
-
-<div>
-  <h3 class="text-xl font-bold text-green-400 mb-4">✅ The Solution</h3>
-  <div class="space-y-3 text-sm">
-    <div class="p-3 bg-green-900/30 rounded-lg">
-      <div class="font-bold text-white">Open PR on Mobile</div>
-      <div class="text-gray-400">During meeting or commute</div>
-    </div>
-    <div class="p-3 bg-green-900/30 rounded-lg">
-      <div class="font-bold text-white">Invoke @review-enforcer</div>
-      <div class="text-gray-400">Standards-based analysis in 3 minutes</div>
-    </div>
-    <div class="p-3 bg-green-900/30 rounded-lg">
-      <div class="font-bold text-white">Team Unblocked</div>
-      <div class="text-gray-400">Immediately with quality maintained</div>
-    </div>
-  </div>
-</div>
-
-</div>
-
-<div class="mt-6 grid grid-cols-3 gap-4 text-center">
-  <div class="p-3 bg-blue-900/60 rounded-lg">
-    <div class="text-2xl font-bold text-blue-300">2 hours → 0 min</div>
-    <div class="text-xs text-gray-400">Blocking time per PR</div>
-  </div>
-  <div class="p-3 bg-blue-900/60 rounded-lg">
-    <div class="text-2xl font-bold text-blue-300">16 hrs/week</div>
-    <div class="text-xs text-gray-400">Team velocity gained</div>
-  </div>
-  <div class="p-3 bg-blue-900/60 rounded-lg">
-    <div class="text-2xl font-bold text-blue-300">Same quality</div>
-    <div class="text-xs text-gray-400">As IDE-based reviews</div>
-  </div>
-</div>
+# Starting the Agent: Two Trigger Modes
+<TwoColPairedConceptsSlide
+  :partNumber="1"
+  pillIcon="🚀"
+  pillLabel="Delegation Loop: Triggers"
+  title="Direct Delegation vs. Configured Automation"
+  :left='{
+    header: "Direct Delegation",
+    icon: "🎯",
+    items: [
+      { title: "Assign in browser, VS Code, or Mobile", detail: "One issue → one session, started immediately" },
+      "No automation setup required — works on any repository",
+      "Best for ad-hoc bounded tasks and exploring the workflow"
+    ]
+  }'
+  :right='{
+    header: "Configured Automation",
+    icon: "⚙️",
+    items: [
+      { title: "Set a trigger comment text in Agents → Automations", detail: "Starts a new configured run — distinct from draft-PR refinement comments" },
+      "Recurring handoffs: doc updates, investigations, follow-up issues",
+      "Admin must enable cloud-agent policy for Copilot Business / Enterprise"
+    ]
+  }'
+  :progressDots='{ current: 2, total: 4, activeColor: "bg-cyan-400 shadow-lg shadow-cyan-500/50" }'
+/>
 
 ---
 
-# Use Case: Issue Triage from Screenshots
-
-<div class="grid grid-cols-2 gap-8 mt-6">
-
-<div>
-  <h3 class="text-xl font-bold text-red-400 mb-4">❌ Manual Process</h3>
-  <div class="space-y-3 text-sm">
-    <div class="p-3 bg-red-900/30 rounded-lg">
-      <div class="font-bold text-white">10-14 minutes</div>
-      <div class="text-gray-400">Copying alert details into GitHub issues</div>
-    </div>
-    <div class="p-3 bg-red-900/30 rounded-lg">
-      <div class="font-bold text-white">60% detail loss</div>
-      <div class="text-gray-400">Screenshot context missed in manual entry</div>
-    </div>
-    <div class="p-3 bg-red-900/30 rounded-lg">
-      <div class="font-bold text-white">Template skipped</div>
-      <div class="text-gray-400">Manual filing loses metadata</div>
-    </div>
-  </div>
-</div>
-
-<div>
-  <h3 class="text-xl font-bold text-green-400 mb-4">✅ AI-Powered Flow</h3>
-  <div class="space-y-3 text-sm">
-    <div class="p-3 bg-green-900/30 rounded-lg">
-      <div class="font-bold text-white">Drag Screenshot</div>
-      <div class="text-gray-400">Into github.com/copilot</div>
-    </div>
-    <div class="p-3 bg-green-900/30 rounded-lg">
-      <div class="font-bold text-white">AI Reads Image</div>
-      <div class="text-gray-400">Errors, stack traces, timestamps, system state</div>
-    </div>
-    <div class="p-3 bg-green-900/30 rounded-lg">
-      <div class="font-bold text-white">Generates Issue</div>
-      <div class="text-gray-400">Template applied, labels assigned, links added</div>
-    </div>
-  </div>
-</div>
-
-</div>
-
-<div class="mt-6 grid grid-cols-3 gap-4 text-center">
-  <div class="p-3 bg-blue-900/60 rounded-lg">
-    <div class="text-2xl font-bold text-blue-300">14 min → 2 min</div>
-    <div class="text-xs text-gray-400">Per issue filed</div>
-  </div>
-  <div class="p-3 bg-blue-900/60 rounded-lg">
-    <div class="text-2xl font-bold text-blue-300">95% capture</div>
-    <div class="text-xs text-gray-400">vs 60% manual</div>
-  </div>
-  <div class="p-3 bg-blue-900/60 rounded-lg">
-    <div class="text-2xl font-bold text-blue-300">60 min/week</div>
-    <div class="text-xs text-gray-400">Saved on alerts</div>
-  </div>
-</div>
+# Per-Run Reasoning: Quality vs. Cost
+<ThreeColumnCardSlide
+  :partNumber="1"
+  pillIcon="⚖️"
+  pillLabel="Delegation Loop: Reasoning"
+  title="Choose Reasoning Level at Task Start"
+  :columns='[
+    { icon: "📊", title: "Default", description: "Balanced quality and cost — right for routine tasks like dependency upgrades and test scaffolding" },
+    { icon: "🔬", title: "Higher Reasoning", description: "Better on complex work — uses more tokens and more premium-request credits per run" },
+    { icon: "📋", title: "Requirements", description: "Supporting models only; requires a paid Copilot plan that includes the cloud agent" }
+  ]'
+  :progressDots='{ current: 3, total: 4, activeColor: "bg-cyan-400 shadow-lg shadow-cyan-500/50" }'
+/>
 
 ---
 
-# Use Case: Real-Time Effort Estimation
-
-<div class="grid grid-cols-2 gap-8 mt-6">
-
-<div>
-  <h3 class="text-xl font-bold text-red-400 mb-4">❌ Traditional Flow</h3>
-  <div class="space-y-3 text-sm">
-    <div class="p-3 bg-red-900/30 rounded-lg">
-      <div class="font-bold text-white">Stakeholder Delays</div>
-      <div class="text-gray-400">"Let me research and get back to you"</div>
-    </div>
-    <div class="p-3 bg-red-900/30 rounded-lg">
-      <div class="font-bold text-white">90 minutes</div>
-      <div class="text-gray-400">Investigating dependencies, complexity, risk</div>
-    </div>
-    <div class="p-3 bg-red-900/30 rounded-lg">
-      <div class="font-bold text-white">Lost Momentum</div>
-      <div class="text-gray-400">2-hour delay causes rescheduling</div>
-    </div>
-  </div>
-</div>
-
-<div>
-  <h3 class="text-xl font-bold text-green-400 mb-4">✅ Web Copilot Flow</h3>
-  <div class="space-y-3 text-sm">
-    <div class="p-3 bg-green-900/30 rounded-lg">
-      <div class="font-bold text-white">During the Call</div>
-      <div class="text-gray-400">Stakeholder asks effort question</div>
-    </div>
-    <div class="p-3 bg-green-900/30 rounded-lg">
-      <div class="font-bold text-white">Invoke effort-estimator</div>
-      <div class="text-gray-400">AI analyzes codebase, dependencies, velocity</div>
-    </div>
-    <div class="p-3 bg-green-900/30 rounded-lg">
-      <div class="font-bold text-white">3-minute Estimate</div>
-      <div class="text-gray-400">Data-driven answer without leaving call</div>
-    </div>
-  </div>
-</div>
-
-</div>
-
-<div class="mt-6 grid grid-cols-3 gap-4 text-center">
-  <div class="p-3 bg-blue-900/60 rounded-lg">
-    <div class="text-2xl font-bold text-blue-300">90 min → 3 min</div>
-    <div class="text-xs text-gray-400">Per estimate</div>
-  </div>
-  <div class="p-3 bg-blue-900/60 rounded-lg">
-    <div class="text-2xl font-bold text-blue-300">0 delay</div>
-    <div class="text-xs text-gray-400">Real-time decisions</div>
-  </div>
-  <div class="p-3 bg-blue-900/60 rounded-lg">
-    <div class="text-2xl font-bold text-blue-300">4.3 hrs/week</div>
-    <div class="text-xs text-gray-400">Saved on inquiries</div>
-  </div>
-</div>
+# The Separation-of-Duties Guarantee
+<HeroStatSlide
+  :partNumber="1"
+  pillIcon="🛡️"
+  pillLabel="Delegation Loop: Safety"
+  title="The Agent Can Never Merge Its Own PR"
+  subtitle="Platform-enforced, not policy — by design"
+  :hero='{ value: "2", label: "required human reviewers before any agent change reaches the default branch", source: "GitHub enforces: agent opens draft only · assigner cannot be approver" }'
+  :supporting='[
+    { icon: "📝", title: "Draft status is invariant", description: "Every coding agent session opens a draft PR — no configuration can change this" },
+    { icon: "⛔", title: "Assigner cannot approve", description: "The person who assigned the issue is blocked from approving the resulting PR" },
+    { icon: "🔍", title: "Evidence bundle for reviewer 2", description: "Agent reasoning, test results, and firewall alerts surface for the second reviewer" },
+    { icon: "🤝", title: "Plan for a second reviewer", description: "Teams where leads both assign and review need a designated rotation approver" }
+  ]'
+  :insight='{ icon: "💡", text: "This constraint makes every agent change structurally safer than a solo commit from a team member." }'
+  :progressDots='{ current: 4, total: 4, activeColor: "bg-cyan-400 shadow-lg shadow-cyan-500/50" }'
+/>
 
 ---
 
-# Use Case: Documentation from Code
-
-<div class="grid grid-cols-2 gap-8 mt-6">
-
-<div>
-  <h3 class="text-xl font-bold text-red-400 mb-4">❌ Context Switching</h3>
-  <div class="space-y-3 text-sm">
-    <div class="p-3 bg-red-900/30 rounded-lg">
-      <div class="font-bold text-white">IDE ↔ Browser</div>
-      <div class="text-gray-400">Reading code, then writing docs separately</div>
-    </div>
-    <div class="p-3 bg-red-900/30 rounded-lg">
-      <div class="font-bold text-white">65 minutes total</div>
-      <div class="text-gray-400">Read 15 min + Write 35 min + Format 10 min</div>
-    </div>
-    <div class="p-3 bg-red-900/30 rounded-lg">
-      <div class="font-bold text-white">Docs lag behind</div>
-      <div class="text-gray-400">Become inaccurate, only 60% coverage</div>
-    </div>
-  </div>
-</div>
-
-<div>
-  <h3 class="text-xl font-bold text-green-400 mb-4">✅ Web Copilot Flow</h3>
-  <div class="space-y-3 text-sm">
-    <div class="p-3 bg-green-900/30 rounded-lg">
-      <div class="font-bold text-white">Navigate to Code</div>
-      <div class="text-gray-400">View implementation in browser</div>
-    </div>
-    <div class="p-3 bg-green-900/30 rounded-lg">
-      <div class="font-bold text-white">Ask Copilot</div>
-      <div class="text-gray-400">AI reads code, writes product language</div>
-    </div>
-    <div class="p-3 bg-green-900/30 rounded-lg">
-      <div class="font-bold text-white">8 minutes review</div>
-      <div class="text-gray-400">Refine and publish</div>
-    </div>
-  </div>
-</div>
-
-</div>
-
-<div class="mt-6 grid grid-cols-3 gap-4 text-center">
-  <div class="p-3 bg-blue-900/60 rounded-lg">
-    <div class="text-2xl font-bold text-blue-300">65 min → 8 min</div>
-    <div class="text-xs text-gray-400">Per feature documented</div>
-  </div>
-  <div class="p-3 bg-blue-900/60 rounded-lg">
-    <div class="text-2xl font-bold text-blue-300">100% coverage</div>
-    <div class="text-xs text-gray-400">vs 60% manual</div>
-  </div>
-  <div class="p-3 bg-blue-900/60 rounded-lg">
-    <div class="text-2xl font-bold text-blue-300">1.9 hrs/week</div>
-    <div class="text-xs text-gray-400">Saved for product teams</div>
-  </div>
-</div>
+# Part 2 — Writing Issues
+<SectionOpenerSlide
+  :partNumber="2"
+  title="Writing Issues"
+  subtitle="PR quality is a direct function of issue quality — the most learnable and immediately applicable skill in this talk."
+  :cards='[
+    { icon: "📝", title: "Issue Quality", blurb: "Structured issues produce better PRs" },
+    { icon: "🖼️", title: "Visual Workflow", blurb: "Drop an image, get a complete issue" },
+    { icon: "✅", title: "Acceptance Criteria", blurb: "Context + criteria + constraints format" }
+  ]'
+  :terminal='{ context: "Image-based issue creation", detail: "14 min manual → 2 min visual · 95% detail capture" }'
+/>
 
 ---
 
-# Multi-Model Selection
-
-<div class="grid grid-cols-3 gap-4 mt-6">
-
-<div class="p-4 bg-blue-900/40 rounded-lg border-2 border-blue-400">
-  <div class="text-2xl mb-2">⚡</div>
-  <div class="font-bold text-blue-300 text-lg mb-2">GPT-4.1</div>
-  <div class="text-sm text-gray-300 space-y-1">
-    <div>✓ Fast inference</div>
-    <div>✓ Cost-effective</div>
-    <div>✓ Strong code analysis</div>
-  </div>
-  <div class="mt-3 p-2 bg-blue-800/60 rounded text-xs text-blue-200">
-    Best for: Routine queries
-  </div>
-</div>
-
-<div class="p-4 bg-purple-900/40 rounded-lg border-2 border-purple-400">
-  <div class="text-2xl mb-2">📝</div>
-  <div class="font-bold text-purple-300 text-lg mb-2">Claude Sonnet 4</div>
-  <div class="text-sm text-gray-300 space-y-1">
-    <div>✓ Balanced performance</div>
-    <div>✓ Excellent writing</div>
-    <div>✓ Technical docs</div>
-  </div>
-  <div class="mt-3 p-2 bg-purple-800/60 rounded text-xs text-purple-200">
-    Best for: Documentation
-  </div>
-</div>
-
-<div class="p-4 bg-orange-900/40 rounded-lg border-2 border-orange-400">
-  <div class="text-2xl mb-2">🧠</div>
-  <div class="font-bold text-orange-300 text-lg mb-2">Claude Opus 4</div>
-  <div class="text-sm text-gray-300 space-y-1">
-    <div>✓ Highest reasoning</div>
-    <div>✓ Complex analysis</div>
-    <div>✓ Architecture</div>
-  </div>
-  <div class="mt-3 p-2 bg-orange-800/60 rounded text-xs text-orange-200">
-    Best for: Critical decisions
-  </div>
-</div>
-
-</div>
-
-<div class="mt-6 p-4 bg-gray-800 rounded-lg">
-  <div class="font-bold text-white mb-2">When to Switch Models:</div>
-  <div class="grid grid-cols-3 gap-4 text-sm text-gray-300">
-    <div><span class="text-blue-400">→</span> PR reviews, issue triage</div>
-    <div><span class="text-purple-400">→</span> Release notes, user guides</div>
-    <div><span class="text-orange-400">→</span> System design, refactoring</div>
-  </div>
-</div>
-
-<div class="mt-4 text-center text-sm text-gray-400 italic">
-  Match model capabilities to task requirements—optimize quality and cost
-</div>
+# PR Quality = Issue Quality
+<ProblemSolutionOutcomeSlide
+  :partNumber="2"
+  pillIcon="📝"
+  pillLabel="Writing Issues: Why Quality Matters"
+  title="The Agent Interprets, Not Infers"
+  :problem='{
+    header: "Vague Issues",
+    items: [
+      "Agent guesses at intent and scope boundaries",
+      { title: "Ambiguous ownership", detail: "Agent may touch unrelated files" },
+      "PRs arrive with wrong assumptions baked in",
+      "Rework cost often exceeds original implementation time"
+    ]
+  }'
+  :solution='{
+    header: "Structured Issues",
+    items: [
+      "Acceptance criteria: testable, checkboxed conditions",
+      { title: "Explicit scope boundaries", detail: "In-scope files and out-of-scope constraints listed" },
+      "Context links: migration guides, related files, patterns to follow"
+    ]
+  }'
+  :outcome='{
+    header: "Consistent PRs",
+    items: [
+      "Agent follows spec — correctness is reviewable",
+      "Evidence bundle coherent with stated intent"
+    ],
+    metrics: [
+      { value: "12 min", label: "review time on well-scoped issues" }
+    ]
+  }'
+  :progressDots='{ current: 1, total: 4, activeColor: "bg-blue-400 shadow-lg shadow-blue-500/50" }'
+/>
 
 ---
 
-# Integration with IDE Workflows
-
-<div class="grid grid-cols-3 gap-4 mt-6 text-sm">
-
-<div class="p-4 bg-blue-900/40 rounded-lg border-l-4 border-blue-400">
-  <div class="text-3xl mb-2">💻</div>
-  <div class="font-bold text-blue-300 text-lg mb-3">VS Code</div>
-  <div class="text-xs text-gray-400 mb-2 font-semibold">Implementation</div>
-  <div class="text-xs text-gray-300 space-y-1">
-    <div>• Write and edit code</div>
-    <div>• Run tests and debugger</div>
-    <div>• Local file system access</div>
-    <div>• Full repository editing</div>
-  </div>
-</div>
-
-<div class="p-4 bg-green-900/40 rounded-lg border-l-4 border-green-400">
-  <div class="text-3xl mb-2">🌐</div>
-  <div class="font-bold text-green-300 text-lg mb-3">Web</div>
-  <div class="text-xs text-gray-400 mb-2 font-semibold">Coordination</div>
-  <div class="text-xs text-gray-300 space-y-1">
-    <div>• Plan features across repos</div>
-    <div>• Review PRs from anywhere</div>
-    <div>• Triage issues with visuals</div>
-    <div>• Generate documentation</div>
-  </div>
-</div>
-
-<div class="p-4 bg-purple-900/40 rounded-lg border-l-4 border-purple-400">
-  <div class="text-3xl mb-2">⚙️</div>
-  <div class="font-bold text-purple-300 text-lg mb-3">CLI</div>
-  <div class="text-xs text-gray-400 mb-2 font-semibold">Automation</div>
-  <div class="text-xs text-gray-300 space-y-1">
-    <div>• Script repetitive tasks</div>
-    <div>• CI/CD integration</div>
-    <div>• Infrastructure management</div>
-    <div>• Batch operations</div>
-  </div>
-</div>
-
-</div>
-
-<div class="mt-6 p-5 bg-gradient-to-r from-blue-600 to-blue-800 rounded-xl shadow-lg text-center">
-  <div class="text-xl font-bold text-white">Web Copilot doesn't replace the IDE—it extends AI to coordination workflows</div>
-</div>
-
-<div class="mt-4 text-center text-sm text-gray-400 italic">
-  Same AI and customizations across interfaces—consistent intelligence throughout
-</div>
+# The Quality Gap Is Visible
+<BeforeAfterPanelsSlide
+  :partNumber="2"
+  pillIcon="🔍"
+  pillLabel="Writing Issues: Vague vs. Structured"
+  title="Same Task, Opposite Outcomes"
+  :before='{
+    header: "Underspecified",
+    items: [
+      "Issue title: Fix the auth bug",
+      "Body: The auth is broken. Please fix it.",
+      "No acceptance criteria — done is undefined",
+      "No scope — agent may touch unrelated files"
+    ]
+  }'
+  :after='{
+    header: "Structured",
+    items: [
+      "Issue title: Upgrade express-rate-limit v6 to v7",
+      "3 checkboxed, testable acceptance criteria",
+      "Scope: explicit in/out-of-scope file list",
+      "Context: migration guide + current file link"
+    ]
+  }'
+  :progressDots='{ current: 2, total: 4, activeColor: "bg-blue-400 shadow-lg shadow-blue-500/50" }'
+/>
 
 ---
 
-# GitHub Spark: Rapid Prototyping
-
-<div class="grid grid-cols-2 gap-8 mt-6">
-
-<div>
-  <h3 class="text-xl font-bold text-purple-400 mb-4">⚡ Key Capabilities</h3>
-  <div class="space-y-3 text-sm">
-    <div class="p-3 bg-purple-900/30 rounded-lg">
-      <div class="font-bold text-white">Natural Language UI</div>
-      <div class="text-gray-400">Describe interface, AI creates interactive prototype</div>
-    </div>
-    <div class="p-3 bg-purple-900/30 rounded-lg">
-      <div class="font-bold text-white">Live Sharing</div>
-      <div class="text-gray-400">Send preview link, collect feedback immediately</div>
-    </div>
-    <div class="p-3 bg-purple-900/30 rounded-lg">
-      <div class="font-bold text-white">Design Iteration</div>
-      <div class="text-gray-400">Test concepts before committing dev resources</div>
-    </div>
-    <div class="p-3 bg-purple-900/30 rounded-lg">
-      <div class="font-bold text-white">Code Export</div>
-      <div class="text-gray-400">Convert validated prototypes to production</div>
-    </div>
-  </div>
-</div>
-
-<div>
-  <h3 class="text-xl font-bold text-green-400 mb-4">🎯 Use Cases</h3>
-  <div class="space-y-3 text-sm">
-    <div class="p-3 bg-green-900/30 rounded-lg">
-      <div class="font-bold text-white">Design Validation</div>
-      <div class="text-gray-400">Test UX ideas with users before building</div>
-    </div>
-    <div class="p-3 bg-green-900/30 rounded-lg">
-      <div class="font-bold text-white">Stakeholder Alignment</div>
-      <div class="text-gray-400">Show live prototypes during planning meetings</div>
-    </div>
-    <div class="p-3 bg-green-900/30 rounded-lg">
-      <div class="font-bold text-white">Requirements Clarification</div>
-      <div class="text-gray-400">Concrete examples vs abstract descriptions</div>
-    </div>
-    <div class="p-3 bg-green-900/30 rounded-lg">
-      <div class="font-bold text-white">Onboarding</div>
-      <div class="text-gray-400">Create interactive demos of proposed features</div>
-    </div>
-  </div>
-</div>
-
-</div>
-
-<div class="mt-6 p-5 bg-gradient-to-r from-purple-600 to-purple-800 rounded-xl shadow-lg text-center">
-  <div class="text-xl font-bold text-white">Design-driven development: prove concepts with users before committing resources</div>
-</div>
+# The Fast Path to a Complete Issue
+<HeroStatSlide
+  :partNumber="2"
+  pillIcon="🖼️"
+  pillLabel="Writing Issues: Image Workflow"
+  title="Drop a Screenshot — Get a Structured Issue"
+  subtitle="95% detail capture in 2 minutes vs. 14 minutes of manual transcription"
+  :hero='{ value: "2 min", label: "to create a fully structured issue via image-based workflow", source: "vs 14-minute manual transcription — 95% vs ~60% detail capture" }'
+  :supporting='[
+    { icon: "📸", title: "Drop screenshot into github.com/copilot", description: "Monitoring alerts, UI bugs, PagerDuty screenshots, error dialogs" },
+    { icon: "🔍", title: "AI extracts structured context", description: "Error codes, timestamps, request IDs, stack traces, affected services" },
+    { icon: "📋", title: "Template applied automatically", description: "Labels assigned, severity assessed, issue ready for review in 2 minutes" },
+    { icon: "🔄", title: "Assign to Copilot to close the loop", description: "Once the issue is confirmed, assign it to the coding agent for the PR" }
+  ]'
+  :insight='{ icon: "💡", text: "Operations teams report 9.3 hours/week of transcription time dropping to 1.3 hours/week." }'
+  :progressDots='{ current: 3, total: 4, activeColor: "bg-blue-400 shadow-lg shadow-blue-500/50" }'
+/>
 
 ---
 
-# Coding Agent: Autonomous Execution
-
-<div class="grid grid-cols-2 gap-8 mt-6">
-
-<div>
-  <h3 class="text-xl font-bold text-orange-400 mb-4">🤖 How It Works</h3>
-  <div class="space-y-3 text-sm">
-    <div class="p-3 bg-orange-900/30 rounded-lg">
-      <div class="font-bold text-white">Task Delegation</div>
-      <div class="text-gray-400">Assign routine implementation to autonomous agent</div>
-    </div>
-    <div class="p-3 bg-orange-900/30 rounded-lg">
-      <div class="font-bold text-white">Progress Monitoring</div>
-      <div class="text-gray-400">Track work from task pane, review decisions real-time</div>
-    </div>
-    <div class="p-3 bg-orange-900/30 rounded-lg">
-      <div class="font-bold text-white">PR-Based Workflow</div>
-      <div class="text-gray-400">Agent creates branch, makes changes, opens PR</div>
-    </div>
-    <div class="p-3 bg-orange-900/30 rounded-lg">
-      <div class="font-bold text-white">Custom Integration</div>
-      <div class="text-gray-400">Respects repository instructions and skills</div>
-    </div>
-  </div>
-</div>
-
-<div>
-  <h3 class="text-xl font-bold text-blue-400 mb-4">🎯 Best For</h3>
-  <div class="space-y-3 text-sm">
-    <div class="p-3 bg-blue-900/30 rounded-lg">
-      <div class="font-bold text-white">Routine Refactoring</div>
-      <div class="text-gray-400">Update API patterns across multiple files</div>
-    </div>
-    <div class="p-3 bg-blue-900/30 rounded-lg">
-      <div class="font-bold text-white">Boilerplate Generation</div>
-      <div class="text-gray-400">Create CRUD endpoints, test scaffolding</div>
-    </div>
-    <div class="p-3 bg-blue-900/30 rounded-lg">
-      <div class="font-bold text-white">Documentation Updates</div>
-      <div class="text-gray-400">Sync docs with implementation changes</div>
-    </div>
-    <div class="p-3 bg-blue-900/30 rounded-lg">
-      <div class="font-bold text-white">Dependency Upgrades</div>
-      <div class="text-gray-400">Update libraries with migration patterns</div>
-    </div>
-  </div>
-</div>
-
-</div>
-
-<div class="mt-6 p-5 bg-gradient-to-r from-orange-600 to-orange-800 rounded-xl shadow-lg text-center">
-  <div class="text-xl font-bold text-white">Humans focus on architecture and review—agents handle mechanical execution</div>
-</div>
+# Anatomy of an Agent-Ready Issue
+<ThreeColumnCardSlide
+  :partNumber="2"
+  pillIcon="🎯"
+  pillLabel="Writing Issues: Structure"
+  title="Three Components That Maximize PR Quality"
+  :columns='[
+    { icon: "✅", title: "Acceptance Criteria", description: "Testable, checkboxed conditions that define done — the agent runs these as a checklist", items: ["Specific and verifiable", "One condition per checkbox"] },
+    { icon: "📐", title: "Scope Boundaries", description: "Explicit in/out-of-scope prevents the agent from making helpful but unwanted changes", items: ["List specific files and dirs", "Name what must not change"] },
+    { icon: "🔗", title: "Context + Constraints", description: "Migration guides, related PRs, patterns to follow, libraries or approaches to avoid", items: ["Link to relevant files", "State performance requirements"] }
+  ]'
+  :progressDots='{ current: 4, total: 4, activeColor: "bg-blue-400 shadow-lg shadow-blue-500/50" }'
+/>
 
 ---
 
-# Best Practices
-
-<div class="grid grid-cols-2 gap-8 mt-6">
-
-<div>
-  <h3 class="text-xl font-bold text-blue-400 mb-4">🔧 Customization Strategy</h3>
-  <div class="space-y-3 text-sm">
-    <div class="p-3 bg-blue-900/30 rounded-lg border-l-4 border-blue-400">
-      <div class="font-bold text-white mb-1">Create in IDE, use everywhere</div>
-      <div class="text-gray-400">Build in VS Code, auto-works on web</div>
-    </div>
-    <div class="p-3 bg-blue-900/30 rounded-lg border-l-4 border-blue-400">
-      <div class="font-bold text-white mb-1">Test portability</div>
-      <div class="text-gray-400">Verify agents/skills in browser before rollout</div>
-    </div>
-    <div class="p-3 bg-blue-900/30 rounded-lg border-l-4 border-blue-400">
-      <div class="font-bold text-white mb-1">Mobile-first agents</div>
-      <div class="text-gray-400">Design for quick decisions on phones</div>
-    </div>
-  </div>
-</div>
-
-<div>
-  <h3 class="text-xl font-bold text-green-400 mb-4">📱 Access Patterns</h3>
-  <div class="space-y-3 text-sm">
-    <div class="p-3 bg-green-900/30 rounded-lg border-l-4 border-green-400">
-      <div class="font-bold text-white mb-1">Web: Coordination</div>
-      <div class="text-gray-400">Planning, docs, cross-repo analysis</div>
-    </div>
-    <div class="p-3 bg-green-900/30 rounded-lg border-l-4 border-green-400">
-      <div class="font-bold text-white mb-1">IDE: Implementation</div>
-      <div class="text-gray-400">Coding, debugging, refactoring, testing</div>
-    </div>
-    <div class="p-3 bg-green-900/30 rounded-lg border-l-4 border-green-400">
-      <div class="font-bold text-white mb-1">Mobile: Unblocking</div>
-      <div class="text-gray-400">PR reviews, issue triage, quick answers</div>
-    </div>
-  </div>
-</div>
-
-</div>
-
-<div class="mt-6 p-5 bg-gradient-to-r from-blue-600 to-blue-800 rounded-xl shadow-lg text-center">
-  <div class="text-xl font-bold text-white">AI benefits distribute broadly—customization effort centralizes with engineering</div>
-</div>
+# Part 3 — Trust and Configuration
+<SectionOpenerSlide
+  :partNumber="3"
+  title="Trust and Configuration"
+  subtitle="The credibility bridge: CI parity, allowlist firewall, and evidence-first auditability."
+  :cards='[
+    { icon: "⚙️", title: "Setup Steps", blurb: "Mirror your CI environment exactly" },
+    { icon: "🔒", title: "Agent Firewall", blurb: "Allowlist-based outbound restriction" },
+    { icon: "📋", title: "Evidence Logs", blurb: "Blocked calls logged in the audit bundle" }
+  ]'
+  :terminal='{ context: "Blocked outbound call in evidence bundle", detail: "Auditability is an artifact feature, not an audit step" }'
+/>
 
 ---
 
-# Common Pitfalls
-
-<div class="grid grid-cols-3 gap-4 mt-6 text-sm">
-
-<div class="space-y-3">
-  <div class="p-3 bg-red-900/40 rounded-lg border-2 border-red-500">
-    <div class="text-red-400 font-bold mb-2">❌ Wrong</div>
-    <div class="text-gray-300">Different instructions for web vs IDE</div>
-  </div>
-  <div class="p-3 bg-green-900/40 rounded-lg border-2 border-green-500">
-    <div class="text-green-400 font-bold mb-2">✅ Right</div>
-    <div class="text-gray-300">Single repository instructions work everywhere</div>
-  </div>
-</div>
-
-<div class="space-y-3">
-  <div class="p-3 bg-red-900/40 rounded-lg border-2 border-red-500">
-    <div class="text-red-400 font-bold mb-2">❌ Wrong</div>
-    <div class="text-gray-300">Trying to write code in github.com/copilot</div>
-  </div>
-  <div class="p-3 bg-green-900/40 rounded-lg border-2 border-green-500">
-    <div class="text-green-400 font-bold mb-2">✅ Right</div>
-    <div class="text-gray-300">Use web for planning, IDE for coding</div>
-  </div>
-</div>
-
-<div class="space-y-3">
-  <div class="p-3 bg-red-900/40 rounded-lg border-2 border-red-500">
-    <div class="text-red-400 font-bold mb-2">❌ Wrong</div>
-    <div class="text-gray-300">Assuming all work happens on laptops</div>
-  </div>
-  <div class="p-3 bg-green-900/40 rounded-lg border-2 border-green-500">
-    <div class="text-green-400 font-bold mb-2">✅ Right</div>
-    <div class="text-gray-300">Design agents for phones (reviews/triage)</div>
-  </div>
-</div>
-
-</div>
-
-<div class="mt-6 p-4 bg-gradient-to-r from-yellow-900/40 to-gray-800 rounded-lg text-center">
-  <span class="text-white font-bold">⚠️ Biggest missed opportunity: ignoring mobile workflows</span>
-</div>
-
-<div class="mt-4 text-center text-sm text-gray-400 italic">
-  Modern teams are distributed and mobile—design for it
-</div>
+# CI Parity with copilot-setup-steps.yml
+<CodeWithFeaturesSlide
+  :partNumber="3"
+  pillIcon="⚙️"
+  pillLabel="Trust & Config: Environment"
+  title="Same Runtime as Your CI Pipeline"
+  codePosition="left"
+  :code='{ language: "yaml", filename: ".github/workflows/copilot-setup-steps.yml", content: "jobs:\n  copilot-setup-steps:  # required job name\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n      - uses: actions/setup-node@v4\n        with:\n          node-version: 20\n          cache: npm\n      - run: npm ci" }'
+  :features='[
+    { icon: "🔑", title: "Job name is the contract", description: "copilot-setup-steps — only this name triggers; everything else is standard Actions syntax" },
+    { icon: "🔒", title: "Runs before firewall", description: "Private installs and internal tools in setup steps need no allowlist entries" },
+    { icon: "🔍", title: "Debuggable in CI", description: "Path trigger validates setup before the first agent session runs" }
+  ]'
+  :progressDots='{ current: 1, total: 2, activeColor: "bg-indigo-400 shadow-lg shadow-indigo-500/50" }'
+/>
 
 ---
 
-# Enterprise Considerations
-
-<div class="grid grid-cols-2 gap-8 mt-6">
-
-<div>
-  <h3 class="text-xl font-bold text-red-400 mb-4">🔒 Security & Compliance</h3>
-  <div class="space-y-3 text-sm">
-    <div class="p-3 bg-gray-800 rounded-lg">
-      <div class="font-bold text-white mb-1">Same Access Controls</div>
-      <div class="text-gray-400">Web Copilot respects repository permissions</div>
-    </div>
-    <div class="p-3 bg-gray-800 rounded-lg">
-      <div class="font-bold text-white mb-1">Audit Trail</div>
-      <div class="text-gray-400">All AI interactions logged like VS Code</div>
-    </div>
-    <div class="p-3 bg-gray-800 rounded-lg">
-      <div class="font-bold text-white mb-1">Custom Agent Enforcement</div>
-      <div class="text-gray-400">Security-focused agents work on web</div>
-    </div>
-  </div>
-</div>
-
-<div>
-  <h3 class="text-xl font-bold text-green-400 mb-4">🚀 Organizational Rollout</h3>
-  <div class="space-y-3 text-sm">
-    <div class="p-3 bg-gray-800 rounded-lg">
-      <div class="font-bold text-white mb-1">Lower Barrier to Entry</div>
-      <div class="text-gray-400">Non-engineers access AI without IDE setup</div>
-    </div>
-    <div class="p-3 bg-gray-800 rounded-lg">
-      <div class="font-bold text-white mb-1">Broad Productivity Gains</div>
-      <div class="text-gray-400">Product, design, operations benefit</div>
-    </div>
-    <div class="p-3 bg-gray-800 rounded-lg">
-      <div class="font-bold text-white mb-1">Centralized Customization</div>
-      <div class="text-gray-400">Engineering creates, organization benefits</div>
-    </div>
-  </div>
-</div>
-
-</div>
-
-<div class="mt-6 p-5 bg-gradient-to-r from-blue-600 to-blue-800 rounded-xl shadow-lg text-center">
-  <div class="text-xl font-bold text-white">Democratize AI assistance beyond engineering—entire org benefits from customizations</div>
-</div>
+# The Agent Firewall: Allowlist and Audit Log
+<CodeWithFeaturesSlide
+  :partNumber="3"
+  pillIcon="🔒"
+  pillLabel="Trust & Config: Agent Firewall"
+  title="Blocked Calls Appear in the Evidence Bundle"
+  codePosition="left"
+  :code='{ language: "text", filename: "PR Evidence Bundle — Firewall Alert", content: "⚠️  Firewall blocked outbound connection\nTarget: unauthorized-domain.com:443\nCommand: curl https://unauthorized-domain.com/upload\nTime: 2026-04-06T14:32:17Z" }'
+  :features='[
+    { icon: "🔒", title: "Default allowlist", description: "npm, PyPI, Docker Hub, GitHub APIs, and OS package managers — most repos need no configuration" },
+    { icon: "➕", title: "Extend at org or repo level", description: "Add internal registries and staging APIs under Settings → Copilot → Cloud agent" },
+    { icon: "🔍", title: "Blocked calls are audit artifacts", description: "Any unauthorized outbound attempt logs here — investigate before merging any PR with alerts" }
+  ]'
+  :progressDots='{ current: 2, total: 2, activeColor: "bg-indigo-400 shadow-lg shadow-indigo-500/50" }'
+/>
 
 ---
 
-# Metrics and ROI (1/2)
-
-<div class="grid grid-cols-4 gap-3 mt-6 text-center">
-  <div class="p-3 bg-blue-900/60 rounded-lg">
-    <div class="text-2xl font-bold text-blue-300">85%</div>
-    <div class="text-xs text-gray-400">Issue filing time saved</div>
-  </div>
-  <div class="p-3 bg-blue-900/60 rounded-lg">
-    <div class="text-2xl font-bold text-blue-300">2 hrs → 0</div>
-    <div class="text-xs text-gray-400">PR blocking time</div>
-  </div>
-  <div class="p-3 bg-blue-900/60 rounded-lg">
-    <div class="text-2xl font-bold text-blue-300">97%</div>
-    <div class="text-xs text-gray-400">Estimation time saved</div>
-  </div>
-  <div class="p-3 bg-blue-900/60 rounded-lg">
-    <div class="text-2xl font-bold text-blue-300">88%</div>
-    <div class="text-xs text-gray-400">Documentation time saved</div>
-  </div>
-</div>
+# Part 4 — Review Workflow
+<SectionOpenerSlide
+  :partNumber="4"
+  title="Review Workflow"
+  subtitle="Close the loop: evidence-bundle review turns hours of skepticism into minutes of confidence."
+  :cards='[
+    { icon: "📦", title: "Evidence Bundle", blurb: "Changes + reasoning + blocked calls" },
+    { icon: "📱", title: "Mobile Approval", blurb: "Invoke @review-enforcer, approve in 3 min" },
+    { icon: "🗺️", title: "What to Delegate", blurb: "Bounded + well-understood → agent" }
+  ]'
+  :terminal='{ context: "Lodash upgrade across 23 files", detail: "12 minutes total human time — agent handled the rest" }'
+/>
 
 ---
 
-# Metrics and ROI (2/2)
-
-<div class="mt-6">
-  <h3 class="text-xl font-bold text-green-400 mb-4 text-center">📊 Team Velocity Gains</h3>
-  <div class="grid grid-cols-3 gap-4 text-sm">
-    <div class="p-4 bg-green-900/30 rounded-lg text-center">
-      <div class="text-3xl font-bold text-green-300">16 hrs/week</div>
-      <div class="text-gray-400 mt-2">Capacity from mobile PR reviews</div>
-    </div>
-    <div class="p-4 bg-green-900/30 rounded-lg text-center">
-      <div class="text-3xl font-bold text-green-300">60 min/week</div>
-      <div class="text-gray-400 mt-2">Saved on issue triage</div>
-    </div>
-    <div class="p-4 bg-green-900/30 rounded-lg text-center">
-      <div class="text-3xl font-bold text-green-300">4.3 hrs/week</div>
-      <div class="text-gray-400 mt-2">Saved on stakeholder comms</div>
-    </div>
-  </div>
-</div>
-
-<div class="mt-6 p-5 bg-gradient-to-r from-green-600 to-green-800 rounded-xl shadow-lg text-center">
-  <div class="text-xl font-bold text-white">ROI from eliminating context switches and enabling mobile workflows</div>
-</div>
-
----
-layout: center
----
-
-# The Multi-Interface Vision (1/2)
-
-<div class="grid grid-cols-4 gap-4 mt-8 text-sm">
-
-<div class="p-4 bg-blue-900/40 rounded-lg text-center">
-  <div class="text-3xl mb-2">💻</div>
-  <div class="font-bold text-blue-300 mb-2">IDE</div>
-  <div class="text-xs text-gray-400 space-y-1">
-    <div>Implementation</div>
-    <div>Debugging</div>
-    <div>Local file editing</div>
-    <div>Test execution</div>
-  </div>
-</div>
-
-<div class="p-4 bg-green-900/40 rounded-lg text-center">
-  <div class="text-3xl mb-2">🌐</div>
-  <div class="font-bold text-green-300 mb-2">Web</div>
-  <div class="text-xs text-gray-400 space-y-1">
-    <div>Planning</div>
-    <div>Coordination</div>
-    <div>PR reviews</div>
-    <div>Documentation</div>
-  </div>
-</div>
-
-<div class="p-4 bg-purple-900/40 rounded-lg text-center">
-  <div class="text-3xl mb-2">📱</div>
-  <div class="font-bold text-purple-300 mb-2">Mobile</div>
-  <div class="text-xs text-gray-400 space-y-1">
-    <div>Reviews anywhere</div>
-    <div>Quick unblocking</div>
-    <div>Stakeholder response</div>
-    <div>Issue triage</div>
-  </div>
-</div>
-
-<div class="p-4 bg-orange-900/40 rounded-lg text-center">
-  <div class="text-3xl mb-2">⚙️</div>
-  <div class="font-bold text-orange-300 mb-2">CLI</div>
-  <div class="text-xs text-gray-400 space-y-1">
-    <div>Scripting</div>
-    <div>Automation</div>
-    <div>CI/CD integration</div>
-    <div>Infrastructure</div>
-  </div>
-</div>
-
-</div>
+# Evidence-Bundle-First Review
+<BeforeAfterMetricsSlide
+  :partNumber="4"
+  pillIcon="📦"
+  pillLabel="Review Workflow: Evidence Bundle"
+  title="Review by Outcome, Not by Line Count"
+  :before='{
+    header: "Without Evidence Bundle",
+    items: [
+      "Open diff cold — unclear what changed or why",
+      { title: "Run tests locally to know if it works", detail: "30+ minutes before review can start" },
+      "No audit of external calls made during execution",
+      "Agent reasoning is opaque — reviewer guesses intent"
+    ]
+  }'
+  :after='{
+    header: "With Evidence Bundle",
+    items: [
+      "Read summary first — 2–3 min for full change rationale",
+      { title: "Test results already visible", detail: "Pass/fail from agent CI run — no local run needed" },
+      "Firewall alerts surfaced — unauthorized calls visible immediately",
+      "Invoke @review-enforcer for structured mobile analysis"
+    ]
+  }'
+  :metrics='[
+    { value: "<3 min", label: "mobile review end-to-end" },
+    { value: "30 min", label: "average PR wait time, down from 4 hours" },
+    { value: "2–3 min", label: "to read evidence bundle and know what changed" }
+  ]'
+  :progressDots='{ current: 1, total: 3, activeColor: "bg-purple-400 shadow-lg shadow-purple-500/50" }'
+/>
 
 ---
 
-# The Multi-Interface Vision (2/2)
-
-<div class="p-6 bg-gradient-to-r from-blue-600 to-purple-800 rounded-xl shadow-lg text-center">
-  <div class="text-2xl font-bold text-white mb-3">Complete AI Coverage Across Every Interface</div>
-  <div class="text-lg text-blue-100">Same customizations work identically everywhere</div>
-</div>
-
-<div class="mt-6 text-center text-gray-400 italic">
-  Build expertise once—apply throughout your workflow
-</div>
-
----
-
-# Key Takeaways
-
-<div class="grid grid-cols-2 gap-6 mt-6 text-sm">
-
-<div class="p-4 bg-blue-900/30 rounded-lg border-l-4 border-blue-400">
-  <div class="text-2xl mb-2">🔄</div>
-  <div class="font-bold text-white mb-2">Portability is Built-In</div>
-  <div class="text-gray-400">Repository customizations automatically work across IDE, web, mobile, and CLI</div>
-</div>
-
-<div class="p-4 bg-green-900/30 rounded-lg border-l-4 border-green-400">
-  <div class="text-2xl mb-2">🎯</div>
-  <div class="font-bold text-white mb-2">Context-Appropriate Tools</div>
-  <div class="text-gray-400">Each interface optimizes for its natural workflows—no forced abstractions</div>
-</div>
-
-<div class="p-4 bg-purple-900/30 rounded-lg border-l-4 border-purple-400">
-  <div class="text-2xl mb-2">🌍</div>
-  <div class="font-bold text-white mb-2">Democratized AI Access</div>
-  <div class="text-gray-400">Non-engineers benefit from repository customizations without IDE training</div>
-</div>
-
-<div class="p-4 bg-orange-900/30 rounded-lg border-l-4 border-orange-400">
-  <div class="text-2xl mb-2">⚡</div>
-  <div class="font-bold text-white mb-2">Workflow Continuity</div>
-  <div class="text-gray-400">AI assistance follows you wherever work happens—no artificial boundaries</div>
-</div>
-
-<div class="p-4 bg-yellow-900/30 rounded-lg border-l-4 border-yellow-400 col-span-2">
-  <div class="text-2xl mb-2">💰</div>
-  <div class="font-bold text-white mb-2">ROI Multiplication</div>
-  <div class="text-gray-400">Single investment in customization serves entire organization across all interfaces</div>
-</div>
-
-</div>
-
-<div class="mt-6 p-5 bg-gradient-to-r from-blue-600 to-blue-800 rounded-xl shadow-lg text-center">
-  <div class="text-2xl font-bold text-white">AI assistance is no longer constrained to the IDE</div>
-</div>
+# What to Delegate: The Decision Framework
+<FrameworkMappingRowsSlide
+  :partNumber="4"
+  pillIcon="🗺️"
+  pillLabel="Review Workflow: Delegation Guide"
+  title="When the Agent Wins vs. When to Stay Human"
+  subtitle="Take this framework back to your team tomorrow morning"
+  :rows='[
+    { label: "Well-bounded", description: "Approach is clear, scope is defined — dep upgrades, doc sync, lint", tag: "→ Delegate" },
+    { label: "Design-only", description: "Novel features, architecture decisions — keep human, use IDE Copilot", tag: "→ Human" },
+    { label: "Multi-repo", description: "Agent works one repo per session — cross-repo needs orchestration", tag: "→ Human" },
+    { label: "Local or DB", description: "Production access, local DB, and local debug are outside the sandbox", tag: "→ Human" }
+  ]'
+  footnote="Start with one delegation-candidate issue this sprint — bounded + well-understood is the only test"
+  :progressDots='{ current: 2, total: 3, activeColor: "bg-purple-400 shadow-lg shadow-purple-500/50" }'
+/>
 
 ---
 
-# Getting Started
-
-<div class="grid grid-cols-2 gap-8 mt-6">
-
-<div>
-  <h3 class="text-xl font-bold text-blue-400 mb-4">🚀 Immediate Actions</h3>
-  <div class="space-y-2 text-sm">
-    <div class="p-3 bg-gray-800 rounded-lg flex items-start gap-3">
-      <span class="text-xl">1️⃣</span>
-      <div>
-        <div class="font-bold text-white">Open github.com/copilot</div>
-        <div class="text-gray-400">Verify repository instructions and agents appear</div>
-      </div>
-    </div>
-    <div class="p-3 bg-gray-800 rounded-lg flex items-start gap-3">
-      <span class="text-xl">2️⃣</span>
-      <div>
-        <div class="font-bold text-white">Test mobile access</div>
-        <div class="text-gray-400">Review PR using custom agent from phone</div>
-      </div>
-    </div>
-    <div class="p-3 bg-gray-800 rounded-lg flex items-start gap-3">
-      <span class="text-xl">3️⃣</span>
-      <div>
-        <div class="font-bold text-white">File issue from screenshot</div>
-        <div class="text-gray-400">Try image-based issue creation workflow</div>
-      </div>
-    </div>
-    <div class="p-3 bg-gray-800 rounded-lg flex items-start gap-3">
-      <span class="text-xl">4️⃣</span>
-      <div>
-        <div class="font-bold text-white">Generate documentation</div>
-        <div class="text-gray-400">Create user docs from code without IDE switch</div>
-      </div>
-    </div>
-    <div class="p-3 bg-gray-800 rounded-lg flex items-start gap-3">
-      <span class="text-xl">5️⃣</span>
-      <div>
-        <div class="font-bold text-white">Delegate to Coding Agent</div>
-        <div class="text-gray-400">Assign routine refactoring and review PR</div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div>
-  <h3 class="text-xl font-bold text-green-400 mb-4">📈 Next Steps</h3>
-  <div class="space-y-3 text-sm">
-    <div class="p-3 bg-green-900/30 rounded-lg">
-      <div class="font-bold text-white mb-1">Explore GitHub Spark</div>
-      <div class="text-gray-400">For design prototyping and stakeholder demos</div>
-    </div>
-    <div class="p-3 bg-green-900/30 rounded-lg">
-      <div class="font-bold text-white mb-1">Configure mobile agents</div>
-      <div class="text-gray-400">Optimize for team reviews on phones</div>
-    </div>
-    <div class="p-3 bg-green-900/30 rounded-lg">
-      <div class="font-bold text-white mb-1">Integrate web workflows</div>
-      <div class="text-gray-400">Into stakeholder communication patterns</div>
-    </div>
-    <div class="p-3 bg-green-900/30 rounded-lg">
-      <div class="font-bold text-white mb-1">Measure improvements</div>
-      <div class="text-gray-400">Track team velocity gains from eliminating PR blocking</div>
-    </div>
-  </div>
-
-  <div class="mt-6 p-4 bg-blue-900/40 rounded-lg border-2 border-blue-500">
-    <div class="font-bold text-blue-300 mb-2">💡 Fast Path to Value</div>
-    <div class="text-xs text-gray-300">Identify biggest context-switching pain points (PR reviews, issue triage, stakeholder questions) and shift those workflows to web</div>
-  </div>
-</div>
-
-</div>
+# The Benchmark: 23 Files, 12 Minutes
+<HeroStatSlide
+  :partNumber="4"
+  pillIcon="📊"
+  pillLabel="Review Workflow: Benchmark"
+  title="What Delegation Looks Like in Practice"
+  subtitle="A complete lodash upgrade, start to finish"
+  :hero='{ value: "12 min", label: "total human time for a complete lodash upgrade across 23 files", source: "Issue filed → agent executed → draft PR reviewed → approved after one comment round" }'
+  :supporting='[
+    { icon: "📝", title: "Assign", description: "Developer files structured issue: scope, acceptance criteria, migration guide link" },
+    { icon: "🤖", title: "Execute", description: "Agent upgrades all 23 files, updates tests, opens draft PR with evidence bundle" },
+    { icon: "💬", title: "Refine", description: "Developer leaves 2 comments; agent pushes follow-up commits and re-runs CI" },
+    { icon: "✅", title: "Approve", description: "12 minutes total human time — agent handled the implementation" }
+  ]'
+  :insight='{ icon: "💡", text: "The agent handled the rest. Human time = issue filing + PR review + one comment round." }'
+  :progressDots='{ current: 3, total: 3, activeColor: "bg-purple-400 shadow-lg shadow-purple-500/50" }'
+/>
 
 ---
 
-# Resources
-
-<div class="grid grid-cols-2 gap-8 mt-6 text-sm">
-
-<div>
-  <h3 class="text-lg font-bold text-blue-400 mb-4">📚 Official Documentation</h3>
-  <div class="space-y-2">
-    <div class="p-3 bg-gray-800 rounded-lg">
-      <a href="https://docs.github.com/en/copilot/get-started/quickstart" class="text-blue-300 hover:text-blue-200">
-        GitHub Copilot Web Quickstart →
-      </a>
-    </div>
-    <div class="p-3 bg-gray-800 rounded-lg">
-      <a href="https://docs.github.com/en/copilot/github-copilot-chat/copilot-chat-in-github/using-github-copilot-chat-in-githubcom" class="text-blue-300 hover:text-blue-200">
-        Using Copilot Chat in GitHub.com →
-      </a>
-    </div>
-    <div class="p-3 bg-gray-800 rounded-lg">
-      <a href="https://docs.github.com/en/copilot/github-copilot-chat/copilot-chat-in-github-mobile/using-github-copilot-chat-in-github-mobile" class="text-blue-300 hover:text-blue-200">
-        Copilot on Mobile →
-      </a>
-    </div>
-  </div>
-</div>
-
-<div>
-  <h3 class="text-lg font-bold text-green-400 mb-4">🚀 Advanced Features</h3>
-  <div class="space-y-2">
-    <div class="p-3 bg-gray-800 rounded-lg">
-      <a href="https://githubnext.com/projects/github-spark" class="text-green-300 hover:text-green-200">
-        GitHub Spark Documentation →
-      </a>
-    </div>
-    <div class="p-3 bg-gray-800 rounded-lg">
-      <a href="https://docs.github.com/en/copilot/concepts/coding-agent/coding-agent" class="text-green-300 hover:text-green-200">
-        Coding Agent Guide →
-      </a>
-    </div>
-    <div class="p-3 bg-gray-800 rounded-lg">
-      <a href="https://github.blog/ai-and-ml/github-copilot/how-to-use-github-copilot-on-github-com-a-power-users-guide/" class="text-green-300 hover:text-green-200">
-        Power User's Guide to Web Copilot →
-      </a>
-    </div>
-  </div>
-</div>
-
-</div>
-
-<div class="mt-8 text-center text-gray-400">
-  <div class="text-sm italic">Scan QR codes in handout for direct access to resources</div>
-</div>
+# Before/After
+<BeforeAfterSlide
+  header="From Hours of Oversight to Minutes of Review"
+  :leftItems='["Issue transcription took 14+ minutes per task", "Review required hours of skeptical, manual reading", "No clear framework for what to delegate to AI", "Audit was a separate step, not part of the artifact"]'
+  :rightItems='["Image drop creates a complete issue in under 2 minutes", "Evidence bundle review completed on a phone in minutes", "Decision tree: bounded + well-understood → delegate", "Blocked firewall calls embedded in the evidence bundle"]'
+  :metrics='[
+    { value: "12 min", detail: "total human time for lodash upgrade across 23 files" },
+    { value: "95%", detail: "detail captured in image-based issue creation" },
+    { value: "<3 min", detail: "mobile PR review and approval end-to-end" }
+  ]'
+/>
 
 ---
-layout: end
+
+# What You Can Do Today
+<WhatYouCanDoTodaySlide
+  :today='["Assign one bounded, well-understood issue to the coding agent", "Use image-drop to create your next GitHub issue", "Review the evidence bundle on the resulting draft PR"]'
+  :thisWeek='["Add copilot-setup-steps.yml to mirror your CI toolchain", "Configure Agent Firewall to strict or moderate", "Build a structured issue template: context, criteria, constraints"]'
+  :thisMonth='["Audit agent PR patterns and refine your issue templates", "Enable Agents > Automations for repo-wide comment triggers", "Measure human-time-per-PR before and after delegation"]'
+  footer="The smallest delegation — one bounded issue — proves the loop and builds the confidence to expand it."
+/>
+
+---
+
+# References
+<ReferencesSlide
+  :groups='[
+    { title: "📖 Official Documentation", color: "cyan", items: [
+      { href: "https://code.visualstudio.com/docs/copilot/copilot-coding-agent", label: "GitHub Copilot coding agent — VS Code", description: "Core concepts and triggering the agent from VS Code" },
+      { href: "https://docs.github.com/en/copilot/concepts/coding-agent/coding-agent", label: "About the Copilot coding agent", description: "Architecture, security model, capabilities, and limitations" },
+      { href: "https://docs.github.com/en/copilot/how-tos/use-copilot-agents/coding-agent/customize-the-agent-environment", label: "Customizing the development environment", description: "copilot-setup-steps.yml reference and runner configuration" },
+      { href: "https://docs.github.com/en/copilot/how-tos/use-copilot-agents/coding-agent/customize-the-agent-firewall", label: "Customizing or disabling the firewall", description: "Allowlist management, org-level controls, and firewall limitations" }
+    ] },
+    { title: "📣 Blog & Changelog", color: "blue", items: [
+      { href: "https://github.blog/ai-and-ml/github-copilot/assigning-and-completing-issues-with-coding-agent-in-github-copilot/", label: "Assigning and completing issues with coding agent", description: "Delegation workflow, evidence bundle, and PR lifecycle" },
+      { href: "https://github.blog/ai-and-ml/github-copilot/onboarding-your-ai-peer-programmer-setting-up-github-copilot-coding-agent-for-success/", label: "Onboarding your AI peer programmer", description: "Issue quality, setup strategies, and adoption patterns" },
+      { href: "https://github.blog/changelog/2026-08-03-trigger-copilot-automations-with-comments", label: "Trigger Copilot automations with comments", description: "Repository-configured comment triggers and automations" },
+      { href: "https://github.blog/changelog/2026-08-03-customize-the-reasoning-level-for-copilot-cloud-agent", label: "Customize the reasoning level for Copilot cloud agent", description: "Per-run reasoning controls and token tradeoffs" }
+    ] },
+    { title: "🛠️ Related Talks", color: "purple", items: [
+      { label: "Copilot CLI", description: "Terminal interface for triggering agent sessions from scripts and CI pipelines" },
+      { label: "Agentic SDLC", description: "Multi-agent orchestration patterns for complex parallel workflows" },
+      { label: "Custom Instructions Workshop", description: "Repository standards that shape agent PRs identically to IDE suggestions" }
+    ] }
+  ]'
+/>
+
 ---
 
 # Thank You
-
-<div class="text-center mt-12">
-  <div class="text-6xl mb-6">🌐</div>
-  <div class="text-2xl text-gray-300 mb-4">Multi-interface AI assistance for modern software teams</div>
-  <div class="text-xl text-blue-400">github.com/copilot</div>
-</div>
-
-<div class="mt-12 text-center text-sm text-gray-400">
-  Questions? Let's discuss how web Copilot can transform your team's workflows.
-</div>
+<ThankYouSlide
+  title="From Issue to Pull Request"
+  subtitle="GitHub Copilot's Coding Agent in Practice"
+  :cards='[
+    { value: "12 min", detail: "total human time — lodash upgrade, 23 files, agent handled the rest" },
+    { value: "2 min", detail: "to create an issue with 95% detail capture via image-based workflow" },
+    { value: "Never", detail: "the agent can merge its own PR — platform-enforced separation of duties" }
+  ]'
+  prompt="What's the first bounded, well-understood issue you'd delegate to the coding agent?"
+/>

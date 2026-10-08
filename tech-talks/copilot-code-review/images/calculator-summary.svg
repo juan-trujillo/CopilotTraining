@@ -1,0 +1,46 @@
+<svg width="1600" height="900" viewBox="0 0 1600 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg2" x1="0" y1="0" x2="1600" y2="900" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0B1120"/>
+      <stop offset="1" stop-color="#1E1B4B"/>
+    </linearGradient>
+    <linearGradient id="glow2" x1="180" y1="120" x2="1420" y2="780" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#22D3EE" stop-opacity="0.18"/>
+      <stop offset="1" stop-color="#A855F7" stop-opacity="0.18"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1600" height="900" rx="32" fill="url(#bg2)"/>
+  <rect x="60" y="60" width="1480" height="780" rx="28" fill="#0F172A" stroke="#334155" stroke-width="2"/>
+  <rect x="60" y="60" width="1480" height="780" rx="28" fill="url(#glow2)"/>
+
+  <text x="100" y="132" fill="#E2E8F0" font-family="Segoe UI, Arial, sans-serif" font-size="40" font-weight="700">Executive Summary Output</text>
+  <text x="100" y="170" fill="#94A3B8" font-family="Segoe UI, Arial, sans-serif" font-size="22">The calculator turns raw PR metrics into a reusable business narrative.</text>
+
+  <rect x="100" y="216" width="920" height="500" rx="28" fill="#111827" stroke="#475569" stroke-width="2"/>
+  <text x="140" y="272" fill="#C4B5FD" font-family="Segoe UI, Arial, sans-serif" font-size="26" font-weight="700">Copyable stakeholder summary</text>
+  <text x="140" y="332" fill="#F8FAFC" font-family="Segoe UI, Arial, sans-serif" font-size="31">PRs with agentic Copilot Code Review close</text>
+  <text x="140" y="378" fill="#67E8F9" font-family="Segoe UI, Arial, sans-serif" font-size="42" font-weight="700">15.0 days faster</text>
+  <text x="470" y="378" fill="#F8FAFC" font-family="Segoe UI, Arial, sans-serif" font-size="31">than non-CCR PRs.</text>
+
+  <text x="140" y="442" fill="#F8FAFC" font-family="Segoe UI, Arial, sans-serif" font-size="29">Current adoption: 15.3% of pull requests</text>
+  <text x="140" y="492" fill="#F8FAFC" font-family="Segoe UI, Arial, sans-serif" font-size="29">Observed monthly savings: 1,229 hours and $88,594</text>
+  <text x="140" y="542" fill="#F8FAFC" font-family="Segoe UI, Arial, sans-serif" font-size="29">Expansion upside: 6,821 hours and $491,863</text>
+  <text x="140" y="616" fill="#94A3B8" font-family="Segoe UI, Arial, sans-serif" font-size="24">Model parameters stay attached to the summary, so the story is auditable.</text>
+  <rect x="140" y="650" width="250" height="40" rx="20" fill="#6D28D9"/>
+  <text x="202" y="677" fill="#FAF5FF" font-family="Segoe UI, Arial, sans-serif" font-size="20" font-weight="700">Copy summary</text>
+
+  <rect x="1060" y="216" width="380" height="238" rx="24" fill="#0F172A" stroke="#0EA5E9" stroke-width="2"/>
+  <text x="1092" y="266" fill="#7DD3FC" font-family="Segoe UI, Arial, sans-serif" font-size="24" font-weight="700">Model assumptions</text>
+  <text x="1092" y="316" fill="#E2E8F0" font-family="Segoe UI, Arial, sans-serif" font-size="22">Baseline review time: 30 min</text>
+  <text x="1092" y="356" fill="#E2E8F0" font-family="Segoe UI, Arial, sans-serif" font-size="22">With CCR: 15 min</text>
+  <text x="1092" y="396" fill="#E2E8F0" font-family="Segoe UI, Arial, sans-serif" font-size="22">Developer cost: $150K / year</text>
+  <text x="1092" y="436" fill="#E2E8F0" font-family="Segoe UI, Arial, sans-serif" font-size="22">Derived rate: $72 / hour</text>
+
+  <rect x="1060" y="484" width="380" height="232" rx="24" fill="#0F172A" stroke="#A855F7" stroke-width="2"/>
+  <text x="1092" y="534" fill="#E9D5FF" font-family="Segoe UI, Arial, sans-serif" font-size="24" font-weight="700">What changes in the talk</text>
+  <text x="1092" y="584" fill="#F8FAFC" font-family="Segoe UI, Arial, sans-serif" font-size="22">ROI proof becomes app-led, not SQL-led.</text>
+  <text x="1092" y="624" fill="#F8FAFC" font-family="Segoe UI, Arial, sans-serif" font-size="22">YAML remains for review behavior and policy.</text>
+  <text x="1092" y="664" fill="#F8FAFC" font-family="Segoe UI, Arial, sans-serif" font-size="22">Warehouse queries are optional for recurring internal reporting.</text>
+  <text x="1092" y="704" fill="#94A3B8" font-family="Segoe UI, Arial, sans-serif" font-size="20">Show the workflow, then show the output your buyer can reuse.</text>
+</svg>

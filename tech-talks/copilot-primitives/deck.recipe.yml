@@ -1,0 +1,71 @@
+# Reviewed 2026-09-16: preserve the four-primitives spine and add a compact
+# place-load-prove preamble. Independent review moved the live climax to skill graduation.
+version: 1
+deck:
+  title: "Copilot Configuration Primitives: Making AI Understand Your Codebase"
+  subtitle: "Instructions, Custom Prompts, Skills, and Agents"
+  tagline: "Encode the convention once. Graduate the workflow when it is proven."
+
+  agenda:
+    - title: "Encode the smallest fitting primitive"
+      takeaway: "See one shared convention become repository, path-scoped, and directory guidance."
+      whyItMatters: "Teams choose the correct file and stop repeating stable context in each request."
+    - title: "Graduate solved work into capability"
+      takeaway: "Turn a working chat into a shared command, then add scripts and templates as a skill."
+      whyItMatters: "The team reuses proven work with observable execution evidence."
+    - title: "Prove configuration reached the result"
+      takeaway: "Trace eligibility through acceptance, then repair the first broken boundary."
+      whyItMatters: "Delivery, execution, validation, and approval remain independently observable."
+
+  arcToc: "Instructions → Custom Prompts → Skills → Agents"
+  arcNarrative: >
+    A three-slide preamble classifies owner, lifetime, selector, and evidence;
+    separates eligibility, loading, execution, validation, and acceptance; and
+    repairs one concrete selector failure. Instructions then establish the
+    reviewed baseline and prove delivery through a live /init demonstration.
+    Custom Prompts capture a solved workflow as a shared command. Skills form
+    the engagement peak by graduating that workflow into a runnable pack during
+    a live demonstration. Agents close the progression by composing the stack
+    behind explicit tools and a human-controlled handoff.
+  sectionOrder:
+    - "Instructions"
+    - "Custom Prompts"
+    - "Skills"
+    - "Agents"
+  sectionModes:
+    "Instructions":
+      emphasis: high
+      note: >
+        Use one anatomy beat for repository-wide and path-scoped instructions.
+        Give AGENTS.md one selector slide inside this section. Show shared
+        configuration as reviewed institutional knowledge with a named owner.
+        Run /init live and use the References panel as delivery evidence.
+    "Custom Prompts":
+      emphasis: medium
+      note: >
+        Show a complete .prompt.md anatomy with inputs, selection, file context,
+        tools, and links to instructions. Use a static /create-prompt transcript
+        to preserve time for the runnable graduation in the next section.
+    "Skills":
+      emphasis: high
+      note: >
+        Make prompt-to-skill graduation the climax. Show progressive loading,
+        SKILL.md, a referenced script, and a referenced template. Run the
+        /create-prompt to /create-skill graduation live and validate one output.
+    "Agents":
+      emphasis: medium
+      note: >
+        Show one read-only planner anatomy with explicit tools and one handoff.
+        Use a static /create-agent transcript. Keep human approval outside the
+        agent tool list and close with the primitive selection decision model.
+
+  preamble: []
+  appendix: []
+
+  highlightMoments:
+    - "One repository convention becomes broad, path-scoped, or directory guidance through an explicit selector decision."
+    - "A solved chat becomes a team command, then graduates into a runnable skill with a referenced script and template."
+    - "Skills load metadata first, instructions on a match, and resources during execution."
+    - "The evidence chain separates eligible, loaded, executed, validated, and accepted into observable claims."
+    - "A read-only planner and one implementation handoff make tool constraints visible as architecture."
+

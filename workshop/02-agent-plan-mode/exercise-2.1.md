@@ -1,119 +1,91 @@
-# Exercise 2.1: Invoking Plan Mode
+# Exercise 2.1: Swap the Show
 
 ## 🔨 Exercise
 
-### Exercise 2.1: Invoking Plan Mode — "Research Before Code"
+### Exercise 2.1: Swap the Show — "Align the Foundation Before the Sprint Starts"
 
-**Lead:** Marcus ⭐ | **Support:** Sarah 🤝 | **Time:** 8 min
+**Lead:** Rafael ⭐ | **Support:** Sarah 🤝 | **Time:** 10 min
 
 #### 📖 The Challenge
 
-Marcus has been assigned the character detail page feature—a task that spans frontend components, backend API endpoints, and database queries. He's staring at the FanHub codebase trying to figure out where to start. Which files need to be modified? What dependencies exist between layers? What patterns should he follow?
+It's 9:00 AM. Sprint planning starts in 15 minutes. Rafael opens the FanHub repo and sees what he already suspected: the seed data is still Breaking Bad. Characters, episodes, locations — all placeholder content from the workshop scaffold. The team's chosen show is sitting in a doc somewhere and in the `docs/[show]-universe.md` they created in Module 1. The product they're building features on top of? Still Walter White.
 
-The old approach: spend 35 minutes manually exploring the codebase, opening files, tracing imports, checking existing patterns, and hoping he doesn't miss critical dependencies. Last sprint, he missed 5 dependencies across 3 features, leading to build failures and integration conflicts that took hours to debug.
+Rafael doesn't care which files need updating. He cares that the team doesn't spend the next three sprints building features on the wrong foundation.
 
-Sarah has been watching this pattern across the team: *"We spend more time figuring out what to change than actually changing it. There has to be a better way to map the work before diving in."*
+*"The architecture is fine. The data is wrong. Before anyone opens a feature branch, the repo needs to reflect what we're actually shipping."*
+
+He's not going to hand-edit seed files. He's going to ask Copilot to enumerate what needs to change, generate the replacement content, and execute the swap — before standup.
 
 #### 🔄 The Transformation
 
 | Before ❌ | After ✨ |
 |-----------|----------|
-| Marcus spends 35 minutes manually analyzing: opening 15+ files, tracing import chains, checking API patterns, making notes about what needs to change, second-guessing dependencies | Marcus invokes plan mode: types one request, waits 90 seconds, gets a comprehensive implementation plan with file paths, step ordering, dependencies, and open questions |
-| **Planning time:** 35 min<br>**Missed dependencies:** 5 per sprint<br>**Confidence:** Low (guessing) | **Planning time:** 7 min (2 min AI + 5 min review)<br>**Missed dependencies:** 1 per sprint<br>**Confidence:** High (validated plan) |
+| Team builds features on Breaking Bad placeholder data. Every exercise, every example, every test uses the wrong show. Inconsistencies compound across modules. | Repo reflects the team's chosen show from day one. Every subsequent exercise, plan, and prompt runs against real data — the product they're actually building. |
+| **Data alignment:** Manual, deferred ("we'll swap it later") | **Data alignment:** Done in Agent mode before sprint planning |
+| **Confidence in examples:** Low — everything references the wrong show | **Confidence in examples:** High — exercises are grounded in their own content |
+
+**Time saved:** 10 min now prevents hours of confusion across five modules of exercises.
 
 #### 🎯 Your Goal
 
-Use the plan agent to research and generate a comprehensive implementation plan for the character detail feature.
+Use Copilot in Agent mode to replace the Breaking Bad seed data with content for your chosen show. By the end of this exercise, the FanHub site should load characters, episodes, and locations from your show — not Breaking Bad.
 
 #### 📋 Steps
 
-1. **Open Copilot Chat in Plan Mode**
-   
-   Open the Chat view (`Ctrl+Alt+I` or `Cmd+Alt+I` on Mac) and select **Plan** from the agents dropdown at the top. You should see the plan agent icon (📋) indicating you're in planning mode, not default chat mode.
-   
-   Why plan mode? Because it uses read-only research tools to analyze your codebase comprehensively before proposing any changes. The default agent starts implementing immediately; plan mode separates research from execution.
+1. **Open Agent mode**
 
-2. **Request the Character Detail Feature Plan**
-   
-   In the plan mode chat, enter this request:
-   
-   ```
-   @workspace Implement a character detail page feature:
-   - Frontend: Display character name, role, biography, episode count
-   - Backend: API endpoint to fetch character by ID with full details
-   - Database: Query to retrieve character information efficiently
-   - Follow existing FanHub patterns for routing, error handling, and styling
-   ```
-   
-   Press Enter and wait for the plan agent to research your codebase. This takes 60-120 seconds—it's reading ARCHITECTURE.md, copilot-instructions.md, analyzing existing patterns, mapping dependencies, and identifying constraints.
-   
-   **What to observe:** The plan agent doesn't make any code changes. It's gathering context to propose a research-based implementation plan.
+   Open Copilot Chat (`Ctrl+Alt+I` / `Cmd+Alt+I` on Mac) and switch to **Agent** mode. Agent mode can read files, generate new content, and write changes — which is exactly what a data swap requires.
 
-3. **Review the Generated Plan**
-   
-   Examine the plan output, which should include:
-   
-   - **Summary**: High-level approach (e.g., "Create React component, Express API endpoint, database query")
-   - **Implementation Steps**: Ordered tasks like:
-     - Step 1: Create database query in `backend/src/database/queries.js`
-     - Step 2: Add API endpoint in `backend/src/routes/characters.js`
-     - Step 3: Create frontend component in `frontend/src/pages/CharacterDetail.jsx`
-     - (Additional steps for routing, styling, error handling, tests)
-   - **Open Questions**: Ambiguities like "Should character biography support rich text formatting?" or "What happens if character ID doesn't exist?"
-   - **Dependencies**: What order steps must execute (database before API, API before frontend)
-   
-   **Note the file paths:** The plan references specific files in your FanHub codebase. It analyzed your project structure from ARCHITECTURE.md and existing code patterns.
-   
-   **Note the time:** Planning took ~2 minutes of AI research plus your ~5 minutes of review = 7 minutes total, compared to 35 minutes of manual analysis.
+2. **Ask Copilot to audit the seed data**
 
-4. **Save the Plan (Don't Execute Yet)**
-   
-   Use the **"Open in Editor"** button to save the plan as a markdown file, or simply copy the plan content into a new file:
-   
+   Paste the following prompt:
+
    ```
-   fanhub/docs/FEATURE-CHARACTER-DETAIL.md
+   @workspace Audit the FanHub seed data and list every file that contains
+   Breaking Bad-specific content (character names, episode titles, locations,
+   show-specific terminology). Don't make any changes yet — just list the files
+   and summarize what each one contains.
    ```
-   
-   Don't execute the plan yet—that's Exercise 2.3. Right now, focus on seeing how plan mode researches and proposes implementation strategies.
-   
-   **Why save it?** Plans become documentation: a record of *what* you're building, *why*, and *how* the pieces fit together. Share with team members, reference during implementation, or revisit when requirements change.
+
+   Review the list. This is your swap inventory.
+
+3. **Ask Copilot to generate replacement content**
+
+   Once you've seen what needs to change, prompt:
+
+   ```
+   Using docs/[show]-universe.md as the source of truth, generate replacement
+   seed data for [Your Show] to replace the Breaking Bad content in the files
+   you just listed. Match the existing data structure exactly — same field names,
+   same format, same number of entries where possible. Apply the changes.
+   ```
+
+   Replace `[Your Show]` and `[show]` with your actual show name and slug.
+
+4. **Verify the swap**
+
+   Once Copilot completes the changes, open the FanHub app (or check the data files directly) and confirm:
+   - At least 3 characters from your show appear
+   - At least 1 episode or season entry is present
+   - No "Walter White" or "Jesse Pinkman" remain in the seed data
 
 #### ✅ Success Criteria
 
-- [ ] Plan agent generates 5-7 implementation steps with specific file paths
-- [ ] Plan includes summary, steps, open questions, and dependencies sections
-- [ ] File paths reference your actual FanHub codebase structure (e.g., `backend/src/routes/`, `frontend/src/pages/`)
-- [ ] Planning completed in ~7 minutes (compared to 35 minutes manual analysis)
-- [ ] Plan saved for review and team discussion
+- [ ] Agent mode used to audit and swap seed data (not manual find/replace)
+- [ ] Characters, episodes, and/or locations reflect your chosen show
+- [ ] Breaking Bad character names no longer appear in seed data files
+- [ ] `docs/[show]-universe.md` referenced as the content source
 
-> 📂 **Compare Your Work**: [`examples/completed-config/docs/character-detail-challenge.md`](../examples/completed-config/docs/character-detail-challenge.md)
+#### 💭 Reflection
 
-#### 📚 Official Docs
+> **Rafael:** "The architecture is fine. The data is wrong. This is a 15-minute alignment — not a feature."
+>
+> Sarah, reviewing the PR: "This should have been the first thing we did."
+>
+> Rafael: "It is. I'm already on the next OKR."
 
-- [Planning in VS Code Chat](https://code.visualstudio.com/docs/copilot/chat/chat-planning) — How the plan agent researches tasks and generates implementation plans
-- [Context Engineering Guide](https://code.visualstudio.com/docs/copilot/guides/context-engineering-guide) — How `@workspace` enables comprehensive codebase analysis
+#### 🔗 Connection to the Module
 
----
+This exercise is the only one in Module 2 that isn't about planning a feature. It's about **establishing the foundation** that makes every plan meaningful. When the data matches your product, every subsequent plan, every example output, and every test you run throughout the workshop is grounded in something real.
 
-## 🔗 What You Built
-
-**In this exercise:**
-- `fanhub/docs/FEATURE-CHARACTER-DETAIL.md` — Implementation plan with step-by-step breakdown, dependencies, and open questions
-
-**How it compounds:**
-
-| Previous Modules | This Module | Combined Power |
-|------------------|-------------|----------------|
-| ARCHITECTURE.md (Module 1) | Plan agent research | Plan understands your tech stack, folder structure, and data flow automatically |
-| copilot-instructions.md (Module 1) | Plan agent proposals | Plans follow your coding standards and patterns without explicit reminders |
-
----
-
-## ➡️ Next Up
-
-**[Exercise 2.2: Validating and Refining Plans](exercise-2.2.md)** — Review the AI-generated plan with David's architectural expertise to catch what AI can't see.
-
-> *"The plan looks solid, but I see three things that could break in production..."*  
-> — David, applying 20 years of experience to the AI-generated plan
-
----
+Everything from Exercise 2.2 forward builds on top of what you just swapped in.

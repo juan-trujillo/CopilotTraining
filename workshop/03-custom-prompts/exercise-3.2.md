@@ -1,191 +1,108 @@
-# Exercise 3.2: Referencing Standards and Docs
+# Exercise 3.2: Creating a Context-Aware Prompt File
 
 ## 🔨 Exercise
 
-### Exercise 3.2: Referencing Standards and Docs — "Link Once, Use Forever"
+### Exercise 3.2: Feature Kickoff Brief — "Save One Strong Team Prompt"
 
-**Lead:** Sarah ⭐ | **Support:** David 🤝 | **Time:** 7 min
+**Lead:** Marcus ⭐ | **Support:** Sarah 🤝 | **Time:** 12 min
 
 #### 📖 The Challenge
 
-Sarah has been typing her React component review prompt manually: 8 lines explaining functional components, hooks rules, TypeScript types, error boundaries, accessibility, and performance patterns. Takes 3 minutes to type, and she occasionally misses a check. Meanwhile, all these standards are _already documented_ in `.github/copilot-instructions.md` from Module 1.
+Before Marcus starts any new feature, he reassembles the same context from scratch: which files to touch, which patterns from `copilot-instructions.md` to follow, which architecture dependencies to sequence first. He rebuilds this from memory every time — and the brief is never quite the same twice.
 
-David faces the same problem with architecture reviews—he types patterns that are already in ARCHITECTURE.md. The team is duplicating documentation: once in the foundational files, again in every prompt.
+The missing piece is a prompt file that accepts a feature name as a variable, pulls in the current architecture and team standards automatically, and always returns the same structured kickoff brief. One invocation, consistent output, zero manual context assembly.
 
-Sarah realizes: _"Why am I copying standards into prompts? I should link to the source of truth. When standards evolve, prompts automatically reference the latest version."_
+💭 *Marcus: "Same prompt, different feature name, same reliable structure every time — that's the workflow I wanted."*
 
 #### 🔄 The Transformation
 
-| Before ❌                                                                                                                                                                            | After ✨                                                                                                                                                                      |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Sarah types 8-line React review prompt manually. Lists standards she remembers, occasionally forgets accessibility checks. When copilot-instructions.md updates, prompt stays stale. | Sarah types `/react-review` (1 line). Prompt links to copilot-instructions.md and always uses current standards. Never forgets checks because they're in the linked document. |
-| **Lines typed:** 8<br>**Setup time:** 3 min<br>**Missed checks:** 2-3 per week<br>**Version drift:** Constant                                                                        | **Lines typed:** 1<br>**Setup time:** 6 seconds<br>**Missed checks:** 0<br>**Version drift:** Impossible (always references latest)                                           |
-
-**Impact:** 3 minutes saved per review × 12 reviews/week = **36 minutes/week**. More importantly: **0 violations make it through** because prompts never forget documented standards.
+| Before ❌ | After ✨ |
+|---|---|
+| Marcus rebuilds implementation context from memory before each feature. Different structure every time, occasionally misses a dependency. | Marcus runs `/Feature-Kickoff "Lore Quick-Add Form"`. Gets files, patterns, sequencing, open questions, and suggested first PR scope — in under 10 seconds. |
+| **Setup:** Manual, inconsistent, from memory | **Setup:** One variable, one invocation |
+| **Risk:** Missed dependencies, stale patterns, inconsistent scope | **Result:** Always current architecture, always current standards |
 
 #### 🎯 Your Goal
 
-Create a code review prompt that links to your existing documentation, ensuring reviews always reference current standards.
+Create a workspace prompt file that takes a feature name as input, references living architecture and instruction docs, and returns a consistent structured kickoff brief for any feature.
 
 #### 📋 Steps
 
-1. **Create a documentation-linked prompt file**
+1. **Create `feature-kickoff.prompt.md`**
 
-   Create `.github/prompts/react-review.prompt.md`:
-
-   ```markdown
-   ---
-   name: react-review
-   description: "Review React component against team standards"
-   agent: "ask"
-   ---
-
-   Review the React component in ${file} against our standards documented in [.github/copilot-instructions.md](../../.github/copilot-instructions.md).
-
-   Check for compliance with:
-
-   **React Standards** (from copilot-instructions.md):
-
-   - Functional components with proper hooks usage
-   - TypeScript types for all props and state
-   - Error boundary implementation for user-facing components
-   - Accessibility attributes (ARIA labels, semantic HTML)
-   - Performance optimization (memoization, lazy loading)
-
-   **Architecture Patterns** (from ARCHITECTURE.md):
-
-   - Component location matches [docs/ARCHITECTURE.md](../examples/completed-config/docs/ARCHITECTURE.md) folder structure
-   - API calls use centralized services layer
-   - State management follows established patterns
-
-   Provide:
-
-   1. **Compliance summary** — Which standards are met, which are violated
-   2. **Specific issues** — Line numbers and exact problems
-   3. **Fix recommendations** — Code examples showing corrections
-   4. **Priority** — Critical (blocks merge) vs. Nice-to-have (optional improvement)
-   ```
-
-   **Key elements:**
-   - **Relative Markdown links**: `[.github/copilot-instructions.md](../../.github/copilot-instructions.md)` references the actual file
-   - **Multiple document references**: Links both copilot-instructions.md and ARCHITECTURE.md
-   - **Structured output**: Specifies exactly what format you want returned
-   - **agent: 'ask'**: Uses analysis agent (no code changes, just review)
-
-2. **Invoke the documentation-aware review**
-
-   Open a React component (e.g., `frontend/src/components/CharacterCard.js`) and run:
-
-   ```
-   /react-review
-   ```
-
-   Watch Copilot:
-   - Read the prompt file
-   - Fetch content from `.github/copilot-instructions.md` and `docs/ARCHITECTURE.md`
-   - Analyze the current file against both documents
-   - Return structured review with line numbers and priorities
-
-   **Expected output:**
-
-   ```
-   ✅ COMPLIANCE SUMMARY:
-   Met: Functional component, TypeScript types, hooks rules
-   Violated: Missing error boundary, no ARIA labels, not memoized
-
-   ❌ SPECIFIC ISSUES:
-   Line 47: <div> should be <section> for semantic HTML
-   Line 82: onClick missing aria-label for screen readers
-   Component: Not wrapped in error boundary
-
-   🔧 FIX RECOMMENDATIONS:
-   [Detailed code examples with corrections]
-
-   🚨 PRIORITY:
-   Critical: Add error boundary (blocks merge)
-   Nice-to-have: Memoization optimization
-   ```
-
-3. **Test automatic documentation updates**
-
-   Make a change to `.github/copilot-instructions.md`. For example, add:
-
-   ```markdown
-   - **Data fetching**: Always use React Query for server state management
-   ```
-
-   Now run `/react-review` on a component that fetches data. Notice the review now includes React Query validation—**without modifying the prompt file**. The prompt automatically references the updated standards.
-
-   **This is the power of documentation links:** Standards evolve, prompts stay synchronized automatically.
-
-4. **Create an architecture review prompt**
-
-   Following the same pattern, create `.github/prompts/arch-review.prompt.md`:
+   Create `.github/prompts/feature-kickoff.prompt.md`:
 
    ```markdown
    ---
-   name: arch-review
-   description: "Validate architectural patterns and structure"
-   agent: "ask"
+   name: Feature Kickoff
+   description: Generate a structured implementation brief for any named feature
+   mode: ask
    ---
 
-   Review ${file} against our architecture documented in [docs/ARCHITECTURE.md](../examples/completed-config/docs/ARCHITECTURE.md).
+   Generate a feature kickoff brief for: **${input:featureName}**
 
-   Validate:
+   ## Context sources
+   - [Architecture guide](./ARCHITECTURE.md): file structure, module boundaries, data flow
+   - [Team instructions](./.github/copilot-instructions.md): patterns, naming, review habits
 
-   - File location matches architectural layer (components, services, routes)
-   - Dependencies flow correctly (UI → Services → Database)
-   - Data models match schema definitions
-   - API patterns follow REST conventions
+   ## Output
 
-   Flag any violations with specific examples and corrections.
+   **Files you'll touch**
+   List likely affected files with create/extend/modify labels.
+
+   **Patterns to follow**
+   Pull relevant conventions from copilot-instructions.md for this feature.
+
+   **Dependencies to sequence first**
+   Based on ARCHITECTURE.md, what must land before this feature?
+
+   **Open questions before you start**
+   What decisions need to be made before coding begins?
+
+   **Suggested first PR scope**
+   The smallest reviewable slice to ship first.
    ```
 
-   Test by running `/arch-review` on any file. David's 20 years of architectural wisdom, now executable as a function.
+   **Key design choices:**
+   - **`${input:featureName}`** — VS Code prompts for the feature name at invocation time; same prompt, different brief every sprint
+   - **Markdown links to living docs** — when architecture or standards evolve, every future kickoff reflects the change automatically
+   - **Structured output** — consistent format makes briefs comparable and reviewable across features
+
+2. **Invoke it for a real feature**
+
+   In Copilot Chat:
+
+   ```
+   /Feature-Kickoff "Lore Quick-Add Form"
+   ```
+
+   VS Code will prompt for `featureName`, then pass it along with the linked doc content. Check the output: are the files, patterns, and sequencing correct for this feature?
+
+3. **Run it again for a second feature**
+
+   ```
+   /Feature-Kickoff "Character Detail Stats Card"
+   ```
+
+   Compare the two outputs. The structure should be identical — the content should be completely different. That's the variable doing its job.
 
 #### ✅ Success Criteria
 
-- [ ] `.github/prompts/react-review.prompt.md` uses Markdown links to reference copilot-instructions.md and ARCHITECTURE.md
-- [ ] Running `/react-review` on a component produces structured review output with compliance summary
-- [ ] Updating copilot-instructions.md automatically changes future `/react-review` results (no prompt file changes needed)
-- [ ] `.github/prompts/arch-review.prompt.md` created and validates architecture patterns
-
-> 📂 **Compare Your Work**:
->
-> - [`react-review.prompt.md`](../examples/completed-config/.github/prompts/react-review.prompt.md)
-> - [`arch-review.prompt.md`](../examples/completed-config/.github/prompts/arch-review.prompt.md)
-
-#### 📚 Official Docs
-
-- [Prompt Files - Referencing Files](https://code.visualstudio.com/docs/copilot/customization/prompt-files#_body) — How to use Markdown links to include other workspace files in prompts
-- [VS Code Workspace Context](https://code.visualstudio.com/docs/copilot/copilot-customization#_workspace-context) — How Copilot accesses workspace files referenced in prompts
+- [ ] Prompt exists with `${input:featureName}` variable
+- [ ] References `ARCHITECTURE.md` and `copilot-instructions.md` via markdown links
+- [ ] Output includes files, patterns, sequencing, open questions, and first PR scope
+- [ ] Running it twice with different feature names produces consistent structure, different content
 
 ---
 
 ## 🔗 What You Built
 
-**In this exercise:**
+**In this exercise:** `.github/prompts/feature-kickoff.prompt.md` — a reusable prompt that takes any feature name and returns a structured implementation brief grounded in current architecture and team standards.
 
-- `.github/prompts/react-review.prompt.md` — Code review function that always references current React standards from copilot-instructions.md
-- `.github/prompts/arch-review.prompt.md` — Architecture validation function that enforces patterns documented in ARCHITECTURE.md
-
-**How it compounds:**
-
-| Previous Modules                                    | This Exercise                           | Combined Power                                                      |
-| --------------------------------------------------- | --------------------------------------- | ------------------------------------------------------------------- |
-| Module 1: ARCHITECTURE.md documents system design   | Prompt links to ARCHITECTURE.md         | Architecture validated automatically in every review                |
-| Module 1: copilot-instructions.md defines standards | Prompt links to copilot-instructions.md | Standards enforced consistently without manual checking             |
-| Exercise 3.1: Created first prompt file             | Add documentation links to prompts      | Single source of truth + automated enforcement = zero version drift |
-
-**Why this matters:** Sarah's React review standards were locked in her head and occasionally forgotten. Now they're documented once in copilot-instructions.md and enforced automatically through `/react-review`. When standards evolve, every review uses the latest version instantly. **Documentation becomes automation.**
+**Why it matters:** The brief is only as good as the docs it reads. Because the prompt links to living sources of truth, it stays accurate as the codebase evolves — without anyone updating the prompt file.
 
 ---
 
 ## ➡️ Next Up
 
-**[Exercise 3.3: Variable-Driven Prompts](exercise-3.3.md)** — Make prompts even more powerful by using variables to capture dynamic context like the current file, selected text, or user input.
-
-> _"The documentation links are brilliant, but build debugging needs more than just file references. Can prompts capture logs, environment variables, and error output automatically?"_  
-> — Marcus, about to discover prompt file variables
-
----
+**Exercise 3.3: Show-Accuracy Check Prompt** — encode domain knowledge (your universe file) into a prompt that applies canon rules automatically to any content piece.

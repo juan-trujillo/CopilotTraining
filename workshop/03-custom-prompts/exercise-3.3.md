@@ -1,258 +1,177 @@
-# Exercise 3.3: Variable-Driven Prompts
+# Exercise 3.3: Lore Entry Accuracy Check Prompt
 
 ## 🔨 Exercise
 
-### Exercise 3.3: Variable-Driven Prompts — "Context Without Copy-Paste"
+### Exercise 3.3: Lore Entry Accuracy Check Prompt — "Encode Your Domain Knowledge"
 
-**Lead:** Marcus ⭐ | **Support:** Rafael 🤝, Elena 🤝 | **Time:** 10 min
+**Lead:** Marcus ⭐ | **Support:** Sarah 🤝 | **Time:** 12 min
 
 #### 📖 The Challenge
 
-It's 4:30 PM. Marcus is debugging a build failure. His current workflow:
+It's 10:20 AM. Marcus just opened a PR — he used Copilot to batch-generate lore entries for the `/lore` page the team built last sprint. Ten facts about the show, fifteen minutes of work. The code looks fine.
 
-1. Copy error message from terminal (2 min)
-2. Open Docker config file (1 min)
-3. Copy relevant sections (1 min)
-4. Type detailed prompt: _"Here's the error: [paste]. Here's the config: [paste]. Here's the environment: [paste]. What's wrong?"_ (1 min)
-5. Total: **5 minutes just to gather context** before diagnosis even starts
+Sarah reviews it. One entry says Walter White first met Jesse "at a university chemistry program." He didn't — Walter was Jesse's high school chemistry teacher at J.P. Wynne High School. She keeps reading. A second entry misattributes a quote. A third has the wrong location.
 
-Elena has the same problem with test debugging—she's constantly copying test output, file content, and error traces. Rafael spends time copying feature requirements and file lists for effort estimation.
+She finds three errors. She flags them. She is not doing this every sprint.
 
-Marcus realizes: _"Prompts can capture this context automatically using variables. I shouldn't manually copy what VS Code already knows."_
+*"Marcus. You used Copilot to write these entries. You need to use Copilot to check them. The canon rules are sitting in `docs/breaking-bad-universe.md` from Module 1. Build a prompt that validates lore entries — before anything goes into the database."*
+
+Marcus blinks. He tab-switches to Hacker News. Then he tab-switches back.
+
+*"Wait — if the rules are already in the file, I just... point the prompt at each entry? Before it hits the database?"*
+
+That's exactly it. The knowledge exists. The prompt just makes it run consistently, at scale, by anyone on the team.
 
 #### 🔄 The Transformation
 
-| Before ❌                                                                                                                                                                                                             | After ✨                                                                                                                                                                                            |
-| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Marcus manually copies error output (from terminal), config files (from editor), and environment details (from system). Types 4-paragraph prompt with all context pasted in. Takes 5 minutes before diagnosis begins. | Marcus opens the failing config file, selects the error output, runs `/debug-build`. Prompt automatically captures file path, selected error, workspace context. Structured analysis in 30 seconds. |
-| **Context gathering:** 5 min<br>**Manual steps:** 4 (copy, switch, paste, format)<br>**Context errors:** Frequent (wrong version copied, stale config)                                                                | **Context gathering:** 0.5 min<br>**Manual steps:** 1 (invoke prompt)<br>**Context errors:** Impossible (always current file, current selection)                                                    |
+| Before ❌ | After ✨ |
+|-----------|----------|
+| Marcus ships Copilot-generated lore entries; Sarah manually cross-references canon during PR review. | Marcus invokes `/lore-accuracy-check` before opening the PR. Canon errors are caught before Sarah ever sees the code. |
+| **Review time:** 8–10 min/PR, entirely on Sarah | **Review time:** ~2 min — Marcus reads the prompt output, fixes before pushing |
+| **Error catch rate:** Varies by Sarah's availability and recall | **Error catch rate:** 100% for rules encoded in the universe file |
+| **Scale:** Sarah is the bottleneck on every lore PR | **Scale:** Any team member runs the check; the domain knowledge lives in a file |
 
-**Time saved:** 4.5 minutes per build failure × 5 failures/sprint = **22.5 minutes/sprint**. More importantly: debugging starts with **perfect context, every time**.
+**Time saved:** 7 min avg × 20 lore reviews/sprint = **140 min/sprint** = **60 hours/year**. More importantly: Sarah stops being the accuracy bottleneck for lore Marcus generates.
 
 #### 🎯 Your Goal
 
-Create variable-driven prompts that automatically capture file paths, selected text, and workspace context, eliminating manual copy-paste.
+Create `.github/prompts/lore-accuracy-check.prompt.md` — a reusable prompt that validates any lore entry against the canon rules in your universe file. The prompt should catch errors in lore descriptions, pass cleanly on correct content, and work on any lore entry without being hardcoded to a specific title or character.
 
 #### 📋 Steps
 
-1. **Create a selection-based debugging prompt**
+1. **Scaffold the prompt file in Agent mode**
 
-   Create `.github/prompts/debug-build.prompt.md`:
+   In GitHub Copilot Chat, switch to **Agent mode**. Paste the following to generate the initial prompt file:
+
+   ```
+   Create a new prompt file at `.github/prompts/lore-accuracy-check.prompt.md`.
+
+   The prompt should:
+   - Have frontmatter with name, description, and mode: ask
+   - Reference `docs/[show]-universe.md` as its accuracy source using a `#file:` reference
+   - Instruct Copilot to check provided lore entry content against canon rules
+   - Flag anything that contradicts show canon, misattributes relationships or locations, or
+     makes claims not established in the show
+   - List specific rule violations if any are found
+   - Pass cleanly (with a brief confirmation) when no violations are detected
+   - Use ${selection} so it operates on selected text, or instruct the user to paste content after invoking it
+   ```
+
+   **For other shows:** Replace `breaking-bad` and the reference to `docs/breaking-bad-universe.md` with your show's slug and universe file path (e.g., `docs/stranger-things-universe.md`).
+
+2. **Review and refine the prompt body**
+
+   Open the generated `.github/prompts/lore-accuracy-check.prompt.md`. It should look roughly like this — adjust yours if it doesn't:
 
    ```markdown
    ---
-   name: debug-build
-   description: "Analyze build failures with automatic context"
-   agent: "ask"
-   tools: ["codebase"]
-   argument-hint: "Select error output in terminal first"
+   name: lore-accuracy-check
+   description: 'Validates lore entries for accuracy against show canon rules'
+   mode: ask
    ---
 
-   Analyze this build failure:
+   You are a canon accuracy reviewer for a fan site.
 
-   **Current file:** ${file}
-   **File directory:** ${fileDirname}
-   **Workspace root:** ${workspaceFolder}
+   Check the following lore entry against the established canon in
+   [docs/[show]-universe.md](../docs/[show]-universe.md).
 
-   **Error output:**
-   \`\`\`
+   Content to review:
    ${selection}
-   \`\`\`
 
-   Diagnose the problem by:
+   For each violation found:
+   - Quote the problematic text
+   - Explain what the canon rule says
+   - Suggest a corrected version
 
-   1. Checking [Docker configuration](../../fanhub/docker-compose.yml)
-   2. Validating [package.json dependencies](../../slides/package.json)
-   3. Reviewing recent changes to ${file}
-   4. Comparing against [ARCHITECTURE.md](../examples/completed-config/docs/ARCHITECTURE.md) build patterns
+   If no violations are found, confirm the content is accurate and briefly explain why it passes.
 
-   Provide:
-
-   - **Root cause** — What's actually broken
-   - **Fix** — Exact commands or code changes
-   - **Prevention** — How to avoid this in the future
+   Do not flag stylistic choices or tone — only factual contradictions with established canon.
    ```
 
-   **Key variables:**
-   - `${file}` — Currently open file's full path
-   - `${fileDirname}` — Directory containing the file
-   - `${workspaceFolder}` — Root folder of the workspace
-   - `${selection}` — Currently selected text (the error output)
-   - `argument-hint` — Shows users what to do before invoking
+   **Key design decisions to preserve:**
+   - **`#file:` or markdown link to the universe file** — this is what makes the prompt accurate. Without it, the prompt is generic and Copilot will fall back on training data, which may contain the same errors you're trying to catch.
+   - **`${selection}`** — lets you select text in the editor and invoke the prompt against it, rather than copy-pasting into chat manually.
+   - **No hardcoded entry titles** — the prompt works on any lore entry. Don't constrain it to a specific title or character name.
+   - **Separate factual from stylistic** — the last line is important. Without it, the prompt may flag valid creative choices as errors.
 
-2. **Use the debugging prompt with context capture**
+3. **Test against a known-bad lore entry**
 
-   Simulate a build failure workflow:
-
-   a) Open `docker-compose.yml` (or any config file)
-
-   b) In the terminal, select an error message (or simulate one):
+   The FanHub seed data contains a deliberately wrong lore entry. Use this as your test input — either select it in the editor and invoke the prompt, or paste it directly in chat after invoking `/lore-accuracy-check`:
 
    ```
-   ERROR: Cannot find module 'express'
-   at Function.Module._resolveFilename
+   Title: "Walter & Jesse — Origin"
+   Walter White recruited Jesse Pinkman as his partner after reconnecting with him on
+   the street. Jesse had been Walter's former student at the University of New Mexico,
+   where Walter taught a chemistry course.
    ```
 
-   c) Run in Copilot Chat:
+   **Expected result:** The prompt should flag "University of New Mexico" as a canon violation. Walter White was a chemistry teacher at J.P. Wynne **High School** — not a university professor. The corrected version should reference J.P. Wynne High School.
+
+   If the prompt doesn't catch this, check that your universe file (from Exercise 1.6) correctly states Walter's role and that the prompt file actually references it. The prompt is only as accurate as the rules you encoded.
+
+4. **Test against a correct lore entry — confirm it passes cleanly**
+
+   Now test an accurate lore entry to confirm the prompt doesn't generate false positives:
 
    ```
-   /debug-build
+   Title: "The Blue Sky Formula"
+   Walter White's methamphetamine, known on the street as "Blue Sky," achieved a purity
+   level exceeding 99% — far beyond any competitor. Its distinctive blue tint came from
+   the synthesis method Walter developed at the Superlab.
    ```
 
-   Watch how variables get substituted:
-   - `${file}` becomes the actual path: `/workspaces/CopilotTraining/docker-compose.yml`
-   - `${selection}` becomes the error text you selected
-   - `${workspaceFolder}` becomes the workspace root
+   **Expected result:** The prompt should confirm this passes — the key facts (purity over 99%, the Superlab) are consistent with established canon.
 
-   The prompt automatically:
-   - Identifies which file is open
-   - Captures the exact error
-   - Checks related configuration files
-   - References architecture documentation
+5. **Test on your own show's content (non-Breaking Bad participants)**
 
-   **No manual copying.** Context is perfect because it's captured automatically.
+   If you're building a site for a different show, write one intentionally wrong lore entry and one accurate one from your show, then run both through your show's accuracy-check prompt.
 
-3. **Create an input-driven feature estimation prompt**
-
-   Rafael needs effort estimation. Create `.github/prompts/feature-estimate.prompt.md`:
-
-   ```markdown
-   ---
-   name: feature-estimate
-   description: "Estimate feature effort with codebase analysis"
-   agent: "agent"
-   tools: ["codebase", "search/codebase"]
-   argument-hint: "feature-estimate <feature description>"
-   ---
-
-   Estimate implementation effort for: ${input:featureDescription:Describe the feature}
-
-   Analyze against codebase in ${workspaceFolder}:
-
-   1. **Similar implementations** — Find comparable features in existing code
-   2. **Affected files** — List files that need modification
-   3. **New files** — Estimate what new files are needed
-   4. **Dependencies** — Identify external libraries or services required
-   5. **Testing scope** — Estimate test file coverage needed
-
-   Reference:
-
-   - Architecture patterns: [ARCHITECTURE.md](../examples/completed-config/docs/ARCHITECTURE.md)
-   - Existing features: Search for similar implementations
-
-   Provide effort estimate in:
-
-   - **Development time** — Hours or days for implementation
-   - **Testing time** — Hours for test coverage
-   - **Complexity rating** — Low/Medium/High with justification
-   - **Risk factors** — What could make this take longer
+   **Stranger Things example (wrong):**
    ```
-
-   **Input variables:**
-   - `${input:featureDescription}` — Prompts user for feature name when invoked
-   - If user types `/feature-estimate Add character search`, the variable becomes `"Add character search"`
-   - The `:Describe the feature` part is placeholder text shown to the user
-
-4. **Test the input-driven prompt**
-
-   In Copilot Chat, run:
-
+   Eleven's psychokinetic powers were the result of her mother's exposure
+   to LSD during CIA experiments conducted at Hawkins Lab.
    ```
-   /feature-estimate Add real-time chat to character detail page
-   ```
+   *(The show depicts MKUltra-style experiments, but the specific mechanism for Eleven's powers is tied to her mother Teresa's participation — test whether your prompt correctly handles this level of canon nuance.)*
 
-   The prompt:
-   - Captures `"Add real-time chat to character detail page"` as the feature description
-   - Searches the codebase for similar WebSocket/real-time features
-   - Estimates files to modify, new dependencies (socket.io?), testing needs
-   - Provides effort breakdown: "3 days backend, 2 days frontend, 1 day testing"
-
-   Rafael can now walk into stakeholder meetings with **data-driven estimates in 5 minutes** instead of 2-hour planning sessions.
-
-5. **Create a file context template generator**
-
-   Elena wants a test file generator. Create `.github/prompts/test-file.prompt.md`:
-
-   ```markdown
-   ---
-   name: test-file
-   description: "Generate test file for current source file"
-   agent: "agent"
-   ---
-
-   Generate test file for:
-
-   **Source:** ${file}
-   **Filename:** ${fileBasename}
-   **Directory:** ${fileDirname}
-
-   Create test at: `${fileDirname}/__tests__/${fileBasenameNoExtension}.test.js`
-
-   Include:
-
-   - Unit tests for all exported functions in ${fileBasename}
-   - Integration tests if ${file} contains API endpoints
-   - Mocked dependencies (imports from other files)
-   - Edge cases: empty inputs, null, errors
-
-   Follow patterns from existing tests in `${workspaceFolder}/**/__tests__/`
-   ```
-
-   **File context variables:**
-   - `${fileBasename}` — Just the filename: `characters.js`
-   - `${fileBasenameNoExtension}` — Filename without extension: `characters`
-   - `${fileDirname}` — Parent directory path
-
-   Now Elena opens any source file and runs `/test-file`. The prompt automatically determines the correct test file path and name.
+   The goal is the same: one failure case, one passing case. The prompt should distinguish between them using only the rules in your universe file.
 
 #### ✅ Success Criteria
 
-- [ ] `.github/prompts/debug-build.prompt.md` uses `${file}`, `${selection}`, and `${workspaceFolder}` variables
-- [ ] Selecting error text and running `/debug-build` automatically includes that error in the analysis
-- [ ] `.github/prompts/feature-estimate.prompt.md` uses `${input:featureDescription}` to accept feature names
-- [ ] Running `/feature-estimate Add notifications` prompts for input and analyzes the codebase for effort estimation
-- [ ] `.github/prompts/test-file.prompt.md` uses `${fileBasename}` and `${fileBasenameNoExtension}` to determine test paths
-
-> 📂 **Compare Your Work**:
->
-> - [`debug-build.prompt.md`](../examples/completed-config/.github/prompts/debug-build.prompt.md)
-> - [`feature-estimate.prompt.md`](../examples/completed-config/.github/prompts/feature-estimate.prompt.md)
-> - [`test-file.prompt.md`](../examples/completed-config/.github/prompts/test-file.prompt.md)
+- [ ] `.github/prompts/lore-accuracy-check.prompt.md` exists with correct frontmatter (`name`, `description`, `mode: ask`)
+- [ ] The prompt references `docs/[show]-universe.md` using a `#file:` reference or markdown link
+- [ ] The prompt is invokable in Copilot Chat as `/[show]-accuracy-check`
+- [ ] The prompt catches the "former college student" error (or equivalent error for your show)
+- [ ] The prompt passes cleanly on the correctly-described Walter White bio (or equivalent for your show)
+- [ ] The prompt works on any content type — not hardcoded to a specific character or field
 
 #### 📚 Official Docs
 
-- [VS Code Variables Reference](https://code.visualstudio.com/docs/editor/variables-reference) — Complete list of available variables: workspace, file, selection, input
-- [Prompt Files - Variables](https://code.visualstudio.com/docs/copilot/customization/prompt-files#_variables) — How to use variables in prompt file body text
+- [Copilot prompt files](https://code.visualstudio.com/docs/copilot/customization/prompt-files) — Full reference for `.prompt.md` frontmatter, variables, and invocation patterns
 
 ---
 
 ## 🔗 What You Built
 
 **In this exercise:**
-
-- `.github/prompts/debug-build.prompt.md` — Build debugging function that automatically captures error output and file context
-- `.github/prompts/feature-estimate.prompt.md` — Effort estimation function that accepts feature descriptions and analyzes the codebase
-- `.github/prompts/test-file.prompt.md` — Test generation function that automatically determines correct test file paths
+- `.github/prompts/[show]-accuracy-check.prompt.md` — A reusable canon accuracy checker that applies the rules from your universe file to any content piece on demand
 
 **How it compounds:**
 
-| Previous Modules                                 | This Exercise                                  | Combined Power                                                                |
-| ------------------------------------------------ | ---------------------------------------------- | ----------------------------------------------------------------------------- |
-| Module 1: ARCHITECTURE.md documents structure    | Variables reference ARCHITECTURE.md by path    | Prompts always check current architecture, no hardcoded paths                 |
-| Exercise 3.1: Created invokable prompt functions | Add variables for dynamic context              | Functions become context-aware—same prompt, different file = relevant results |
-| Exercise 3.2: Linked prompts to documentation    | Variables reference docs by ${workspaceFolder} | Prompts work correctly even if workspace moves or is cloned elsewhere         |
+| Previous Modules | This Exercise | Combined Power |
+|------------------|---------------|----------------|
+| Exercise 1.6: `docs/[show]-universe.md` with canon rules | Prompt that references and applies those rules | Domain knowledge encoded once → applied systematically at every content review |
+| Exercise 3.1: Test-generation prompt | Accuracy-check prompt | Two audit layers: code correctness (tests) + content correctness (canon check) |
+| Exercise 3.2: Context-aware prompt with linked docs | Universe file as the linked source of truth | The pattern generalizes: any structured knowledge file can become an accuracy prompt's reference |
 
-**Why this matters:** Marcus was spending 5 minutes gathering context before debugging could start. Now `/debug-build` captures perfect context in 30 seconds. Rafael's feature estimation went from 2-hour meetings to 5-minute data-driven analysis. Elena's test generation automatically knows the correct file paths.
-
-**The function analogy is complete:** Prompts accept parameters (variables), execute with current context, return consistent results. Your best practices are now executable functions with perfect parameter binding.
+**Why this matters:** Elena's insight — "I already wrote the rules; I just hadn't automated their application" — describes a real and recurring problem on AI-assisted teams. Domain experts encode knowledge in documents. That knowledge sits idle unless it's wired into the workflows that need it. Prompt files are the wire. The fan site makes this concrete: the same pattern applies to clinical terminology validation in healthcare, regulatory compliance checking in fintech, brand voice auditing in e-commerce. **You don't just write the rules once — you build the check that applies them every time.**
 
 ---
 
 ## ➡️ Next Module
 
-**[Module 4: Agent Skills](../04-agent-skills/README.md)** — Prompt files are perfect for specific tasks, but what if you want to give Copilot specialized domain knowledge and capabilities?
+**[Module 4: Agent Skills](../04-agent-skills/README.md)** — You've built prompts that apply domain knowledge on demand. Next: package that knowledge into agent skills that Copilot can call proactively, without being explicitly invoked — so the accuracy check happens as part of the workflow, not after it.
 
-> _"These prompt functions are powerful, but I'm still explaining 'I'm a senior QA engineer focused on edge cases' in every new chat session. Can I make that automatic?"_
-> — Elena, about to discover custom instructions
+> *"The prompt catches errors when Elena remembers to run it. What I want is a skill that runs as part of content generation — so the check is baked in, not bolted on."*
+> — David, about to build the lore validation skill
 
 ---

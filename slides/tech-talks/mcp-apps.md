@@ -9,1381 +9,464 @@ info: |
 drawings:
   persist: false
 transition: slide-left
-title: MCP Apps - Rich Interactive UI
-module: tech-talks/mcp-apps
+title: MCP Apps
 mdc: true
+section: Extend and Embed
 status: active
-updated: 2026-02-01
+updated: 2026-04-22
 ---
 
-<div class="h-full flex flex-col items-center justify-center relative overflow-hidden">
-  <!-- Gradient background -->
-  <div class="absolute inset-0 bg-gradient-to-br from-purple-900/20 via-blue-900/10 to-cyan-900/20"></div>
+<script setup>
+import TitleSlide from './components/structure/TitleSlide.vue'
+import CoreQuestionSlide from './components/structure/CoreQuestionSlide.vue'
+import TocSlide from './components/structure/TocSlide.vue'
+import SectionOpenerSlide from './components/structure/SectionOpenerSlide.vue'
+import BeforeAfterSlide from './components/structure/BeforeAfterSlide.vue'
+import WhatYouCanDoTodaySlide from './components/structure/WhatYouCanDoTodaySlide.vue'
+import ReferencesSlide from './components/structure/ReferencesSlide.vue'
+import ThankYouSlide from './components/structure/ThankYouSlide.vue'
+import ThreeColumnCardSlide from './components/ThreeColumnCardSlide.vue'
+import FourCardGridSlide from './components/FourCardGridSlide.vue'
+import FrameworkMappingRowsSlide from './components/FrameworkMappingRowsSlide.vue'
+import CodeWithFeaturesSlide from './components/CodeWithFeaturesSlide.vue'
+import HeroStatSlide from './components/HeroStatSlide.vue'
+import BeforeAfterMetricsSlide from './components/BeforeAfterMetricsSlide.vue'
+import TwoColPairedConceptsSlide from './components/TwoColPairedConceptsSlide.vue'
+</script>
 
-  <!-- Glowing orb -->
-  <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-gradient-to-r from-purple-500/20 via-blue-500/20 to-cyan-500/20 rounded-full blur-3xl"></div>
-
-  <!-- Logo with glow -->
-  <div class="relative z-10">
-    <div class="absolute inset-0 blur-2xl opacity-50">
-      <img src="./sdp-logo.png" class="w-64" alt="" />
-    </div>
-    <img src="./sdp-logo.png" class="w-64 relative" alt="SDP Logo" />
-  </div>
-
-  <!-- Gradient text title -->
-  <h1 class="!text-5xl !font-bold !mt-8 bg-gradient-to-r from-purple-400 via-blue-400 to-cyan-400 bg-clip-text text-transparent relative z-10">
-    MCP Apps
-  </h1>
-
-  <!-- Pill subtitle -->
-  <div class="mt-4 relative z-10">
-    <span class="px-6 py-2 bg-gradient-to-r from-purple-600/80 to-blue-600/80 rounded-full text-white text-xl font-medium shadow-lg shadow-purple-500/25">
-      Rich Interactive UI in Chat
-    </span>
-  </div>
-
-  <!-- Tagline -->
-  <div class="mt-8 text-lg opacity-70 relative z-10">
-    Eliminate context-switching • Transform chat into visual workspace
-  </div>
-
-  <!-- Decorative line -->
-  <div class="mt-6 w-32 h-1 bg-gradient-to-r from-transparent via-purple-400 to-transparent rounded-full relative z-10"></div>
-</div>
-
-<div class="abs-br m-6 flex gap-2">
-  <span class="text-sm opacity-50">Tech Talk · 40 minutes</span>
-</div>
+# Title
+<TitleSlide
+  title="MCP Apps"
+  subtitle="Rich Interactive UI in Chat"
+  tagline="Transform chat from text stream to visual workspace with inline charts, tables, and forms"
+  meta="GitHub Copilot · Model Context Protocol · VS Code"
+/>
 
 ---
-layout: default
----
 
-# 🎯 The Question This Talk Answers
-
-<div class="mt-12 flex justify-center">
-  <div class="bg-gradient-to-r from-purple-500/20 to-blue-500/20 border-2 border-purple-500/50 p-10 rounded-xl max-w-3xl">
-    <div class="text-3xl font-bold text-white text-center leading-relaxed">
-      "How do I create interactive visualizations and UI components within chat instead of exporting data to external tools?"
-    </div>
-  </div>
-</div>
-
-<div class="mt-12 flex justify-center gap-8 opacity-75">
-  <div class="flex flex-col items-center">
-    <carbon-chart-line class="text-5xl" />
-    <div class="text-sm mt-2">Charts</div>
-  </div>
-  <div class="flex flex-col items-center">
-    <carbon-table class="text-5xl" />
-    <div class="text-sm mt-2">Tables</div>
-  </div>
-  <div class="flex flex-col items-center">
-    <carbon-tree-view class="text-5xl" />
-    <div class="text-sm mt-2">Trees</div>
-  </div>
-</div>
+# Core Question
+<CoreQuestionSlide
+  question="What if your chat responses were interactive visualizations you could explore inline?"
+  subtext="Chat returns text. MCP Apps return"
+  highlight="charts, tables, forms, and trees — interactive, inline, no context switch."
+  :cards='[
+    { icon: "🔧", title: "MCP Server Author", description: "Build tools that return component specs instead of text — VS Code renders them automatically" },
+    { icon: "📊", title: "Data-Heavy Developer", description: "Replace copy-to-Excel workflows with inline sortable tables and drill-down charts" },
+    { icon: "🏗️", title: "Tool Builder", description: "Compose custom agent workflows with stateful multi-step form interactions in chat" },
+    { title: "12 min → 45 sec", description: "Copy-to-Excel chart workflow collapses to inline bar chart — 90 min/day reclaimed in data-heavy workflows" },
+    { title: "6 component types", description: "Charts, tables, forms, trees, cards, custom — one decision tree maps any use case to the right type" },
+    { title: "type: component", description: "Return one field differently in your MCP tool response — VS Code renders an interactive iframe in chat" }
+  ]'
+/>
 
 ---
-layout: center
----
 
-# 📖 Table of Contents
-
-<div class="grid grid-cols-2 gap-6 mt-8">
-  <div @click="$nav.go(8)" class="cursor-pointer p-6 bg-gradient-to-br from-purple-500/10 to-purple-600/5 rounded-xl border border-purple-500/30 hover:border-purple-400/60 transition-all hover:scale-105">
-    <div class="text-3xl mb-2">📊</div>
-    <div class="font-semibold text-lg">Component Types</div>
-    <div class="text-sm opacity-70 mt-2">Charts, tables, forms, trees, cards</div>
-  </div>
-
-  <div @click="$nav.go(15)" class="cursor-pointer p-6 bg-gradient-to-br from-blue-500/10 to-blue-600/5 rounded-xl border border-blue-500/30 hover:border-blue-400/60 transition-all hover:scale-105">
-    <div class="text-3xl mb-2">🔨</div>
-    <div class="font-semibold text-lg">Building MCP Apps</div>
-    <div class="text-sm opacity-70 mt-2">Server structure and callbacks</div>
-  </div>
-
-  <div @click="$nav.go(20)" class="cursor-pointer p-6 bg-gradient-to-br from-cyan-500/10 to-cyan-600/5 rounded-xl border border-cyan-500/30 hover:border-cyan-400/60 transition-all hover:scale-105">
-    <div class="text-3xl mb-2">💡</div>
-    <div class="font-semibold text-lg">Real-World Patterns</div>
-    <div class="text-sm opacity-70 mt-2">Practical implementation examples</div>
-  </div>
-
-  <div @click="$nav.go(24)" class="cursor-pointer p-6 bg-gradient-to-br from-indigo-500/10 to-indigo-600/5 rounded-xl border border-indigo-500/30 hover:border-indigo-400/60 transition-all hover:scale-105">
-    <div class="text-3xl mb-2">🔗</div>
-    <div class="font-semibold text-lg">Integration</div>
-    <div class="text-sm opacity-70 mt-2">Agents, skills, and memory</div>
-  </div>
-</div>
+# Table of Contents
+<TocSlide
+  :sections='[
+    { icon: "🎨", title: "Component Types",   subtitle: "The visual palette — 6 types",              blurb: "Charts, tables, forms, trees, cards, custom — and when to use each",      slide: 4  },
+    { icon: "🔨", title: "Building MCP Apps", subtitle: "Server structure and the pivotal moment",    blurb: "type: component, callback lifecycle, security model",                      slide: 8  },
+    { icon: "🗺️", title: "Real-World Patterns", subtitle: "Four canonical scenarios",               blurb: "Dashboard, drill-down, form workflow, tree navigation",                    slide: 13 },
+    { icon: "🔗", title: "Integration",       subtitle: "Agents, skills, and memory",                blurb: "MCP Apps as first-class platform capability in agentic workflows",         slide: 18 }
+  ]'
+/>
 
 ---
-layout: default
----
 
-# ❌ The Problem
-
-<div class="grid grid-cols-2 gap-8 mt-6">
-
-<div>
-
-<div class="text-sm space-y-4">
-
-<div class="bg-red-900/20 rounded-lg p-4 border border-red-500/30">
-<div class="font-bold text-red-400 mb-2">📉 Data visualization trapped in text</div>
-<div class="text-gray-300">Charts, tables, diagrams rendered as ASCII or markdown—hard to read, impossible to interact with</div>
-</div>
-
-<div class="bg-red-900/20 rounded-lg p-4 border border-red-500/30">
-<div class="font-bold text-red-400 mb-2">🚫 No interactive elements</div>
-<div class="text-gray-300">Can't click, filter, sort without leaving chat and opening external tools</div>
-</div>
-
-<div class="bg-red-900/20 rounded-lg p-4 border border-red-500/30">
-<div class="font-bold text-red-400 mb-2">⚠️ Context switching for visuals</div>
-<div class="text-gray-300">Copy data to spreadsheets, export to visualization tools—<strong>5-10 minute detour per query</strong></div>
-</div>
-
-<div class="bg-red-900/20 rounded-lg p-4 border border-red-500/30">
-<div class="font-bold text-red-400 mb-2">⏸️ Static responses</div>
-<div class="text-gray-300">Can't explore data differently without crafting new prompts and starting over</div>
-</div>
-
-</div>
-
-</div>
-
-<div class="ml-4 flex flex-col justify-center">
-
-<div class="bg-gray-800/50 p-4 rounded-lg border border-gray-600">
-
-```
-┌─────────────────────────────┐
-│ Sales by Region (ASCII)     │
-├─────────────────────────────┤
-│ North  ████████████ 45,000  │
-│ South  ████████████ 52,000  │
-│ East   ████████████ 61,000  │
-│ West   ████████████ 58,000  │
-└─────────────────────────────┘
-```
-
-</div>
-
-<div class="text-center my-4">
-<div class="text-3xl">⬇️</div>
-</div>
-
-<div class="bg-orange-900/20 p-4 rounded-lg border border-orange-500/30 text-center text-sm">
-<div class="text-orange-300">
-Copy to Excel → Create chart<br/>
-→ Realize need different date range<br/>
-→ Return to chat → Repeat
-</div>
-<div class="mt-4 text-red-400 font-bold text-lg">
-⏱️ 15 minutes lost per analysis
-</div>
-</div>
-
-</div>
-
-</div>
+# Part 1 — Component Types
+<SectionOpenerSlide
+  :partNumber="1"
+  title="Component Types"
+  subtitle="Six built-in component types cover the full visualization surface — one decision tree maps any use case."
+  :cards='[
+    { icon: "📊", title: "Charts & Tables", blurb: "Visual data with hover, zoom, sort, filter, export" },
+    { icon: "📝", title: "Forms & Trees",   blurb: "Structured input, hierarchical navigation with callbacks" },
+    { icon: "🃏", title: "Cards & Custom",  blurb: "Rich layouts and sandboxed HTML for anything else" }
+  ]'
+  :terminal='{ context: "Ask: show sales data", detail: "Interactive bar chart renders inline — filter, hover, drill down" }'
+/>
 
 ---
-layout: default
----
 
-# ✨ The Solution: MCP Apps
-
-<div class="grid grid-cols-2 gap-8 mt-8">
-
-<div class="bg-gradient-to-br from-green-500/10 to-green-600/5 rounded-xl border border-green-500/30 p-6">
-
-### What It Does
-
-<div class="text-sm mt-4 space-y-3">
-
-MCP Apps extend Model Context Protocol to return **rich UI component specifications** instead of plain text
-
-Components render directly in VS Code chat with **full interactivity** preserved
-
-<div class="mt-4 opacity-75 italic">
-When model calls MCP tool, server responds with interactive elements that VS Code renders inline
-</div>
-
-</div>
-
-</div>
-
-<div class="bg-gradient-to-br from-blue-500/10 to-blue-600/5 rounded-xl border border-blue-500/30 p-6">
-
-### Key Capabilities
-
-<div class="text-sm mt-4 space-y-2">
-
-- 📊 **Interactive Charts**: Bar, line, pie with hover, zoom, drill-down
-- 📋 **Data Tables**: Sortable, filterable, paginated grids
-- 📝 **Input Forms**: Validated data collection with callbacks
-- 🌲 **Hierarchical Trees**: Expandable file/folder views
-- 🎴 **Rich Cards**: Grid/list layouts with images and actions
-- 🎨 **Custom Components**: Sandboxed HTML/CSS/JS
-
-</div>
-
-</div>
-
-</div>
-
-<div class="mt-8 p-4 bg-gradient-to-r from-purple-600/20 to-blue-600/20 rounded-lg border border-purple-500/30">
-<div class="text-center text-sm">
-<carbon-arrow-right class="inline-block" /> <strong>Architecture:</strong> Prompt → MCP Tool → Component Spec → VS Code Render → User Interaction → Callback
-</div>
-</div>
+# The Six Types
+<FrameworkMappingRowsSlide
+  :partNumber="1"
+  pillIcon="🎨"
+  pillLabel="Component Types: Visual Palette"
+  title="Six Component Types — One Decision Tree"
+  :rows='[
+    { label: "chart",   description: "Time-series, comparisons, distributions — bar, line, pie, scatter, area", tag: "visual data"     },
+    { label: "table",   description: ">20 rows needing sort, filter, search, pagination, CSV export",           tag: "tabular data"    },
+    { label: "form",    description: "Multi-field structured input with validation, dropdowns, callbacks",       tag: "user input"      },
+    { label: "tree",    description: "File systems, org charts, nested categories — expand/collapse + select",   tag: "hierarchical"    },
+    { label: "cards",   description: "Options, portfolios, galleries — grid/list/carousel with action buttons",  tag: "rich layout"     },
+    { label: "custom",  description: "Sandboxed HTML/CSS/JS for flame graphs, maps, or any bespoke visual",      tag: "anything else"   }
+  ]'
+  footnote="Default to built-in types. Reach for custom only when no built-in type fits."
+  :progressDots='{ current: 1, total: 3, activeColor: "bg-cyan-400 shadow-lg shadow-cyan-500/50" }'
+/>
 
 ---
-layout: default
----
 
-# 🧠 Mental Model Shift
-
-<div class="grid grid-cols-3 gap-4 mt-6 text-sm">
-
-<div class="border-2 border-green-500/50 p-4 rounded-lg bg-green-500/5">
-<div class="font-bold text-green-400 mb-3 text-base">✅ Move Toward</div>
-
-**Component-First Responses**  
-Return UI components for visual data, not markdown tables
-
-**Progressive Disclosure**  
-Summary visualizations first, drill-down through interactions
-
-**Callback-Driven Updates**  
-Form submissions trigger new MCP tool calls
-
-**Inline Data Exploration**  
-Filter, sort, paginate without new prompts → **5-10x faster**
-
-</div>
-
-<div class="border-2 border-yellow-500/50 p-4 rounded-lg bg-yellow-500/5">
-<div class="font-bold text-yellow-400 mb-3 text-base">⚠️ Move Away From</div>
-
-**ASCII Art Charts**  
-Rendering bar charts with █ characters
-
-**"Export to CSV" Workflows**  
-Instructing users to copy data and visualize externally
-
-**Static Code Blocks**  
-Returning HTML that users must save and open in browser
-
-</div>
-
-<div class="border-2 border-red-500/50 p-4 rounded-lg bg-red-500/5">
-<div class="font-bold text-red-400 mb-3 text-base">🛑 Move Against</div>
-
-**Massive Markdown Tables**  
-500-row tables as text exceeds context window
-
-**Unsandboxed Custom HTML**  
-Arbitrary HTML/JS without iframe isolation → XSS vulnerabilities
-
-</div>
-
-</div>
-
-<div class="mt-6 p-4 bg-gradient-to-r from-purple-600/20 to-blue-600/20 rounded-lg border border-purple-500/30">
-<div class="text-center text-sm italic">
-<strong>Before:</strong> Show sales → 180-line table → Copy to Excel → 12 min  
-<strong>After:</strong> Interactive chart renders → Click to filter → 45 sec
-</div>
-</div>
+# Charts and Tables in detail
+<TwoColPairedConceptsSlide
+  :partNumber="1"
+  pillIcon="📊"
+  pillLabel="Component Types: Data"
+  title="Charts and Tables — The Workhorses"
+  :left='{
+    header: "Charts",
+    icon: "📈",
+    items: [
+      { title: "Five chart types", detail: "bar, line, pie, scatter, area — all interactive" },
+      { title: "Hover, zoom, drill-down", detail: "Mouse over for exact values; click for details" },
+      { title: "Custom colors + legend", detail: "Adapts to VS Code theme variables automatically" }
+    ]
+  }'
+  :right='{
+    header: "Tables",
+    icon: "📋",
+    items: [
+      { title: "Sort and filter", detail: "Click column headers; dropdown filters for enum columns" },
+      { title: "Full-text search", detail: "Search box across all columns, instant results" },
+      { title: "Pagination + CSV export", detail: "10/25/50/100 per page; download button always visible" }
+    ]
+  }'
+  :progressDots='{ current: 2, total: 3, activeColor: "bg-cyan-400 shadow-lg shadow-cyan-500/50" }'
+/>
 
 ---
-layout: default
----
 
-# When to Use MCP Apps
-
-<div class="grid grid-cols-2 gap-8 mt-6">
-
-<div>
-
-### Decision Tree
-
-```
-Q: What type of data?
-├─ Visual/Quantitative
-│  → Use MCP Apps charts
-│
-├─ Tabular with >20 rows
-│  → Use MCP Apps table
-│
-├─ Structured input needed
-│  → Use MCP Apps form
-│
-├─ Hierarchical navigation
-│  → Use MCP Apps tree
-│
-└─ Simple text/code
-   → Use standard text
-```
-
-</div>
-
-<div class="text-sm">
-
-### Use When
-
-✅ Presenting naturally visual data (charts, graphs)<br/>
-✅ Tables with >20 rows needing sort/filter<br/>
-✅ Collecting validated structured input<br/>
-✅ Navigating hierarchical data<br/>
-✅ User benefits from inline exploration
-
-### Don't Use When
-
-❌ Output is <100 lines of text/code<br/>
-❌ No interactive benefit<br/>
-❌ Mobile/accessibility primary concern<br/>
-❌ Network-constrained environments
-
-<div class="mt-4 text-xs opacity-50">
-
-| Aspect | MCP Apps | Standard Text | External Tools |
-|--------|----------|---------------|----------------|
-| **Best For** | Visual/tabular | Code, explanations | Heavy analysis |
-| **Interaction** | Inline (sort, filter) | None | Full (separate app) |
-| **Setup Time** | 30-60 min | None | Varies |
-
-</div>
-
-</div>
-
-</div>
+# Forms, Trees, Cards
+<ThreeColumnCardSlide
+  :partNumber="1"
+  pillIcon="🔧"
+  pillLabel="Component Types: Interaction"
+  title="Forms, Trees, Cards — Stateful Interaction"
+  :columns='[
+    { icon: "📝", title: "Forms", description: "Collect structured input with validation and submit callbacks", items: ["text, email, number, select, checkbox", "Pattern matching + error messages", "onSubmit calls specified MCP tool"] },
+    { icon: "🌲", title: "Trees", description: "Navigate hierarchical data with expand/collapse and selection", items: ["Lazy-load children on expand", "File-type icons or custom icons", "onSelect triggers MCP tool callback"] },
+    { icon: "🃏", title: "Cards", description: "Present options or galleries with rich layouts and actions", items: ["Grid, list, or carousel layout", "Title, subtitle, image, badges", "Multiple action buttons per card"] }
+  ]'
+  :progressDots='{ current: 3, total: 3, activeColor: "bg-cyan-400 shadow-lg shadow-cyan-500/50" }'
+/>
 
 ---
-layout: section
-name: component-types
----
 
-<div class="h-full flex flex-col items-center justify-center">
-<div class="text-6xl mb-6">📊</div>
-<h1 class="text-5xl font-bold bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
-Component Types Deep-Dive
-</h1>
-<div class="mt-4 text-xl opacity-70">
-Five built-in components for most visualization needs
-</div>
-</div>
-
----
-layout: two-cols
----
-
-# Charts: Data Visualization
-
-<div class="text-sm">
-
-Interactive charts with **hover, zoom, drill-down**
-
-### Capabilities
-- 📍 Hover for exact values
-- 📈 5 chart types: bar, line, pie, scatter, area
-- 🎨 Custom styling and colors
-- 📱 Responsive resizing
-
-### Use When
-- Time-series data
-- Comparisons
-- Distributions
-- Trends
-
-</div>
-
-::right::
-
-<div class="text-xs ml-4">
-
-```typescript
-return {
-  content: [{
-    type: "component",
-    component: {
-      type: "chart",
-      chartType: "bar",  // line, pie, scatter, area
-      title: "Monthly Revenue Trend",
-      data: [
-        { label: "Jan", value: 45000 },
-        { label: "Feb", value: 52000 },
-        { label: "Mar", value: 61000 },
-        { label: "Apr", value: 58000 }
-      ],
-      options: {
-        interactive: true,
-        colors: ["#4CAF50"],
-        showLegend: true,
-        animation: true
-      }
-    }
-  }]
-};
-```
-
-</div>
+# Part 2 — Building MCP Apps
+<SectionOpenerSlide
+  :partNumber="2"
+  title="Building MCP Apps"
+  subtitle="One field changes everything: return type: 'component' instead of text — VS Code renders an interactive iframe."
+  :cards='[
+    { icon: "⚡", title: "The Pivotal Moment", blurb: "type: component in your content array triggers VS Code to render UI" },
+    { icon: "🔄", title: "Callback Lifecycle", blurb: "User clicks → VS Code calls MCP tool → server returns updated state" },
+    { icon: "🔒", title: "Security Model",     blurb: "Sandboxed iframe, CSP restrictions, explicit callback approval" }
+  ]'
+  :terminal='{ context: "return { content: [{ type: \"component\", component: { type: \"chart\"... } }] }", detail: "VS Code detects, instantiates, renders — no extra configuration" }'
+/>
 
 ---
-layout: two-cols
----
 
-# Tables: Interactive Grids
-
-<div class="text-sm">
-
-Sortable, filterable with **pagination and export**
-
-### Capabilities
-- ⬆️⬇️ Click headers to sort
-- 🔍 Full-text search
-- 🎯 Column-specific filters
-- 📄 Pagination (10/25/50/100)
-- 💾 CSV export
-- 📅 Type-aware (dates, numbers)
-
-### Use When
-Displaying **>20 rows** where users need to find, sort, or filter records
-
-</div>
-
-::right::
-
-<div class="text-xs ml-4">
-
-```typescript
-return {
-  content: [{
-    type: "component",
-    component: {
-      type: "table",
-      title: "Active Users",
-      columns: [
-        { key: "name", label: "Name", sortable: true },
-        { key: "email", label: "Email", sortable: true },
-        { key: "role", label: "Role", filterable: true },
-        { key: "lastActive", label: "Last Active", 
-          sortable: true, type: "date" }
-      ],
-      data: [
-        { name: "Alice Chen", email: "alice@ex.com", 
-          role: "Admin", lastActive: "2025-02-06T10:30:00Z" },
-        { name: "Bob Smith", email: "bob@ex.com", 
-          role: "User", lastActive: "2025-02-05T14:20:00Z" }
-      ],
-      options: {
-        pagination: true,
-        pageSize: 10,
-        searchable: true,
-        exportable: true
-      }
-    }
-  }]
-};
-```
-
-</div>
+# The Pivotal Moment
+<CodeWithFeaturesSlide
+  :partNumber="2"
+  pillIcon="⚡"
+  pillLabel="Building: The Key Change"
+  title="One Field — From Text String to Interactive Chart"
+  codePosition="left"
+  :code='{ language: "typescript", content: "// Before: plain text response\nreturn {\n  content: [{\n    type: \"text\",\n    text: \"Jan: 45000, Feb: 52000\"\n  }]\n};\n\n// After: interactive chart\nreturn {\n  content: [{\n    type: \"component\",\n    component: {\n      type: \"chart\",\n      chartType: \"bar\",\n      title: \"Monthly Revenue\",\n      data: [\n        { label: \"Jan\", value: 45000 },\n        { label: \"Feb\", value: 52000 }\n      ],\n      options: { interactive: true }\n    }\n  }]\n};" }'
+  :features='[
+    { icon: "🔍", title: "VS Code detects it", description: "type: component in the content array triggers the chat renderer — no other config needed" },
+    { icon: "📦", title: "Sandboxed iframe", description: "Component renders in an isolated iframe with VS Code theme variables available" },
+    { icon: "🎨", title: "Theme-aware", description: "var(--vscode-editor-background) and all theme tokens accessible in custom components" }
+  ]'
+  :progressDots='{ current: 1, total: 4, activeColor: "bg-blue-400 shadow-lg shadow-blue-500/50" }'
+/>
 
 ---
-layout: two-cols
----
 
-# Forms & Trees
-
-<div class="text-sm">
-
-### Forms: Structured Input
-
-**Collect validated user input** with type-aware fields
-
-- ✅ Validation: required fields, patterns
-- 📝 Field types: text, email, number, select, checkbox
-- ❗ Inline error messages
-- 🔄 Submit callback to MCP tool
-
-**Use when:** Multi-field data collection with validation
-
-</div>
-
-::right::
-
-<div class="text-sm ml-4">
-
-### Trees: Hierarchical Navigation
-
-**Expandable tree views** for nested data
-
-- 📁 Expand/collapse nodes
-- 🎨 File-type icons
-- 🖱️ Selection callbacks
-- 🔄 Lazy loading children
-
-**Use when:** File systems, org charts, nested categories
-
-</div>
-
-<div class="mt-4 text-xs opacity-75 col-span-2">
-
-```typescript
-// Form with callback
-{ type: "form", title: "Create User", fields: [...], onSubmit: "process-user-creation" }
-
-// Tree with selection
-{ type: "tree", title: "Project Files", data: [...], options: { onSelect: "open-file" } }
-```
-
-</div>
+# The Full Callback Lifecycle
+<FrameworkMappingRowsSlide
+  :partNumber="2"
+  pillIcon="🔄"
+  pillLabel="Building: Callback Lifecycle"
+  title="The Full Interaction Loop — Stateful Without a New Prompt"
+  :rows='[
+    { label: "User prompt",  description: "Developer types or agent routes a request that matches a tool",                     tag: "chat input"     },
+    { label: "Model selects",description: "Model identifies the right MCP tool and calls it with arguments",                  tag: "tool call"      },
+    { label: "Server runs",  description: "MCP server executes logic (fetch DB, query API) and builds component spec",        tag: "server side"    },
+    { label: "VS Code renders",description: "Chat renderer detects type: component and instantiates interactive element",     tag: "iframe render"  },
+    { label: "User interacts",description: "Click, filter, submit — action fires; VS Code calls the registered callback tool", tag: "user action"   },
+    { label: "Updated state", description: "Callback tool processes data and returns a new component or text confirmation",    tag: "new response"   }
+  ]'
+  :progressDots='{ current: 2, total: 4, activeColor: "bg-blue-400 shadow-lg shadow-blue-500/50" }'
+/>
 
 ---
-layout: section
-name: building
----
 
-<div class="h-full flex flex-col items-center justify-center">
-<div class="text-6xl mb-6">🔨</div>
-<h1 class="text-5xl font-bold bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
-Building MCP Apps
-</h1>
-<div class="mt-4 text-xl opacity-70">
-Complete server implementation and callbacks
-</div>
-</div>
-
----
-layout: default
----
-
-# Basic MCP Server Structure
-
-<div class="grid grid-cols-2 gap-6 text-xs">
-
-<div>
-
-```typescript
-// src/index.ts
-import { Server } from "@modelcontextprotocol/sdk/server/index.js";
-import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
-
-const server = new Server({
-  name: "my-mcp-app",
-  version: "1.0.0"
-}, {
-  capabilities: {
-    tools: {}
-  }
-});
-
-// Define tool that returns chart
-server.setRequestHandler("tools/list", async () => ({
-  tools: [{
-    name: "show-metrics",
-    description: "Display project metrics as interactive charts",
-    inputSchema: {
-      type: "object",
-      properties: {
-        timeRange: {
-          type: "string",
-          enum: ["day", "week", "month"]
-        }
-      }
-    }
-  }]
-}));
-```
-
-</div>
-
-<div>
-
-```typescript
-// Handle tool call
-server.setRequestHandler("tools/call", async (request) => {
-  if (request.params.name === "show-metrics") {
-    const { timeRange } = request.params.arguments;
-    const data = await fetchMetrics(timeRange);
-
-    return {
-      content: [{
-        type: "component",  // Key: return component
-        component: {
-          type: "chart",
-          chartType: "line",
-          title: `Project Metrics (${timeRange})`,
-          data: data,
-          options: {
-            interactive: true,
-            showLegend: true
-          }
-        }
-      }]
-    };
-  }
-});
-
-const transport = new StdioServerTransport();
-await server.connect(transport);
-```
-
-</div>
-
-</div>
-
-<div class="mt-4 text-sm text-center opacity-75">
-Return `type: "component"` in content array → VS Code detects and renders
-</div>
+# Callback Code Example
+<CodeWithFeaturesSlide
+  :partNumber="2"
+  pillIcon="🔗"
+  pillLabel="Building: Callbacks"
+  title="Callback Pattern — Form Collects, Tool Processes"
+  codePosition="left"
+  :code='{ language: "typescript", content: "// Tool 1: return form with callback\nreturn {\n  content: [{\n    type: \"component\",\n    component: {\n      type: \"form\",\n      title: \"Create User\",\n      fields: [\n        { name: \"username\", type: \"text\", required: true },\n        { name: \"role\", type: \"select\",\n          options: [\"Admin\",\"Editor\",\"Viewer\"] }\n      ],\n      onSubmit: \"process-user-creation\"\n    }\n  }]\n};\n\n// Tool 2: onSubmit callback\nif (name === \"process-user-creation\") {\n  const { username, role } = args;\n  await createUser(username, role);\n  return { content: [{ type: \"text\",\n    text: `User ${username} created!` }] };\n}" }'
+  :features='[
+    { icon: "📋", title: "onSubmit names the tool", description: "String value is the exact MCP tool name VS Code will call with the form data as arguments" },
+    { icon: "🌲", title: "onSelect for trees", description: "Tree node clicks call the specified tool with the node&#39;s data payload as arguments" },
+    { icon: "✅", title: "Explicit approval", description: "VS Code shows approval prompt before invoking callback tool — user controls what executes" }
+  ]'
+  :progressDots='{ current: 3, total: 4, activeColor: "bg-blue-400 shadow-lg shadow-blue-500/50" }'
+/>
 
 ---
-layout: default
----
 
-# Callback Handling
-
-<div class="grid grid-cols-2 gap-6 text-xs">
-
-<div>
-
-### Form with Callback
-
-```typescript
-// Tool returns form with onSubmit callback
-{
-  name: "create-user-form",
-  description: "Show user creation form"
-}
-
-// Form response
-return {
-  content: [{
-    type: "component",
-    component: {
-      type: "form",
-      title: "Create New User",
-      fields: [
-        { name: "username", type: "text", required: true },
-        { name: "email", type: "email", required: true }
-      ],
-      submitLabel: "Create",
-      onSubmit: "process-user-creation"  // Callback tool
-    }
-  }]
-};
-```
-
-</div>
-
-<div>
-
-### Callback Handler
-
-```typescript
-// Define callback tool
-{
-  name: "process-user-creation",
-  description: "Process user creation from form",
-  inputSchema: {
-    type: "object",
-    properties: {
-      username: { type: "string" },
-      email: { type: "string" }
-    }
-  }
-}
-
-// Handle callback
-if (request.params.name === "process-user-creation") {
-  const { username, email } = request.params.arguments;
-  await createUser(username, email);
-
-  return {
-    content: [{
-      type: "text",
-      text: `✅ User ${username} created successfully!`
-    }]
-  };
-}
-```
-
-</div>
-
-</div>
-
-<div class="mt-4 text-center text-sm opacity-75">
-Workflow: Form render → User submit → VS Code calls MCP tool → Process data → Return confirmation
-</div>
+# Security Model
+<FourCardGridSlide
+  :partNumber="2"
+  pillIcon="🔒"
+  pillLabel="Building: Security"
+  title="Security by Default — Sandboxed, Restricted, Explicit"
+  :cards='[
+    { icon: "📦", title: "Sandboxed iframe",   description: "Custom components run in isolated iframes — no access to VS Code APIs or the host page DOM" },
+    { icon: "🛡️", title: "CSP restrictions",   description: "Content Security Policy prevents arbitrary external requests from component scripts" },
+    { icon: "✋", title: "Explicit callbacks",  description: "VS Code prompts for approval before invoking any MCP tool triggered by component interaction" },
+    { icon: "🎨", title: "Theme tokens only",  description: "Custom components access VS Code color tokens via CSS variables — nothing else from the host" }
+  ]'
+  :insight='{ icon: "💡", text: "Use var(--vscode-editor-background) and related CSS variables in custom components — they auto-adapt to light and dark themes." }'
+  :progressDots='{ current: 4, total: 4, activeColor: "bg-blue-400 shadow-lg shadow-blue-500/50" }'
+/>
 
 ---
-layout: default
----
 
-# Configuration in VS Code
-
-<div class="grid grid-cols-2 gap-8 mt-6">
-
-<div>
-
-### Add to `.vscode/mcp.json`
-
-```json
-{
-  "servers": {
-    "my-metrics-app": {
-      "type": "stdio",
-      "command": "node",
-      "args": [
-        "${workspaceFolder}/mcp-apps/dist/index.js"
-      ]
-    }
-  }
-}
-```
-
-### Testing Steps
-
-1. Build MCP server: `npm run build`
-2. Restart VS Code or run `MCP: Restart Server`
-3. In chat: `#my-metrics-app show-metrics --timeRange month`
-4. Component renders inline ✅
-
-</div>
-
-<div class="text-sm">
-
-### Component Schema
-
-All components follow this base:
-
-```typescript
-interface ComponentContent {
-  type: "component";
-  component: {
-    type: "chart" | "table" | "form" 
-          | "tree" | "cards" | "custom";
-    title?: string;
-    // Type-specific properties
-    data?: any;
-    options?: {
-      interactive?: boolean;
-      // Type-specific options
-    };
-  };
-}
-```
-
-**Common patterns:**
-- `data` holds content (rows, nodes, points)
-- `options` control behavior
-- `onSubmit`/`onSelect` specify callbacks
-
-</div>
-
-</div>
+# Part 3 — Real-World Patterns
+<SectionOpenerSlide
+  :partNumber="3"
+  title="Real-World Patterns"
+  subtitle="Four canonical scenarios that move from 'can build' to 'builds well' — with the 12-min → 45-sec payoff."
+  :cards='[
+    { icon: "📊", title: "Dashboard",        blurb: "Multi-component overview from a single query" },
+    { icon: "🔍", title: "Drill-Down",       blurb: "Chart click opens detail table — no new prompt" },
+    { icon: "📝", title: "Form Workflow",    blurb: "Multi-step guided collection with validation and callbacks" }
+  ]'
+  :terminal='{ context: "Manual: copy → Excel → chart → 12 minutes", detail: "MCP Apps: same query → 45 seconds inline" }'
+/>
 
 ---
-layout: section
-name: patterns
----
 
-<div class="h-full flex flex-col items-center justify-center">
-<div class="text-6xl mb-6">💡</div>
-<h1 class="text-5xl font-bold bg-gradient-to-r from-cyan-400 to-indigo-400 bg-clip-text text-transparent">
-Real-World Patterns
-</h1>
-<div class="mt-4 text-xl opacity-70">
-Practical use cases that demonstrate value
-</div>
-</div>
-
----
-layout: two-cols
----
-
-# Dashboard & Drill-Down
-
-<div class="text-sm">
-
-### Multi-Component Dashboard
-
-**Pattern:** Single query returns comprehensive dashboard
-
-```typescript
-return {
-  content: [
-    { type: "component", component: {
-      type: "chart", title: "Commits by Author",
-      data: authorStats }},
-    { type: "component", component: {
-      type: "table", title: "Recent PRs",
-      data: recentPRs }}
-  ]
-};
-```
-
-**Benefit:** Comprehensive view in single response, no context-switch
-
-</div>
-
-::right::
-
-<div class="text-sm ml-4">
-
-### Progressive Drill-Down
-
-**Pattern:** Chart with callback to show detail table
-
-```typescript
-// Initial chart with onClick callback
-{
-  type: "chart",
-  title: "Sales by Region",
-  data: regionSales,
-  options: {
-    onClick: "show-region-details"
-  }
-}
-
-// Callback returns detailed table
-if (name === "show-region-details") {
-  const { region } = arguments;
-  return {
-    type: "table",
-    title: `${region} Sales Details`,
-    data: fetchDetails(region)
-  };
-}
-```
-
-**Benefit:** Summary → Details without new prompt
-
-</div>
+# Dashboard Pattern
+<CodeWithFeaturesSlide
+  :partNumber="3"
+  pillIcon="📊"
+  pillLabel="Patterns: Dashboard"
+  title="Dashboard — Multi-Component Response from One Query"
+  codePosition="top"
+  :code='{ language: "typescript", content: "// One tool call returns chart + table together\nreturn {\n  content: [\n    { type: \"component\", component: { type: \"chart\",\n      chartType: \"bar\", title: \"Commits by Author\", data: authorStats } },\n    { type: \"component\", component: { type: \"table\",\n      title: \"Recent Pull Requests\",\n      columns: [{ key: \"title\", sortable: true }, { key: \"status\", filterable: true }],\n      data: recentPRs, options: { pagination: true } } }\n  ]\n};" }'
+  :features='[
+    { icon: "🔄", title: "Multiple components in one response", description: "Return array with chart + table + cards together — comprehensive view from a single query" },
+    { icon: "🧩", title: "Each component independent", description: "Sort the table, hover the chart — components interact independently with their own callbacks" },
+    { icon: "⚡", title: "No context switch", description: "Entire monitoring dashboard inline — developer never leaves chat to build the same view externally" }
+  ]'
+  :progressDots='{ current: 1, total: 4, activeColor: "bg-indigo-400 shadow-lg shadow-indigo-500/50" }'
+/>
 
 ---
-layout: two-cols
----
 
-# Form-Driven Workflows
-
-<div class="text-sm">
-
-### Multi-Step Guided Process
-
-**Pattern:** Form collects config → generates code
-
-```typescript
-// Step 1: Show form
-{
-  type: "form",
-  title: "Configure New API Endpoint",
-  fields: [
-    { name: "path", type: "text", required: true },
-    { name: "method", type: "select", 
-      options: ["GET", "POST", "PUT", "DELETE"] },
-    { name: "auth", type: "checkbox", 
-      label: "Require authentication" }
-  ],
-  onSubmit: "generate-endpoint-code"
-}
-```
-
-</div>
-
-::right::
-
-<div class="text-sm ml-4">
-
-```typescript
-// Step 2: Generate and show code
-if (name === "generate-endpoint-code") {
-  const { path, method, auth } = arguments;
-  const code = generateEndpointCode(path, method, auth);
-
-  return {
-    content: [{
-      type: "text",
-      text: `\`\`\`typescript\n${code}\n\`\`\``
-    }]
-  };
-}
-```
-
-**Benefit:** Structured input collection, guided workflows, validation
-
-</div>
+# Progressive Drill-Down
+<TwoColPairedConceptsSlide
+  :partNumber="3"
+  pillIcon="🔍"
+  pillLabel="Patterns: Drill-Down"
+  title="Progressive Drill-Down — Summary to Detail Without a New Prompt"
+  :left='{
+    header: "Step 1: Summary chart",
+    icon: "📈",
+    items: [
+      { title: "Tool returns bar chart", detail: "Sales by region — overview at a glance" },
+      { title: "onClick: show-region-details", detail: "Click any bar to drill into that region" },
+      { title: "Context preserved", detail: "Original chart stays visible above the detail" }
+    ]
+  }'
+  :right='{
+    header: "Step 2: Detail table",
+    icon: "📋",
+    items: [
+      { title: "Callback receives region name", detail: "Arguments from the clicked bar — no prompt needed" },
+      { title: "Returns sortable detail table", detail: "Product, units, revenue — exportable to CSV" },
+      { title: "Natural master-detail flow", detail: "Same UX as a native app — stays inside chat" }
+    ]
+  }'
+  :progressDots='{ current: 2, total: 4, activeColor: "bg-indigo-400 shadow-lg shadow-indigo-500/50" }'
+/>
 
 ---
-layout: default
----
 
-# 🎯 Real-World Use Cases
-
-<div class="grid grid-cols-3 gap-4 text-xs mt-4">
-
-<div class="border-2 border-blue-500/50 p-3 rounded-lg bg-blue-500/5">
-
-### System Metrics Dashboard
-
-<div class="bg-blue-900/20 p-2 rounded text-red-300 mb-2 text-xs">
-<strong>Problem:</strong> DevOps team queries Prometheus → Export CSV → Import Grafana → <strong>15-20 min per analysis</strong>
-</div>
-
-<div class="bg-green-900/20 p-2 rounded text-green-300 text-xs">
-<strong>Solution:</strong> MCP App queries Prometheus, returns interactive dashboard
-</div>
-
-```typescript
-return {
-  content: [
-    { type: "component", component: 
-      { type: "chart", title: "CPU Usage", 
-        data: cpuData }},
-    { type: "component", component: 
-      { type: "chart", title: "Memory", 
-        data: memData }},
-    { type: "component", component: 
-      { type: "table", title: "Error Logs", 
-        data: errors }}
-  ]
-};
-```
-
-<div class="mt-2 p-2 bg-green-600/20 rounded text-center">
-<strong>✅ 15-20 min → 90 sec</strong><br/>
-<span class="text-xs">Team analyzes 8x more frequently, catches issues 40% faster</span>
-</div>
-
-</div>
-
-<div class="border-2 border-green-500/50 p-3 rounded-lg bg-green-500/5">
-
-### Database Query Results
-
-<div class="bg-blue-900/20 p-2 rounded text-red-300 mb-2 text-xs">
-<strong>Problem:</strong> Analysts query DB, receive 500-row text, copy to Excel for filtering → <strong>10 min per query × 30 queries/day</strong>
-</div>
-
-<div class="bg-green-900/20 p-2 rounded text-green-300 text-xs">
-<strong>Solution:</strong> MCP App returns interactive table
-</div>
-
-```typescript
-return {
-  content: [{
-    type: "component",
-    component: {
-      type: "table",
-      title: "Query Results",
-      columns: resultColumns,
-      data: resultRows,
-      options: {
-        sortable: true,
-        searchable: true,
-        exportable: true,
-        pagination: true
-      }
-    }
-  }]
-};
-```
-
-<div class="mt-2 p-2 bg-green-600/20 rounded text-center">
-<strong>✅ 10 min → 2 min per query</strong><br/>
-<span class="text-xs">240 minutes saved per day (3-person team)</span>
-</div>
-
-</div>
-
-<div class="border-2 border-purple-500/50 p-3 rounded-lg bg-purple-500/5">
-
-### Project Scaffolding Forms
-
-<div class="bg-blue-900/20 p-2 rounded text-red-300 mb-2 text-xs">
-<strong>Problem:</strong> Developers create microservices → <strong>20-min Slack thread</strong> with infra team → Manual setup
-</div>
-
-<div class="bg-green-900/20 p-2 rounded text-green-300 text-xs">
-<strong>Solution:</strong> MCP App form collects structured input, generates scaffold
-</div>
-
-```typescript
-return {
-  content: [{
-    type: "component",
-    component: {
-      type: "form",
-      title: "New Microservice Config",
-      fields: [
-        { name: "serviceName", type: "text" },
-        { name: "language", type: "select", 
-          options: ["TypeScript", "Python", "Go"] },
-        { name: "database", type: "select" }
-      ],
-      onSubmit: "generate-scaffold"
-    }
-  }]
-};
-```
-
-<div class="mt-2 p-2 bg-green-600/20 rounded text-center">
-<strong>✅ 20-min Slack → 3-min form</strong><br/>
-<span class="text-xs">100% config accuracy, self-serve without infra bottleneck</span>
-</div>
-
-</div>
-
-</div>
+# The 12-min → 45-sec Payoff
+<HeroStatSlide
+  :partNumber="3"
+  pillIcon="⚡"
+  pillLabel="Patterns: ROI"
+  title="12 Minutes of Manual Work → 45 Seconds Inline"
+  subtitle="Copy-to-Excel workflows collapse — in data-heavy roles, that&#39;s 90 minutes per day reclaimed"
+  :hero='{ value: "16×", label: "faster than copy-export-chart", source: "12 min manual → 45 sec inline — repeated dozens of times per day" }'
+  :supporting='[
+    { icon: "📊", title: "Form workflow pattern", description: "Multi-step guided data collection with validation — no external form builder needed" },
+    { icon: "🌲", title: "Tree navigation pattern", description: "File system exploration with inline previews on select — stays in chat throughout" },
+    { icon: "🔧", title: "MCP Apps Playground", description: "Working examples of all four patterns available as a hands-on follow-up resource" }
+  ]'
+  :insight='{ icon: "💡", text: "The Playground repository has runnable implementations of all four canonical patterns — import and adapt, no blank-page start." }'
+  :progressDots='{ current: 3, total: 4, activeColor: "bg-indigo-400 shadow-lg shadow-indigo-500/50" }'
+/>
 
 ---
-layout: section
-name: integration
----
 
-<div class="h-full flex flex-col items-center justify-center">
-<div class="text-6xl mb-6">🔗</div>
-<h1 class="text-5xl font-bold bg-gradient-to-r from-indigo-400 to-purple-400 bg-clip-text text-transparent">
-Integration with VS Code
-</h1>
-<div class="mt-4 text-xl opacity-70">
-Combining MCP Apps with agents, skills, and memory
-</div>
-</div>
-
----
-layout: default
----
-
-# Integration Patterns
-
-<div class="grid grid-cols-3 gap-6 text-sm">
-
-<div>
-
-### With Custom Agents
-
-Agents leverage MCP Apps for visualization
-
-```markdown
----
-name: data-analyst
-tools: ['analytics-dashboard']
-mcp-servers:
-  - name: analytics-app
-    tools: ['show-metrics', 'show-table']
----
-
-You are a data analyst.
-When presenting quantitative data,
-always use interactive charts
-or tables from analytics-app.
-```
-
-**User:** "Analyze last month's sales"<br/>
-**Agent:** Calls `analytics-app.show-metrics` → Interactive chart
-
-</div>
-
-<div>
-
-### With Agent Skills
-
-Skills include MCP Apps tools in workflow
-
-```markdown
----
-name: code-review-reporter
-tools: ['fs', 'git', 'review-dashboard/*']
----
-
-When generating reports:
-1. Use `fs` to read files
-2. Use `git` for commits
-3. Use `review-dashboard/show-complexity`
-   for complexity chart
-4. Use `review-dashboard/show-coverage`
-   for test coverage table
-```
-
-</div>
-
-<div>
-
-### With Copilot Memory
-
-Memory stores dashboard preferences
-
-```
-User: "Remember I prefer
-      bar charts over pie charts"
-Agent: Stores preference
-
-Future: "Show sales data"
-Agent: Retrieves preference
-      → Uses bar chart component
-```
-
-</div>
-
-</div>
-
-<div class="mt-8 text-center text-xs opacity-75">
-MCP Apps integrate seamlessly with all VS Code Copilot customization features
-</div>
+# Best Practices
+<FrameworkMappingRowsSlide
+  :partNumber="3"
+  pillIcon="✅"
+  pillLabel="Patterns: Best Practices"
+  title="Build Well — Five Rules for Production MCP Apps"
+  :rows='[
+    { label: "Component-first", description: "Return UI for visual data — never ASCII charts or 500-row markdown tables",          tag: "default to UI"   },
+    { label: "Progressively", description: "Show summary first; enable drill-down — manage context window while preserving depth", tag: "summary → detail" },
+    { label: "Callback-driven", description: "Let user interactions call back to MCP tools — stateful workflow without new prompts", tag: "stateful"        },
+    { label: "Theme-aware",    description: "Use var(--vscode-*) tokens in custom components — adapts to light and dark mode",     tag: "CSS variables"   },
+    { label: "Sandbox always", description: "Never return unsandboxed HTML/JS — XSS risk, CSP violations, theme inconsistency",    tag: "iframe only"     }
+  ]'
+  :progressDots='{ current: 4, total: 4, activeColor: "bg-indigo-400 shadow-lg shadow-indigo-500/50" }'
+/>
 
 ---
-layout: default
----
 
-# 🎨 Best Practices
-
-<div class="grid grid-cols-3 gap-4 text-xs mt-4">
-
-<div class="border-2 border-blue-500/50 p-3 rounded-lg bg-blue-500/5">
-
-### Design
-
-<div class="space-y-2 mt-2">
-
-<div class="bg-blue-900/20 p-2 rounded">
-<strong>Progressive disclosure</strong><br/>
-Show summary first, enable drill-down on interaction
-</div>
-
-<div class="bg-blue-900/20 p-2 rounded">
-<strong>Responsive layouts</strong><br/>
-Components adapt to chat panel width
-</div>
-
-<div class="bg-blue-900/20 p-2 rounded">
-<strong>Theme awareness</strong><br/>
-Use VS Code CSS variables
-```css
-var(--vscode-foreground)
-var(--vscode-editor-background)
-```
-</div>
-
-<div class="bg-blue-900/20 p-2 rounded">
-<strong>Loading states</strong><br/>
-Show skeleton/spinner for async data
-</div>
-
-</div>
-
-</div>
-
-<div class="border-2 border-green-500/50 p-3 rounded-lg bg-green-500/5">
-
-### Performance
-
-<div class="space-y-2 mt-2">
-
-<div class="bg-green-900/20 p-2 rounded">
-<strong>Paginate large datasets</strong><br/>
-Don't render 10,000 rows at once
-</div>
-
-<div class="bg-green-900/20 p-2 rounded">
-<strong>Lazy load images</strong><br/>
-Load visible content first
-</div>
-
-<div class="bg-green-900/20 p-2 rounded">
-<strong>Cache queries</strong><br/>
-MCP server-side caching for repeated requests
-</div>
-
-<div class="bg-green-900/20 p-2 rounded">
-<strong>Optimize re-renders</strong><br/>
-Only update changed data
-</div>
-
-</div>
-
-</div>
-
-<div class="border-2 border-red-500/50 p-3 rounded-lg bg-red-500/5">
-
-### Security
-
-<div class="space-y-2 mt-2">
-
-<div class="bg-red-900/20 p-2 rounded">
-<strong>Sandbox custom HTML</strong><br/>
-Always use `sandbox: true` for custom components
-</div>
-
-<div class="bg-red-900/20 p-2 rounded">
-<strong>Validate inputs</strong><br/>
-Sanitize form data before processing
-</div>
-
-<div class="bg-red-900/20 p-2 rounded">
-<strong>Rate limit</strong><br/>
-Prevent abuse of callback tools
-</div>
-
-<div class="bg-red-900/20 p-2 rounded">
-<strong>No sensitive data in logs</strong><br/>
-Scrub credentials from component specs
-</div>
-
-</div>
-
-</div>
-
-</div>
+# Part 4 — Integration
+<SectionOpenerSlide
+  :partNumber="4"
+  title="Integration"
+  subtitle="MCP Apps become first-class platform capability in agentic workflows — not a feature, a platform."
+  :cards='[
+    { icon: "🤖", title: "Custom Agents", blurb: "Wire MCP App tools into agent definitions for visual-first workflows" },
+    { icon: "🧠", title: "Agent Skills",  blurb: "Skills declare which dashboard tools they use — composable visualization" },
+    { icon: "💾", title: "Copilot Memory", blurb: "Persist chart preferences and UI state across sessions" }
+  ]'
+  :terminal='{ context: "agent calls analytics-app.show-metrics automatically", detail: "Interactive chart in chat — no manual tool invocation needed" }'
+/>
 
 ---
-layout: default
+
+# With Custom Agents and Skills
+<TwoColPairedConceptsSlide
+  :partNumber="4"
+  pillIcon="🤖"
+  pillLabel="Integration: Agents & Skills"
+  title="Agents and Skills — Visual-First Agentic Workflows"
+  :left='{
+    header: "Custom Agents",
+    icon: "🤖",
+    items: [
+      { title: "Declare MCP server in agent def", detail: "mcp-servers: analytics-app wires all its tools into the agent" },
+      { title: "Agent uses tools automatically", detail: "\"Analyze last month&#39;s sales\" → agent calls show-metrics → chart renders" },
+      { title: "No manual tool invocation", detail: "Developer describes intent — agent selects and calls the right component tool" }
+    ]
+  }'
+  :right='{
+    header: "Agent Skills",
+    icon: "🎯",
+    items: [
+      { title: "Skills list which tools they use", detail: "review-dashboard/show-complexity — explicit tool declarations" },
+      { title: "Composable visualization", detail: "Code review skill calls coverage table + complexity chart as workflow steps" },
+      { title: "Shareable patterns", detail: "Org skill library can publish visual reporting skills for all teams" }
+    ]
+  }'
+  :progressDots='{ current: 1, total: 3, activeColor: "bg-purple-400 shadow-lg shadow-purple-500/50" }'
+/>
+
+---
+
+# Copilot Memory Integration
+<ThreeColumnCardSlide
+  :partNumber="4"
+  pillIcon="💾"
+  pillLabel="Integration: Memory"
+  title="Copilot Memory — Persistent UI State Across Sessions"
+  :columns='[
+    { icon: "📌", title: "Store Preferences", description: "User says \"remember I prefer bar charts over pie\" — Memory stores it, every future query uses bar charts automatically" },
+    { icon: "🔄", title: "Persistent State", description: "Dashboard filter settings, selected regions, and drill-down context survive session restarts — pick up where you left off" },
+    { icon: "🏢", title: "Team Conventions", description: "Organization-level Memory can store chart color palettes and table column preferences — visual consistency across the team" }
+  ]'
+  :progressDots='{ current: 2, total: 3, activeColor: "bg-purple-400 shadow-lg shadow-purple-500/50" }'
+/>
+
+---
+
+# The Platform View
+<FourCardGridSlide
+  :partNumber="4"
+  pillIcon="🔗"
+  pillLabel="Integration: Platform"
+  title="MCP Apps as Platform — Not Feature, Architecture"
+  :cards='[
+    { icon: "🔧", title: "Build once", description: "MCP App tools are composable — dashboard used standalone or wired into agents and skills" },
+    { icon: "🤖", title: "Agent-native", description: "Agents call visualization tools the same way they call any MCP tool — charts appear automatically" },
+    { icon: "🌐", title: "Org-wide library", description: "Share visualization skills in the org skill library — every team gets the same interactive reporting" },
+    { icon: "💾", title: "Memory-backed state", description: "Preferences, filters, and context persist — interactive UX that feels like a native application" }
+  ]'
+  :insight='{ icon: "🚀", text: "The progression: standalone MCP App → agent-integrated tool → org skill → Memory-backed preference. Each step multiplies reach." }'
+  :progressDots='{ current: 3, total: 3, activeColor: "bg-purple-400 shadow-lg shadow-purple-500/50" }'
+/>
+
+---
+
+# Before/After
+<BeforeAfterSlide
+  header="From Text-Stream Chat to Visual Workspace"
+  :leftItems='["Data responses are markdown tables or ASCII — unreadable beyond toy examples", "Copy data to Excel, build chart, realize wrong date range, repeat — 12 min per query", "Static results: re-prompt and start over when you need a different filter or view", "Context switches accumulate: 90 minutes per day lost to data formatting in heavy workflows"]'
+  :rightItems='["Charts, tables, forms, and trees render inline — interactive from the moment they appear", "Click to filter, hover for details, drill down into regions — no new prompts needed", "Callback-driven state: form submissions and tree selections call MCP tools and return updates", "12 minutes of manual copy-export-chart work → 45 seconds inline — flow preserved throughout"]'
+  :metrics='[
+    { value: "16×", detail: "faster than copy-to-Excel chart workflow — 12 min manual → 45 sec inline" },
+    { value: "90 min/day", detail: "reclaimed in data-heavy workflows from eliminating context-switch overhead" },
+    { value: "6 types", detail: "charts, tables, forms, trees, cards, custom — one decision tree maps any use case" }
+  ]'
+/>
+
 ---
 
 # What You Can Do Today
-
-<div class="grid grid-cols-2 gap-8 mt-6">
-
-<div class="text-sm">
-
-### Immediate Actions (15 min)
-
-- [ ] **Install MCP Apps Playground**
-  ```bash
-  git clone https://github.com/modelcontextprotocol/servers
-  cd mcp-apps-playground
-  npm install
-  ```
-
-- [ ] **Add to `.vscode/mcp.json`**
-  Follow [setup instructions](https://github.com/modelcontextprotocol/servers#readme)
-
-- [ ] **Test in chat**
-  ```
-  @mcp-apps-playground show me the chart demo
-  ```
-
-</div>
-
-<div class="text-sm">
-
-### Short-Term (1 hour)
-
-- [ ] Identify one "export to CSV" workflow
-- [ ] Build MCP server returning table/chart for that data source
-- [ ] Test with 2-3 colleagues, measure time savings
-
-### Advanced (2-4 hours)
-
-- [ ] Build multi-step form workflow
-- [ ] Implement callback tools for drill-down
-- [ ] Integrate MCP Apps with custom agent
-
-</div>
-
-</div>
-
-<div class="mt-8 text-center text-sm">
-
-**Next Steps:** ✅ Complete immediate actions → 📖 Review [MCP SDK docs](https://github.com/modelcontextprotocol/typescript-sdk) → 💬 Share with team
-
-</div>
+<WhatYouCanDoTodaySlide
+  :today='["Install the MCP Apps Playground and run all six component type examples locally", "Change one existing MCP tool to return type: component instead of text — build your first chart", "Map your most text-heavy tool response to the decision tree: which component type fits best?"]'
+  :thisWeek='["Add a sortable table component to your highest-traffic data query tool", "Implement one callback: form onSubmit or tree onSelect calling a second MCP tool", "Test the security model — verify iframe sandboxing and CSP restrictions with browser devtools"]'
+  :thisMonth='["Build a dashboard tool returning chart + table from a single query", "Wire your MCP App into a Custom Agent definition so it fires automatically on data requests", "Set a Copilot Memory preference (chart type, color palette) and verify it persists across sessions"]'
+  footer="MCP Apps transform chat from a text stream into a visual workspace — start with one tool, one component type, one callback."
+/>
 
 ---
-layout: default
----
 
-# Related Patterns
-
-<div class="grid grid-cols-2 gap-8 mt-8">
-
-<div>
-
-### Complementary Features
-
-- **MCP Servers Workshop** — MCP fundamentals, tool development, configuration
-- **Custom Agents** — Building agents that leverage MCP Apps for visualization
-- **Agent Skills** — Packaging MCP Apps workflows as reusable skills
-
-### Decision Flow
-
-```
-Q: What's your actual goal?
-├─ Need custom tools (not visualizations)
-│  → See: MCP Servers Workshop
-├─ Need agent orchestration with visualization
-│  → Combine: Custom Agents + MCP Apps
-└─ Need organization-wide deployment
-   → See: Enterprise Patterns
-```
-
-</div>
-
-<div>
-
-### Official Documentation
-
-**Primary:**
-- 📖 [MCP Apps Blog Post](https://code.visualstudio.com/blogs/2026/01/26/mcp-apps-support) — Intro and capabilities
-- 📖 [VS Code MCP Servers Documentation](https://code.visualstudio.com/docs/copilot/customization/mcp-servers) — Integration guide
-- 📖 [Model Context Protocol Spec](https://modelcontextprotocol.io/) — Core protocol
-
-**Resources:**
-- 🐙 [MCP Apps Playground](https://github.com/modelcontextprotocol/servers) — Working examples
-- 🐙 [MCP TypeScript SDK](https://github.com/modelcontextprotocol/typescript-sdk) — Build servers
-
-</div>
-
-</div>
+# References
+<ReferencesSlide
+  :groups='[
+    { title: "📖 Official Documentation", color: "cyan", items: [
+      { href: "https://code.visualstudio.com/blogs/2026/01/26/mcp-apps-support", label: "MCP Apps support in VS Code", description: "Introduction, capabilities overview, and getting started guide" },
+      { href: "https://code.visualstudio.com/docs/copilot/customization/mcp-servers", label: "MCP servers documentation in VS Code", description: "MCP integration, configuration, and debugging reference" },
+      { href: "https://modelcontextprotocol.io/", label: "Model Context Protocol specification", description: "Core MCP protocol spec — component content type details" }
+    ] },
+    { title: "🔧 SDKs & Examples", color: "purple", items: [
+      { href: "https://github.com/modelcontextprotocol/servers", label: "MCP servers repository (Playground)", description: "Working examples of all component types — install locally for live demos" },
+      { href: "https://github.com/modelcontextprotocol/typescript-sdk", label: "MCP TypeScript SDK", description: "SDK for building MCP servers — types, transport, request handlers" }
+    ] }
+  ]'
+/>
 
 ---
-layout: end
----
 
-<div class="h-full flex flex-col items-center justify-center relative overflow-hidden">
-  <!-- Gradient background -->
-  <div class="absolute inset-0 bg-gradient-to-br from-purple-900/20 via-blue-900/10 to-cyan-900/20"></div>
-
-  <!-- Glowing orb -->
-  <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-gradient-to-r from-purple-500/20 via-blue-500/20 to-cyan-500/20 rounded-full blur-3xl"></div>
-
-  <!-- Logo with glow -->
-  <div class="relative z-10">
-    <div class="absolute inset-0 blur-2xl opacity-50">
-      <img src="./sdp-logo.png" class="w-48" alt="" />
-    </div>
-    <img src="./sdp-logo.png" class="w-48 relative" alt="SDP Logo" />
-  </div>
-
-  <!-- Gradient text title -->
-  <h1 class="!text-5xl !font-bold !mt-8 bg-gradient-to-r from-purple-400 via-blue-400 to-cyan-400 bg-clip-text text-transparent relative z-10">
-    MCP Apps
-  </h1>
-
-  <!-- Subtitle -->
-  <div class="mt-4 relative z-10">
-    <span class="px-6 py-2 bg-gradient-to-r from-purple-600/80 to-blue-600/80 rounded-full text-white text-xl font-medium shadow-lg shadow-purple-500/25">
-      Rich Interactive UI in Chat
-    </span>
-  </div>
-
-  <!-- Key points -->
-  <div class="mt-8 text-center opacity-80 relative z-10 space-y-2">
-    <div class="text-lg">✨ Eliminate context-switching</div>
-    <div class="text-lg">🎨 Transform chat into visual workspace</div>
-    <div class="text-lg">📊 Explore data inline</div>
-  </div>
-
-  <!-- Questions -->
-  <div class="abs-bottom-8 text-center w-full relative z-10">
-    <div class="text-2xl font-bold bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
-      Questions?
-    </div>
-  </div>
-
-  <!-- Decorative line -->
-  <div class="abs-bottom-4 w-32 h-1 bg-gradient-to-r from-transparent via-purple-400 to-transparent rounded-full left-1/2 -translate-x-1/2"></div>
-</div>
+# Thank You
+<ThankYouSlide
+  title="MCP Apps"
+  subtitle="Rich Interactive UI in Chat"
+  :cards="[
+    { value: 'type: component', detail: 'one field change in your MCP tool response — VS Code renders an interactive iframe automatically' },
+    { value: '16×', detail: 'faster than copy-to-Excel — 12-minute chart workflow collapses to 45 seconds inline' },
+    { value: '6 types', detail: 'charts, tables, forms, trees, cards, custom — composable into agents, skills, and Memory-backed workflows' }
+  ]"
+  prompt="Which of your existing MCP tools has the most text-heavy response that would benefit from a chart or table component?"
+/>

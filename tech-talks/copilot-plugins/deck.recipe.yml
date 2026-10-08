@@ -1,0 +1,100 @@
+# deck.recipe.yml — Copilot Plugins & APM talk slide generation guidance
+# COUNCIL REVISE (2026-08-10): Preserve the APM packaging thesis and arc; add
+# enterprise managed settings as a bounded, separate governance companion.
+
+version: 1
+
+# Metadata for the deck
+deck:
+  title: "Copilot Plugins & APM"
+  subtitle: "Composable AI Extensions"
+  tagline: "Install once, configure everywhere"
+
+  # How the opening slides frame the talk
+
+  # Table of contents
+  toc:
+    enabled: true
+
+
+  agenda:
+    - title: "One Team Setup"
+      takeaway: "Install instructions, skills, plugins, and MCP servers from a manifest."
+      whyItMatters: "Configuration stops drifting across contributors."
+    - title: "Configuration as Code"
+      takeaway: "Version agent setup through apm.yml and lock files."
+      whyItMatters: "Teams can review and reproduce their exact agent environment."
+    - title: "Faster Discovery"
+      takeaway: "Find vetted extensions through a shared marketplace."
+      whyItMatters: "Useful capabilities become easier to evaluate and adopt."
+
+  arcToc: "WHY the shift matters → HOW to explore the ecosystem → CODIFY as team infrastructure → ACT with concrete next steps"
+  arcNarrative: >
+    WHY the shift matters → HOW to explore the ecosystem → CODIFY as team
+    infrastructure (manifest + lockfile together) → ACT with concrete next steps.
+    "The Opportunity" earns audience attention before any CLI syntax appears.
+    "What You Can Do Today" closes on action, not theory — a reading list cannot compete.
+  # "The Lockfile Pattern" folds into "Building an APM Manifest" as its natural conclusion.
+  sectionOrder:
+    - "The Opportunity"
+    - "CLI-First Plugin Management"
+    - "Building an APM Manifest"
+    - "What You Can Do Today"
+
+  # Emphasis modes for specific sections
+  sectionModes:
+    "The Opportunity":
+      emphasis: medium-high
+      note: >
+        Frame the paradigm shift — per-developer configuration → per-repository configuration —
+        before any CLI commands appear; audience buy-in here determines whether the technical
+        sections land as "interesting" or "essential."
+    "CLI-First Plugin Management":
+      emphasis: high
+      note: >
+        Live-demo apm marketplace browse and copilot plugin install; this is the audience's
+        first hands-on contact with the ecosystem and sets the CLI-first tone for the rest
+        of the talk.
+    "Building an APM Manifest":
+      emphasis: high
+      note: >
+        Walk through a complete apm.yml with plugins, instructions, skills, and MCP servers,
+        then close with the lockfile pattern as the natural capstone of "configuration as code" —
+        treat apm-lock.yml like package-lock.json, not an implementation detail. Add a bounded
+        companion beat: enterprise managed settings are separate governance, not apm.yml merge
+        or inheritance. enabledPlugins and extraKnownMarketplaces establish an additive enterprise
+        floor; teams extend it through files under copilot/teams/ mapped by team-mappings.json.
+        Users in multiple teams receive least-restrictive team values beneath non-overridable
+        enterprise decisions. This is supported only in VS Code, Copilot CLI, Copilot App, and
+        Copilot cloud agent for Business or Enterprise.
+    "What You Can Do Today":
+      emphasis: medium-high
+      note: >
+        Deliver a concrete action ladder — try one plugin locally, add apm.yml to one repo,
+        review the lockfile diff on the next PR — so every attendee leaves with a step they
+        can take within the hour.
+
+  # What to emphasize most (3-5 key points readers/audiences should remember)
+  highlightMoments:
+    - "copilot plugin install for exploration; apm install for team-wide reproducibility — two tools, two scopes"
+    - "apm.yml is infrastructure: commit it to version control alongside your code, not in a wiki page"
+    - "Lockfiles make 'works on my machine' impossible for AI configuration — apm-lock.yml is non-negotiable"
+    - "The complete onboarding: git clone && apm install gives every contributor identical AI context, zero manual steps"
+    - "APM packages reproducible project configuration; managed settings govern a separate additive enterprise floor that teams can extend — never present this as apm.yml merge or inheritance"
+
+  # References section
+  references:
+    enabled: true
+    mode: numbered  # Use numbered footnote references
+
+  # Thank you slide
+  thankYou:
+    enabled: true
+    variant: standard
+
+# OPEN DECISION: Should "The Lockfile Pattern" be restored as a standalone fourth section
+# (displacing "What You Can Do Today")?
+# Current choice: lockfile coverage folds into "Building an APM Manifest" to preserve an
+# action-oriented close. Restore as standalone only if audience feedback shows teams are
+# struggling specifically with lockfile drift rather than with initial manifest adoption —
+# i.e., once apm.yml is widely used, the lockfile deserves its own spotlight.

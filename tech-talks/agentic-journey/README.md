@@ -1,7 +1,14 @@
 ---
-status: active
-updated: 2026-02-01
-section: "Agentic Transformation"
+status: archived
+updated: 2026-09-15
+section: "Delegate and Coordinate"
+audience: [developer, team-lead, engineering-leader]
+level: applied
+duration: 45
+format: core-talk
+decision: "How should an issue move through intake, planning, coding, and review?"
+prerequisites: [agent-dev-loop, copilot-web]
+related: [agentic-workflows, agentic-sdlc]
 references:
   - url: https://docs.github.com/en/copilot
     label: "GitHub Copilot documentation"
@@ -38,40 +45,6 @@ references:
 
 ---
 
-## 📽️ Slide Generation Mapping
-
-### Slide Sequence (Generated Automatically)
-
-1. **Title/Logo Slide** ← H1 title + subtitle
-2. **Question/Objective Slide** ← "The Question This Talk Answers"
-3. **Table of Contents Slide** ← Auto-generated from 🎬 sections
-4. **Problem Slide** ← "The Problem"
-5. **Solution Overview** ← "The Solution"
-6. **Key Artifacts** ← "Key Artifacts" inventory
-7. **Mental Model Shift** ← Move-Toward/Away/Against
-8. **When to Use Decision Tree** ← "When to Use This Pattern"
-9. **Phase 1: Agentic Intake** ← 🎬 Section 1 (3-4 slides)
-10. **Phase 2: Agentic Planning** ← 🎬 Section 2 (3-4 slides)
-11. **Phase 3: Agentic Coding** ← 🎬 Section 3 (2-3 slides)
-12. **Phase 4: Code Review** ← 🎬 Section 4 (3-4 slides)
-13. **Graduation to Full SDLC** ← 🎬 Section 5 (2-3 slides)
-14. **Use Cases** ← Real-World Use Cases (1-2 slides)
-15. **Actionable Outcomes** ← What You Can Do Today
-16. **Related Patterns** ← Related Patterns
-17. **Official Documentation** ← 📚 section
-18. **End Slide** ← Auto-generated
-
-### Major Sections (TOC Entries)
-
-```markdown
-<!-- 🎬 MAJOR SECTION: Agentic Intake -->
-<!-- 🎬 MAJOR SECTION: Agentic Planning -->
-<!-- 🎬 MAJOR SECTION: Agentic Coding -->
-<!-- 🎬 MAJOR SECTION: Code Review -->
-<!-- 🎬 MAJOR SECTION: Graduating to Full SDLC -->
-```
-
----
 
 ## The Problem
 

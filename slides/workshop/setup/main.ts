@@ -1,6 +1,20 @@
-// Slidev resolves `setup/main.ts` relative to each deck file's directory,
-// not the project root. This re-export ensures the canonical setup at
-// slides/setup/main.ts is picked up by every deck under workshop/.
-// Keep all four category shims (tech-talks, intro-talks, exec-talks, workshop)
-// pointing at the same file. See slides/setup/main.ts for the actual logic.
-export { default } from '../../setup/main'
+import { defineAppSetup } from '@slidev/types'
+import sharedSetup from '../../setup/main'
+
+function hideGotoDialog() {
+  const styleId = 'copilottraining-hide-goto-dialog'
+  if (document.getElementById(styleId))
+    return
+
+  const style = document.createElement('style')
+  style.id = styleId
+  style.textContent = '#slidev-goto-dialog { display: none !important; }'
+  document.head.appendChild(style)
+}
+
+export default defineAppSetup((context) => {
+  sharedSetup(context)
+  if (typeof window !== 'undefined' && context.router) {
+    hideGotoDialog()
+  }
+})

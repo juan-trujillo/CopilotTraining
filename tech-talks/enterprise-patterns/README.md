@@ -1,7 +1,14 @@
 ---
 status: active
-updated: 2026-02-01
-section: "Agentic Transformation"
+updated: 2026-09-16
+section: "Verify and Govern"
+audience: [platform-engineer, security, architect, engineering-leader]
+level: strategic
+duration: 60
+format: core-talk
+decision: "How should organizations standardize, govern, and measure Copilot adoption?"
+prerequisites: []
+related: [copilot-hooks, agentic-sdlc, copilot-plugins]
 references:
   - url: https://docs.github.com/en/copilot/managing-copilot/managing-github-copilot-in-your-organization
     label: "Managing Copilot in your organization"
@@ -12,6 +19,33 @@ references:
   - url: https://docs.github.com/en/rest/copilot/copilot-metrics
     label: "Copilot metrics REST API"
     verified: 2026-02-01
+  - url: https://agents.md/
+    label: "AGENTS.md open format"
+    verified: 2026-03-23
+  - url: https://github.blog/changelog/2026-08-07-copilot-impact-dashboard-adds-a-return-on-investment-section
+    label: "Copilot impact dashboard adds a return on investment section"
+    verified: 2026-08-10
+  - url: https://github.blog/changelog/2026-08-07-copilot-usage-metrics-api-adds-agent-app-activity
+    label: "Copilot usage metrics API adds agent app activity"
+    verified: 2026-08-10
+  - url: https://github.blog/changelog/2026-08-03-enterprise-team-specialization-for-managed-settings
+    label: "Enterprise team specialization for managed settings"
+    verified: 2026-08-10
+  - url: https://github.blog/changelog/2026-07-31-upcoming-august-2026-model-deprecations-in-github-copilot
+    label: "Upcoming September 2026 model deprecations in GitHub Copilot"
+    verified: 2026-08-10
+  - url: https://code.visualstudio.com/docs/enterprise/ai-settings
+    label: "Configure AI settings for an enterprise"
+    verified: 2026-09-15
+  - url: https://code.visualstudio.com/docs/copilot/security
+    label: "Security considerations for AI in VS Code"
+    verified: 2026-09-15
+  - url: https://code.visualstudio.com/updates/v1_121
+    label: "VS Code release notes: v1.121"
+    verified: 2026-09-15
+  - url: https://code.visualstudio.com/updates/v1_122
+    label: "VS Code release notes: v1.122"
+    verified: 2026-09-15
 ---
 
 # Scaling GitHub Copilot Across Organizations
@@ -35,40 +69,6 @@ references:
 
 ---
 
-## 📽️ Slide Generation Mapping
-
-### Slide Sequence (Generated Automatically)
-
-1. **Title/Logo Slide** ← H1 title + subtitle
-2. **Question/Objective Slide** ← "The Question This Talk Answers"
-3. **Table of Contents Slide** ← Auto-generated from 🎬 sections
-4. **Problem Slide** ← "The Problem"
-5. **Solution Overview** ← "The Solution"
-6. **Key Artifacts** ← "Key Artifacts" inventory
-7. **Mental Model Shift** ← Move-Toward/Away/Against
-8. **When to Use Decision Tree** ← "When to Use This Pattern"
-9. **Organization-Wide Standards** ← 🎬 Section 1 (3-4 slides)
-10. **Organizational Skills & Knowledge Bases** ← 🎬 Section 2 (3-4 slides)
-11. **Governance & Licensing** ← 🎬 Section 3 (2-3 slides)
-12. **Adoption & Enablement** ← 🎬 Section 4 (3-4 slides)
-13. **Multi-Team Coordination** ← 🎬 Section 5 (2-3 slides)
-14. **Use Cases** ← Real-World Use Cases (1-2 slides)
-15. **Actionable Outcomes** ← What You Can Do Today
-16. **Related Patterns** ← Related Patterns
-17. **Official Documentation** ← 📚 section
-18. **End Slide** ← Auto-generated
-
-### Major Sections (TOC Entries)
-
-```markdown
-<!-- 🎬 MAJOR SECTION: Organization-Wide Standards -->
-<!-- 🎬 MAJOR SECTION: Organizational Skills & Knowledge Bases -->
-<!-- 🎬 MAJOR SECTION: Governance & Licensing -->
-<!-- 🎬 MAJOR SECTION: Adoption & Enablement -->
-<!-- 🎬 MAJOR SECTION: Multi-Team Coordination -->
-```
-
----
 
 ## The Problem
 
@@ -233,7 +233,7 @@ Q: Where are you in your Copilot adoption journey?
 
 ### The Challenge
 
-**Traditional approach:**
+**Traditional polyrepo approach:**
 ```
 repo-1/.github/copilot-instructions.md  ← Team A's standards
 repo-2/.github/copilot-instructions.md  ← Team B's standards
@@ -241,7 +241,7 @@ repo-3/.github/copilot-instructions.md  ← Team C's standards
 ```
 Result: Inconsistent standards, repeated configuration across 50+ repositories
 
-**Organization-level approach:**
+**Organization-level polyrepo approach:**
 ```
 Organization Settings
   ↓
@@ -256,6 +256,24 @@ Individual Repos (optional overrides only)
   └── repo-2/.github/copilot-instructions.md  ← Domain-specific rules
 ```
 Result: Baseline consistency with flexibility for repository-specific needs
+
+**Monorepo approach with nested playbooks:**
+```
+repo/
+├── .github/
+│   ├── copilot-instructions.md          ← Repo constitution
+│   └── instructions/
+│       ├── api.instructions.md          ← Additive, glob-based rules
+│       └── infra.instructions.md
+├── AGENTS.md                            ← Global agent guardrails
+├── frontend/
+│   └── AGENTS.md                        ← Frontend agent playbook
+├── backend/
+│   └── AGENTS.md                        ← Backend agent playbook
+└── infra/
+    └── AGENTS.md                        ← Infra agent playbook
+```
+Result: Shared repo standards plus local commands and guardrails for each domain
 
 ### What to Standardize
 
@@ -325,6 +343,25 @@ Result: Baseline consistency with flexibility for repository-specific needs
 - **ROI: 50x in first year, compounding annually**
 
 Organization-wide custom instructions provide baseline standards that apply automatically across every repository. Instead of each team configuring security requirements independently, define them once at organization level—every developer gets correct authentication patterns without manual setup. This approach scales expertise: senior architects define standards once, 500 developers apply them automatically. The ROI compounds—every new repository inherits organizational knowledge from day one.
+
+### When to Use Which
+
+| Situation | Primary Pattern | Why |
+|-----------|-----------------|-----|
+| 50+ separate repos need the same baseline security and quality rules | Organization instructions | One central GitHub baseline for every repository |
+| One repo needs project-specific GitHub Copilot conventions | `.github/copilot-instructions.md` | Clear repo-wide constitution for GitHub tooling |
+| Specific file types need different guidance inside a repo | `.github/instructions/*.instructions.md` | `applyTo` patterns target the right files precisely |
+| A monorepo package needs local commands, tests, and workflow rules | Nearest `AGENTS.md` | Directory-local playbook avoids one giant global file |
+| A polyrepo team wants cross-agent portability in addition to GitHub guidance | Repo-level `AGENTS.md` plus repo instructions | Keep GitHub-specific standards and portable agent playbooks side by side |
+
+### Polyrepo vs. Monorepo Decision Matrix
+
+| Topology | Put shared standards here | Put local workflow guidance here | Why this split works |
+|----------|---------------------------|----------------------------------|----------------------|
+| **Polyrepo** | Organization instructions + each repo's `.github/copilot-instructions.md` | Optional root `AGENTS.md` per repo | Each repo has its own lifecycle, but still benefits from a common baseline |
+| **Monorepo** | Root `.github/copilot-instructions.md` + `.github/instructions/*.instructions.md` | Root `AGENTS.md` plus nested `frontend/`, `backend/`, `infra/` `AGENTS.md` files | Repo-wide standards stay centralized while subprojects keep their own commands and guardrails |
+
+**Rule of thumb:** if the selector is a **repository**, use organization instructions or `copilot-instructions.md`. If the selector is a **file pattern**, use `.instructions.md`. If the selector is a **directory or subproject**, use the nearest `AGENTS.md`.
 
 ---
 
@@ -423,9 +460,13 @@ Copilot Knowledge Bases solve the multi-repository context problem. In microserv
 - Enforce compliance requirements (data residency, audit trails)
 - Set budget controls on premium model requests
 
+### Organization-Owned Telemetry and Tool Policy
+
+Treat observability and tool discovery as organization-owned contracts. Configure OpenTelemetry export centrally so security and platform teams define approved destinations, fields, retention, and access rather than leaving telemetry behavior to each repository. Govern MCP discovery through enterprise policy: restrict clients to a curated registry when approved tools should remain discoverable, or turn MCP off when no external tool execution is allowed. Repository configuration can narrow behavior, but it must not widen the organizational boundary.
+
 **Auto model selection benefits:**
 - Route routine tasks to cost-effective models
-- Reserve premium models (Claude Opus, GPT-4.1) for complex analysis
+- Reserve supported higher-reasoning models for complex analysis
 - Respect organizational policies automatically
 - Audit model usage across organization for cost tracking
 
@@ -434,17 +475,21 @@ Copilot Knowledge Bases solve the multi-repository context problem. In microserv
 **Governance policies:**
 ```
 Organization Settings → Copilot Policies
-  ├── Allowed models: GPT-4.1, Claude Sonnet 4
-  ├── Restricted models: Claude Opus 4 (requires approval)
+  ├── Allowed models: Currently supported, organization-approved models
+  ├── Restricted models: Higher-cost supported models (requires approval)
   ├── Auto-selection: Enabled for routine tasks
   └── Audit logging: All model usage tracked
 ```
 
 **Cost optimization patterns:**
 - Routine code completion: Fast, cost-effective models
-- Documentation generation: Balanced models (Sonnet)
-- Architecture analysis: Premium models (Opus) with budget controls
+- Documentation generation: Supported balanced-capability models
+- Architecture analysis: Supported higher-reasoning models with budget controls
 - Code review automation: Task-appropriate model selection
+
+### September 1 Model Migration Readiness
+
+Treat model retirement as a policy-readiness check, not a one-time cleanup task. Before September 1 migrations, enable a durable, supported replacement model in Copilot model policies and verify that the replacement appears in the model selectors used by each affected workflow. Prefer capability and support-status wording in standards and runbooks over pinning guidance to model names that will age quickly. No action is required to remove retired models after retirement; the operational work is ensuring an approved supported model is available before teams depend on it.
 
 ### Narrative
 
@@ -525,7 +570,7 @@ Enterprise Copilot deployments require governance frameworks addressing access, 
 
 *Self-service patterns that enable 50+ teams simultaneously*
 
-### Adoption Metrics and ROI Measurement
+### Measuring Adoption and ROI
 
 ### What to Measure
 
@@ -577,9 +622,22 @@ Onboarding Time:         45 days → 28 days
 Cost per Feature:        -31% (normalized)
 ```
 
+**Product-backed ROI view:**
+- Use the enterprise or organization Copilot impact dashboard ROI section to compare early-phase and agent-first developer cohorts
+- Enable the Copilot usage metrics policy and grant the viewer **View Copilot Metrics** permission before relying on the dashboard
+- Model cost per developer per month, payroll share, and pull requests per developer; use the salary control to align the model with local compensation assumptions
+- Treat the result as directional: costs are based on AI-credit estimates and salary is a modeling input, not an audited savings figure
+- Interpret trends using the corrected 28-day cohort, which includes every active user in the window; the correction does not change API or NDJSON exports
+
+**Agent app activity:**
+- Use `totals_by_3rd_party_agent` in enterprise and organization usage reports to attribute recognized agent app activity
+- Join reporting history on stable `agent_id`; display names are mutable labels
+- Track job starts and aggregate `session_count` to understand agent use, but do not add nested `user_initiated_interaction_count` to the top-level field of the same name
+- Account for report shape: per-user entries omit `session_count`, unidentified agents are omitted, and the array is absent when there is no agent activity
+
 ### Narrative
 
-Measuring Copilot ROI requires tracking leading, intermediate, and lagging indicators. Usage metrics (acceptance rate, active users) show adoption health. Productivity metrics (PR velocity, review time) demonstrate efficiency gains. Business metrics (time to market, cost per feature) justify investment to CFO. Most organizations track acceptance rate (target: 55-65%) and active users (target: 80%+ utilization of licensed seats). Intermediate metrics like PR velocity and review time show concrete productivity improvements: teams shipping 40% more features with same headcount, code reviews completing 30% faster. Quarterly reporting combines these into business case: "Copilot investment of $X delivered $Y in productivity gains, reducing cost per feature 31% while improving developer satisfaction." Data-driven ROI storytelling secures continued investment and expansion.
+Measuring Copilot ROI requires tracking leading, intermediate, and lagging indicators. Usage metrics show adoption health, productivity metrics expose workflow movement, and business metrics connect those changes to investment decisions. The impact dashboard adds a consistent directional model for enterprise and organization reporting, while usage reports separate recognized agent app activity from top-level interaction totals. Use both as evidence, not attribution proof: pair cohort trends and agent activity with delivery context before making investment claims. This produces a more defensible narrative than anecdotes while preserving the caveats behind the estimates.
 
 ---
 
@@ -761,11 +819,6 @@ Scaling Copilot adoption requires self-service enablement—teams onboard withou
 
 *Balance central control with team autonomy*
 
-<!-- 🎬 MAJOR SECTION: Multi-Team Coordination -->
-## Multi-Team Coordination: Federated Governance That Scales
-
-*Balance central control with team autonomy*
-
 ### The Scaling Challenge
 
 **Uncoordinated adoption risks:**
@@ -780,21 +833,21 @@ Scaling Copilot adoption requires self-service enablement—teams onboard withou
 - Platform team overwhelmed with support requests
 - Innovation stalls waiting for standardization
 
-### Federated Governance Model
+### Managed Settings: Enterprise Floor, Team Specialization
 
-**Platform team responsibilities:**
-- Define organization-wide standards (instructions, security policies)
-- Maintain shared skill libraries and Knowledge Bases
-- Provide onboarding kit and templates
-- Track metrics and report ROI
-- Govern model access and compliance
+**Enterprise configuration:**
+- Mark only selected managed-setting keys as overridable; every non-overridable enterprise choice remains locked
+- Store team-specific settings under `copilot/teams/` and map each file to GitHub team slugs through `team-mappings.json`
+- Treat enterprise values as the policy floor: team specialization can adjust only the keys the enterprise administrator permits
 
-**Team responsibilities:**
-- Customize repository instructions for domain-specific needs
-- Build team-specific agent skills for specialized workflows
-- Contribute successful patterns back to platform team
-- Follow review standards and compliance requirements
-- Measure and report team-level metrics
+**Merge behavior:**
+- When a user belongs to multiple mapped teams, supported settings resolve to the least restrictive value allowed beneath the enterprise policy
+- `enabledPlugins` and `extraKnownMarketplaces` are additive: teams can extend the enterprise baseline but cannot shrink it
+- Validate the effective result for users with multiple team memberships rather than assuming one team file wins
+
+**Enforcement boundary:**
+- Managed team specialization currently applies in VS Code, Copilot CLI, the Copilot App, and Copilot cloud agent
+- Enforcement requires GitHub Copilot Business or Enterprise licensing; do not present team mappings as a control for unsupported surfaces or license tiers
 
 ### Community of Practice
 
@@ -810,7 +863,7 @@ Scaling Copilot adoption requires self-service enablement—teams onboard withou
 - Provide platform team support to high-adoption teams
 - Create career development opportunities for AI expertise
 
-Successful enterprise adoption requires balancing central governance with team autonomy. The federated model divides responsibility: platform team provides baseline standards, shared libraries, and compliance frameworks; individual teams customize for domain-specific needs and contribute innovations back. Community of Practice prevents knowledge silos: monthly pattern-sharing sessions, internal skill catalogs, async collaboration channels. This approach scales innovation—50 teams experiment independently within governance guardrails, successful patterns promote to organization level, everyone benefits from collective learning. The alternative (centralized control) creates bottlenecks; pure autonomy creates chaos. Federated governance with community knowledge sharing achieves both consistency and velocity.
+Successful enterprise adoption requires balancing central governance with team autonomy. Managed settings make that boundary explicit: enterprise administrators lock the policy floor, identify overridable keys, and map team specializations through versioned files. Least-restrictive merging lets multi-team users receive permitted capabilities without bypassing locked choices, while additive plugin and marketplace lists preserve the enterprise baseline. Community of Practice still carries discoveries across teams, but the control plane is now concrete, reviewable, and bounded by supported surfaces and licensing.
 
 ### Knowledge Multiplication Effect
 
@@ -957,9 +1010,9 @@ Team Adoption:
 
 ### Complementary Features
 
-- **[Agentic Journey](../agentic-journey/)** — Issue-to-PR automation workflows that leverage org standards
+- **[Agentic Lifecycle Orchestration](../agentic-lifecycle/)** — Issue-to-PR automation workflows that leverage org standards
 - **[Agentic SDLC](../agentic-sdlc/)** — Full Gen-4 transformation when ready to graduate beyond enterprise patterns
-- **[Agent Teams](../agent-teams/)** — Specialized agent coordination patterns for complex workflows
+- **[Multi-Agent Coordination](../multi-agent-coordination/)** — Specialized agent coordination patterns for complex workflows
 
 ### Decision Flow
 

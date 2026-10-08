@@ -164,7 +164,7 @@ Include:
 
 **Custom prompt files** turn your best prompts into reusable functions that standardize team practices and save repetitive typing. You'll create workspace prompts for code review and test generation, configure YAML frontmatter to control agent behavior, and measure time saved through prompt reuse. You'll document specialized functions once and invoke them in seconds.
 
-**Time:** ~20 minutes | **Exercises:** 3
+**Time:** ~32 minutes | **Exercises:** 3
 
 ---
 
@@ -174,9 +174,9 @@ The exercises below demonstrate how prompt files transform repetitive tasks into
 
 | # | Exercise | Lead | Support | Problem | Solution | Key Metrics | Artifacts |
 |---|----------|------|---------|---------|----------|-------------|-----------|
-| [3.1](exercise-3.1.md) | Creating Your First Prompt File | Elena | Marcus | Test generation prompt typed 5×/day: 3 min each, inconsistent standards | Create `.github/prompts/test-suite.prompt.md` for standardized test generation | 3→0.1 min per invocation, 5 invocations/day = 14.5 min/day saved | `.github/prompts/test-suite.prompt.md` |
-| [3.2](exercise-3.2.md) | Referencing Standards and Docs | Sarah | David | React review prompt manually types standards: 8 lines, 3 min setup, missed checks | Create `/react-review` prompt that links to copilot-instructions.md | 8→1 lines, 3→0.1 min setup, 0 missed checks | `.github/prompts/react-review.prompt.md` |
-| [3.3](exercise-3.3.md) | Variable-Driven Prompts | Marcus | Rafael, Elena | Build debugging prompt requires manual context: 5 min to gather logs, env vars, config | Create `/debug-build` with variables for current file and selection | 5→0.5 min context gathering, 10× faster debugging | `.github/prompts/debug-build.prompt.md` |
+| [3.1](exercise-3.1.md) | Creating a Docs Refresh Prompt | Sarah | David | 6 min | Keep foundational docs evergreen after code changes |
+| [3.2](exercise-3.2.md) | Creating a Context-Aware Prompt File | Elena | Sarah | 12 min | Save one reusable prompt with docs, roadmap, and variables |
+| [3.3](exercise-3.3.md) | Show-Accuracy Check Prompt | Elena | Sarah | The seeded Breaking Bad data has bugs; manual accuracy review takes 8–10 min per content pass | Create `[show]-accuracy-check.prompt.md` referencing the universe file; catch seeded errors automatically | 8→1 min/review, catches errors on first invocation | `.github/prompts/[show]-accuracy-check.prompt.md` |
 
 ---
 

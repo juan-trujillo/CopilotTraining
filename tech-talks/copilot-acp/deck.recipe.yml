@@ -1,0 +1,90 @@
+# Three Builders Arc: Each section IS a different use case.
+# Repetition dissolves because each builder advances the story rather than restating.
+
+version: 1
+
+deck:
+  title: "GitHub Copilot ACP"
+  subtitle: "Your Tool Just Got an AI Agent"
+  tagline: "One flag. Any editor. Full agent capabilities."
+
+  agenda:
+    - title: "Full Agents in Any Editor"
+      takeaway: "Connect any compatible editor to Copilot agent capabilities."
+      whyItMatters: "Editor choice no longer limits the agent experience."
+    - title: "Production Permissions"
+      takeaway: "Choose access strategies that separate exploration from execution."
+      whyItMatters: "Teams can enable autonomy without granting blanket access."
+    - title: "Composed Agent Systems"
+      takeaway: "Coordinate focused agents across repositories and contexts."
+      whyItMatters: "Independent agents create parallel progress with less coordination."
+
+  arcToc: "Zed Developer → Platform Engineer → Multi-Agent Orchestrator → Ship Safely"
+  arcNarrative: >
+    The talk opens with a concrete builder story, not topology: a Zed developer who
+    needs Copilot agent features. One command (`copilot --acp --stdio`) unlocks the
+    full experience — 14 lines of SDK code produce streaming responses. The audience
+    sees output before theory. Builder 2 pivots to the enterprise gate question: a
+    platform engineer asks "can I trust this?" and discovers three permission strategies
+    that make ACP production-safe. Builder 3 escalates to multi-agent orchestration —
+    spawning one ACP process per repo, broadcasting prompts, synthesizing cross-repo
+    results — proving ACP sessions compose into systems greater than their parts. The
+    closing section weaves the three builders together with a decision table and
+    alternatives comparison, giving each persona their "first step" before they leave.
+    This arc eliminates repetition because each section is structurally different (new
+    use case, new persona, new capability layer) while building on the prior section's
+    foundation.
+
+  sectionOrder:
+    - "Zed Developer"
+    - "Platform Engineer"
+    - "Multi-Agent Orchestrator"
+    - "Ship Safely"
+
+  sectionModes:
+    "Zed Developer":
+      emphasis: high
+      note: >
+        Open with the Zed developer's painful moment — locked out of Copilot's agent
+        experience. Show `copilot --acp --stdio` starting the server BEFORE explaining
+        what ACP is. Walk through the 14-line TypeScript client connecting and receiving
+        streaming responses. The protocol explanation (JSON-RPC, capabilities, sessions)
+        comes AFTER the audience has seen it work. The LSP analogy lands once here as a
+        one-sentence aside ("same move that solved language tooling"), not as a section
+        centerpiece. Close with: "Zed shipped this in 2 weeks, not 3 months."
+    "Platform Engineer":
+      emphasis: high
+      note: >
+        Pivot to the enterprise adoption gate: "Can I ship this?" Lead with the
+        permission-request flow diagram (agent proposes → client mediates → policy
+        decides). Show three concrete strategies side by side: interactive approval for
+        editors, policy-based for CI/CD (the "whoa" moment — 3 lines that make
+        automation safe), tiered by environment table. Close with the enterprise security
+        table showing how each concern maps to an ACP mechanism. The audience leaves this
+        section knowing exactly how to scope agent trust for their deployment context.
+    "Multi-Agent Orchestrator":
+      emphasis: high
+      note: >
+        Escalate from "one agent, one editor" to "many agents, coordinated work." Open
+        with the cross-repo pain (4 repos, disconnected results). Show the orchestrator
+        architecture: one ACP process per repo, broadcast prompts, coalesced results,
+        orchestrator synthesis. Include both screenshots (agents panel, results panel).
+        The key insight: no special "multi-agent mode" needed — standard ACP sessions
+        compose naturally. Close with the live demo command (`git clone ... npm run dev`).
+        This section is the climactic proof that ACP is a platform, not just a protocol.
+    "Ship Safely":
+      emphasis: medium
+      note: >
+        Quick-close section that weaves the three builders together. Open with the
+        decision table ("Use ACP if..."). Show the ACP vs alternatives comparison
+        (MCP, Extensions, copilot -p, Direct API). Give each persona their concrete
+        first step: developer → run the basic client example; platform engineer →
+        implement policy-based permissions; orchestrator builder → clone cli-acp.
+        End on the flywheel: more clients → more agents → open standard, not vendor lock.
+
+  highlightMoments:
+    - "`copilot --acp --stdio` — the server is running before the next slide loads. The entire integration problem collapses to one flag."
+    - "14 lines of TypeScript SDK code produce a live streaming Copilot agent response — zero to connected in under 5 minutes"
+    - "Three lines of permission policy turn a dangerous automation into a compliance-friendly one: auto-approve reads, prompt writes, block deletes"
+    - "The orchestrator spawns 4 ACP processes, broadcasts one prompt, and synthesizes cross-repo results — no special mode, just composable sessions"
+    - "Zed shipped full Copilot agent support in 2 weeks, not 3 months — and zero maintenance when Copilot updates"

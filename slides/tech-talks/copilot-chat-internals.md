@@ -3,839 +3,469 @@ theme: default
 class: text-center
 highlighter: shiki
 lineNumbers: false
+info: |
+  ## Copilot Chat Internals
+  CopilotTraining Tech Talk
 drawings:
   persist: false
 transition: slide-left
 title: Copilot Chat Internals
 mdc: true
-status: active
-updated: 2026-02-01
+section: Choose and Configure
+status: archived
+updated: 2026-09-15
 ---
 
-# 🔍 Copilot Chat Internals
+<script setup>
+import TitleSlide from './components/structure/TitleSlide.vue'
+import CoreQuestionSlide from './components/structure/CoreQuestionSlide.vue'
+import TocSlide from './components/structure/TocSlide.vue'
+import SectionOpenerSlide from './components/structure/SectionOpenerSlide.vue'
+import BeforeAfterSlide from './components/structure/BeforeAfterSlide.vue'
+import WhatYouCanDoTodaySlide from './components/structure/WhatYouCanDoTodaySlide.vue'
+import ReferencesSlide from './components/structure/ReferencesSlide.vue'
+import ThankYouSlide from './components/structure/ThankYouSlide.vue'
+import BeforeAfterMetricsSlide from './components/BeforeAfterMetricsSlide.vue'
+import BeforeAfterPanelsSlide from './components/BeforeAfterPanelsSlide.vue'
+import TwoColPairedConceptsSlide from './components/TwoColPairedConceptsSlide.vue'
+import FourCardGridSlide from './components/FourCardGridSlide.vue'
+import CodeWithFeaturesSlide from './components/CodeWithFeaturesSlide.vue'
+import HeroStatSlide from './components/HeroStatSlide.vue'
+import WorkflowShowdownStepsSlide from './components/WorkflowShowdownStepsSlide.vue'
+import AITerminalTranscriptSlide from './components/AITerminalTranscriptSlide.vue'
+import FrameworkMappingRowsSlide from './components/FrameworkMappingRowsSlide.vue'
+</script>
 
-## Debugging AI Interactions
-
-⏰ **Duration** • 40 minutes | 👥 **Audience** • Developers / DevOps / Technical Leads
-
----
-layout: center
----
-
-# ❓ The Question
-
-<div class="text-2xl mb-8">
-
-> *"Why didn't Copilot do what I expected—*
->
-> *and how do I systematically debug AI interactions?"*
-
-</div>
-
-<div class="text-lg opacity-80">
-
-Every developer using Copilot encounters unexpected results.
-
-This talk shows you how to investigate, not guess.
-
-</div>
-
----
-layout: center
+# Title
+<TitleSlide
+  title="Copilot Chat Internals"
+  subtitle="Debugging AI Interactions"
+  tagline="Transform AI debugging from guesswork into systematic investigation"
+  meta="GitHub Copilot · Debugging AI Interactions · CopilotTraining"
+/>
 ---
 
-# 📖 Table of Contents
-
-<div class="grid grid-cols-2 gap-6">
-  <div @click="$nav.go(7)" class="cursor-pointer p-6 rounded-lg border-2 border-blue-400 hover:border-blue-500 hover:bg-blue-400/10 transition-all">
-    <div class="text-3xl mb-2">🔎</div>
-    <div class="font-semibold text-lg">Chat Debug View</div>
-    <div class="text-sm opacity-70">Complete request inspection</div>
-  </div>
-  <div @click="$nav.go(11)" class="cursor-pointer p-6 rounded-lg border-2 border-purple-400 hover:border-purple-500 hover:bg-purple-400/10 transition-all">
-    <div class="text-3xl mb-2">🧠</div>
-    <div class="font-semibold text-lg">Thinking Tokens</div>
-    <div class="text-sm opacity-70">See model reasoning</div>
-  </div>
-  <div @click="$nav.go(13)" class="cursor-pointer p-6 rounded-lg border-2 border-green-400 hover:border-green-500 hover:bg-green-400/10 transition-all">
-    <div class="text-3xl mb-2">⚙️</div>
-    <div class="font-semibold text-lg">Diagnostics View</div>
-    <div class="text-sm opacity-70">Configuration validation</div>
-  </div>
-  <div @click="$nav.go(15)" class="cursor-pointer p-6 rounded-lg border-2 border-orange-400 hover:border-orange-500 hover:bg-orange-400/10 transition-all">
-    <div class="text-3xl mb-2">📋</div>
-    <div class="font-semibold text-lg">Extension Logs & MCP</div>
-    <div class="text-sm opacity-70">Deep troubleshooting</div>
-  </div>
-</div>
-
-<div @click="$nav.go(17)" class="mt-6 cursor-pointer p-4 rounded-lg border-2 border-cyan-400 hover:border-cyan-500 hover:bg-cyan-400/10 transition-all">
-  <div class="text-center">
-    <span class="text-2xl mr-2">🔧</span>
-    <span class="font-semibold">Troubleshooting Patterns</span>
-    <span class="text-sm opacity-70 ml-2">• Systematic debugging workflows</span>
-  </div>
-</div>
-
+# Core Question
+<CoreQuestionSlide
+  question="Why can&#39;t I reproduce this Copilot failure?"
+  subtext="When AI responses break, most engineers have nowhere to look. Copilot now ships"
+  highlight="a full debugging stack — if you know where to find it."
+  :cards='[
+    { icon: "🔧", title: "Platform Engineers", description: "Debug agent pipelines and MCP configurations before users notice" },
+    { icon: "👩‍💻", title: "Developers", description: "Understand why context isn&#39;t loading or responses are wrong" },
+    { icon: "🏗️", title: "DevOps / SRE", description: "Trace reliability issues back to model turns, not infrastructure" },
+    { title: "45 min → 4 min", description: "Typical config-error diagnosis time with vs. without the debug view" },
+    { title: "Black box → Observable", description: "Agent Debug Panel exposes every model turn and tool call in real time" },
+    { title: "v1.110 — Feb 2026", description: "Real-time event stream and chart visualization newly available" }
+  ]'
+/>
 ---
 
-# ⚠️ The Problem
-
-<div class="text-xl mb-6">Why debugging AI interactions is hard</div>
-
-<div class="grid grid-cols-1 gap-4">
-
-<div class="p-4 bg-red-400/10 rounded border-l-4 border-red-400">
-  <div class="font-semibold">🔒 Black box frustration</div>
-  <div class="text-sm opacity-80">No visibility into what the model received</div>
-</div>
-
-<div class="p-4 bg-orange-400/10 rounded border-l-4 border-orange-400">
-  <div class="font-semibold">❓ Context mystery</div>
-  <div class="text-sm opacity-80">Which files were sent? Were custom instructions loaded?</div>
-</div>
-
-<div class="p-4 bg-yellow-400/10 rounded border-l-4 border-yellow-400">
-  <div class="font-semibold">🔁 Trial-and-error debugging</div>
-  <div class="text-sm opacity-80">20-40 minutes per failed interaction</div>
-</div>
-
-<div class="p-4 bg-purple-400/10 rounded border-l-4 border-purple-400">
-  <div class="font-semibold">⚙️ Customization uncertainty</div>
-  <div class="text-sm opacity-80">Are my agents and instructions actually working?</div>
-</div>
-
-</div>
-
+# Table of Contents
+<TocSlide
+  :sections='[
+    { icon: "📡", title: "Agent Debug Panel", subtitle: "Real-Time Event Stream (v1.110)", blurb: "Monitor every model turn, tool call, and chart in real time", slide: 4 },
+    { icon: "🔍", title: "Chat Debug View", subtitle: "Complete Request Inspection", blurb: "See the full pipeline: files, instructions, thinking tokens", slide: 9 },
+    { icon: "⚙️", title: "Customization Diagnostics", subtitle: "Configuration Validation", blurb: "Diagnose instruction errors and MCP config issues fast", slide: 14 },
+    { icon: "🗺️", title: "Troubleshooting Patterns", subtitle: "Systematic Investigation", blurb: "Repeatable triage workflows to apply the same day", slide: 17 },
+  ]'
+/>
 ---
 
-# ✅ The Solution
-
-<div class="text-xl mb-6">Built-in observability tools</div>
-
-<div class="grid grid-cols-2 gap-6">
-
-<div>
-
-### What It Provides
-
-- **Request Inspection**: View system prompts, context, and tool invocations
-- **Reasoning Visibility**: See model thinking tokens
-- **Configuration Validation**: Verify customizations loaded correctly
-- **Network Diagnostics**: Troubleshoot connectivity issues
-
-</div>
-
-<div>
-
-### Four Diagnostic Systems
-
-1. **Chat Debug View** → Request/response details
-2. **Thinking Tokens** → Model reasoning
-3. **Diagnostics View** → Config validation
-4. **Extension Logs** → Infrastructure debugging
-
-</div>
-
-</div>
-
-<div class="mt-6 p-4 bg-blue-400/10 rounded border-l-4 border-blue-400">
-  <div class="font-semibold">💡 Core Insight</div>
-  <div class="text-sm">Transform AI debugging from guesswork into systematic investigation</div>
-</div>
-
----
-layout: center
-name: chatdebugview
+# Part 1 — Agent Debug Panel: Real-Time Events
+<SectionOpenerSlide
+  :partNumber="1"
+  title="Agent Debug Panel: Real-Time Events"
+  subtitle="Live event stream and chart visualization — Copilot goes from black box to observable system"
+  :cards='[
+    { icon: "📡", title: "Real-Time Events", blurb: "Monitor tool calls, model turns, and errors as they happen" },
+    { icon: "📊", title: "Chart Visualization", blurb: "Timeline view of agent execution — spot bottlenecks instantly" },
+    { icon: "🔍", title: "Tool Call Inspection", blurb: "Expand any event to see inputs, outputs, and durations" },
+  ]'
+  :terminal='{ context: "Opening the Agent Debug Panel in VS Code (v1.110+)", detail: "Every model turn and tool call — visible in real time" }'
+/>
 ---
 
-# 🔎 Chat Debug View
-
-<div class="text-4xl font-bold bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
-Complete Request Inspection
-</div>
-
-<div class="mt-6 text-xl opacity-80">
-See exactly what every AI request sends and receives
-</div>
-
-<div class="mt-8 text-sm opacity-60">
-Section 1 of 5 • No more black boxes
-</div>
-
+# Agent Debug Panel — Four Events
+<FourCardGridSlide
+  :partNumber="1"
+  pillIcon="📡"
+  pillLabel="Agent Debug Panel · Events"
+  title="Four Event Streams — All Live"
+  :cards='[
+    { icon: "💬", title: "Chat Events", description: "Every message, tool call, and response in chronological order" },
+    { icon: "🔧", title: "Tool Invocations", description: "Live timing data for each tool call — instant bottleneck detection" },
+    { icon: "📁", title: "Customization Loading", description: "Which instruction files, skills, and agents loaded — with status" },
+    { icon: "⚠️", title: "Errors and Warnings", description: "Immediate visibility into failures with context and error detail" }
+  ]'
+  :insight='{ icon: "💡", text: "Keep the panel open during development sessions — your AI interaction dashboard." }'
+  :progressDots='{ current: 1, total: 4, activeColor: "bg-cyan-400 shadow-lg shadow-cyan-500/50" }'
+/>
 ---
 
-# 🔎 Chat Debug View: What It Shows
-
-<div class="text-lg mb-4">Every component of each AI interaction</div>
-
-<div class="grid grid-cols-2 gap-4">
-
-<div class="space-y-3">
-
-<div class="p-3 bg-blue-400/10 rounded">
-  <div class="font-semibold">📝 System Prompt</div>
-  <div class="text-sm opacity-80">Base instructions for AI behavior</div>
-</div>
-
-<div class="p-3 bg-green-400/10 rounded">
-  <div class="font-semibold">💬 User Prompt</div>
-  <div class="text-sm opacity-80">Your actual request as sent</div>
-</div>
-
-<div class="p-3 bg-purple-400/10 rounded">
-  <div class="font-semibold">📁 Context</div>
-  <div class="text-sm opacity-80">Files, instructions, and context sent</div>
-</div>
-
-</div>
-
-<div class="space-y-3">
-
-<div class="p-3 bg-orange-400/10 rounded">
-  <div class="font-semibold">🔧 Tool Invocations</div>
-  <div class="text-sm opacity-80">Which tools were called and results</div>
-</div>
-
-<div class="p-3 bg-cyan-400/10 rounded">
-  <div class="font-semibold">✨ Model Response</div>
-  <div class="text-sm opacity-80">Full response from language model</div>
-</div>
-
-</div>
-
-</div>
-
-<div class="mt-6 p-4 bg-yellow-400/10 rounded border-l-4 border-yellow-400">
-  <div class="font-semibold">🎯 How to Open</div>
-  <div class="text-sm">Command Palette → <code>Developer: Show Chat Debug View</code></div>
-</div>
-
+# Agent Debug Panel — Customization Failure
+<AITerminalTranscriptSlide
+  :partNumber="1"
+  pillIcon="🔍"
+  pillLabel="Agent Debug Panel · Live Demo"
+  title="Caught: Custom Instructions Not Loading"
+  subtitle="From 35 minutes of guesswork to 90 seconds in the panel"
+  :transcript='[
+    { type: "prompt", text: "Developer: Open Agent Debug Panel" },
+    { type: "user", text: "Why is Copilot ignoring my custom instructions?" },
+    { type: "thinking", label: "📁 Loaded Customizations:" },
+    { type: "response", lines: ["  .github/agents/backend.md — loaded", "  .github/copilot-instructions.md — YAML syntax error line 14", "  .vscode/settings.json — empty file, skipped"] },
+    { type: "divider" },
+    { type: "outcome", text: "Root cause found in 90 seconds" },
+    { type: "outcome", text: "Fix: corrected YAML frontmatter — instructions now apply" }
+  ]'
+  footerMetric="35 min → 90 sec to root cause"
+  :progressDots='{ current: 2, total: 4, activeColor: "bg-cyan-400 shadow-lg shadow-cyan-500/50" }'
+/>
 ---
 
-# 🔎 The Request Pipeline
-
-<div class="text-sm mb-4">What happens when you send a chat message</div>
-
-<div class="grid grid-cols-5 gap-2 text-xs">
-
-<div class="p-3 bg-blue-400/10 rounded text-center">
-  <div class="text-2xl mb-1">1️⃣</div>
-  <div class="font-semibold">Your Prompt</div>
-</div>
-
-<div class="flex items-center justify-center">
-  <div class="text-2xl">→</div>
-</div>
-
-<div class="p-3 bg-purple-400/10 rounded text-center">
-  <div class="text-2xl mb-1">2️⃣</div>
-  <div class="font-semibold">Context Assembly</div>
-</div>
-
-<div class="flex items-center justify-center">
-  <div class="text-2xl">→</div>
-</div>
-
-<div class="p-3 bg-pink-400/10 rounded text-center">
-  <div class="text-2xl mb-1">3️⃣</div>
-  <div class="font-semibold">System Prompt</div>
-</div>
-
-</div>
-
-<div class="grid grid-cols-5 gap-2 text-xs mt-2">
-
-<div class="col-start-2 flex items-center justify-center">
-  <div class="text-2xl">↓</div>
-</div>
-
-</div>
-
-<div class="grid grid-cols-5 gap-2 text-xs">
-
-<div class="col-start-2 p-3 bg-orange-400/10 rounded text-center">
-  <div class="text-2xl mb-1">5️⃣</div>
-  <div class="font-semibold">Response</div>
-</div>
-
-<div class="flex items-center justify-center">
-  <div class="text-2xl">←</div>
-</div>
-
-<div class="p-3 bg-green-400/10 rounded text-center">
-  <div class="text-2xl mb-1">4️⃣</div>
-  <div class="font-semibold">Model Inference</div>
-</div>
-
-</div>
-
-<div class="mt-6 text-sm">
-  <strong>Key Assembly Steps:</strong> Active files + #file refs + @workspace + instructions + agent defs + tools
-</div>
-
+# Agent Debug Panel — Chart and Customizations
+<TwoColPairedConceptsSlide
+  :partNumber="1"
+  pillIcon="📊"
+  pillLabel="Agent Debug Panel · Sub-Features"
+  title="Two Lenses on Every Debugging Session"
+  :left='{
+    header: "Chart View",
+    icon: "📊",
+    items: [
+      { title: "Flow Diagram", detail: "Agent execution as a visual graph" },
+      { title: "Timing Bottlenecks", detail: "Spot slow tool calls at a glance" },
+      { title: "Tool Call Chains", detail: "Follow execution path through steps" },
+      "Switch: list view to chart view"
+    ]
+  }'
+  :right='{
+    header: "Loaded Customizations",
+    icon: "📁",
+    items: [
+      { title: "Per-file status", detail: "Loaded — Warning — Failed with reason" },
+      { title: "File location", detail: "Exact path and scope shown" },
+      { title: "Application order", detail: "Which instructions apply first" },
+      "First stop for missing instructions"
+    ]
+  }'
+  :progressDots='{ current: 3, total: 4, activeColor: "bg-cyan-400 shadow-lg shadow-cyan-500/50" }'
+/>
 ---
 
-# 🔎 What to Look For
-
-<div class="text-lg mb-4">Key things to check in Debug View</div>
-
-<div class="space-y-4">
-
-<div class="p-4 bg-blue-400/10 rounded border-l-4 border-blue-400">
-  <div class="font-semibold mb-2">📁 Context Section</div>
-  <div class="text-sm opacity-90">
-    • Are the right files included?<br/>
-    • Is the context window full? (check token usage)<br/>
-    • Are instructions being loaded?
-  </div>
-</div>
-
-<div class="p-4 bg-purple-400/10 rounded border-l-4 border-purple-400">
-  <div class="font-semibold mb-2">🔧 Tool Invocations</div>
-  <div class="text-sm opacity-90">
-    • Which tools were called?<br/>
-    • Did they succeed or fail?<br/>
-    • What data did they return?
-  </div>
-</div>
-
-<div class="p-4 bg-green-400/10 rounded border-l-4 border-green-400">
-  <div class="font-semibold mb-2">✨ Response</div>
-  <div class="text-sm opacity-90">
-    • Does the model reference your instructions?<br/>
-    • Are patterns from your codebase being followed?
-  </div>
-</div>
-
-</div>
-
----
-layout: center
-name: thinkingtoken
+# Agent Debug Panel — Impact
+<WorkflowShowdownStepsSlide
+  :partNumber="1"
+  pillIcon="🎯"
+  pillLabel="Agent Debug Panel · Impact"
+  title="From Reload-and-Pray to Systematic Debugging"
+  subtitle="The panel replaces guesswork with evidence"
+  leftLabel="Old Habit: Reload and Guess"
+  rightLabel="New Pattern: Debug Panel First"
+  :steps='[
+    { left: { label: "Instructions ignored", note: "Response does not match expectations" }, right: { label: "Instructions ignored", note: "Response does not match expectations" } },
+    { left: { label: "Reload the window", note: "Hope the problem disappears" }, right: { label: "Open Agent Debug Panel", note: "Developer: Open Agent Debug Panel" } },
+    { left: { label: "Try the same prompt", note: "Same wrong result appears again" }, right: { label: "Check Loaded Customizations", note: "See the failed file and error message" } },
+    { left: { label: "Add context manually", note: "30+ minutes — root cause unknown" }, right: { label: "Fix syntax error, verify", note: "Instructions load correctly in 2 minutes" } }
+  ]'
+  :outcomeLeft='{ icon: "🔄", label: "30 minutes of trial and error — no root cause" }'
+  :outcomeRight='{ icon: "✓", label: "Root cause found and fixed in under 2 minutes" }'
+  summaryMetric="30 min → 2 min — panel eliminates trial-and-error debugging"
+  :progressDots='{ current: 4, total: 4, activeColor: "bg-cyan-400 shadow-lg shadow-cyan-500/50" }'
+/>
 ---
 
-# 🧠 Thinking Tokens
-
-<div class="text-4xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
-See the Model Reason
-</div>
-
-<div class="mt-6 text-xl opacity-80">
-Watch the model's reasoning process in real-time
-</div>
-
-<div class="mt-8 text-sm opacity-60">
-Section 2 of 5 • VS Code 1.109+
-</div>
-
+# Part 2 — Chat Debug View: Full Pipeline
+<SectionOpenerSlide
+  :partNumber="2"
+  title="Chat Debug View: Full Pipeline"
+  subtitle="Unify Chat Debug View, Thinking Tokens, and Context Management in one pipeline mental model"
+  :cards='[
+    { icon: "📋", title: "Request Inspector", blurb: "See every file, instruction, and tool call sent to the model" },
+    { icon: "🧠", title: "Thinking Tokens", blurb: "Watch model reasoning steps before the response arrives" },
+    { icon: "📐", title: "Context Management", blurb: "Control compaction and window limits for agent sessions" },
+  ]'
+  :terminal='{ context: "Opening Chat Debug View during an agent session", detail: "Full request pipeline — nothing hidden from you" }'
+/>
 ---
 
-# 🧠 Thinking Tokens: What They Reveal
-
-<div class="grid grid-cols-2 gap-6">
-
-<div>
-
-### What Are Thinking Tokens?
-
-Some models (Claude, o-series) produce **internal reasoning steps** before generating a response.
-
-VS Code 1.109+ can display these tokens, showing *how* the model approaches your request.
-
-### Enable Thinking Display
-
-Setting: `chat.renderThinking`
-
-- **"collapsed"** (default) — Shown collapsed
-- **"expanded"** — Shown expanded
-- **"hidden"** — Not displayed
-
-</div>
-
-<div>
-
-### What Thinking Reveals
-
-<div class="space-y-3">
-
-<div class="p-3 bg-blue-400/10 rounded">
-  <div class="font-semibold text-sm">Problem decomposition</div>
-  <div class="text-xs opacity-80">How the model breaks down your request</div>
-</div>
-
-<div class="p-3 bg-purple-400/10 rounded">
-  <div class="font-semibold text-sm">Tool selection reasoning</div>
-  <div class="text-xs opacity-80">Why specific tools were chosen</div>
-</div>
-
-<div class="p-3 bg-green-400/10 rounded">
-  <div class="font-semibold text-sm">Context evaluation</div>
-  <div class="text-xs opacity-80">How files influenced decisions</div>
-</div>
-
-<div class="p-3 bg-orange-400/10 rounded">
-  <div class="font-semibold text-sm">Uncertainty signals</div>
-  <div class="text-xs opacity-80">When multiple approaches considered</div>
-</div>
-
-</div>
-
-</div>
-
-</div>
-
----
-layout: center
-name: diagnosticsview
+# Chat Debug View — Request Pipeline
+<FrameworkMappingRowsSlide
+  :partNumber="2"
+  pillIcon="🔍"
+  pillLabel="Chat Debug View · Pipeline"
+  title="The 5-Stage Request Pipeline"
+  subtitle="Nothing is hidden — Chat Debug View captures every stage of every request"
+  :rows='[
+    { label: "Prompt", description: "Your request plus active file and any @-referenced context attached", tag: "User input" },
+    { label: "Assembly", description: "Instructions, skills, agents, and tools merged into one payload", tag: "Context build" },
+    { label: "System prompt", description: "Final merged payload sent as the model instruction layer", tag: "LLM input" },
+    { label: "Inference", description: "Model generates response, calling tools as needed in real time", tag: "Tool calls" },
+    { label: "Response", description: "Formatted output delivered — Debug View captures every stage above", tag: "Full trace" }
+  ]'
+  footnote="Knowing which stage failed cuts diagnosis time from hours to minutes"
+  :progressDots='{ current: 1, total: 4, activeColor: "bg-blue-400 shadow-lg shadow-blue-500/50" }'
+/>
 ---
 
-# ⚙️ Diagnostics View
-
-<div class="text-4xl font-bold bg-gradient-to-r from-green-400 to-emerald-400 bg-clip-text text-transparent">
-Configuration Validation
-</div>
-
-<div class="mt-6 text-xl opacity-80">
-Verify custom agents, instructions, and skills are loading correctly
-</div>
-
-<div class="mt-8 text-sm opacity-60">
-Section 3 of 5 • Catch config errors early
-</div>
-
+# Chat Debug View — Context Inspection
+<AITerminalTranscriptSlide
+  :partNumber="2"
+  pillIcon="🔍"
+  pillLabel="Chat Debug View · Context Inspection"
+  title="Context Inspection: Finding the Wrong File"
+  subtitle="Model was correct — the context was wrong"
+  :transcript='[
+    { type: "prompt", text: "Developer: Show Chat Debug View" },
+    { type: "user", text: "Response references the wrong version of AuthService" },
+    { type: "thinking", label: "🔍 Chat Debug View — Context:" },
+    { type: "response", lines: ["Context included:", "  AuthService.v1.ts (120 tokens)", "  AuthService.ts — not included"] },
+    { type: "response", lines: ["Tool invocations:", "  search_codebase returned v1 file path"] },
+    { type: "divider" },
+    { type: "outcome", text: "Context included the wrong file — not a model error" },
+    { type: "outcome", text: "Fix: attach #file:AuthService.ts explicitly" }
+  ]'
+  footerMetric="Debug view shifts blame from model to context — usually correct"
+  :progressDots='{ current: 2, total: 4, activeColor: "bg-blue-400 shadow-lg shadow-blue-500/50" }'
+/>
 ---
 
-# ⚙️ Diagnostics View: What It Shows
-
-<div class="grid grid-cols-2 gap-6">
-
-<div>
-
-### When Customizations Don't Apply
-
-Custom agents, instructions, prompts, and skills can fail to load **silently**.
-
-### What Diagnostics Reveals
-
-- All active customization files
-- Load status (loaded, failed, skipped)
-- Error messages for failed files
-- Application order for instructions
-
-### How to Open
-
-Right-click in Chat view → **Diagnostics**
-
-</div>
-
-<div>
-
-### Common Issues Revealed
-
-<div class="space-y-3 text-sm">
-
-<div class="p-3 bg-red-400/10 rounded">
-  <div class="font-semibold">Agent not available</div>
-  <div class="text-xs opacity-80">File failed to load due to syntax error</div>
-  <div class="text-xs text-green-400">→ Check YAML frontmatter</div>
-</div>
-
-<div class="p-3 bg-orange-400/10 rounded">
-  <div class="font-semibold">Instructions ignored</div>
-  <div class="text-xs opacity-80">File in wrong location</div>
-  <div class="text-xs text-green-400">→ Move to .github/ folder</div>
-</div>
-
-<div class="p-3 bg-yellow-400/10 rounded">
-  <div class="font-semibold">Skills not triggering</div>
-  <div class="text-xs opacity-80">Not matching applyTo pattern</div>
-  <div class="text-xs text-green-400">→ Update glob pattern</div>
-</div>
-
-</div>
-
-</div>
-
-</div>
-
----
-layout: center
-name: extensionlogs
+# Chat Debug View — Thinking Tokens
+<FourCardGridSlide
+  :partNumber="2"
+  pillIcon="🧠"
+  pillLabel="Chat Debug View · Thinking Tokens"
+  title="What Thinking Tokens Reveal"
+  :cards='[
+    { icon: "🧩", title: "Problem Decomposition", description: "How the model breaks down complex requests into subtasks" },
+    { icon: "🔧", title: "Tool Selection Logic", description: "Why specific tools were chosen over alternative approaches" },
+    { icon: "📖", title: "Context Evaluation", description: "How files and instructions shaped the model decisions" },
+    { icon: "🤔", title: "Uncertainty Signals", description: "When the model considers multiple approaches before choosing" }
+  ]'
+  :insight='{ icon: "💡", text: "Unexpected response? Read the thinking — the model usually had a reason." }'
+  :progressDots='{ current: 3, total: 4, activeColor: "bg-blue-400 shadow-lg shadow-blue-500/50" }'
+/>
 ---
 
-# 📋 Extension Logs & MCP
-
-<div class="text-4xl font-bold bg-gradient-to-r from-orange-400 to-red-400 bg-clip-text text-transparent">
-Deep Troubleshooting
-</div>
-
-<div class="mt-6 text-xl opacity-80">
-Infrastructure-level debugging for network, auth, and external tools
-</div>
-
-<div class="mt-8 text-sm opacity-60">
-Section 4 of 5 • When things really break
-</div>
-
+# Chat Debug View — Context Management
+<BeforeAfterMetricsSlide
+  :partNumber="2"
+  pillIcon="📐"
+  pillLabel="Chat Debug View · Context Control"
+  title="Context Window: Control Before It Controls You"
+  :before='{
+    header: "Without Context Management",
+    items: [
+      "Long sessions produce vague, forgetful responses",
+      "Developers restart conversations and lose progress",
+      { title: "No warning before overflow", detail: "Context fills silently until quality drops" },
+      "Tool results excluded without notice"
+    ]
+  }'
+  :after='{
+    header: "With /compact and /fork",
+    items: [
+      "/compact: 95% to 42% — key decisions preserved",
+      { title: "Context window indicator", detail: "Visual percentage with token breakdown" },
+      "/fork: branch at decision points without losing history",
+      "Proactive compaction before quality degrades"
+    ]
+  }'
+  :metrics='[
+    { value: "95% → 42%", label: "context reduction after /compact" },
+    { value: ">80%", label: "threshold to trigger /compact" },
+    { value: "0 lost", label: "key decisions preserved" }
+  ]'
+  :insight='{ icon: "💡", text: "Use /compact proactively — do not wait for responses to degrade." }'
+  :progressDots='{ current: 4, total: 4, activeColor: "bg-blue-400 shadow-lg shadow-blue-500/50" }'
+/>
 ---
 
-# 📋 Extension Logs: Trace Mode
-
-<div class="grid grid-cols-2 gap-6">
-
-<div>
-
-### Enable Detailed Logging
-
-1. Command Palette (`Ctrl+Shift+P`)
-2. **Developer: Set Log Level**
-3. Set to **Trace** for:
-   - GitHub Copilot
-   - GitHub Copilot Chat
-
-### View Logs
-
-1. **Output: Show Output Channels**
-2. Select **GitHub Copilot** from dropdown
-3. Review detailed logs
-
-</div>
-
-<div>
-
-### What Logs Reveal
-
-<div class="space-y-3 text-sm">
-
-<div class="p-3 bg-blue-400/10 rounded">
-  <div class="font-semibold">Network requests</div>
-  <div class="text-xs opacity-80">Request/response patterns, timeouts</div>
-</div>
-
-<div class="p-3 bg-purple-400/10 rounded">
-  <div class="font-semibold">Authentication</div>
-  <div class="text-xs opacity-80">Auth status, token validation</div>
-</div>
-
-<div class="p-3 bg-green-400/10 rounded">
-  <div class="font-semibold">Extension lifecycle</div>
-  <div class="text-xs opacity-80">Initialization, crashes, restarts</div>
-</div>
-
-<div class="p-3 bg-orange-400/10 rounded">
-  <div class="font-semibold">Performance timing</div>
-  <div class="text-xs opacity-80">Identify bottlenecks</div>
-</div>
-
-</div>
-
-</div>
-
-</div>
-
----
-layout: center
-name: troubleshooting
+# Part 3 — Customization Diagnostics
+<SectionOpenerSlide
+  :partNumber="3"
+  title="Customization Diagnostics"
+  subtitle="Diagnose misconfigured instructions — the top failure mode — plus MCP and extension log infra"
+  :cards='[
+    { icon: "🔧", title: "Instruction Validator", blurb: "Test custom instructions are loading and applying correctly" },
+    { icon: "📡", title: "Extension Logs", blurb: "Surface errors from MCP servers and language extensions" },
+    { icon: "✅", title: "Config Health Check", blurb: "Verify workspace settings before blaming the model" },
+  ]'
+  :terminal='{ context: "Running diagnostics on a broken agent configuration", detail: "Misconfiguration caught in 4 min instead of 45" }'
+/>
 ---
 
-# 🔧 Troubleshooting Patterns
-
-<div class="text-4xl font-bold bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">
-Systematic Debugging Workflows
-</div>
-
-<div class="mt-6 text-xl opacity-80">
-Proven diagnostic workflows for common AI interaction problems
-</div>
-
-<div class="mt-8 text-sm opacity-60">
-Section 5 of 5 • From symptoms to solutions
-</div>
-
+# Customization Diagnostics — Failure Modes
+<FrameworkMappingRowsSlide
+  :partNumber="3"
+  pillIcon="⚙️"
+  pillLabel="Customization Diagnostics · Failure Modes"
+  title="Four Failure Modes — One Tool to Catch Them"
+  subtitle="Open Diagnostics View — catch config errors before they waste an hour"
+  :rows='[
+    { label: "Agent missing", description: "YAML syntax error — Diagnostics shows the exact line number and file", tag: "Fix: syntax" },
+    { label: "Ignored rules", description: "Instruction file in wrong location — must be in the .github/ folder", tag: "Fix: location" },
+    { label: "Skills miss", description: "applyTo glob does not match file path — update the pattern in skill.md", tag: "Fix: glob" },
+    { label: "MCP silent", description: "MCP: List Servers — Show Output reveals server crash or auth timeout", tag: "Fix: restart" }
+  ]'
+  footnote="Check Diagnostics View before spending 30 minutes blaming the model"
+  :progressDots='{ current: 1, total: 2, activeColor: "bg-indigo-400 shadow-lg shadow-indigo-500/50" }'
+/>
 ---
 
-# 🔧 Pattern 1: Instructions Ignored
-
-<div class="space-y-4">
-
-<div class="p-4 bg-red-400/10 rounded border-l-4 border-red-400">
-  <div class="font-semibold mb-2">❌ Symptom</div>
-  <div class="text-sm">Copilot generates code that violates your custom instructions</div>
-</div>
-
-<div class="p-4 bg-blue-400/10 rounded border-l-4 border-blue-400">
-  <div class="font-semibold mb-2">🔍 Diagnostic Steps</div>
-  <div class="text-sm space-y-1">
-    1. Open <strong>Diagnostics</strong> (right-click in Chat)<br/>
-    2. Verify instruction file is listed and loaded<br/>
-    3. Open <strong>Chat Debug View</strong><br/>
-    4. Check if instructions appear in context section<br/>
-    5. Look for "References" section in response
-  </div>
-</div>
-
-<div class="p-4 bg-green-400/10 rounded border-l-4 border-green-400">
-  <div class="font-semibold mb-2">✅ Common Causes</div>
-  <div class="text-sm">
-    • File not in <code>.github/copilot-instructions.md</code><br/>
-    • Syntax error in YAML frontmatter<br/>
-    • Instructions too long, truncated by context limits
-  </div>
-</div>
-
-</div>
-
+# Customization Diagnostics — Tools Comparison
+<TwoColPairedConceptsSlide
+  :partNumber="3"
+  pillIcon="🔧"
+  pillLabel="Customization Diagnostics · Tools"
+  title="Diagnostics View vs Extension Logs"
+  :left='{
+    header: "Diagnostics View",
+    icon: "⚙️",
+    items: [
+      { title: "Right-click in Chat", detail: "Instant access — no configuration needed" },
+      { title: "Load status per file", detail: "Loaded / Warning / Failed with reason" },
+      { title: "Application order", detail: "Which instructions apply first" },
+      "Best for: config and customization problems"
+    ]
+  }'
+  :right='{
+    header: "Extension Logs",
+    icon: "📋",
+    items: [
+      { title: "Developer: Set Log Level", detail: "Set Trace for Copilot and Copilot Chat" },
+      { title: "Network and auth state", detail: "Connectivity, proxy, certificate issues" },
+      { title: "MCP: List Servers", detail: "Status, output logs, restart controls" },
+      "Best for: network, auth, and infrastructure"
+    ]
+  }'
+  :progressDots='{ current: 2, total: 2, activeColor: "bg-indigo-400 shadow-lg shadow-indigo-500/50" }'
+/>
 ---
 
-# 🔧 Pattern 2: Wrong Files in Context
-
-<div class="space-y-4">
-
-<div class="p-4 bg-red-400/10 rounded border-l-4 border-red-400">
-  <div class="font-semibold mb-2">❌ Symptom</div>
-  <div class="text-sm">Generated code ignores critical utilities or patterns</div>
-</div>
-
-<div class="p-4 bg-blue-400/10 rounded border-l-4 border-blue-400">
-  <div class="font-semibold mb-2">🔍 Diagnostic Steps</div>
-  <div class="text-sm space-y-1">
-    1. Open <strong>Chat Debug View</strong><br/>
-    2. Expand the <strong>context section</strong><br/>
-    3. Review which files were actually included<br/>
-    4. Check token usage percentage
-  </div>
-</div>
-
-<div class="p-4 bg-green-400/10 rounded border-l-4 border-green-400">
-  <div class="font-semibold mb-2">✅ Common Causes & Fixes</div>
-  <div class="text-sm">
-    • <code>@workspace</code> returned unexpected results → Use explicit <code>#file</code><br/>
-    • Context window 95% full → Critical files truncated<br/>
-    • Implicit context (active file) wasn't expected
-  </div>
-</div>
-
-</div>
-
+# Part 4 — Systematic Troubleshooting
+<SectionOpenerSlide
+  :partNumber="4"
+  title="Systematic Troubleshooting"
+  subtitle="Repeatable triage workflows and decision trees practitioners can apply the same day"
+  :cards='[
+    { icon: "🗺️", title: "Triage Workflow", blurb: "Start with observability, then dig into the request layer" },
+    { icon: "🎯", title: "Decision Tree", blurb: "Route symptom → root cause → fix in three steps" },
+    { icon: "📝", title: "Evidence Checklist", blurb: "Capture the right data before opening a bug report" },
+  ]'
+  :terminal='{ context: "Applying systematic debugging to a real agent failure", detail: "From symptom to fix in under 5 minutes" }'
+/>
 ---
 
-# 🔧 Pattern 3: Tool Invocation Failed
-
-<div class="space-y-4">
-
-<div class="p-4 bg-red-400/10 rounded border-l-4 border-red-400">
-  <div class="font-semibold mb-2">❌ Symptom</div>
-  <div class="text-sm">Agent produces generic code without using external tools</div>
-</div>
-
-<div class="p-4 bg-blue-400/10 rounded border-l-4 border-blue-400">
-  <div class="font-semibold mb-2">🔍 Diagnostic Steps</div>
-  <div class="text-sm space-y-1">
-    1. Open <strong>Chat Debug View</strong><br/>
-    2. Expand <strong>tool invocations section</strong><br/>
-    3. Check error message or response<br/>
-    4. Run <strong>MCP: List Servers</strong><br/>
-    5. Select server → <strong>Show Output</strong>
-  </div>
-</div>
-
-<div class="p-4 bg-green-400/10 rounded border-l-4 border-green-400">
-  <div class="font-semibold mb-2">✅ Common Causes</div>
-  <div class="text-sm">
-    • MCP server not running → Restart server<br/>
-    • Tool requires authentication → Update credentials<br/>
-    • Timeout due to VPN latency → Increase timeout config
-  </div>
-</div>
-
-</div>
-
+# Troubleshooting Patterns — Decision Map
+<FrameworkMappingRowsSlide
+  :partNumber="4"
+  pillIcon="🗺️"
+  pillLabel="Troubleshooting Patterns · Decision Map"
+  title="Four Symptoms — Four Diagnostic Paths"
+  subtitle="Route the problem to the right tool without guesswork"
+  :rows='[
+    { label: "Bad response", description: "Open Chat Debug View — check context sent versus context expected", tag: "Debug View" },
+    { label: "Ignored rules", description: "Open Diagnostics View — instruction file may have a syntax error", tag: "Diagnostics" },
+    { label: "Tool failure", description: "Expand tool invocations in Debug View — check MCP server logs", tag: "MCP Logs" },
+    { label: "Session drift", description: "Use /compact when context exceeds 80% — preserves decisions", tag: "/compact" }
+  ]'
+  footnote="Systematic triage: identify the layer before applying the fix"
+  :progressDots='{ current: 1, total: 3, activeColor: "bg-purple-400 shadow-lg shadow-purple-500/50" }'
+/>
 ---
 
-# 📊 Real-World Impact
-
-<div class="text-lg mb-4">Measurable improvements from diagnostic tools</div>
-
-<div class="grid grid-cols-2 gap-6">
-
-<div class="p-4 bg-blue-400/10 rounded border-l-4 border-blue-400">
-  <div class="text-3xl font-bold mb-2">41 min</div>
-  <div class="font-semibold">Time saved per config error</div>
-  <div class="text-sm opacity-80 mt-2">Using Diagnostics View instead of trial-and-error</div>
-</div>
-
-<div class="p-4 bg-purple-400/10 rounded border-l-4 border-purple-400">
-  <div class="text-3xl font-bold mb-2">80%</div>
-  <div class="font-semibold">Reduction in missed context</div>
-  <div class="text-sm opacity-80 mt-2">Monitoring context indicator proactively</div>
-</div>
-
-<div class="p-4 bg-green-400/10 rounded border-l-4 border-green-400">
-  <div class="text-3xl font-bold mb-2">1-1.5 hrs</div>
-  <div class="font-semibold">Daily time saved (team of 4)</div>
-  <div class="text-sm opacity-80 mt-2">MCP server timeout debugging</div>
-</div>
-
-<div class="p-4 bg-orange-400/10 rounded border-l-4 border-orange-400">
-  <div class="text-3xl font-bold mb-2">80%</div>
-  <div class="font-semibold">Faster prompt debugging</div>
-  <div class="text-sm opacity-80 mt-2">Using thinking tokens to identify ambiguity</div>
-</div>
-
-</div>
-
+# Troubleshooting Patterns — Systematic vs Ad-Hoc
+<WorkflowShowdownStepsSlide
+  :partNumber="4"
+  pillIcon="🎯"
+  pillLabel="Troubleshooting Patterns · Workflow"
+  title="Ad-Hoc Guessing vs Systematic Investigation"
+  subtitle="Systematic debugging finds root cause every time — guessing sometimes gets lucky"
+  leftLabel="Ad-Hoc Debugging"
+  rightLabel="Systematic Investigation"
+  :steps='[
+    { left: { label: "Strange response", note: "Instructions seem wrong or missing" }, right: { label: "Strange response", note: "Instructions seem wrong or missing" } },
+    { left: { label: "Reload, rephrase, hope", note: "Same problem appears again" }, right: { label: "Open Agent Debug Panel", note: "Check Loaded Customizations in 10 seconds" } },
+    { left: { label: "Give up, re-add context", note: "Context re-added manually every session" }, right: { label: "Open Chat Debug View", note: "Verify context or check Diagnostics" } },
+    { left: { label: "Problem recurs", note: "No root cause identified — cycle repeats" }, right: { label: "Fix root cause once", note: "Syntax error, file path, or glob pattern" } }
+  ]'
+  :outcomeLeft='{ icon: "🔄", label: "Problem recurs — no root cause identified" }'
+  :outcomeRight='{ icon: "✓", label: "Fixed permanently in 4 minutes" }'
+  summaryMetric="Systematic debugging: find root cause in minutes, not hours"
+  :progressDots='{ current: 2, total: 3, activeColor: "bg-purple-400 shadow-lg shadow-purple-500/50" }'
+/>
 ---
 
-# ✅ What You Can Do Today
-
-<div class="grid grid-cols-2 gap-6">
-
-<div>
-
-### Immediate (5 minutes)
-
-- ✅ Open **Chat Debug View** now
-- ✅ Enable thinking display: `chat.renderThinking` → "expanded"
-- ✅ Check **Diagnostics** (right-click in Chat)
-- ✅ Bookmark key commands
-
-### Short-Term (30 minutes)
-
-- ✅ Develop with Debug View open
-- ✅ Monitor context window indicator
-- ✅ Enable trace logs if needed
-- ✅ Validate customizations after changes
-
-</div>
-
-<div>
-
-### Advanced (1-2 hours)
-
-- ✅ Build personal debugging runbook
-- ✅ Analyze thinking patterns
-- ✅ Set up MCP monitoring routine
-- ✅ Create team documentation
-
-### Next Steps
-
-1. Make Debug View a habit
-2. Review [Copilot Chat](../copilot-chat/) foundations
-3. Share diagnostic wins with team
-4. Explore [Custom Agents Workshop](../../workshop/06-custom-agents/)
-
-</div>
-
-</div>
-
+# Troubleshooting Patterns — Impact
+<HeroStatSlide
+  :partNumber="4"
+  pillIcon="⏱️"
+  pillLabel="Troubleshooting Patterns · Impact"
+  title="The Debug Stack Ships With Your Editor"
+  subtitle="You had the tools already — now you know where to find them"
+  :hero='{ value: "4 min", label: "to diagnose a config error that took 45 minutes before", source: "VS Code diagnostics view — real practitioner time reduction" }'
+  :supporting='[
+    { icon: "📡", title: "Agent Debug Panel", description: "Real-time event stream catches load failures instantly" },
+    { icon: "🔍", title: "Chat Debug View", description: "Request pipeline inspection eliminates context guesswork" },
+    { icon: "⚙️", title: "Diagnostics View", description: "Config validation before 30 minutes of troubleshooting" },
+    { icon: "📋", title: "Extension Logs", description: "Trace mode surfaces network and auth root causes" }
+  ]'
+  :insight='{ icon: "💡", text: "The debug stack is already in your editor — the only thing missing was knowing where to look." }'
+  :progressDots='{ current: 3, total: 3, activeColor: "bg-purple-400 shadow-lg shadow-purple-500/50" }'
+/>
 ---
 
-# 🎯 Mental Model Shift
-
-<div class="text-xl mb-6 text-center">
-From <span class="text-red-400">"AI is unpredictable"</span> to <span class="text-green-400">"every interaction is debuggable"</span>
-</div>
-
-<div class="grid grid-cols-2 gap-6">
-
-<div>
-
-### ✅ Move Toward
-
-<div class="space-y-2 text-sm">
-
-- **Debug-View-First**: Keep it open during iteration
-- **Thinking Token Analysis**: Read model reasoning
-- **Diagnostics-As-Validation**: Check after every change
-- **Evidence-Based Refinement**: Base improvements on actual data
-
-</div>
-
-</div>
-
-<div>
-
-### 🛑 Move Away From
-
-<div class="space-y-2 text-sm">
-
-- **Blind Iteration**: Tweaking without checking context
-- **Assuming Loads**: Not verifying instructions applied
-- **Reload as First Step**: Masks root causes
-- **Black Box Acceptance**: AI is fundamentally unpredictable
-
-</div>
-
-</div>
-
-</div>
-
-<div class="mt-6 p-4 bg-blue-400/10 rounded border-l-4 border-blue-400">
-  <div class="font-semibold">Example Transformation</div>
-  <div class="text-sm">Before: 35 minutes of prompt tweaking and window reloads • After: 4 minutes to identify YAML syntax error in line 14</div>
-</div>
-
+# Before After
+<BeforeAfterSlide
+  header="From Guesswork to Systematic AI Debugging"
+  :leftItems='["Guess at why Copilot responded incorrectly", "No visibility into what context was sent to the model", "Config errors take 30–45 minutes to diagnose", "Reproduce AI failures by trial and error"]'
+  :rightItems='["Agent Debug Panel shows every event as it happens", "Chat Debug View exposes all files, instructions, and tool calls", "Config diagnostics catch instruction errors in minutes", "Thinking tokens reveal model reasoning before the response"]'
+  :metrics='[
+    { value: "45 min → 4 min", detail: "Config error diagnosis time" },
+    { value: "100% visibility", detail: "Chat Debug View exposes full request pipeline" },
+    { value: "v1.110", detail: "Agent Debug Panel — Feb 2026" }
+  ]'
+/>
 ---
 
-# 📚 Official Documentation
-
-<div class="grid grid-cols-1 gap-4">
-
-<div class="p-4 bg-blue-400/10 rounded">
-  <div class="font-semibold mb-2">📖 Primary Documentation</div>
-  <div class="text-sm space-y-1">
-    • <a href="https://code.visualstudio.com/docs/copilot/chat/chat-debug-view" class="text-blue-400">Chat Debug View</a> — Complete guide to request inspection<br/>
-    • <a href="https://code.visualstudio.com/docs/copilot/troubleshooting" class="text-blue-400">Troubleshoot AI in VS Code</a> — Comprehensive troubleshooting reference<br/>
-    • <a href="https://code.visualstudio.com/docs/copilot/customization/mcp-servers" class="text-blue-400">MCP Servers</a> — Configuring and debugging external tools
-  </div>
-</div>
-
-<div class="p-4 bg-purple-400/10 rounded">
-  <div class="font-semibold mb-2">🔧 Additional Resources</div>
-  <div class="text-sm space-y-1">
-    • <a href="https://code.visualstudio.com/docs/copilot/customization/custom-instructions" class="text-blue-400">Custom Instructions</a> — Writing and debugging instruction files<br/>
-    • <a href="https://code.visualstudio.com/docs/copilot/customization/custom-agents" class="text-blue-400">Copilot Agents</a> — Building and troubleshooting agents<br/>
-    • <a href="https://github.com/microsoft/vscode-discussions/discussions/categories/copilot" class="text-blue-400">VS Code Discussions</a> — Community troubleshooting patterns
-  </div>
-</div>
-
-</div>
-
----
-layout: center
+# What You Can Do Today
+<WhatYouCanDoTodaySlide
+  :today='["Open Agent Debug Panel in VS Code (v1.110+)", "Enable Chat Debug View for your current agent session", "Check one instruction file through the diagnostics panel"]'
+  :thisWeek='["Add debug view to your standard agent troubleshooting flow", "Explore thinking tokens on a failing agent task", "Validate all custom instruction files in your workspace"]'
+  :thisMonth='["Build a team triage checklist using systematic patterns", "Profile context usage to optimize agent performance", "Document common failure signatures for your agent setup"]'
+  footer="The debug stack is already in your editor — the only thing missing was knowing where to look."
+/>
 ---
 
-# 🎉 You're Ready!
+# References
+<ReferencesSlide
+  :groups='[
+    { title: "📖 Official Documentation", color: "cyan", items: [
+        { href: "https://code.visualstudio.com/updates/v1_110", label: "VS Code release notes: February 2026 (v1.110)", description: "Agent Debug Panel and real-time event stream" },
+        { href: "https://code.visualstudio.com/docs/copilot/chat/chat-debug-view", label: "Copilot Chat debug view", description: "Complete request pipeline inspection" },
+        { href: "https://code.visualstudio.com/docs/copilot/troubleshooting", label: "Copilot troubleshooting guide", description: "Systematic diagnostics and common fixes" },
+        { href: "https://code.visualstudio.com/docs/copilot/chat/copilot-chat-context#_context-compaction", label: "Context compaction documentation", description: "/compact and context window management" },
+        { href: "https://code.visualstudio.com/docs/copilot/customization/custom-instructions", label: "Custom instructions in VS Code", description: "Write and validate customization files" }
+    ] },
+    { title: "🛠️ Related Content", color: "purple", items: [
+        { href: "https://code.visualstudio.com/docs/copilot/customization/mcp-servers", label: "MCP server configuration", description: "Configure and debug external tool servers" },
+        { label: "Copilot Memory", description: "Context persistence across agent sessions" },
+        { label: "MCP Apps", description: "Debugging MCP server integrations" }
+    ] }
+  ]'
+/>
+---
 
-<div class="text-2xl mb-8">
-
-**Make AI interactions transparent and debuggable**
-
-</div>
-
-<div class="grid grid-cols-3 gap-6 text-center">
-
-<div>
-  <div class="text-4xl mb-2">🔎</div>
-  <div class="font-semibold">Chat Debug View</div>
-  <div class="text-sm opacity-70">See every request</div>
-</div>
-
-<div>
-  <div class="text-4xl mb-2">🧠</div>
-  <div class="font-semibold">Thinking Tokens</div>
-  <div class="text-sm opacity-70">Understand reasoning</div>
-</div>
-
-<div>
-  <div class="text-4xl mb-2">⚙️</div>
-  <div class="font-semibold">Diagnostics</div>
-  <div class="text-sm opacity-70">Validate configs</div>
-</div>
-
-</div>
-
-<div class="mt-12 text-center opacity-70">
-  <div>Start with <code>Developer: Show Chat Debug View</code> today!</div>
-</div>
+# Thank You
+<ThankYouSlide
+  title="Copilot Chat Internals"
+  subtitle="Debugging AI Interactions"
+  :cards="[
+    { value: 'Agent Debug Panel', detail: 'Real-time event stream and chart visualization — v1.110' },
+    { value: '45 min → 4 min', detail: 'Config-error diagnosis time with the Chat Debug View' },
+    { value: 'Zero hidden requests', detail: 'Every file, instruction, and tool call fully visible' },
+  ]"
+  prompt="What&#39;s your most common Copilot debugging pain point right now?"
+/>

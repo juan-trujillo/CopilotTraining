@@ -1,0 +1,199 @@
+import assert from "node:assert/strict";
+import { readFile } from "node:fs/promises";
+import test from "node:test";
+
+const workshopMachinery = [
+  ".github/agents/module-planner.agent.md",
+  ".github/agents/module-creator.agent.md",
+  ".github/skills/module-author/SKILL.md",
+  ".github/skills/exercise-author/SKILL.md",
+];
+
+const personas = ["Sarah", "Marcus", "David", "Elena", "Rafael", "Jessica"];
+
+const executiveMachinery = [
+  ".github/agents/exec-talk-generator.agent.md",
+  ".github/agents/slide-generator.agent.md",
+  ".github/skills/exec-recipe-review/SKILL.md",
+  ".github/skills/exec-recipe-review/EXEC-RECIPE-TEMPLATE.yml",
+];
+
+const recipeReviewMachinery = [
+  ".github/skills/deck-recipe-review/SKILL.md",
+  ".github/skills/deck-recipe-refresh/SKILL.md",
+  ".github/skills/exec-recipe-review/SKILL.md",
+];
+
+async function read(path) {
+  return readFile(new URL(`../${path}`, import.meta.url), "utf8");
+}
+
+test("workshop machinery uses live repository paths", async () => {
+  for (const path of workshopMachinery) {
+    const content = await read(path);
+    assert.doesNotMatch(content, /(?:^|[\s`])modules\//m, `${path} still references modules/`);
+  }
+});
+
+test("workshop planning represents all six personas", async () => {
+  for (const path of workshopMachinery.slice(0, 3)) {
+    const content = await read(path);
+    for (const persona of personas) {
+      assert.match(content, new RegExp(`\\b${persona}\\b`), `${path} omits ${persona}`);
+    }
+  }
+});
+
+test("module template produces valid active content", async () => {
+  const template = await read(".github/skills/module-author/TEMPLATE.md");
+  assert.match(template, /^---\r?\nstatus: active\r?\nupdated: YYYY-MM-DD\r?\n---/);
+  assert.doesNotMatch(template, /�/, "module template contains encoding damage");
+  for (const persona of personas) {
+    assert.match(template, new RegExp(`\\b${persona}\\b`), `module template omits ${persona}`);
+  }
+});
+
+test("executive machinery uses the live tech-talks/exec-* source path", async () => {
+  for (const path of executiveMachinery) {
+    const content = await read(path);
+    assert.doesNotMatch(
+      content,
+      /(?:^|[\s`])exec-talks\/<topic>/m,
+      `${path} still points to the retired exec-talks/<topic> source path`,
+    );
+  }
+});
+
+test("executive recipe template allows a self-contained briefing", async () => {
+  const template = await read(".github/skills/exec-recipe-review/EXEC-RECIPE-TEMPLATE.yml");
+  assert.match(template, /preamble:\s*\[\]/);
+  assert.doesNotMatch(template, /exec-spine/);
+});
+
+test("tech-talk generator distinguishes required and optional sections", async () => {
+  const generator = await read(".github/agents/tech-talk-generator.agent.md");
+  assert.match(generator, /Visual Assets.*optional/is);
+  assert.doesNotMatch(generator, /all required sections[^\n]*Visual Assets/i);
+});
+
+test("talk generators require traceable evidence and audience outcomes", async () => {
+  const techGenerator = await read(".github/agents/tech-talk-generator.agent.md");
+  const execGenerator = await read(".github/agents/exec-talk-generator.agent.md");
+
+  assert.match(techGenerator, /### Evidence map/);
+  assert.match(techGenerator, /expected signal/i);
+  assert.match(techGenerator, /how to validate/i);
+  assert.match(execGenerator, /### Evidence map/);
+  assert.match(execGenerator, /## Executive Content Fitness \(Hard Gate\)/);
+  assert.match(execGenerator, /Decision-ready/);
+  assert.match(execGenerator, /owner and success signal/i);
+});
+
+test("executive review preserves the factual opportunity-framed voice", async () => {
+  const review = await read(".github/skills/exec-recipe-review/SKILL.md");
+  assert.match(review, /AGENTS\.md/);
+  assert.doesNotMatch(review, /Missing urgency|cost of not acting|cost of delay/i);
+});
+
+test("recipe reviews use the independent reviewer native to the current host", async () => {
+  for (const path of recipeReviewMachinery) {
+    const content = await read(path);
+    assert.match(content, /Never launch one Copilot host from another/);
+    assert.match(content, /VS Code:[\s\S]*runSubagent/);
+    assert.match(content, /different model family/);
+    assert.match(content, /Do not invoke the `copilot` CLI from VS Code/);
+    assert.match(content, /copilot --prompt \$prompt --no-ask-user/);
+    assert.match(content, /Rubber Duck is not a selectable custom agent/);
+    assert.match(content, /REVIEW PENDING: independent cross-model critique unavailable/);
+  }
+});
+
+test("tech-talk template is clean and produces observable actions", async () => {
+  const template = await read("tech-talks/TEMPLATE.md");
+  assert.doesNotMatch(template, /�/, "tech-talk template contains encoding damage");
+  assert.match(template, /## What You Can Do Today/);
+  assert.match(template, /Expected signal/);
+  assert.match(template, /Validate/);
+  assert.match(template, /Boundary/);
+});
+
+test("universal instructions own the education north star", async () => {
+  const instructions = await read("AGENTS.md");
+  assert.match(
+    instructions,
+    /Great Copilot education helps capable people form better judgment about context, delegation, verification, and authority, then lets them prove that judgment in their own work\./,
+  );
+  for (const lens of ["Context", "Delegation", "Verification", "Authority"]) {
+    assert.match(instructions, new RegExp(`\\*\\*${lens}\\*\\*`));
+  }
+  assert.match(instructions, /attempt → inspect → adjust → rerun → validate/);
+  assert.match(instructions, /### Relevant, Compelling, Actionable: Creation Lens and Publication Gate/);
+  for (const quality of ["Relevant", "Compelling", "Actionable"]) {
+    assert.match(instructions, new RegExp(`\\*\\*${quality}\\*\\*`));
+  }
+  assert.match(instructions, /### Universal Voice and Prose Contract/);
+  assert.match(instructions, /canonical source for editorial policy/i);
+  assert.match(instructions, /### Actor, Question, and Proof Contract/);
+  assert.match(instructions, /Name who or what acts when agency matters/);
+  assert.match(instructions, /Every slide should answer one audience question/);
+  assert.match(instructions, /show a representative input, action, or artifact together with its observable result/);
+});
+
+test("tech-talk slides enforce actor, question, and proof clarity", async () => {
+  const generator = await read(".github/agents/tech-talk-slide-generator.agent.md");
+  assert.match(generator, /Per-slide clarity gate/);
+  assert.match(generator, /Name the actor wherever agency changes the meaning/);
+  assert.match(generator, /viewer entering on this slide/);
+  assert.match(generator, /representative input or action beside its observable output or decision/);
+  assert.match(generator, /Separate verification status from the behavior being verified/);
+});
+
+test("live content machinery has no deleted editorial dependencies", async () => {
+  const machinery = [
+    ...workshopMachinery,
+    ...executiveMachinery.slice(0, 3),
+    ".github/agents/tech-talk-generator.agent.md",
+    ".github/agents/tech-talk-slide-generator.agent.md",
+    ".github/skills/deck-recipe-review/SKILL.md",
+  ];
+  for (const path of machinery) {
+    const content = await read(path);
+    assert.doesNotMatch(content, /memories\//, `${path} references the deleted Workbench`);
+    assert.doesNotMatch(
+      content,
+      /(?:read|review|consult|see persona voice guidelines in)\s+`?\.github\/copilot-instructions\.md/i,
+      `${path} treats the deleted root copilot instructions as an editorial source`,
+    );
+  }
+});
+
+test("content planning and recipe review consume the judgment contract", async () => {
+  const consumers = [
+    ".github/agents/module-planner.agent.md",
+    ".github/agents/module-creator.agent.md",
+    ".github/agents/tech-talk-generator.agent.md",
+    ".github/agents/exec-talk-generator.agent.md",
+    ".github/agents/slide-generator.agent.md",
+    ".github/agents/tech-talk-slide-generator.agent.md",
+    ".github/skills/module-author/SKILL.md",
+    ".github/skills/exercise-author/SKILL.md",
+    ".github/skills/deck-recipe-review/SKILL.md",
+    ".github/skills/exec-recipe-review/SKILL.md",
+  ];
+  for (const path of consumers) {
+    const content = await read(path);
+    assert.match(content, /Judgment and Transfer Contract/, `${path} does not consume the contract`);
+  }
+});
+
+test("workshop and tech-talk templates require transfer to real work", async () => {
+  for (const path of [
+    ".github/skills/exercise-author/TEMPLATE.md",
+    "tech-talks/TEMPLATE.md",
+  ]) {
+    const content = await read(path);
+    assert.match(content, /Apply It to Your Work/, `${path} lacks a transfer prompt`);
+    assert.match(content, /context/i, `${path} does not ask learners to examine context`);
+    assert.match(content, /authority|approve|review owner/i, `${path} omits authority or ownership`);
+  }
+});

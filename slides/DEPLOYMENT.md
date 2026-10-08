@@ -67,6 +67,31 @@ This creates a `dist/` directory with all presentations.
 
 ### Preview Locally
 
+**Homepage + companions** (no full build required):
+
+```bash
+cd slides
+npm run sync-index
+npm run generate-agendas -- vscode-latest   # → companions/.../agenda.md + .html
+npm run export-pdf -- vscode-latest        # → companions/.../deck.pdf (optional)
+npm run preview:index
+```
+
+Open: `http://127.0.0.1:8080/`
+
+- **Agenda** chips link to `/<category>/<slug>/agenda.html`
+- **PDF** chips link to `/<category>/<slug>/deck.pdf`
+- Both are built **locally**, inspected, then committed under
+  `slides/companions/`. Deploy only **copies** them (never regenerates).
+- Use the **Deploy** agent (`.github/agents/deploy.agent.md`) to regen stale
+  companions, hard-gate with `npm run check-companions -- --strict`, and
+  snarky-commit before push. CI runs `copy-companions` +
+  `verify-companions-dist` so a silent drop fails the build.
+
+See [companions/README.md](./companions/README.md).
+
+**Full dist** after a build:
+
 ```bash
 cd slides/dist
 python3 -m http.server 8080
@@ -177,7 +202,7 @@ To customize:
 - Test locally first with `npm run dev <file>.md`
 - Check the Actions tab to monitor deployment progress
 - Use meaningful commit messages for slide changes
-- Keep presentations concise (15-20 slides recommended)
+- Keep presentations focused (under 25 slides; 2–5 per topic section)
 
 ---
 

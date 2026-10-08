@@ -22,7 +22,7 @@ You're part of the development team at **TechCorp**, a mid-sized software compan
 
 - **Sarah** — Senior developer (15 years), skeptical of new tools, demands proof of value
 - **Marcus** — DevOps developer (5 years), comfortable with infrastructure, wants to improve application code skills and automation
-- **Priya** — Recent graduate (1 year), eager to learn, afraid of asking "dumb" questions
+- **Jessica** — Recent graduate (1 year), eager to learn, afraid of asking "dumb" questions
 - **David** — Staff engineer (20 years), concerned about relevance, deep expertise
 - **Elena** — QA engineer (8 years), passionate about quality and comprehensive testing
 - **Rafael** — Product manager (10 years), bridges business and technical, prioritizes ruthlessly
@@ -51,7 +51,7 @@ She pauses for effect.
 
 Marcus mutters, "This is going to take days to understand."
 
-Priya thinks, "I don't even know where to start."
+Jessica thinks, "I don't even know where to start."
 
 David sighs, "Another codebase with no architecture decisions recorded."
 
@@ -372,12 +372,14 @@ This will be YOUR FanHub throughout the training.
 
 | # | Exercise | Lead | Support | Time | Topic |
 |---|----------|------|---------|------|-------|
-| [0.1](exercise-0.1.md) | Context Fundamentals | All ⭐ | All 🤝 | 10 min | Quick practice with `#file`, `@workspace`, `#codebase`, `#fetch`, and images. |
-| [0.2](exercise-0.2.md) | Experience "The Struggle" | All ⭐ | All 🤝 | 10 min | Experience what happens when you build with AI that doesn't understand your codebase.  |
+| [0.1](exercise-0.1.md) | Clone FanHub & Pick Your Stack | All ⭐ | All 🤝 | 10 min | Clone the FanHub starter repo, choose your language flavor and fan theme, get the app running locally. |
+| [0.2](exercise-0.2.md) | Context Fundamentals | All ⭐ | All 🤝 | 10 min | Quick practice with `#file`, `@workspace`, `#codebase`, `#fetch`, and images. |
+| [0.3](exercise-0.3.md) | Experience "The Struggle" | All ⭐ | All 🤝 | 10 min | Experience what happens when you build with AI that doesn't understand your codebase. |
+| [0.4](exercise-0.4.md) | Set Your Success Metrics | All ⭐ | All 🤝 | 10 min | Define how you'll personally measure success with AI-assisted development. |
 
 > 📚 **Want to go deeper?** See the [Copilot Chat Tech Talk](../../tech-talks/copilot-chat/README.md) for comprehensive coverage of context mechanisms, VS Code 1.109 Chat UX enhancements, and best practices.
 
-**Total Time**: ~20 minutes
+**Total Time**: ~40 minutes
 
 ---
 
@@ -408,7 +410,7 @@ You've experienced:
 
 **Marcus thinks:** "Is Copilot even helping? This feels like fighting with autocomplete."
 
-**Priya worries:** "If I can't get good results, maybe I'm not using it right?"
+**Jessica worries:** "If I can't get good results, maybe I'm not using it right?"
 
 **Sarah observes:** "This is what I was afraid of. Generic garbage that doesn't understand our domain."
 
