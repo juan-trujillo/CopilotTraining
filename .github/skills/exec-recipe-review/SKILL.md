@@ -1,0 +1,208 @@
+---
+name: exec-recipe-review
+description: >
+  Review an exec-talk's README and produce an exec.recipe.yml. Requires an independent
+  cross-model critique of section weighting, executive audience fit, narrative
+  arc, and action clarity. Always overwrites any existing recipe. Triggers: "review the talk",
+  "create the recipe", "is this landing for execs", "section weighting", "coverage gap",
+  "recipe", "executive framing".
+infer: true
+---
+
+# Exec Recipe Review Skill
+
+Read the exec-talk README, analyze its structure with a primary reviewer plus an independent cross-model critique, and write `exec.recipe.yml`. This skill **always produces a fresh recipe** — it does not preserve or patch an existing one. The recipe is the authoritative input for the Slide Generator when building exec-talk decks.
+
+**Key Constraints:**
+- **Judgment and Transfer Contract** — Apply the universal contract in `AGENTS.md`. Protect the leadership decision, evidence, ownership, authority boundary, and organizational test when consolidating the README. Context that does not change a decision has not earned executive airtime.
+- **Max 4 sections** — Review should consolidate, not expand. Exec talks are tighter than tech talks. Each section earns ~8–12 slides in a 30–45 min briefing.
+- **Executive audience is the filter** — Every section must be evaluated through the lens of a CXO, VP, or transformation lead. If a section teaches implementation, it needs to be reframed as business implications or cut.
+- **Slide generator ensures consistency** — Once you commit a recipe, the [Slide Generator agent](../../agents/slide-generator.agent.md) generates all slides using the cockpit HTML template system with uniform structure. Focus the review on *decision clarity and business credibility*, not slide-level details.
+- **Recipe schema** — Read `.github/skills/exec-recipe-review/EXEC-RECIPE-TEMPLATE.yml` to understand all valid fields before writing the output file.
+
+---
+
+## When to Invoke This Skill
+
+- After a new exec-talk README is complete
+- User wants to revise section structure, business framing, or action clarity
+- User questions whether a section earns its airtime ("are we spending too long on X")
+- User notices a business angle is missing ("we never explain the investment and readiness signals")
+- User asks to "review the talk" or check if the structure matches the executive audience
+
+**Not for:** Minor wording tweaks, slide-level fixes, or tech-talk decks (use `deck-recipe-review` for those).
+
+---
+
+## Pre-Flight: Gather Source Material
+
+Before starting the review, read all three sources. The independent-review brief must include the full context — the reviewer must not be expected to read files itself.
+
+```
+1. tech-talks/exec-<topic>/README.md                                     — full section content + key metrics
+2. .github/skills/exec-recipe-review/EXEC-RECIPE-TEMPLATE.yml            — recipe schema (all valid fields)
+3. AGENTS.md                                                             — canonical editorial policy and content fitness gate
+```
+
+Do **not** read the existing `slides/tech-talks/exec-<topic>.md`. The recipe is the authoritative spec for the slide generator — existing slides will be overwritten and should not constrain the review.
+
+From these, extract:
+- The `## ` H2 headings from the README — these are the candidate sections
+- Target audience + talk duration (from README frontmatter or intro)
+- The core business question or decision the talk is designed to drive
+- Key metrics, risk frames, and business moments
+- The specific concern the user raised (if invoked manually)
+
+---
+
+## Primary Analysis
+
+Perform one primary structural analysis using the complete context block below. The independent review gate that follows provides the separate adversarial perspective.
+
+### Context Block Template
+
+```
+TASK: [One-sentence description of the structural question]
+
+TALK: [title], [duration], audience: [audience list]
+CORE QUESTION: "[the business question or decision the talk drives]"
+
+CANDIDATE SECTIONS (from README ## headings):
+1. "[Section Name]" — [2-line description of what it covers]
+2. ...
+
+CONSTRAINTS:
+- Max 4 sections (no exceptions — consolidate, don't expand)
+- Audience is executives: every section must land as business implication, not implementation detail
+- Slide generator will apply cockpit HTML templates for structural consistency
+- Use factual, opportunity-framed language; do not manufacture urgency, threaten with inaction,
+  or use cost-of-delay pressure
+
+USER CONCERN: [Exact concern — what's taking too much space / what's missing / what's not landing]
+
+KNOWN MATERIAL:
+- [Any key metrics, business models, or frameworks already in the README]
+- [Any competitive data, cost figures, or risk framing that exists]
+```
+
+### Primary Review Prompt
+
+```
+[CONTEXT BLOCK]
+
+Analyze: Is the current section structure the best use of this talk's time with a C-suite audience?
+What should change and why?
+
+1. Identify the strongest executive decision journey and the single highest-value structural improvement.
+2. Protect sourced claims, business credibility, quantified outcomes, and decision clarity.
+3. Identify which judgment lens or lenses the arc develops and where leaders can test the decision in their organization.
+4. Reframe or remove implementation detail and content that has not earned executive airtime.
+5. Produce a concrete `sectionOrder`, emphasis levels, and highlight changes with rationale.
+6. Flag open questions and at least one credible alternate structure for the independent reviewer to challenge.
+```
+
+---
+
+## Mandatory Independent Review Gate
+
+Before writing the recipe, complete all of these steps without asking the user to remember or invoke them:
+
+1. Select the review mechanism from the current host. Never launch one Copilot host from another:
+  - **VS Code:** launch one review subagent with `runSubagent`, explicitly selecting an available model from a different model family than the primary model. Give it the complete context block and adversarial review prompt. Do not invoke the `copilot` CLI from VS Code.
+  - **Copilot CLI:** ask the main CLI agent to delegate the complete brief to its built-in **Rubber Duck** tool. Rubber Duck is not a selectable custom agent; never invoke it with `--agent "Rubber Duck"`.
+2. In Copilot CLI, use:
+  ```powershell
+  $prompt = @'
+  You are the main GitHub Copilot CLI agent. Do not perform this review yourself.
+  Delegate the complete review brief below to your built-in Rubber Duck tool, wait for
+  its response, and return the critique with explicit evidence that delegation occurred.
+
+  [COMPLETE CONTEXT BLOCK AND ADVERSARIAL REVIEW PROMPT]
+  '@
+  copilot --prompt $prompt --no-ask-user
+  ```
+3. Require the independent reviewer to attack the proposed business question, decision journey, section order, weighting, credibility, timing context, action clarity, voice compliance, and content that has not earned executive airtime.
+4. Do not role-play the independent reviewer in the primary model. Wait for the separate review and preserve substantive disagreements for reconciliation.
+5. Accept a review only when it comes from the selected independent mechanism and includes the requested critique. For CLI, require explicit Rubber Duck delegation evidence. For VS Code, record the subagent model in the reconciliation.
+6. If the host-native independent reviewer is unavailable, choose another available model family in the same host. If no cross-model reviewer is available, record the unavailable gate, perform the primary review, and mark the recipe `# REVIEW PENDING: independent cross-model critique unavailable`. This degraded path preserves progress while preventing the recipe from being treated as fully reviewed.
+
+---
+
+## Reconciliation and Final Recipe Direction
+
+Reconcile the primary analysis with the independent critique. The reviewer is advisory, but every material objection must be accepted or rejected with a content-based reason before producing:
+
+1. **Verdict** (2-3 sentences) — the core structural problem and fix for this executive audience
+2. **`arcToc`** — one line ≤ 80 chars, section names joined by ` → ` (use "The X" naming pattern if appropriate)
+3. **`arcNarrative`** — a prose paragraph: what each section establishes for the executive, where credibility and decision relevance peak, and why the ordering supports a decision
+4. **Concrete `sectionOrder`** with `sectionModes` (emphasis + one-line note per section)
+5. **Updated `highlightMoments`** list — what to drop, what to add (quantified business metrics preferred)
+6. **One open decision** — the single thing the user must resolve before slides can be generated
+
+---
+
+## Mapping Output to exec.recipe.yml
+
+Write the **complete** `exec.recipe.yml` file — all fields. Source them as follows:
+
+| Field | Source |
+|---|---|
+| `version` | Always `1` |
+| `deck.title` | README H1 title |
+| `deck.subtitle` | README subtitle line or guiding question, condensed |
+| `deck.tagline` | README one-line promise / focus (from intro block) |
+| `deck.arcToc` | Reconciled review output |
+| `deck.arcNarrative` | Reconciled review output |
+| `deck.sectionOrder` | Reconciled review output |
+| `deck.sectionModes` | Reconciled review output |
+| `deck.highlightMoments` | Reconciled review output |
+| `deck.preamble` | `[]` for a self-contained briefing; use `src` entries only when a real shared context deck exists |
+| `deck.appendix` | `[]` unless the talk has explicit appendix content |
+
+Use `EXEC-RECIPE-TEMPLATE.yml` (read during pre-flight) as the schema for field names, YAML structure, and inline comments. If there is an open decision from the review, append it as a YAML comment at the end of the file: `# OPEN DECISION: [question] — [paths and consequences]`.
+
+**Post-Recipe Workflow:**
+1. Commit updated `exec.recipe.yml`
+2. Invoke [Slide Generator agent](../../agents/slide-generator.agent.md) with the exec-talk path
+3. Slide Generator uses the cockpit HTML template system to create consistent slides for all sections
+4. No manual slide editing needed — the template ensures title slides, overview, section openers, closers, and references are auto-generated
+
+---
+
+## Quality Checks Before Committing
+
+- [ ] **Max 4 sections** — Reconciled output has exactly 4 or fewer sections. If more, consolidate.
+- [ ] Every section in the new `sectionOrder` exists as a `## ` heading in the README
+- [ ] No section has been marked `high` that contains primarily implementation detail — reframe or cut
+- [ ] `arcToc` is a single line ≤ 80 chars using ` → ` separators between section names
+- [ ] `arcNarrative` is a prose paragraph explaining the sequencing logic for an executive audience
+- [ ] The open decision is documented in the file — don't silently absorb it
+- [ ] `highlightMoments` list is 3-5 items with quantified metrics where possible
+- [ ] No `highlightMoments` entry describes a tool command, code pattern, or implementation step
+- [ ] A final voice scan finds no second-person address, alarmist urgency, cost-of-inaction pressure, or "not X, it's Y" rhetorical flips
+- [ ] **After approval**: Slide Generator agent will regenerate all slides using the cockpit HTML system — you don't need to update individual slides
+- [ ] `deck.preamble` is `[]` unless the briefing intentionally imports an existing context deck
+
+---
+
+## Common Executive Talk Anti-Patterns
+
+| Anti-Pattern | Signal | Exec Fix |
+|---|---|---|
+| Implementation section | Section covers a tool, CLI, or configuration step rather than a business outcome | Reframe as "What this means for your platform team" or absorb into the stakes section |
+| Missing timing context | No section explains what changed, which decision is now available, or what readiness signals matter | Add sourced market or capability context before the action close |
+| Passive closing section | Last section = "Resources" or "References" — leaders leave with no decision | Reframe as "What Leadership Must Authorize" or "Three Decisions This Quarter" |
+| Metric-free talk | Key points are directional but not quantified | Audit README for any numbers; if none exist, flag as an open decision |
+| All sections equal weight | All `high` or all `medium` | Force a ranking — the credibility peak and the urgency section should be highest emphasis |
+| Too many sections | 5+ sections in a 30-min exec briefing | Consolidate: the opening frame and the system/model can often be one section |
+| Audience confusion | Section mixes exec-level framing with developer-level detail | Cut the detail; add a speaker note that "detail available on request" |
+
+---
+
+## Example Invocations
+
+- "we're spending two sections on the operating model — review the exec talk and see if that's the best use of time"
+- "we never explain the investment and readiness signals — is it worth adding a section?"
+- "does the agentic-delivery talk structure land for a CXO audience?"
+- "review the exec recipe before we regenerate slides"
+- "is this the best use of our time with VPs who only have 30 minutes?"

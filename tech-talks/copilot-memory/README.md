@@ -1,7 +1,14 @@
 ---
-status: active
-updated: 2026-02-01
-section: "Copilot Surfaces"
+status: archived
+updated: 2026-09-15
+section: "Choose and Configure"
+audience: [developer, team-lead]
+level: applied
+duration: 25
+format: clinic
+decision: "Where should durable personal knowledge live, and when should it expire?"
+prerequisites: [copilot-primitives]
+related: [copilot-chat-internals, copilot-with-foundry]
 references:
   - url: https://docs.github.com/en/copilot/how-tos/use-copilot-agents/copilot-memory
     label: "Copilot Memory documentation"
@@ -32,40 +39,6 @@ references:
 
 ---
 
-## 📽️ Slide Generation Mapping
-
-### Slide Sequence (Generated Automatically)
-
-1. **Title/Logo Slide** ← H1 title + subtitle
-2. **Question/Objective Slide** ← "The Question This Talk Answers"
-3. **Table of Contents Slide** ← Auto-generated from 🎬 sections
-4. **Problem Slide** ← "The Problem"
-5. **Solution Overview** ← "The Solution"
-6. **Key Artifacts** ← Configuration and usage patterns
-7. **Mental Model Shift** ← Move-Toward/Away/Against
-8. **When to Use Decision Tree** ← "When to Use This Pattern"
-9. **How Memory Works** ← 🎬 Section 1 (3-4 slides)
-10. **Enabling & Managing** ← 🎬 Section 2 (2-3 slides)
-11. **What to Remember** ← 🎬 Section 3 (3-4 slides)
-12. **Memory vs Instructions** ← 🎬 Section 4 (2-3 slides)
-13. **Privacy & Best Practices** ← 🎬 Section 5 (2-3 slides)
-14. **Use Cases** ← Real-World Use Cases (1-2 slides)
-15. **Actionable Outcomes** ← What You Can Do Today
-16. **Related Patterns** ← Related Patterns
-17. **Official Documentation** ← 📚 section
-18. **End Slide** ← Auto-generated
-
-### Major Sections (TOC Entries)
-
-```markdown
-<!-- 🎬 MAJOR SECTION: How Memory Works -->
-<!-- 🎬 MAJOR SECTION: Enabling & Managing -->
-<!-- 🎬 MAJOR SECTION: What to Remember -->
-<!-- 🎬 MAJOR SECTION: Memory vs Instructions -->
-<!-- 🎬 MAJOR SECTION: Privacy & Best Practices -->
-```
-
----
 
 ## The Problem
 

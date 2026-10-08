@@ -4,988 +4,444 @@ class: text-center
 highlighter: shiki
 lineNumbers: false
 info: |
-  ## GitHub Copilot ACP: The Agent Client Protocol
+  ## GitHub Copilot ACP
   CopilotTraining Tech Talk
 drawings:
   persist: false
 transition: slide-left
-title: Copilot ACP - Universal AI Integration
-module: tech-talks/copilot-acp
+title: GitHub Copilot ACP
 mdc: true
+section: "Extend and Embed"
 status: active
-updated: 2026-02-11
+updated: 2026-06-10
 ---
 
-<div class="h-full flex flex-col items-center justify-center relative overflow-hidden">
-  <!-- Gradient background -->
-  <div class="absolute inset-0 bg-gradient-to-br from-violet-900/20 via-purple-900/10 to-indigo-900/20"></div>
+<script setup>
+import TitleSlide from './components/structure/TitleSlide.vue'
+import CoreQuestionSlide from './components/structure/CoreQuestionSlide.vue'
+import TocSlide from './components/structure/TocSlide.vue'
+import SectionOpenerSlide from './components/structure/SectionOpenerSlide.vue'
+import WhatYouCanDoTodaySlide from './components/structure/WhatYouCanDoTodaySlide.vue'
+import ReferencesSlide from './components/structure/ReferencesSlide.vue'
+import ThankYouSlide from './components/structure/ThankYouSlide.vue'
+</script>
 
-  <!-- Glowing orb -->
-  <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-gradient-to-r from-violet-500/20 via-purple-500/20 to-indigo-500/20 rounded-full blur-3xl"></div>
-
-  <!-- Logo with glow -->
-  <div class="relative z-10">
-    <div class="absolute inset-0 blur-2xl opacity-50">
-      <img src="./sdp-logo.png" class="w-64" alt="" />
-    </div>
-    <img src="./sdp-logo.png" class="w-64 relative" alt="SDP Logo" />
-  </div>
-
-  <!-- Gradient text title -->
-  <h1 class="!text-5xl !font-bold !mt-8 bg-gradient-to-r from-violet-400 via-purple-400 to-indigo-400 bg-clip-text text-transparent relative z-10">
-    Copilot ACP
-  </h1>
-
-  <!-- Pill subtitle -->
-  <div class="mt-4 relative z-10">
-    <span class="px-6 py-2 bg-gradient-to-r from-violet-600/80 to-purple-600/80 rounded-full text-white text-xl font-medium shadow-lg shadow-violet-500/25">
-      The Agent Client Protocol for Universal AI Integration
-    </span>
-  </div>
-
-  <!-- Tagline -->
-  <div class="mt-8 text-lg opacity-70 relative z-10">
-    ⏰ <strong>45 minutes</strong> • Developers • Platform Engineers • Tool Builders
-  </div>
-
-  <!-- Decorative line -->
-  <div class="mt-6 w-32 h-1 bg-gradient-to-r from-transparent via-violet-400 to-transparent rounded-full relative z-10"></div>
-</div>
+# Title
+<TitleSlide
+  title="GitHub Copilot ACP"
+  subtitle="Your Tool Just Got an AI Agent"
+  tagline="One flag. Any editor. Full agent capabilities."
+  meta="45 min • Developers • Platform Engineers • Tool Builders"
+/>
 
 ---
 
-# The Central Question
-
-<div class="h-full flex items-center justify-center">
-  <div class="max-w-4xl">
-    <div class="text-6xl text-center mb-8">🤔</div>
-    <div class="text-4xl font-bold text-center bg-gradient-to-r from-violet-400 to-purple-400 bg-clip-text text-transparent mb-6">
-      "How do I integrate Copilot's agentic capabilities into any editor, tool, or workflow — not just VS Code?"
-    </div>
-    <div class="text-xl text-center opacity-80 mt-8">
-      ACP is "LSP for AI agents" — the same shift that transformed language tooling, now applied to coding agents
-    </div>
-  </div>
-</div>
-
----
-layout: center
----
-
-# 📖 Table of Contents
-
-<div class="grid grid-cols-2 gap-6 mt-8">
-  <div @click="$nav.go(7)" class="cursor-pointer p-6 bg-gradient-to-br from-violet-500/10 to-violet-600/5 rounded-xl border border-violet-500/30 hover:border-violet-400/60 transition-all hover:scale-105">
-    <div class="text-3xl mb-2">🏗️</div>
-    <div class="font-semibold text-lg">Protocol Architecture</div>
-    <div class="text-sm opacity-70 mt-2">Four layers of standardization — the LSP analogy</div>
-  </div>
-
-  <div @click="$nav.go(11)" class="cursor-pointer p-6 bg-gradient-to-br from-purple-500/10 to-purple-600/5 rounded-xl border border-purple-500/30 hover:border-purple-400/60 transition-all hover:scale-105">
-    <div class="text-3xl mb-2">🚀</div>
-    <div class="font-semibold text-lg">Getting Started</div>
-    <div class="text-sm opacity-70 mt-2">From zero to connected in 5 minutes</div>
-  </div>
-
-  <div @click="$nav.go(14)" class="cursor-pointer p-6 bg-gradient-to-br from-indigo-500/10 to-indigo-600/5 rounded-xl border border-indigo-500/30 hover:border-indigo-400/60 transition-all hover:scale-105">
-    <div class="text-3xl mb-2">📦</div>
-    <div class="font-semibold text-lg">SDK Ecosystem</div>
-    <div class="text-sm opacity-70 mt-2">Build in TypeScript, Python, Rust, or Kotlin</div>
-  </div>
-
-  <div @click="$nav.go(16)" class="cursor-pointer p-6 bg-gradient-to-br from-fuchsia-500/10 to-fuchsia-600/5 rounded-xl border border-fuchsia-500/30 hover:border-fuchsia-400/60 transition-all hover:scale-105">
-    <div class="text-3xl mb-2">🔒</div>
-    <div class="font-semibold text-lg">Permissions & Security</div>
-    <div class="text-sm opacity-70 mt-2">Trust without blind faith — enterprise-ready</div>
-  </div>
-</div>
+# Your Question
+<CoreQuestionSlide
+  question="I build tools outside VS Code — how do I give them Copilot&#39;s full agent capabilities?"
+  subtext="Every role needs something different: real integration speed, enterprise trust, or multi-agent coordination."
+  highlight="ACP gives each of you exactly what you need."
+  :cards="[
+    { icon: '👨‍💻', title: 'Zed Developer', description: 'Connect without months of custom work' },
+    { icon: '🔧', title: 'Platform Engineer', description: 'Ship safely with policy-enforced permissions' },
+    { icon: '🤖', title: 'Orchestrator', description: 'Coordinate agents across repositories' },
+    { icon: '⚡', title: '2 weeks', description: 'vs 3 months to ship before ACP' },
+    { icon: '📝', title: '14 lines', description: 'of TypeScript to connect' },
+    { icon: '🔒', title: '3 lines', description: 'of policy to secure automation' }
+  ]"
+/>
 
 ---
 
-# The Problem
-
-<div class="grid grid-cols-2 gap-6 mt-4">
-
-<div>
-
-### Editor Lock-In & Fragmentation
-
-<div class="text-sm space-y-2 mt-3">
-
-**The N×M integration matrix**
-- Every editor needs a custom plugin for every AI agent
-- VS Code, JetBrains, Neovim, Zed — separate integrations
-- Agent authors spend more time on glue code than AI
-
-**No standard protocol**
-- LSP solved this for language servers, DAP for debuggers
-- AI agents have nothing — until ACP
-
-</div>
-
-</div>
-
-<div>
-
-### Automation Gaps
-
-<div class="text-sm space-y-2 mt-3">
-
-**CI/CD can't access agentic AI**
-- No programmatic way to leverage agent capabilities
-- Custom wiring required for every integration
-
-**Teams locked to one editor**
-- Full Copilot experience only in VS Code
-- Terminal workflows, custom tools excluded
-
-</div>
-
-</div>
-
-</div>
-
-<div class="mt-4 p-3 bg-gradient-to-r from-red-600/40 to-orange-600/40 rounded-xl border border-red-500/50">
-<div class="font-bold text-center text-sm">What's needed: a protocol that decouples editors from agents — like LSP did for language tooling</div>
-</div>
+# The Journey
+<TocSlide
+  :sections='[
+    { icon: "👨‍💻", title: "Zed Developer", subtitle: "From locked-in to full agent", blurb: "Connect without months of custom work", slide: 4 },
+    { icon: "🔧", title: "Platform Engineer", subtitle: "Three permission strategies", blurb: "Ship safely with policy-enforced permissions", slide: 7 },
+    { icon: "🤖", title: "Multi-Agent Orchestrator", subtitle: "One protocol, many agents", blurb: "Coordinate agents across repositories", slide: 10 },
+    { icon: "✅", title: "Ship Safely", subtitle: "When and how to use ACP", blurb: "Decision framework for adoption", slide: 17 }
+  ]'
+/>
 
 ---
 
-# The Solution: Agent Client Protocol (ACP)
+# Zed Developer
+<SectionOpenerSlide
+  :partNumber="1"
+  section="Part 1"
+  title="Zed Developer"
+  subtitle="From locked out to full agent experience in 14 lines of code"
+  :cards="[
+    { icon: '🚀', title: 'One Command', blurb: 'copilot --acp --stdio' },
+    { icon: '⚡', title: 'Streaming Responses', blurb: 'Real-time agent output' },
+    { icon: '📦', title: 'Any Editor', blurb: 'Standard protocol for all' }
+  ]"
+  :terminal='{ context: "Connect any editor to Copilot", detail: "2 weeks instead of 3 months" }'
+/>
 
-<div class="text-sm space-y-3 mt-4">
-
-**Standardized communication between editors and AI agents via JSON-RPC 2.0**
-
-<div class="grid grid-cols-2 gap-4 mt-3">
-
-<div class="p-3 bg-violet-900/40 rounded-lg border border-violet-500/50">
-<div class="text-xl mb-1">🌐</div>
-<div class="font-semibold mb-1 text-sm">Universal Editor Support</div>
-<div class="text-xs opacity-90">
-Any ACP-compatible editor connects to Copilot — Zed, JetBrains, Neovim, Emacs
-</div>
-</div>
-
-<div class="p-3 bg-purple-900/40 rounded-lg border border-purple-500/50">
-<div class="text-xl mb-1">📡</div>
-<div class="font-semibold mb-1 text-sm">Bidirectional Streaming</div>
-<div class="text-xs opacity-90">
-Real-time responses and inline permission requests as the agent works
-</div>
-</div>
-
-<div class="p-3 bg-indigo-900/40 rounded-lg border border-indigo-500/50">
-<div class="text-xl mb-1">🧠</div>
-<div class="font-semibold mb-1 text-sm">Stateful Sessions</div>
-<div class="text-xs opacity-90">
-Persistent context across prompts — accumulates understanding
-</div>
-</div>
-
-<div class="p-3 bg-fuchsia-900/40 rounded-lg border border-fuchsia-500/50">
-<div class="text-xl mb-1">🔐</div>
-<div class="font-semibold mb-1 text-sm">Permission-Mediated Security</div>
-<div class="text-xs opacity-90">
-Every tool invocation goes through explicit user approval — enterprise-ready
-</div>
-</div>
-
-</div>
-
-</div>
-
----
-layout: center
----
-
-# 🧠 The Core Insight
-
-<div class="text-5xl mb-8">💡</div>
-
-<div class="text-3xl font-bold bg-gradient-to-r from-violet-400 to-purple-400 bg-clip-text text-transparent mb-8">
-From "each editor needs its own AI plugin"<br/>to "any editor connects to any agent through one standard protocol"
-</div>
-
-<div class="grid grid-cols-2 gap-6 mt-8 text-sm max-w-3xl mx-auto">
-
-<div class="p-4 bg-red-900/30 rounded-lg border border-red-500/40">
-<div class="font-semibold text-red-400 mb-2">❌ Before ACP</div>
-<div class="opacity-80">N editors × M agents = N×M integrations</div>
-<div class="text-xs opacity-60 mt-1">Custom glue code that breaks with every update</div>
-</div>
-
-<div class="p-4 bg-green-900/30 rounded-lg border border-green-500/40">
-<div class="font-semibold text-green-400 mb-2">✅ After ACP</div>
-<div class="opacity-80">N editors + M agents = N+M integrations</div>
-<div class="text-xs opacity-60 mt-1">Each side implements the protocol once</div>
-</div>
-
-</div>
-
----
-layout: center
-name: protocol-architecture
----
-
-<!-- 🎬 MAJOR SECTION: Protocol Architecture -->
-
-<div class="text-center">
-  <div class="text-6xl mb-6">🏗️</div>
-  <h1 class="text-5xl font-bold bg-gradient-to-r from-violet-400 to-purple-400 bg-clip-text text-transparent">
-    Protocol Architecture
-  </h1>
-  <div class="mt-4 text-xl opacity-70">Four layers of standardization — inspired by LSP's proven design</div>
-</div>
+<!-- Phase B: high — 1–2 body slides showing code example and result -->
 
 ---
 
-# Four-Layer Architecture
-
-<div class="grid grid-cols-2 gap-6 mt-4 text-sm">
-
-<div class="space-y-3">
-
-<div class="p-3 bg-violet-900/30 rounded-lg border border-violet-500/40">
-<div class="font-bold text-violet-400 mb-1">1. Transport Layer</div>
-<div class="text-xs opacity-90">JSON-RPC 2.0 over <strong>stdio</strong> (editors) or <strong>TCP</strong> (network tools)</div>
-</div>
-
-<div class="p-3 bg-purple-900/30 rounded-lg border border-purple-500/40">
-<div class="font-bold text-purple-400 mb-1">2. Protocol Layer</div>
-<div class="text-xs opacity-90">Bidirectional request/response — both client and agent initiate messages</div>
-</div>
-
-<div class="p-3 bg-indigo-900/30 rounded-lg border border-indigo-500/40">
-<div class="font-bold text-indigo-400 mb-1">3. Session Layer</div>
-<div class="text-xs opacity-90">Stateful context — history, working directory, MCP servers per session</div>
-</div>
-
-<div class="p-3 bg-fuchsia-900/30 rounded-lg border border-fuchsia-500/40">
-<div class="font-bold text-fuchsia-400 mb-1">4. Application Layer</div>
-<div class="text-xs opacity-90">Agent logic (AI) + Client UX (rendering, permission dialogs)</div>
-</div>
-
-</div>
-
-<div>
-
-### Start the Server
-
-```bash
-# stdio mode — for editor integration
-copilot --acp --stdio
-
-# TCP mode — for network tools
-copilot --acp --port 3000
-```
-
-### Key Protocol Messages
-
-```
-Client → Agent:
-  initialize, session/new, session/prompt
-
-Agent → Client:
-  requestPermission, sessionUpdate
-
-Both directions:
-  Notifications for progress & state
-```
-
-</div>
-
-</div>
+# The 14-Line Integration
+<CodeWithFeaturesSlide
+  :partNumber="1"
+  pillIcon="🚀"
+  pillLabel="Section 1 · Integration"
+  title="From Command to Live Agent Workflow"
+  codePosition="left"
+  :code='{ language: "json", filename: "acp-protocol", content: "→ {method: initialize, params: {...}}\n← {result: initialized}\n\n→ {method: prompt, text: Refactor fetch}\n← {event: thinking, text: Analyzing...}\n← {event: tool, tool: read_files, path: *.ts}\n← {event: thinking, text: Found 3 fetches}\n← {event: text, delta: function getUsers() {\n  return Promise.all([\n    fetch(/api/users),\n    fetch(/api/posts)\n  ])\n}}" }'
+  :features="[
+    { icon: '💭', title: 'Streaming protocol', description: 'Real JSON-RPC messages: → client, ← server' },
+    { icon: '🔧', title: 'Visible agent internals', description: 'See thinking, tool calls, and code as it streams' },
+    { icon: '📡', title: 'Language-agnostic', description: 'Any editor can implement this protocol' }
+  ]"
+  :progressDots='{ current: 1, total: 2, activeColor: "bg-cyan-400 shadow-lg shadow-cyan-500/50" }'
+/>
 
 ---
 
-# Core Message Flow
-
-<div class="mt-4 text-sm">
-
-```
-Client (Editor)                    Agent (Copilot CLI)
-     │                                    │
-     │──── initialize ──────────────────▶│  Capability negotiation
-     │◀─── initializeResult ────────────│
-     │                                    │
-     │──── session/new ─────────────────▶│  Create workspace context
-     │◀─── newSessionResult ────────────│
-     │                                    │
-     │──── session/prompt ──────────────▶│  Send user prompt
-     │◀─── sessionUpdate (streaming) ───│  Stream response chunks
-     │◀─── requestPermission ───────────│  Agent needs tool access
-     │──── permissionResponse ──────────▶│  User approves/denies
-     │◀─── sessionUpdate (streaming) ───│  Continue with result
-     │◀─── promptResult ────────────────│  Response complete
-     │                                    │
-```
-
-</div>
-
-<div class="mt-2 grid grid-cols-3 gap-4 text-xs">
-<div class="p-2 bg-violet-900/30 rounded-lg border border-violet-500/30 text-center">
-<strong>JSON-RPC 2.0</strong><br/>Human-readable, debuggable
-</div>
-<div class="p-2 bg-purple-900/30 rounded-lg border border-purple-500/30 text-center">
-<strong>Streaming Updates</strong><br/>Real-time response rendering
-</div>
-<div class="p-2 bg-indigo-900/30 rounded-lg border border-indigo-500/30 text-center">
-<strong>Permission Mediation</strong><br/>Agents never act without approval
-</div>
-</div>
+# Before & After: What Zed Gets
+<BeforeAfterMetricsSlide
+  :partNumber="1"
+  pillIcon="📊"
+  pillLabel="Section 1 · Impact"
+  title="From Locked-In to Free"
+  :before='{
+    header: "Before ACP",
+    items: [
+      "Stuck waiting for IDE team",
+      { title: "3+ months", detail: "Build custom agent API" },
+      "Limited to existing features"
+    ]
+  }'
+  :after='{
+    header: "After ACP",
+    items: [
+      { title: "Connect in 2 weeks", detail: "Standard protocol, any tool" },
+      "Full agent reasoning available",
+      { title: "Your control", detail: "No waiting for platform updates" }
+    ]
+  }'
+  :metrics="[
+    { value: '90%', label: 'less integration code' },
+    { value: '2-3 weeks', label: 'time to market' },
+    { value: '∞', label: 'use cases' }
+  ]"
+  :progressDots='{ current: 2, total: 2, activeColor: "bg-cyan-400 shadow-lg shadow-cyan-500/50" }'
+/>
 
 ---
 
-# ACP vs LSP vs MCP
+# Platform Engineer
+<SectionOpenerSlide
+  :partNumber="2"
+  section="Part 2"
+  title="Platform Engineer"
+  subtitle="Three permission strategies prove ACP is production-safe"
+  :cards="[
+    { icon: '✅', title: 'Interactive Approval', blurb: 'Human reviews each request' },
+    { icon: '🤖', title: 'Policy-Based', blurb: 'Auto-approve safe ops' },
+    { icon: '🎯', title: 'Tiered by Env', blurb: 'Different rules per context' }
+  ]"
+  :terminal='{ context: "Permission callback gates every action", detail: "3 lines to auto-approve reads, prompt writes" }'
+/>
 
-<div class="mt-4">
-
-| Aspect | ACP | MCP | LSP |
-|--------|-----|-----|-----|
-| **Purpose** | Editor ↔ Agent | Model ↔ Tool | Editor ↔ Language Server |
-| **Best For** | Universal AI agent access | Extending agent capabilities | Code intelligence |
-| **Sessions** | Stateful, persistent | Stateless per invocation | Stateful per workspace |
-| **Transport** | JSON-RPC over stdio/TCP | JSON-RPC over stdio/SSE | JSON-RPC over stdio/TCP |
-| **Analogy** | Any agent → any editor | Any tool → any model | Any language → any editor |
-
-</div>
-
-<div class="mt-4 p-3 bg-violet-900/30 rounded-lg border border-violet-500/40 text-sm">
-<strong>Key relationship:</strong> ACP defines how <em>editors talk to agents</em>. MCP defines how <em>agents access tools</em>. They're complementary — ACP sessions configure MCP servers, giving agents tool access through a standard interface.
-</div>
-
----
-layout: center
-name: getting-started
----
-
-<!-- 🎬 MAJOR SECTION: Getting Started -->
-
-<div class="text-center">
-  <div class="text-6xl mb-6">🚀</div>
-  <h1 class="text-5xl font-bold bg-gradient-to-r from-purple-400 to-indigo-400 bg-clip-text text-transparent">
-    Getting Started
-  </h1>
-  <div class="mt-4 text-xl opacity-70">From zero to connected in 5 minutes</div>
-</div>
+<!-- Phase B: high — 1–2 body slides showing permission model and table -->
 
 ---
 
-# Step 1: Start the ACP Server
-
-<div class="grid grid-cols-2 gap-6 mt-4 text-sm">
-
-<div>
-
-### Prerequisites
-
-- GitHub Copilot subscription (Pro, Pro+, Business, Enterprise)
-- Copilot CLI installed and authenticated
-- Node.js v22+ for TypeScript SDK
-
-### Launch
-
-```bash
-# Start in stdio mode (recommended)
-copilot --acp --stdio
-
-# Or TCP mode for network access
-copilot --acp --port 3000
-```
-
-The `--acp` flag transforms Copilot CLI into a **protocol server**.
-
-</div>
-
-<div>
-
-### Install the SDK
-
-```bash
-npm install @agentclientprotocol/sdk
-```
-
-### What You Get
-
-<div class="space-y-2 mt-3 text-xs">
-<div class="p-2 bg-green-900/30 rounded border border-green-500/30">✅ Initialize response with agent capabilities</div>
-<div class="p-2 bg-green-900/30 rounded border border-green-500/30">✅ Session with unique <code>sessionId</code></div>
-<div class="p-2 bg-green-900/30 rounded border border-green-500/30">✅ Streaming updates as agent processes</div>
-<div class="p-2 bg-green-900/30 rounded border border-green-500/30">✅ Prompt result with <code>stopReason: "end_turn"</code></div>
-</div>
-
-</div>
-
-</div>
+# Permission Callback: Three Strategies
+<ProblemSolutionOutcomeSlide
+  :partNumber="2"
+  pillIcon="🔐"
+  pillLabel="Section 2 · Policies"
+  title="Permissions Done Right"
+  :problem='{
+    header: "The Challenge",
+    items: [
+      "Ship agents to production safely",
+      { title: "Balance:", detail: "Power vs. policy enforcement" }
+    ]
+  }'
+  :solution='{
+    header: "The Approach",
+    items: [
+      "Permission callback intercepts requests",
+      { title: "Three strategies:", detail: "Interactive, Policy-based, Tiered by env" }
+    ]
+  }'
+  :outcome='{
+    header: "The Result",
+    items: [
+      "Auditable per-session permissions",
+      { title: "Your rules.", detail: "Enforced at the agent boundary" }
+    ]
+  }'
+  :progressDots='{ current: 1, total: 2, activeColor: "bg-blue-400 shadow-lg shadow-blue-500/50" }'
+/>
 
 ---
 
-# Step 2: Connect a Client
+# Context-Aware Policy: Tiered by Environment
+<CodeWithFeaturesSlide
+  :partNumber="2"
+  pillIcon="🎯"
+  pillLabel="Section 2 · Environment Tiers"
+  title="Permission Policies That Scale"
+  codePosition="left"
+  :code='{ language: "typescript", filename: "policy.ts", content: "const SAFE = [read, search];\nconst BLOCKED = [delete];\n\nasync requestPermission(p) {\n  if (SAFE.includes(p.tool))\n    return approved;\n  if (BLOCKED.includes(p.tool))\n    return cancelled;\n  return await promptUser(p);\n}" }'
+  :features="[
+    { icon: '💾', title: 'Auto-approve safe ops', description: 'Reads never prompt' },
+    { icon: '🛑', title: 'Auto-block dangerous ops', description: 'Deletes always blocked' },
+    { icon: '👤', title: 'Human decides the rest', description: 'Writes prompt the user' }
+  ]"
+  :progressDots='{ current: 2, total: 2, activeColor: "bg-blue-400 shadow-lg shadow-blue-500/50" }'
+/>
 
-<div class="mt-4 text-xs">
+---
 
-```typescript
-import * as acp from "@agentclientprotocol/sdk";
-import { spawn } from "node:child_process";
-import { Readable, Writable } from "node:stream";
+# Multi-Agent Orchestrator
+<SectionOpenerSlide
+  :partNumber="3"
+  section="Part 3"
+  title="Multi-Agent Orchestrator"
+  subtitle="One protocol, many agents, coordinated work across repos"
+  :cards="[
+    { icon: '📡', title: 'Broadcast', blurb: 'Prompt all workers at once' },
+    { icon: '🧠', title: 'Synthesize', blurb: 'Orchestrator merges results' },
+    { icon: '🔄', title: 'Compose', blurb: 'Standard sessions, no special mode' }
+  ]"
+  :terminal='{ context: "Spawn one agent per repo", detail: "Coordinate results naturally" }'
+/>
 
-async function main() {
-  // Start Copilot CLI as ACP server
-  const copilot = spawn("copilot", ["--acp", "--stdio"], {
-    stdio: ["pipe", "pipe", "inherit"],
-  });
+<!-- Phase B: high — 1–2 body slides showing orchestrator architecture -->
 
-  const stream = acp.ndJsonStream(
-    Writable.toWeb(copilot.stdin!) as WritableStream<Uint8Array>,
-    Readable.toWeb(copilot.stdout!) as ReadableStream<Uint8Array>
-  );
+---
 
-  const client: acp.Client = {
-    async requestPermission(params) {
-      return { outcome: { outcome: "cancelled" } }; // Handle permissions
+# Architecture: One Orchestrator, Many Workers
+<CodeWithFeaturesSlide
+  :partNumber="3"
+  pillIcon="🤖"
+  pillLabel="Section 3 · Architecture"
+  title="Spawning Multi-Agent Sessions"
+  codePosition="left"
+  :code='{ language: "typescript", filename: "orchestrator.ts", content: "const workers = repos.map(repo => ({\n  process: spawn(copilot, [--acp, --stdio]),\n  repo\n}));\n\nfor (const worker of workers) {\n  const sess = await connection.newSession({\n    cwd: worker.repo.path,\n    mcpServers: [filesystemServer(repo.path)]\n  });\n}" }'
+  :features="[
+    { icon: '📦', title: 'One process per repo', description: 'Isolated context and state' },
+    { icon: '🔀', title: 'Same protocol everywhere', description: 'No special multi-agent mode' },
+    { icon: '🧩', title: 'Compose at will', description: 'Standard ACP sessions compose naturally' }
+  ]"
+  :progressDots='{ current: 1, total: 6, activeColor: "bg-indigo-400 shadow-lg shadow-indigo-500/50" }'
+/>
+
+---
+
+# Shopfleet Scenario Arc
+<CodeWithFeaturesSlide
+  :partNumber="3"
+  pillIcon="🗺️"
+  pillLabel="Section 3 · Scenario Arc"
+  title="Five Scenarios, One Operator Playbook"
+  codePosition="left"
+  :code='{ language: "markdown", filename: "SCENARIO.md", content: "1. service-audit-and-api-alignment\n2. payment-expansion\n3. loyalty-feature-rollout\n4. inventory-sync-coordination\n5. security-audit-shared-upgrade\n\nSuggested: 1 -> 2 -> 3 -> 4 -> 5" }'
+  :features="[
+    { icon: '🏁', title: 'Start with architecture truth', description: 'Scenario 1 creates a shared baseline across all repos' },
+    { icon: '🔁', title: 'Escalate complexity', description: 'Scenarios 2-4 layer feature rollout and dependency routing' },
+    { icon: '🚨', title: 'End with critical path ops', description: 'Scenario 5 proves security sequencing under pressure' }
+  ]"
+  :progressDots='{ current: 2, total: 6, activeColor: "bg-indigo-400 shadow-lg shadow-indigo-500/50" }'
+/>
+
+---
+
+# Broadcast + Synthesis Operator Loop
+<AITerminalTranscriptSlide
+  :partNumber="3"
+  pillIcon="📡"
+  pillLabel="Section 3 · Operator Loop"
+  title="Scenario 1: Broadcast First, Synthesize Second"
+  subtitle="The fastest way to align eight shopfleet services"
+  :transcript='[
+    { type: "prompt", text: "Broadcast to all workers" },
+    { type: "user", text: "Audit this microservice: purpose, APIs, dependencies, risks" },
+    { type: "thinking", label: "🤔 Workers streaming:" },
+    { type: "response", lines: ["users: profile + auth ownership", "orders: fulfillment + payment handoff", "storefront: UI + checkout orchestration"] },
+    { type: "divider" },
+    { type: "prompt", text: "Set Orchestrator Focus" },
+    { type: "user", text: "Synthesize dependency map + alignment gaps + next 3 actions" },
+    { type: "outcome", text: "One architecture narrative from seven isolated contexts" }
+  ]'
+  footerMetric="Operator pattern: shared prompt -> worker evidence -> orchestrator synthesis"
+  :progressDots='{ current: 3, total: 6, activeColor: "bg-indigo-400 shadow-lg shadow-indigo-500/50" }'
+/>
+
+---
+
+# Dependency Routing in Action
+<CodeWithFeaturesSlide
+  :partNumber="3"
+  pillIcon="🔄"
+  pillLabel="Section 3 · Dependency Routing"
+  title="Scenario 3: Loyalty Rollout with Cross-Repo Cascades"
+  codePosition="left"
+  :code='{ language: "json", filename: "acp-manifest.json", content: "{\n  \"name\": \"shopfleet-storefront\",\n  \"dependsOn\": [\"shopfleet-users\", \"shopfleet-products\"]\n}\n\n// Broadcast: implement loyalty points\n// Route plan: storefront <- users, products, payments\n// Cascade: service-specific prompts generated per dependency" }'
+  :features="[
+    { icon: '🧠', title: 'Graph-aware prompts', description: 'Routes are generated from repo relationships, not guesswork' },
+    { icon: '🎯', title: 'Repo-specific execution', description: 'Each worker gets the same intent but tailored implementation context' },
+    { icon: '🧪', title: 'Consistency checks', description: 'Orchestrator catches schema drift across LoyaltyAccount and PointsTransaction' }
+  ]"
+  :progressDots='{ current: 4, total: 6, activeColor: "bg-indigo-400 shadow-lg shadow-indigo-500/50" }'
+/>
+
+---
+
+# Security Sequence Matters
+<WorkflowShowdownStepsSlide
+  :partNumber="3"
+  pillIcon="🛡️"
+  pillLabel="Section 3 · Security Ops"
+  title="Scenario 5: Shared Library Security Upgrade"
+  subtitle="Order of operations is the difference between safety and outage"
+  leftLabel="Ad-hoc rollout"
+  rightLabel="Orchestrated rollout"
+  :steps='[
+    {
+      left: { label: "Patch services in parallel", note: "Inconsistent hash behavior" },
+      right: { label: "Patch shopfleet-shared first", note: "Single source of crypto truth" }
     },
-    async sessionUpdate(params) {
-      const update = params.update;
-      if (update.sessionUpdate === "agent_message_chunk"
-          && update.content.type === "text") {
-        process.stdout.write(update.content.text); // Stream response
-      }
+    {
+      left: { label: "Discover breakages after deploy", note: "Login failures surface late" },
+      right: { label: "Broadcast diagnostic audit", note: "Find all hash usage before rollout" }
     },
-  };
-
-  const connection = new acp.ClientSideConnection((_agent) => client, stream);
-  await connection.initialize({
-    protocolVersion: acp.PROTOCOL_VERSION, clientCapabilities: {},
-  });
-
-  const session = await connection.newSession({ cwd: process.cwd(), mcpServers: [] });
-  await connection.prompt({
-    sessionId: session.sessionId,
-    prompt: [{ type: "text", text: "Explain the purpose of this project" }],
-  });
-}
-```
-
-</div>
-
----
-layout: center
-name: sdk-ecosystem
----
-
-<!-- 🎬 MAJOR SECTION: SDK Ecosystem -->
-
-<div class="text-center">
-  <div class="text-6xl mb-6">📦</div>
-  <h1 class="text-5xl font-bold bg-gradient-to-r from-indigo-400 to-blue-400 bg-clip-text text-transparent">
-    SDK Ecosystem
-  </h1>
-  <div class="mt-4 text-xl opacity-70">Build in your language — four official SDKs</div>
-</div>
-
----
-
-# Multi-Language SDKs
-
-<div class="mt-4 text-sm">
-
-| SDK | Package | Install |
-|-----|---------|---------|
-| **TypeScript** | `@agentclientprotocol/sdk` | `npm i @agentclientprotocol/sdk` |
-| **Python** | `agent-client-protocol` | `pip install agent-client-protocol` |
-| **Rust** | `agent-client-protocol` | `cargo add agent-client-protocol` |
-| **Kotlin** | `acp-kotlin` | Maven / Gradle |
-
-</div>
-
-<div class="mt-6 p-4 bg-indigo-900/30 rounded-lg border border-indigo-500/40 text-sm">
-<strong>ACP + MCP complement each other:</strong>
-<div class="mt-2 grid grid-cols-2 gap-4 text-xs">
-<div>• <strong>ACP</strong> = how editors talk to agents</div>
-<div>• <strong>MCP</strong> = how agents access tools</div>
-<div>• ACP sessions <em>configure</em> MCP servers</div>
-<div>• Client tells agent which tools are available</div>
-</div>
-</div>
-
----
-
-# MCP Integration Through ACP
-
-<div class="grid grid-cols-2 gap-6 mt-4 text-sm">
-
-<div>
-
-```typescript
-// Sessions can configure MCP servers
-const session = await connection.newSession({
-  cwd: process.cwd(),
-  mcpServers: [{
-    name: "github",
-    transport: {
-      type: "stdio",
-      command: "npx",
-      args: ["-y",
-        "@modelcontextprotocol/server-github"],
-      env: {
-        GITHUB_TOKEN: process.env.GITHUB_TOKEN
-      },
+    {
+      left: { label: "No migration plan", note: "Users forced into resets" },
+      right: { label: "Dual-verify transition", note: "Old SHA + new bcrypt during migration" }
     },
-  }],
-});
-```
-
-</div>
-
-<div class="flex items-center">
-<div class="p-4 bg-violet-900/30 rounded-lg border border-violet-500/40 text-xs space-y-3">
-<div><strong>What this does:</strong></div>
-<div>1. Creates an ACP session with a working directory</div>
-<div>2. Attaches an MCP server (GitHub) for the agent to use</div>
-<div>3. Agent can now access GitHub tools through the standard MCP interface</div>
-<div class="mt-2 p-2 bg-green-900/20 rounded border border-green-500/30">The client controls which tools are available — agents request, users approve</div>
-</div>
-</div>
-
-</div>
-
----
-layout: center
-name: permissions-security
----
-
-<!-- 🎬 MAJOR SECTION: Permissions & Security -->
-
-<div class="text-center">
-  <div class="text-6xl mb-6">🔒</div>
-  <h1 class="text-5xl font-bold bg-gradient-to-r from-fuchsia-400 to-pink-400 bg-clip-text text-transparent">
-    Permissions & Security
-  </h1>
-  <div class="mt-4 text-xl opacity-70">Trust without blind faith — enterprise-ready permission model</div>
-</div>
+    {
+      left: { label: "Manual coordination", note: "High incident risk" },
+      right: { label: "Orchestrator validates all services", note: "Evidence before production" }
+    }
+  ]'
+  :outcomeLeft='{ icon: "⚠️", label: "Uncontrolled security blast radius" }'
+  :outcomeRight='{ icon: "✅", label: "Controlled migration with audit trail" }'
+  summaryMetric="Critical path: shared library -> dependent services -> validation broadcast"
+  :progressDots='{ current: 5, total: 6, activeColor: "bg-indigo-400 shadow-lg shadow-indigo-500/50" }'
+/>
 
 ---
 
-# The Permission Model
-
-<div class="grid grid-cols-2 gap-6 mt-4 text-sm">
-
-<div>
-
-### Every Action Is Mediated
-
-```
-Agent: "I need to run `npm test`"
-  ↓
-Client: Shows permission dialog
-  ↓
-User: Approves (or denies)
-  ↓
-Agent: Executes (or adapts)
-```
-
-### Permission Strategies
-
-<div class="space-y-1 mt-3 text-xs">
-<div class="p-2 bg-violet-900/30 rounded border border-violet-500/30"><strong>Interactive</strong> — User reviews each request</div>
-<div class="p-2 bg-purple-900/30 rounded border border-purple-500/30"><strong>Policy-based</strong> — Auto-approve reads, require approval for writes</div>
-<div class="p-2 bg-indigo-900/30 rounded border border-indigo-500/30"><strong>Blocked</strong> — Auto-deny destructive operations</div>
-</div>
-
-</div>
-
-<div>
-
-### Enterprise Security
-
-<div class="text-xs">
-
-| Concern | ACP Solution |
-|---------|-------------|
-| Unauthorized access | Permission callback gates every operation |
-| Command execution | Shell commands require explicit approval |
-| Data exfiltration | Network operations mediated by client |
-| Scope creep | Session-scoped; new session resets |
-| Audit trail | Log all permission requests and outcomes |
-
-</div>
-
-<div class="mt-3 p-2 bg-green-900/30 rounded-lg border border-green-500/40 text-xs">
-<strong>Architecturally enforced</strong> — agents cannot bypass the permission layer. It's not optional.
-</div>
-
-</div>
-
-</div>
+# Screenshot Storyboard
+<ThreeColumnCardSlide
+  :partNumber="3"
+  pillIcon="📸"
+  pillLabel="Section 3 · Demo Visuals"
+  title="Live Screenshot Storyboard for Your Polyrepo Demo"
+  :columns='[
+    {
+      icon: "1️⃣",
+      title: "Topology",
+      items: [
+        "Full app layout: orchestrator + 3+ workers",
+        "Dependency graph with node and edge counts",
+        "Banner showing unloaded dependency neighbors"
+      ]
+    },
+    {
+      icon: "2️⃣",
+      title: "Coordination",
+      items: [
+        "Routing plan panel with edited downstream prompts",
+        "Broadcast results with coalesced worker outputs",
+        "Orchestrator card in Synthesizing state"
+      ]
+    },
+    {
+      icon: "3️⃣",
+      title: "Agent States",
+      items: [
+        "Worker card with dependsOn and dependedBy pills",
+        "Unloaded dep chip with Load as Worker action",
+        "Session panel showing Restore vs Re-spawn"
+      ]
+    }
+  ]'
+  :insight='{ icon: "🧭", text: "If you want backup visuals, cli-acp has walkthrough captures under docs/images/walkthrough/01-06 while you replace with live local shots." }'
+  :progressDots='{ current: 6, total: 6, activeColor: "bg-indigo-400 shadow-lg shadow-indigo-500/50" }'
+/>
 
 ---
 
-# Use Case: Zed Editor Integration
+# Ship Safely
+<SectionOpenerSlide
+  :partNumber="4"
+  section="Part 4"
+  title="Ship Safely"
+  subtitle="Decision table and alternatives: When to use ACP, when not to"
+  :cards="[
+    { icon: '✅', title: 'Use ACP', blurb: 'Non-VS Code, multi-agent, CI/CD' },
+    { icon: '⚠️', title: 'Maybe Not', blurb: 'Already in VS Code is simpler' },
+    { icon: '🔗', title: 'Choose Wisely', blurb: 'Know your alternative' }
+  ]"
+  :terminal='{ context: "Four personas, one next step each", detail: "Flywheel: more clients → more agents" }'
+/>
 
-<div class="grid grid-cols-2 gap-6 mt-4 text-sm">
-
-<div>
-
-### The Problem
-
-Zed users wanted Copilot's full agent experience — but a VS Code extension-compatible layer would take **months**.
-
-### The Solution
-
-Zed implemented ACP client support:
-
-```bash
-copilot --acp --stdio
-```
-
-### The Outcome
-
-<div class="mt-3 space-y-1 text-xs">
-<div class="p-2 bg-green-900/30 rounded border border-green-500/30">✅ Full agent experience — streaming, permissions, sessions</div>
-<div class="p-2 bg-green-900/30 rounded border border-green-500/30">✅ <strong>2 weeks</strong> vs 3+ months custom build</div>
-<div class="p-2 bg-green-900/30 rounded border border-green-500/30">✅ No maintenance burden when Copilot updates</div>
-</div>
-
-</div>
-
-<div>
-
-### When to Use ACP
-
-<div class="text-xs">
-
-```
-Q: How do you want to use Copilot?
-├─ "My preferred editor (not VS Code)"
-│  → ACP with editor's built-in client
-│
-├─ "CI/CD automation"
-│  → copilot -p (programmatic mode)
-│
-├─ "Custom tool or dashboard"
-│  → ACP SDK (TS/Python/Rust/Kotlin)
-│
-└─ "Coordinate multiple agents"
-   → ACP + MCP combined
-```
-
-</div>
-
-</div>
-
-</div>
+<!-- Phase B: medium — 1 body slide with decision table -->
 
 ---
 
-# 🚀 ACP Agent Orchestrator
-
-<div class="grid grid-cols-2 gap-6 mt-4 text-sm">
-
-<div>
-
-### Multi-Agent Coordination via ACP
-
-The [**ACP Agent Orchestrator**](https://github.com/MSBart2/cli-acp) — a full web interface for orchestrating multiple Copilot agents across repositories.
-
-<div class="space-y-2 mt-3 text-xs">
-<div class="p-2 bg-violet-900/30 rounded border border-violet-500/30">🤖 One <code>copilot --acp --stdio</code> process per repo</div>
-<div class="p-2 bg-purple-900/30 rounded border border-purple-500/30">📡 Broadcast prompts to all workers simultaneously</div>
-<div class="p-2 bg-indigo-900/30 rounded border border-indigo-500/30">🔄 Coalesced results → auto-forwarded to orchestrator</div>
-<div class="p-2 bg-fuchsia-900/30 rounded border border-fuchsia-500/30">📋 Issue/PR tracking loop across repos</div>
-</div>
-
-| Layer | Technology |
-|-------|-----------|
-| Backend | Node + Express + Socket.IO |
-| Frontend | React + Vite + Tailwind |
-| ACP | `@agentclientprotocol/sdk` |
-
-</div>
-
-<div>
-
-<img src="./copilot-acp/images/acp-orchestrator-agents.png" class="rounded-lg border border-violet-500/30 shadow-lg" alt="Multiple agents working simultaneously" />
-
-<div class="mt-3 text-xs opacity-70 text-center">Multiple Copilot agents coordinating cross-repo work</div>
-
-</div>
-
-</div>
+# When to Use ACP: Decision Framework
+<ThreeColumnCardSlide
+  :partNumber="4"
+  pillIcon="✅"
+  pillLabel="Section 4 · Decision"
+  title="Choose Your Path"
+  :columns='[
+    { icon: "🎯", title: "Use ACP Now", description: "Non-VS Code tool, multi-agent coordination, Claude API, enterprise policy" },
+    { icon: "🤔", title: "Consider Alternatives", description: "Already VS Code, IDE-specific needs, single-agent only, built-in copilot works" },
+    { icon: "📚", title: "Start Small", description: "Read spec, try SDK for your language, deploy to dev/test, add policies before prod" }
+  ]'
+  :progressDots='{ current: 1, total: 1, activeColor: "bg-purple-400 shadow-lg shadow-purple-500/50" }'
+/>
 
 ---
 
-# Orchestrator in Action
-
-<div class="grid grid-cols-2 gap-6 mt-3 text-sm">
-
-<div>
-
-<img src="./copilot-acp/images/acp-orchestrator-results.png" class="rounded-lg border border-purple-500/30 shadow-lg max-h-80" alt="Coalesced broadcast results" />
-
-<div class="mt-2 text-xs opacity-70 text-center">Coalesced broadcast results panel</div>
-
-</div>
-
-<div>
-
-### Cross-Repo Documentation Audit
-
-<div class="space-y-1 mt-2 text-xs">
-<div class="p-1.5 bg-violet-900/20 rounded">1️⃣ <strong>Broadcast</strong> audit prompts to all workers</div>
-<div class="p-1.5 bg-purple-900/20 rounded">2️⃣ <strong>Coalesce</strong> worker outputs automatically</div>
-<div class="p-1.5 bg-indigo-900/20 rounded">3️⃣ <strong>Synthesize</strong> cross-repo findings</div>
-<div class="p-1.5 bg-fuchsia-900/20 rounded">4️⃣ <strong>Create issues</strong> with coordinated tracking</div>
-<div class="p-1.5 bg-violet-900/20 rounded">5️⃣ <strong>Generate PRs</strong> across all repos</div>
-<div class="p-1.5 bg-purple-900/20 rounded">6️⃣ <strong>Merge coordination</strong> via orchestrator</div>
-</div>
-
-### Try It Yourself
-
-```bash
-git clone https://github.com/MSBart2/cli-acp.git
-cd cli-acp/webapp
-npm run install:all && npm run dev
-```
-
-</div>
-
-</div>
+# What You Can Do Today
+<WhatYouCanDoTodaySlide
+  :today='["Follow agentclientprotocol.com/spec", "Bookmark the official documentation", "Star the SDK repositories"]'
+  :thisWeek='["Clone the ACP SDK for your language", "Run the 14-line example and stream responses", "Read the four-layer architecture guide"]'
+  :thisMonth='["Integrate ACP into your editor or tool", "Test permission strategies in dev/stage", "Merge to production with policy gates"]'
+  footer="One flag. One agent. Ship safely with ACP."
+/>
 
 ---
 
-# 🧠 Mental Model Shift
-
-<div class="grid grid-cols-3 gap-3 mt-4 text-xs">
-
-<div class="space-y-2">
-<div class="font-bold text-green-400 text-sm mb-2">✅ Move Toward</div>
-<div class="p-2 bg-green-900/20 rounded-lg border border-green-500/30">
-<strong>Protocol-First</strong><br/>Standard interface eliminates per-editor maintenance
-</div>
-<div class="p-2 bg-green-900/20 rounded-lg border border-green-500/30">
-<strong>Streaming Collaboration</strong><br/>Real-time responses, inline permission requests
-</div>
-<div class="p-2 bg-green-900/20 rounded-lg border border-green-500/30">
-<strong>Session-Based Context</strong><br/>Accumulates understanding across prompts
-</div>
-<div class="p-2 bg-green-900/20 rounded-lg border border-green-500/30">
-<strong>Permission-Mediated Trust</strong><br/>Enterprise security without losing capability
-</div>
-</div>
-
-<div class="space-y-2">
-<div class="font-bold text-yellow-400 text-sm mb-2">⚠️ Move Away From</div>
-<div class="p-2 bg-yellow-900/20 rounded-lg border border-yellow-500/30">
-<strong>Editor-Specific Plugins</strong><br/>N×M matrix doesn't scale — ACP reduces to N+M
-</div>
-<div class="p-2 bg-yellow-900/20 rounded-lg border border-yellow-500/30">
-<strong>Text-Only CLI Parsing</strong><br/>Use structured JSON-RPC with typed schemas
-</div>
-<div class="p-2 bg-yellow-900/20 rounded-lg border border-yellow-500/30">
-<strong>Single-Editor Lock-In</strong><br/>ACP makes any editor work with any agent
-</div>
-</div>
-
-<div class="space-y-2">
-<div class="font-bold text-red-400 text-sm mb-2">🛑 Move Against</div>
-<div class="p-2 bg-red-900/20 rounded-lg border border-red-500/30">
-<strong>Auto-Approving All Permissions</strong><br/>Defeats the security model
-</div>
-<div class="p-2 bg-red-900/20 rounded-lg border border-red-500/30">
-<strong>Ignoring Session Lifecycle</strong><br/>Resource leaks — always handle teardown
-</div>
-</div>
-
-</div>
+# References
+<ReferencesSlide
+  title="Learn More"
+  :groups='[
+    { title: "📖 Official Documentation", color: "cyan", items: [
+        { href: "https://agentclientprotocol.com/protocol/overview", label: "ACP Protocol Overview", description: "Complete specification" },
+        { href: "https://docs.github.com/en/copilot/reference/acp-server", label: "Copilot CLI ACP Server", description: "Integration reference" },
+        { href: "https://agentclientprotocol.com/get-started/architecture", label: "Four-Layer Architecture", description: "Design deep dive" }
+    ] },
+    { title: "🛠️ Code & Examples", color: "purple", items: [
+        { href: "https://github.com/agentclientprotocol/agent-client-protocol", label: "ACP SDKs & Specs", description: "TypeScript, Python, Rust, Kotlin" },
+        { href: "https://github.com/github/cli-acp-orchestrator", label: "Orchestrator Reference", description: "Multi-agent patterns" }
+    ] }
+  ]'
+/>
 
 ---
 
-# ✅ What You Can Do Today
-
-<div class="grid grid-cols-3 gap-4 mt-4 text-sm">
-
-<div>
-
-### 15 Minutes
-
-<div class="space-y-1.5 text-xs mt-2">
-<div class="p-1.5 bg-green-900/20 rounded border border-green-500/20">
-☑️ Verify CLI: <code>copilot --version</code>
-</div>
-<div class="p-1.5 bg-green-900/20 rounded border border-green-500/20">
-☑️ Start ACP: <code>copilot --acp --stdio</code>
-</div>
-<div class="p-1.5 bg-green-900/20 rounded border border-green-500/20">
-☑️ Read the official ACP server docs
-</div>
-</div>
-
-</div>
-
-<div>
-
-### 1 Hour
-
-<div class="space-y-1.5 text-xs mt-2">
-<div class="p-1.5 bg-purple-900/20 rounded border border-purple-500/20">
-☑️ Install TS SDK
-</div>
-<div class="p-1.5 bg-purple-900/20 rounded border border-purple-500/20">
-☑️ Run the basic client example
-</div>
-<div class="p-1.5 bg-purple-900/20 rounded border border-purple-500/20">
-☑️ Implement a simple permission policy
-</div>
-<div class="p-1.5 bg-purple-900/20 rounded border border-purple-500/20">
-☑️ Try the multi-turn example
-</div>
-</div>
-
-</div>
-
-<div>
-
-### 2-4 Hours
-
-<div class="space-y-1.5 text-xs mt-2">
-<div class="p-1.5 bg-violet-900/20 rounded border border-violet-500/20">
-☑️ Clone & run ACP Agent Orchestrator
-</div>
-<div class="p-1.5 bg-violet-900/20 rounded border border-violet-500/20">
-☑️ Build a custom ACP client
-</div>
-<div class="p-1.5 bg-violet-900/20 rounded border border-violet-500/20">
-☑️ Policy-based permissions for your org
-</div>
-<div class="p-1.5 bg-violet-900/20 rounded border border-violet-500/20">
-☑️ Integrate MCP servers through ACP
-</div>
-</div>
-
-</div>
-
-</div>
-
----
-
-# Related Patterns
-
-<div class="grid grid-cols-2 gap-6 mt-4 text-sm">
-
-<div class="space-y-3">
-
-### Complementary Features
-
-<div class="p-3 bg-violet-900/30 rounded-lg border border-violet-500/30">
-<div class="font-semibold">Copilot CLI</div>
-<div class="text-xs opacity-80 mt-1">Terminal-native AI — ACP makes CLI capabilities available to other editors</div>
-</div>
-
-<div class="p-3 bg-purple-900/30 rounded-lg border border-purple-500/30">
-<div class="font-semibold">MCP Apps</div>
-<div class="text-xs opacity-80 mt-1">Build tools agents access through MCP — ACP sessions configure MCP servers</div>
-</div>
-
-<div class="p-3 bg-indigo-900/30 rounded-lg border border-indigo-500/30">
-<div class="font-semibold">Copilot SDK</div>
-<div class="text-xs opacity-80 mt-1">Lower-level API — ACP provides a higher-level protocol abstraction</div>
-</div>
-
-</div>
-
-<div>
-
-### Decision Flow
-
-<div class="p-3 bg-gray-800/50 rounded-lg font-mono text-xs mt-3">
-<div>Q: What's your actual goal?</div>
-<div>├─ "Use Copilot in the terminal"</div>
-<div>│  → Copilot CLI</div>
-<div>├─ "Build tools agents can use"</div>
-<div>│  → MCP Apps</div>
-<div>├─ "Extend Copilot in VS Code"</div>
-<div>│  → Copilot Hooks</div>
-<div>└─ "Integrate into custom editor/tool"</div>
-<div>   → <strong class="text-violet-400">This talk (ACP)</strong></div>
-</div>
-
-</div>
-
-</div>
-
----
-
-<div class="text-center mb-6">
-<h1 class="text-4xl font-bold bg-gradient-to-r from-violet-400 to-purple-400 bg-clip-text text-transparent">📚 References</h1>
-</div>
-
-<div class="grid grid-cols-2 gap-8 text-sm">
-
-<div class="space-y-4">
-
-<div class="p-4 bg-violet-900/20 rounded-xl border border-violet-500/30">
-<div class="font-semibold text-violet-400 mb-3">📖 Official Docs</div>
-<div class="text-xs space-y-2 opacity-90">
-<div class="flex items-start gap-2"><span class="text-violet-400 mt-0.5">›</span> <span><strong>Copilot CLI ACP Server</strong> — Server modes, integration examples, API</span></div>
-<div class="flex items-start gap-2"><span class="text-violet-400 mt-0.5">›</span> <span><strong>ACP Protocol Overview</strong> — Full spec with message types and lifecycle</span></div>
-<div class="flex items-start gap-2"><span class="text-violet-400 mt-0.5">›</span> <span><strong>ACP Spec Repository</strong> — Protocol schema, SDKs, community libs</span></div>
-</div>
-</div>
-
-<div class="p-4 bg-indigo-900/20 rounded-xl border border-indigo-500/30">
-<div class="font-semibold text-indigo-400 mb-3">🔗 Integrations</div>
-<div class="text-xs space-y-2 opacity-90">
-<div class="flex items-start gap-2"><span class="text-indigo-400 mt-0.5">›</span> <span><strong>Zed ACP Agent</strong> — Native Copilot via ACP</span></div>
-<div class="flex items-start gap-2"><span class="text-indigo-400 mt-0.5">›</span> <span><strong>ACP Agent Orchestrator</strong> — Multi-repo coordination</span></div>
-</div>
-</div>
-
-</div>
-
-<div class="space-y-4">
-
-<div class="p-4 bg-purple-900/20 rounded-xl border border-purple-500/30">
-<div class="font-semibold text-purple-400 mb-3">📋 Blog Posts</div>
-<div class="text-xs space-y-2 opacity-90">
-<div class="flex items-start gap-2"><span class="text-purple-400 mt-0.5">›</span> <span><strong>ACP Support in Copilot CLI — Public Preview</strong> — Launch announcement</span></div>
-<div class="flex items-start gap-2"><span class="text-purple-400 mt-0.5">›</span> <span><strong>Power Agentic Workflows in Your Terminal</strong> — Workflow patterns</span></div>
-</div>
-</div>
-
-<div class="p-4 bg-fuchsia-900/20 rounded-xl border border-fuchsia-500/30">
-<div class="font-semibold text-fuchsia-400 mb-3">🌐 Community</div>
-<div class="text-xs space-y-2 opacity-90">
-<div class="flex items-start gap-2"><span class="text-fuchsia-400 mt-0.5">›</span> <span><strong>agentclientprotocol.com</strong> — Protocol overview and architecture</span></div>
-<div class="flex items-start gap-2"><span class="text-fuchsia-400 mt-0.5">›</span> <span><strong>The LSP for AI Agents</strong> — Industry analysis</span></div>
-</div>
-</div>
-
-</div>
-
-</div>
-
-<div class="mt-4 text-center">
-<span class="px-4 py-1.5 bg-violet-900/30 rounded-full text-xs opacity-70 border border-violet-500/20">docs.github.com/en/copilot/reference/acp-server • agentclientprotocol.com</span>
-</div>
-
----
-layout: center
-class: text-center
----
-
-<div class="text-6xl mb-8">🎉</div>
-
-# Thank You!
-
-<div class="text-2xl mt-6 opacity-80">
-  The Agent Client Protocol for Universal AI Integration
-</div>
-
-<div class="mt-8 text-lg">
-  <strong>Next Steps:</strong> Start an ACP server with <code>copilot --acp --stdio</code>
-</div>
-
-<div class="mt-6 text-sm opacity-70">
-  Questions? Let's discuss universal AI agent integration
-</div>
+# Thank You
+<ThankYouSlide
+  title="Your Tool Just Got an AI Agent"
+  subtitle="Build with ACP. Ship safely. Scale."
+  :cards="[
+    { icon: '⚡', text: 'One flag. 14 lines. Streaming full agent API.' },
+    { icon: '🔒', text: 'Three permission strategies. Production policies.' },
+    { icon: '🤖', text: 'Compose sessions. Coordinate agents. Open standard.' }
+  ]"
+  prompt="Start here: github.com/agentclientprotocol/spec"
+/>

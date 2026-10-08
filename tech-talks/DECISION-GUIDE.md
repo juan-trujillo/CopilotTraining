@@ -1,119 +1,94 @@
+---
+status: active
+updated: 2026-09-16
+---
+
 # Tech Talks Decision Guide
 
-**Not sure which talk to start with?** Find the right content for your role and goals.
+Choose a talk by the decision you need to make. Use a pathway when you need a sequence.
 
----
+## Start Here: First Useful Workflow
 
-## 🧱 The Foundation: Chat + Primitives
+Use this path when you are new to Copilot or introducing it to a team. Each step ends with evidence that makes the next step worthwhile.
 
-Every Copilot journey starts with two essentials:
+1. **Choose the surface** — [Which Copilot Where?](surfaces/) produces a routed task with named context and reviewer.
+2. **Configure shared behavior** — [Copilot Configuration Primitives](copilot-primitives/) builds and verifies instructions, prompts, skills, and agents.
+3. **Make success reusable** — [Agent Dev Loop](agent-dev-loop/) turns one solved task into a validated team capability.
+4. **Delegate bounded work** — [From Issue to Pull Request](copilot-web/) produces a draft pull request with acceptance evidence.
+5. **Verify before merge** — [PR Trust Stack](pr-trust-stack/) records accepted and rejected findings, deterministic checks, and the final human decision.
 
-| Step | Talk | Why it matters |
-|------|------|----------------|
-| **1. Learn to talk to Copilot** | [Copilot Chat](copilot-chat/) | Master context mechanisms — #file, @workspace, #codebase |
-| **2. Teach Copilot your codebase** | [Copilot Primitives](copilot-primitives/) | The 4 configuration primitives (instructions, prompts, skills, agents) that transform Copilot from a generic assistant into a team-specific development partner |
+Stop at any step when its evidence is missing. Repair that boundary before adding more autonomy.
 
-> 💡 **Everything else builds on these two.** Chat teaches you how to collaborate with Copilot. Primitives teaches you how to configure Copilot to work the way your team needs. Start here regardless of role.
+## Choose and Configure
 
----
+**Question:** What context does Copilot need, where should the work run, and how should the experience be configured?
 
-## 🚀 Quick Start (After the Foundation)
+| Decision | Talk | Evidence you inspect or produce |
+|---|---|---|
+| Choose the right Copilot surface | [Which Copilot Where?](surfaces/) | A routed task with named context, artifact, and reviewer |
+| Encode and verify shared Copilot behavior | [Copilot Configuration Primitives](copilot-primitives/) | Working instruction, prompt, skill, or agent plus delivery and acceptance evidence |
+| Work where shell and runtime state are decisive | [Copilot CLI](copilot-cli/) | A terminal-native result with observable command evidence |
 
-| I want to... | Go to |
-|--------------|-------|
-| Understand how Copilot works under the hood | [Copilot Chat Internals](copilot-chat-internals/) — debug view, system prompts |
-| Use Copilot in the terminal | [Copilot CLI](copilot-cli/) — natural language to shell, Plan Mode |
-| Use Copilot in the browser | [Copilot Web](copilot-web/) — cross-device, PR reviews, issue triage |
-| Integrate Copilot into any editor or tool | [Copilot ACP](copilot-acp/) — Agent Client Protocol for universal AI integration |
-| Embed Copilot in my own apps | [Copilot SDK](copilot-sdk/) — programmatic agent integration |
-| Get quick wins with agents | [Agentic Journey](agentic-journey/) — issue-to-PR automation in hours |
-| Implement agent safety controls | [Terminal Sandboxing](terminal-sandboxing/) + [Copilot Hooks](copilot-hooks/) |
+Release-specific VS Code changes are routed through [rolling release briefs](../.github/content-routing/release-briefs/) to their durable owners. The current [VS Code Latest](vscode-latest/) talk remains active until its approved retirement checklist is complete.
 
----
+## Delegate and Coordinate
 
-## 🗺️ By Role
+**Question:** What work can be delegated, how should it be decomposed, and how much autonomy fits?
 
-All paths start with [Copilot Chat](copilot-chat/) → [Copilot Primitives](copilot-primitives/), then branch:
+| Decision | Talk | Evidence you inspect or produce |
+|---|---|---|
+| Turn solved work into reusable capability | [Agent Dev Loop](agent-dev-loop/) | Repository configuration and a validated plan |
+| Delegate one bounded repository task | [From Issue to Pull Request](copilot-web/) | A draft pull request with an evidence bundle |
+| Split, steer, and integrate multi-agent work | [Multi-Agent Coordination](multi-agent-coordination/) | A coordination contract, isolated evidence, and a named integration owner |
+| Build loops that stop safely | [Loop Engineering](loopy-agents/) | Progress state, verification signal, limit, and escalation path |
+| Automate recurring judgments across a lifecycle | [Agentic Lifecycle Orchestration](agentic-lifecycle/) | Compiled workflow candidates with explicit handoffs, safe outputs, and approval gates |
 
-| Role | After the foundation, continue with... |
-|------|----------------------------------------|
-| **Individual Developer** | [Copilot CLI](copilot-cli/) → [Multi-Step Tasks](multi-step-tasks/) → [Parallel Execution](parallel-execution/) |
-| **Team / Tech Lead** | [Agent Teams](agent-teams/) → [Chat Internals](copilot-chat-internals/) → [Agentic SDLC](agentic-sdlc/) (Part 2) → [Enterprise Patterns](enterprise-patterns/) |
-| **Security / Compliance** | [Terminal Sandboxing](terminal-sandboxing/) → [Copilot Hooks](copilot-hooks/) → [Agentic SDLC](agentic-sdlc/) (Part 3) → [Enterprise Patterns](enterprise-patterns/) |
-| **Platform Engineer** | [Agentic SDLC](agentic-sdlc/) (all parts) → [Agent Teams](agent-teams/) → [Parallel Execution](parallel-execution/) → [Copilot ACP](copilot-acp/) → [Copilot SDK](copilot-sdk/) |
-| **Executive / Leadership** | See [exec-talks/](../exec-talks/) — [Agentic Delivery](../exec-talks/agentic-delivery/), [Agentic Economics](../exec-talks/agentic-economics/), [Agentic Labor](../exec-talks/agentic-labor/) |
+## Verify and Govern
 
----
+**Question:** What evidence permits work to proceed, who may approve it, and where must execution stop?
 
-## 🧭 Learning Paths
+| Decision | Talk | Evidence you inspect or produce |
+|---|---|---|
+| Govern AI findings and deterministic merge evidence | [PR Trust Stack](pr-trust-stack/) | Dispositioned findings, evaluated checks, and a named merge authority |
+| Allow or deny agent actions | [Copilot Hooks](copilot-hooks/) | An execution boundary with an auditable allow, deny, or escalation result |
+| Manufacture trustworthy delivery evidence | [Agentic SDLC](agentic-sdlc/) | Repository and CI signals that gate or return agent work |
+| Standardize governance across teams | [Enterprise Patterns](enterprise-patterns/) | An operating model with owners, policy, rollout, and success measures |
 
-### Path 0 — Quick Wins with Agents
-> [Chat](copilot-chat/) → [Primitives](copilot-primitives/) → [Agentic Journey](agentic-journey/) Phases 1-4 → Evaluate → [Agentic SDLC](agentic-sdlc/) when hitting limits
+## Extend and Embed
 
-### Path 1 — Individual Productivity
-> [Chat](copilot-chat/) → [Primitives](copilot-primitives/) → [Copilot CLI](copilot-cli/) → [Multi-Step Tasks](multi-step-tasks/) → [Parallel Execution](parallel-execution/)
+**Question:** When should Copilot gain a new capability, interface, protocol boundary, or domain context?
 
-### Path 2 — Team Orchestration
-> [Chat](copilot-chat/) → [Primitives](copilot-primitives/) → [Multi-Step Tasks](multi-step-tasks/) → [Agent Teams](agent-teams/) → [Chat Internals](copilot-chat-internals/)
+| Decision | Talk | Evidence you inspect or produce |
+|---|---|---|
+| Package and distribute team capabilities | [Plugins and APM](copilot-plugins/) | A versioned manifest and lockfile change |
+| Act on live Azure state | [Azure MCP and Skills](copilot-azure-mcp/) | A least-privilege action with before-and-after evidence |
+| Own the agent runtime in an application | [Copilot SDK](copilot-sdk/) | An application-owned trigger, tools, identity, and runtime contract |
+| Connect an external client | [ACP](copilot-acp/) | A client session with explicit permission boundaries |
+| Return interactive UI through MCP | [MCP Apps](mcp-apps/) | A component response with a validated callback loop |
+| Add governed organizational knowledge | [Copilot with Foundry](copilot-with-foundry/) | A sourced organizational answer beyond repository context |
 
-### Path 3 — Enterprise Governance
-> [Chat](copilot-chat/) → [Primitives](copilot-primitives/) → [Terminal Sandboxing](terminal-sandboxing/) → [Copilot Hooks](copilot-hooks/) → [Agentic SDLC](agentic-sdlc/) (Part 3) → [Enterprise Patterns](enterprise-patterns/)
+## Learning Paths
 
-### Path 4 — Platform Engineering
-> [Chat](copilot-chat/) → [Primitives](copilot-primitives/) → [Agentic SDLC](agentic-sdlc/) (all parts) → [Agent Teams](agent-teams/) → [Parallel Execution](parallel-execution/) → [Copilot ACP](copilot-acp/) → [Copilot SDK](copilot-sdk/)
+### Individual Developer
 
----
+[Which Copilot Where?](surfaces/) → [Copilot Configuration Primitives](copilot-primitives/) → [Agent Dev Loop](agent-dev-loop/) → choose [Copilot CLI](copilot-cli/) or [From Issue to Pull Request](copilot-web/) → verify the resulting evidence
 
-## 📊 Comparison Tables
+### Team Delegation
 
-### Copilot Interfaces
+[Which Copilot Where?](surfaces/) → [Agent Dev Loop](agent-dev-loop/) → [From Issue to Pull Request](copilot-web/) → [Multi-Agent Coordination](multi-agent-coordination/) → [Loop Engineering](loopy-agents/)
 
-| Interface | Best For | Talk |
-|-----------|----------|------|
-| **VS Code Chat** | Interactive development, complex tasks, exploration | [Copilot Chat](copilot-chat/) |
-| **Terminal (CLI)** | DevOps automation, Plan Mode, scripting | [Copilot CLI](copilot-cli/) |
-| **Browser/Mobile** | Cross-device, lightweight queries, web workflows | [Copilot Web](copilot-web/) |
-| **Any Editor (ACP)** | Universal agent access, custom tools, multi-agent systems | [Copilot ACP](copilot-acp/) |
-| **Programmatic (SDK)** | Custom apps, embedded agents, specialized tools | [Copilot SDK](copilot-sdk/) |
+### Repository Automation
 
-### Agent Patterns
+[Which Copilot Where?](surfaces/) → [Agentic Lifecycle Orchestration](agentic-lifecycle/) → [PR Trust Stack](pr-trust-stack/) → [Copilot Hooks](copilot-hooks/) → [Agentic SDLC](agentic-sdlc/)
 
-| Pattern | When to Use | Talk |
-|---------|-------------|------|
-| **Multi-Step Tasks** | Phased work needing context isolation (research → analysis → implementation) | [Multi-Step Tasks](multi-step-tasks/) |
-| **Agent Teams** | Specialized roles working together (planner / coder / reviewer) | [Agent Teams](agent-teams/) |
-| **Parallel Execution** | Independent features running simultaneously on different branches | [Parallel Execution](parallel-execution/) |
+### Platform and Governance
 
-### Governance Controls
+[Enterprise Patterns](enterprise-patterns/) → [Plugins and APM](copilot-plugins/) → [Copilot Hooks](copilot-hooks/) → [PR Trust Stack](pr-trust-stack/) → [Agentic SDLC](agentic-sdlc/)
 
-| Tool | Controls | Talk |
-|------|----------|------|
-| **Terminal Sandboxing** | _What_ agents can access — network, filesystem restrictions | [Terminal Sandboxing](terminal-sandboxing/) |
-| **Copilot Hooks** | _When_ agents act — lifecycle gates, approval policies, audit trails | [Copilot Hooks](copilot-hooks/) |
+### Product and Tool Builders
 
-💡 **Defense in depth:** Use both together — sandboxing for baseline safety, hooks for policy enforcement.
+[Which Copilot Where?](surfaces/) → [Copilot SDK](copilot-sdk/) → choose [ACP](copilot-acp/), [MCP Apps](mcp-apps/), or [Azure MCP and Skills](copilot-azure-mcp/) → [Copilot with Foundry](copilot-with-foundry/)
 
-### Agentic Transformation Stages
+## Selection Rule
 
-| Stage | Scope | Talk | Expected ROI |
-|-------|-------|------|-------------|
-| **Try agents** | Issue triage automation | [Agentic Journey](agentic-journey/) (Phase 1) | 6× faster triage |
-| **Automate workflows** | Full issue-to-PR lifecycle | [Agentic Journey](agentic-journey/) (Phases 1-4) | 10-20× throughput |
-| **Transform SDLC** | Repos, PRs, CI/CD for AI velocity | [Agentic SDLC](agentic-sdlc/) | 100× at scale |
-| **Scale organization** | Enterprise-wide adoption | [Enterprise Patterns](enterprise-patterns/) | Measurable org ROI |
-| **Need executive buy-in?** | Business case first | [Agentic Labor](../exec-talks/agentic-labor/) | — |
-
----
-
-## ❓ Common Questions
-
-| Question | Answer |
-|----------|--------|
-| "I just want to be more productive" | [Copilot Chat](copilot-chat/) → [Copilot Primitives](copilot-primitives/) → [Copilot CLI](copilot-cli/) |
-| "How do I make Copilot understand my codebase?" | [Copilot Primitives](copilot-primitives/) — instructions, prompts, skills, agents |
-| "I need agents to work together" | [Multi-Step Tasks](multi-step-tasks/) (phases) or [Agent Teams](agent-teams/) (roles) |
-| "I'm worried about security" | [Terminal Sandboxing](terminal-sandboxing/) + [Copilot Hooks](copilot-hooks/) |
-| "Agents are shipping too fast and things break" | [Agentic SDLC](agentic-sdlc/) (all three parts) |
-| "I want cross-session memory" | [Copilot Memory](copilot-memory/) |
-| "I want rich UI in chat responses" | [MCP Apps](mcp-apps/) |
-| "I want Copilot in a non-VS Code editor" | [Copilot ACP](copilot-acp/) — Agent Client Protocol for universal editor integration |
+Choose a separate talk only when it teaches a distinct decision, produces distinct evidence, names a distinct boundary, and supports at least 25 focused minutes. Otherwise use a clinic, case study, release brief, reference, or pathway.

@@ -36,82 +36,64 @@ Use this rubric during content creation. If any category is 🔴 or 🟡, revise
 
 ---
 
-## 📽️ Slide Generation Mapping
+## Reader-First README Contract
 
-This template is structured to generate Slidev slides automatically. Understanding the mapping helps you write slide-friendly content.
+This template produces the **canonical, human-readable tech talk**. Keep visible content focused on practitioners reading the README. Slides are generated later as a separate artifact.
 
-### Slide Sequence (Generated Automatically)
+### What belongs in the README
 
-1. **Title/Logo Slide** ← Generated from H1 title + subtitle
-2. **Question/Objective Slide** ← "The Question This Talk Answers" section
-3. **Table of Contents Slide** ← Auto-generated from major sections (marked below with 🎬)
-4. **Problem Slide** ← "The Problem" section
-5. **Solution Overview** ← "The Solution" section
-6. **Key Artifacts** ← "Key Artifacts" section (navigation/inventory)
-7. **🧠 The Shift (Preview)** ← Core Insight one-liner only. Plants the thesis before evidence.
-8. **When to Use Decision Tree** ← "When to Use This Pattern" section
-9. **[Major Section 1] Divider** ← First 🎬 marked section (for TOC jumping)
-10. **[Major Section 1 Content]** ← 2-4 slides from deep-dive content
-11. **[Major Section 2] Divider** ← Second 🎬 marked section
-12. **[Major Section 2 Content]** ← 2-4 slides from deep-dive content
-13. **Use Cases** ← "Real-World Use Cases" section (1-2 slides)
-14. **🧠 Mental Model Shift (Full)** ← Full Move-Toward/Away/Against grid. Reinforces the thesis with evidence.
-15. **Actionable Outcomes** ← "What You Can Do Today" checklist
-16. **Related Patterns** ← "Related Patterns" section
-17. **📖 References** ← "📖 References" section (REQUIRED)
-18. **End Slide** ← Auto-generated
+- The question this talk answers
+- The opportunity, mechanics, artifacts, decision criteria, and references
+- 3-6 major deep-dive sections with concrete examples
+- A clear mental model with a standalone core insight
 
-### Mental Model: Thesis → Evidence → Reinforcement
+### Coverage and sequence
 
-The mental model appears **twice** in every presentation:
+Treat the sections below as coverage prompts. Choose, combine, and order them around the approved narrative arc so that each section advances the thesis, proves it through an artifact, exposes a boundary, or enables transfer. Do not preserve a template heading as a standalone section when its content serves the reader better inside another section.
 
-| Position | Slide | Content | Purpose |
-|----------|-------|---------|---------|
-| Early (#7) | **🧠 The Shift** | Core Insight one-liner + simple from/to visual | Plant the lens the audience watches through |
-| Late (#14) | **🧠 Mental Model Shift** | Full ✅ Move Toward / ⚠️ Away From / 🛑 Against grid | Reinforce with authority after seeing the evidence |
+### What does not belong in the README
 
-This mirrors classic rhetoric: state your thesis early, prove it in the body, then restate it with weight.
+- Slide sequence tables
+- Speaker notes or presentation choreography
+- Visible "this becomes a slide" explanations
+- Any section whose primary audience is a generator rather than a human reader
 
-### Major Sections (TOC Entries)
+### Invisible structure hints
 
-Mark major sections that should appear in the TOC with 🎬 marker in a comment:
+If helpful, mark major sections with a comment before the H2 heading:
 
 ```markdown
 <!-- 🎬 MAJOR SECTION: [Short Name for TOC Card] -->
 ## [Full Section Heading]
 ```
 
-**Guidelines:**
-- Use 3-6 major sections (fits 2×2 or 2×3 grid in TOC)
-- Each major section = 2-5 content slides
-- Major sections should be "deep dive" technical content, not front matter
-- Examples: "Core Architecture", "Implementation Patterns", "Advanced Features"
+These comments stay invisible to readers while giving downstream tooling lightweight structural hints.
 
 ---
 
-## The Problem
+## The Opportunity
 
-### Key Points
+### What's Now Possible
 
-- **[Issue 1]**
-  [1 sentence describing the challenge or limitation]
+- **[Capability 1]**
+  [1 sentence describing what teams can now do]
 
-- **[Issue 2]**
-  [1 sentence describing the challenge or limitation]
+- **[Capability 2]**
+  [1 sentence describing what teams can now do]
 
-- **[Issue 3]**
-  [1 sentence describing the challenge or limitation]
+- **[Capability 3]**
+  [1 sentence describing what teams can now do]
 
-- **[Issue 4]**
-  [1 sentence describing the challenge or limitation]
+- **[Capability 4]**
+  [1 sentence describing what teams can now do]
 
-### Narrative
+### The Emerging Practice
 
-[2-3 paragraphs telling the story of the problem. Set the scene: who experiences this, what makes it frustrating, what's the cost of not solving it. Paint a picture that makes readers think "yes, that's exactly my situation." Include specific examples, time costs, or failure scenarios.]
+[2-3 paragraphs illuminating the new approach. Focus on curiosity: what does this unlock? Who is already exploring this? What becomes easier or newly feasible? Paint a picture of possibility that makes readers think "I want to try that." Include specific examples of what's achievable.]
 
 ---
 
-## The Solution: [Feature Name]
+## How It Works: [Feature Name]
 
 ### What It Does
 
@@ -135,7 +117,7 @@ Mark major sections that should appear in the TOC with 🎬 marker in a comment:
 
 ---
 
-## �️ Visual Assets
+## Visual Assets
 
 *Optional but highly recommended: Include diagrams, screenshots, and visual aids from source documentation*
 
@@ -183,7 +165,7 @@ tech-talks/
 
 ---
 
-## �📦 Key Artifacts
+## Key Artifacts
 
 **Every tech talk must include working artifacts.** These are the actual files, configurations, or code samples that demonstrate the feature in action.
 
@@ -213,34 +195,34 @@ tech-talks/
 
 ## 🎯 Mental Model Shift
 
-> **The Core Insight:** From [old way of thinking] to [new way of thinking]
+> **The Core Insight:** [One-liner capturing the new mental model — what becomes natural with this approach]
 
-*This Core Insight line is used twice in slides: once as an early preview ("The Shift" slide) to plant the thesis, and again here as the anchor for the full reinforcement slide near the end. Write it to work standalone as a compelling one-liner.*
+*Write this as a compelling standalone thesis for the README. It should make sense even if no slides are ever generated.*
 
 ### Move Toward (Embrace These Patterns)
 
-These are the practices and patterns this feature enables. Start adopting these approaches.
+These are the practices and patterns this feature enables. Start experimenting with these approaches.
 
-- ✅ **[New Pattern 1]**: [Why this is better now] → [Specific benefit or outcome]
-- ✅ **[New Pattern 2]**: [Why this is better now] → [Specific benefit or outcome]
-- ✅ **[New Pattern 3]**: [Why this is better now] → [Specific benefit or outcome]
+- ✅ **[Pattern 1]**: [What this unlocks] → [Specific benefit or outcome]
+- ✅ **[Pattern 2]**: [What this unlocks] → [Specific benefit or outcome]
+- ✅ **[Pattern 3]**: [What this unlocks] → [Specific benefit or outcome]
 
 ### Move Away From (Retire These Habits)
 
-These patterns worked before but don't scale with this feature. Gradually phase them out.
+As this approach matures, some familiar patterns naturally evolve. These aren't failures — they're stepping stones.
 
-- ⚠️ **[Old Pattern 1]**: [Why it doesn't scale anymore] → [What happens if you keep doing it]
-- ⚠️ **[Old Pattern 2]**: [Why it doesn't scale anymore] → [What happens if you keep doing it]
-- ⚠️ **[Old Pattern 3]**: [Why it doesn't scale anymore] → [What happens if you keep doing it]
+- 🔄 **[Evolving Pattern 1]**: [How this naturally changes] → [What you might try instead]
+- 🔄 **[Evolving Pattern 2]**: [How this naturally changes] → [What you might try instead]
+- 🔄 **[Evolving Pattern 3]**: [How this naturally changes] → [What you might try instead]
 
-### Move Against (Active Resistance Required)
+### Move Against (Active Resistance)
 
 These are anti-patterns that will cause problems. Actively avoid or correct them.
 
 - 🛑 **[Anti-pattern 1]**: [Why this is dangerous or counterproductive] → [Specific risk, cost, or failure mode]
 - 🛑 **[Anti-pattern 2]**: [Why this is dangerous or counterproductive] → [Specific risk, cost, or failure mode]
 
-> **Example Transformation:** [Concrete before/after example showing the mental model shift in action. E.g., "Before: Manual log parsing after deployment. After: Proactive analysis during the deploy itself with AI-suggested fixes."]
+> **What This Looks Like:** [Concrete example showing the mental model in action. Focus on the new workflow, not contrast with the old. E.g., "A developer describes a new API endpoint in an issue, assigns it to Copilot, and reviews the complete PR with implementation, tests, and docs 30 minutes later."]
 
 ---
 
@@ -286,7 +268,7 @@ Q: [Top-level question about use case fit]
 <!-- 🎬 MAJOR SECTION: [Short Name for TOC] -->
 ## [Major Section 1: Deep Dive Topic]
 
-[This section provides technical depth on a specific aspect of the feature. Structure it with clear subheadings, code examples, and explanations. This will become 2-4 slides.]
+[This section provides technical depth on a specific aspect of the feature. Use clear subheadings, concrete examples, and explanations that work well in a long-form technical write-up.]
 
 ### [Subsection 1.1]
 
@@ -330,7 +312,7 @@ Q: [Top-level question about use case fit]
 <!-- 🎬 MAJOR SECTION: [Short Name for TOC] -->
 ## [Major Section 3: Deep Dive Topic]
 
-[Third major section if needed. Generally aim for 3-5 major sections for good TOC balance.]
+[Third major section if needed. Generally aim for 3-5 major sections for a balanced deep dive.]
 
 ---
 
@@ -345,91 +327,66 @@ Q: [Top-level question about use case fit]
 
 ### Use Case 1: [Descriptive Title]
 
-**The Problem:** [Specific scenario with pain points - 2-3 sentences]
+**The Scenario:** [Specific situation where this shines - 2-3 sentences]
 
-**The Solution:** [How this feature addresses it - 2-3 sentences]
+**How It Works:** [How this feature enables it - 2-3 sentences]
 
-**Implementation:**
+**Example:**
 ```[language]
 [Code example or command sequence]
 ```
 
-**Outcome:** [Measurable improvement - e.g., "3 hours → 15 minutes" or "8 attempts → 2 attempts"]
+**What You Get:** [Concrete outcome - e.g., "Complete implementation in 15 minutes" or "Consistent results in 2 iterations"]
 
 ---
 
 ### Use Case 2: [Descriptive Title]
 
-**The Problem:** [Specific scenario]
+**The Scenario:** [Specific situation]
 
-**The Solution:** [How this feature addresses it]
+**How It Works:** [How this feature enables it]
 
-**Implementation:**
+**Example:**
 ```[language]
 [Code example]
 ```
 
-**Outcome:** [Measurable improvement]
+**What You Get:** [Concrete outcome]
 
 ---
 
-### Use Case 3: [Descriptive Title]
+## What You Can Do Today
 
-[Follow same pattern. Aim for 3-5 use cases total.]
+### 15 Minutes — Prove the Core Behavior
 
----
+- **Try:** [Small, low-risk action using the primary artifact]
+- **Expected signal:** [Specific output, file change, or behavior to observe]
+- **Validate:** [Command or inspection that confirms the result]
 
-## ✅ What You Can Do Today
+### 1 Hour — Integrate It into Real Work
 
-**Immediate Actions (15 minutes):**
-- [ ] [First quick action - e.g., "Install the CLI: \`npm install -g @github/copilot\`"]
-- [ ] [Second quick action - e.g., "Try interactive mode: \`copilot\` and ask about your project"]
-- [ ] [Third quick action - e.g., "Review the [cheat sheet](link) for common commands"]
+- **Build:** [Workflow integration using realistic project context]
+- **Expected signal:** [Observable improvement or decision evidence]
+- **Validate:** [Test, comparison, or review that confirms the outcome]
 
-**Short-Term Implementation (1 hour):**
-- [ ] [Action requiring more setup - e.g., "Set up Plan Mode in your primary project"]
-- [ ] [Integration action - e.g., "Add to your CI/CD pipeline following [this guide](link)"]
-- [ ] [Practice action - e.g., "Use [feature] for your next [specific task]"]
+### 2–4 Hours — Run a Bounded Pilot
 
-**Advanced Exploration (2-4 hours):**
-- [ ] [Complex implementation - e.g., "Build a custom agent using [this reference](link)"]
-- [ ] [Optimization - e.g., "Configure advanced settings for [specific workflow]"]
-- [ ] [Extension - e.g., "Integrate with [related system] using [pattern]"]
+- **Pilot:** [Team or production-like trial with a clear scope]
+- **Success measure:** [Metric or acceptance criterion to collect]
+- **Boundary:** [Condition that pauses, rolls back, or redirects the pattern]
 
-**Next Steps After Completion:**
-1. ✅ Complete the immediate actions above
-2. 📖 Review related talk: [Link to complementary tech-talk]
-3. 💬 Share your experience: [Link to discussion or feedback channel]
-4. 🚀 Explore advanced pattern: [Link to next-level content]
+### Apply It to Your Work
+
+- **Candidate task:** [A real repository or workflow decision this model can improve]
+- **Decisive context:** [The files, runtime state, policy, or domain knowledge the task requires]
+- **Delegation and authority:** [What Copilot may do, what remains human-led, and who approves the result]
+- **Evidence:** [The observable signal that determines whether to keep, adjust, or stop the pattern]
 
 ---
 
-## Related Patterns
+## References
 
-### Complementary Features
-
-- **[Related Tech-Talk 1](../folder/)** — [When to use this alongside current feature]
-- **[Related Tech-Talk 2](../folder/)** — [When this solves a different but adjacent problem]
-- **[Related Tech-Talk 3](../folder/)** — [When you need both features together]
-
-### Decision Flow
-
-**If this talk doesn't fit your needs:**
-
-```
-Q: What's your actual goal?
-├─ [Goal A] → See: [Other Tech-Talk](link)
-├─ [Goal B] → See: [Other Tech-Talk](link)
-└─ [Goal C] → Combine: [This talk] + [Other talk](link)
-```
-
-See [DECISION-GUIDE.md](../DECISION-GUIDE.md) for complete navigation help.
-
----
-
-## � References
-
-Numbered references cited inline throughout the content using `[^n]` footnote syntax. These appear as footnotes on slides and as a dedicated References slide.
+Numbered references cited inline throughout the content using `[^n]` footnote syntax. Collect them here so readers can trace the sources behind major claims, examples, and architecture details.
 
 ### Official Documentation
 
@@ -491,28 +448,26 @@ Before marking this talk as complete:
 - [ ] **Move-Toward/Away/Against is concrete**: Specific patterns, not vague advice
 - [ ] **Use cases have outcomes**: Each shows measurable before/after
 - [ ] **Actionable items are time-bounded**: Clear 15min/1hr/2-4hr divisions
+- [ ] **Actions are observable**: Each action names an expected signal and validation method; the pilot includes a boundary
+- [ ] **Transfer is explicit**: Readers can apply the model to a real task with decisive context, authority, and evidence
 - [ ] **Decision tree prevents misuse**: Clear "when NOT to use" guidance
 - [ ] **Official documentation linked**: Minimum 2 official doc references in "📖 References" section
 - [ ] **References throughout**: 8-15 numbered `[^n]` references with inline citations
 - [ ] **Links are current**: All documentation and related talk links work
 - [ ] **Code examples run**: All code has been tested and works
-- [ ] **Slides will generate cleanly**: Content follows structure for slide-generator.agent
+### Structure-Friendly Writing Tips
 
-### Slide-Friendly Writing Tips
-
-- **Keep bullet points to 5 or fewer** per section (slides will split if more)
 - **Use comparison tables** instead of long paragraphs where possible
 - **Break long code examples** into separate subsections
-- **Mark major sections** with 🎬 comment so TOC generates correctly
-- **Front-load key points** in each section (becomes slide title/summary)
+- **Mark major sections** with 🎬 comments when it helps clarify the deep-dive structure
+- **Front-load key points** in each section so the main idea is obvious on first read
 - **Use concrete metrics** in outcomes ("3x faster" not "much faster")
 
 ### Voice and Tone
 
-- **Respectful of audience expertise**: Assume readers are professionals
-- **Practical over theoretical**: Focus on "here's how" not "here's why it's interesting"
-- **Honest about tradeoffs**: Acknowledge limitations and alternative approaches
-- **Directive without being prescriptive**: Guide decisions, don't mandate solutions
+Apply the canonical **Universal Voice and Prose Contract** and **Content Fitness Gate** in `AGENTS.md`.
+
+For practitioner tech talks, keep the register expert-to-expert and technical. Use concrete implementation examples, explain how and why the mechanism works, and give tradeoffs enough specificity to support a real engineering decision.
 
 ---
 
@@ -522,23 +477,23 @@ Before marking this talk as complete:
 
 ### Example: Mental Model Shift Section
 
-> **The Core Insight:** From "AI assists me with coding" to "AI autonomously completes work while I govern outcomes"
+> **The Core Insight:** AI agents complete work autonomously while you govern outcomes
 
 #### Move Toward (Embrace These Patterns)
 
-- ✅ **Delegation Over Instruction**: Give agents goals and constraints, let them determine approach → Agents find solutions you wouldn't have considered
-- ✅ **Outcome-Based Review**: Judge results by correctness and quality, not by how it was built → Faster iteration cycles, less micromanagement
+- ✅ **Delegation Over Instruction**: Give agents goals and constraints, let them determine approach → Agents find solutions you might not have considered
+- ✅ **Outcome-Based Review**: Judge results by correctness and quality, not by how it was built → Faster iteration cycles, more focus on what matters
 - ✅ **Parallel Workflows**: Run multiple agents on different branches simultaneously → 5-10x throughput on independent features
 
 #### Move Away From (Retire These Habits)
 
-- ⚠️ **Step-by-Step Prompting**: Telling AI exactly what to do at each step → Negates AI's reasoning abilities, wastes your time
-- ⚠️ **Single-File Focus**: Only giving AI context about the immediate file → Misses architectural patterns, creates inconsistent code
-- ⚠️ **Sequential Execution**: Waiting for one task to finish before starting next → Leaves agents idle, extends delivery timelines
+- 🔄 **Step-by-Step Prompting → Goal-Based Prompting**: As you build trust, try describing outcomes rather than steps → Let agents leverage their reasoning
+- 🔄 **Single-File Focus → Repository-Wide Context**: Experiment with giving broader context → Agents produce more architecturally consistent code
+- 🔄 **Sequential Execution → Parallel Dispatch**: When comfortable, try running multiple agents on independent work → Discover new throughput
 
-#### Move Against (Active Resistance Required)
+### Move Against (Active Resistance)
 
-- 🛑 **"AI Can't Be Trusted" Mindset**: Assuming AI output is always wrong until proven right → Creates review bottlenecks, defeats purpose of automation
-- 🛑 **No Guardrails**: Running agents with full system access without sandboxing → Security incidents, accidental deletions, configuration overwrites
+- 🛡️ **Trust builds incrementally**: Start with low-risk tasks, expand scope as you validate results → Build confidence through observation
+- 🛡️ **Sandboxing matters**: Agents work best with clear boundaries and scoped permissions → Security and confidence go together
 
-> **Example Transformation:** Before: Developer spends 3 hours writing a new API endpoint, 2 hours writing tests, 1 hour updating docs. After: Developer writes issue describing endpoint requirements, assigns to Copilot agent, reviews PR 30 minutes later with implementation + tests + docs complete.
+> **What This Looks Like:** A developer describes a new API endpoint in an issue, assigns it to a Copilot agent, and reviews the complete PR with implementation, tests, and docs 30 minutes later.

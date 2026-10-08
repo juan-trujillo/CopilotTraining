@@ -1,0 +1,39 @@
+<svg width="1600" height="900" viewBox="0 0 1600 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg3" x1="0" y1="0" x2="1600" y2="900" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#08111D"/>
+      <stop offset="1" stop-color="#111827"/>
+    </linearGradient>
+  </defs>
+  <rect width="1600" height="900" rx="32" fill="url(#bg3)"/>
+  <text x="800" y="96" text-anchor="middle" fill="#F8FAFC" font-family="Segoe UI, Arial, sans-serif" font-size="40" font-weight="700">ROI Story Shift</text>
+  <text x="800" y="138" text-anchor="middle" fill="#94A3B8" font-family="Segoe UI, Arial, sans-serif" font-size="22">From manual proof construction to a guided calculator-led conversation</text>
+
+  <rect x="90" y="196" width="620" height="586" rx="28" fill="#111827" stroke="#7F1D1D" stroke-width="2"/>
+  <text x="130" y="250" fill="#FCA5A5" font-family="Segoe UI, Arial, sans-serif" font-size="30" font-weight="700">Old ROI Path</text>
+  <text x="130" y="292" fill="#CBD5E1" font-family="Segoe UI, Arial, sans-serif" font-size="22">Lead the audience through mechanics first</text>
+  <rect x="130" y="334" width="540" height="84" rx="18" fill="#3F1D1D"/>
+  <text x="160" y="385" fill="#FEE2E2" font-family="Segoe UI, Arial, sans-serif" font-size="25">1. Explain warehouse queries and exports</text>
+  <rect x="130" y="442" width="540" height="84" rx="18" fill="#3F1D1D"/>
+  <text x="160" y="493" fill="#FEE2E2" font-family="Segoe UI, Arial, sans-serif" font-size="25">2. Walk through ROI formulas by hand</text>
+  <rect x="130" y="550" width="540" height="84" rx="18" fill="#3F1D1D"/>
+  <text x="160" y="601" fill="#FEE2E2" font-family="Segoe UI, Arial, sans-serif" font-size="25">3. Translate numbers into a narrative later</text>
+  <rect x="130" y="658" width="540" height="84" rx="18" fill="#3F1D1D"/>
+  <text x="160" y="709" fill="#FEE2E2" font-family="Segoe UI, Arial, sans-serif" font-size="25">4. YAML and SQL feel like the product story</text>
+
+  <rect x="890" y="196" width="620" height="586" rx="28" fill="#0F172A" stroke="#155E75" stroke-width="2"/>
+  <text x="930" y="250" fill="#67E8F9" font-family="Segoe UI, Arial, sans-serif" font-size="30" font-weight="700">Calculator-Led Path</text>
+  <text x="930" y="292" fill="#CBD5E1" font-family="Segoe UI, Arial, sans-serif" font-size="22">Lead with the customer conversation and reusable output</text>
+  <rect x="930" y="334" width="540" height="84" rx="18" fill="#164E63"/>
+  <text x="960" y="385" fill="#ECFEFF" font-family="Segoe UI, Arial, sans-serif" font-size="25">1. Bring in real PR analytics and assumptions</text>
+  <rect x="930" y="442" width="540" height="84" rx="18" fill="#164E63"/>
+  <text x="960" y="493" fill="#ECFEFF" font-family="Segoe UI, Arial, sans-serif" font-size="25">2. Show savings and expansion upside instantly</text>
+  <rect x="930" y="550" width="540" height="84" rx="18" fill="#164E63"/>
+  <text x="960" y="601" fill="#ECFEFF" font-family="Segoe UI, Arial, sans-serif" font-size="25">3. Reuse the executive summary with stakeholders</text>
+  <rect x="930" y="658" width="540" height="84" rx="18" fill="#164E63"/>
+  <text x="960" y="709" fill="#ECFEFF" font-family="Segoe UI, Arial, sans-serif" font-size="25">4. Keep YAML and SQL as optional operations tooling</text>
+
+  <path d="M760 490H840" stroke="#6366F1" stroke-width="10" stroke-linecap="round"/>
+  <path d="M818 462L858 490L818 518" stroke="#6366F1" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="800" y="452" text-anchor="middle" fill="#C7D2FE" font-family="Segoe UI, Arial, sans-serif" font-size="22" font-weight="700">Shift the narrative</text>
+</svg>

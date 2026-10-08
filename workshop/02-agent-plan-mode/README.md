@@ -120,19 +120,20 @@ When you invoke the plan agent, it automatically reads:
 
 **Agent plan mode** separates research from implementation, letting AI analyze your codebase comprehensively before proposing changes. You'll learn to leverage plan mode for complex multi-file features, validate AI-generated plans with your expertise, and execute implementations with confidence. You'll measure time saved in planning, conflicts avoided, and review cycles reduced.
 
-**Time:** ~25 minutes | **Exercises:** 3
+**Time:** ~45 minutes | **Exercises:** 4
 
 ---
 
 ## 📋 Exercise Planning
 
-The exercises below use plan mode to tackle increasingly complex implementation challenges. Each exercise demonstrates how planning before coding saves time and prevents errors.
+The exercises below use plan mode to design and build the "Universe at a Glance" homepage feature — live stat cards and a quick-add form that seeds show-specific data for Modules 3–6. Each exercise demonstrates how planning before coding surfaces hidden complexity and prevents mid-implementation surprises.
 
 | # | Exercise | Lead | Support | Problem | Solution | Key Metrics | Artifacts |
 |---|----------|------|---------|---------|----------|-------------|-----------|
-| [2.1](exercise-2.1.md) | Invoking Plan Mode | Marcus | Sarah | Feature planning: 35 min manual analysis, 5 missed dependencies per sprint | Use plan agent to research character detail feature implementation | 35→7 min planning, 5→1 missed dependencies | Plan output in Chat |
-| [2.2](exercise-2.2.md) | Validating and Refining Plans | David | Elena, Sarah | AI plans miss edge cases: 3 architectural issues per plan, 2 review cycles | Review plan output, identify missing requirements, iterate before execution | 3→0 architectural issues, 2→1 review cycles | Refined plan with annotations |
-| [2.3](exercise-2.3.md) | Executing Plans | Marcus | Elena | Implementation conflicts: 25 min debugging integration issues, 40% test coverage gaps | Execute validated plan with test-first approach | 25→5 min debugging, 40%→85% initial coverage | Character detail feature files |
+| [2.1](exercise-2.1.md) | Plan the Universe Stat Cards | Marcus | Sarah, Elena | Homepage has no live data; building the stat card row touches 5–7 files unseen without a plan | Use plan agent to research the "Universe at a Glance" stat card row — DB schema, API endpoints, React component, homepage wiring | 30→7 min planning, 5–7 files surfaced before first keystroke | `docs/universe-dashboard-plan.md` (partial) |
+| [2.2](exercise-2.2.md) | Plan the Quick-Add Form | David | Elena, Sarah | Quick-add form has hidden complexity: two insert paths, form state, counter refresh, duplicate handling | Use plan agent to research the collapsible add form and verify it correctly references the tables from 2.1 | One open question resolved, plan references 2.1 schema — continuity check passed | `docs/universe-dashboard-plan.md` (partial) |
+| [2.3](exercise-2.3.md) | Combine Plans into a Delivery Roadmap | Marcus | Elena | Two parallel plans have hidden overlaps (shared tables, shared homepage wiring) that create merge conflicts if executed independently | Merge 2.1 and 2.2 plans into one dependency-safe delivery roadmap | 0 duplicate steps, dependency-safe sequence: DB → API → Components → Homepage | `docs/universe-dashboard-plan.md` (final) |
+| [2.4](exercise-2.4.md) | Execute the Plan and Populate Your Universe | Sarah | Marcus, David | Plans don't ship code; execution still risks drift from the plan | Execute merged roadmap in agent mode, verify the UI, then populate with real show data via the new quick-add form | 6+ show entries added, counters change from 0·0·0 to real numbers | Running homepage with live stat cards; show data seeded for Modules 3–6 |
 
 ---
 
@@ -143,9 +144,10 @@ The exercises below use plan mode to tackle increasingly complex implementation 
 **When to use it:** When implementing features that span multiple files or layers, refactoring code with unclear dependencies, or breaking down ambiguous requirements into actionable steps.
 
 **What you'll build:**
-- **Character detail page feature** — Full-stack implementation plan spanning frontend, backend, and database
-- **Validated implementation roadmap** — Plan reviewed and refined by experienced developers
-- **Executed feature code** — Frontend components, API endpoints, database queries, and tests
+- **"Universe at a Glance" stat card row** — Three animated counter cards (Characters · Locations · Show Lore) fetching live counts from new API endpoints
+- **Quick-add form panel** — A collapsible homepage form that writes to the database and refreshes the correct counter on submit
+- **Delivery roadmap** — A merged, dependency-safe plan saved to `docs/universe-dashboard-plan.md`
+- **Seeded show data** — At least 6 real entries from the participant's chosen show, ready for Modules 3–6
 
 **Official Documentation:**
 - 📖 [Planning in VS Code Chat](https://code.visualstudio.com/docs/copilot/chat/chat-planning) — How to use the plan agent and iterate on plans

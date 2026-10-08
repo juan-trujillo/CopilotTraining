@@ -1,0 +1,139 @@
+# deck.recipe.yml — Agentic Workflows talk guidance
+#
+# COUNCIL VERDICT (May 2026, 3-agent collaborative council):
+# The core structural problem: 10 use cases (5 newly added) are buried in an unsectioned
+# block, making their relationship to patterns and decision criteria opaque. The fix:
+# promote flagship use cases into the opening section as evidence for the problem, merge
+# Architecture + Safe Outputs into one trust-building section, and deploy a Path×Maturity
+# matrix as Section 3's spine — surfacing all 10 use cases visually so audience members
+# can self-locate before the CTA lands.
+#
+# COUNCIL REVISE (2026-08-10): Preserve the arc; add one execution-boundary beat
+# and relabel the Path C Level 2 pattern as Comment Workflows (gh-aw).
+
+version: 1
+
+deck:
+  title: "GitHub Agentic Workflows"
+  subtitle: "Repository Automation with AI Agents"
+  tagline: "Write repository automation in natural language, execute with security-first AI agents"
+
+  # arcToc: ≤80 chars, displayed as TocSlide subtitle
+
+  agenda:
+    - title: "Intent-Driven Workflows"
+      takeaway: "Describe outcomes and let agents adapt to repository context."
+      whyItMatters: "Automation stays useful when the surrounding state changes."
+    - title: "Security by Design"
+      takeaway: "Explore safe outputs and sandboxed, read-only defaults."
+      whyItMatters: "Teams can automate without treating governance as an afterthought."
+    - title: "A Practical Starting Point"
+      takeaway: "Locate the workflow and maturity path that fits the team."
+      whyItMatters: "Every attendee leaves with a credible next action."
+
+  arcToc: "Why It Matters → Architecture & Safety → Patterns by Path → Your Path Forward"
+
+  arcNarrative: >
+    Section 1 establishes three audience paths (A: high-volume triage automation; B: complex
+    visibility and reporting; C: multi-agent orchestration) via three flagship use cases — one
+    per path — so every persona self-recognizes their problem within the first 12 slides. The
+    decision tree is a teaser here, not a deep dive; its job is to plant the A/B/C framing
+    that threads through the entire talk. Section 2 is the intellectual core: it layers
+    architecture → safe execution → Pattern Showcase, moving from "how it compiles" to "what
+    these patterns are called," with the Pattern Showcase slide acting as the bridge that
+    translates technical concepts into repeatable design vocabulary before Section 3 applies
+    them. Section 3 is the talk's centerpiece: a 3×3 matrix (Path A/B/C × Maturity Level
+    1/2/3) distributes all 10 use cases visually so audience members scan for their path and
+    level intersection and instantly find their peer use cases and dominant patterns. Peak
+    engagement lands at Section 1 (motivation + credential) and Section 3 (the "I can see
+    myself here" matrix moment). Section 4 closes with a path+level self-assessment that
+    converts the matrix insight into concrete week-by-week actions per path. This ordering
+    beats the previous structure because it makes use cases primary evidence rather than a
+    reference appendix, ties patterns to decisions rather than abstract categorization, and
+    gives every persona a personalized action sequence rather than a generic CTA.
+
+  sectionOrder:
+    - "Why Agentic Workflows Matter"
+    - "Architecture & Safe Execution"
+    - "Patterns by Path & Maturity"
+    - "Your Path Forward"
+
+  sectionModes:
+    "Why Agentic Workflows Matter":
+      emphasis: high
+      note: >
+        Draw from: README "The Opportunity", "The Solution", "Mental Model Shift" intro, and
+        3 flagship use cases from "Real-World Use Cases". Open with the YAML friction contrast
+        (intent-driven vs. stepwise), then deliver three flagship use cases — one per path —
+        concisely (2-3 lines + trigger + artifact each): Path A = Issue Triage (high-volume,
+        instant wins), Path B = Weekly Health Report (visibility, zero effort), Path C =
+        Multi-Agent Orchestration (parallel workers, synthesized insight). End with the A/B/C
+        decision tree as a preview/teaser: "Which path is yours?" Do NOT explain the
+        compilation pipeline here — defer to Section 2. The "whoa" moment is the before/after:
+        complex YAML automation collapsed into an 8-line Markdown intent statement. Leave the
+        audience leaning forward to understand how that is safe.
+    "Architecture & Safe Execution":
+      emphasis: high
+      note: >
+        Draw from: README "Core Architecture & Compilation", "Safe Outputs Deep Dive",
+        and "Key Artifacts". This is the trust-building section. Teach the three-phase
+        pipeline (Authoring -> Compilation -> Execution) with the lock-file reveal as the
+        primary "whoa" moment: show compiled YAML side-by-side with the Markdown source so
+        the audience viscerally understands the compiler enforces security, not author
+        discipline. Then the Safe Outputs model: read-only AI sandbox -> structured JSON ->
+        validation pipeline (schema, sanitization, rate limiting, permissions) -> scoped
+        handler executes. Include the noop pattern as the #1 runtime failure mode with its
+        fix. Close with the Pattern Showcase bridge slide: name and visually map the 5
+        pattern families (Continuous Improvement, Monitoring/Insights, Orchestration,
+        Quality/Safety, Release/Delivery) to their primary use-case examples — this slide
+        transitions the audience from "I understand the mechanism" to "I know the vocabulary
+        for Section 3." Add at most one execution-boundary beat: gh-aw comment workflows are
+        repo-owned, version-controlled Markdown compiled to Actions and governed by safe
+        outputs; Copilot cloud-agent Automations are configured in Agents > Automations,
+        delegate tasks on configured trigger text, require an eligible plan, and are controlled
+        by Business/Enterprise admin policy. Do not characterize runtime beyond the README.
+    "Patterns by Path & Maturity":
+      emphasis: medium
+      note: >
+        Draw from: README "The Agent Factory Pattern" and "Real-World Use Cases" (all 10).
+        Spine of this section is a 3x3 matrix: rows = Path A/B/C, columns = Level 1
+        (prototype/quick win), Level 2 (production-ready), Level 3 (advanced/multi-agent).
+        Distribute all 10 use cases across the 9 cells: Path A L1=Issue Triage, L2=PR Review,
+        L3=Dependency Audit; Path B L1=Weekly Health Report, L2=Release Notes, L3=Weekly
+        Research Digest; Path C L1=CI Failure Diagnosis, L2=Comment Workflows (gh-aw),
+        L3=Multi-Agent Orchestration + Code Simplification. Include the Agent Factory
+        philosophy (specialize not monolith; 100+ workflows in continuous production) as
+        framing before the matrix. Surface 1 failure mode per path (Path A: too many ops
+        hitting max; Path B: low-signal noop spam; Path C: worker synchronization). The
+        "whoa" moment is the matrix reveal — audience scans for their intersection and
+        instantly locates their peer use cases. Use 3 slides (one per path), each showing
+        that path's 3 maturity levels with 1-2 use cases and the dominant pattern per cell.
+        Do NOT use a single dense 3x3 grid — legibility requires one path per slide.
+    "Your Path Forward":
+      emphasis: medium-low
+      note: >
+        Draw from: README "What You Can Do Today", "Mental Model Shift" tables, and "Related
+        Patterns". Recap the A/B/C decision tree as a commitment: "You have seen the matrix
+        — which path is yours?" Then deliver a maturity progression contract per path (Week 1:
+        Level 1 workflow; Week 2-3: add safe writes; Week 4+: Level 2; Month 2+: Level 3).
+        Path-specific CTAs: Path A gets triage workflow starter; Path B gets weekly report
+        template; Path C gets orchestrator scaffolding. Include the Mental Model Shift
+        move-toward/move-away tables compressed to one slide. Close with Related Patterns
+        breadcrumbs (MCP, Custom Instructions, Agent Teams) and the single install command:
+        gh extension install github/gh-aw. This section should feel fast and confident —
+        audience leaves knowing exactly what to build Monday morning.
+
+  preamble: []
+  appendix: []
+
+  highlightMoments:
+    - "Write repository automation in 8-line Markdown intent — the compiler generates the secure YAML lock file"
+    - "Safe outputs: AI reads everything, writes nothing — all requests flow through a validation pipeline enforced by the compiler, not author discipline"
+    - "Noop is the #1 failure mode: every workflow must explicitly handle 'no action needed' or it fails silently"
+    - "100+ workflows running continuously in production (Peli's Agent Factory): validated reality across triage, PR review, CI diagnosis, ChatOps, research digests, and more"
+    - "The 3x3 matrix (Path x Maturity) shows exactly where you sit — find your cell and see which peers have already shipped it"
+
+# DECIDED: Matrix format = Option B — 3 path slides (one per Path A/B/C), each showing
+# 3 maturity levels with 1-2 use cases and the dominant pattern per cell. Estimated
+# Section 3 slide count: ~14-16 slides (3 matrix slides + factory intro + failure modes
+# + transitions).

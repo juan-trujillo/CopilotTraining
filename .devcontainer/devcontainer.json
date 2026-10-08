@@ -1,11 +1,6 @@
 {
   "name": "GitHub Copilot Training Workshop",
-  "image": "mcr.microsoft.com/devcontainers/javascript-node:1-20-bullseye",
-
-  "features": {
-    "ghcr.io/devcontainers/features/docker-in-docker:2": {},
-    "ghcr.io/devcontainers/features/github-cli:1": {}
-  },
+  "image": "mcr.microsoft.com/devcontainers/javascript-node:1-22-bookworm",
 
   "customizations": {
     "vscode": {
@@ -22,6 +17,10 @@
         "dbaeumer.vscode-eslint",
         "esbenp.prettier-vscode",
         "ms-azuretools.vscode-docker",
+
+        // Slidev / Vue authoring
+        "Vue.volar",
+        "antfu.unocss",
 
         // Optional but helpful
         "eamodio.gitlens"
@@ -62,8 +61,8 @@
     }
   },
 
-  // Forward ports for FanHub application
-  "forwardPorts": [3000, 3001, 5432],
+  // Forward ports for FanHub application and Slidev
+  "forwardPorts": [3000, 3001, 3030, 5432],
   "portsAttributes": {
     "3000": {
       "label": "FanHub Frontend",
@@ -73,20 +72,21 @@
       "label": "FanHub Backend API",
       "onAutoForward": "notify"
     },
+    "3030": {
+      "label": "Slidev Dev Server",
+      "onAutoForward": "notify"
+    },
     "5432": {
       "label": "PostgreSQL",
       "onAutoForward": "silent"
     }
   },
 
-  // Post-create command to set up the environment
-  "postCreateCommand": "npm install",
+  // Keep local container startup light; install heavier tooling on demand.
+  "postCreateCommand": "npm install && cd slides && npm install",
 
   // Use 'forwardPorts' to make a list of ports inside the container available locally.
   "remoteUser": "node",
 
-  // Workspace mount - preserve git history
-  "mounts": [
-    "source=${localWorkspaceFolder}/.git,target=${containerWorkspaceFolder}/.git,type=bind,consistency=cached"
-  ]
+  "mounts": []
 }

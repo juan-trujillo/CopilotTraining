@@ -9,1201 +9,502 @@ info: |
 drawings:
   persist: false
 transition: slide-left
-title: Copilot Configuration Primitives - Making AI Understand Your Codebase
-module: tech-talks/copilot-primitives
+title: Copilot Configuration Primitives
 mdc: true
+section: Choose and Configure
 status: active
-updated: 2026-06-22
+updated: 2026-09-16
 ---
 
+<script setup>
+import TitleSlide from './components/structure/TitleSlide.vue'
+import CoreQuestionSlide from './components/structure/CoreQuestionSlide.vue'
+import TocSlide from './components/structure/TocSlide.vue'
+import SectionOpenerSlide from './components/structure/SectionOpenerSlide.vue'
+import BeforeAfterSlide from './components/structure/BeforeAfterSlide.vue'
+import WhatYouCanDoTodaySlide from './components/structure/WhatYouCanDoTodaySlide.vue'
+import ReferencesSlide from './components/structure/ReferencesSlide.vue'
+import ThankYouSlide from './components/structure/ThankYouSlide.vue'
+import FrameworkMappingRowsSlide from './components/FrameworkMappingRowsSlide.vue'
+import TwoColPairedConceptsSlide from './components/TwoColPairedConceptsSlide.vue'
+import FourCardGridSlide from './components/FourCardGridSlide.vue'
+import CodeWithFeaturesSlide from './components/CodeWithFeaturesSlide.vue'
+import ThreeColumnCardSlide from './components/ThreeColumnCardSlide.vue'
+import MaturityJourneyRoadmapSlide from './components/MaturityJourneyRoadmapSlide.vue'
+import AITerminalTranscriptSlide from './components/AITerminalTranscriptSlide.vue'
+</script>
 
-<!-- ═══════════════════════════════════════════════════════════════════════ -->
-<!-- SLIDE 1 — Title                                                       -->
-<!-- ═══════════════════════════════════════════════════════════════════════ -->
-
-<div class="h-full flex flex-col items-center justify-center relative overflow-hidden" style="background: #0d1117;">
-  <!-- Label -->
-  <div class="flex items-center gap-2 mb-6">
-    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 16 16" fill="#e6edf3"><path d="M6.766 11.695C4.703 11.437 3.25 9.904 3.25 7.92c0-.806.281-1.677.75-2.258-.203-.532-.172-1.662.062-2.129.626-.081 1.469.258 1.969.726.594-.194 1.219-.291 1.985-.291.765 0 1.39.097 1.953.274.484-.451 1.343-.79 1.969-.709.218.435.25 1.564.046 2.113.5.613.766 1.436.766 2.274 0 1.984-1.453 3.485-3.547 3.759.531.355.891 1.129.891 2.016v1.678c0 .484.39.758.859.564C13.781 14.824 16 11.905 16 8.291 16 3.726 12.406 0 7.984 0 3.562 0 0 3.726 0 8.291c0 3.581 2.203 6.55 5.172 7.663A.595.595 0 0 0 6 15.389v-1.291c-.219.097-.5.162-.75.162-1.031 0-1.641-.581-2.078-1.662-.172-.435-.36-.693-.719-.742-.187-.016-.25-.097-.25-.193 0-.194.313-.339.625-.339.453 0 .844.29 1.25.887.313.468.641.678 1.031.678.391 0 .641-.146 1-.516.266-.275.469-.517.657-.678Z"/></svg>
-    <span class="text-sm font-medium tracking-wide uppercase" style="color: #8b949e;">GitHub Copilot</span>
-  </div>
-  <!-- Heading -->
-  <h1 class="!text-6xl !font-bold !leading-tight text-center max-w-4xl" style="color: #e6edf3;">
-    Configuration Primitives
-  </h1>
-  <!-- Subtitle -->
-  <p class="mt-6 text-xl text-center max-w-2xl" style="color: #8b949e;">
-    Making AI Understand Your Codebase
-  </p>
-  <!-- Badges -->
-  <div class="mt-8 flex gap-4">
-    <div class="px-5 py-2 rounded-md text-sm font-medium" style="background: #238636; color: #ffffff;">
-      30 Minutes
-    </div>
-    <div class="px-5 py-2 rounded-md text-sm font-medium border" style="border-color: #30363d; color: #e6edf3;">
-      Developers
-    </div>
-    <div class="px-5 py-2 rounded-md text-sm font-medium border" style="border-color: #30363d; color: #e6edf3;">
-      Engineering Teams
-    </div>
-  </div>
-</div>
+<!-- SLIDE: Title -->
+# Title
+<TitleSlide
+  title="Copilot Configuration Primitives"
+  subtitle="Instructions · Custom Prompts · Skills · Agents"
+  tagline="Encode the convention once. Graduate the workflow when it is proven."
+  meta="GitHub Copilot · Customization & Context"
+/>
 
 ---
 
-<!-- ═══════════════════════════════════════════════════════════════════════ -->
-<!-- SLIDE 2 — The Question                                                -->
-<!-- ═══════════════════════════════════════════════════════════════════════ -->
-
-# The Central Question
-
-<div class="h-full flex items-center justify-center" style="background: #0d1117;">
-<div class="max-w-4xl">
-<div class="text-6xl text-center mb-8">💭</div>
-<div class="text-3xl font-bold text-center mb-6 leading-snug" style="color: #e6edf3;">
-"How can I make GitHub Copilot understand my codebase better?"
-</div>
-<div class="mt-8 flex gap-6 justify-center text-sm">
-<div class="px-4 py-2 rounded-lg border text-center" style="background: #161b22; border-color: #30363d;">
-<div class="font-bold" style="color: #3fb950;">👩‍💻 Developers</div>
-<div class="text-xs mt-1" style="color: #8b949e;">Conventions &amp; code quality</div>
-</div>
-<div class="px-4 py-2 rounded-lg border text-center" style="background: #161b22; border-color: #30363d;">
-<div class="font-bold" style="color: #58a6ff;">🧑‍💼 Team Leads</div>
-<div class="text-xs mt-1" style="color: #8b949e;">Consistency &amp; onboarding</div>
-</div>
-<div class="px-4 py-2 rounded-lg border text-center" style="background: #161b22; border-color: #30363d;">
-<div class="font-bold" style="color: #d29922;">⚙️ Platform Teams</div>
-<div class="text-xs mt-1" style="color: #8b949e;">Governance &amp; standards</div>
-</div>
-</div>
-</div>
-</div>
-
----
-layout: center
-name: toc
----
-
-<!-- ═══════════════════════════════════════════════════════════════════════ -->
-<!-- SLIDE 3 — Table of Contents                                           -->
-<!-- ═══════════════════════════════════════════════════════════════════════ -->
-
-# 📖 Table of Contents
-
-<div class="grid grid-cols-3 gap-4 mt-8">
-  <div @click="$nav.go(7)" class="cursor-pointer p-4 rounded-xl border transition-all hover:scale-105" style="background: #161b22; border-color: #30363d;">
-    <div class="text-2xl mb-2">📋</div>
-    <div class="font-semibold" style="color: #e6edf3;">Instructions</div>
-    <div class="text-xs mt-1" style="color: #8b949e;">Always-on guardrails &amp; path-specific rules</div>
-  </div>
-
-  <div @click="$nav.go(9)" class="cursor-pointer p-4 rounded-xl border transition-all hover:scale-105" style="background: #161b22; border-color: #30363d;">
-    <div class="text-2xl mb-2">🧰</div>
-    <div class="font-semibold" style="color: #e6edf3;">Skills</div>
-    <div class="text-xs mt-1" style="color: #8b949e;">On-demand expertise packs</div>
-  </div>
-
-  <div @click="$nav.go(10)" class="cursor-pointer p-4 rounded-xl border transition-all hover:scale-105" style="background: #161b22; border-color: #30363d;">
-    <div class="text-2xl mb-2">⚡</div>
-    <div class="font-semibold" style="color: #e6edf3;">Prompts</div>
-    <div class="text-xs mt-1" style="color: #8b949e;">Reusable task workflows</div>
-  </div>
-
-  <div @click="$nav.go(11)" class="cursor-pointer p-4 rounded-xl border transition-all hover:scale-105" style="background: #161b22; border-color: #30363d;">
-    <div class="text-2xl mb-2">🤖</div>
-    <div class="font-semibold" style="color: #e6edf3;">Agents</div>
-    <div class="text-xs mt-1" style="color: #8b949e;">Specialized personas &amp; handoffs</div>
-  </div>
-
-  <div @click="$nav.go(13)" class="cursor-pointer p-4 rounded-xl border transition-all hover:scale-105" style="background: #161b22; border-color: #30363d;">
-    <div class="text-2xl mb-2">🔀</div>
-    <div class="font-semibold" style="color: #e6edf3;">Choosing the Right Primitive</div>
-    <div class="text-xs mt-1" style="color: #8b949e;">Comparison &amp; adoption path</div>
-  </div>
-
-  <div @click="$nav.go(14)" class="cursor-pointer p-4 rounded-xl border transition-all hover:scale-105" style="background: #161b22; border-color: #30363d;">
-    <div class="text-2xl mb-2">🆕</div>
-    <div class="font-semibold" style="color: #e6edf3;">What's New (March 2026)</div>
-    <div class="text-xs mt-1" style="color: #8b949e;">Editor, Hooks, Plugins</div>
-  </div>
-</div>
+<!-- SLIDE: Core Question -->
+# Core Question
+<CoreQuestionSlide
+  question="How can I make GitHub Copilot actually understand my codebase?"
+  subtext="Generic responses miss conventions that the repository never made explicit. Shared, reviewable configuration supplies that context."
+  highlight="Choose the smallest primitive, show its anatomy, then prove delivery and acceptance separately."
+  :cards='[{"icon":"👩‍💻","title":"Individual contributors","description":"Create repeatable commands and capabilities without rebuilding context in every session."},{"icon":"🏗️","title":"Team leads","description":"Review shared behavior as version-controlled institutional knowledge with a named owner."},{"icon":"🧑‍🔧","title":"Platform engineers","description":"Bound selectors, tools, and approval so configuration can scale across teams."},{"icon":"📋","title":"Encode","description":"Turn one convention into repository, path-scoped, or directory guidance."},{"icon":"⚡","title":"Graduate","description":"Move a solved chat into a shared command, then a runnable skill."},{"icon":"✅","title":"Prove","description":"Trace eligibility through loading, execution, validation, and acceptance."}]'
+/>
 
 ---
 
-<!-- ═══════════════════════════════════════════════════════════════════════ -->
-<!-- SLIDE 4 — The Problem                                                 -->
-<!-- ═══════════════════════════════════════════════════════════════════════ -->
-
-# The Problem
-
-<div class="grid grid-cols-2 gap-4 mt-6 text-xs" style="background: #0d1117;">
-
-<div class="p-4 rounded-lg" style="background: #161b22; border-left: 4px solid #f85149;">
-<div class="font-bold mb-2" style="color: #f85149;">Generic responses that ignore your conventions</div>
-<div style="color: #8b949e;">You use Prisma — Copilot suggests raw SQL. You use Vitest — it generates Mocha patterns. Every suggestion needs manual correction.</div>
-</div>
-
-<div class="p-4 rounded-lg" style="background: #161b22; border-left: 4px solid #d29922;">
-<div class="font-bold mb-2" style="color: #d29922;">Repeated context in every conversation</div>
-<div style="color: #8b949e;">"We use TypeScript with strict mode, our tests are in __tests__/, we use..." — copy-pasted into every single chat session.</div>
-</div>
-
-<div class="p-4 rounded-lg" style="background: #161b22; border-left: 4px solid #e3b341;">
-<div class="font-bold mb-2" style="color: #e3b341;">Inconsistent AI behavior across the team</div>
-<div style="color: #8b949e;">Same question, different developer, wildly different response quality — because context varies person to person.</div>
-</div>
-
-<div class="p-4 rounded-lg" style="background: #161b22; border-left: 4px solid #58a6ff;">
-<div class="font-bold mb-2" style="color: #58a6ff;">One-size-fits-all doesn't fit anyone</div>
-<div style="color: #8b949e;">Default Copilot treats your React frontend and Python data pipeline identically — no awareness of project boundaries.</div>
-</div>
-
-</div>
-
-<div class="mt-4 p-3 rounded-xl border text-center text-sm" style="background: #161b22; border-color: #30363d;">
-<div class="font-bold" style="color: #e6edf3;">Configuration primitives let you encode project knowledge once and share it with the whole team</div>
-</div>
-
-<div style="position: absolute; bottom: 16px; left: 32px; opacity: 0.4; font-size: 0.75rem; color: #8b949e;">[1] code.visualstudio.com/docs/copilot/copilot-customization</div>
+<!-- SLIDE: Table of Contents -->
+# Table of Contents
+<TocSlide
+  title="Copilot Configuration Primitives"
+  subtitle="Instructions → Custom Prompts → Skills → Agents"
+  :sections='[{"icon":"📋","title":"Instructions","blurb":"Always-on and scoped guidance with observable delivery","slide":4},{"icon":"💬","title":"Custom Prompts","blurb":"Freeze a solved workflow as a team /command","slide":14},{"icon":"⚡","title":"Skills","blurb":"Graduate the prompt with scripts and templates","slide":19},{"icon":"🤖","title":"Agents","blurb":"Compose the stack behind explicit tool boundaries","slide":25}]'
+/>
 
 ---
 
-<!-- ═══════════════════════════════════════════════════════════════════════ -->
-<!-- SLIDE 5 — The Solution: 4 Configuration Primitives                    -->
-<!-- ═══════════════════════════════════════════════════════════════════════ -->
-
-# The Solution: 4 Configuration Primitives
-
-<div class="mt-4" style="background: #0d1117;">
-
-<div class="rounded-xl p-5 border space-y-3" style="background: #161b22; border-color: #30363d;">
-
-  <div class="flex items-center gap-4 p-3 rounded-lg border" style="background: #0d1117; border-color: #30363d;">
-    <div class="text-2xl w-10">📋</div>
-    <div>
-      <span class="font-bold" style="color: #e6edf3;">Instructions</span>
-      <span class="ml-2 text-sm" style="color: #8b949e;">Always-on guardrails injected into every request</span>
-    </div>
-    <div class="ml-auto text-xs font-mono" style="color: #58a6ff;">.instructions.md</div>
-  </div>
-
-  <div class="flex items-center gap-4 p-3 rounded-lg border" style="background: #0d1117; border-color: #30363d;">
-    <div class="text-2xl w-10">🧰</div>
-    <div>
-      <span class="font-bold" style="color: #e6edf3;">Skills</span>
-      <span class="ml-2 text-sm" style="color: #8b949e;">On-demand capability packs loaded by relevance</span>
-    </div>
-    <div class="ml-auto text-xs font-mono" style="color: #58a6ff;">SKILL.md</div>
-  </div>
-
-  <div class="flex items-center gap-4 p-3 rounded-lg border" style="background: #0d1117; border-color: #30363d;">
-    <div class="text-2xl w-10">⚡</div>
-    <div>
-      <span class="font-bold" style="color: #e6edf3;">Prompts</span>
-      <span class="ml-2 text-sm" style="color: #8b949e;">Reusable task templates via /command</span>
-    </div>
-    <div class="ml-auto text-xs font-mono" style="color: #58a6ff;">.prompt.md</div>
-  </div>
-
-  <div class="flex items-center gap-4 p-3 rounded-lg border" style="background: #0d1117; border-color: #30363d;">
-    <div class="text-2xl w-10">🤖</div>
-    <div>
-      <span class="font-bold" style="color: #e6edf3;">Agents</span>
-      <span class="ml-2 text-sm" style="color: #8b949e;">Specialized personas with constrained tools</span>
-    </div>
-    <div class="ml-auto text-xs font-mono" style="color: #58a6ff;">.agent.md</div>
-  </div>
-
-</div>
-
-<div class="mt-4 text-center text-sm" style="color: #8b949e;">All Markdown files · Version controlled · Team-shared</div>
-
-</div>
-
-<div style="position: absolute; bottom: 16px; left: 32px; opacity: 0.4; font-size: 0.75rem; color: #8b949e;">[3] code.visualstudio.com/docs/copilot/customization/overview</div>
+<!-- SLIDE: Part 1 — Instructions -->
+# Part 1 Opener
+<SectionOpenerSlide
+  :partNumber="1"
+  pillIcon="📋"
+  pillLabel="Instructions"
+  title="Instructions"
+  subtitle="Place the context, prove delivery, then encode the shared baseline."
+  :cards='[{"icon":"🧭","title":"Place","blurb":"Classify owner, lifetime, selector, and evidence."},{"icon":"🔎","title":"Prove","blurb":"Trace eligibility through accountable acceptance."},{"icon":"🏗️","title":"Encode","blurb":"Use repository, path-scoped, or directory guidance."}]'
+  :terminal='{"context":"$ /init","detail":"Draft the baseline, inspect References, then validate the result."}'
+/>
 
 ---
 
-<!-- ═══════════════════════════════════════════════════════════════════════ -->
-<!-- SLIDE 6 — The Shift                                                   -->
-<!-- ═══════════════════════════════════════════════════════════════════════ -->
-
-# 🧠 The Shift
-
-<div class="h-full flex flex-col items-center justify-center -mt-12" style="background: #0d1117;">
-  <div class="max-w-4xl w-full">
-
-<div class="grid grid-cols-3 gap-8 items-center">
-
-<div class="text-center p-6 rounded-xl border" style="background: #161b22; border-color: #f85149;">
-  <div class="text-4xl mb-4">🔄</div>
-  <div class="text-lg font-bold" style="color: #f85149;">Repeating context</div>
-  <div class="text-sm mt-2" style="color: #8b949e;">in every conversation</div>
-</div>
-
-<div class="text-center">
-  <div class="text-5xl" style="color: #3fb950;">→</div>
-</div>
-
-<div class="text-center p-6 rounded-xl border" style="background: #161b22; border-color: #3fb950;">
-  <div class="text-4xl mb-4">📁</div>
-  <div class="text-lg font-bold" style="color: #3fb950;">Encode once</div>
-  <div class="text-sm mt-2" style="color: #8b949e;">in configuration files</div>
-</div>
-
-</div>
-
-<div class="mt-10 text-center">
-  <div class="text-xl italic" style="color: #c9d1d9;">
-    "Every interaction becomes smarter — automatically."
-  </div>
-</div>
-
-  </div>
-</div>
+<!-- SLIDE: Place Context Before Choosing a Primitive -->
+# Place Context Before Choosing a Primitive
+<FourCardGridSlide
+  :partNumber="1"
+  pillIcon="🧭"
+  pillLabel="Context Check · Placement"
+  title="Every Context Item Carries Four Decisions"
+  :cards='[{"icon":"👤","title":"Owner","description":"Name who maintains, reviews, and may approve the context."},{"icon":"🕒","title":"Lifetime","description":"Choose one request, a repeated task, repository lifetime, or a policy cycle."},{"icon":"🎯","title":"Selector","description":"Target the repository, matching files, a command, a relevant task, or an agent."},{"icon":"🧪","title":"Evidence","description":"Define the loaded signal, executable check, artifact review, and acceptance owner."}]'
+  :insight='{"icon":"🔐","text":"One-request facts stay in the request. Shared behavior earns a reviewed primitive."}'
+  :progressDots='{"current":1,"total":9,"activeColor":"bg-cyan-400 shadow-lg shadow-cyan-500/50"}'
+/>
 
 ---
 
-<!-- ═══════════════════════════════════════════════════════════════════════ -->
-<!-- SLIDE 7 — Instructions: The Foundation                                -->
-<!-- ═══════════════════════════════════════════════════════════════════════ -->
-
-# 📋 Instructions: The Foundation
-
-<div class="mt-4 grid grid-cols-2 gap-6" style="background: #0d1117;">
-
-<div>
-
-<div class="font-bold mb-2" style="color: #e6edf3;">How It Works</div>
-
-<div class="space-y-1 text-sm" style="color: #c9d1d9;">
-
-- Create `.github/copilot-instructions.md`
-- Contents **automatically injected** into every request
-- No special syntax — just Markdown
-- Appears in **References** section of chat responses
-- Use <code>/create-instruction</code> to scaffold from the editor
-
-</div>
-
-<div class="font-bold mt-4 mb-2" style="color: #e6edf3;">Two Types</div>
-
-<div class="space-y-2">
-<div class="p-2 rounded text-sm border" style="background: #161b22; border-color: #30363d;">
-  <span class="font-bold" style="color: #3fb950;">Repository-wide</span>
-  <span class="ml-1" style="color: #8b949e;">.github/copilot-instructions.md</span>
-</div>
-<div class="p-2 rounded text-sm border" style="background: #161b22; border-color: #30363d;">
-  <span class="font-bold" style="color: #58a6ff;">Path-specific</span>
-  <span class="ml-1" style="color: #8b949e;">.github/instructions/*.instructions.md</span>
-</div>
-</div>
-
-<div class="mt-3 text-xs" style="color: #8b949e;">Also recognized: <code style="color: #c9d1d9;">AGENTS.md</code>, <code style="color: #c9d1d9;">CLAUDE.md</code>, <code style="color: #c9d1d9;">COPILOT.md</code></div>
-
-</div>
-
-<div>
-
-<div class="font-bold mb-2" style="color: #e6edf3;">Example</div>
-
-```markdown
-# Repository Instructions
-
-This repo uses TypeScript with strict
-type checking enabled.
-
-## Build and Test
-- Build: `npm run build`
-- Tests: `npm test` (Vitest)
-- Tests in `__tests__/` co-located
-
-## Coding Standards
-- Functional programming patterns
-- Explicit return types on exports
-- JSDoc for all public functions
-- Named exports only (no default)
-```
-
-</div>
-
-</div>
-
-<div style="position: absolute; bottom: 16px; left: 32px; opacity: 0.4; font-size: 0.75rem; color: #8b949e;">[2] code.visualstudio.com/docs/copilot/customization/custom-instructions</div>
+<!-- SLIDE: Delivery and Acceptance Are Separate Claims -->
+# Delivery and Acceptance Are Separate Claims
+<MaturityJourneyRoadmapSlide
+  :partNumber="1"
+  pillIcon="🔎"
+  pillLabel="Context Check · Evidence"
+  title="Trace Configuration from Eligibility to Acceptance"
+  subtitle="Each rung proves one claim and hands evidence to the next"
+  :stages='[{"icon":"🎯","label":"1","name":"Eligible","description":"The selector matches the request"},{"icon":"📥","label":"2","name":"Loaded","description":"The client included the artifact"},{"icon":"🛠️","label":"3","name":"Executed","description":"Expected files and tools were used"},{"icon":"🧪","label":"4","name":"Validated","description":"Independent checks passed"},{"icon":"✅","label":"5","name":"Accepted","isTarget":true,"description":"The accountable reviewer approved"}]'
+  caption="References proves delivery. Tests and review prove the result."
+  :progressDots='{"current":2,"total":9,"activeColor":"bg-cyan-400 shadow-lg shadow-cyan-500/50"}'
+/>
 
 ---
 
-<!-- ═══════════════════════════════════════════════════════════════════════ -->
-<!-- SLIDE 8 — Path-Specific Instructions                                  -->
-<!-- ═══════════════════════════════════════════════════════════════════════ -->
-
-# 📋 Path-Specific Instructions
-
-<div class="mt-4 grid grid-cols-2 gap-6" style="background: #0d1117;">
-
-<div>
-
-<div class="font-bold mb-2" style="color: #e6edf3;">Targeted Rules via Glob Patterns</div>
-
-<div class="text-sm mb-3" style="color: #c9d1d9;">Apply <strong>different conventions</strong> to different parts of your codebase automatically:</div>
-
-```markdown
----
-applyTo: "src/models/**/*.ts"
----
-
-# Database Model Instructions
-
-1. Use Prisma schema definitions
-2. Include JSDoc with field descriptions
-3. Define relationships with @relation
-4. Add indexes for foreign keys
-5. snake_case DB columns, camelCase TS
-6. Always include createdAt, updatedAt
-```
-
-<div class="mt-3 text-sm" style="color: #8b949e;">Path-specific + repo-wide instructions combine when both match.</div>
-
-</div>
-
-<div>
-
-<div class="font-bold mb-2" style="color: #e6edf3;">Common Patterns</div>
-
-<div class="space-y-3 mt-2">
-<div class="p-3 rounded-lg text-sm" style="background: #161b22;">
-  <div class="font-mono text-xs" style="color: #3fb950;">applyTo: "**/*.test.ts"</div>
-  <div class="mt-1" style="color: #c9d1d9;">Test writing standards</div>
-</div>
-<div class="p-3 rounded-lg text-sm" style="background: #161b22;">
-  <div class="font-mono text-xs" style="color: #58a6ff;">applyTo: "src/api/**/*.ts"</div>
-  <div class="mt-1" style="color: #c9d1d9;">API route conventions</div>
-</div>
-<div class="p-3 rounded-lg text-sm" style="background: #161b22;">
-  <div class="font-mono text-xs" style="color: #d29922;">applyTo: "**/*.css"</div>
-  <div class="mt-1" style="color: #c9d1d9;">Styling guidelines</div>
-</div>
-<div class="p-3 rounded-lg text-sm" style="background: #161b22;">
-  <div class="font-mono text-xs" style="color: #8534F3;">applyTo: "docs/**/*.md"</div>
-  <div class="mt-1" style="color: #c9d1d9;">Documentation standards</div>
-</div>
-</div>
-
-<div class="mt-4 p-3 rounded-lg border text-sm" style="background: #161b22; border-color: #d29922;">
-  <span style="color: #d29922;">💡 Tip:</span> <span style="color: #c9d1d9;">Keep instructions under 2 pages — context budget matters</span>
-</div>
-
-</div>
-
-</div>
-
-<div style="position: absolute; bottom: 16px; left: 32px; opacity: 0.4; font-size: 0.75rem; color: #8b949e;">[6] docs.github.com/copilot/customizing-copilot/adding-repository-custom-instructions</div>
+<!-- SLIDE: Repair the First Broken Boundary -->
+# Repair the First Broken Boundary
+<FourCardGridSlide
+  :partNumber="1"
+  pillIcon="🔧"
+  pillLabel="Context Check · Repair"
+  title="A Valid Rule Can Miss the Request"
+  :cards='[{"icon":"🎯","title":"1 · Name the target","description":"The request edits src/orders/create-order.ts."},{"icon":"❌","title":"2 · Find the break","description":"applyTo targets src/payments/**/*.ts, so the valid rule is ineligible."},{"icon":"🔧","title":"3 · Repair the selector","description":"Change applyTo to src/orders/**/*.ts while preserving the rule."},{"icon":"✅","title":"4 · Prove the result","description":"Confirm loading, run Orders checks, inspect the diff, and obtain owner approval."}]'
+  :insight='{"icon":"🎯","text":"Inspect in order: target → selector → loaded context → tools → checks → review."}'
+  :progressDots='{"current":3,"total":9,"activeColor":"bg-cyan-400 shadow-lg shadow-cyan-500/50"}'
+/>
 
 ---
 
-<!-- ═══════════════════════════════════════════════════════════════════════ -->
-<!-- SLIDE 9 — Skills: On-Demand Expertise                                 -->
-<!-- ═══════════════════════════════════════════════════════════════════════ -->
-
-# 🧰 Skills: On-Demand Expertise
-
-<div class="mt-4 grid grid-cols-2 gap-6" style="background: #0d1117;">
-
-<div>
-
-<div class="font-bold mb-2" style="color: #e6edf3;">Progressive 3-Level Loading</div>
-
-<div class="space-y-3 mt-2">
-<div class="p-3 rounded-lg border" style="background: #161b22; border-color: #30363d;">
-  <div class="font-bold text-sm" style="color: #e6edf3;">Level 1: Discovery</div>
-  <div class="text-xs mt-1" style="color: #8b949e;">Name + description always visible (lightweight)</div>
-</div>
-<div class="p-3 rounded-lg border" style="background: #161b22; border-color: #30363d;">
-  <div class="font-bold text-sm" style="color: #e6edf3;">Level 2: Instructions</div>
-  <div class="text-xs mt-1" style="color: #8b949e;">Full SKILL.md loaded when prompt matches</div>
-</div>
-<div class="p-3 rounded-lg border" style="background: #161b22; border-color: #30363d;">
-  <div class="font-bold text-sm" style="color: #e6edf3;">Level 3: Resources</div>
-  <div class="text-xs mt-1" style="color: #8b949e;">Scripts, templates, examples loaded on-demand</div>
-</div>
-</div>
-
-<div class="font-bold mt-4 mb-2" style="color: #e6edf3;">Open Standard</div>
-
-<div class="p-3 rounded-lg border text-sm" style="background: #161b22; border-color: #30363d;">
-  <span style="color: #c9d1d9;">Works across</span>
-  <span class="font-bold" style="color: #e6edf3;"> VS Code</span>,
-  <span class="font-bold" style="color: #e6edf3;">Copilot CLI</span>, and
-  <span class="font-bold" style="color: #e6edf3;">coding agent</span>
-  <div class="text-xs mt-1" style="color: #8b949e;">agentskills.io · Use <code>/create-skill</code> to scaffold</div>
-</div>
-
-</div>
-
-<div>
-
-<div class="font-bold mb-2" style="color: #e6edf3;">Skill Structure</div>
-
-```
-.github/skills/
-  test-runner/
-    SKILL.md           # Instructions
-    test-template.ts   # Template file
-    scripts/
-      run-tests.sh     # Executable
-    examples/
-      api-test.ts      # Reference
-```
-
-<div class="font-bold mt-3 mb-2" style="color: #e6edf3;">Example SKILL.md</div>
-
-```markdown
----
-name: test-runner
-description: Run tests, analyze
-  failures, suggest fixes
----
-
-# Test Runner Skill
-
-## Process
-1. Locate test files matching glob
-2. Run with `npm test -- --reporter`
-3. Analyze failure stack traces
-4. Suggest targeted fixes
-```
-
-</div>
-
-</div>
-
-<div style="position: absolute; bottom: 16px; left: 32px; opacity: 0.4; font-size: 0.75rem; color: #8b949e;">[4] code.visualstudio.com/docs/copilot/customization/agent-skills</div>
+<!-- SLIDE: Three Instruction Surfaces -->
+# The Three Instruction Surfaces
+<ThreeColumnCardSlide
+  :partNumber="1"
+  pillIcon="📋"
+  pillLabel="Instructions"
+  title="Three Instruction Surfaces — One for Each Scope"
+  :columns='[{"icon":"🌐","title":"Repo-wide","description":"The whole-repository baseline — always active.","items":[".github/copilot-instructions.md","Applied to every request in this repo","Coding standards, build commands, file structure","No frontmatter needed — pure Markdown"]},{"icon":"🎯","title":"Path-scoped","description":"Activates only for matching file patterns.","items":[".github/instructions/*.instructions.md","applyTo glob in frontmatter — required","No applyTo means it is not auto-applied","Language rules, tests, framework patterns"]},{"icon":"📁","title":"AGENTS.md","description":"Portable agent playbook — open format.","items":["Root AGENTS.md is the default playbook","Setup, test, and PR commands live here","Cross-agent portable — not VS Code only","Nested files are still experimental"]}]'
+  :progressDots='{"current":4,"total":9,"activeColor":"bg-cyan-400 shadow-lg shadow-cyan-500/50"}'
+/>
 
 ---
 
-<!-- ═══════════════════════════════════════════════════════════════════════ -->
-<!-- SLIDE 10 — Custom Prompts: Reusable Workflows                         -->
-<!-- ═══════════════════════════════════════════════════════════════════════ -->
-
-# ⚡ Custom Prompts: Reusable Workflows
-
-<div class="mt-4 grid grid-cols-2 gap-6" style="background: #0d1117;">
-
-<div>
-
-<div class="font-bold mb-2" style="color: #e6edf3;">How Prompts Work</div>
-
-<div class="space-y-1 text-sm" style="color: #c9d1d9;">
-
-- Create `.github/prompts/*.prompt.md`
-- Invoke in chat: type `/` + prompt name
-- **On-demand** — only runs when you call it
-- Supports variables: `${selection}`, `${file}`, `${input:name}`
-- Can reference instructions via Markdown links
-- Specifies agent and tools in frontmatter
-
-</div>
-
-<div class="font-bold mt-4 mb-2" style="color: #e6edf3;">Usage</div>
-
-```
-/component MyButtonGroup
-/test UserService
-/security-review
-```
-
-<div class="mt-3 p-3 rounded-lg border text-sm" style="background: #161b22; border-color: #58a6ff;">
-  <span style="color: #58a6ff;">Key difference:</span>
-  <span style="color: #c9d1d9;"> Instructions are always-on. Prompts are </span><span class="font-bold" style="color: #e6edf3;">user-invoked</span><span style="color: #c9d1d9;">.</span>
-</div>
-
-<div class="mt-2 text-xs" style="color: #8b949e;">Use <code>/create-prompt</code> to scaffold · Syncs via Settings Sync</div>
-
-</div>
-
-<div>
-
-<div class="font-bold mb-2" style="color: #e6edf3;">Example Prompt File</div>
-
-```markdown
----
-name: component
-description: Scaffold a React component
-  with tests and documentation
-tools: ['editFiles', 'createFile']
-agent: agent
----
-
-# Component Generator
-
-Create a new React component:
-
-src/components/{{componentName}}/
-  {{componentName}}.tsx
-  {{componentName}}.types.ts
-  {{componentName}}.module.css
-  __tests__/
-    {{componentName}}.test.tsx
-  index.ts
-
-## Requirements
-- Functional component with hooks
-- TypeScript props interface
-- Follow [coding standards](
-    ../../copilot-instructions.md)
-```
-
-</div>
-
-</div>
-
-<div style="position: absolute; bottom: 16px; left: 32px; opacity: 0.4; font-size: 0.75rem; color: #8b949e;">[3] code.visualstudio.com/docs/copilot/customization/prompt-files</div>
+<!-- SLIDE: Repository-Wide Instructions -->
+# Repo Instructions Code
+<CodeWithFeaturesSlide
+  :partNumber="1"
+  pillIcon="📋"
+  pillLabel="Instructions"
+  title="A Production-Ready copilot-instructions.md"
+  :code='{"language":"markdown","content":"# Repository Instructions\n\nThis repository uses TypeScript with strict type checking.\n\n## Build and Test\n- Build: `npm run build`\n- Tests co-located in `__tests__/` directories\n- Use Vitest — never Mocha or Jest\n- Run: `npm test`\n\n## Coding Standards\n- Prefer functional patterns\n- Explicit return types on all functions\n- JSDoc on every exported function\n- Named exports only — no default exports\n\n## Error Handling\n- Custom error classes extending Error\n- Structured logging via logger.error()\n- Never swallow errors silently","filename":".github/copilot-instructions.md"}'
+  codePosition="left"
+  :features='[{"icon":"⚡","title":"Immediate effect","description":"Created this file? Every eligible Copilot request in this repo now receives your conventions."},{"icon":"📝","title":"Keep it concise","description":"Preserve context capacity for the request, relevant code, and tool results."},{"icon":"🔍","title":"Verify via References","description":"After the first chat response, check the References panel in VS Code — instruction files used are listed there."}]'
+  :progressDots='{"current":5,"total":9,"activeColor":"bg-cyan-400 shadow-lg shadow-cyan-500/50"}'
+/>
 
 ---
 
-<!-- ═══════════════════════════════════════════════════════════════════════ -->
-<!-- SLIDE 11 — Agents: Specialized Personas                               -->
-<!-- ═══════════════════════════════════════════════════════════════════════ -->
-
-# 🤖 Agents: Specialized Personas
-
-<div class="mt-4 grid grid-cols-2 gap-6" style="background: #0d1117;">
-
-<div>
-
-<div class="font-bold mb-2" style="color: #e6edf3;">What Agents Do</div>
-
-<div class="space-y-1 text-sm" style="color: #c9d1d9;">
-
-- Define **who** the AI becomes for a session
-- Constrain available **tools** (read-only, full access, etc.)
-- Set **model priority** arrays (fallback chain)
-- Enable **handoffs** between agents
-- Support **subagent** delegation for parallel work
-
-</div>
-
-<div class="font-bold mt-4 mb-2" style="color: #e6edf3;">Why Constrain Tools?</div>
-
-<div class="space-y-2">
-<div class="p-2 rounded text-sm border" style="background: #161b22; border-color: #30363d;">
-  <span class="font-bold" style="color: #58a6ff;">Planner:</span>
-  <span style="color: #8b949e;"> search, readFile, listFiles</span>
-  <span class="text-xs ml-1" style="color: #58a6ff;">(read-only)</span>
-</div>
-<div class="p-2 rounded text-sm border" style="background: #161b22; border-color: #30363d;">
-  <span class="font-bold" style="color: #3fb950;">Implementer:</span>
-  <span style="color: #8b949e;"> editFiles, terminal, search</span>
-  <span class="text-xs ml-1" style="color: #3fb950;">(full access)</span>
-</div>
-<div class="p-2 rounded text-sm border" style="background: #161b22; border-color: #30363d;">
-  <span class="font-bold" style="color: #d29922;">Reviewer:</span>
-  <span style="color: #8b949e;"> search, readFile, fetch</span>
-  <span class="text-xs ml-1" style="color: #d29922;">(analysis only)</span>
-</div>
-</div>
-
-</div>
-
-<div>
-
-<div class="font-bold mb-2" style="color: #e6edf3;">Example Agent</div>
-
-```markdown
----
-name: planner
-description: Generate implementation
-  plans. Read-only.
-tools:
-  - search
-  - readFile
-  - listFiles
-  - fetch
-model:
-  - Claude Sonnet 4 (copilot)
-  - GPT-4.1 (copilot)
-  - o4-mini (copilot)
-handoffs:
-  - label: Start Implementation
-    agent: agent
-    prompt: Implement the plan above.
----
-
-# Planning Agent
-
-You are a senior software architect.
-
-## Rules
-- NEVER modify files
-- Cite specific files and lines
-- Include effort estimates
-- Flag decisions needing discussion
-```
-
-</div>
-
-</div>
-
-<div style="position: absolute; bottom: 16px; left: 32px; opacity: 0.4; font-size: 0.75rem; color: #8b949e;">[5] code.visualstudio.com/docs/copilot/customization/custom-agents</div>
+<!-- SLIDE: Path-Scoped Instructions -->
+# Path-scoped instructions
+<CodeWithFeaturesSlide
+  :partNumber="1"
+  pillIcon="📋"
+  pillLabel="Instructions"
+  title="Path-Scoped Instructions — Precision at File Level"
+  :code='{"language":"markdown","content":"---\napplyTo: \"src/models/**/*.ts\"\n---\n\n# Database Model Instructions\n\nWhen working with database models:\n\n1. Use Prisma schema in `prisma/schema.prisma`\n2. Include JSDoc with field descriptions\n3. Define relationships with `@relation`\n4. Add indexes for foreign keys\n5. snake_case for DB columns, camelCase in TS\n6. Always include: `createdAt` and `updatedAt`","filename":".github/instructions/models.instructions.md"}'
+  codePosition="left"
+  :features='[{"icon":"🎯","title":"Surgical scoping","description":"applyTo glob means these rules activate only on matching files — never polluting other contexts."},{"icon":"⚠️","title":"No glob, no auto-load","description":"Omit applyTo and the file is not applied automatically. You can still attach it by hand."},{"icon":"➕","title":"Additive with repo-wide","description":"Path-scoped files combine with copilot-instructions.md when both selectors match."}]'
+  :progressDots='{"current":6,"total":9,"activeColor":"bg-cyan-400 shadow-lg shadow-cyan-500/50"}'
+/>
 
 ---
 
-<!-- ═══════════════════════════════════════════════════════════════════════ -->
-<!-- SLIDE 12 — Handoffs: Multi-Agent Workflows                            -->
-<!-- ═══════════════════════════════════════════════════════════════════════ -->
-
-# 🤖 Handoffs: Multi-Agent Workflows
-
-<div class="mt-6" style="background: #0d1117;">
-
-<div class="flex items-center justify-center gap-4">
-
-<div class="p-4 rounded-xl border text-center w-44" style="background: #161b22; border-color: #58a6ff;">
-  <div class="text-3xl mb-2">📋</div>
-  <div class="font-bold" style="color: #58a6ff;">Plan</div>
-  <div class="text-xs mt-1" style="color: #8b949e;">Read-only research</div>
-  <div class="text-xs mt-1" style="color: #58a6ff;">search, readFile</div>
-</div>
-
-<div class="text-2xl" style="color: #3fb950;">→</div>
-
-<div class="p-4 rounded-xl border text-center w-44" style="background: #161b22; border-color: #3fb950;">
-  <div class="text-3xl mb-2">🔨</div>
-  <div class="font-bold" style="color: #3fb950;">Implement</div>
-  <div class="text-xs mt-1" style="color: #8b949e;">Full editing access</div>
-  <div class="text-xs mt-1" style="color: #3fb950;">editFiles, terminal</div>
-</div>
-
-<div class="text-2xl" style="color: #3fb950;">→</div>
-
-<div class="p-4 rounded-xl border text-center w-44" style="background: #161b22; border-color: #8534F3;">
-  <div class="text-3xl mb-2">🔍</div>
-  <div class="font-bold" style="color: #8534F3;">Review</div>
-  <div class="text-xs mt-1" style="color: #8b949e;">Security analysis</div>
-  <div class="text-xs mt-1" style="color: #8534F3;">search, fetch</div>
-</div>
-
-</div>
-
-<div class="mt-6 rounded-lg border text-sm max-w-xl mx-auto p-4" style="background: #161b22; border-color: #30363d;">
-
-```yaml
-# In planner.agent.md frontmatter
-handoffs:
-  - label: Start Implementation
-    agent: agent
-    prompt: Implement the plan outlined above.
-    send: false
-  - label: Review Code
-    agent: security-reviewer
-    prompt: Review for security issues.
-```
-
-</div>
-
-<div class="mt-4 text-center text-sm" style="color: #8b949e;">Each agent has its own tools and constraints — context flows between them via handoffs</div>
-
-</div>
+<!-- SLIDE: Write Instructions Economically -->
+# How to write instructions
+<FourCardGridSlide
+  :partNumber="1"
+  pillIcon="📋"
+  pillLabel="Instructions"
+  title="Write Instructions Like They Cost Tokens"
+  :cards='[{"icon":"1️⃣","title":"One idea per line","description":"Each rule is a single statement. Split compound guidance into separate lines."},{"icon":"💡","title":"Include the why","description":"Use date-fns, not moment — moment is deprecated and inflates the bundle."},{"icon":"✅","title":"Show examples","description":"Preferred vs avoided snippets beat abstract style adjectives every time."},{"icon":"🧹","title":"Skip the linter","description":"Do not spend context on tabs, quotes, or import order. Tools already own that."}]'
+  :progressDots='{"current":7,"total":9,"activeColor":"bg-cyan-400 shadow-lg shadow-cyan-500/50"}'
+/>
 
 ---
 
-<!-- ═══════════════════════════════════════════════════════════════════════ -->
-<!-- SLIDE 13 — Choosing the Right Primitive                               -->
-<!-- ═══════════════════════════════════════════════════════════════════════ -->
-
-# Choosing the Right Primitive
-
-<div class="mt-4" style="background: #0d1117;">
-
-<table class="w-full text-sm">
-<thead>
-<tr style="border-bottom: 1px solid #30363d;">
-  <th class="text-left p-2" style="color: #8b949e;">Aspect</th>
-  <th class="text-left p-2" style="color: #e6edf3;">📋 Instructions</th>
-  <th class="text-left p-2" style="color: #e6edf3;">🧰 Skills</th>
-  <th class="text-left p-2" style="color: #e6edf3;">⚡ Prompts</th>
-  <th class="text-left p-2" style="color: #e6edf3;">🤖 Agents</th>
-</tr>
-</thead>
-<tbody style="color: #c9d1d9;">
-<tr style="border-bottom: 1px solid #161b22;">
-  <td class="p-2 font-medium" style="color: #8b949e;">Loading</td>
-  <td class="p-2">Always-on</td>
-  <td class="p-2">AI matches</td>
-  <td class="p-2">User invokes /</td>
-  <td class="p-2">User selects</td>
-</tr>
-<tr style="border-bottom: 1px solid #161b22;">
-  <td class="p-2 font-medium" style="color: #8b949e;">Scope</td>
-  <td class="p-2">Every request</td>
-  <td class="p-2">When relevant</td>
-  <td class="p-2">Single task</td>
-  <td class="p-2">Full session</td>
-</tr>
-<tr style="border-bottom: 1px solid #161b22;">
-  <td class="p-2 font-medium" style="color: #8b949e;">Includes</td>
-  <td class="p-2">Markdown</td>
-  <td class="p-2">Scripts, files</td>
-  <td class="p-2">Variables</td>
-  <td class="p-2">Tool restrictions</td>
-</tr>
-<tr style="border-bottom: 1px solid #161b22;">
-  <td class="p-2 font-medium" style="color: #8b949e;">Portability</td>
-  <td class="p-2">VS Code + GH</td>
-  <td class="p-2">VS Code + CLI</td>
-  <td class="p-2">VS Code</td>
-  <td class="p-2">VS Code + CLI</td>
-</tr>
-<tr>
-  <td class="p-2 font-medium" style="color: #8b949e;">Setup</td>
-  <td class="p-2" style="color: #3fb950;">5 min</td>
-  <td class="p-2" style="color: #58a6ff;">15 min</td>
-  <td class="p-2" style="color: #58a6ff;">10 min</td>
-  <td class="p-2" style="color: #d29922;">20 min</td>
-</tr>
-</tbody>
-</table>
-
-<div class="mt-5 p-4 rounded-lg border" style="background: #161b22; border-color: #d29922;">
-  <div class="font-bold text-sm" style="color: #d29922;">💡 Progressive Adoption Path</div>
-  <div class="text-sm mt-2" style="color: #c9d1d9;">
-    <span class="font-bold" style="color: #3fb950;">Week 1:</span> copilot-instructions.md →
-    <span class="font-bold" style="color: #58a6ff;">Week 2:</span> path-specific instructions →
-    <span class="font-bold" style="color: #58a6ff;">Week 3:</span> first prompt →
-    <span class="font-bold" style="color: #d29922;">Month 2+:</span> skills &amp; agents
-  </div>
-</div>
-
-</div>
+<!-- SLIDE: AGENTS.md Playbook -->
+# AGENTS.md
+<TwoColPairedConceptsSlide
+  :partNumber="1"
+  pillIcon="📋"
+  pillLabel="Instructions"
+  title="AGENTS.md — Cross-Tool Institutional Knowledge"
+  :left='{"header":"📁 What goes in root AGENTS.md","items":["Setup and install commands for the repo","Test commands and linting steps for PRs","Repository navigation tips","PR title format and commit conventions","Commands agents should actually run"]}'
+  :right='{"header":"🌐 Keep the playbook portable","items":["Open Markdown — not VS Code-specific","Any coding agent that reads AGENTS.md gets it","Prefer applyTo for folder-specific rules","Nested AGENTS.md is still experimental","Institutional knowledge that travels with the repo"]}'
+  :progressDots='{"current":8,"total":9,"activeColor":"bg-cyan-400 shadow-lg shadow-cyan-500/50"}'
+/>
 
 ---
 
-<!-- ═══════════════════════════════════════════════════════════════════════ -->
-<!-- SLIDE 14 — What's New: Chat Customizations Editor                     -->
-<!-- ═══════════════════════════════════════════════════════════════════════ -->
-
-# 🆕 What's New: Chat Customizations Editor
-
-<div class="mt-4" style="background: #0d1117;">
-
-<div class="p-4 rounded-lg border mb-4" style="background: #161b22; border-color: #3fb950; border-left: 4px solid #3fb950;">
-<div class="font-bold" style="color: #3fb950;">Centralized UI for managing all configuration primitives</div>
-<div class="text-sm mt-1" style="color: #8b949e;">March 2026 — VS Code 1.100+</div>
-</div>
-
-<div class="grid grid-cols-2 gap-4 text-sm">
-
-<div>
-<div class="font-bold mb-2" style="color: #e6edf3;">Scaffold Commands</div>
-<div class="space-y-2">
-<div class="p-2 rounded border" style="background: #0d1117; border-color: #30363d;">
-  <code style="color: #58a6ff;">/create-instruction</code> <span style="color: #8b949e;">— New .instructions.md with applyTo</span>
-</div>
-<div class="p-2 rounded border" style="background: #0d1117; border-color: #30363d;">
-  <code style="color: #58a6ff;">/create-prompt</code> <span style="color: #8b949e;">— New .prompt.md with frontmatter</span>
-</div>
-<div class="p-2 rounded border" style="background: #0d1117; border-color: #30363d;">
-  <code style="color: #58a6ff;">/create-skill</code> <span style="color: #8b949e;">— New SKILL.md + directory structure</span>
-</div>
-<div class="p-2 rounded border" style="background: #0d1117; border-color: #30363d;">
-  <code style="color: #58a6ff;">/create-agent</code> <span style="color: #8b949e;">— New .agent.md with tools &amp; model</span>
-</div>
-<div class="p-2 rounded border" style="background: #0d1117; border-color: #30363d;">
-  <code style="color: #58a6ff;">/create-hook</code> <span style="color: #8b949e;">— New agent hook definition</span>
-</div>
-</div>
-</div>
-
-<div>
-<div class="font-bold mb-2" style="color: #e6edf3;">Editor Tabs</div>
-<div class="space-y-2">
-<div class="p-2 rounded border" style="background: #0d1117; border-color: #30363d;">
-  <span style="color: #e6edf3;">📋 Instructions</span> <span style="color: #8b949e;">— Browse, edit, toggle repo-wide &amp; path-specific</span>
-</div>
-<div class="p-2 rounded border" style="background: #0d1117; border-color: #30363d;">
-  <span style="color: #e6edf3;">🧰 Skills</span> <span style="color: #8b949e;">— View loaded skills, test matching</span>
-</div>
-<div class="p-2 rounded border" style="background: #0d1117; border-color: #30363d;">
-  <span style="color: #e6edf3;">⚡ Prompts</span> <span style="color: #8b949e;">— Preview, test with sample inputs</span>
-</div>
-<div class="p-2 rounded border" style="background: #0d1117; border-color: #30363d;">
-  <span style="color: #e6edf3;">🤖 Agents</span> <span style="color: #8b949e;">— Configure tools, model, handoffs</span>
-</div>
-<div class="p-2 rounded border" style="background: #0d1117; border-color: #30363d;">
-  <span style="color: #e6edf3;">🔌 Plugins</span> <span style="color: #8b949e;">— Install, configure, manage bundles</span>
-</div>
-</div>
-</div>
-
-</div>
-
-</div>
-
-<div style="position: absolute; bottom: 16px; left: 32px; opacity: 0.4; font-size: 0.75rem; color: #8b949e;">[13] code.visualstudio.com/docs/copilot/customization/chat-customizations</div>
+<!-- SLIDE: Live Demo — /init -->
+# Live demo /init
+<AITerminalTranscriptSlide
+  :partNumber="1"
+  pillIcon="📋"
+  pillLabel="Instructions · Live Demo"
+  title="Demo: /init Drafts the Baseline"
+  subtitle="Do not hand-author the first constitution. Generate it, then edit."
+  :transcript='[
+    { "type": "user", "text": "/init" },
+    { "type": "thinking", "label": "🤔 Copilot:" },
+    { "type": "response", "lines": ["Scanning workspace conventions…", "Found: TypeScript, Vitest, Prisma, pnpm", "Drafting .github/copilot-instructions.md"] },
+    { "type": "outcome", "text": "Always-on file created — review, trim, commit" },
+    { "type": "user", "text": "Add a user endpoint" },
+    { "type": "thinking" },
+    { "type": "response", "lines": ["References: copilot-instructions.md", "Prisma + Vitest + named exports — not generic Express"] },
+    { "type": "outcome", "text": "Check References. If the file is listed, it is working." }
+  ]'
+  footerMetric="5 minutes to a team-aware baseline"
+  :progressDots='{"current":9,"total":9,"activeColor":"bg-cyan-400 shadow-lg shadow-cyan-500/50"}'
+/>
 
 ---
 
-<!-- ═══════════════════════════════════════════════════════════════════════ -->
-<!-- SLIDE 15 — What's New: Agent Hooks                                    -->
-<!-- ═══════════════════════════════════════════════════════════════════════ -->
-
-# 🆕 What's New: Agent Hooks
-
-<div class="mt-4" style="background: #0d1117;">
-
-<div class="p-4 rounded-lg border mb-4" style="background: #161b22; border-color: #3fb950; border-left: 4px solid #3fb950;">
-<div class="font-bold" style="color: #3fb950;">Lifecycle hooks that run shell commands at key moments in agent execution</div>
-<div class="text-sm mt-1" style="color: #8b949e;">Available in VS Code Insiders — ships stable April 2026</div>
-</div>
-
-<div class="grid grid-cols-2 gap-4 text-sm">
-
-<div>
-<div class="font-bold mb-2" style="color: #e6edf3;">Hook Lifecycle Events</div>
-<table class="w-full text-xs">
-<thead>
-<tr style="border-bottom: 1px solid #30363d;">
-  <th class="text-left p-1" style="color: #8b949e;">Event</th>
-  <th class="text-left p-1" style="color: #8b949e;">Fires When</th>
-</tr>
-</thead>
-<tbody style="color: #c9d1d9;">
-<tr style="border-bottom: 1px solid #161b22;">
-  <td class="p-1"><code>SessionStart</code></td>
-  <td class="p-1">Agent session begins</td>
-</tr>
-<tr style="border-bottom: 1px solid #161b22;">
-  <td class="p-1"><code>PreToolUse</code></td>
-  <td class="p-1">Before any tool call</td>
-</tr>
-<tr style="border-bottom: 1px solid #161b22;">
-  <td class="p-1"><code>PostToolUse</code></td>
-  <td class="p-1">After a tool call completes</td>
-</tr>
-<tr style="border-bottom: 1px solid #161b22;">
-  <td class="p-1"><code>PreMessage</code></td>
-  <td class="p-1">Before sending user message</td>
-</tr>
-<tr style="border-bottom: 1px solid #161b22;">
-  <td class="p-1"><code>PostMessage</code></td>
-  <td class="p-1">After agent response</td>
-</tr>
-<tr>
-  <td class="p-1"><code>Stop</code></td>
-  <td class="p-1">Agent session ends</td>
-</tr>
-</tbody>
-</table>
-</div>
-
-<div>
-<div class="font-bold mb-2" style="color: #e6edf3;">Example: Auto-format on Save</div>
-
-```json
-// .vscode/settings.json
-"github.copilot.chat.agent.hooks": {
-  "PostToolUse": [
-    {
-      "tool": "editFile",
-      "command": "npx prettier --write",
-      "args": ["${filePath}"],
-      "blocking": true
-    }
-  ]
-}
-```
-
-<div class="mt-3 p-2 rounded border text-xs" style="background: #161b22; border-color: #30363d;">
-  <span style="color: #d29922;">💡</span>
-  <span style="color: #c9d1d9;"> Hooks can also be scoped to a specific agent via <code>hooks</code> in agent frontmatter</span>
-</div>
-</div>
-
-</div>
-
-</div>
-
-<div style="position: absolute; bottom: 16px; left: 32px; opacity: 0.4; font-size: 0.75rem; color: #8b949e;">[14] code.visualstudio.com/docs/copilot/customization/agent-hooks</div>
+<!-- SLIDE: Part 2 — Custom Prompts -->
+# Part 2 Opener
+<SectionOpenerSlide
+  :partNumber="2"
+  pillIcon="💬"
+  pillLabel="Custom Prompts"
+  title="Custom Prompts"
+  subtitle="Solve the task in chat. Freeze the working recipe as a team /command."
+  :cards='[{"icon":"🧪","title":"Solve first","blurb":"A prompt is a proven workflow — not a guess about what the team might need later."},{"icon":"👥","title":"Team /command","blurb":"One developer writes the file. Every developer gets /component with the same context."},{"icon":"🎓","title":"Then graduate","blurb":"When the recipe needs scripts or auto-load, it becomes a skill. Not before."}]'
+  :terminal='{"context":"$ /create-prompt scaffold a React component with tests","detail":"Freeze the recipe. Do not retype it tomorrow."}'
+/>
 
 ---
 
-<!-- ═══════════════════════════════════════════════════════════════════════ -->
-<!-- SLIDE 16 — What's New: Agent Plugins                                  -->
-<!-- ═══════════════════════════════════════════════════════════════════════ -->
-
-# 🆕 What's New: Agent Plugins
-
-<div class="mt-4" style="background: #0d1117;">
-
-<div class="p-4 rounded-lg border mb-4" style="background: #161b22; border-color: #3fb950; border-left: 4px solid #3fb950;">
-<div class="font-bold" style="color: #3fb950;">Shareable bundles that package skills, agents, hooks, and MCP servers together</div>
-<div class="text-sm mt-1" style="color: #8b949e;">Preview — March 2026</div>
-</div>
-
-<div class="grid grid-cols-2 gap-4 text-sm">
-
-<div>
-<div class="font-bold mb-2" style="color: #e6edf3;">What a Plugin Contains</div>
-
-<div class="space-y-2">
-<div class="p-2 rounded border" style="background: #0d1117; border-color: #30363d;">
-  <span style="color: #e6edf3;">🧰 Skills</span> <span style="color: #8b949e;">— Domain expertise packs</span>
-</div>
-<div class="p-2 rounded border" style="background: #0d1117; border-color: #30363d;">
-  <span style="color: #e6edf3;">🤖 Agents</span> <span style="color: #8b949e;">— Preconfigured personas</span>
-</div>
-<div class="p-2 rounded border" style="background: #0d1117; border-color: #30363d;">
-  <span style="color: #e6edf3;">⚙️ Hooks</span> <span style="color: #8b949e;">— Lifecycle automations</span>
-</div>
-<div class="p-2 rounded border" style="background: #0d1117; border-color: #30363d;">
-  <span style="color: #e6edf3;">🔌 MCP Servers</span> <span style="color: #8b949e;">— External tool integrations</span>
-</div>
-</div>
-
-<div class="font-bold mt-4 mb-2" style="color: #e6edf3;">Discovery</div>
-
-<div class="p-3 rounded border" style="background: #0d1117; border-color: #30363d;">
-  <div style="color: #c9d1d9;">Use <code style="color: #58a6ff;">@agentPlugins</code> in chat to browse and install plugins from the marketplace</div>
-</div>
-
-</div>
-
-<div>
-<div class="font-bold mb-2" style="color: #e6edf3;">Plugin Manifest</div>
-
-```json
-{
-  "name": "react-patterns",
-  "version": "1.2.0",
-  "description": "React best practices",
-  "skills": ["./skills/component"],
-  "agents": ["./agents/reviewer.agent.md"],
-  "hooks": {
-    "PostToolUse": [{
-      "tool": "editFile",
-      "command": "npx eslint --fix",
-      "args": ["${filePath}"]
-    }]
-  },
-  "mcpServers": {
-    "storybook": {
-      "command": "npx",
-      "args": ["storybook-mcp"]
-    }
-  }
-}
-```
-
-<div class="mt-3 text-xs" style="color: #8b949e;">
-  Community sources: <code style="color: #c9d1d9;">github.com/copilot-plugins</code> · <code style="color: #c9d1d9;">awesome-copilot</code>
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-<div style="position: absolute; bottom: 16px; left: 32px; opacity: 0.4; font-size: 0.75rem; color: #8b949e;">[15] code.visualstudio.com/docs/copilot/customization/agent-plugins</div>
+<!-- SLIDE: Prompt File Anatomy -->
+# Prompt anatomy code
+<CodeWithFeaturesSlide
+  :partNumber="2"
+  pillIcon="💬"
+  pillLabel="Custom Prompts"
+  title="Prompt File Anatomy"
+  :code='{"language":"markdown","content":"---\nname: component\ndescription: Generate a React component with TypeScript,\n  tests, and documentation\ntools: [\"editFiles\", \"createFile\"]\nagent: agent\n---\n\n# Component Generator\n\nCreate a new React component: ${input:componentName:Component name}\n\n## Files to Create\nsrc/components/${input:componentName}/\n  ${input:componentName}.tsx\n  ${input:componentName}.types.ts\n  __tests__/${input:componentName}.test.tsx\n  index.ts\n\nFollow conventions in [standards](../copilot-instructions.md)\nAlso available: ${selection} and ${file}","filename":".github/prompts/component.prompt.md"}'
+  codePosition="left"
+  :features='[{"icon":"🔤","title":"Real variables","description":"${input:name:hint} prompts the user. ${selection} and ${file} pull the current editor context."},{"icon":"🔗","title":"Link, do not copy","description":"Reference copilot-instructions.md. Duplicating the constitution creates drift."},{"icon":"🛠️","title":"Scope the tools","description":"tools and agent on the prompt override the current session for this one task."}]'
+  :progressDots='{"current":1,"total":4,"activeColor":"bg-blue-400 shadow-lg shadow-blue-500/50"}'
+/>
 
 ---
 
-<!-- ═══════════════════════════════════════════════════════════════════════ -->
-<!-- SLIDE 17 — Real-World Use Cases                                       -->
-<!-- ═══════════════════════════════════════════════════════════════════════ -->
-
-# Real-World Use Cases
-
-<div class="mt-4 grid grid-cols-2 gap-4" style="background: #0d1117;">
-
-<div class="p-4 rounded-lg border" style="background: #161b22; border-color: #30363d;">
-  <div class="font-bold" style="color: #e6edf3;">🏗️ Monorepo Conventions</div>
-  <div class="text-xs mt-1 font-medium" style="color: #8b949e;">Primitive: Path-specific Instructions</div>
-  <div class="text-sm mt-2" style="color: #c9d1d9;">React frontend, Node backend, React Native mobile — each gets its own conventions via applyTo globs</div>
-  <div class="mt-2 text-sm font-bold" style="color: #3fb950;">40% fewer code review style comments</div>
-</div>
-
-<div class="p-4 rounded-lg border" style="background: #161b22; border-color: #30363d;">
-  <div class="font-bold" style="color: #e6edf3;">🧪 Test Standardization</div>
-  <div class="text-xs mt-1 font-medium" style="color: #8b949e;">Primitive: Prompt + Skill</div>
-  <div class="text-sm mt-2" style="color: #c9d1d9;">/test command generates conformant tests. Test-runner skill analyzes failures and suggests fixes.</div>
-  <div class="mt-2 text-sm font-bold" style="color: #3fb950;">Conformant tests from day 1</div>
-</div>
-
-<div class="p-4 rounded-lg border" style="background: #161b22; border-color: #30363d;">
-  <div class="font-bold" style="color: #e6edf3;">🗄️ Database Safety</div>
-  <div class="text-xs mt-1 font-medium" style="color: #8b949e;">Primitive: Agent + Hooks</div>
-  <div class="text-sm mt-2" style="color: #c9d1d9;">DB admin agent enforces 3NF, generates up/down migrations. PostToolUse hook validates SQL before commit.</div>
-  <div class="mt-2 text-sm font-bold" style="color: #3fb950;">Zero migration rollbacks in 6 months</div>
-</div>
-
-<div class="p-4 rounded-lg border" style="background: #161b22; border-color: #30363d;">
-  <div class="font-bold" style="color: #e6edf3;">🚀 Fast Onboarding</div>
-  <div class="text-xs mt-1 font-medium" style="color: #8b949e;">Primitive: Instructions + Prompt + Plugin</div>
-  <div class="text-sm mt-2" style="color: #c9d1d9;">Instructions document architecture. /onboard prompt provides guided codebase tour. Plugin bundles the full setup.</div>
-  <div class="mt-2 text-sm font-bold" style="color: #3fb950;">2 weeks → 3 days to first commit</div>
-</div>
-
-</div>
+<!-- SLIDE: Worked Transcript — /create-prompt -->
+# Worked example /create-prompt
+<AITerminalTranscriptSlide
+  :partNumber="2"
+  pillIcon="💬"
+  pillLabel="Custom Prompts · Worked Transcript"
+  title="Worked Example: /create-prompt From a Solved Chat"
+  subtitle="Do not invent the file from a blank buffer. Extract the recipe that just worked."
+  :transcript='[
+    { "type": "user", "text": "Scaffold a React component with types, CSS modules, and a Vitest file." },
+    { "type": "thinking" },
+    { "type": "response", "lines": ["Created Button.tsx, Button.types.ts, Button.test.tsx", "Used named exports and Vitest — from instructions"] },
+    { "type": "user", "text": "/create-prompt Save this as a reusable /component command" },
+    { "type": "thinking", "label": "🤔 Copilot:" },
+    { "type": "response", "lines": ["Writing .github/prompts/component.prompt.md", "Parameter: ${input:componentName}", "Linked ../copilot-instructions.md"] },
+    { "type": "outcome", "text": "Team can now type /component — the recipe is frozen" }
+  ]'
+  footerMetric="One writer. Every developer gets the slash command."
+  :progressDots='{"current":2,"total":4,"activeColor":"bg-blue-400 shadow-lg shadow-blue-500/50"}'
+/>
 
 ---
 
-<!-- ═══════════════════════════════════════════════════════════════════════ -->
-<!-- SLIDE 18 — Mental Model Shift                                         -->
-<!-- ═══════════════════════════════════════════════════════════════════════ -->
-
-# 🧠 Mental Model Shift
-
-<div class="mt-4 grid grid-cols-2 gap-6" style="background: #0d1117;">
-
-<div>
-
-<div class="font-bold mb-3" style="color: #3fb950;">✅ Move Toward</div>
-
-<div class="space-y-2 text-sm">
-<div class="p-2 rounded border" style="background: #161b22; border-color: #3fb950;">
-  <span class="font-bold" style="color: #e6edf3;">File-based config</span>
-  <div class="text-xs mt-1" style="color: #8b949e;">Encode conventions once in .github/ instead of repeating in every prompt</div>
-</div>
-<div class="p-2 rounded border" style="background: #161b22; border-color: #3fb950;">
-  <span class="font-bold" style="color: #e6edf3;">Progressive enhancement</span>
-  <div class="text-xs mt-1" style="color: #8b949e;">Start simple, add complexity only when clear need emerges</div>
-</div>
-<div class="p-2 rounded border" style="background: #161b22; border-color: #3fb950;">
-  <span class="font-bold" style="color: #e6edf3;">Team-shared AI knowledge</span>
-  <div class="text-xs mt-1" style="color: #8b949e;">Config in version control = reviewable institutional knowledge</div>
-</div>
-</div>
-
-</div>
-
-<div>
-
-<div class="font-bold mb-3" style="color: #f85149;">🛑 Move Against</div>
-
-<div class="space-y-2 text-sm">
-<div class="p-2 rounded border" style="background: #161b22; border-color: #f85149;">
-  <span class="font-bold" style="color: #e6edf3;">Over-engineering with agents first</span>
-  <div class="text-xs mt-1" style="color: #8b949e;">80% of teams get most value from instructions alone</div>
-</div>
-<div class="p-2 rounded border" style="background: #161b22; border-color: #f85149;">
-  <span class="font-bold" style="color: #e6edf3;">Massive instruction files</span>
-  <div class="text-xs mt-1" style="color: #8b949e;">Keep under 2 pages — bloat consumes your context budget</div>
-</div>
-<div class="p-2 rounded border" style="background: #161b22; border-color: #f85149;">
-  <span class="font-bold" style="color: #e6edf3;">Task-specific content in instructions</span>
-  <div class="text-xs mt-1" style="color: #8b949e;">General conventions only — use prompts for specific tasks</div>
-</div>
-</div>
-
-<div class="font-bold mt-4 mb-2" style="color: #d29922;">⚠️ Move Away</div>
-
-<div class="p-2 rounded border text-sm" style="background: #161b22; border-color: #d29922;">
-  <span class="font-bold" style="color: #e6edf3;">Copy-pasting context every conversation</span>
-  <div class="text-xs mt-1" style="color: #8b949e;">Instructions eliminate this entirely — encode once, apply everywhere</div>
-</div>
-
-</div>
-
-</div>
+<!-- SLIDE: Prompt to Skill Graduation -->
+# Prompt vs skill intent
+<TwoColPairedConceptsSlide
+  :partNumber="2"
+  pillIcon="💬"
+  pillLabel="Custom Prompts"
+  title="Prompt First — Skill When the Recipe Is Proven"
+  :left='{"header":"💬 Stay on a prompt when","items":["A human should decide when it runs","The steps are text, not scripts","You are still iterating on the recipe","The team needs a shared /command now","Example: /component, /pr-checklist"]}'
+  :right='{"header":"⚡ Graduate to a skill when","items":["The agent should notice the task itself","You have a script or template to run","The same workflow spans tools","You want auto-load, slash-only, or both","Example: test-runner with run-tests.sh"]}'
+  :progressDots='{"current":3,"total":4,"activeColor":"bg-blue-400 shadow-lg shadow-blue-500/50"}'
+/>
 
 ---
 
-<!-- ═══════════════════════════════════════════════════════════════════════ -->
-<!-- SLIDE 19 — What You Can Do Today                                      -->
-<!-- ═══════════════════════════════════════════════════════════════════════ -->
-
-# ✅ What You Can Do Today
-
-<div class="mt-4 grid grid-cols-3 gap-4" style="background: #0d1117;">
-
-<div class="p-4 rounded-xl border" style="background: #161b22; border-color: #3fb950;">
-  <div class="text-sm font-bold mb-3" style="color: #3fb950;">⏱️ 5 Minutes</div>
-  <div class="space-y-2 text-sm" style="color: #c9d1d9;">
-    <div>☐ Create <code class="text-xs">.github/copilot-instructions.md</code></div>
-    <div>☐ Add tech stack + build commands</div>
-    <div>☐ Try <code class="text-xs">/create-instruction</code></div>
-  </div>
-</div>
-
-<div class="p-4 rounded-xl border" style="background: #161b22; border-color: #58a6ff;">
-  <div class="text-sm font-bold mb-3" style="color: #58a6ff;">⏱️ 1 Hour</div>
-  <div class="space-y-2 text-sm" style="color: #c9d1d9;">
-    <div>☐ Add path-specific instructions</div>
-    <div>☐ Create first <code class="text-xs">.prompt.md</code></div>
-    <div>☐ Browse <a href="https://github.com/github/awesome-copilot" style="color: #58a6ff;">Awesome Copilot</a> examples</div>
-  </div>
-</div>
-
-<div class="p-4 rounded-xl border" style="background: #161b22; border-color: #d29922;">
-  <div class="text-sm font-bold mb-3" style="color: #d29922;">⏱️ 2-4 Hours</div>
-  <div class="space-y-2 text-sm" style="color: #c9d1d9;">
-    <div>☐ Build a skill for a common task</div>
-    <div>☐ Create a planning agent</div>
-    <div>☐ Set up multi-agent workflow</div>
-  </div>
-</div>
-
-</div>
-
-<div class="mt-6 p-4 rounded-lg border text-center" style="background: #161b22; border-color: #3fb950;">
-  <div class="text-lg font-bold" style="color: #3fb950;">Start with instructions. Get value in 5 minutes.</div>
-  <div class="text-sm mt-1" style="color: #8b949e;">Add complexity only when clear need emerges.</div>
-</div>
+<!-- SLIDE: Keep Prompts Thin -->
+# Common prompt mistakes
+<ThreeColumnCardSlide
+  :partNumber="2"
+  pillIcon="💬"
+  pillLabel="Custom Prompts"
+  title="Keep Prompts Thin — They Are Not the Constitution"
+  :columns='[{"icon":"🛑","title":"Do not copy rules","description":"Link instructions. Copied standards drift the first week.","items":["Link copilot-instructions.md","One source of conventions","Prompts describe the task only"]},{"icon":"🛑","title":"Do not skip variables","description":"Hard-coded names make a personal snippet, not a team command.","items":["${input:name:hint} for parameters","${selection} for the highlight","${file} for the active file"]},{"icon":"🛑","title":"Do not start here","description":"A prompt without instructions still produces generic files.","items":["Instructions first","Then freeze the recipe","Then add scripts as a skill"]}]'
+  :progressDots='{"current":4,"total":4,"activeColor":"bg-blue-400 shadow-lg shadow-blue-500/50"}'
+/>
 
 ---
 
-<!-- ═══════════════════════════════════════════════════════════════════════ -->
-<!-- SLIDE 20 — References                                                 -->
-<!-- ═══════════════════════════════════════════════════════════════════════ -->
-
-# 📖 References
-
-<div class="grid grid-cols-2 gap-4 text-xs mt-6" style="background: #0d1117;">
-
-<div class="space-y-2">
-  <div class="font-bold mb-1" style="color: #e6edf3;">Official Documentation</div>
-  <div style="color: #c9d1d9;">[1] <strong>Customize AI in VS Code</strong> — code.visualstudio.com/docs/copilot/copilot-customization</div>
-  <div style="color: #c9d1d9;">[2] <strong>Custom instructions</strong> — code.visualstudio.com/docs/copilot/customization/custom-instructions</div>
-  <div style="color: #c9d1d9;">[3] <strong>Prompt files</strong> — code.visualstudio.com/docs/copilot/customization/prompt-files</div>
-  <div style="color: #c9d1d9;">[4] <strong>Agent Skills</strong> — code.visualstudio.com/docs/copilot/customization/agent-skills</div>
-  <div style="color: #c9d1d9;">[5] <strong>Custom agents</strong> — code.visualstudio.com/docs/copilot/customization/custom-agents</div>
-  <div style="color: #c9d1d9;">[6] <strong>Repository instructions</strong> — docs.github.com/copilot/customizing-copilot</div>
-</div>
-
-<div class="space-y-2">
-  <div class="font-bold mb-1" style="color: #e6edf3;">Standards & Community</div>
-  <div style="color: #c9d1d9;">[7] <strong>Agent Skills standard</strong> — agentskills.io</div>
-  <div style="color: #c9d1d9;">[8] <strong>Awesome Copilot</strong> — github.com/github/awesome-copilot</div>
-  <div style="color: #c9d1d9;">[9] <strong>Response customization</strong> — docs.github.com/copilot/concepts/prompting</div>
-  <div style="color: #c9d1d9;">[10] <strong>Instructions support</strong> — docs.github.com/copilot/reference</div>
-  <div style="color: #c9d1d9;">[11] <strong>VS Code Chat docs</strong> — code.visualstudio.com/docs/copilot/chat</div>
-  <div style="color: #c9d1d9;">[12] <strong>Agent Hooks reference</strong> — code.visualstudio.com/docs/copilot/customization/agent-hooks</div>
-  <div style="color: #c9d1d9;">[13] <strong>Chat Customizations</strong> — code.visualstudio.com/docs/copilot/customization/chat-customizations</div>
-  <div style="color: #c9d1d9;">[14] <strong>Agent Plugins</strong> — code.visualstudio.com/docs/copilot/customization/agent-plugins</div>
-</div>
-
-</div>
+<!-- SLIDE: Part 3 — Skills -->
+# Part 3 Opener
+<SectionOpenerSlide
+  :partNumber="3"
+  pillIcon="⚡"
+  pillLabel="Skills"
+  title="Skills"
+  subtitle="Graduate the proven prompt. Add scripts and templates the agent can actually run."
+  :cards='[{"icon":"📦","title":"A pack, not a file","blurb":"SKILL.md plus scripts/ plus templates. If there is nothing to run, keep the prompt."},{"icon":"🎛️","title":"Both by default","blurb":"A skill can auto-load and appear as /skill. Lock either side on purpose."},{"icon":"🧪","title":"Live /create-skill","blurb":"Extract the prompt you just proved. Do not invent a capability from a blank folder."}]'
+  :terminal='{"context":"$ /create-skill from how we just ran and fixed tests","detail":"Prompt solved it. Skill packages it."}'
+/>
 
 ---
-layout: end
+
+<!-- SLIDE: Progressive Skill Loading -->
+# How Skills Work
+<ThreeColumnCardSlide
+  :partNumber="3"
+  pillIcon="⚡"
+  pillLabel="Skills"
+  title="Three-Level Progressive Loading"
+  :columns='[{"icon":"1️⃣","title":"Discovery","description":"Lightweight metadata scanned at startup.","items":["Skill name and description only","Always loaded — near-zero context cost","Powers AI relevance matching","Dozens of skills with minimal overhead"]},{"icon":"2️⃣","title":"Instructions","description":"Full SKILL.md body — when the task matches.","items":["Complete guidance and process steps","Loaded only when description matches","Or when someone types /test-runner","Contains links to scripts and templates"]},{"icon":"3️⃣","title":"Resources","description":"Scripts and templates — when referenced.","items":["Shell scripts, test templates, examples","Fetched lazily during execution","Never loaded if not referenced","This is why a skill is a folder"]}]'
+  :progressDots='{"current":1,"total":5,"activeColor":"bg-indigo-400 shadow-lg shadow-indigo-500/50"}'
+/>
+
 ---
 
-<!-- ═══════════════════════════════════════════════════════════════════════ -->
-<!-- SLIDE 21 — End                                                        -->
-<!-- ═══════════════════════════════════════════════════════════════════════ -->
+<!-- SLIDE: Skill Pack Anatomy -->
+# Skill anatomy code
+<CodeWithFeaturesSlide
+  :partNumber="3"
+  pillIcon="⚡"
+  pillLabel="Skills"
+  title="A Test-Runner Skill — The Folder Is the Point"
+  :code='{"language":"markdown","content":"---\nname: test-runner\ndescription: Run tests, analyze failures, and suggest\n  fixes. Use when asked to test, debug failures,\n  or add coverage.\n---\n\n# Test Runner Skill\n\n## Process\n1. Detect the runner from package.json\n2. Run [scripts/run-tests.sh](scripts/run-tests.sh)\n3. Start new files from [assets/test-template.ts](assets/test-template.ts)\n4. Suggest targeted fixes from the failure output","filename":".github/skills/test-runner/SKILL.md"}'
+  codePosition="left"
+  :features='[{"icon":"🎯","title":"Description is the trigger","description":"Write when to use it. That sentence is how auto-load decides."},{"icon":"🔗","title":"Links make resources real","description":"Unlinked files in the folder are invisible. Reference every script and template."},{"icon":"📂","title":".github/skills/test-runner/","description":"SKILL.md + scripts/ + assets/. Personal copy lives in ~/.copilot/skills/."}]'
+  :progressDots='{"current":2,"total":5,"activeColor":"bg-indigo-400 shadow-lg shadow-indigo-500/50"}'
+/>
 
-<div class="h-full flex flex-col items-center justify-center" style="background: #0d1117;">
-  <div class="text-6xl mb-6">📋 🧰 ⚡ 🤖</div>
-  <h1 class="!text-5xl !font-bold" style="color: #e6edf3;">
-    Configuration Primitives
-  </h1>
-  <div class="mt-4 text-xl" style="color: #8b949e;">
-    Making AI Understand Your Codebase
-  </div>
-  <div class="mt-8 text-sm" style="color: #8b949e;">
-    Start with instructions → Add complexity when needed
-  </div>
-  <div class="mt-6 w-32 h-1 rounded-full" style="background: linear-gradient(to right, transparent, #8534F3, transparent);"></div>
-</div>
+---
+
+<!-- SLIDE: Skill Runner Script -->
+# Skill script
+<CodeWithFeaturesSlide
+  :partNumber="3"
+  pillIcon="⚡"
+  pillLabel="Skills"
+  title="The Script the Skill Actually Runs"
+  :code='{"language":"bash","content":"#!/usr/bin/env bash\nset -euo pipefail\n\n# scripts/run-tests.sh — invoked from SKILL.md\nTARGET=\"${1:-}\"\n\nif [[ -n \"$TARGET\" ]]; then\n  npm test -- \"$TARGET\"\nelse\n  npm test\nfi\n\nif [[ \"${2:-}\" == \"--coverage\" ]]; then\n  npm run test:coverage\nfi","filename":".github/skills/test-runner/scripts/run-tests.sh"}'
+  codePosition="left"
+  :features='[{"icon":"▶️","title":"Runnable, not descriptive","description":"The agent executes this script. A paragraph of advice is still a prompt."},{"icon":"📎","title":"Must be linked","description":"SKILL.md has to point at scripts/run-tests.sh or the file never loads."},{"icon":"🔒","title":"Keep it boring","description":"Detect the runner, run the suite, print failures. Leave analysis to SKILL.md."}]'
+  :progressDots='{"current":3,"total":5,"activeColor":"bg-indigo-400 shadow-lg shadow-indigo-500/50"}'
+/>
+
+---
+
+<!-- SLIDE: Skill Test Template -->
+# Skill template
+<CodeWithFeaturesSlide
+  :partNumber="3"
+  pillIcon="⚡"
+  pillLabel="Skills"
+  title="The Template New Tests Start From"
+  :code='{"language":"typescript","content":"import { render, screen, waitFor } from \"@testing-library/react\";\nimport userEvent from \"@testing-library/user-event\";\nimport { ComponentUnderTest } from \"./ComponentUnderTest\";\n\ndescribe(\"ComponentUnderTest\", () => {\n  it(\"renders without crashing\", () => {\n    render(<ComponentUnderTest />);\n    expect(screen.getByRole(\"main\")).toBeInTheDocument();\n  });\n});","filename":".github/skills/test-runner/assets/test-template.ts"}'
+  codePosition="left"
+  :features='[{"icon":"📄","title":"Start from house style","description":"New tests copy this file. The agent does not invent a second test stack."},{"icon":"🔗","title":"Linked from SKILL.md","description":"assets/test-template.ts is loaded only when the skill says to create a test."},{"icon":"♻️","title":"Why this is a skill","description":"A prompt can describe a test. A skill ships the template and the runner."}]'
+  :progressDots='{"current":4,"total":5,"activeColor":"bg-indigo-400 shadow-lg shadow-indigo-500/50"}'
+/>
+
+---
+
+<!-- SLIDE: Live Demo — /create-skill -->
+# Live demo /create-skill
+<AITerminalTranscriptSlide
+  :partNumber="3"
+  pillIcon="⚡"
+  pillLabel="Skills · Live Demo"
+  title="Demo: /create-skill From the Prompt That Worked"
+  subtitle="Graduate after the recipe is proven. Then add the script and the template."
+  :transcript='[
+    { "type": "user", "text": "/create-skill from how we just ran and fixed the API tests" },
+    { "type": "thinking", "label": "🤔 Copilot:" },
+    { "type": "response", "lines": ["Creating .github/skills/test-runner/", "SKILL.md + scripts/run-tests.sh + assets/test-template.ts"] },
+    { "type": "user", "text": "Make it auto-load on test work, and keep /test-runner" },
+    { "type": "thinking" },
+    { "type": "response", "lines": ["Default: auto-load AND slash command", "user-invocable: false hides /skill", "disable-model-invocation: true is slash-only"] },
+    { "type": "outcome", "text": "Ask to test an endpoint — the skill loads and runs the script" }
+  ]'
+  footerMetric="Prompt solved it. Skill packages the runner."
+  :progressDots='{"current":5,"total":5,"activeColor":"bg-indigo-400 shadow-lg shadow-indigo-500/50"}'
+/>
+
+---
+
+<!-- SLIDE: Part 4 — Agents -->
+# Part 4 Opener
+<SectionOpenerSlide
+  :partNumber="4"
+  pillIcon="🤖"
+  pillLabel="Agents"
+  title="Agents"
+  subtitle="Compose the stack into a persona. The tool list is the architecture."
+  :cards='[{"icon":"🔒","title":"Constraint as design","blurb":"A read-only Planner cannot edit files. The restriction is the design, not a workaround."},{"icon":"🔄","title":"Handoff, not hop","blurb":"Plan, then one button to Implementer with the plan intact. Role stays separated."},{"icon":"🧪","title":"Live /create-agent","blurb":"Generate the persona last — after instructions, prompts, and skills already exist."}]'
+  :terminal='{"context":"$ /create-agent a read-only planner that hands off to implementer","detail":"Do not start teams here."}'
+/>
+
+---
+
+<!-- SLIDE: Planner Agent Anatomy -->
+# Agent anatomy code
+<CodeWithFeaturesSlide
+  :partNumber="4"
+  pillIcon="🤖"
+  pillLabel="Agents"
+  title="The Planner Agent — Constraint as Architecture"
+  :code='{"language":"markdown","content":"---\nname: planner\ndescription: Generate implementation plans by researching\n  the codebase. Read-only — never modifies files.\ntools: [\"search\", \"readFile\", \"listFiles\", \"fetch\"]\nmodel: Claude Sonnet 4 (copilot)\nhandoffs:\n  - label: Start Implementation\n    agent: agent\n    prompt: Implement the plan outlined above.\n    send: false\n---\n\n# Planning Agent\n\nYou are a senior architect creating implementation plans.\n\n## Rules\n- NEVER modify files — you are read-only\n- Always cite files and line numbers\n- Include effort estimates for each step","filename":".github/agents/planner.agent.md"}'
+  codePosition="left"
+  :features='[{"icon":"🔒","title":"tools: is the boundary","description":"search, readFile, listFiles, fetch — no editFiles. Same pattern as a security reviewer."},{"icon":"🔄","title":"Handoff button appears","description":"Start Implementation switches to the implementer with the plan intact."},{"icon":"🧠","title":"Model per agent","description":"Reasoning model for planning. Fast model for implementation. Match the role."}]'
+  :progressDots='{"current":1,"total":4,"activeColor":"bg-purple-400 shadow-lg shadow-purple-500/50"}'
+/>
+
+---
+
+<!-- SLIDE: Worked Transcript — /create-agent -->
+# Worked example /create-agent
+<AITerminalTranscriptSlide
+  :partNumber="4"
+  pillIcon="🤖"
+  pillLabel="Agents · Worked Transcript"
+  title="Worked Example: /create-agent After the Stack Exists"
+  subtitle="Generate the persona after the constitution, the prompt, and the skill already exist."
+  :transcript='[
+    { "type": "user", "text": "/create-agent a read-only planner that hands off to implementer" },
+    { "type": "thinking", "label": "🤔 Copilot:" },
+    { "type": "response", "lines": ["Writing .github/agents/planner.agent.md", "tools: search, readFile, listFiles, fetch", "handoff: Start Implementation → agent"] },
+    { "type": "user", "text": "Plan adding rate limiting to the users API" },
+    { "type": "thinking" },
+    { "type": "response", "lines": ["Read src/api/users.ts:88-140", "Plan: middleware + tests via test-runner skill", "No files edited — Planner has no write tools"] },
+    { "type": "outcome", "text": "Handoff button appears. Constraint held." }
+  ]'
+  footerMetric="Do not start teams on agents."
+  :progressDots='{"current":2,"total":4,"activeColor":"bg-purple-400 shadow-lg shadow-purple-500/50"}'
+/>
+
+---
+
+<!-- SLIDE: Configuration Stack -->
+# Full primitive stack
+<MaturityJourneyRoadmapSlide
+  :partNumber="4"
+  pillIcon="🤖"
+  pillLabel="Agents"
+  title="The Configuration Stack — How the Primitives Compose"
+  :stages='[{"icon":"📋","label":"S1","name":"Instructions","description":"Always-on baseline every later file inherits"},{"icon":"💬","label":"S2","name":"Prompts","description":"Freeze a solved workflow as a team /command"},{"icon":"⚡","label":"S3","name":"Skills","description":"Graduate the recipe — add scripts and templates"},{"icon":"🤖","label":"S4","name":"Agents","isTarget":true,"description":"Constrain the persona that composes the rest"}]'
+  caption="Solve with a prompt. Graduate to a skill. Constrain with an agent."
+  :progressDots='{"current":3,"total":4,"activeColor":"bg-purple-400 shadow-lg shadow-purple-500/50"}'
+/>
+
+---
+
+<!-- SLIDE: Choosing the Right Primitive -->
+# Decision tree — choosing the right primitive
+<FrameworkMappingRowsSlide
+  :partNumber="4"
+  pillIcon="🤖"
+  pillLabel="Agents"
+  title="Choosing the Right Primitive"
+  :rows='[{"label":"Always-on","description":"Repo conventions and build commands belong in every request.","tag":"→ Instruct"},{"label":"Folder rules","description":"applyTo for file patterns. Root AGENTS.md for portable commands.","tag":"→ Scope"},{"label":"Solved task","description":"The team repeats a proven recipe and shares one /command.","tag":"→ Prompt"},{"label":"Add scripts","description":"The recipe needs a runner, a template, or auto-load.","tag":"→ Skill"},{"label":"A persona","description":"A role needs tools on or off, and maybe a handoff.","tag":"→ Agent"}]'
+  :progressDots='{"current":4,"total":4,"activeColor":"bg-purple-400 shadow-lg shadow-purple-500/50"}'
+/>
+
+---
+
+<!-- SLIDE: Before and After -->
+# Before and After
+<BeforeAfterSlide
+  header="From Repeated Context to Inherited Knowledge"
+  :leftItems='["Developer re-explains conventions in every chat session — minutes wasted, every day","The same scaffolding prompt is retyped until someone copies the wrong version","A skill folder is invented before the team has a working recipe","Generic boilerplate: no types, console.log errors, wrong test framework"]'
+  :rightItems='["/init drafts copilot-instructions.md — conventions present on the next request","/create-prompt freezes the recipe the team just proved as /component","/create-skill adds run-tests.sh and the test template only after that recipe works","/create-agent last — a read-only Planner that cannot touch the files it planned"]'
+  :metrics='[{"value":"5 min","detail":"To /init the first instructions file and see immediate improvement"},{"value":"Prompt → Skill","detail":"Solve thoroughly as a /command, then graduate scripts into a skill"},{"value":"4 primitives","detail":"Instructions, prompts, skills, agents — in that order"}]'
+/>
+
+---
+
+<!-- SLIDE: What You Can Do Today -->
+# What You Can Do Today
+<WhatYouCanDoTodaySlide
+  :today='["Run /init and commit a trimmed .github/copilot-instructions.md","Verify the References panel lists that file on the next chat request","Write one rule with a why and a preferred vs avoided example"]'
+  :thisWeek='["Add one path-scoped .instructions.md — and remember applyTo is required","Run /create-prompt on a scaffolding task your team already solved","Link that prompt to instructions instead of copying the constitution"]'
+  :thisMonth='["Run /create-skill only after the prompt is stable — add a script and a template","Set user-invocable or disable-model-invocation on purpose, not by accident","Run /create-agent for a read-only Planner and try the handoff once"]'
+  footer="Start with instructions. Solve with a prompt. Graduate to a skill. Constrain with an agent."
+/>
+
+---
+
+<!-- SLIDE: References -->
+# References
+<ReferencesSlide
+  :groups='[{"title":"📖 VS Code Documentation","color":"cyan","items":[{"label":"Customize AI in Visual Studio Code","href":"https://code.visualstudio.com/docs/copilot/copilot-customization","description":"Overview of all customization options — the canonical starting point"},{"label":"Use custom instructions in VS Code","href":"https://code.visualstudio.com/docs/copilot/customization/custom-instructions","description":"Instructions syntax, applyTo globs, and personal vs. workspace scoping"},{"label":"Use Agent Skills in VS Code","href":"https://code.visualstudio.com/docs/copilot/customization/agent-skills","description":"Skill structure, progressive loading, and the open standard"},{"label":"Use prompt files in VS Code","href":"https://code.visualstudio.com/docs/copilot/customization/prompt-files","description":"Prompt frontmatter schema, variable interpolation, and team sharing"},{"label":"Custom agents in VS Code","href":"https://code.visualstudio.com/docs/copilot/customization/custom-agents","description":"Agent file structure, tool restrictions, model selection, and handoffs"},{"label":"Chat Debug View","href":"https://code.visualstudio.com/docs/copilot/chat/chat-debug-view","description":"Inspect request context, tool calls, and response details"},{"label":"Troubleshoot AI in VS Code","href":"https://code.visualstudio.com/docs/copilot/troubleshooting","description":"Diagnose customization and request-path failures"}]},{"title":"📖 GitHub Documentation","color":"purple","items":[{"label":"Adding repository custom instructions for GitHub Copilot","href":"https://docs.github.com/en/copilot/customizing-copilot/adding-repository-custom-instructions-for-github-copilot","description":"GitHub-side documentation for repository instructions"},{"label":"AGENTS.md open format","href":"https://agents.md/","description":"Open specification for the cross-agent AGENTS.md playbook format"}]}]'
+/>
+
+---
+
+<!-- SLIDE: Thank You -->
+# Thank You
+<ThankYouSlide
+  title="Copilot Configuration Primitives"
+  subtitle="Encode the convention once. Graduate the workflow when it is proven."
+  :cards='[{"icon":"📋","value":"Instructions","detail":"/init today — one file, immediate improvement, zero ongoing maintenance"},{"icon":"💬","value":"Prompts","detail":"Freeze a solved recipe as a team /command before you automate it"},{"icon":"⚡","value":"Skills","detail":"Graduate the prompt — scripts and templates the agent can run"}]'
+  prompt="Solve with a prompt. Graduate to a skill. Add an agent only when the role needs a tool boundary."
+/>

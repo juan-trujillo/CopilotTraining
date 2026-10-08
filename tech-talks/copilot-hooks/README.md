@@ -1,7 +1,14 @@
 ---
 status: active
-updated: 2026-02-11
-section: "Context & Customization"
+updated: 2026-09-16
+section: "Verify and Govern"
+audience: [platform-engineer, security]
+level: advanced
+duration: 45
+format: core-talk
+decision: "Which agent actions should policy allow or deny at execution time?"
+prerequisites: [copilot-primitives]
+related: [agentic-lifecycle, agentic-sdlc, enterprise-patterns]
 references:
   - url: https://code.visualstudio.com/docs/copilot/customization/hooks
     label: "Agent hooks configuration in VS Code"
@@ -15,6 +22,15 @@ references:
   - url: https://docs.github.com/en/copilot/how-tos/use-copilot-agents/coding-agent/use-hooks
     label: "Using hooks with coding agent"
     verified: 2026-02-11
+  - url: https://code.visualstudio.com/docs/copilot/security
+    label: "Security considerations for AI in VS Code"
+    verified: 2026-09-15
+  - url: https://code.visualstudio.com/updates/v1_121
+    label: "VS Code release notes: v1.121"
+    verified: 2026-09-15
+  - url: https://code.visualstudio.com/updates/v1_122
+    label: "VS Code release notes: v1.122"
+    verified: 2026-09-15
 ---
 
 # GitHub Copilot Hooks: Programmable Governance for Agent Workflows
@@ -38,40 +54,6 @@ references:
 
 ---
 
-## 📽️ Slide Generation Mapping
-
-### Slide Sequence (Generated Automatically)
-
-1. **Title/Logo Slide** ← H1 title + subtitle
-2. **Question/Objective Slide** ← "The Question This Talk Answers"
-3. **Table of Contents Slide** ← Auto-generated from 🎬 sections
-4. **Problem Slide** ← "The Problem"
-5. **Solution Overview** ← "The Solution"
-6. **Key Artifacts** ← "Key Artifacts" inventory
-7. **Mental Model Shift** ← Move-Toward/Away/Against
-8. **When to Use Decision Tree** ← "When to Use This Pattern"
-9. **Lifecycle Control** ← 🎬 Section 1 (3-4 slides)
-10. **Preventive Enforcement** ← 🎬 Section 2 (3-4 slides)
-11. **Observability & Audit** ← 🎬 Section 3 (2-3 slides)
-12. **Real-World Patterns** ← 🎬 Section 4 (3-4 slides)
-13. **Advanced Integration** ← 🎬 Section 5 (2-3 slides)
-14. **Use Cases** ← Real-World Use Cases (1-2 slides)
-15. **Actionable Outcomes** ← What You Can Do Today
-16. **Related Patterns** ← Related Patterns
-17. **Official Documentation** ← 📚 section
-18. **End Slide** ← Auto-generated
-
-### Major Sections (TOC Entries)
-
-```markdown
-<!-- 🎬 MAJOR SECTION: Lifecycle Control -->
-<!-- 🎬 MAJOR SECTION: Preventive Enforcement -->
-<!-- 🎬 MAJOR SECTION: Observability & Audit -->
-<!-- 🎬 MAJOR SECTION: Real-World Patterns -->
-<!-- 🎬 MAJOR SECTION: Advanced Integration -->
-```
-
----
 
 ## The Problem
 
@@ -247,6 +229,10 @@ Q: What's your governance requirement?
 | **Veto Power** | Yes (`PreToolUse` only) | Yes (blocks via OS) | No (suggestions only) |
 | **Setup Time** | 1-2 hours | 30 minutes | 15 minutes |
 | **Performance Impact** | <5s per action typical | None (native OS) | None |
+
+### Defense in Depth, Not Substitution
+
+Use deterministic hooks to inspect or block known action patterns, approval policy to retain human authority over consequential tools, and preview OS sandboxing to restrict filesystem and network effects if a command still runs. The VS Code sandbox is available on macOS and Linux, including WSL2, and is enabled with `chat.agent.sandbox.enabled`; it does not replace hooks or approval policy. Sensitive secret prompts remain a separate boundary: the user enters secrets directly in the terminal, and auto-approve flows cancel rather than supplying them.
 
 ---
 

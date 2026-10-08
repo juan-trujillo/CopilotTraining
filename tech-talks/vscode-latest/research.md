@@ -1,15 +1,15 @@
 # Research: VS Code Latest Features for AI-Assisted Development
 
 > Topic: vscode-latest | Developers using GitHub Copilot and AI-assisted workflows | 30-45 minutes
-> Primary Question: What are the most impactful new VS Code features (v1.107-1.109) for developers using GitHub Copilot and AI-assisted development workflows?
+> Primary Question: What are the most impactful new VS Code features (v1.108-1.110) for developers using GitHub Copilot and AI-assisted development workflows?
 
 ## 1. Executive Summary
 
-Visual Studio Code versions 1.107 through 1.109 (November 2025 - January 2026) introduced transformative capabilities for AI-assisted development, fundamentally changing how developers orchestrate, secure, and scale agent-driven workflows. The most impactful innovation is **multi-agent orchestration** — enabling developers to coordinate multiple specialized AI agents (local, background, cloud, and Claude) that work in parallel across isolated workspaces. The Agent HQ interface provides centralized session management, while new features like Git worktree isolation, terminal sandboxing, and Agent Skills allow developers to safely delegate complex tasks without losing control.
+Visual Studio Code versions 1.108 through 1.110 (December 2025 - February 2026) introduced transformative capabilities for AI-assisted development, fundamentally changing how developers orchestrate, secure, and scale agent-driven workflows. The most impactful innovations include **Agent Plugins** for distributing prepackaged customizations, **agentic browser tools** for autonomous web app verification, and **context compaction** for maintaining long-running sessions.
 
-Key innovations include: Anthropic Claude integration with "thinking tokens" for visible reasoning, organization-wide custom agents for team standardization, Agent Skills for domain-specific knowledge, improved terminal auto-approval with safety guardrails, an integrated browser for localhost testing, and dramatic performance improvements to terminal rendering and chat responsiveness. These releases mark VS Code's evolution from a code editor with AI assistance to a **multi-agent development platform** where humans orchestrate specialized AI workers.
+Key innovations include: Anthropic Claude integration with "thinking tokens" for visible reasoning, Agent Plugins as installable bundles from Extensions view, agentic browser tools enabling agents to autonomously interact with web apps, context compaction and session forking for session management, `/create-*` commands for generating customizations from conversations, and the Explore subagent for fast parallelized codebase research. These releases mark VS Code's evolution from a code editor with AI assistance to a **multi-agent development platform** where humans orchestrate specialized AI workers.
 
-For developers using GitHub Copilot, these features mean: faster iteration cycles through parallel agent execution, safer automation via sandboxing, better reasoning transparency through thinking tokens, team-wide consistency via org-level customization, and the ability to hand off complex multi-step tasks to background agents while continuing other work. The overarching theme is **agentic transformation** — moving from "ask AI for help" to "orchestrate AI teams that execute workflows."
+For developers using GitHub Copilot, these features mean: faster iteration cycles through parallel agent execution, safer automation via sandboxing, better reasoning transparency through thinking tokens, team-wide consistency via org-level customization, agent plugins for instant capability boosts, and the ability to hand off complex multi-step tasks to background agents while continuing other work. The overarching theme is **Agentic SDLC** — moving from "ask AI for help" to "orchestrate AI teams that execute workflows."
 
 ## 2. Source URL Analysis
 
@@ -81,47 +81,83 @@ For developers using GitHub Copilot, these features mean: faster iteration cycle
 - Breakpoints organized as tree by file (debug-bp-tree.png)
 - Test coverage navigation toolbar (coverage-navigation.png)
 
-### https://code.visualstudio.com/updates/v1_107 (November 2025 Release)
+### https://code.visualstudio.com/updates/v1_110 (February 2026 Release)
 
-**Summary:** The November release unified agent sessions with the Chat view, introduced Git worktree isolation for background agents, enabled org-level custom agents, and enhanced MCP (Model Context Protocol) support.
+**Summary:** The February 2026 release focuses on agent extensibility and session management maturity. Major themes include Agent Plugins for distributable customization bundles, agentic browser tools for autonomous web app verification, context compaction for long-running sessions, and comprehensive accessibility improvements.
 
 **Key Facts and Numbers:**
-- Agent sessions integrated directly into Chat view (compact and side-by-side modes)
-- Local agents now continue running in background when session closed
-- Background agents can run in dedicated Git worktrees for true isolation
-- Custom agents can be shared at GitHub organization level
-- MCP specification updated to 2025-11-25 (includes URL elicitation, tasks, enums improvements)
-- GitHub MCP Server provided as built-in option (preview)
+- Agent Plugins (experimental) enable distributable bundles of skills, hooks, agents, MCP servers
+- Agentic browser tools let agents autonomously navigate, interact, and verify web apps
+- Context compaction manually or automatically summarizes conversation history
+- Session forking via `/fork` creates independent conversation branches
+- `/create-*` slash commands generate customizations from conversations
+- Explore subagent runs on fast models (Claude Haiku 4.5, Gemini 3 Flash) for codebase research
+- Edit mode deprecated — hidden by default, fully removed in v1.125
+- Kitty graphics protocol support for terminal image rendering
+- Long-distance Next Edit Suggestions (NES) predict edits anywhere in file
 
 **Code Examples and Configurations:**
 ```json
-// Control agent sessions view orientation
-"chat.viewSessions.orientation": "sideBySide" // or "stacked"
+// Enable Agent Plugins
+"chat.plugins.enabled": true,
+"chat.plugins.marketplaces": ["copilot-plugins", "awesome-copilot"],
 
-// Enable organization-level custom agents (experimental)
-"github.copilot.chat.customAgents.showOrganizationAndEnterpriseAgents": true
+// Enable agentic browser tools
+"workbench.browser.enableChatTools": true,
 
-// Use custom agents with background agents (experimental)
-"github.copilot.chat.cli.customAgents.enabled": true
+// Configure Explore subagent model
+"chat.exploreAgent.defaultModel": "claude-haiku-4-5",
 
-// Enable Claude Skills support (experimental)
-"chat.useClaudeSkills": true
+// Custom thinking phrases
+"chat.agent.thinking.phrases": {
+  "mode": "replace",
+  "phrases": ["Analyzing architecture...", "Evaluating patterns..."]
+},
 
-// GitHub MCP Server toolsets
-"github.copilot.chat.githubMcpServer.toolsets": ["default", "workflows"]
-
-// Azure authentication: Entra ID is now default
-"github.copilot.chat.azureAuthType": "entraId" // or "apiKey"
+// Enable contextual tips
+"chat.tips.enabled": true
 ```
 
 **Images and Diagrams:**
-- Recent sessions in Chat view compact mode (recent-sessions.png, recent-sessions-all.png)
-- Side-by-side sessions and chat view (all-sessions.png)
-- Background agent with worktree file changes (filechanges.png)
-- Background agent with context attachments (background_attachments.png)
-- Custom agents in background agent dropdown (background_agents.png)
-- Using custom agents as subagents (use-agents-as-subagents.png)
-- Language Models editor for managing models (multiple images showing visibility toggle, provider selection)
+- Agent Plugins view in Extensions (agent-plugins-extensions-view.png)
+- Agent Debug Panel with flow chart (agent-logs.png, agent-flow-chart.png)
+- Context compaction control (context-compaction.png)
+- Chat fork conversation button (chat-fork-conversation.png)
+- Ask questions carousel (ask-questions-tool.png)
+- NES eagerness control (nes-aggressiveness.png)
+- Modal editors (modal-editors.png, modal-extensions.png)
+- Kitty graphics protocol terminal image (kitty-graphics-protocol.png)
+
+### https://code.visualstudio.com/updates/v1_109 (January 2026 Release)
+
+**Summary:** The January 2026 release focuses heavily on agent orchestration maturity, Claude integration, and security. Major themes include enhanced chat UX with thinking tokens, comprehensive agent session management, organization-wide customization capabilities, and terminal sandboxing.
+
+**Key Facts and Numbers:**
+- Anthropic Claude models now supported natively in VS Code via GitHub Copilot subscription
+- Thinking token budgets configurable (default 4,000 tokens, set to 0 to disable)
+- Plan agent now follows 4-phase workflow: Discovery → Alignment → Design → Refinement
+- Terminal sandboxing restricts file access to workspace and blocks network by default (macOS/Linux)
+- Copilot Memory (preview) enables persistent context across sessions
+- External indexing for non-GitHub workspaces enables faster semantic search
+
+**Code Examples and Configurations:**
+```json
+// Configure extended thinking budget for Anthropic models
+"github.copilot.chat.anthropic.thinking.budgetTokens": 4000
+
+// Enable terminal sandboxing (macOS/Linux only)
+"chat.tools.terminal.sandbox.enabled": true
+
+// Enable Copilot Memory tool
+"github.copilot.chat.copilotMemory.enabled": true
+```
+
+**Images and Diagrams:**
+- Agent Session Day event promotional image
+- Chat thinking tokens with detailed/compact styles
+- Ask Questions tool carousel UI
+- Terminal command presentation improvements
+- Agent status indicator in command center
 
 ## 3. Key Capabilities (6)
 

@@ -1,20 +1,34 @@
 ---
 status: active
-updated: 2026-02-01
-section: "Agentic Transformation"
+updated: 2026-09-16
+section: "Verify and Govern"
+audience: [platform-engineer, architect, engineering-leader]
+level: advanced
+duration: 90
+format: core-talk
+decision: "What repository and CI infrastructure creates trustworthy agent throughput?"
+prerequisites: [agentic-workflows]
+related: [copilot-hooks, enterprise-patterns, loopy-agents]
 references:
+  - url: https://github.com/microsoft/agentrc
+    label: "Microsoft AgentRC repository"
+    verified: 2026-03-19
+  - url: https://github.com/microsoft/agentrc/blob/main/docs/concepts.md
+    label: "AgentRC concepts and maturity model"
+    verified: 2026-03-19
   - url: https://docs.github.com/en/actions
     label: "GitHub Actions documentation"
-    verified: 2026-02-01
+    verified: 2026-03-19
   - url: https://docs.github.com/en/actions/using-workflows/caching-dependencies-to-speed-up-workflows
     label: "GitHub Actions caching guide"
-    verified: 2026-02-01
+    verified: 2026-03-19
   - url: https://nx.dev/
     label: "Nx monorepo tools"
-    verified: 2026-02-01
+    verified: 2026-03-19
   - url: https://slsa.dev/
     label: "SLSA supply chain security framework"
-    verified: 2026-02-01
+    verified: 2026-03-19
+
 ---
 
 # Agentic SDLC: Infrastructure for AI Velocity
@@ -38,38 +52,6 @@ references:
 
 ---
 
-## 📽️ Slide Generation Mapping
-
-### Slide Sequence (Generated Automatically)
-
-1. **Title/Logo Slide** ← H1 title + subtitle
-2. **Question/Objective Slide** ← "The Question This Talk Answers"
-3. **Table of Contents Slide** ← Auto-generated from 🎬 sections
-4. **Problem Slide** ← "The Problem"
-5. **Solution Overview** ← "The Solution"
-6. **Key Artifacts** ← "Key Artifacts" inventory
-7. **Mental Model Shift** ← Move-Toward/Away/Against
-8. **When to Use Decision Tree** ← "When to Use This Pattern"
-9. **Repository Topology** ← 🎬 Section 1 (5-6 slides)
-10. **PR Workflows** ← 🎬 Section 2 (5-6 slides)
-11. **Trust Manufacturing** ← 🎬 Section 3 (6-7 slides)
-12. **Implementation Roadmap** ← 🎬 Section 4 (2-3 slides)
-13. **Use Cases** ← Real-World Use Cases (2 slides)
-14. **Actionable Outcomes** ← What You Can Do Today
-15. **Related Patterns** ← Related Patterns
-16. **Official Documentation** ← 📚 section
-17. **End Slide** ← Auto-generated
-
-### Major Sections (TOC Entries)
-
-```markdown
-<!-- 🎬 MAJOR SECTION: Repository Topology -->
-<!-- 🎬 MAJOR SECTION: PR Workflows -->
-<!-- 🎬 MAJOR SECTION: Trust Manufacturing -->
-<!-- 🎬 MAJOR SECTION: Implementation Roadmap -->
-```
-
----
 
 ## The Problem
 
@@ -93,28 +75,294 @@ Your organization just adopted GitHub Copilot agents. Within weeks, agents are g
 
 Then reality hits. The repository structure forces agents to coordinate changes across 3-5 repos for a single feature. PRs pile up because reviewers can't keep pace — line-by-line review of 15,000 lines/day is impossible. CI queues grow to 60-90 minutes because the pipeline was designed for 3 builds/day, not 30. Test flakiness that was "annoying but tolerable" at 5% failure rate becomes catastrophic when it blocks 15 PRs/day. Security and compliance checks that took 4 hours with manual sign-offs can't scale to agent velocity.
 
-The infrastructure designed for Gen-3 SDLC (humans assisted by AI autocomplete) collapses under Gen-4 pressure (AI agents as primary producers). Your agents can write code faster than your infrastructure can prove it's safe to ship.
+The infrastructure designed for human-paced or partially assisted delivery collapses under **Level 5 / Autonomous** pressure. In AgentRC terms, what many teams casually call a "Gen-4 SDLC" maps more closely to **Level 5: Autonomous** — the point where agents become primary producers and the surrounding system must support end-to-end automation with minimal oversight.
 
 This talk provides the architectural blueprint to rewire your SDLC for AI velocity: repository topology that minimizes coordination, PR workflows that scale to feature-scale payloads, and CI pipelines that manufacture trust at 10-15 features/day.
 
 ---
 
-## The Solution: Gen-4 SDLC Architecture
+## The Solution: Level 5 SDLC Architecture
 
 ### What It Does
 
-The Gen-4 SDLC architecture transforms three critical infrastructure layers — repositories, pull request workflows, and continuous integration — from human-optimized collaboration tools into agent-native delivery infrastructure capable of sustainable 10-15 features/day throughput.
+The **Level 5 / Autonomous SDLC** architecture transforms three critical infrastructure layers — repositories, pull request workflows, and continuous integration — from human-optimized collaboration tools into agent-native delivery infrastructure capable of sustainable 10-15 features/day throughput.
 
 ### Key Capabilities
 
 - **Agent-Native Repository Topology**: Monorepo with enforced module boundaries, hermetic builds, and affected analysis — agents navigate via grep, not GitHub search
 - **Outcome-Focused PR Workflows**: Intent-based specifications, evidence-bundle reviews, and policy-gated merges — humans validate outcomes, not implementation details
 - **CI as Trust Factory**: Fast feedback (<10 min), context-aware validation with agents, zero-flake tolerance, and attestation generation — manufacturing trust at agent velocity
-- **100x Throughput Scaling**: From 150 features/year (Gen-3) to 3,600 features/year (Gen-4) with maintained or improved quality and compliance
+- **100x Throughput Scaling**: From Level 3-style standardized delivery to Level 5 autonomous delivery with maintained or improved quality and compliance
 
-### Architecture Overview
+### Maturity Assessment Framework
 
-The Gen-4 transformation operates at three layers that stack and reinforce each other:
+The AgentRC maturity model defines five levels of readiness — from functional infrastructure through fully autonomous delivery — enriched with developer adoption signals, team practice metrics, and organizational governance criteria. Each level captures both the infrastructure state and the adoption behaviors that make that infrastructure effective. A team with Level 5 infrastructure but onboarding-stage habits will underutilize it; a team with strong governance sitting on Level 1 infrastructure will hit agent velocity walls they can't explain.
+
+| Level | Name | Platform Readiness | Adoption Stage | What It Unlocks |
+|-------|------|--------------------|----------------|-----------------|
+| **L1** | Functional | Build and CI baseline stable | Pre-onboarding | Basic automation can run — the floor before anything else matters |
+| **L2** | Documented | Instructions and conventions explicit | Onboarding | Agents and developers have explicit context to work from |
+| **L3** | Standardized | Full CI/CD, CCA, CCR, GHAS enabled | Standardized | Repeatable automation, habitual Copilot use, delegated work, quality infrastructure |
+| **L4** | Optimized | MCP enterprise integration, advanced orchestration | Optimized | Advanced agent capabilities, enterprise governance, quality as infrastructure |
+| **L5** | Autonomous | Intent-based delivery, policy-gated merge, SLSA | Transforming | Agents as primary producers, continuous measurement, organizational transformation |
+
+This talk targets **Level 5**, but the path only works if Levels 1-4 are already doing their job. Autonomous delivery is not a shortcut around maturity; it is the compounding result of it.
+
+---
+
+### Unified Maturity Model: Assessment Criteria by Level
+
+For each level, infrastructure signals and adoption signals are consolidated into a single view. Use these as a self-assessment: rate where your team sits across both the platform readiness dimension and the practices dimension before deciding which investments matter most.
+
+---
+
+#### Level 1 — Functional
+
+> *"The system runs. Scripts complete. CI doesn't fail randomly. We have a floor."*
+
+There is no adoption-level equivalent at L1 — the developer adoption signals presuppose that the developer environment and licensing are in place. L1 is about getting the infrastructure floor stable before anything else matters.
+
+**AgentRC — Infrastructure Signals:**
+- Build scripts run reliably end-to-end without manual intervention
+- A basic CI pipeline exists (build + test) and completes on every push
+- No "works on my machine" — the pipeline produces consistent signals
+- Basic test suite exists (even if coverage is low)
+- Dependencies are pinned (lockfile exists)
+
+**You're not at L1 yet if:**
+- CI fails >10% of the time for reasons unrelated to code changes
+- There is no automated test run on push or PR
+- "Run the build" requires oral knowledge or tribal context
+
+**Metrics floor:**
+- CI pipeline success rate ≥90% (excluding code failures)
+- Build time documented and predictable
+
+---
+
+#### Level 2 — Documented
+
+> *"Agents have context to work from. Developers have Copilot configured. The system isn't guessing."*
+
+**AgentRC — Infrastructure Signals:**
+- `README.md` covers setup, build, test, and deploy steps with enough specificity that someone new (human or agent) can follow it
+- `.github/copilot-instructions.md` exists, is versioned in the repo, and reflects the team's actual coding standards — not a stub
+- Coding conventions are explicit (linting rules, naming patterns, architectural preferences documented)
+- Agents can navigate the codebase without needing to ask clarifying questions about conventions
+
+**Onboarding — Developer Adoption Signals:**
+- Every developer has Copilot licensed and installed in their editor
+- GitHub Copilot CLI is installed and in active use
+- Copilot Chat is used for debugging, code generation, and learning (not just "explain this code")
+- Developers are aware of model selection options and use the default deliberately (not by default)
+- `.github/copilot-instructions.md` exists in at least the primary repository
+
+**You're not at L2 yet if:**
+- Copilot is installed but developers default to Stack Overflow or ChatGPT for coding questions
+- `copilot-instructions.md` doesn't exist or contains only the tech stack name
+- CLI is not installed or developers don't know it exists
+- Agents produce output that doesn't match the codebase's conventions because no instructions guide them
+
+**Metrics targets:**
+- Copilot MAU ≥30% of licensed seats (early adoption, not yet habitual)
+- `.github/copilot-instructions.md` present and reviewed in a PR in the past 90 days
+- Developers using ≥2 Copilot modalities (Chat + Completions minimum)
+
+---
+
+#### Level 3 — Standardized
+
+> *"Automation is repeatable. Copilot is part of daily workflow. Agents handle well-decomposed tasks. Code quality is enforced — not just suggested."*
+
+L3 is where developer adoption habits are fully formed, agentic work begins, and quality infrastructure comes online. This is the most important maturity step — L3 is the launch pad for everything that follows.
+
+**AgentRC — Infrastructure Signals:**
+- CI/CD pipeline is fully automated: build, test, lint, and deploy in a single workflow with no manual steps
+- Branch protection and CODEOWNERS are configured and enforced; agent-created PRs are held to the same standards as any other PR
+- `AGENTS.md` exists in CCA-enabled repositories and defines build commands, test patterns, and PR conventions so CCA operates like a team member who has read the contributor guide
+- `.github/workflows/copilot-setup-steps.yml` exists in CCA-enabled repositories, giving deterministic control over the agent's build environment (pinned dependencies, tool versions)
+- Security scanning (SAST, secret detection, dependency audit) runs on every PR — not on a schedule
+- Observability exists: build time, test flake rate, and coverage are tracked and visible
+- CI flake rate <2%; green builds are trustworthy signals
+
+**Standardized — Developer Habit Signals:**
+- Copilot MAU ≥60% of licensed seats
+- Chat turns per active user ≥30/week (habitual use, not experimentation)
+- Completion acceptance rate ≥25% across primary languages
+- ≥3 Copilot modalities in active use (Chat + Completions + at least one of CLI, CCA, CCR)
+- Prompt file library exists: `.github/prompts/` with ≥3 files covering the team's most common workflows
+- Custom instructions are reviewed in GitHub PRs like any code change
+- Developers select models deliberately based on task type; a shared model selection guide exists
+- Context management is intentional: `@workspace`, `#file`, and prompt files used to get better answers
+
+**Agentic Development Signals:**
+- Teams assign well-written GitHub Issues directly to Copilot Coding Agent (CCA) and review the resulting PRs with the same rigor as any other PR
+- GitHub Issue templates structure input for CCA with acceptance criteria, file references, and constraint specifications
+- MCP servers configured for ≥1 enterprise system (internal docs, database schema, CI feedback, ticketing)
+- Issue quality is high enough that CCA self-corrects through GitHub Actions CI feedback loops (plan → code → test → fix → pass)
+- Teams have a shared understanding of which work is "CCA-shaped" and which requires human-driven development
+- The agent firewall is configured to restrict outbound network access from the CCA runtime
+- Copilot Memory is enabled and teams review stored memories periodically
+
+**Code Quality Signals:**
+- Copilot Code Review (CCR) is configured as an automatic reviewer on at least the team's primary repositories
+- Custom coding guidelines exist in GitHub repository settings (≥5 guidelines reflecting team-specific standards)
+- GitHub branch rulesets require CCR status checks, passing CI via GitHub Actions, and CODEOWNERS approval for sensitive areas
+- GitHub Advanced Security is enabled: CodeQL, secret scanning, Dependabot
+
+**You're not at L3 yet if:**
+- CI succeeds but requires manual steps to trigger or interpret
+- CCA is enabled but nobody has assigned an issue to it
+- Issues are written for human readers only and lack the structured context CCA needs
+- CCR is enabled but only used on-demand (not automatic)
+- Custom coding guidelines don't exist, so CCR gives only generic feedback
+- The agent firewall has not been configured
+- Branch protection allows bypassing for agent-created PRs
+
+**Metrics targets:**
+- CI flake rate <2%; PR check time <10 minutes for affected analysis
+- Copilot MAU ≥60% of licensed seats
+- Chat turns per active user ≥30/week
+- CCA issues resolved per sprint ≥3-5 per team
+- CCA PR merge rate ≥60%
+- CCR coverage = 100% of PRs in target repositories (automatic review)
+- ≥3 prompt files per active repository
+
+---
+
+#### Level 4 — Optimized
+
+> *"MCP connects agents to enterprise systems. Governance is an organizational capability, not a team-by-team experiment. Code quality enforcement is infrastructure, not process."*
+
+**AgentRC — Infrastructure Signals:**
+- MCP servers are installed for the team's key enterprise systems — internal documentation, database schema, GitHub Actions for CI context, ticketing systems
+- Each MCP server is evaluated with the same rigor as any other supply chain dependency: source reviewed, permissions scoped, access minimized
+- Custom agents and AI skills chain multi-step work — CCA reads an issue, queries a database schema via MCP, generates migration code following custom instructions, creates a PR
+- Agent-mode orchestration is established for complex multi-step workflows (not just single-issue automation)
+- Local agent security model is understood: developers know that local agents (VS Code agent mode) run under their own credentials with no agent firewall, and that branch rulesets are the governance control point regardless of where code was authored
+- PR review time is measurably lower than pre-CCR baseline (≥30% reduction)
+
+**Adoption & Governance Signals — Agentic Development:**
+- MCP servers in active use ≥2 (enterprise-specific, not just the GitHub MCP server)
+- Time from CCA assignment to merged PR trending downward as issue quality and instructions improve
+- Agent-mode orchestration chains CCA + MCP + custom instructions for complex tasks
+- CCA PR merge rate ≥60% (indicating good issue decomposition and instruction quality)
+- Teams actively distinguish CCA-appropriate vs. human-appropriate work
+
+**Adoption & Governance Signals — Code Quality:**
+- CCR is configured as automatic reviewer on all GitHub PRs (or all PRs in key repositories)
+- Custom coding guidelines ≥10, reflecting the team's actual standards (not generic best practices)
+- Human reviewers trust CCR to catch mechanical issues and focus their time on design, architecture, and business logic
+- CCR false positive rate <20% (guidelines are tuned, not noisy)
+- Teams iterate on coding guidelines based on CCR feedback patterns
+- PR turnaround time reduced ≥30% compared to pre-CCR baseline
+
+**Adoption & Governance Signals — Enterprise Platform:**
+- GitHub enterprise/organization settings for Copilot are deliberately configured: model availability, content exclusions, feature toggles for CCA, CCR, MCP, and Copilot Memory
+- Copilot Memory enablement policy is set at the enterprise/org level with documented rationale; repository owners review and curate stored memories on a regular cadence
+- Seat utilization is actively managed (allocated seats ≥80% active; inactive seats reallocated or removed)
+- PRU governance is in place with budget awareness, model selection guidance, and cost reporting
+- GitHub repository templates pre-seed new projects with `.github/copilot-instructions.md`, `AGENTS.md`, and prompt files so every new repository inherits Copilot configuration from day one
+- Audit logging is configured and reviewed for compliance-sensitive environments
+- GitHub content exclusions are scoped correctly, tested, and documented
+
+**You're not at L4 yet if:**
+- MCP is not configured, or only a single demo server is set up
+- Developers treat CCA output as final rather than reviewing it as a first draft
+- CCR is enabled but custom coding guidelines don't exist
+- Policies are at defaults ("we just turned everything on")
+- No one knows how many seats are allocated vs. actively used
+- Copilot Memory is left at the default disabled state, or enabled with no curation process
+- PRU spending is unmonitored or unexplained spikes go unnoticed
+
+**Metrics targets:**
+- MCP servers in active use ≥2 (enterprise-specific)
+- CCA PR merge rate ≥60%; time to merged PR trending down
+- CCR coverage 100% automatic; false positive rate <20%
+- PR review turnaround reduced ≥30% vs. pre-CCR baseline
+- Seat utilization ≥80% of allocated seats active in the last 28 days
+- PRU budget variance within ±15% of planned spend
+- Content exclusion audit reviewed quarterly with documented rationale
+- Copilot Spaces content reviewed and updated on a defined cadence (monthly minimum)
+
+---
+
+#### Level 5 — Autonomous
+
+> *"Agents are primary producers. Governance is organizational infrastructure. The investment is measured, ROI is quantified, and the capability improves continuously."*
+
+**AgentRC — Infrastructure Signals:**
+- End-to-end feature delivery with minimal oversight is routine: intent spec → agent implementation → CI trust evidence → human outcome validation → merge → deploy
+- Review capacity operates at 15,000 lines/day per reviewer (vs. 300 at L3) because governance is automated, not manual
+- CI operates as a trust factory: <10-minute PR checks via affected analysis, parallelization, and caching; agents productive 95% of the time
+- Zero-flake tolerance enforced: quarantine on first flake, fix within 2 days
+- SLSA attestations generated per release for supply chain compliance
+- Governance pyramid inverted: 4 human checkpoints replace 22 manual approval gates; 90% of checks are automated policy enforcement
+- Intent-based PRs, evidence-bundle PRs, and policy-gated auto-merge are all operational
+
+**Platform Adoption Signals — Enterprise Governance:**
+- Admin dashboard provides leadership visibility into adoption trends, cost, and risk
+- Copilot Spaces follow a deliberate architecture: org-wide content (security policies, architectural standards), team-scoped content (API docs, onboarding), project-specific content (design decisions, domain context)
+- Content curation is an ongoing responsibility with a named owner, not a one-time setup
+- Leadership asks "how is Copilot going?" and receives quantified answers from the admin dashboard
+
+**Measurement & Continuous Improvement Signals:**
+- GitHub Copilot Metrics API data feeds into team dashboards alongside DORA metrics, velocity, and developer satisfaction
+- Teams build custom views showing adoption trends by modality, language, and team, and correlate Copilot usage with engineering outcomes (PR cycle time, deployment frequency)
+- Leadership has an ROI narrative: "Copilot contributed to X% reduction in PR cycle time, Y% increase in deployment frequency"
+- Capability assessments are repeated quarterly with clear next-level targets
+- Champions program is active: identified power users coach peers, contribute to custom instructions, and report patterns back to the platform team
+- Post-engagement self-sufficiency score ≥4/5: the team can sustain and extend what was built
+- ≥4 Copilot modalities in active use across the organization (indicating breadth, not just depth)
+- ≥2 champions per participating team
+
+**You're not at L5 yet if:**
+- The only Copilot metric tracked is "number of seats"
+- There is no correlation between Copilot usage and engineering outcomes
+- CI takes >30 minutes or flake rate >2%
+- Review process still expects line-by-line scrutiny of agent-generated PRs
+- Leadership asks about Copilot ROI and nobody has data
+- No champion or internal advocate exists to sustain adoption
+- The capability assessment was done once and never revisited
+
+**Metrics targets:**
+- Features/day: 10-15 (from 2-3/week at L3)
+- PR check time <10 minutes; full pipeline <30 minutes
+- CI flake rate <2%; cache hit rate >80%
+- Review capacity 15,000 lines/day/reviewer (50× the L3 baseline)
+- Time to production: measured in hours, not days
+- Copilot Metrics API integrated with DORA dashboard
+- Capability level delta ≥1 level per engagement (primary FDE success metric)
+- Self-sufficiency score ≥4/5 at engagement wrap-up
+- ROI narrative produced (yes/no — every engagement produces one)
+- ≥2 champions identified per participating team
+
+---
+
+### The Instruction Hierarchy: A Cross-Cutting Investment
+
+One concept runs through every level and represents the single highest-leverage investment at any stage: treating Copilot configuration files as first-class engineering artifacts — stored in GitHub repositories, reviewed in GitHub PRs, and evolved alongside the codebase.
+
+```text
+Organization-level instructions
+  (GitHub > Settings > Copilot > Custom Instructions)
+  └── Repository instructions (.github/copilot-instructions.md)
+       └── Agent instructions (AGENTS.md)
+            └── Prompt files (.github/prompts/*.prompt.md)
+                 └── Coding guidelines
+                      (GitHub > Repository Settings > Copilot > Code Review)
+```
+
+| Quality Level | What It Looks Like |
+|--------------|-------------------|
+| **None** | No configuration files exist. Copilot gives generic output |
+| **Basic** | A `copilot-instructions.md` exists listing the tech stack and a few conventions |
+| **Good** | Instructions capture architecture patterns, library preferences, and testing conventions. Prompt files exist for common workflows. `AGENTS.md` is configured for CCA |
+| **Excellent** | Instructions are specific enough that Copilot output matches what a senior team member would produce. Prompt files cover the team's top workflows. Coding guidelines are tuned with low false positive rates. The team iterates on all configuration files regularly |
+
+> **Note:** Organization-level instructions currently apply to Copilot Chat on GitHub.com, CCR, and CCA only — not to Copilot Chat or agents running in IDEs. For standards that must reach developers in editors, repository-level `.github/copilot-instructions.md` is the mechanism.
+
+The Level 5 transformation operates at three layers that stack and reinforce each other:
 
 **Layer 1 (Foundation): Repository Topology** reorganizes code boundaries so agents can find everything they need in a single atomic workspace. This eliminates the coordination tax — when agents must touch 3 repos to implement a feature, you pay 3x merge + 3x deploy + N handoffs in overhead. Monorepo structure with tools like Nx provides module boundary enforcement (not suggestions), hermetic builds (deterministic CI signals), and affected analysis (test only what changed).
 
@@ -122,9 +370,11 @@ The Gen-4 transformation operates at three layers that stack and reinforce each 
 
 **Layer 3 (Trust Manufacturing): CI Pipeline** transforms from quality gate to trust factory. Speed matters — 60-minute CI means agents idle 80% of the time. The target is <10 minutes for PR checks via parallelization, caching, and affected analysis. Context-aware validation uses agents to apply judgment (not just pattern matching) for compliance. Zero-flake tolerance makes green builds trustworthy again. Attestations provide audit trails for regulated environments.
 
-These three layers compound: fast CI enables high PR velocity, which requires streamlined review, which depends on atomic repo changes. Miss any layer and the system bottlenecks.
+These three layers compound: fast CI enables high PR velocity, which requires streamlined review, which depends on atomic repo changes. Miss any layer and the system bottlenecks — and the repo stalls somewhere between Level 3 and Level 4 instead of reaching Level 5.
 
 **Official Documentation:**
+- 📖 [AgentRC Concepts](https://github.com/microsoft/agentrc/blob/main/docs/concepts.md) — Maturity levels, readiness pillars, and how autonomy is staged
+- 📖 [AgentRC Repository](https://github.com/microsoft/agentrc) — Measure, generate, and maintain loop for repository AI readiness
 - 📖 [Nx Monorepo Tools](https://nx.dev/) — Build orchestration, module boundaries, and affected analysis
 - 📖 [GitHub Actions Documentation](https://docs.github.com/en/actions) — CI/CD workflow automation
 - 📖 [SLSA Framework](https://slsa.dev/) — Supply chain security and attestation standards
@@ -152,13 +402,13 @@ These three layers compound: fast CI enables high PR velocity, which requires st
 - **Evidence-bundle PR template** — Required artifacts for outcome-based review
 - **Attestation generation workflow** — SLSA compliance and audit trails
 
-**Guidance:** Primary artifacts demonstrate the "what" (actual configs). Supporting patterns show the "how" (organizational implementation). Together they form a complete Gen-4 SDLC blueprint.
+**Guidance:** Primary artifacts demonstrate the "what" (actual configs). Supporting patterns show the "how" (organizational implementation). Together they form a complete **Level 5 / Autonomous SDLC** blueprint.
 
 ---
 
 ## 🎯 Mental Model Shift
 
-> **The Core Insight:** From "infrastructure supports human collaboration" to "infrastructure enables agent velocity while humans govern outcomes"
+> **The Core Insight:** From "infrastructure supports human collaboration" to "each maturity level unlocks more automation, speed, and safety until infrastructure can sustain autonomous delivery while humans govern outcomes"
 
 ### Move Toward (Embrace These Patterns)
 
@@ -191,7 +441,7 @@ These three layers compound: fast CI enables high PR velocity, which requires st
 ```
 Q: What's your current agent throughput vs. target?
 ├─ "2-3 features/week, want 10-15/day"
-│  → Use: Full Gen-4 SDLC (this talk)
+│  → Use: Full Level 5 / Autonomous SDLC (this talk)
 │  └─ Best for: Platform transformation, sustainable AI velocity
 │
 ├─ "Haven't started with agents yet"
@@ -250,13 +500,13 @@ When agents cross repo boundaries frequently, you pay exponential coordination c
 
 ### Why Traditional Structures Fail
 
-**Traditional (Gen-3) Assumptions:**
+**Level 3-4 Assumptions:**
 - **Humans produce code** — 10-50 lines/hour, context-switching every 23 minutes
 - **PRs are collaboration forums** — "Can you explain this?" "Why did you...?" "LGTM 🚀"
 - **Repo structure optimized for teams** — "Frontend in one repo, backend in another"
 - **Boundaries are social contracts** — Comments, conventions, and code review
 
-**Agentic (Gen-4) Reality:**
+**Level 5 / Autonomous Reality:**
 - **Agents produce feature-scale payloads** — 500-2000 lines in 15 minutes, zero context switching
 - **Humans govern safety and outcomes** — "Ship the feature" or "Roll it back" (not line-level review)
 - **Repo structure optimized for agents** — "Everything this agent needs is in one atomic boundary"
@@ -269,8 +519,8 @@ When agents cross repo boundaries frequently, you pay exponential coordination c
 
 **What We're Optimizing For:**
 
-| Traditional Metric | Gen-4 Metric | Target |
-|--------------------|--------------|--------|
+| Traditional Metric | Level 5 Metric | Target |
+|--------------------|----------------|--------|
 | Lines of code written | Features shipped | 10-15/day |
 | Code review depth | Outcome validation speed | <20 min/PR |
 | Manual quality gates | Automated trust evidence | 90% automated |
@@ -398,7 +648,7 @@ enterprise-control-plane/
 
 ### Enforced Module Boundaries
 
-#### Suggested Boundaries (Fail in Gen-4)
+#### Suggested Boundaries (Fail at Level 5)
 
 ```typescript
 // Hope developers notice the comment
@@ -408,7 +658,7 @@ export class PaymentProcessor {}
 
 **Problem:** Agents don't read comments. They follow import patterns they observe in the codebase.
 
-#### Enforced Boundaries (Work in Gen-4)
+#### Enforced Boundaries (Work at Level 5)
 
 ```json
 // nx.json module boundary configuration
@@ -473,7 +723,7 @@ Violating import:
 
 ### Hermetic Builds for Deterministic Trust
 
-#### Non-Hermetic (Breaks in Gen-4)
+#### Non-Hermetic (Breaks at Level 5)
 
 ```dockerfile
 # Dockerfile - DON'T DO THIS
@@ -486,7 +736,7 @@ RUN npm run build
 
 **Problem:** Same git commit produces different builds on different days. CI becomes unreliable signal.
 
-#### Hermetic (Works in Gen-4)
+#### Hermetic (Works at Level 5)
 
 ```dockerfile
 # Dockerfile - DO THIS
@@ -586,28 +836,29 @@ libs/data-access
 
 Traditional PRs were designed for humans collaborating on 50-200 line changes with line-by-line review and synchronous discussion. AI agents generate 500-2000 line feature diffs in 15 minutes. **Human reviewers can't keep up — the bottleneck isn't coding, it's governance.**
 
-### The Four Generations Context
+### The Unified Maturity Context for PR Governance
 
-Understanding the shift from Gen-3 to Gen-4 explains why PR workflows must transform:
+The PR governance model shifts at each maturity level. The table below maps infrastructure readiness against team practice signals — platform readiness on the left, adoption indicators on the right:
 
-| Generation | Primary Producer | Review Mode | PR Characteristics |
-|------------|------------------|-------------|-------------------|
-| **Gen-1** | Individual devs | Manual testing | Waterfall, no PRs |
-| **Gen-2** | Team collaboration | Code review | 50-200 lines, discussion |
-| **Gen-3** | Human + AI assist | Line-by-line | 100-400 lines, still readable |
-| **Gen-4** | AI agents | Outcome validation | 500-2000 lines, feature-complete |
+| Level | Name | Primary Producer Pattern | Review / Governance Mode | Platform Adoption Signals |
+|-------|------|--------------------------|--------------------------|----------------------|
+| **L1** | **Functional** | Humans working against basic tooling | Manual verification | No Copilot habits yet; environment setup in progress |
+| **L2** | **Documented** | Humans and assistants using shared instructions | Human review with better context via Copilot Chat | Copilot in daily use; completions + chat habitual |
+| **L3** | **Standardized** | Teams using CCA for well-decomposed issues; CCR automatic on all PRs | Repeatable gates (CCR + branch rulesets) plus human approval | CCA delegated work ≥3-5 issues/sprint; CCR automatic; GHAS active |
+| **L4** | **Optimized** | Tool-using agents with MCP servers, multi-step orchestration | Context-aware automation + human exception handling; enterprise governance | MCP ≥2 enterprise systems; org-level policies deliberate; seat utilization ≥80% |
+| **L5** | **Autonomous** | Agents as primary producers for feature-scale changes | Outcome validation backed by policy and evidence; 4 human checkpoints, 90% automated | Metrics API + DORA correlated; ROI narrative produced; champions active |
 
-**The Breakpoint:** When AI-generated code volume exceeds human review capacity (happening now).
+**The Breakpoint:** Most PR systems feel fine through Levels 1-4, then break when teams try to operate at **Level 5 volume** using **Level 3 review habits**.
 
 ### Why Traditional PR Practices Fail
 
-**Gen-3 Design Assumptions:**
+**Level 3 Design Assumptions:**
 - **Small, incremental changes** — 50-200 lines, human-comprehensible in 30-minute review
 - **Line-by-line scrutiny** — "Can you explain line 47?" "Why this approach?" "Move function to utils"
 - **Synchronous collaboration** — Back-and-forth discussion until consensus reached
 - **Trust through detailed inspection** — Read every line, understand every decision
 
-**Gen-4 Reality:**
+**Level 5 Reality:**
 - **Feature-scale payloads** — 500-2000 lines, 5-15 files, entire features atomically
 - **Intent-driven generation** — Specified at goal level ("add OAuth"), not implementation level
 - **Machine velocity** — 15 minutes from intent to PR, 15 PRs/day, 24/7 availability
@@ -619,8 +870,8 @@ Understanding the shift from Gen-3 to Gen-4 explains why PR workflows must trans
 
 #### Where Scarcity Moves
 
-| Gen-3 Scarcity | Gen-4 Scarcity |
-|----------------|----------------|
+| Level 3 Scarcity | Level 5 Scarcity |
+|------------------|------------------|
 | Developer time to write code | Governance capacity to review |
 | Code quality (bugs in implementation) | Trust at scale (can we ship this velocity?) |
 | Implementation speed | Architectural coherence |
@@ -633,7 +884,7 @@ Solution: Hire more developers
 Control: Code reviews catch bugs
 ```
 
-**Gen-4 Economics:**
+**Level 5 Economics:**
 ```
 Bottleneck: Trusting code
 Solution: Automate trust manufacturing
@@ -642,7 +893,7 @@ Control: Policy enforcement + outcome validation
 
 > 💡 **The Shift:** From "can we write it fast enough?" to "can we trust it at this velocity?"
 
-### Gen-4 Control Surfaces
+### Level 5 Control Surfaces
 
 #### 1. Intent Specification (What Humans Provide)
 
@@ -845,7 +1096,7 @@ human_review:
 - Compliance officer reviews every data change
 - **Result:** 4-7 days from PR to merge
 
-#### Gen-4 Governance (Scales to 10-15 Features/Day)
+#### Level 5 Governance (Scales to 10-15 Features/Day)
 
 - 4 human checkpoints: intent validation, security risk assessment, architectural fit, outcome validation
 - Automated enforcement: 90% of checks
@@ -873,8 +1124,8 @@ Automated Governance (90%)
 
 #### From Code-Level to Outcome-Level
 
-| Gen-3 PR Review | Gen-4 PR Review |
-|-----------------|-----------------|
+| Level 3 PR Review | Level 5 PR Review |
+|-------------------|-------------------|
 | "Why did you use a Map here?" | "Does this meet the intent?" |
 | "Can you extract this function?" | "Are edge cases handled?" |
 | "Add more comments" | "Is this compliant and secure?" |
@@ -1196,51 +1447,93 @@ Machine-readable artifacts proving checks ran and passed:
 <!-- 🎬 MAJOR SECTION: Implementation Roadmap -->
 ## Part 4: Implementation Roadmap
 
-*Phased approach to Gen-4 SDLC transformation*
+*Phased approach to progressing from standardized engineering to autonomous delivery*
 
-### Phase 1: Foundation (Weeks 1-4)
+### Phase 1: Reach Level 3 (Standardized)
 
-**Repository:**
+**Repository and Infrastructure:**
 - [ ] Audit current repos: how often do agents touch 2+ repos?
 - [ ] If >30%, plan monorepo migration
 - [ ] Set up Nx/Lerna/Bazel for build orchestration
 - [ ] Define module boundaries with enforcement rules
 - [ ] Enable affected analysis
+- [ ] Target CI flake rate <2%, PR check time <10 minutes
 
-**CI:**
-- [ ] Measure current PR check time and flake rate
-- [ ] Identify slowest checks (candidates for parallelization)
-- [ ] Add caching for dependencies and builds
-- [ ] Target: <10 min PR checks
+**Developer Adoption Habits:**
+- [ ] Ensure Copilot MAU ≥60% of licensed seats
+- [ ] Confirm developers use ≥3 modalities (Chat + Completions + CLI minimum)
+- [ ] Version `.github/copilot-instructions.md` in primary repositories and review it in PRs
+- [ ] Build prompt file library: ≥3 `.github/prompts/` files for most common workflows
+- [ ] Establish shared model selection guidance for the team
 
-### Phase 2: Automation (Weeks 5-8)
+**Agentic Development:**
+- [ ] Set up CCA on a low-risk repository; create `.github/workflows/copilot-setup-steps.yml`
+- [ ] Configure the agent firewall to restrict outbound network access
+- [ ] Write `AGENTS.md` with build commands, test patterns, and PR conventions
+- [ ] Create GitHub Issue templates structured for CCA (acceptance criteria, file references, constraints)
+- [ ] Write and assign 2-3 well-decomposed issues to CCA; review results as a team
+- [ ] Connect ≥1 MCP server to a valuable enterprise system
 
-**Governance:**
+**Quality Infrastructure:**
+- [ ] Enable CCR as automatic reviewer on primary repositories
+- [ ] Co-author ≥5 custom coding guidelines with the tech lead
+- [ ] Configure branch rulesets: require CCR status checks + human reviewer + CODEOWNERS approval
+- [ ] Enable GitHub Advanced Security (CodeQL, secret scanning, Dependabot)
+
+### Phase 2: Reach Level 4 (Optimized)
+
+**Governance and Quality:**
 - [ ] Create intent templates for common feature types
 - [ ] Automate 80% of current manual checks
-- [ ] Build evidence-bundle requirements
+- [ ] Build evidence-bundle PR requirements
 - [ ] Set up attestation generation
+- [ ] Iterate coding guidelines until CCR false positive rate <20%
+- [ ] Measure and document PR review turnaround reduction (target ≥30% improvement)
+
+**Advanced Agent Capabilities:**
+- [ ] MCP servers in active use ≥2 (enterprise-specific, not just the GitHub MCP server)
+- [ ] CCA PR merge rate ≥60%; time to merged PR trending down
+- [ ] Enable Copilot Memory; establish curation cadence (monthly review minimum)
+- [ ] Implement agent-mode orchestration for at least one complex multi-step workflow
+
+**Enterprise Platform:**
+- [ ] Review GitHub enterprise/organization settings for Copilot deliberately (model availability, content exclusions, feature toggles)
+- [ ] Set seat utilization target ≥80% active; reallocate or remove inactive seats
+- [ ] Establish PRU governance: budget awareness, model selection guidance, cost reporting
+- [ ] Set up GitHub repository templates that pre-seed new projects with instruction files
+- [ ] Configure and test GitHub content exclusions; document rationale
 
 **Quality:**
-- [ ] Identify all flaky tests
-- [ ] Implement quarantine policy
-- [ ] Add agent-based compliance validation
-- [ ] Target: <2% flake rate
+- [ ] Identify all flaky tests; implement quarantine policy
+- [ ] Add agent-based compliance validation for at least one domain
+- [ ] Target: <2% flake rate; >80% cache hit rate
 
-### Phase 3: Optimization (Weeks 9-12)
+### Phase 3: Operate at Level 5 (Autonomous)
 
-**Velocity:**
-- [ ] Measure agent throughput
+**Velocity and Infrastructure:**
+- [ ] Measure agent throughput (target 10-15 features/day)
 - [ ] Identify bottlenecks (repo coordination, review capacity, CI speed)
-- [ ] Optimize slowest checks
+- [ ] Enable intent-based PRs, evidence-bundle PRs, and policy-gated auto-merge
+- [ ] Generate SLSA attestations per release
 - [ ] Scale infrastructure (more runners, better caching)
-- [ ] Target: 10-15 features/day
 
-**Governance:**
-- [ ] Train reviewers on outcome validation (not line-by-line)
-- [ ] Refine policy gates based on feedback
-- [ ] Measure false positive rate
-- [ ] Iterate on agent validation prompts
+**Enterprise Governance:**
+- [ ] Admin dashboard provides leadership visibility into adoption trends and cost
+- [ ] Copilot Spaces operational with deliberate architecture: org-wide, team-scoped, project-specific content
+- [ ] Content curation has a named owner and cadence; spaces not stale
+
+**Measurement and Continuous Improvement:**
+- [ ] Integrate GitHub Copilot Metrics API data into team dashboards alongside DORA metrics
+- [ ] Build custom views showing adoption trends by modality, language, and team
+- [ ] Correlate Copilot usage with PR cycle time and deployment frequency
+- [ ] Produce ROI narrative for leadership: "Copilot contributed to X% reduction in PR cycle time"
+- [ ] Run capability assessment quarterly with clear next-level targets
+- [ ] Identify and equip ≥2 champions per team: power users who coach peers and contribute to instructions
+- [ ] Establish product feedback channel back to GitHub
+- [ ] Governance refinement:
+  - [ ] Train reviewers on outcome validation (not line-by-line)
+  - [ ] Refine policy gates based on feedback
+  - [ ] Measure false positive rate; iterate on agent validation prompts
 
 ---
 
@@ -1282,23 +1575,31 @@ Machine-readable artifacts proving checks ran and passed:
 - [ ] Audit last 50 PRs: How many touched 2+ repos? (If >30%, monorepo candidate)
 - [ ] Measure current PR check time and identify slowest checks
 - [ ] Calculate flake rate: failed PR runs ÷ total PR runs × 100
+- [ ] Run a self-assessment against the maturity model — rate your team on both infrastructure readiness and adoption practices for each level
+- [ ] Check Copilot MAU in the GitHub admin dashboard: are ≥60% of licensed seats active?
 
 **Short-Term Implementation (1-2 weeks):**
 - [ ] Set up affected analysis for existing monorepo (or plan migration if multi-repo)
 - [ ] Add caching for dependencies and build artifacts in CI
 - [ ] Implement flake quarantine policy (fail test on second flake)
 - [ ] Create intent template for one common feature type
+- [ ] Version `.github/copilot-instructions.md` in primary repositories; review it in a PR
+- [ ] Write `AGENTS.md` and `.github/workflows/copilot-setup-steps.yml` in CCA-enabled repositories
+- [ ] Enable CCR as automatic reviewer on the team's most active repository
 
 **Advanced Exploration (1-3 months):**
 - [ ] Execute monorepo migration if needed (follow Phase 1 roadmap)
 - [ ] Deploy agent-based compliance validation for one domain (e.g., GDPR)
 - [ ] Build evidence-bundle PR template with required artifacts
 - [ ] Train team on outcome-based review vs. line-by-line
+- [ ] Connect ≥2 enterprise MCP servers (internal docs, database schema, ticketing)
+- [ ] Integrate GitHub Copilot Metrics API into team dashboards and correlate with DORA metrics
+- [ ] Identify and equip ≥2 champions per team to sustain adoption after the engagement
 
 **Next Steps After Completion:**
-1. ✅ Complete Phase 1 (foundation) and measure baseline metrics
+1. ✅ Complete Phase 1 (Level 3 standardization) and measure baseline metrics
 2. 📖 Review [Agentic Journey](../agentic-journey/) if you need quick wins before full transformation
-3. 📊 Build ROI dashboard tracking: time-to-merge, agent velocity, flake rate, review capacity
+3. 📊 Build ROI dashboard tracking: time-to-merge, agent velocity, flake rate, review capacity, Copilot Metrics API adoption trends
 4. 🚀 Present transformation plan using [Agentic Delivery](../../exec-talks/agentic-delivery/) executive framing
 
 ---
@@ -1307,8 +1608,8 @@ Machine-readable artifacts proving checks ran and passed:
 
 ### Complementary Features
 
-- **[Agentic Journey](../agentic-journey/)** — Incremental issue-to-PR automation when you're not ready for full SDLC transformation
-- **[Agent Teams](../agent-teams/)** — Specialized multi-agent coordination patterns for complex workflows
+- **[Agentic Lifecycle Orchestration](../agentic-lifecycle/)** — Evidence-gated issue-to-PR automation before full SDLC transformation
+- **[Multi-Agent Coordination](../multi-agent-coordination/)** — Specialized multi-agent coordination patterns for complex workflows
 - **[Parallel Execution](../parallel-execution/)** — Worktree-based independence for multiple agents working simultaneously
 - **[Copilot Hooks](../copilot-hooks/)** — Governance mechanisms and agent behavior controls
 
@@ -1332,9 +1633,13 @@ See [DECISION-GUIDE.md](../DECISION-GUIDE.md) for complete navigation help.
 ## 📚 Official Documentation
 
 **Primary Documentation:**
+- 📖 **[AgentRC](https://github.com/microsoft/agentrc)** — Repository AI-readiness workflow built around measure, generate, and maintain
+- 📖 **[AgentRC Concepts](https://github.com/microsoft/agentrc/blob/main/docs/concepts.md)** — The 5-level maturity model and readiness pillars used in this talk
 - 📖 **[Nx Monorepo Tools](https://nx.dev/)** — Build orchestration, module boundaries, affected analysis, and caching
 - 📖 **[GitHub Actions Documentation](https://docs.github.com/en/actions)** — CI/CD workflow automation, caching, and parallelization
 - 📖 **[SLSA Framework](https://slsa.dev/)** — Supply chain security levels and attestation standards
+- 📖 **[GitHub Copilot Metrics API](https://docs.github.com/en/rest/copilot/copilot-metrics)** — Adoption metrics by modality, language, and team for ROI measurement
+- 📖 **[Copilot Coding Agent](https://docs.github.com/en/copilot/how-tos/use-copilot-agents/coding-agent)** — CCA setup, `copilot-setup-steps.yml`, and agent firewall configuration
 
 **Additional Resources:**
 - 🎓 [Nx Tutorial: Monorepo Setup](https://nx.dev/getting-started/intro) — Step-by-step monorepo creation

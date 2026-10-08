@@ -1,0 +1,106 @@
+version: 1
+
+deck:
+  title: "GitHub Copilot CLI: AI at the Point of Work"
+  subtitle: "Bring AI to Where Work Lives and Steer It from Anywhere"
+  tagline: "Close distance across intent, complexity, context, time, and geography."
+
+  agenda:
+    - title: "Turn Intent into Evidence"
+      takeaway: "Shape an ambiguous Docker request into an approved plan and two targeted checks."
+      whyItMatters: "Early clarity focuses tools, reasoning effort, and engineering attention."
+    - title: "Choose Autonomy with Confidence"
+      takeaway: "Use a decision ladder that delivers a 5-minute automated CI analysis."
+      whyItMatters: "Clear permissions, containment, review, and cost boundaries support confident automation."
+    - title: "Keep the Incident in Reach"
+      takeaway: "Steer a live server session from a phone while a 12GB log corpus stays on its host."
+      whyItMatters: "Durable sessions preserve momentum, execution locality, and data governance."
+
+  arcToc: "Clarify Intent → Choose Autonomy → Keep Context → Steer From Anywhere"
+
+  arcNarrative: >
+    Plan Mode opens with the five-part Distance Model and closes the intent gap
+    through a quantified Docker diagnosis. Operating Modes closes the complexity
+    and time gaps by pairing interactive, headless, fan-out, delegated, and
+    scheduled work with explicit permission, containment, review, and cost
+    boundaries. Context Management establishes the session as a durable,
+    recoverable unit of work and creates a focused breath before the climax.
+    Remote Sessions completes the geography arc through device handoff and
+    data-local forensics, with host execution and human steering working
+    together. This sequence prepares the audience to understand what runs, what
+    persists, and what stays under human approval when the marquee reveal lands.
+    The arcToc uses four concise verb phrases in the same order as the full
+    section names so the chain fits within 80 characters.
+
+  sectionOrder:
+    - "Plan Mode: Collaborative Planning Before Implementation"
+    - "Interactive Mode vs Programmatic Mode vs Cloud Delegation"
+    - "Automatic Context Management and Repository Memory"
+    - "Remote Sessions: The Last Distance Falls"
+
+  sectionModes:
+    "Plan Mode: Collaborative Planning Before Implementation":
+      emphasis: medium
+      note: >
+        Open with the five-part Distance Model so the audience can track which
+        gap each section closes. Tell one complete Docker story: ambiguous
+        request, clarifying questions, approved plan, two targeted checks, and
+        an 8-minute resolution following a 45-minute, 8-attempt baseline. Keep
+        real-time steering and Rubber Duck as brief quality checkpoints. Present
+        Rubber Duck as enabled by default and powered by a different model
+        family, with the quality-gap percentage reserved for speaker notes.
+        Use three focused body slides and place the reasoning-model catalog in
+        the appendix.
+    "Interactive Mode vs Programmatic Mode vs Cloud Delegation":
+      emphasis: high
+      note: >
+        Build a task-and-boundary decision ladder the audience can apply on
+        Monday: interactive work for uncertain diagnosis, copilot -p for
+        reproducible CI, /fleet for parallel subtasks inside one approved plan,
+        & for long-running cloud work, and session-scoped scheduled prompts for
+        recurring patrol. Feature the 5-minute CI artifact and its 25-minute
+        baseline as the centerpiece. Give every rung its permissions, output,
+        review, containment, and cost signal, including local and cloud
+        sandboxing and the managed permissions.disableBypassPermissionsMode
+        control. Plant the scheduled-patrol thread for the remote climax. Place
+        the agent roster, custom-agent authoring, and plugin mechanics in the
+        appendix.
+    "Automatic Context Management and Repository Memory":
+      emphasis: medium-low
+      note: >
+        Carry two ideas across two slides. First, show the durable session
+        through auto-compaction at 95%, repository memory across sessions, and
+        /resume from any machine. Second, show turn-level recovery through
+        /rewind, which restores Copilot-changed files, keeps developer-authored
+        edits, and works with Git as an optional foundation. Name /chronicle
+        improve writing .github/copilot-instructions.md as the producer
+        takeaway. Place /worktree, storage internals, model controls, sidebar
+        mechanics, /voice, and /app in the reference appendix.
+    "Remote Sessions: The Last Distance Falls":
+      emphasis: high
+      note: >
+        Deliver the geography payoff as the closing marquee and explain
+        execution locality alongside operator locality in one clear frame. Show
+        a controlled host session handed to web or mobile by QR code, then
+        connect the walking-to-meeting incident to 12GB log forensics performed
+        where the data lives. Collect the scheduled-patrol thread from Operating
+        Modes. Present /fleet as subagent orchestration inside one approved plan
+        on one host. Present multi-environment work as several independent
+        remote sessions that an operator steers from one browser. Pair remote
+        steering with scoped --allow-tool permissions, host-side containment,
+        enterprise policy, and human approval for consequential actions. Give
+        Agent Plugins 1.0 one consumer-facing mention that points to the
+        dedicated plugins talk, and close with a concrete staging-host action.
+
+  preamble: []
+
+  appendix:
+    - src: ./copilot-cli-reference.md
+
+  highlightMoments:
+    - "Plan Mode delivers an 8-minute Docker diagnosis with 2 targeted checks after a 45-minute, 8-attempt baseline."
+    - "A copilot -p CI step delivers build-failure analysis in 5 minutes after a 25-minute baseline."
+    - "/rewind returns a session to an earlier turn, restores Copilot edits, keeps developer edits, and works with Git as an option."
+    - "--remote keeps a 12GB log corpus on its server while the operator steers the live session from a phone."
+
+# OPEN DECISION: Will the remote handoff use a live QR-scan demo or a narrated storyboard? — A live demo needs venue connectivity, a phone camera, and a staged host; a storyboard needs two or three capture images prepared before slide generation.

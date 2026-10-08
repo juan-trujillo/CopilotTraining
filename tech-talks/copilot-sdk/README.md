@@ -1,7 +1,14 @@
 ---
 status: active
-updated: 2026-02-18
-section: "Context & Customization"
+updated: 2026-09-16
+section: "Extend and Embed"
+audience: [developer, platform-engineer, architect]
+level: advanced
+duration: 45
+format: core-talk
+decision: "When should an application own the agent runtime?"
+prerequisites: [surfaces]
+related: [copilot-acp, mcp-apps, copilot-plugins]
 references:
   - url: https://github.com/github/copilot-sdk
     label: "GitHub Copilot SDK repository"
@@ -24,6 +31,12 @@ references:
   - url: https://github.com/github/copilot-sdk/blob/main/docs/auth/index.md
     label: "Copilot SDK Authentication overview"
     verified: 2026-02-18
+    - url: https://code.visualstudio.com/updates/v1_121
+        label: "VS Code release notes: v1.121"
+        verified: 2026-09-15
+    - url: https://code.visualstudio.com/updates/v1_132
+        label: "VS Code release notes: v1.132"
+        verified: 2026-09-15
 ---
 
 # GitHub Copilot SDK: Build AI-Powered Tools for Your Workflows
@@ -47,38 +60,6 @@ references:
 
 ---
 
-## 📽️ Slide Generation Mapping
-
-### Slide Sequence (Generated Automatically)
-
-1. **Title/Logo Slide** ← H1 title + subtitle
-2. **Question/Objective Slide** ← "The Question This Talk Answers"
-3. **Table of Contents Slide** ← Auto-generated from 🎬 sections
-4. **Problem Slide** ← "The Problem"
-5. **Solution Overview** ← "The Solution"
-6. **Key Artifacts** ← "Key Artifacts" inventory
-7. **Mental Model Shift** ← Move-Toward/Away/Against
-8. **When to Use Decision Tree** ← "When to Use This Pattern"
-9. **Architecture & Capabilities** ← 🎬 Section 1 (2-3 slides)
-10. **Getting Started** ← 🎬 Section 2 (2-3 slides)
-11. **Integration Patterns** ← 🎬 Section 3 (3-4 slides)
-12. **Advanced Features** ← 🎬 Section 4 (2-3 slides)
-13. **Use Cases** ← Real-World Use Cases (1-2 slides)
-14. **Actionable Outcomes** ← What You Can Do Today
-15. **Related Patterns** ← Related Patterns
-16. **Official Documentation** ← 📚 section
-17. **End Slide** ← Auto-generated
-
-### Major Sections (TOC Entries)
-
-```markdown
-<!-- 🎬 MAJOR SECTION: Architecture & Capabilities -->
-<!-- 🎬 MAJOR SECTION: Getting Started -->
-<!-- 🎬 MAJOR SECTION: Integration Patterns -->
-<!-- 🎬 MAJOR SECTION: Advanced Features -->
-```
-
----
 
 ## The Problem
 
@@ -128,6 +109,10 @@ The GitHub Copilot SDK (Technical Preview, January 2026) provides a programmable
 The SDK communicates with Copilot CLI running in server mode via JSON-RPC over stdio. When you create a `CopilotClient`, the SDK spawns (or connects to) the CLI process, manages the communication protocol, and streams results back to your application. This architecture means you get all of CLI's capabilities without rebuilding the agent runtime, and GitHub handles authentication, model management, and updates automatically.
 
 The separation is intentional: Copilot CLI is the agent runtime (planning, tools, memory), and the SDK is how you programmatically control that runtime from any application. Your code defines prompts and constraints, the SDK routes requests to CLI, and agents execute with the same reliability as interactive CLI sessions.
+
+### Runtime Ownership Decision
+
+Choose the SDK when the application must own runtime lifecycle, tools, policy, observability, and delivery. Choose editor-hosted agent UX when a person should steer work through editor context, diffs, diagnostics, and approvals. VS Code's remote Agent Host is evidence that the runtime can be portable beyond the local editor process; it does not collapse the protocol boundary. Coordinating an external client through the Agent Host Protocol remains a separate client, permission, and session design concern from embedding the Copilot runtime with the SDK.
 
 **Official Documentation:**
 - 📖 [GitHub Copilot SDK Repository](https://github.com/github/copilot-sdk) — Installation, API reference, and language-specific examples
@@ -1240,7 +1225,7 @@ Path('docs/API_REFERENCE.md').write_text(docs)
 - **[GitHub Copilot CLI](../copilot-cli/)** — Interactive terminal experience; SDK enables programmatic control of the same runtime
 - **[MCP Apps](../mcp-apps/)** — Extend SDK capabilities by connecting to internal systems and APIs
 - **[Agentic SDLC](../agentic-sdlc/)** — Full repository automation; SDK is the building block for custom agent workflows
-- **[Custom Agents](../agent-teams/)** — Specialized agents for specific domains; SDK provides the runtime to host them
+- **[Multi-Agent Coordination](../multi-agent-coordination/)** — Specialized workstreams and integration contracts; SDK provides a runtime for custom hosts
 
 ### Decision Flow
 

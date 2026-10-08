@@ -1,0 +1,89 @@
+# REVIEW PENDING: independent critique completed; the host did not expose
+# the reviewer's model family, so cross-model independence remains unverified.
+version: 1
+
+deck:
+  title: "Agentic Lifecycle Orchestration"
+  subtitle: "A Real Issue, a Reusable Workflow, and the Next Decision"
+  tagline: "Choose each label-driven handoff from issue to reviewed draft PR"
+
+  agenda:
+    - title: "Build a bounded research handoff"
+      takeaway: "Read the complete workflow source, compile its lock, and inspect the comment on a selected issue."
+      whyItMatters: "The event and output guard let a maintainer request evidence on any issue."
+    - title: "Approve a plan that the repository can verify"
+      takeaway: "See a faulty build command corrected before a named approver requests implementation."
+      whyItMatters: "A scoped plan and working baseline make the next label meaningful."
+    - title: "Trace a tested fix into a human decision"
+      takeaway: "Follow the two-file draft PR, current-head checks, and advisory review."
+      whyItMatters: "A reviewer can inspect both working evidence and the remaining runtime uncertainty."
+
+  arcToc: "Request Research → Approve a Plan → Produce a Draft Fix → Review and Transfer"
+  arcNarrative: >
+    Open with the observed draft PR as a tangible destination, then rewind to
+    the maintainer's first label request. Show the complete research source
+    through trigger, guarded comment, and evidence instructions; its comment
+    sets up a scope choice. Give the corrected, reproducible plan a clear
+    approval checkpoint. Peak engagement lands on the two-file change, scoped
+    build, and current-head CI proof produced after a human implementation
+    request. Finish with a separate PR review request, advisory COMMENT,
+    a baseline comparison, and a reusable label-and-evidence loop. Keep
+    operational incident history in the README for readers who need it.
+
+  sectionOrder:
+    - "1. Request Research on Any Issue"
+    - "2. Turn Research into a Plan a Human Can Approve"
+    - "3. Implement, Validate, and Offer a Draft PR"
+    - "4. Request Advisory Review and Keep Acceptance Human"
+
+  sectionModes:
+    "1. Request Research on Any Issue":
+      emphasis: high
+      note: >
+        Show the complete live FanHub research workflow over legible code
+        slides. Connect event selection, read permissions, instruction body,
+        and one guarded comment to concrete practitioner decisions. Show
+        issue #110 as selected input and its scope question as observed output.
+        Include compile, label, and inspection commands. Keep #175 as a brief
+        example of a separate policy decision.
+    "2. Turn Research into a Plan a Human Can Approve":
+      emphasis: medium
+      note: >
+        Show the independent planning trigger and bounded outputs. Give the
+        corrected #110 plan its own proof moment: an unrunnable solution
+        command prompted a local baseline check, then a scoped Frontend build,
+        two-file acceptance, rollback, and named approver. A human applies
+        the implementation request to the issue after reading the latest plan.
+    "3. Implement, Validate, and Offer a Draft PR":
+      emphasis: high
+      note: >
+        Explain the trusted approval-label event and actor check, plan
+        provenance, allowed .NET source, and one-draft-PR output. Show the
+        exact two-file move on PR #193, zero build errors and seven existing
+        warnings. Show how to identify a draft head and inspect its completed
+        checks; distinguish runner status from the actual draft artifact.
+        Keep runtime incident history and bot-token CI procedures in the
+        README as supporting operational detail.
+    "4. Request Advisory Review and Keep Acceptance Human":
+      emphasis: medium
+      note: >
+        Show the PR-specific request label, verified approval provenance,
+        COMMENT-only review, and lifecycle:reviewed status. Pair the browser
+        baseline comparison with its clear result and unexercised error
+        recovery boundary. The draft remains open for the maintainer's
+        acceptance decision. Close with the four manual request commands,
+        the artifact each produces, and an own-repo question that yields
+        a label, named approver, and current-head check.
+
+  preamble: []
+  appendix: []
+
+  highlightMoments:
+    - "The complete research source selects any labeled issue and confines one comment to that issue."
+    - "The #110 plan corrected an unrunnable command before an approver requested the two-file fix."
+    - "Draft PR #193 moved only two layout files; the scoped build passed with zero errors and seven existing warnings."
+    - "Current-head Frontend and CodeQL checks passed; a reviewer can verify the draft SHA and completed checks."
+    - "The PR review posted COMMENT and lifecycle:reviewed; error recovery and acceptance remain with a person."
+
+# OPEN DECISION: The maintainer chooses whether to exercise Blazor error
+# recovery before accepting PR #193; the talk presents that check as pending.

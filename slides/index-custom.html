@@ -1,84 +1,248 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CopilotTraining - Slidev Presentations</title>
+  <title>Copilot Practice Library | Talks, Workshops, and Executive Briefings</title>
   <style>
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
+
+    /* ── Dark theme (default) ── */
+    :root {
+      --bg-gradient: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+      --text: #e2e8f0;
+      --text-muted: #94a3b8;
+      --text-dim: #64748b;
+      --section-bg: rgba(255, 255, 255, 0.03);
+      --section-border: rgba(255, 255, 255, 0.1);
+      --section-shadow: rgba(0, 0, 0, 0.2);
+      --section-divider: rgba(255, 255, 255, 0.08);
+      --card-bg: rgba(255, 255, 255, 0.06);
+      --card-border: rgba(255, 255, 255, 0.13);
+      --card-hover-bg: rgba(255, 255, 255, 0.08);
+      --card-h2: #e2e8f0;
+      --card-p: #94a3b8;
+      --chip-bg: rgba(255, 255, 255, 0.07);
+      --chip-border: rgba(255, 255, 255, 0.12);
+      --chip-color: #94a3b8;
+      --line-color: rgba(255, 255, 255, 0.1);
+      --hero-bg: rgba(255, 255, 255, 0.03);
+      --hero-border: rgba(255, 255, 255, 0.1);
+      --section-desc: #e2e8f0;
+      --badge-bg: rgba(255, 255, 255, 0.08);
+      --badge-border: rgba(255, 255, 255, 0.18);
+      --badge-color: #94a3b8;
+      --deprecated-bg: rgba(255, 255, 255, 0.02);
+      --deprecated-border: rgba(255, 255, 255, 0.06);
+      --deprecated-color: #64748b;
+    }
+
+    /* ── Light theme ── */
+    [data-theme="light"] {
+      --bg-gradient: linear-gradient(135deg, #e8edf3 0%, #dde3ec 100%);
+      --text: #0f172a;
+      --text-muted: #334155;
+      --text-dim: #475569;
+      --section-bg: rgba(255, 255, 255, 0.95);
+      --section-border: rgba(0, 0, 0, 0.12);
+      --section-shadow: rgba(0, 0, 0, 0.1);
+      --section-divider: rgba(0, 0, 0, 0.1);
+      --card-bg: #ffffff;
+      --card-border: rgba(0, 0, 0, 0.14);
+      --card-hover-bg: #f8fafc;
+      --card-h2: #0f172a;
+      --card-p: #334155;
+      --chip-bg: rgba(0, 0, 0, 0.06);
+      --chip-border: rgba(0, 0, 0, 0.14);
+      --chip-color: #475569;
+      --line-color: rgba(0, 0, 0, 0.1);
+      --hero-bg: rgba(255, 255, 255, 0.9);
+      --hero-border: rgba(0, 0, 0, 0.12);
+      --section-desc: #1e293b;
+      --badge-bg: rgba(0, 0, 0, 0.06);
+      --badge-border: rgba(0, 0, 0, 0.16);
+      --badge-color: #475569;
+      --deprecated-bg: rgba(0, 0, 0, 0.02);
+      --deprecated-border: rgba(0, 0, 0, 0.06);
+      --deprecated-color: #94a3b8;
+      --card-shadow: 0 2px 8px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.06);
+      --card-shadow-hover: 0 6px 20px rgba(0, 0, 0, 0.12), 0 2px 6px rgba(0, 0, 0, 0.08);
+    }
+
+    /* Respect OS preference when no manual override is set */
+    @media (prefers-color-scheme: light) {
+      :root:not([data-theme]) {
+        --bg-gradient: linear-gradient(135deg, #e8edf3 0%, #dde3ec 100%);
+        --text: #0f172a;
+        --text-muted: #334155;
+        --text-dim: #475569;
+        --section-bg: rgba(255, 255, 255, 0.95);
+        --section-border: rgba(0, 0, 0, 0.12);
+        --section-shadow: rgba(0, 0, 0, 0.1);
+        --section-divider: rgba(0, 0, 0, 0.1);
+        --card-bg: #ffffff;
+        --card-border: rgba(0, 0, 0, 0.14);
+        --card-hover-bg: #f8fafc;
+        --card-h2: #0f172a;
+        --card-p: #334155;
+        --chip-bg: rgba(0, 0, 0, 0.06);
+        --chip-border: rgba(0, 0, 0, 0.14);
+        --chip-color: #475569;
+        --line-color: rgba(0, 0, 0, 0.1);
+        --hero-bg: rgba(255, 255, 255, 0.9);
+        --hero-border: rgba(0, 0, 0, 0.12);
+        --section-desc: #1e293b;
+        --badge-bg: rgba(0, 0, 0, 0.06);
+        --badge-border: rgba(0, 0, 0, 0.16);
+        --badge-color: #475569;
+        --deprecated-bg: rgba(0, 0, 0, 0.02);
+        --deprecated-border: rgba(0, 0, 0, 0.06);
+        --deprecated-color: #94a3b8;
+        --card-shadow: 0 2px 8px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.06);
+        --card-shadow-hover: 0 6px 20px rgba(0, 0, 0, 0.12), 0 2px 6px rgba(0, 0, 0, 0.08);
+      }
+    }
+
     body {
       font-family: 'Avenir Next', Arial, sans-serif;
-      background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
-      color: #e2e8f0;
+      background: var(--bg-gradient);
+      color: var(--text);
       min-height: 100vh;
-      padding: 2rem;
+      padding: 1.25rem 1.5rem;
+      transition: background 0.3s ease, color 0.3s ease;
     }
+
     .container {
-      max-width: 1200px;
+      max-width: 1800px;
       margin: 0 auto;
+      width: 100%;
     }
+
+    .hero {
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+      margin-bottom: 1.5rem;
+      padding: 1rem 1.5rem;
+      background: var(--hero-bg);
+      border: 1px solid var(--hero-border);
+      border-left: 4px solid #22d3ee;
+      border-radius: 12px;
+    }
+
+    .hero-logo {
+      width: 52px;
+      height: auto;
+      flex-shrink: 0;
+      opacity: 0.9;
+    }
+
+    .hero-text {
+      flex: 1;
+    }
+
     h1 {
-      font-size: 3rem;
-      margin-bottom: 1rem;
+      font-size: 2rem;
+      margin-bottom: 0.2rem;
       background: linear-gradient(135deg, #22d3ee 0%, #3b82f6 50%, #6366f1 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
     }
+
     .subtitle {
-      font-size: 1.2rem;
-      color: #94a3b8;
-      margin-bottom: 3rem;
+      font-size: 0.875rem;
+      color: var(--text-muted);
+      line-height: 1.4;
     }
+
+    /* ── Theme toggle button ── */
+    .theme-toggle {
+      margin-left: auto;
+      flex-shrink: 0;
+      background: var(--chip-bg);
+      border: 1px solid var(--chip-border);
+      border-radius: 20px;
+      padding: 0.4rem 1rem;
+      cursor: pointer;
+      font-size: 0.82rem;
+      font-family: inherit;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+    }
+
+    .theme-toggle:hover {
+      background: var(--card-hover-bg);
+      color: var(--text);
+    }
+
     .section {
-      margin-bottom: 3rem;
-      background: rgba(255, 255, 255, 0.03);
-      border: 2px solid rgba(255, 255, 255, 0.15);
-      border-radius: 16px;
-      padding: 2rem;
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+      margin-bottom: 2rem;
+      background: var(--section-bg);
+      border: 1px solid var(--section-border);
+      border-radius: 12px;
+      padding: 1.25rem 1.5rem;
+      box-shadow: 0 4px 16px var(--section-shadow);
+      transition: background 0.3s ease, border-color 0.3s ease;
     }
+
     .section-header {
       display: flex;
       align-items: center;
-      gap: 1rem;
-      margin-bottom: 1.5rem;
-      padding-bottom: 1rem;
-      border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+      gap: 0.75rem;
+      margin-bottom: 1rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid var(--section-divider);
     }
+
     .section-icon {
-      font-size: 2rem;
+      font-size: 1.5rem;
     }
+
     .section-title {
-      font-size: 1.75rem;
+      font-size: 1.35rem;
       font-weight: 600;
       margin: 0;
     }
+
     .section-description {
-      color: #94a3b8;
-      font-size: 0.95rem;
-      margin-top: 0.25rem;
+      color: var(--section-desc);
+      font-size: 0.9rem;
+      margin-top: 0.2rem;
+      font-weight: 400;
+      opacity: 0.85;
     }
+
     /* Workshop: orange → red → purple */
     .section.workshop {
-      border-color: rgba(251, 146, 60, 0.3);
+      border-color: rgba(251, 146, 60, 0.25);
+      border-left: 4px solid rgba(251, 146, 60, 0.8);
       background: linear-gradient(135deg, rgba(251, 146, 60, 0.05) 0%, rgba(248, 113, 113, 0.03) 50%, rgba(192, 132, 252, 0.03) 100%);
     }
+
     .section.workshop .section-title {
       background: linear-gradient(135deg, #fb923c 0%, #f87171 50%, #c084fc 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
     }
+
     /* Tech-talks: cyan → blue → indigo */
     .section.tech-talks {
-      border-color: rgba(34, 211, 238, 0.3);
+      border-color: rgba(34, 211, 238, 0.25);
+      border-left: 4px solid rgba(34, 211, 238, 0.8);
       background: linear-gradient(135deg, rgba(34, 211, 238, 0.05) 0%, rgba(59, 130, 246, 0.03) 50%, rgba(99, 102, 241, 0.03) 100%);
     }
+
     .section.tech-talks .section-title {
       background: linear-gradient(135deg, #22d3ee 0%, #3b82f6 50%, #6366f1 100%);
       -webkit-background-clip: text;
@@ -98,55 +262,178 @@
     }
     /* Exec-talks: blue → cyan → green */
     .section.exec-talks {
-      border-color: rgba(59, 130, 246, 0.3);
+      border-color: rgba(59, 130, 246, 0.25);
+      border-left: 4px solid rgba(59, 130, 246, 0.8);
       background: linear-gradient(135deg, rgba(59, 130, 246, 0.05) 0%, rgba(34, 211, 238, 0.03) 50%, rgba(74, 222, 128, 0.03) 100%);
     }
+
     .section.exec-talks .section-title {
       background: linear-gradient(135deg, #3b82f6 0%, #22d3ee 50%, #4ade80 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
     }
+
     .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-      gap: 1.5rem;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      grid-auto-rows: clamp(90px, 10vw, 150px);
+      gap: 0.75rem;
     }
+
     .card {
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 12px;
-      padding: 1.5rem;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 10px;
+      padding: 1rem 1.1rem;
       transition: all 0.3s ease;
       text-decoration: none;
       color: inherit;
-      display: block;
+      display: flex;
+      flex-direction: column;
+      box-shadow: var(--card-shadow, none);
     }
+
     .card:hover {
-      background: rgba(255, 255, 255, 0.08);
+      background: var(--card-hover-bg);
       transform: translateY(-4px);
+      box-shadow: var(--card-shadow-hover, none);
     }
-    /* Workshop card styles: orange → red → purple */
+
+    /* Light mode: per-section left accent stripe on cards */
+    [data-theme="light"] .section.tech-talks .card {
+      border-left: 3px solid rgba(34, 211, 238, 0.5);
+    }
+
+    [data-theme="light"] .section.workshop .card {
+      border-left: 3px solid rgba(251, 146, 60, 0.5);
+    }
+
+    [data-theme="light"] .section.exec-talks .card {
+      border-left: 3px solid rgba(59, 130, 246, 0.5);
+    }
+
+    [data-theme="light"] .section.repos .card {
+      border-left: 3px solid rgba(168, 85, 247, 0.5);
+    }
+
+    /* Light mode: kill the yellow tint on NEW cards, keep just the border glow */
+    [data-theme="light"] .card-new {
+      background: #ffffff !important;
+    }
+
+    /* Light mode: sub-group label chips — stronger contrast */
+    [data-theme="light"] .sub-group-label {
+      color: #1e293b;
+      background: rgba(0, 0, 0, 0.08);
+      border-color: rgba(0, 0, 0, 0.2);
+    }
+
+    [data-theme="light"] .section.tech-talks .sub-group-label {
+      color: #0369a1;
+      background: rgba(34, 211, 238, 0.15);
+      border-color: rgba(34, 211, 238, 0.4);
+    }
+
+    /* Light mode: section titles — replace unreadable light-cyan gradients with dark solid colors */
+    [data-theme="light"] .section.tech-talks .section-title {
+      background: none;
+      -webkit-text-fill-color: #0369a1;
+      color: #0369a1;
+    }
+
+    [data-theme="light"] .section.workshop .section-title {
+      background: none;
+      -webkit-text-fill-color: #c2410c;
+      color: #c2410c;
+    }
+
+    [data-theme="light"] .section.exec-talks .section-title {
+      background: none;
+      -webkit-text-fill-color: #1d4ed8;
+      color: #1d4ed8;
+    }
+
+    [data-theme="light"] .section.repos .section-title {
+      background: none;
+      -webkit-text-fill-color: #7e22ce;
+      color: #7e22ce;
+    }
+
+    /* Light mode: hero h1 gradient — replace light cyan with readable dark blue */
+    [data-theme="light"] h1 {
+      background: linear-gradient(135deg, #0369a1 0%, #1d4ed8 50%, #4338ca 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+    }
+
+    /* Light mode: card hover title colors — replace light cyan with darker tones */
+    [data-theme="light"] .section.tech-talks .card:hover h2 {
+      color: #0369a1;
+    }
+
+    [data-theme="light"] .section.workshop .card:hover h2 {
+      color: #c2410c;
+    }
+
+    [data-theme="light"] .section.exec-talks .card:hover h2 {
+      color: #1d4ed8;
+    }
+
+    [data-theme="light"] .section.repos .card:hover h2 {
+      color: #7e22ce;
+    }
+
+    /* Light mode: section count badges — readable accent colors */
+    [data-theme="light"] .section.tech-talks .section-count-badge {
+      color: #0369a1;
+      background: rgba(3, 105, 161, 0.1);
+      border-color: rgba(3, 105, 161, 0.3);
+    }
+
+    [data-theme="light"] .section.workshop .section-count-badge {
+      color: #c2410c;
+      background: rgba(194, 65, 12, 0.1);
+      border-color: rgba(194, 65, 12, 0.3);
+    }
+
+    [data-theme="light"] .section.repos .section-count-badge {
+      color: #7e22ce;
+      background: rgba(126, 34, 206, 0.1);
+      border-color: rgba(126, 34, 206, 0.3);
+    }
+
+    /* Card h2 base — solid, transitions to section accent on hover */
+    .card h2 {
+      font-size: 0.92rem;
+      font-weight: 600;
+      margin-bottom: 0.6rem;
+      color: var(--card-h2);
+      transition: color 0.2s ease;
+      overflow: hidden;
+    }
+
+    /* NEW badge — floats right inside the card title row */
+    /* Full definition below in .badge-new */
+
+    /* Workshop card styles */
     .section.workshop .card:hover {
       border-color: rgba(251, 146, 60, 0.6);
       box-shadow: 0 4px 20px rgba(251, 146, 60, 0.2);
     }
-    .section.workshop .card h2 {
-      background: linear-gradient(135deg, #fb923c 0%, #f87171 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+
+    .section.workshop .card:hover h2 {
+      color: #fb923c;
     }
-    /* Tech-talks card styles: cyan → blue → indigo */
+
+    /* Tech-talks card styles */
     .section.tech-talks .card:hover {
       border-color: rgba(34, 211, 238, 0.6);
       box-shadow: 0 4px 20px rgba(34, 211, 238, 0.2);
     }
-    .section.tech-talks .card h2 {
-      background: linear-gradient(135deg, #22d3ee 0%, #3b82f6 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+
+    .section.tech-talks .card:hover h2 {
+      color: #22d3ee;
     }
     /* Intro-talks card styles: teal → cyan → blue */
     .section.intro-talks .card:hover {
@@ -164,64 +451,129 @@
       border-color: rgba(59, 130, 246, 0.6);
       box-shadow: 0 4px 20px rgba(59, 130, 246, 0.2);
     }
-    .section.exec-talks .card h2 {
-      background: linear-gradient(135deg, #3b82f6 0%, #22d3ee 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+
+    .section.exec-talks .card:hover h2 {
+      color: #3b82f6;
     }
+
     .card p {
-      font-size: 0.9rem;
-      color: #cbd5e1;
-      line-height: 1.5;
+      font-size: 0.8rem;
+      color: var(--card-p);
+      line-height: 1.45;
+      margin-top: auto;
+      overflow: hidden;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
     }
+
     .sub-group {
       margin-bottom: 2rem;
     }
+
     .sub-group:last-child {
       margin-bottom: 0;
     }
+
     .sub-group-header {
       display: flex;
       align-items: center;
-      gap: 0.6rem;
-      margin-bottom: 1rem;
-      padding-left: 0.25rem;
+      gap: 0.5rem;
+      margin-bottom: 0.6rem;
+      padding-left: 0.1rem;
     }
+
     .sub-group-icon {
       font-size: 1.15rem;
       opacity: 0.9;
     }
+
     .sub-group-label {
-      font-size: 0.85rem;
-      font-weight: 600;
+      font-size: 0.72rem;
+      font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.08em;
-      color: #64748b;
+      color: var(--chip-color);
+      background: var(--chip-bg);
+      padding: 0.2rem 0.65rem;
+      border-radius: 20px;
+      border: 1px solid var(--chip-border);
     }
+
     .section.tech-talks .sub-group-label {
-      background: linear-gradient(135deg, #22d3ee 0%, #3b82f6 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+      color: #22d3ee;
+      background: rgba(34, 211, 238, 0.1);
+      border-color: rgba(34, 211, 238, 0.25);
     }
+
     .sub-group-line {
       flex: 1;
       height: 1px;
-      background: linear-gradient(90deg, rgba(255,255,255,0.1) 0%, transparent 100%);
+      background: linear-gradient(90deg, var(--line-color) 0%, transparent 100%);
       margin-left: 0.5rem;
     }
+
+    .sub-group-desc {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-left: 0.5rem;
+    }
+
     /* Related Repos: purple → pink → rose */
     .section.repos {
-      border-color: rgba(168, 85, 247, 0.3);
+      border-color: rgba(168, 85, 247, 0.25);
+      border-left: 4px solid rgba(168, 85, 247, 0.8);
       background: linear-gradient(135deg, rgba(168, 85, 247, 0.05) 0%, rgba(236, 72, 153, 0.03) 50%, rgba(251, 113, 133, 0.03) 100%);
     }
+
     .section.repos .section-title {
       background: linear-gradient(135deg, #a855f7 0%, #ec4899 50%, #fb7185 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
     }
+
+    .section.repos .card:hover {
+      border-color: rgba(168, 85, 247, 0.6);
+      box-shadow: 0 4px 20px rgba(168, 85, 247, 0.2);
+    }
+
+    .section.repos .card:hover h2 {
+      color: #a855f7;
+    }
+
+    .section-count-badge {
+      margin-left: auto;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--badge-color);
+      background: var(--badge-bg);
+      border: 1px solid var(--badge-border);
+      border-radius: 20px;
+      padding: 0.25rem 0.8rem;
+      letter-spacing: 0.02em;
+      white-space: nowrap;
+      align-self: center;
+    }
+
+    .section.tech-talks .section-count-badge {
+      color: #22d3ee;
+      background: rgba(34, 211, 238, 0.12);
+      border-color: rgba(34, 211, 238, 0.35);
+    }
+
+    .section.workshop .section-count-badge {
+      color: #fb923c;
+      background: rgba(251, 146, 60, 0.12);
+      border-color: rgba(251, 146, 60, 0.35);
+    }
+
+    .section.repos .section-count-badge {
+      color: #a855f7;
+      background: rgba(168, 85, 247, 0.12);
+      border-color: rgba(168, 85, 247, 0.35);
+    }
+
     .note {
       margin-top: 1.5rem;
       padding: 1rem;
@@ -231,45 +583,945 @@
       font-size: 0.9rem;
       color: #fcd34d;
     }
-    /* "NEW" badge — auto-applied by JS to cards updated within 7 days */
+
+    /* "NEW" badge */
     .badge-new {
       display: inline-block;
       font-size: 0.75rem;
       font-weight: 800;
       text-transform: uppercase;
       letter-spacing: 0.1em;
-      padding: 0.25rem 0.65rem;
+      padding: 0.2rem 0.5rem;
       border-radius: 6px;
       background: #fbbf24;
       color: #000;
       -webkit-text-fill-color: #000;
       background-clip: padding-box;
       -webkit-background-clip: padding-box;
-      margin-left: 0.75rem;
-      vertical-align: middle;
+      float: right;
+      margin-left: 0.5rem;
+      margin-top: 0.05rem;
       box-shadow: 0 0 12px rgba(251, 191, 36, 0.7), 0 0 24px rgba(251, 191, 36, 0.3);
       animation: pulse-new 2s ease-in-out infinite;
     }
-    /* Card glow for NEW items — amber border + soft ambient glow */
+
     .card-new {
       border-color: rgba(251, 191, 36, 0.5) !important;
       box-shadow: 0 0 12px rgba(251, 191, 36, 0.15), 0 4px 24px rgba(251, 191, 36, 0.1) !important;
       background: rgba(251, 191, 36, 0.04) !important;
     }
+
     .card-new:hover {
       border-color: rgba(251, 191, 36, 0.8) !important;
       box-shadow: 0 0 20px rgba(251, 191, 36, 0.3), 0 8px 32px rgba(251, 191, 36, 0.15) !important;
     }
+
+    /* Deprecated card */
+    .card-deprecated {
+      opacity: 0.45;
+      filter: grayscale(0.6);
+      border-color: var(--deprecated-border) !important;
+      background: var(--deprecated-bg) !important;
+      pointer-events: none;
+    }
+
+    .card-deprecated:hover {
+      transform: none;
+    }
+
+    .badge-deprecated {
+      display: inline-block;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding: 0.2rem 0.55rem;
+      border-radius: 4px;
+      background: var(--chip-bg);
+      color: var(--deprecated-color);
+      -webkit-text-fill-color: var(--deprecated-color);
+      margin-left: 0.5rem;
+      vertical-align: middle;
+    }
+
     @keyframes pulse-new {
-      0%, 100% { box-shadow: 0 0 10px rgba(251, 191, 36, 0.6), 0 0 20px rgba(251, 191, 36, 0.2); }
-      50% { box-shadow: 0 0 14px rgba(251, 191, 36, 0.8), 0 0 28px rgba(251, 191, 36, 0.3); }
+
+      0%,
+      100% {
+        box-shadow: 0 0 10px rgba(251, 191, 36, 0.6), 0 0 20px rgba(251, 191, 36, 0.2);
+      }
+
+      50% {
+        box-shadow: 0 0 14px rgba(251, 191, 36, 0.8), 0 0 28px rgba(251, 191, 36, 0.3);
+      }
+    }
+
+        /* ── Card shell (deck cards enhanced by JS) ── */
+    .card-shell {
+      position: relative;
+      cursor: pointer;
+      min-height: 100%;
+    }
+
+    .card-title-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.4rem;
+      margin-bottom: 0.45rem;
+    }
+
+    .card-title-row h2 {
+      margin-bottom: 0;
+      flex: 1;
+      min-width: 0;
+    }
+
+    .card-title-link {
+      text-decoration: none;
+      color: inherit;
+      flex: 1;
+      min-width: 0;
+    }
+
+    .card-body-link {
+      text-decoration: none;
+      color: inherit;
+      display: block;
+      flex: 1;
+    }
+
+    .card-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.35rem;
+      flex-shrink: 0;
+      margin-top: 0.1rem;
+    }
+
+    .card-chip {
+      font-size: 0.62rem;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: var(--badge-color);
+      background: var(--badge-bg);
+      border: 1px solid var(--badge-border);
+      border-radius: 999px;
+      padding: 0.18rem 0.45rem;
+      line-height: 1.2;
+      transition: all 0.15s ease;
+    }
+
+    .card-chip:hover {
+      color: #fff;
+      background: rgba(59, 130, 246, 0.85);
+      border-color: rgba(59, 130, 246, 0.95);
+    }
+
+    .card-chip.is-missing {
+      opacity: 0.35;
+      pointer-events: none;
+    }
+
+    .grid {
+      grid-auto-rows: minmax(clamp(100px, 11vw, 160px), auto);
+    }
+
+    /* ── 2026 catalog refresh ─────────────────────────────────── */
+    :root {
+      --bg-gradient: #090d14;
+      --text: #f4f7fb;
+      --text-muted: #a9b4c4;
+      --text-dim: #758196;
+      --section-bg: rgba(13, 19, 29, 0.86);
+      --section-border: rgba(148, 163, 184, 0.16);
+      --section-shadow: rgba(0, 0, 0, 0.32);
+      --section-divider: rgba(148, 163, 184, 0.14);
+      --card-bg: rgba(17, 25, 38, 0.84);
+      --card-border: rgba(148, 163, 184, 0.18);
+      --card-hover-bg: rgba(23, 34, 51, 0.96);
+      --card-h2: #f8fafc;
+      --card-p: #a9b4c4;
+      --chip-bg: rgba(148, 163, 184, 0.08);
+      --chip-border: rgba(148, 163, 184, 0.18);
+      --chip-color: #b8c3d2;
+      --hero-bg: transparent;
+      --hero-border: rgba(148, 163, 184, 0.18);
+      --section-desc: #c4cedb;
+    }
+
+    [data-theme="light"] {
+      --bg-gradient: #edf1f5;
+      --text: #111827;
+      --text-muted: #526074;
+      --text-dim: #6b778a;
+      --section-bg: rgba(255, 255, 255, 0.82);
+      --section-border: rgba(15, 23, 42, 0.14);
+      --section-shadow: rgba(15, 23, 42, 0.1);
+      --section-divider: rgba(15, 23, 42, 0.12);
+      --card-bg: rgba(255, 255, 255, 0.96);
+      --card-border: rgba(15, 23, 42, 0.16);
+      --card-hover-bg: #ffffff;
+      --card-h2: #111827;
+      --card-p: #526074;
+      --chip-bg: rgba(15, 23, 42, 0.055);
+      --chip-border: rgba(15, 23, 42, 0.16);
+      --chip-color: #465468;
+      --hero-bg: transparent;
+      --hero-border: rgba(15, 23, 42, 0.16);
+      --section-desc: #3c4a5e;
+    }
+
+    body {
+      position: relative;
+      padding: 2rem clamp(1.25rem, 4vw, 4.5rem) 6rem;
+      background-color: #090d14;
+      background-image:
+        linear-gradient(rgba(148, 163, 184, 0.045) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(148, 163, 184, 0.045) 1px, transparent 1px),
+        linear-gradient(135deg, #090d14 0%, #111827 55%, #0b1018 100%);
+      background-size: 32px 32px, 32px 32px, 100% 100%;
+      background-attachment: fixed;
+      font-family: "Aptos", "Segoe UI Variable", "Trebuchet MS", sans-serif;
+    }
+
+    [data-theme="light"] body {
+      background-color: #edf1f5;
+      background-image:
+        linear-gradient(rgba(15, 23, 42, 0.045) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(15, 23, 42, 0.045) 1px, transparent 1px),
+        linear-gradient(135deg, #f4f7fa 0%, #e8edf3 100%);
+    }
+
+    .container {
+      max-width: 2100px;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr) auto;
+      align-items: center;
+      gap: 1.25rem;
+      margin: 0 0 1.5rem;
+      padding: 1.5rem 0 1.75rem;
+      background: transparent;
+      border: 0;
+      border-bottom: 1px solid var(--hero-border);
+      border-radius: 0;
+    }
+
+    .hero-logo-wrap {
+      width: 58px;
+      height: 58px;
+      display: grid;
+      place-items: center;
+      background: #f5b800;
+      border: 1px solid #ffd24d;
+      border-radius: 6px;
+      box-shadow: 5px 5px 0 rgba(34, 211, 238, 0.26);
+    }
+
+    .hero-logo {
+      width: 43px;
+      opacity: 1;
+    }
+
+    .eyebrow {
+      margin-bottom: 0.3rem;
+      color: #22d3ee;
+      font-family: "Cascadia Code", "SFMono-Regular", Consolas, monospace;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 0;
+      background: none;
+      color: var(--text);
+      -webkit-text-fill-color: currentColor;
+      font-family: "Aptos Display", "Segoe UI Variable Display", "Trebuchet MS", sans-serif;
+      font-size: clamp(1.9rem, 4vw, 3.15rem);
+      font-weight: 760;
+      line-height: 1;
+      letter-spacing: 0;
+    }
+
+    [data-theme="light"] h1 {
+      background: none;
+      color: #111827;
+      -webkit-text-fill-color: #111827;
+    }
+
+    .subtitle {
+      max-width: 790px;
+      margin-top: 0.55rem;
+      color: var(--text-muted);
+      font-size: 0.93rem;
+    }
+
+    .hero-controls {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+    }
+
+    .library-status {
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+      color: var(--text-muted);
+      font-family: "Cascadia Code", "SFMono-Regular", Consolas, monospace;
+      font-size: 0.7rem;
+      white-space: nowrap;
+    }
+
+    .library-status::before {
+      width: 7px;
+      height: 7px;
+      content: "";
+      background: #4ade80;
+      border-radius: 50%;
+      box-shadow: 0 0 0 4px rgba(74, 222, 128, 0.12);
+    }
+
+    .theme-toggle {
+      min-width: 42px;
+      min-height: 42px;
+      justify-content: center;
+      padding: 0.55rem 0.7rem;
+      border-radius: 6px;
+    }
+
+    .catalog-nav {
+      position: sticky;
+      top: 0.75rem;
+      z-index: 20;
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 1px;
+      margin-bottom: 1.75rem;
+      overflow: hidden;
+      background: var(--section-border);
+      border: 1px solid var(--section-border);
+      border-radius: 7px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18);
+      backdrop-filter: blur(16px);
+    }
+
+    .catalog-nav a {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      padding: 0.85rem 1rem;
+      background: rgba(12, 18, 28, 0.94);
+      color: var(--text-muted);
+      font-size: 0.84rem;
+      font-weight: 700;
+      text-decoration: none;
+      transition: background 0.18s ease, color 0.18s ease;
+    }
+
+    [data-theme="light"] .catalog-nav a {
+      background: rgba(255, 255, 255, 0.95);
+    }
+
+    .catalog-nav a:hover,
+    .catalog-nav a:focus-visible {
+      background: var(--card-hover-bg);
+      color: var(--text);
+      outline: none;
+    }
+
+    .catalog-nav-index {
+      color: #22d3ee;
+      font-family: "Cascadia Code", "SFMono-Regular", Consolas, monospace;
+      font-size: 0.72rem;
+    }
+
+    .onboarding-path {
+      --group-accent: #f5b800;
+      margin-bottom: 2.25rem;
+      padding: 1.5rem 1.65rem;
+      border-top: 1px solid rgba(245, 184, 0, 0.4);
+      border-bottom: 1px solid rgba(245, 184, 0, 0.22);
+      scroll-margin-top: 5rem;
+    }
+
+    #start-here:target,
+    #tech-talks:target,
+    #workshop:target,
+    #related-repos:target {
+      position: relative;
+      z-index: 1;
+      outline: 1px solid color-mix(in srgb, var(--target-accent) 72%, transparent);
+      outline-offset: 4px;
+      box-shadow:
+        0 0 0 5px color-mix(in srgb, var(--target-accent) 12%, transparent),
+        0 0 34px color-mix(in srgb, var(--target-accent) 34%, transparent),
+        0 16px 48px var(--section-shadow);
+      animation: target-halo 620ms ease-out;
+    }
+
+    #start-here { --target-accent: #f5b800; }
+    #tech-talks { --target-accent: #22d3ee; }
+    #workshop { --target-accent: #fb923c; }
+    #related-repos { --target-accent: #a855f7; }
+
+    @keyframes target-halo {
+      from {
+        outline-offset: 10px;
+        box-shadow:
+          0 0 0 12px color-mix(in srgb, var(--target-accent) 22%, transparent),
+          0 0 58px color-mix(in srgb, var(--target-accent) 54%, transparent),
+          0 16px 48px var(--section-shadow);
+      }
+    }
+
+    .onboarding-heading {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 1.1rem;
+    }
+
+    .onboarding-heading h2 {
+      font-size: 1.1rem;
+      font-weight: 760;
+    }
+
+    .onboarding-heading p {
+      color: var(--text-muted);
+      font-size: 0.84rem;
+    }
+
+    .onboarding-steps {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 1px;
+      background: var(--section-border);
+      border: 1px solid var(--section-border);
+    }
+
+    .onboarding-step {
+      position: relative;
+      min-width: 0;
+      min-height: 110px;
+      padding: 1.2rem 2rem 1.2rem 1.15rem;
+      background: rgba(12, 18, 28, 0.94);
+      color: var(--text);
+      text-decoration: none;
+    }
+
+    [data-theme="light"] .onboarding-step {
+      background: rgba(255, 255, 255, 0.96);
+    }
+
+    .onboarding-step::after {
+      position: absolute;
+      top: 50%;
+      right: 0.55rem;
+      content: "→";
+      color: #f5b800;
+      transform: translateY(-50%);
+    }
+
+    .onboarding-step:last-child::after {
+      content: "✓";
+    }
+
+    .onboarding-step:hover,
+    .onboarding-step:focus-visible {
+      background: var(--card-hover-bg);
+      outline: 2px solid #f5b800;
+      outline-offset: -2px;
+    }
+
+    .onboarding-number,
+    .onboarding-label,
+    .onboarding-detail {
+      display: block;
+    }
+
+    .onboarding-number {
+      color: #f5b800;
+      font-family: "Cascadia Code", "SFMono-Regular", Consolas, monospace;
+      font-size: 0.68rem;
+    }
+
+    .onboarding-label {
+      margin-top: 0.25rem;
+      font-size: 0.9rem;
+      font-weight: 740;
+    }
+
+    .onboarding-detail {
+      margin-top: 0.35rem;
+      color: var(--text-muted);
+      font-size: 0.76rem;
+      line-height: 1.45;
+    }
+
+    .section {
+      margin-bottom: 2.75rem;
+      padding: clamp(1.4rem, 2.4vw, 2rem);
+      border-radius: 8px;
+      box-shadow: 0 12px 38px var(--section-shadow);
+      scroll-margin-top: 5rem;
+    }
+
+    .section.tech-talks,
+    .section.workshop,
+    .section.exec-talks,
+    .section.repos {
+      background: var(--section-bg);
+    }
+
+    .section-header {
+      align-items: flex-start;
+      margin-bottom: 1.75rem;
+      padding-bottom: 1.35rem;
+    }
+
+    .section-title {
+      font-family: "Aptos Display", "Segoe UI Variable Display", "Trebuchet MS", sans-serif;
+      font-size: clamp(1.2rem, 2vw, 1.65rem);
+      font-weight: 750;
+      letter-spacing: 0;
+    }
+
+    .section-description {
+      max-width: 760px;
+      margin-top: 0.3rem;
+      line-height: 1.55;
+    }
+
+    .sub-group {
+      --group-accent: #22d3ee;
+      margin: 0 0 3.25rem;
+      padding-left: 1.25rem;
+      border-left: 2px solid color-mix(in srgb, var(--group-accent) 65%, transparent);
+    }
+
+    #platform-teams { --group-accent: #fbbf24; }
+    #agentic-systems { --group-accent: #4ade80; }
+    #executive-talks { --group-accent: #60a5fa; }
+
+    .sub-group-header {
+      position: sticky;
+      top: 4.5rem;
+      z-index: 10;
+      gap: 0.7rem;
+      margin-bottom: 1.35rem;
+      padding: 0.75rem 0.85rem;
+      background: color-mix(in srgb, var(--section-bg) 92%, var(--group-accent) 8%);
+      border: 1px solid color-mix(in srgb, var(--group-accent) 28%, transparent);
+      border-left: 3px solid var(--group-accent);
+      border-radius: 5px;
+      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.16);
+      backdrop-filter: blur(14px);
+    }
+
+    .sub-group-label {
+      padding: 0;
+      background: transparent;
+      border: 0;
+      border-radius: 0;
+      color: var(--group-accent) !important;
+      font-size: 0.88rem;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+    }
+
+    [data-theme="light"] .section.tech-talks .sub-group-label {
+      background: transparent;
+      border: 0;
+      color: color-mix(in srgb, var(--group-accent) 52%, #0f172a) !important;
+    }
+
+    .sub-group-desc {
+      color: var(--text-muted);
+      font-size: 0.86rem;
+      line-height: 1.45;
+    }
+
+    .sub-group-line {
+      display: none;
+    }
+
+    .grid {
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr));
+      grid-auto-rows: auto;
+      gap: clamp(1.35rem, 1.5vw, 2rem);
+    }
+
+    .card,
+    .card-shell {
+      position: relative;
+      min-height: 190px;
+      padding: 1.4rem 1.45rem 1.3rem;
+      overflow: hidden;
+      border-radius: 6px;
+      box-shadow: none;
+    }
+
+    .card::before,
+    .card-shell::before {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      content: "";
+      background: var(--group-accent, #22d3ee);
+      opacity: 0.62;
+      transform: scaleX(0.18);
+      transform-origin: left;
+      transition: transform 0.22s ease, opacity 0.22s ease;
+    }
+
+    .card:hover,
+    .card-shell:hover {
+      transform: translateY(-2px);
+      border-color: color-mix(in srgb, var(--group-accent, #22d3ee) 52%, transparent) !important;
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.2) !important;
+    }
+
+    .card:hover::before,
+    .card-shell:hover::before {
+      opacity: 1;
+      transform: scaleX(1);
+    }
+
+    .card h2 {
+      font-family: "Aptos Display", "Segoe UI Variable Display", "Trebuchet MS", sans-serif;
+      font-size: 1rem;
+      font-weight: 680;
+      line-height: 1.25;
+    }
+
+    .card p {
+      margin-top: 0.75rem;
+      color: var(--card-p);
+      font-size: 0.88rem;
+      line-height: 1.65;
+      -webkit-line-clamp: 4;
+    }
+
+    .card-title-row {
+      align-items: center;
+      gap: 0.7rem;
+    }
+
+    .card-actions {
+      gap: 0.5rem;
+    }
+
+    .card-chip {
+      padding: 0.28rem 0.55rem;
+      border-radius: 4px;
+      font-size: 0.66rem;
+    }
+
+    .card-chip:hover,
+    .card-chip:focus-visible {
+      background: var(--group-accent, #3b82f6);
+      border-color: var(--group-accent, #3b82f6);
+      color: #071018;
+      outline: none;
+    }
+
+    .section-count-badge {
+      border-radius: 4px;
+      font-family: "Cascadia Code", "SFMono-Regular", Consolas, monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0;
+    }
+
+    .section.repos .grid {
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr));
+    }
+
+    @media (min-width: 1800px) {
+      .catalog-nav a {
+        gap: 0.8rem;
+        padding: 1rem 1.2rem;
+        font-size: 0.92rem;
+      }
+
+      .catalog-nav-index {
+        font-size: 0.78rem;
+      }
+
+      .onboarding-path {
+        padding: 1.75rem 2rem;
+      }
+
+      .onboarding-heading {
+        margin-bottom: 1rem;
+      }
+
+      .onboarding-heading h2 {
+        font-size: 1.25rem;
+      }
+
+      .onboarding-heading p {
+        font-size: 0.92rem;
+      }
+
+      .onboarding-step {
+        min-height: 126px;
+        padding: 1.45rem 2.25rem 1.4rem 1.35rem;
+      }
+
+      .onboarding-number {
+        font-size: 0.74rem;
+      }
+
+      .onboarding-label {
+        font-size: 1rem;
+      }
+
+      .onboarding-detail {
+        font-size: 0.84rem;
+        line-height: 1.5;
+      }
+
+      .grid,
+      .section.repos .grid {
+        grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+      }
+
+      .card,
+      .card-shell {
+        min-height: 225px;
+        padding: 1.65rem 1.7rem 1.55rem;
+      }
+
+      .card h2 {
+        font-size: 1.08rem;
+      }
+
+      .card p {
+        margin-top: 0.7rem;
+        font-size: 0.98rem;
+        line-height: 1.6;
+      }
+
+      .card-chip {
+        font-size: 0.66rem;
+      }
+
+      .sub-group-label {
+        font-size: 0.94rem;
+      }
+
+      .sub-group-desc {
+        font-size: 0.9rem;
+      }
+    }
+
+    @media (max-width: 760px) {
+      body {
+        padding: 1.15rem 1rem 4rem;
+        background-size: 24px 24px, 24px 24px, 100% 100%;
+      }
+
+      .hero {
+        position: relative;
+        display: block;
+        margin-bottom: 1.25rem;
+        padding: 1.25rem 3.2rem 1.5rem 0;
+      }
+
+      .hero-logo-wrap {
+        display: none;
+      }
+
+      .hero-controls {
+        position: absolute;
+        top: 0;
+        right: 0;
+      }
+
+      .library-status {
+        display: none;
+      }
+
+      h1 {
+        font-size: 1.65rem;
+        line-height: 1.05;
+      }
+
+      .subtitle {
+        font-size: 0.82rem;
+      }
+
+      .catalog-nav {
+        top: 0.4rem;
+        margin-bottom: 1.75rem;
+      }
+
+      .onboarding-heading {
+        display: block;
+        margin-bottom: 1rem;
+      }
+
+      .onboarding-heading p {
+        margin-top: 0.3rem;
+      }
+
+      .onboarding-steps {
+        grid-template-columns: 1fr;
+      }
+
+      .onboarding-step {
+        min-height: 92px;
+        padding: 1.15rem 2.1rem 1.15rem 1.05rem;
+      }
+
+      .catalog-nav a {
+        justify-content: center;
+        padding: 0.68rem 0.35rem;
+        font-size: 0.68rem;
+      }
+
+      .catalog-nav-index,
+      .sub-group-desc,
+      .section-count-badge,
+      #themeLabel {
+        display: none;
+      }
+
+      .section {
+        margin-bottom: 2rem;
+        padding: 1.2rem;
+      }
+
+      .section-header {
+        display: block;
+        margin-bottom: 1.5rem;
+        padding-bottom: 1.15rem;
+      }
+
+      .section-icon {
+        display: none;
+      }
+
+      .sub-group {
+        margin-bottom: 2.75rem;
+        padding-left: 0.85rem;
+      }
+
+      .sub-group-header {
+        top: 4rem;
+        margin-bottom: 1rem;
+        padding: 0.75rem 0.8rem;
+      }
+
+      .grid {
+        grid-template-columns: 1fr;
+        gap: 1.25rem;
+      }
+
+      .card,
+      .card-shell {
+        min-height: 150px;
+        padding: 1.25rem 1.2rem 1.15rem;
+      }
+
+      .card-title-row {
+        align-items: stretch;
+        flex-direction: column;
+        gap: 0.85rem;
+      }
+
+      .card-title-link {
+        width: 100%;
+      }
+
+      .card-actions {
+        width: 100%;
+        margin-top: 0;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+      }
     }
   </style>
 </head>
+
 <body>
   <div class="container">
-    <h1>CopilotTraining</h1>
-    <p class="subtitle">Presentations</p>
+    <header class="hero">
+      <div class="hero-logo-wrap">
+        <img src="./tech-talks/sdp-logo.png" alt="SDP Logo" class="hero-logo" />
+      </div>
+      <div class="hero-text">
+        <p class="eyebrow">Copilot practice library</p>
+        <h1>Build better judgment with AI.</h1>
+        <p class="subtitle">Choose a technical deep dive, leadership briefing, or hands-on module. Each path is built around context, delegation, verification, and authority.</p>
+      </div>
+      <div class="hero-controls">
+        <span class="library-status">Current curriculum</span>
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark/light mode">
+          <span id="themeIcon">☀️</span>
+          <span id="themeLabel">Light</span>
+        </button>
+      </div>
+    </header>
+
+    <nav class="catalog-nav" aria-label="Catalog sections">
+      <a href="#start-here"><span class="catalog-nav-index">01</span>Start here</a>
+      <a href="#tech-talks"><span class="catalog-nav-index">02</span>Tech talks</a>
+      <a href="#workshop"><span class="catalog-nav-index">03</span>Workshop</a>
+      <a href="#related-repos"><span class="catalog-nav-index">04</span>Related repos</a>
+    </nav>
+
+    <section class="onboarding-path" id="start-here" aria-labelledby="start-here-title">
+      <div class="onboarding-heading">
+        <h2 id="start-here-title">New to Copilot? Follow this path.</h2>
+        <p>One decision and one observable artifact at each step.</p>
+      </div>
+      <div class="onboarding-steps">
+        <a class="onboarding-step" href="tech-talks/surfaces/">
+          <span class="onboarding-number">01</span>
+          <span class="onboarding-label">Choose the surface</span>
+          <span class="onboarding-detail">Match the task to its context, control, and reviewer.</span>
+        </a>
+        <a class="onboarding-step" href="tech-talks/copilot-primitives/">
+          <span class="onboarding-number">02</span>
+          <span class="onboarding-label">Configure shared behavior</span>
+          <span class="onboarding-detail">Choose, build, and verify instructions, prompts, skills, and agents.</span>
+        </a>
+        <a class="onboarding-step" href="tech-talks/agent-dev-loop/">
+          <span class="onboarding-number">03</span>
+          <span class="onboarding-label">Make success reusable</span>
+          <span class="onboarding-detail">Turn a solved task into team capability.</span>
+        </a>
+        <a class="onboarding-step" href="tech-talks/copilot-web/">
+          <span class="onboarding-number">04</span>
+          <span class="onboarding-label">Delegate bounded work</span>
+          <span class="onboarding-detail">Produce a draft pull request with acceptance evidence.</span>
+        </a>
+        <a class="onboarding-step" href="tech-talks/pr-trust-stack/">
+          <span class="onboarding-number">05</span>
+          <span class="onboarding-label">Verify before merge</span>
+          <span class="onboarding-detail">Disposition findings and keep acceptance human-owned.</span>
+        </a>
+      </div>
+    </section>
 
     <!-- Intro Talks Section -->
     <div class="section intro-talks">
@@ -305,7 +1557,7 @@
     </div>
 
     <!-- Tech Talks Section -->
-    <div class="section tech-talks">
+    <div class="section tech-talks" id="tech-talks">
       <div class="section-header">
         <span class="section-icon">🔬</span>
         <div>
@@ -313,186 +1565,198 @@
           <p class="section-description">Technical deep-dives for practitioners on specific capabilities</p>
         </div>
       </div>
-      <!-- Copilot Surfaces -->
-      <div class="sub-group">
+      <!-- Choose and Configure -->
+      <div class="sub-group" id="choose-and-configure">
         <div class="sub-group-header">
-          <span class="sub-group-icon">💬</span>
-          <span class="sub-group-label">Copilot Surfaces</span>
+          <span class="sub-group-icon">🧭</span>
+          <span class="sub-group-label">Choose and Configure</span>
+          <span class="sub-group-desc">Choose the right surface, context, and configuration for the work</span>
           <span class="sub-group-line"></span>
         </div>
         <div class="grid">
-          <a href="/CopilotTraining/tech-talks/copilot-chat/" class="card">
-            <h2>Copilot Chat</h2>
-            <p>Context mastery for AI collaboration. Master #file, @workspace, #codebase, and #fetch for codebase-specific responses.</p>
-          </a>
-          <a href="/CopilotTraining/tech-talks/copilot-chat-internals/" class="card">
-            <h2>Copilot Chat Internals</h2>
-            <p>Under the hood diagnostics. Chat Debug View, customization diagnostics, and extension logs for systematic troubleshooting.</p>
-          </a>
-          <a href="/CopilotTraining/tech-talks/copilot-cli/" class="card">
+          <a href="tech-talks/copilot-cli/" class="card">
             <h2>Copilot CLI</h2>
-            <p>AI assistance at the terminal. Natural language to shell commands, git operations, and scripting workflows.</p>
+            <p>Close every gap — intent, geography, memory, and scale. Plan Mode, Rubber Duck, Git-free /rewind,
+              Sessions sidebar, /chronicle, live S3→S4 bridge, /fleet fan-out, and cloud delegation.</p>
           </a>
-          <a href="/CopilotTraining/tech-talks/copilot-code-review/" class="card">
-            <h2>Copilot Code Review</h2>
-            <p>Accelerating PR velocity with AI-powered review. 40-60% faster cycle times, custom compliance rulesets, and measurable ROI.</p>
+          <a href="tech-talks/copilot-primitives/" class="card">
+            <h2>Copilot Configuration Primitives</h2>
+            <p>Build instructions, prompts, skills, and agents step by step, compare when each fits, and verify the result.</p>
           </a>
-          <a href="/CopilotTraining/tech-talks/copilot-web/" class="card">
-            <h2>Copilot Web</h2>
-            <p>AI assistance beyond the IDE. PR reviews in browsers, issue triage on mobile, with full repository customizations.</p>
-          </a>
-          <a href="/CopilotTraining/tech-talks/copilot-memory/" class="card">
-            <h2>Copilot Memory</h2>
-            <p>Cross-session context persistence. Store preferences, project context, and workflow patterns that persist across all conversations.</p>
-          </a>
-          <a href="/CopilotTraining/tech-talks/terminal-sandboxing/" class="card">
-            <h2>Terminal Sandboxing</h2>
-            <p>Safe agentic execution. Network restrictions, filesystem limits, and execution controls for secure AI-assisted development.</p>
-          </a>
-          <a href="/CopilotTraining/tech-talks/vscode-latest/" class="card">
+          <a href="tech-talks/vscode-latest/" class="card">
             <h2>What's New in VS Code</h2>
-            <p>Latest Copilot features in VS Code v1.107-v1.109. Agent sessions, Claude integration, terminal sandboxing, and productivity enhancements.</p>
+            <p>v1.121–v1.132: Portable agent infrastructure (AHP + Copilot SDK), BYOK with no GitHub sign-in, local
+              Ollama models, Stable Custom Endpoint, parallel sessions, and GA browser tools with device emulation.</p>
+          </a>
+          <a href="tech-talks/surfaces/" class="card">
+            <h2>Which Copilot Where?</h2>
+            <p>Map seven Copilot experiences, choose where work starts, and hand it off when context or review boundaries change.</p>
           </a>
         </div>
       </div>
 
-      <!-- Context & Customization -->
-      <div class="sub-group">
+      <!-- Verify and Govern -->
+      <div class="sub-group" id="verify-and-govern">
+        <div class="sub-group-header">
+          <span class="sub-group-icon">🛡️</span>
+          <span class="sub-group-label">Verify and Govern</span>
+          <span class="sub-group-desc">Decide what advises, what blocks, and who may approve or override</span>
+          <span class="sub-group-line"></span>
+        </div>
+        <div class="grid">
+          <a href="tech-talks/agentic-sdlc/" class="card">
+            <h2>Agentic SDLC</h2>
+            <p>Build repository and CI infrastructure that manufactures trustworthy evidence at agent speed.</p>
+          </a>
+          <a href="tech-talks/copilot-hooks/" class="card">
+            <h2>Copilot Hooks</h2>
+            <p>Programmable governance for AI agents. Real-time prevention, audit trails, and compliance enforcement at
+              execution time.</p>
+          </a>
+          <a href="tech-talks/enterprise-patterns/" class="card">
+            <h2>Enterprise Patterns</h2>
+            <p>Scaling Copilot across organizations. From team silos to standardized foundations with measurable ROI.
+            </p>
+          </a>
+          <a href="tech-talks/copilot-governance/" class="card">
+            <h2>GitHub Copilot Governance</h2>
+            <p>Carry one bounded change through visible runtime decisions, reviewable evidence, and authorized merge.</p>
+          </a>
+          <a href="tech-talks/pr-trust-stack/" class="card">
+            <h2>PR Trust Stack</h2>
+            <p>Assign every pre-merge signal a role, an owner, and a governed path from evidence to authority.</p>
+          </a>
+        </div>
+      </div>
+
+      <!-- Delegate and Coordinate -->
+      <div class="sub-group" id="delegate-and-coordinate">
+        <div class="sub-group-header">
+          <span class="sub-group-icon">🔀</span>
+          <span class="sub-group-label">Delegate and Coordinate</span>
+          <span class="sub-group-desc">Bound work, compose specialists, and choose the right degree of autonomy</span>
+          <span class="sub-group-line"></span>
+        </div>
+        <div class="grid">
+          <a href="tech-talks/agent-dev-loop/" class="card">
+            <h2>The Agent Dev Loop</h2>
+            <p>Turn solved repository work into reusable instructions, prompts, skills, and reviewed plans.</p>
+          </a>
+          <a href="tech-talks/copilot-web/" class="card">
+            <h2>From Issue to Pull Request</h2>
+            <p>Delegate bounded repository work and review the resulting draft pull request as an evidence bundle.</p>
+          </a>
+          <a href="tech-talks/multi-agent-coordination/" class="card">
+            <h2>Multi-Agent Coordination</h2>
+            <p>Split work only when boundaries earn it, steer isolated workstreams through visible evidence, and integrate under named authority.</p>
+          </a>
+          <a href="tech-talks/loopy-agents/" class="card">
+            <h2>Loop Engineering</h2>
+            <p>Agents that loop until the goal is verifiably met — then stop. Copilot Automations as the native trigger, shared state for multi-agent coordination, and the three production controls most teams skip.</p>
+          </a>
+          <a href="tech-talks/agentic-lifecycle/" class="card">
+            <h2>Agentic Lifecycle Orchestration</h2>
+            <p>Coordinate issue-to-PR handoffs with compiled workflow candidates, visible stops, and named human authority.</p>
+          </a>
+        </div>
+      </div>
+
+      <!-- Extend and Embed -->
+      <div class="sub-group" id="extend-and-embed">
         <div class="sub-group-header">
           <span class="sub-group-icon">🧩</span>
-          <span class="sub-group-label">Context & Customization</span>
+          <span class="sub-group-label">Extend and Embed</span>
+          <span class="sub-group-desc">Add capabilities, interfaces, protocols, and governed domain context</span>
           <span class="sub-group-line"></span>
         </div>
         <div class="grid">
-          <a href="/CopilotTraining/tech-talks/copilot-hooks/" class="card">
-            <h2>Copilot Hooks</h2>
-            <p>Programmable governance for AI agents. Real-time prevention, audit trails, and compliance enforcement at execution time.</p>
+          <a href="tech-talks/copilot-plugins/" class="card">
+            <h2>Copilot Plugins & APM</h2>
+            <p>Package and distribute agent configuration as reproducible, reviewable team infrastructure.</p>
           </a>
-          <a href="/CopilotTraining/tech-talks/copilot-sdk/" class="card">
+          <a href="tech-talks/copilot-azure-mcp/" class="card">
+            <h2>Azure MCP and Skills</h2>
+            <p>Apply domain tools to live Azure state with explicit identity, evidence, and least-privilege authority.</p>
+          </a>
+          <a href="tech-talks/copilot-sdk/" class="card">
             <h2>Copilot SDK</h2>
-            <p>Embedding AI agents in your applications. Build custom tools, bots, and automation with programmatic Copilot access.</p>
+            <p>Embed agent behavior in an application-owned runtime with explicit tools, identity, and policy.</p>
           </a>
-          <a href="/CopilotTraining/tech-talks/copilot-primitives/" class="card">
-            <h2>Copilot Primitives</h2>
-            <p>The 4 configuration primitives. Instructions, prompts, skills, and agents — make Copilot understand your codebase better.</p>
-          </a>
-          <a href="/CopilotTraining/tech-talks/agentic-skill-lifecycle/" class="card">
-            <h2>Agentic Skill Lifecycle</h2>
-            <p>Manage reusable agent behavior as a governed supply chain: author, validate, release, distribute, detect drift, upgrade, and roll back.</p>
-          </a>
-          <a href="/CopilotTraining/tech-talks/customization-best-practices/" class="card">
-            <h2>Customization Best Practices</h2>
-            <p>Best practices for writing instruction files, prompt files, skills, and agents. Lessons from 2,500+ repositories.</p>
-          </a>
-          <a href="/CopilotTraining/tech-talks/apm/" class="card">
-            <h2>APM: Agent Package Manager</h2>
-            <p>Dependency management for AI agent configuration. Versioning, composition, lock files, and security scanning across all AI coding tools.</p>
-          </a>
-          <a href="/CopilotTraining/tech-talks/mcp-apps/" class="card">
-            <h2>MCP Apps</h2>
-            <p>Rich UI in chat responses. Transform chat from text-only to interactive visual experiences with component-based MCP tools.</p>
-          </a>
-          <a href="/CopilotTraining/tech-talks/copilot-acp/" class="card">
+          <a href="tech-talks/copilot-acp/" class="card">
             <h2>Copilot ACP</h2>
-            <p>The Agent Client Protocol for universal AI integration. Use Copilot's agentic capabilities in any editor, tool, or workflow — not just VS Code.</p>
+            <p>Connect external clients to Copilot agents while preserving session and permission boundaries.</p>
+          </a>
+          <a href="tech-talks/mcp-apps/" class="card">
+            <h2>MCP Apps</h2>
+            <p>Return an interactive interface when a text response cannot support the user’s next decision.</p>
+          </a>
+          <a href="tech-talks/copilot-with-foundry/" class="card">
+            <h2>GitHub Copilot with Microsoft Foundry</h2>
+            <p>Add governed organizational knowledge when repository context cannot explain intent.</p>
           </a>
         </div>
       </div>
 
-      <!-- Agent Architecture -->
-      <div class="sub-group">
+      <!-- Executive -->
+      <div class="sub-group" id="executive-talks">
         <div class="sub-group-header">
-          <span class="sub-group-icon">🤖</span>
-          <span class="sub-group-label">Agent Architecture</span>
+          <span class="sub-group-icon">💼</span>
+          <span class="sub-group-label">Executive</span>
+          <span class="sub-group-desc">Strategic narratives for leaders making agentic investment decisions</span>
           <span class="sub-group-line"></span>
         </div>
         <div class="grid">
-          <a href="/CopilotTraining/tech-talks/agent-teams/" class="card">
-            <h2>Agent Teams</h2>
-            <p>Coordinated specialists working together. When you need multiple specialized roles like planners, reviewers, and testers collaborating.</p>
-          </a>
-          <a href="/CopilotTraining/tech-talks/multi-step-tasks/" class="card">
-            <h2>Multi-Step Tasks</h2>
-            <p>Context isolation for complex workflows. Break work into focused phases using subagents—parallel execution without context pollution.</p>
-          </a>
-          <a href="/CopilotTraining/tech-talks/parallel-execution/" class="card">
-            <h2>Parallel Execution</h2>
-            <p>When agents work simultaneously. Run multiple agents on different branches without conflicts using Git worktree isolation.</p>
-          </a>
-          <a href="/CopilotTraining/tech-talks/copilot-auto-mode/" class="card">
-            <h2>Copilot Auto Mode</h2>
-            <p>Smarter tokens, smarter routing. How Auto's HyDRA router, prompt caching, and on-demand tool search make every turn cheaper and better — and when to override it.</p>
-          </a>
-        </div>
-      </div>
-
-      <!-- Agentic Transformation -->
-      <div class="sub-group">
-        <div class="sub-group-header">
-          <span class="sub-group-icon">🚀</span>
-          <span class="sub-group-label">Agentic Transformation</span>
-          <span class="sub-group-line"></span>
-        </div>
-        <div class="grid">
-          <a href="/CopilotTraining/tech-talks/agentic-journey/" class="card">
-            <h2>Agentic Journey</h2>
-            <p>From "assign to copilot" to full SDLC transformation. The 5-phase incremental path with 4-workflow architecture and historical context search.</p>
-          </a>
-          <a href="/CopilotTraining/tech-talks/agentic-sdlc/" class="card">
-            <h2>Agentic SDLC</h2>
-            <p>Infrastructure for AI velocity. Rewire repositories, PR workflows, and CI/CD for AI-as-labor delivery agents (Gen-4 SDLC).</p>
-          </a>
-          <a href="/CopilotTraining/tech-talks/enterprise-patterns/" class="card">
-            <h2>Enterprise Patterns</h2>
-            <p>Scaling Copilot across organizations. From team silos to standardized foundations with measurable ROI.</p>
-          </a>
-          <a href="/CopilotTraining/tech-talks/model-selection/" class="card">
-            <h2>Model Selection</h2>
-            <p>Right model, right task. A decision framework for matching frontier models to task types — with benchmarks, tier strategies, and cost examples.</p>
+          <a href="tech-talks/exec-strategy/" class="card">
+            <h2>The Agentic Operating Model</h2>
+            <p>Authorize one controlled pilot with explicit human authority, fully burdened economics, and a falsifiable
+              return gate.</p>
           </a>
         </div>
       </div>
     </div>
 
-    <!-- Executive Talks Section -->
-    <div class="section exec-talks">
+    <div class="section tech-talks" id="fork-additions">
       <div class="section-header">
-        <span class="section-icon">💼</span>
+        <span class="section-icon">📚</span>
         <div>
-          <h2 class="section-title">Executive Talks</h2>
-          <p class="section-description">Strategic thought leadership for technical decision-makers</p>
+          <h2 class="section-title">Additional Talks</h2>
+          <p class="section-description">Additional material maintained in this fork</p>
         </div>
       </div>
       <div class="grid">
-        <a href="/CopilotTraining/exec-talks/agentic-delivery/" class="card">
-          <h2>Agentic Delivery</h2>
-          <p>No instruments, no delivery. Why enterprises can't fly on AI autopilot without governance, compliance, and audit trails.</p>
+        <a href="tech-talks/agentic-skill-lifecycle/" class="card">
+          <h2>Agentic Skill Lifecycle</h2>
+          <p>Author, validate, release, distribute, upgrade, and roll back reusable agent behavior.</p>
         </a>
-
-        <a href="/CopilotTraining/exec-talks/agentic-economics/" class="card">
-          <h2>Agentic Economics</h2>
-          <p>The $2/hour engineer. Making the business case for AI agents—what work moves to $2/hour labor?</p>
+        <a href="tech-talks/customization-best-practices/" class="card">
+          <h2>Customization Best Practices</h2>
+          <p>Practical patterns for writing instruction files, prompt files, skills, and agents.</p>
         </a>
-
-        <a href="/CopilotTraining/exec-talks/agentic-labor/" class="card">
-          <h2>Agentic Labor</h2>
-          <p>The invisible 80%. Beyond code generation—how agents transform issue triage, compliance, documentation, and knowledge transfer.</p>
+        <a href="tech-talks/apm/" class="card">
+          <h2>APM: Agent Package Manager</h2>
+          <p>Version, compose, and inspect dependencies for AI agent configuration.</p>
         </a>
-
-        <a href="/CopilotTraining/exec-talks/copilot-sdlc-pm/" class="card">
-          <h2>Copilot for PMs & POs</h2>
-          <p>Your team's new teammate. GitHub Copilot across the delivery lifecycle—business case, adoption roadmap, and a 90-day ROI measurement framework for Product Owners and Project Managers.</p>
+        <a href="tech-talks/copilot-auto-mode/" class="card">
+          <h2>Copilot Auto Mode</h2>
+          <p>Inspect model routing, prompt caching, and tool search, and decide when to override Auto.</p>
         </a>
-
-        <a href="/CopilotTraining/exec-talks/github-cloud-business-case/" class="card">
+        <a href="tech-talks/model-selection/" class="card">
+          <h2>Model Selection</h2>
+          <p>Match models to task types with benchmarks, tier strategies, and cost examples.</p>
+        </a>
+        <a href="exec-talks/copilot-sdlc-pm/" class="card">
+          <h2>Copilot for PMs &amp; POs</h2>
+          <p>Evaluate Copilot across the delivery lifecycle with an adoption roadmap and measurement framework.</p>
+        </a>
+        <a href="exec-talks/github-cloud-business-case/" class="card">
           <h2>GitHub Cloud Business Case</h2>
-          <p>A platform decision, not a hosting decision. Build an outcome-led case for moving from GitHub Enterprise Server to Cloud across security, reliability, AI, engineering effectiveness, and operational simplicity.</p>
+          <p>Evaluate a move from GitHub Enterprise Server to Cloud against business and operating outcomes.</p>
         </a>
       </div>
     </div>
 
     <!-- Workshop Section -->
-    <div class="section workshop">
+    <div class="section workshop" id="workshop">
       <div class="section-header">
         <span class="section-icon">🎓</span>
         <div>
@@ -501,45 +1765,52 @@
         </div>
       </div>
       <div class="grid">
-        <a href="/CopilotTraining/workshop/00-orientation/" class="card">
+        <a href="workshop/00-orientation/" class="card">
           <h2>00 - Orientation</h2>
-          <p>The Challenge: Build FanHub in 8 hours. Meet the team, understand the messy codebase, embrace the constraint.</p>
+          <p>The Challenge: Build FanHub in 8 hours. Meet the team, understand the messy codebase, embrace the
+            constraint.</p>
         </a>
 
-        <a href="/CopilotTraining/workshop/01-instructions/" class="card">
+        <a href="workshop/01-instructions/" class="card">
           <h2>01 - Instructions</h2>
-          <p>The magic file. Stop Copilot from guessing—document your architecture and patterns so AI suggestions are consistent.</p>
+          <p>The magic file. Stop Copilot from guessing—document your architecture and patterns so AI suggestions are
+            consistent.</p>
         </a>
 
-        <a href="/CopilotTraining/workshop/02-agent-plan-mode/" class="card">
+        <a href="workshop/02-agent-plan-mode/" class="card">
           <h2>02 - Agent Plan Mode</h2>
-          <p>From implementation to orchestration. Let AI research dependencies and plan multi-file features before coding.</p>
+          <p>From implementation to orchestration. Let AI research dependencies and plan multi-file features before
+            coding.</p>
         </a>
 
-        <a href="/CopilotTraining/workshop/03-custom-prompts/" class="card">
-          <h2>03 - Custom Prompts</h2>
-          <p>Stop repeating yourself. Turn your best prompts into reusable, team-wide functions with built-in standards.</p>
+        <a href="workshop/03-04-combined/" class="card">
+          <h2>03+04 - From Prompts to Skills</h2>
+          <p>Build reusable prompts then graduate them to agent skills. Turn repeated patterns into team-wide functions
+            and packaged domain capabilities.</p>
         </a>
 
-        <a href="/CopilotTraining/workshop/04-agent-skills/" class="card">
-          <h2>04 - Agent Skills</h2>
-          <p>Teach Copilot what it doesn't know. Create domain-specific capabilities for APIs, templates, and infrastructure.</p>
-        </a>
-
-        <a href="/CopilotTraining/workshop/05-mcp-servers/" class="card">
+        <a href="workshop/05-mcp-servers/" class="card">
           <h2>05 - MCP Servers</h2>
-          <p>Beyond static files. Connect Copilot to live databases, APIs, and external tools as first-class context sources.</p>
+          <p>Beyond static files. Connect Copilot to live databases, APIs, and external tools as first-class context
+            sources.</p>
         </a>
 
-        <a href="/CopilotTraining/workshop/06-custom-agents/" class="card">
+        <a href="workshop/06-custom-agents/" class="card">
           <h2>06 - Custom Agents</h2>
-          <p>End context-switching overhead. Bundle tools, skills, and instructions into role-based presets you switch instantly.</p>
+          <p>End context-switching overhead. Bundle tools, skills, and instructions into role-based presets you switch
+            instantly.</p>
+        </a>
+
+        <a href="workshop/fanhub-unplugged/" class="card">
+          <h2>FanHub Unplugged</h2>
+          <p>60-minute agent-directed sprint. You hold the vision, the agent implements. Four paths: Bug Blitz, Rebrand,
+            Build New, or Delight Mode.</p>
         </a>
       </div>
     </div>
 
     <!-- Related Repos Section -->
-    <div class="section repos">
+    <div class="section repos" id="related-repos">
       <div class="section-header">
         <span class="section-icon">🔗</span>
         <div>
@@ -550,82 +1821,245 @@
       <div class="grid">
         <a href="https://github.com/rbmathis/Animalia" class="card" target="_blank" rel="noopener">
           <h2>Animalia 🦁</h2>
-          <p>3M LoC C# codebase for stress-testing Copilot on large repos. Breadcrumb navigation, harness benchmarks, and customization patterns at scale.</p>
+          <p>3M LoC C# codebase for stress-testing Copilot on large repos. Breadcrumb navigation, harness benchmarks,
+            and customization patterns at scale.</p>
         </a>
         <a href="https://github.com/MSBart2/FanHub" class="card" target="_blank" rel="noopener">
           <h2>FanHub 🎬</h2>
-          <p>Intentionally broken workshop starter in 4 languages (Node, .NET, Java, Go). 180+ seeded bugs to fix with Copilot — the messiness is the point.</p>
+          <p>Intentionally broken workshop starter in 4 languages (Node, .NET, Java, Go). 180+ seeded bugs to fix with
+            Copilot — the messiness is the point.</p>
         </a>
         <a href="https://github.com/MSBart2/cli-acp" class="card" target="_blank" rel="noopener">
           <h2>ACP Orchestrator 🎛️</h2>
-          <p>Web UI for orchestrating Copilot CLI agents across multiple repos via Agent Client Protocol. Broadcast prompts, coalesce results, coordinate cross-repo work.</p>
+          <p>Web UI for orchestrating Copilot CLI agents across multiple repos via Agent Client Protocol. Broadcast
+            prompts, coalesce results, coordinate cross-repo work.</p>
+        </a>
+        <a href="https://github.com/Sentry01/AgentCouncil" class="card" target="_blank" rel="noopener">
+          <h2>Agent Council 🏛️</h2>
+          <p>Multi-agent deliberation framework. Agents debate, vote, and reach consensus on complex decisions through
+            structured council sessions.</p>
+        </a>
+        <a href="https://github.com/bradygaster/squad" class="card" target="_blank" rel="noopener">
+          <h2>Squad 🤝</h2>
+          <p>Coordinated multi-agent workflows using the Agent Client Protocol. Define agent teams, assign roles, and
+            orchestrate collaborative task execution.</p>
         </a>
       </div>
     </div>
 
   </div>
   <script>
-    // Auto-show "NEW" badge on cards whose slides were updated within 7 days.
+    // ── Theme toggle ──────────────────────────────────────────────
+    (function () {
+      const root = document.documentElement;
+      const stored = localStorage.getItem('theme');
+      const osDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const initial = stored || (osDark ? 'dark' : 'light');
+      if (initial === 'light') root.setAttribute('data-theme', 'light');
+      else root.setAttribute('data-theme', 'dark');
+
+      function updateButton(theme) {
+        const icon = document.getElementById('themeIcon');
+        const label = document.getElementById('themeLabel');
+        if (!icon || !label) return;
+        if (theme === 'light') {
+          icon.textContent = '🌙';
+          label.textContent = 'Dark';
+        } else {
+          icon.textContent = '☀️';
+          label.textContent = 'Light';
+        }
+      }
+
+      document.addEventListener('DOMContentLoaded', () => {
+        updateButton(root.getAttribute('data-theme'));
+        document.getElementById('themeToggle').addEventListener('click', () => {
+          const current = root.getAttribute('data-theme');
+          const next = current === 'light' ? 'dark' : 'light';
+          root.setAttribute('data-theme', next);
+          localStorage.setItem('theme', next);
+          updateButton(next);
+        });
+      });
+    })();
+
     //
-    // SOURCE OF TRUTH: the "updated:" field in each slide's YAML frontmatter.
-    // To regenerate this map, run:   node slides/scripts/sync-index-dates.mjs
+    // SOURCE OF TRUTH: slide frontmatter "updated:"
+    // Regenerate: node slides/scripts/sync-index-dates.mjs
+    // Agenda/PDF companions live under slides/companions/ and are linked, not embedded.
     const SLIDE_DATES = {
-      'agent-orchestration': '2026-02-01',
-      'agent-teams': '2026-02-12',
-      'agentic-ci': '2026-02-01',
-      'agentic-delivery': '2026-02-06',
-      'agentic-economics': '2026-02-12',
-      'agentic-journey': '2026-02-01',
-      'agentic-labor': '2026-02-12',
-      'agentic-prs': '2026-02-01',
-      'agentic-repos': '2026-02-01',
-      'agentic-sdlc': '2026-06-17',
-      'agentic-sessions': '2026-02-01',
+      '00-orientation': '2026-04-01',
+      '01-instructions': '2026-04-01',
+      '02-agent-plan-mode': '2026-04-01',
+      '03-04-combined': '2026-04-01',
+      '05-mcp-servers': '2026-03-31',
+      '06-custom-agents': '2026-03-31',
+      'agent-dev-loop': '2026-06-30',
+      'agent-teams': '2026-03-24',
+      'agentic-journey': '2026-09-15',
+      'agentic-lifecycle': '2026-10-06',
+      'agentic-sdlc': '2026-04-24',
       'agentic-skill-lifecycle': '2026-09-18',
+      'agentic-workflows': '2026-09-16',
       'apm': '2026-04-17',
-      'context-engineering-foundations': '2026-02-01',
-      'copilot-acp': '2026-02-11',
+      'component-test': '2026-04-21',
+      'context-engineering': '2026-09-16',
+      'copilot-15min': '2026-04-27',
+      'copilot-acp': '2026-06-10',
+      'copilot-app': '2026-09-16',
       'copilot-auto-mode': '2026-06-23',
-      'copilot-chat': '2026-02-01',
-      'copilot-chat-internals': '2026-02-01',
-      'copilot-cli': '2026-03-05',
-      'copilot-code-review': '2026-02-17',
-      'copilot-hooks': '2026-02-11',
-      'copilot-memory': '2026-02-01',
-      'copilot-primitives': '2026-06-22',
-      'copilot-sdk': '2026-02-18',
-      'copilot-sdk-cloudops-short': '2026-02-18',
+      'copilot-azure-mcp': '2026-04-27',
+      'copilot-chat-internals': '2026-09-15',
+      'copilot-cli': '2026-08-28',
+      'copilot-cli-demo': '2026-03-11',
+      'copilot-code-quality': '2026-09-15',
+      'copilot-code-review': '2026-09-15',
+      'copilot-governance': '2026-09-17',
+      'copilot-hooks': '2026-04-22',
+      'copilot-intro': '2026-06-26',
+      'copilot-marketplaces': '2026-03-03',
+      'copilot-memory': '2026-09-15',
+      'copilot-plugins': '2026-08-11',
+      'copilot-primitives': '2026-09-16',
+      'copilot-sdk': '2026-04-22',
       'copilot-sdlc-pm': '2026-06-14',
-      'copilot-web': '2026-02-01',
+      'copilot-web': '2026-08-11',
+      'copilot-with-foundry': '2026-07-24',
       'customization-best-practices': '2026-04-15',
-      'enterprise-patterns': '2026-02-01',
+      'enterprise-patterns': '2026-08-11',
+      'exec-delivery': '2026-09-16',
+      'exec-economics': '2026-09-16',
+      'exec-labor': '2026-09-16',
+      'exec-strategy': '2026-09-16',
+      'fanhub-unplugged': '2026-04-27',
       'github-cloud-business-case': '2026-09-16',
-      'mcp-apps': '2026-02-01',
+      'loopy-agents': '2026-07-02',
+      'mcp-apps': '2026-04-22',
       'model-selection': '2026-05-12',
-      'multi-step-tasks': '2026-02-01',
-      'parallel-execution': '2026-02-01',
-      'subagents': '2026-02-01',
+      'multi-agent-coordination': '2026-09-16',
+      'pr-trust-stack': '2026-09-15',
+      'surfaces': '2026-09-14',
       'terminal-sandboxing': '2026-02-01',
-      'vscode-latest': '2026-02-12',
+      'vscode-latest': '2026-09-25',
     };
+
+    function parseDeckHref(href) {
+      if (!href || href.startsWith('http') || href.startsWith('mailto:')) return null;
+      const clean = href.replace(/^\/CopilotTraining\//, '').replace(/^\//, '').replace(/\/$/, '');
+      const parts = clean.split('/').filter(Boolean);
+      if (parts.length < 2) return null;
+      return { category: parts[0], slug: parts[parts.length - 1], href: clean + '/' };
+    }
+
+    function softLink(el, href, missingHint) {
+      el.href = href;
+      fetch(href, { method: 'HEAD' }).then((res) => {
+        if (!res.ok) {
+          el.classList.add('is-missing');
+          el.title = missingHint;
+        }
+      }).catch(() => {
+        el.classList.add('is-missing');
+        el.title = missingHint;
+      });
+      el.addEventListener('click', (e) => e.stopPropagation());
+    }
+
+    function enhanceDeckCard(card) {
+      const parsed = parseDeckHref(card.getAttribute('href'));
+      if (!parsed) return;
+
+      const { category, slug, href } = parsed;
+      const h2 = card.querySelector('h2');
+      const p = card.querySelector('p');
+      if (!h2) return;
+
+      const shell = document.createElement('div');
+      shell.className = card.className + ' card-shell';
+      shell.dataset.slug = slug;
+      shell.dataset.category = category;
+
+      const titleRow = document.createElement('div');
+      titleRow.className = 'card-title-row';
+
+      const titleLink = document.createElement('a');
+      titleLink.className = 'card-title-link';
+      titleLink.href = href;
+      titleLink.appendChild(h2.cloneNode(true));
+
+      const actions = document.createElement('div');
+      actions.className = 'card-actions';
+
+      const agenda = document.createElement('a');
+      agenda.className = 'card-chip card-agenda';
+      agenda.textContent = 'Agenda';
+      agenda.setAttribute('aria-label', `Open agenda for ${slug}`);
+      softLink(
+        agenda,
+        `${category}/${slug}/agenda.html`,
+        'Agenda not published yet — generate locally: npm run generate-agendas -- ' + slug,
+      );
+
+      const pdf = document.createElement('a');
+      pdf.className = 'card-chip card-pdf';
+      pdf.textContent = 'PDF';
+      pdf.setAttribute('aria-label', `Download PDF for ${slug}`);
+      softLink(
+        pdf,
+        `${category}/${slug}/deck.pdf`,
+        'PDF not published yet — export locally: npm run export-pdf -- ' + slug,
+      );
+
+      actions.appendChild(agenda);
+      actions.appendChild(pdf);
+      titleRow.appendChild(titleLink);
+      titleRow.appendChild(actions);
+      shell.appendChild(titleRow);
+
+      if (p) {
+        const bodyLink = document.createElement('a');
+        bodyLink.className = 'card-body-link';
+        bodyLink.href = href;
+        bodyLink.appendChild(p.cloneNode(true));
+        shell.appendChild(bodyLink);
+      }
+
+      shell.addEventListener('click', (e) => {
+        if (e.target.closest('.card-chip, a')) return;
+        window.location.href = href;
+      });
+
+      card.replaceWith(shell);
+    }
 
     document.addEventListener('DOMContentLoaded', () => {
       const now = new Date();
       const oneWeek = 7 * 24 * 60 * 60 * 1000;
 
-      document.querySelectorAll('.card[href]').forEach(card => {
-        // Extract slug from href:  /CopilotTraining/tech-talks/copilot-cli/ → copilot-cli
-        const match = card.getAttribute('href').match(/\/([\w-]+)\/?$/);
-        if (!match) return;
-        const slug = match[1];
+      document.querySelectorAll('a.card[href]').forEach(enhanceDeckCard);
+
+      document.querySelectorAll('.section').forEach(section => {
+        const count = section.querySelectorAll('.card').length;
+        if (!count) return;
+        const badge = document.createElement('span');
+        badge.className = 'section-count-badge';
+        badge.textContent = `${count} ${count === 1 ? 'item' : 'items'}`;
+        const header = section.querySelector('.section-header');
+        if (header) header.appendChild(badge);
+      });
+
+      document.querySelectorAll('.card').forEach(card => {
+        const slug = card.dataset.slug || (() => {
+          const link = card.getAttribute('href') || card.querySelector('a')?.getAttribute('href') || '';
+          const m = link.match(/\/?([\w-]+)\/?$/);
+          return m ? m[1] : null;
+        })();
+        if (!slug) return;
         const dateStr = SLIDE_DATES[slug];
         if (!dateStr) return;
-
         const updated = new Date(dateStr + 'T00:00:00');
         if (now - updated < oneWeek) {
-          // Add glowing card treatment
           card.classList.add('card-new');
-          // Add NEW badge to title
           const badge = document.createElement('span');
           badge.className = 'badge-new';
           badge.textContent = 'NEW';
@@ -636,4 +2070,5 @@
     });
   </script>
 </body>
+
 </html>

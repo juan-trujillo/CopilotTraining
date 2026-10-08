@@ -4,1209 +4,468 @@ class: text-center
 highlighter: shiki
 lineNumbers: false
 info: |
-  ## GitHub Copilot SDK: Build AI-Powered Tools for Your Workflows
+  ## GitHub Copilot SDK
   CopilotTraining Tech Talk
 drawings:
   persist: false
 transition: slide-left
 title: GitHub Copilot SDK
-module: tech-talks/copilot-sdk
 mdc: true
+section: "Extend and Embed"
 status: active
-updated: 2026-02-18
+updated: 2026-04-22
 ---
 
-<div class="h-full flex flex-col items-center justify-center relative overflow-hidden">
-  <!-- Gradient background -->
-  <div class="absolute inset-0 bg-gradient-to-br from-purple-900/20 via-indigo-900/10 to-blue-900/20"></div>
+<script setup>
+import TitleSlide from './components/structure/TitleSlide.vue'
+import CoreQuestionSlide from './components/structure/CoreQuestionSlide.vue'
+import TocSlide from './components/structure/TocSlide.vue'
+import SectionOpenerSlide from './components/structure/SectionOpenerSlide.vue'
+import BeforeAfterSlide from './components/structure/BeforeAfterSlide.vue'
+import WhatYouCanDoTodaySlide from './components/structure/WhatYouCanDoTodaySlide.vue'
+import ReferencesSlide from './components/structure/ReferencesSlide.vue'
+import ThankYouSlide from './components/structure/ThankYouSlide.vue'
+import FourCardGridSlide from './components/FourCardGridSlide.vue'
+import CodeWithFeaturesSlide from './components/CodeWithFeaturesSlide.vue'
+import ThreeColumnCardSlide from './components/ThreeColumnCardSlide.vue'
+import TwoColPairedConceptsSlide from './components/TwoColPairedConceptsSlide.vue'
+import BeforeAfterMetricsSlide from './components/BeforeAfterMetricsSlide.vue'
+import ProblemSolutionOutcomeSlide from './components/ProblemSolutionOutcomeSlide.vue'
+import HeroStatSlide from './components/HeroStatSlide.vue'
+import WorkflowShowdownStepsSlide from './components/WorkflowShowdownStepsSlide.vue'
+</script>
 
-  <!-- Glowing orb -->
-  <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-gradient-to-r from-purple-500/20 via-indigo-500/20 to-blue-500/20 rounded-full blur-3xl"></div>
-
-  <!-- Logo with glow -->
-  <div class="relative z-10">
-    <div class="absolute inset-0 blur-2xl opacity-50">
-      <img src="./sdp-logo.png" class="w-64" alt="" />
-    </div>
-    <img src="./sdp-logo.png" class="w-64 relative" alt="SDP Logo" />
-  </div>
-
-  <!-- Gradient text title -->
-  <h1 class="!text-5xl !font-bold !mt-8 bg-gradient-to-r from-purple-400 via-indigo-400 to-blue-400 bg-clip-text text-transparent relative z-10">
-    GitHub Copilot SDK
-  </h1>
-
-  <!-- Pill subtitle -->
-  <div class="mt-4 relative z-10">
-    <span class="px-6 py-2 bg-gradient-to-r from-purple-600/80 to-indigo-600/80 rounded-full text-white text-xl font-medium shadow-lg shadow-purple-500/25">
-      Build AI-Powered Tools for Your Workflows
-    </span>
-  </div>
-
-  <!-- Tagline -->
-  <div class="mt-8 text-lg opacity-70 relative z-10">
-    ⏰ <strong>45 minutes</strong> • Developers • DevOps Engineers • Platform Engineers
-  </div>
-
-  <!-- Decorative line -->
-  <div class="mt-6 w-32 h-1 bg-gradient-to-r from-transparent via-purple-400 to-transparent rounded-full relative z-10"></div>
-</div>
+# Title
+<TitleSlide
+  title="GitHub Copilot SDK"
+  subtitle="Build AI-Powered Tools for Your Workflows"
+  tagline="Stop building AI infrastructure. Start building the thing that matters."
+  meta="CopilotTraining · Customization & Context"
+/>
 
 ---
 
-# The Central Question
-
-<div class="h-full flex items-center justify-center">
-  <div class="max-w-4xl">
-    <div class="text-6xl text-center mb-8">🤔</div>
-    <div class="text-4xl font-bold text-center bg-gradient-to-r from-purple-400 to-indigo-400 bg-clip-text text-transparent mb-6">
-      "How do I embed Copilot's agentic capabilities directly into my own applications and workflows?"
-    </div>
-    <div class="text-xl text-center opacity-80 mt-8">
-      Interactive tools are great, but automation requires programmatic control
-    </div>
-  </div>
-</div>
-
----
-layout: center
----
-
-# 📖 Table of Contents
-
-<div class="grid grid-cols-2 gap-6 mt-8">
-  <div @click="$nav.go(7)" class="cursor-pointer p-6 bg-gradient-to-br from-purple-500/10 to-purple-600/5 rounded-xl border border-purple-500/30 hover:border-purple-400/60 transition-all hover:scale-105">
-    <div class="text-3xl mb-2">🏗️</div>
-    <div class="font-semibold text-lg">Architecture & Capabilities</div>
-    <div class="text-sm opacity-70 mt-2">How the SDK works and what it provides</div>
-  </div>
-
-  <div @click="$nav.go(11)" class="cursor-pointer p-6 bg-gradient-to-br from-indigo-500/10 to-indigo-600/5 rounded-xl border border-indigo-500/30 hover:border-indigo-400/60 transition-all hover:scale-105">
-    <div class="text-3xl mb-2">🚀</div>
-    <div class="font-semibold text-lg">Getting Started</div>
-    <div class="text-sm opacity-70 mt-2">Installation and basic usage</div>
-  </div>
-
-  <div @click="$nav.go(14)" class="cursor-pointer p-6 bg-gradient-to-br from-blue-500/10 to-blue-600/5 rounded-xl border border-blue-500/30 hover:border-blue-400/60 transition-all hover:scale-105">
-    <div class="text-3xl mb-2">🔧</div>
-    <div class="font-semibold text-lg">Integration Patterns</div>
-    <div class="text-sm opacity-70 mt-2">Building tools with the SDK</div>
-  </div>
-
-  <div @click="$nav.go(19)" class="cursor-pointer p-6 bg-gradient-to-br from-cyan-500/10 to-cyan-600/5 rounded-xl border border-cyan-500/30 hover:border-cyan-400/60 transition-all hover:scale-105">
-    <div class="text-3xl mb-2">⚡</div>
-    <div class="font-semibold text-lg">Advanced Features</div>
-    <div class="text-sm opacity-70 mt-2">MCP, BYOK, and production patterns</div>
-  </div>
-</div>
+# Core Question
+<CoreQuestionSlide
+  question="What if shipping an AI automation took 10 lines of code — not a month of infrastructure work?"
+  subtext="The Copilot SDK puts the full production agent runtime in your hands."
+  highlight="Same engine. Your workflows. Instant value."
+  :cards='[
+    { icon: "🔧", title: "Platform Engineers", description: "Wire Copilot into CI, cron jobs, and internal tools without building an AI stack" },
+    { icon: "🚀", title: "Developers", description: "Ship AI-powered automations this sprint — release notes, code review, test analysis" },
+    { icon: "🏢", title: "Architects", description: "Evaluate SDK trust posture: BYOK, tool permissions, model routing, MCP integration" },
+    { title: "2 hours → ~15 minutes", description: "Release notes automation — first pattern most teams ship" },
+    { title: "45 min per failed CI run", description: "Manual test-failure analysis eliminated by the scheduler pattern" },
+    { title: "30 min/PR → zero", description: "Code standards enforcement automated end-to-end" }
+  ]'
+/>
 
 ---
 
-# The Problem
-
-<div class="grid grid-cols-2 gap-6 mt-6">
-
-<div>
-
-### General-Purpose AI Doesn't Fit Custom Workflows
-
-<div class="text-sm space-y-3 mt-4">
-
-**Interactive tools don't scale**
-- Release notes: 2 hours manual work
-- Test analysis: 45 min per failure
-- Code review: 30 min checking standards
-
-**Automation requires code**
-- Need programmatic control
-- Integration with existing systems
-- Automatic execution without humans
-
-</div>
-
-</div>
-
-<div>
-
-### Building AI From Scratch Takes Months
-
-<div class="text-sm space-y-3 mt-4">
-
-**Before solving your problem:**
-- Build context management
-- Implement tool orchestration
-- Create planning loops
-- Handle error recovery
-- Integrate MCP servers
-
-**You're building a platform**
-- Not solving actual problems
-- Months of infrastructure work
-- Reinventing production-tested systems
-
-</div>
-
-</div>
-
-</div>
-
-<div class="mt-6 p-5 bg-gradient-to-r from-red-600/40 to-orange-600/40 rounded-xl border border-red-500/50">
-<div class="font-bold text-center">Custom workflows need programmatic AI embedded as infrastructure, not separate assistants</div>
-</div>
+# Table of Contents
+<TocSlide
+  :sections='[
+    { icon: "🏗️", title: "Architecture & Capabilities", subtitle: "The production runtime you already trust", blurb: "JSON-RPC façade, language support, full capability map", slide: 4 },
+    { icon: "⚡", title: "Getting Started", subtitle: "10 lines to a working agent", blurb: "Install, CopilotClient, run_agent — first automation live", slide: 8 },
+    { icon: "🔌", title: "Integration Patterns", subtitle: "CLI → Web API → Scheduled Automation", blurb: "Production-grade deployment patterns with enterprise controls", slide: 11 },
+    { icon: "🎯", title: "Advanced Features", subtitle: "Real-world use cases with full ROI", blurb: "BYOK, streaming, model routing, and the numbers that justify adoption", slide: 16 }
+  ]'
+/>
 
 ---
 
-# The Solution: GitHub Copilot SDK
-
-<div class="grid grid-cols-2 gap-6 mt-4">
-
-<div>
-
-### What It Provides
-
-<div class="text-sm space-y-3 mt-3">
-
-**Production-tested agent runtime**
-- Same engine powering Copilot CLI
-- Planning, tools, multi-turn execution
-- Context management included
-
-**Multi-language support**
-- Python, TypeScript/Node.js
-- Go, .NET SDKs
-- Consistent APIs across languages
-
-</div>
-
-</div>
-
-<div>
-
-### Key Capabilities
-
-<div class="text-sm space-y-3 mt-3">
-
-✅ Full agent runtime (planning + tools)
-✅ Streaming responses
-✅ MCP server integration
-✅ Tool permission control
-✅ GitHub authentication
-✅ Persistent memory
-✅ BYOK support
-
-</div>
-
-</div>
-
-</div>
-
-<div class="mt-6 p-5 bg-gradient-to-r from-green-600/40 to-emerald-600/40 rounded-xl border border-green-500/50">
-<div class="text-center">
-<strong>Result:</strong> Install SDK → Write 10 lines of code → Embed Copilot agents in any application
-</div>
-</div>
-
-<div class="text-sm mt-4 text-center opacity-70">
-Technical Preview • January 2026 • <a href="https://github.com/github/copilot-sdk" class="text-purple-400">github.com/github/copilot-sdk</a>
-</div>
+# Part 1 — Architecture & Capabilities
+<SectionOpenerSlide
+  :partNumber="1"
+  title="Architecture & Capabilities"
+  subtitle="Not a wrapper — the same production agent runtime that powers Copilot CLI, exposed as an SDK."
+  :cards='[
+    { icon: "🏗️", title: "JSON-RPC over stdio", blurb: "Thin protocol façade over the battle-tested CLI agent" },
+    { icon: "🌐", title: "Four Languages", blurb: "Python, TypeScript/Node.js, Go, .NET — same API surface" },
+    { icon: "⚙️", title: "Full Runtime Included", blurb: "Planning loops, tool orchestration, MCP, BYOK — all ship with the import" }
+  ]'
+  :terminal='{ context: "import CopilotClient", detail: "Months of production runtime ship with that one line" }'
+/>
 
 ---
 
-# Mental Model Shift
-
-<div class="grid grid-cols-3 gap-4 mt-6">
-
-<div class="p-4 bg-gradient-to-br from-green-600/20 to-green-700/10 rounded-lg border border-green-500/30">
-<div class="text-2xl mb-2 text-center">✅</div>
-<div class="font-bold text-sm mb-2 text-center">Move Toward</div>
-<div class="text-xs space-y-2">
-<div>• AI as infrastructure, not tool</div>
-<div>• Domain-specific automation</div>
-<div>• SDK + CLI complementarity</div>
-<div>• Production error handling</div>
-</div>
-</div>
-
-<div class="p-4 bg-gradient-to-br from-yellow-600/20 to-yellow-700/10 rounded-lg border border-yellow-500/30">
-<div class="text-2xl mb-2 text-center">⚠️</div>
-<div class="font-bold text-sm mb-2 text-center">Move Away From</div>
-<div class="text-xs space-y-2">
-<div>• Manual repetitive analysis</div>
-<div>• Building agents from scratch</div>
-<div>• Copy-paste integration</div>
-</div>
-</div>
-
-<div class="p-4 bg-gradient-to-br from-red-600/20 to-red-700/10 rounded-lg border border-red-500/30">
-<div class="text-2xl mb-2 text-center">🛑</div>
-<div class="font-bold text-sm mb-2 text-center">Move Against</div>
-<div class="text-xs space-y-2">
-<div>• Unrestricted tool permissions</div>
-<div>• Synchronous blocking calls</div>
-<div>• Zero error handling</div>
-</div>
-</div>
-
-</div>
-
-<div class="mt-6 p-4 bg-purple-600/20 rounded-lg border border-purple-500/30">
-<div class="text-sm">
-<strong>Example Transformation:</strong> Release manager spends 2 hours reviewing 200 commits manually → SDK-powered tool analyzes commits in 10 minutes, generates categorized release notes ready for GitHub releases
-<div class="text-xs mt-2 opacity-80">Savings: 2 hours → 10 minutes (92% reduction)</div>
-</div>
-</div>
-
----
-name: architecture-capabilities
----
-
-<!-- 🎬 MAJOR SECTION: Architecture & Capabilities -->
-
-# 🏗️ How the SDK Works
-
-<div class="mt-4">
-
-### Architecture Components
-
-```
-Your Application (Python/TypeScript/Go/.NET)
-       ↓ API calls
-  SDK Client (github-copilot-sdk)
-       ↓ JSON-RPC over stdio
-  Copilot CLI (server mode)
-       ↓ API requests
-  GitHub Copilot Service
-```
-
-<div class="grid grid-cols-2 gap-4 mt-6">
-
-<div class="text-sm">
-
-**Component Responsibilities:**
-
-1. **Your Application**: Define prompts and consume responses
-2. **SDK Client**: Manage CLI lifecycle and communication
-3. **Copilot CLI**: Execute agent runtime (same as interactive CLI)
-4. **Copilot Service**: Model inference and authentication
-
-</div>
-
-<div class="text-sm">
-
-**Why This Architecture:**
-
-- Reuse production-tested runtime
-- GitHub handles updates automatically
-- No agent infrastructure to maintain
-- Same reliability as CLI sessions
-
-</div>
-
-</div>
-
-</div>
+# The Architecture Reveal
+<FourCardGridSlide
+  :partNumber="1"
+  pillIcon="🏗️"
+  pillLabel="Architecture: How It Works"
+  title="SDK = Production CLI Runtime + Protocol"
+  :cards='[
+    { icon: "📡", title: "JSON-RPC over stdio", description: "SDK spawns Copilot CLI in server mode and manages the protocol — no custom AI runtime needed" },
+    { icon: "🔄", title: "Planning Loops", description: "Multi-turn agentic execution with full tool orchestration — identical to what Copilot Chat uses" },
+    { icon: "🛠️", title: "Tool Orchestration", description: "File system, terminal, web, MCP servers — all available inside your SDK agent calls" },
+    { icon: "🔒", title: "Context Management", description: "Conversation state, working directory scoping, and permission controls built in from day one" }
+  ]'
+  :progressDots='{ current: 1, total: 3, activeColor: "bg-cyan-400 shadow-lg shadow-cyan-500/50" }'
+/>
 
 ---
 
-# SDK Capabilities
-
-<div class="grid grid-cols-2 gap-6 mt-4">
-
-<div>
-
-### Core Agent Features
-
-<div class="text-sm space-y-2 mt-3">
-
-✅ **Planning and multi-turn execution**
-- Agent creates plans before acting
-- Iterates across multiple turns
-
-✅ **Tool invocation**
-- File operations, shell commands
-- Git operations, web requests
-
-✅ **Multiple AI models**
-- GPT-4, Claude, and others
-- Automatic model routing
-
-✅ **Custom agents and skills**
-- Specialized domain expertise
-- Tool and skill configuration
-
-</div>
-
-</div>
-
-<div>
-
-### SDK-Specific Advantages
-
-<div class="text-sm space-y-2 mt-3">
-
-🎯 **Embed in any application**
-- Web apps, desktop tools, CLIs
-
-🎯 **Programmatic control**
-- Define prompts and constraints
-- Control context and scope
-
-🎯 **System integration**
-- Jira, Slack, monitoring tools
-- Custom API connections
-
-🎯 **Security controls**
-- Tool permission restrictions
-- Working directory sandboxing
-
-</div>
-
-</div>
-
-</div>
+# Language Support & Runtime Proof
+<ThreeColumnCardSlide
+  :partNumber="1"
+  pillIcon="🌐"
+  pillLabel="Architecture: Language Support"
+  title="Four Languages, One Production Runtime"
+  :columns='[
+    { icon: "🐍", title: "Python & Node.js", description: "Tier-1 support — most SDK examples, fastest iteration, largest ecosystem overlap with AI tooling", items: ["pip install copilot-sdk", "npm install @github/copilot-sdk"] },
+    { icon: "🔵", title: "Go & .NET", description: "First-class support for enterprise platform teams already in the Go or C# stack", items: ["go get github.com/github/copilot-sdk", "dotnet add package GitHub.CopilotSdk"] },
+    { icon: "🚀", title: "Same Runtime Everywhere", description: "All four languages wrap the identical CLI agent binary — no behavioral differences across stacks" }
+  ]'
+  :progressDots='{ current: 2, total: 3, activeColor: "bg-cyan-400 shadow-lg shadow-cyan-500/50" }'
+/>
 
 ---
 
-# Tool Permissions & Security
-
-<div class="grid grid-cols-2 gap-6 mt-4">
-
-<div>
-
-### Configuration Example
-
-```python
-from github_copilot_sdk import CopilotClient
-
-client = CopilotClient(
-    allowed_tools=[
-        'file_read',
-        'git_log'
-    ],  # Read-only operations
-    working_directory='/safe/dir'
-)
-```
-
-<div class="text-xs mt-3 opacity-70">
-Restrict to least-privilege operations
-</div>
-
-</div>
-
-<div>
-
-### Security Considerations
-
-<div class="text-sm space-y-2 mt-3">
-
-**Production checklist:**
-- ✓ Review required tool permissions
-- ✓ Use `allowed_tools` for restrictions
-- ✓ Run in containerized environments
-- ✓ Validate AI-generated code
-- ✓ Limit file access scope
-
-**Default behavior:**
-- SDK runs CLI in permissive mode
-- Most tools enabled by default
-- Configure explicitly for production
-
-</div>
-
-</div>
-
-</div>
+# Full Capability Map
+<FourCardGridSlide
+  :partNumber="1"
+  pillIcon="⚙️"
+  pillLabel="Architecture: Capabilities"
+  title="Everything That Ships With the Import"
+  :cards='[
+    { icon: "🤖", title: "MCP Integration", description: "Connect any MCP server — tools surface automatically inside the agent&#39;s execution loop" },
+    { icon: "💰", title: "BYOK Support", description: "Bring your own API key for cost governance and enterprise compliance out of the box" },
+    { icon: "🎯", title: "Model Routing", description: "Route requests to the right model per task — balance cost, latency, and capability" },
+    { icon: "📡", title: "Streaming", description: "Real-time token streaming for long-running agents — no timeout cliff, responsive UX" }
+  ]'
+  :insight='{ icon: "💡", text: "These are not add-ons — they are part of the CLI runtime you import." }'
+  :progressDots='{ current: 3, total: 3, activeColor: "bg-cyan-400 shadow-lg shadow-cyan-500/50" }'
+/>
 
 ---
 
-# Billing & Resource Consumption
-
-<div class="mt-6">
-
-<div class="grid grid-cols-2 gap-6">
-
-<div>
-
-### How Billing Works
-
-<div class="text-sm space-y-3 mt-4">
-
-**Copilot premium request quota**
-- Same model as Copilot CLI
-- Each prompt = 1 premium request
-- Multi-turn = separate requests per turn
-- Streaming doesn't count as multiple
-
-**BYOK (Bring Your Own Key)**
-- Azure AI Foundry, OpenAI, Anthropic, Ollama
-- Bypasses GitHub Copilot auth entirely
-- BYOK requests exempt from Copilot quotas
-- ⚡ See: Advanced Features → BYOK slides
-
-</div>
-
-</div>
-
-<div>
-
-### Resource Tracking
-
-<div class="text-sm space-y-3 mt-4">
-
-**Monitor usage:**
-- Track via GitHub Copilot dashboard
-- Set organizational limits
-- Review quota consumption
-
-**Optimization strategies:**
-- Cache responses when possible
-- Use appropriate models (GPT-3.5 vs GPT-4)
-- Batch similar requests
-- Configure fallback models
-
-</div>
-
-</div>
-
-</div>
-
-<div class="mt-4 text-sm text-center opacity-70">
-📖 <a href="https://docs.github.com/en/copilot/concepts/billing/copilot-requests" class="text-purple-400">Copilot Requests documentation</a> for quota details
-</div>
-
-</div>
-
----
-name: getting-started
----
-
-<!-- 🎬 MAJOR SECTION: Getting Started -->
-
-# 🚀 Installing and Using the SDK
-
-<div class="grid grid-cols-2 gap-6 mt-6">
-
-<div>
-
-### Prerequisites
-
-```bash
-# 1. Install Copilot CLI
-brew install gh
-gh extension install github/gh-copilot
-
-# 2. Authenticate
-copilot auth login
-```
-
-</div>
-
-<div>
-
-### Install SDK
-
-<div class="text-sm space-y-3">
-
-**Python:**
-```bash
-pip install github-copilot-sdk
-```
-
-**TypeScript/Node.js:**
-```bash
-npm install @github/copilot-sdk
-```
-
-**Go:**
-```bash
-go get github.com/github/copilot-sdk-go
-```
-
-**.NET:**
-```bash
-dotnet add package GitHub.Copilot.SDK
-```
-
-</div>
-
-</div>
-
-</div>
+# Part 2 — Getting Started
+<SectionOpenerSlide
+  :partNumber="2"
+  title="Getting Started"
+  subtitle="Install once, call run_agent — the full agentic execution loop in under 10 lines of code."
+  :cards='[
+    { icon: "📦", title: "One Install Command", blurb: "pip install or npm install — no infra setup" },
+    { icon: "💻", title: "CopilotClient + run_agent", blurb: "10 lines from install to working agent call" },
+    { icon: "⏱️", title: "Release Notes in 15 min", blurb: "First automation most teams ship — same day" }
+  ]'
+  :terminal='{ context: "pip install copilot-sdk && python hello_agent.py", detail: "2-hour release notes job → ~15 minutes automated" }'
+/>
 
 ---
 
-# Basic SDK Usage
-
-<div class="grid grid-cols-2 gap-6 mt-4">
-
-<div>
-
-### Simple Example (Python)
-
-```python
-from github_copilot_sdk import CopilotClient
-
-# Initialize client
-client = CopilotClient()
-
-# Send a prompt
-response = client.chat(
-    "Explain OAuth in simple terms"
-)
-
-# Get the response
-print(response.text)
-```
-
-<div class="text-xs mt-3 opacity-70">
-SDK handles CLI lifecycle automatically
-</div>
-
-</div>
-
-<div>
-
-### Streaming Responses
-
-```python
-from github_copilot_sdk import CopilotClient
-
-client = CopilotClient()
-
-# Stream response chunks
-for chunk in client.stream(
-    "Generate release notes from git log"
-):
-    print(chunk.text, end='', flush=True)
-```
-
-<div class="text-xs mt-3 opacity-70">
-Real-time output as agent generates response
-</div>
-
-</div>
-
-</div>
-
-<div class="mt-6 p-4 bg-green-600/20 rounded-lg border border-green-500/30">
-<div class="text-sm text-center">
-<strong>That's it!</strong> SDK spawns CLI, manages communication, and streams results back
-</div>
-</div>
+# 10-Line Hello World
+<CodeWithFeaturesSlide
+  :partNumber="2"
+  pillIcon="⚡"
+  pillLabel="Getting Started: Hello World"
+  title="The Full Agentic Loop in 10 Lines"
+  codePosition="left"
+  :code='{ language: "python", content: "from copilot_sdk import CopilotClient\n\nclient = CopilotClient()\n\nresult = client.run_agent(\n    prompt=\"Summarize changes in CHANGELOG.md\",\n    working_dir=\"/repo\",\n    allowed_tools=[\"read_file\", \"list_files\"]\n)\n\nprint(result.output)" }'
+  :features='[
+    { icon: "🔄", title: "Full planning loop", description: "Multi-turn tool use — not a single LLM call" },
+    { icon: "🔒", title: "Tool allowlist", description: "allowed_tools scopes what the agent can touch" },
+    { icon: "📂", title: "Working dir scope", description: "Agent&#39;s file access stays inside /repo" }
+  ]'
+  :progressDots='{ current: 1, total: 2, activeColor: "bg-blue-400 shadow-lg shadow-blue-500/50" }'
+/>
 
 ---
 
-# TypeScript/Node.js Example
-
-```typescript
-import { CopilotClient } from '@github/copilot-sdk';
-
-// Initialize client
-const client = new CopilotClient();
-
-// Send prompt with options
-const response = await client.chat({
-  prompt: 'Analyze test failures in this log',
-  model: 'gpt-4',
-  stream: true
-});
-
-// Handle streaming response
-for await (const chunk of response) {
-  process.stdout.write(chunk.text);
-}
-
-// Clean up
-await client.close();
-```
-
-<div class="mt-4 text-sm opacity-70">
-Async/await pattern with TypeScript types and error handling
-</div>
+# ROI Hook — Release Notes
+<HeroStatSlide
+  :partNumber="2"
+  pillIcon="⏱️"
+  pillLabel="Getting Started: First Win"
+  title="Release Notes: The Team's First Automation"
+  subtitle="One SDK call replaced two hours of manual engineering work"
+  :hero='{ value: ">85%", label: "time reduction", source: "2 hours → ~15 minutes per release" }'
+  :supporting='[
+    { icon: "📝", title: "Before", description: "Engineer reads commits, drafts notes, reviews, publishes — 2 hours per release" },
+    { icon: "⚡", title: "After", description: "SDK agent reads changelog, formats release doc — 15 minutes automated" },
+    { icon: "🚀", title: "Ship It Today", description: "Runs from the 10-line pattern you just saw — no extra infrastructure" }
+  ]'
+  :insight='{ icon: "💡", text: "The SDK agent does the same planning loop a human would — read, reason, write — just consistently and instantly." }'
+  :progressDots='{ current: 2, total: 2, activeColor: "bg-blue-400 shadow-lg shadow-blue-500/50" }'
+/>
 
 ---
-name: integration-patterns
----
 
-<!-- 🎬 MAJOR SECTION: Integration Patterns -->
-
-# 🔧 Integration Patterns
-
-<div class="grid grid-cols-2 gap-5 mt-6">
-
-<div class="p-5 bg-gradient-to-br from-green-900/40 to-green-800/20 rounded-lg border border-green-500/40">
-<div class="text-2xl mb-2">⌨️ CLI Tool</div>
-<div class="font-bold text-green-300 text-sm">Release Notes Generator</div>
-<div class="text-xs text-gray-300 mt-2">Reads git commits, generates categorized customer-facing release notes automatically</div>
-<div class="mt-3 p-2 bg-green-900/50 rounded text-xs">
-  <span class="text-green-400 font-bold">2 hours → 10 min</span> &nbsp;·&nbsp; 92% time reduction per release
-</div>
-</div>
-
-<div class="p-5 bg-gradient-to-br from-blue-900/40 to-blue-800/20 rounded-lg border border-blue-500/40">
-<div class="text-2xl mb-2">🌐 Web API</div>
-<div class="font-bold text-blue-300 text-sm">PR Code Review Endpoint</div>
-<div class="text-xs text-gray-300 mt-2">REST endpoint accepts a diff, returns security, logic, and quality analysis inline</div>
-<div class="mt-3 p-2 bg-blue-900/50 rounded text-xs">
-  <span class="text-blue-400 font-bold">PR throughput doubled</span> &nbsp;·&nbsp; instant feedback on every PR
-</div>
-</div>
-
-<div class="p-5 bg-gradient-to-br from-indigo-900/40 to-indigo-800/20 rounded-lg border border-indigo-500/40">
-<div class="text-2xl mb-2">⏰ Scheduled Automation</div>
-<div class="font-bold text-indigo-300 text-sm">Overnight Test Failure Analysis</div>
-<div class="text-xs text-gray-300 mt-2">Runs nightly, identifies root causes, flags flaky tests, creates Jira tickets automatically</div>
-<div class="mt-3 p-2 bg-indigo-900/50 rounded text-xs">
-  <span class="text-indigo-400 font-bold">45 min → 5 min</span> &nbsp;·&nbsp; 60% less CI blockage time
-</div>
-</div>
-
-<div class="p-5 bg-gradient-to-br from-purple-900/40 to-purple-800/20 rounded-lg border border-purple-500/40">
-<div class="text-2xl mb-2">🤖 Custom Agent Config</div>
-<div class="font-bold text-purple-300 text-sm">Domain-Specific Agents</div>
-<div class="text-xs text-gray-300 mt-2">Specialized agents with scoped tools, skills, and team standards baked in — shareable and version-controlled</div>
-<div class="mt-3 p-2 bg-purple-900/50 rounded text-xs">
-  <span class="text-purple-400 font-bold">Consistent quality</span> &nbsp;·&nbsp; reusable across the org
-</div>
-</div>
-
-</div>
+# Part 3 — Integration Patterns
+<SectionOpenerSlide
+  :partNumber="3"
+  title="Integration Patterns"
+  subtitle="From one-shot CLI tool to persistent HTTP service to autonomous cron job — three production-grade patterns."
+  :cards='[
+    { icon: "🖥️", title: "CLI Tool", blurb: "Wrap run_agent in a script — simplest entry point" },
+    { icon: "🌐", title: "Web API", blurb: "Flask/Express endpoint — agent on demand, HTTP-native" },
+    { icon: "⏰", title: "Scheduled Automation", blurb: "Cron + SDK — fully autonomous, zero human intervention" }
+  ]'
+  :terminal='{ context: "cron: 0 * * * * python ci_analyzer.py", detail: "45-min manual CI failure analysis → automated on every run" }'
+/>
 
 ---
-name: advanced-features
----
 
-<!-- 🎬 MAJOR SECTION: Advanced Features -->
-
-# ⚡ Advanced Feature 1: MCP Integration
-
-<div class="grid grid-cols-2 gap-4 mt-2">
-
-<div>
-
-### Connect MCP Servers
-
-```python
-from github_copilot_sdk import CopilotClient
-
-client = CopilotClient(
-    mcp_servers=[
-        {
-            'name': 'jira',
-            'command': 'npx',
-            'args': [
-                '@modelcontextprotocol/server-jira'
-            ],
-            'env': {
-                'JIRA_URL': 'https://...',
-                'JIRA_TOKEN': os.environ['JIRA_TOKEN']
-            }
-        }
+# Pattern 1+2 — CLI to Web API
+<TwoColPairedConceptsSlide
+  :partNumber="3"
+  pillIcon="🔌"
+  pillLabel="Integration: CLI & Web API"
+  title="From Script to Persistent Service"
+  :left='{
+    header: "CLI Tool Pattern",
+    icon: "🖥️",
+    items: [
+      { title: "One command, one agent call", detail: "python analyze_pr.py --pr 1234" },
+      { title: "Pipe output to CI", detail: "Exit code drives pass/fail gates" },
+      "Perfect for GitHub Actions steps"
     ]
-)
-
-response = client.chat("""
-Review open P0 tickets in Jira.
-Identify blockers for v2.0 release.
-Suggest prioritization.
-""")
-
-# Agent uses Jira MCP server
-# to fetch and analyze tickets
-```
-
-</div>
-
-<div>
-
-### Available MCP Servers
-
-<div class="text-sm space-y-2 mt-3">
-
-**Official servers:**
-- GitHub (repos, issues, PRs)
-- Jira (tickets, workflows)
-- Slack (messages, channels)
-- PostgreSQL (database queries)
-- Filesystem (secure file access)
-
-**Custom servers:**
-- Build your own MCP server
-- Connect internal tools
-- Expose proprietary data
-
-**Use cases:**
-- Integrate with existing systems
-- Access real-time data
-- Automate cross-tool workflows
-
-</div>
-
-<div class="text-xs mt-3 opacity-70">
-📖 MCP: Model Context Protocol — standard for tool integration
-</div>
-
-</div>
-
-</div>
+  }'
+  :right='{
+    header: "Web API Pattern",
+    icon: "🌐",
+    items: [
+      { title: "Flask or Express endpoint", detail: "POST /analyze → streaming response" },
+      { title: "Webhook-driven", detail: "PR opened → agent fires automatically" },
+      "Multi-user, persistent, HTTP-native"
+    ],
+    code: { language: "python", content: "@app.route(\"/analyze\", methods=[\"POST\"])\ndef analyze():\n    return client.run_agent(prompt=...)" }
+  }'
+  :progressDots='{ current: 1, total: 4, activeColor: "bg-indigo-400 shadow-lg shadow-indigo-500/50" }'
+/>
 
 ---
 
-# Advanced Feature 2: Persistent Memory
-
-<div class="grid grid-cols-2 gap-6 mt-4">
-
-<div>
-
-### Enable Memory
-
-```python
-from github_copilot_sdk import CopilotClient
-
-client = CopilotClient(
-    memory_enabled=True,
-    memory_scope='repository'
-)
-
-# First conversation
-client.chat("""
-This codebase uses FastAPI
-with PostgreSQL backend.
-Remember this architecture.
-""")
-
-# Later conversation (new session)
-client.chat("""
-Generate API endpoint for users.
-""")
-
-# Agent remembers architecture
-# and generates FastAPI + PostgreSQL
-```
-
-</div>
-
-<div>
-
-### Memory Scopes
-
-<div class="text-sm space-y-3 mt-4">
-
-**Repository scope:**
-- Shared across all sessions
-- Persists architecture decisions
-- Remembers coding patterns
-
-**Session scope:**
-- Isolated to one conversation
-- No cross-session memory
-- Clean slate each time
-
-**Global scope:**
-- Organization-wide knowledge
-- Shared conventions
-- Team standards
-
-</div>
-
-<div class="mt-4 p-3 bg-indigo-600/20 rounded border border-indigo-500/30 text-sm">
-Memory eliminates repeated context explanations
-</div>
-
-</div>
-
-</div>
+# Pattern 3 — Scheduled Automation
+<ProblemSolutionOutcomeSlide
+  :partNumber="3"
+  pillIcon="⏰"
+  pillLabel="Integration: Scheduler Pattern"
+  title="Fully Autonomous AI on a Cron Schedule"
+  :problem='{
+    header: "The Problem",
+    items: [
+      { title: "45 min per failed CI run", detail: "Engineer reads logs, cross-references tests, files issue" },
+      "Happens at 2am — no one available",
+      "Pattern repeats every broken build"
+    ]
+  }'
+  :solution='{
+    header: "The Solution",
+    items: ["Cron triggers SDK agent on CI failure", "Agent reads logs, identifies pattern, files issue"],
+    code: { language: "python", content: "client.run_agent(\n  prompt=\"Analyze CI failure logs\",\n  allowed_tools=[\"read_file\",\"create_issue\"]\n)" }
+  }'
+  :outcome='{
+    header: "The Outcome",
+    items: ["Failure triaged before morning standup", "Zero human intervention required"],
+    metrics: [{ value: "45 min", label: "→ automated" }]
+  }'
+  :progressDots='{ current: 2, total: 4, activeColor: "bg-indigo-400 shadow-lg shadow-indigo-500/50" }'
+/>
 
 ---
 
-# Advanced Feature 3: Production Error Handling
-
-```python
-from github_copilot_sdk import CopilotClient
-from tenacity import retry, stop_after_attempt, wait_exponential
-
-@retry(
-    stop=stop_after_attempt(3),
-    wait=wait_exponential(multiplier=1, min=2, max=10)
-)
-def ai_analysis_with_retry(prompt: str) -> str:
-    client = CopilotClient()
-
-    try:
-        response = client.chat(prompt, timeout=30)
-        return response.text
-
-    except TimeoutError:
-        # API rate limit or slow response
-        raise  # Retry via tenacity
-
-    except Exception as e:
-        # Log error for observability
-        logger.error(f"SDK error: {e}")
-        raise
-
-# Usage with fallback
-try:
-    result = ai_analysis_with_retry("Analyze logs...")
-except Exception:
-    # Fallback to manual review or alert
-    result = "AI analysis unavailable - manual review required"
-```
+# Tool Permission Control
+<ThreeColumnCardSlide
+  :partNumber="3"
+  pillIcon="🔒"
+  pillLabel="Integration: Enterprise Controls"
+  title="Production Safety: Permission-First Design"
+  :columns='[
+    { icon: "🛠️", title: "allowed_tools", description: "Explicit allowlist of tools the agent can invoke — least privilege enforced at the SDK level", items: ["[\"read_file\", \"list_files\"]", "No shell exec unless declared", "Auditable at call site"] },
+    { icon: "📂", title: "working_dir Scope", description: "Agent file access restricted to the declared working directory — no escape, no surprise writes" },
+    { icon: "🏢", title: "Enterprise Ready", description: "BYOK + permissions + model routing — the security posture InfoSec needs to approve production use" }
+  ]'
+  :progressDots='{ current: 3, total: 4, activeColor: "bg-indigo-400 shadow-lg shadow-indigo-500/50" }'
+/>
 
 ---
 
-# Advanced Feature 4: BYOK — Bring Your Own Key
-
-<div class="grid grid-cols-2 gap-6 mt-4">
-
-<div>
-
-### What & Why
-
-BYOK uses your own model provider API keys, **bypassing GitHub Copilot auth entirely**.
-
-<div class="text-sm space-y-2 mt-3">
-
-**When to use BYOK:**
-- Enterprise deployment on Azure AI Foundry
-- Direct billing with your cloud provider
-- Local models via Ollama (no key needed)
-- Models outside Copilot's catalog
-
-**BYOK requests do NOT count against**
-**Copilot premium request quotas**
-
-</div>
-
-</div>
-
-<div>
-
-### Supported Providers
-
-<div class="text-sm mt-3">
-
-| Provider | `type` |
-|---------|--------|
-| OpenAI + compatible | `"openai"` |
-| Azure AI Foundry | `"openai"` |
-| Azure OpenAI (native) | `"azure"` |
-| Anthropic / Claude | `"anthropic"` |
-| Ollama (local) | `"openai"` |
-
-</div>
-
-<div class="mt-3 p-2 bg-yellow-600/20 rounded border border-yellow-500/30 text-xs">
-⚠️ <code>model</code> is required when using BYOK — always specify it
-</div>
-
-</div>
-
-</div>
+# Integration Patterns Summary
+<WorkflowShowdownStepsSlide
+  :partNumber="3"
+  pillIcon="🗺️"
+  pillLabel="Integration: Pattern Map"
+  title="Three Patterns, One Progression"
+  leftLabel="Without SDK"
+  rightLabel="With SDK"
+  :steps='[
+    { left: { label: "Build custom LLM wrapper" },        right: { label: "pip install copilot-sdk" } },
+    { left: { label: "Hand-roll tool orchestration" },    right: { label: "CopilotClient() + run_agent()" } },
+    { left: { label: "Manage conversation state" },       right: { label: "Choose pattern: CLI / Web / Cron" } },
+    { left: { label: "Handle streaming + retries" },      right: { label: "Ship to production this sprint" } }
+  ]'
+  :outcomeLeft='{ icon: "😓", label: "Weeks of glue code before first value" }'
+  :outcomeRight='{ icon: "🚀", label: "Production automation in one sprint" }'
+  summaryMetric="Same four automations. One SDK call each."
+  :progressDots='{ current: 4, total: 4, activeColor: "bg-indigo-400 shadow-lg shadow-indigo-500/50" }'
+/>
 
 ---
 
-# BYOK: Azure AI Foundry Quick Start
-
-<div class="grid grid-cols-2 gap-4 mt-2">
-
-<div>
-
-### Python Example
-
-```python
-from copilot import CopilotClient
-
-FOUNDRY_URL = (
-  "https://your-resource"
-  ".openai.azure.com/openai/v1/"
-)
-
-client = CopilotClient()
-session = await client.create_session({
-    "model": "gpt-5.2-codex",
-    "provider": {
-        "type": "openai",  # Foundry = openai
-        "base_url": FOUNDRY_URL,
-        "wire_api": "responses",
-        "api_key": os.environ["FOUNDRY_API_KEY"],
-    },
-})
-```
-
-</div>
-
-<div>
-
-### Config Reference
-
-<div class="text-xs mt-2">
-
-| Field | Notes |
-|-------|-------|
-| `type` | `"openai"` \| `"azure"` \| `"anthropic"` |
-| `baseUrl` | Full endpoint URL |
-| `apiKey` | Your provider API key |
-| `bearerToken` | Static token (no auto-refresh) |
-| `wireApi` | `"responses"` for GPT-5 series |
-
-</div>
-
-### Identity Limitations
-
-<div class="text-sm space-y-1 mt-2">
-
-- ❌ Microsoft Entra ID / Azure AD
-- ❌ Managed identities or OIDC
-- ✅ Static API keys and bearer tokens only
-
-</div>
-
-<div class="mt-2 p-2 bg-red-600/20 rounded border border-red-500/30 text-xs">
-Entra tokens expire ~1h; SDK has no refresh callback
-</div>
-
-</div>
-
-</div>
+# Part 4 — Advanced Features
+<SectionOpenerSlide
+  :partNumber="4"
+  title="Advanced Features"
+  subtitle="BYOK, streaming, model routing, and MCP — proved through use cases, not listed as feature bullets."
+  :cards='[
+    { icon: "💰", title: "BYOK + Cost Control", blurb: "Your API key, your model budget, enterprise compliance" },
+    { icon: "📡", title: "Streaming + Routing", blurb: "Real-time UX + right model for each task" },
+    { icon: "🎯", title: "ROI Sweep", blurb: ">85% release notes, CI analysis automated, zero PR review time" }
+  ]'
+  :terminal='{ context: "Full ROI metrics across four real automations", detail: "2h→15min · 45min→auto · 30min/PR→zero · 30min logs→auto" }'
+/>
 
 ---
 
-# 🌍 Real-World Use Cases
+# BYOK + Model Routing
+<TwoColPairedConceptsSlide
+  :partNumber="4"
+  pillIcon="💰"
+  pillLabel="Advanced: BYOK & Model Routing"
+  title="Cost Governance and the Right Model Per Task"
+  :left='{
+    header: "BYOK: Bring Your Own Key",
+    icon: "🔑",
+    items: [
+      { title: "Your API key, your invoice", detail: "Cost attribution stays inside your org" },
+      { title: "Enterprise compliance", detail: "Data stays on your approved provider" },
+      "InfoSec approves, finance tracks, team ships"
+    ]
+  }'
+  :right='{
+    header: "Model Routing",
+    icon: "🎯",
+    items: [
+      { title: "Fast model for simple tasks", detail: "File listing, formatting, categorization" },
+      { title: "Powerful model for complex tasks", detail: "Architecture review, cross-repo analysis" },
+      "Route per call — optimize cost + quality"
+    ]
+  }'
+  :progressDots='{ current: 1, total: 4, activeColor: "bg-purple-400 shadow-lg shadow-purple-500/50" }'
+/>
 
-<div class="grid grid-cols-3 gap-5 mt-6">
+---
 
-<div class="p-5 bg-gradient-to-br from-green-900/40 to-green-800/20 rounded-lg border border-green-500/40">
-<div class="text-2xl mb-2">📋 Release Automation</div>
-<div class="text-xs text-gray-300 mt-2">Release manager reviews 200+ commits to write customer-facing notes — manual, inconsistent, and bottlenecked</div>
-<div class="mt-3 text-xs text-gray-400">SDK analyzes commits, categorizes by Features / Fixes / Breaking Changes, outputs markdown for GitHub releases</div>
-<div class="mt-3 p-2 bg-green-900/50 rounded text-xs">
-  <span class="text-green-400 font-bold">2 hours → 10 min</span> &nbsp;·&nbsp; 92% faster · consistent quality
-</div>
-</div>
+# Streaming for Long-Running Agents
+<CodeWithFeaturesSlide
+  :partNumber="4"
+  pillIcon="📡"
+  pillLabel="Advanced: Streaming"
+  title="Real-Time Output for Long-Running Agents"
+  codePosition="left"
+  :code='{ language: "python", content: "for chunk in client.run_agent_stream(\n    prompt=\"Analyze all PRs from last sprint\",\n    working_dir=\"/repo\",\n    allowed_tools=[\"read_file\", \"list_prs\"]\n):\n    print(chunk.text, end=\"\", flush=True)" }'
+  :features='[
+    { icon: "⚡", title: "No timeout cliff", description: "Stream tokens as they arrive — works across analysis jobs that take minutes" },
+    { icon: "🖥️", title: "Responsive UX", description: "Users see progress in real time — no frozen UI waiting for a batch result" },
+    { icon: "🔄", title: "Same permission model", description: "allowed_tools and working_dir apply identically to streaming calls" }
+  ]'
+  :progressDots='{ current: 2, total: 4, activeColor: "bg-purple-400 shadow-lg shadow-purple-500/50" }'
+/>
 
-<div class="p-5 bg-gradient-to-br from-indigo-900/40 to-indigo-800/20 rounded-lg border border-indigo-500/40">
-<div class="text-2xl mb-2">🧪 Test Failure Analysis</div>
-<div class="text-xs text-gray-300 mt-2">Infra team manually triage failure logs across builds — 45 min per failed CI run, flaky tests missed until 3rd failure</div>
-<div class="mt-3 text-xs text-gray-400">SDK runs nightly, identifies root causes with confidence scores, flags flaky patterns, creates Jira tickets automatically</div>
-<div class="mt-3 p-2 bg-indigo-900/50 rounded text-xs">
-  <span class="text-indigo-400 font-bold">45 min → 5 min</span> &nbsp;·&nbsp; 60% less CI blockage time
-</div>
-</div>
+---
 
-<div class="p-5 bg-gradient-to-br from-blue-900/40 to-blue-800/20 rounded-lg border border-blue-500/40">
-<div class="text-2xl mb-2">🔍 Code Review Bot</div>
-<div class="text-xs text-gray-300 mt-2">Juniors wait 2–3 days for senior review of issues that could be caught automatically — seniors bottlenecked on standards</div>
-<div class="mt-3 text-xs text-gray-400">Webhook-triggered bot reviews PR diffs for security, logic, and quality — posts inline GitHub comments before human review</div>
-<div class="mt-3 p-2 bg-blue-900/50 rounded text-xs">
-  <span class="text-blue-400 font-bold">Review time −50%</span> &nbsp;·&nbsp; PR throughput doubled
-</div>
-</div>
+# MCP Integration
+<ThreeColumnCardSlide
+  :partNumber="4"
+  pillIcon="🔌"
+  pillLabel="Advanced: MCP Integration"
+  title="Connect Any MCP Server to Your Agent"
+  :columns='[
+    { icon: "🔌", title: "MCP Servers as Tools", description: "Register any MCP server — tools surface inside the SDK execution loop, zero glue code needed" },
+    { icon: "🗄️", title: "Example: Database MCP", description: "Agent reads query results, correlates with code, files tickets — all in one run_agent call", items: ["Read DB schema", "Cross-reference commits", "Auto-file issue"] },
+    { icon: "🌐", title: "Example: API MCP", description: "Agent calls your REST API via MCP to pull context that would otherwise require custom tool code" }
+  ]'
+  :progressDots='{ current: 3, total: 4, activeColor: "bg-purple-400 shadow-lg shadow-purple-500/50" }'
+/>
 
-</div>
+---
+
+# ROI Sweep — The Full Picture
+<BeforeAfterMetricsSlide
+  :partNumber="4"
+  pillIcon="📊"
+  pillLabel="Advanced: Real-World ROI"
+  title="Four Automations, Proven Numbers"
+  :before='{
+    header: "Manual Status Quo",
+    items: [
+      { title: "Release engineering", detail: "2 hours per release — read commits, draft, review, publish" },
+      { title: "CI test analysis", detail: "45 min per failed run — log reading, pattern matching, ticket filing" },
+      { title: "Code review standards", detail: "30 min per PR — enforce style, security, coverage manually" },
+      { title: "Incident response", detail: "30+ min log correlation — pull logs, cross-reference, root-cause" }
+    ]
+  }'
+  :after='{
+    header: "SDK Automated",
+    items: [
+      { title: "Release engineering", detail: "~15 minutes — agent reads, drafts, formats, publishes" },
+      { title: "CI test analysis", detail: "Automated on every run — pattern detected, issue filed, zero wait" },
+      { title: "Code review bot", detail: "Zero manual time — webhook fires agent on PR open" },
+      { title: "Incident response", detail: "Automated log correlation — root cause in seconds, not 30 minutes" }
+    ]
+  }'
+  :metrics='[
+    { value: ">85%", label: "release time reduction" },
+    { value: "45 min", label: "CI analysis → automated" },
+    { value: "0 min", label: "PR standards review time" }
+  ]'
+  :insight='{ icon: "🎯", text: "These numbers come from the same 10-line pattern you saw in Getting Started — just pointed at different workflows." }'
+  :progressDots='{ current: 4, total: 4, activeColor: "bg-purple-400 shadow-lg shadow-purple-500/50" }'
+/>
+
+---
+
+# Before/After
+<BeforeAfterSlide
+  header="From AI Infrastructure Work to Shipping Automations"
+  :leftItems='["Months building custom LLM orchestration layers", "Hand-rolling tool call loops and retry logic", "Managing conversation state and context windows", "No enterprise controls — approval blocked by InfoSec"]'
+  :rightItems='["Production agent runtime imported in one command", "Planning loops, tools, and streaming included", "BYOK + tool permissions + model routing built in", "First automation shipping this sprint"]'
+  :metrics='[
+    { value: ">85%", detail: "release engineering time reduction" },
+    { value: "45 min", detail: "CI failure analysis → fully automated" },
+    { value: "Jan 2026", detail: "Technical Preview — install in 15 minutes today" }
+  ]'
+/>
 
 ---
 
 # What You Can Do Today
-
-<div class="grid grid-cols-2 gap-6 mt-6">
-
-<div>
-
-### Immediate (15 minutes)
-
-<div class="text-sm space-y-2 mt-3">
-
-✓ **Install and authenticate**
-```bash
-copilot auth login
-pip install github-copilot-sdk
-```
-
-✓ **Run basic example**
-```python
-from github_copilot_sdk import CopilotClient
-client = CopilotClient()
-print(client.chat("Hello").text)
-```
-
-✓ **Test streaming**
-```python
-for chunk in client.stream("Explain Docker"):
-    print(chunk.text, end='')
-```
-
-</div>
-
-</div>
-
-<div>
-
-### Short-Term (1 hour)
-
-<div class="text-sm space-y-2 mt-3">
-
-✓ **Identify workflow to automate**
-- Release notes generation
-- Test failure analysis
-- Log correlation
-
-✓ **Build CLI tool** (Pattern 1)
-- Use SDK backend
-- Test with real data
-
-✓ **Add error handling**
-- Retry logic
-- Timeout configuration
-- Fallback behavior
-
-</div>
-
-</div>
-
-</div>
-
-<div class="mt-6 p-4 bg-purple-600/20 rounded-lg border border-purple-500/30">
-<div class="text-sm text-center">
-<strong>Next Steps:</strong> Share with team → Review <a href="../mcp-apps/" class="text-purple-400">MCP Apps</a> → Explore <a href="https://github.com/github/copilot-sdk" class="text-purple-400">SDK examples</a> → Scale to organization
-</div>
-</div>
+<WhatYouCanDoTodaySlide
+  :today='["Install the SDK: pip install copilot-sdk or npm install @github/copilot-sdk", "Run the 10-line hello world against a real repo directory", "Read one CHANGELOG.md with run_agent — see the runtime in action"]'
+  :thisWeek='["Pick one repetitive workflow: release notes, CI triage, or PR standards", "Implement the matching pattern: CLI tool, Web API, or cron script", "Demo the automation to your team — 15 minutes prep, instant buy-in"]'
+  :thisMonth='["Deploy one automation to production with allowed_tools and working_dir scoped", "Instrument BYOK for cost tracking and get InfoSec sign-off", "Identify two more workflows to automate — the ROI compounds with each one"]'
+  footer="The SDK is in Technical Preview since January 2026 — the runtime is production-tested, the API is stable enough to ship against today."
+/>
 
 ---
 
-# Related Patterns & Decision Flow
-
-<div class="grid grid-cols-2 gap-6 mt-4">
-
-<div>
-
-### Complementary Features
-
-<div class="text-sm space-y-2 mt-3">
-
-**Copilot CLI**
-- Interactive terminal workflows
-- SDK provides programmatic control
-
-**MCP Apps**
-- Extend SDK with internal systems
-- Connect to APIs and databases
-
-**Agentic SDLC**
-- Full repository automation
-- SDK is the building block
-
-**Custom Agents**
-- Domain-specific expertise
-- SDK provides the runtime
-
-</div>
-
-</div>
-
-<div>
-
-### When to Use SDK vs Alternatives
-
-```
-Q: What are you building?
-
-├─ Interactive terminal workflows
-│  → Use: Copilot CLI
-│
-├─ Code completion while editing
-│  → Use: Copilot in VS Code/IDE
-│
-├─ Custom tools/bots/automation
-│  → Use: Copilot SDK (this talk)
-│
-└─ Non-developer products
-   → Consider: OpenAI API
-```
-
-<div class="text-sm mt-4 p-3 bg-blue-600/20 rounded border border-blue-500/30">
-SDK = Programmatic AI for developer tools
-</div>
-
-</div>
-
-</div>
+# References
+<ReferencesSlide
+  :groups='[
+    { title: "📖 Official Resources", color: "cyan", items: [
+      { href: "https://github.com/github/copilot-sdk", label: "GitHub Copilot SDK Repository", description: "Source code, examples, and issue tracker for the SDK" },
+      { href: "https://github.blog/news-insights/company-news/build-an-agent-into-any-app-with-the-github-copilot-sdk/", label: "Build an agent into any app with the Copilot SDK", description: "Official announcement and architectural overview from GitHub Engineering" }
+    ] },
+    { title: "🛠️ Related Tech Talks", color: "purple", items: [
+      { label: "Copilot Primitives", description: "Instructions, prompts, agents, and skills — the customization layer the SDK extends" },
+      { label: "MCP Apps", description: "MCP server patterns that pair with SDK&#39;s native MCP integration" },
+      { label: "Copilot Memory", description: "Context and memory patterns relevant to long-running SDK automations" }
+    ] }
+  ]'
+/>
 
 ---
 
-# Official Documentation & Resources
-
-<div class="grid grid-cols-2 gap-6 mt-4">
-
-<div>
-
-### Primary Documentation
-
-<div class="text-sm space-y-2 mt-3">
-
-📖 **[GitHub Copilot SDK Repository](https://github.com/github/copilot-sdk)**
-- Installation guides
-- API reference
-- Language-specific examples
-
-📖 **[SDK Blog Announcement](https://github.blog/news-insights/company-news/build-an-agent-into-any-app-with-the-github-copilot-sdk/)**
-- Technical preview details
-- Use cases and architecture
-
-📖 **[Copilot CLI Documentation](https://docs.github.com/en/copilot/using-github-copilot/using-github-copilot-in-the-command-line)**
-- Understand the agent runtime
-
-</div>
-
-</div>
-
-<div>
-
-### Additional Resources
-
-<div class="text-sm space-y-2 mt-3">
-
-🎓 **[Python SDK Cookbook](https://github.com/github/awesome-copilot/blob/main/cookbook/copilot-sdk/python/README.md)**
-- Python-specific patterns
-
-📖 **[BYOK Documentation](https://github.com/github/copilot-sdk/blob/main/docs/auth/byok.md)**
-- Azure AI Foundry, providers, limitations
-
-📖 **[Authentication Overview](https://github.com/github/copilot-sdk/blob/main/docs/auth/index.md)**
-- GitHub OAuth, env vars, BYOK comparison
-
-📋 **[Copilot Requests Docs](https://docs.github.com/en/copilot/concepts/billing/copilot-requests)**
-- Billing, quotas, BYOK exemption
-
-</div>
-
-</div>
-
-</div>
-
----
-layout: center
-class: text-center
----
-
-<div class="relative">
-  <div class="absolute inset-0 bg-gradient-to-br from-purple-900/30 via-indigo-900/20 to-blue-900/30 blur-3xl"></div>
-
-  <div class="relative z-10">
-    <div class="text-6xl mb-8">✅</div>
-    <h1 class="!text-5xl !font-bold bg-gradient-to-r from-purple-400 via-indigo-400 to-blue-400 bg-clip-text text-transparent mb-6">
-      You're Ready to Build with Copilot SDK
-    </h1>
-    <div class="text-xl opacity-80 mb-8">
-      Transform custom workflows with programmatic AI
-    </div>
-    <div class="flex justify-center gap-4 text-sm">
-      <div class="px-6 py-3 bg-purple-600/20 rounded-lg border border-purple-500/30">
-        Install SDK → Write code → Automate workflows
-      </div>
-    </div>
-    <div class="mt-8 text-sm opacity-60">
-      Questions? Explore the <a href="https://github.com/github/copilot-sdk" class="text-purple-400">SDK repository</a>
-    </div>
-  </div>
-</div>
+# Thank You
+<ThankYouSlide
+  title="GitHub Copilot SDK"
+  subtitle="Build AI-Powered Tools for Your Workflows"
+  :cards="[
+    { value: '>85%', detail: 'release engineering time reduction — 2 hours to ~15 minutes' },
+    { value: '10 lines', detail: 'CopilotClient + run_agent — full agentic loop, production runtime' },
+    { value: 'Jan 2026', detail: 'Technical Preview — install today, first automation this sprint' }
+  ]"
+  prompt="Which workflow would your team automate first — release notes, CI triage, or PR standards review?"
+/>

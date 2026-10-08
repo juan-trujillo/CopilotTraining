@@ -1,185 +1,107 @@
-# Exercise 2.3: Executing Plans
+# Exercise 2.3: Plan the Show Lore Form
 
 ## 🔨 Exercise
 
-### Exercise 2.3: Executing Plans — "From Roadmap to Reality"
+### Exercise 2.3: Plan the Show Lore Form — "Continuity Is the Test"
 
-**Lead:** Marcus ⭐ | **Support:** Elena 🤝 | **Time:** 7 min
+**Lead:** David ⭐ | **Support:** Elena 🤝, Sarah 🤝 | **Time:** 10 min
 
 #### 📖 The Challenge
 
-Marcus has a validated, production-ready plan from Exercise 2.2. David reviewed the architecture, Elena ensured testing was included, and Sarah validated it follows standards. Now comes the moment of truth: executing the plan.
+It's 10:30 AM. Jessica has just shared her plan output with the group. David reads it line by line — all the way through. The Lore card, the `/lore` page, the migration, the API route. Everything looks right. Then he gets to the end. *There's no step for adding entries.* The table gets created. The page reads from it. Nothing writes to it.
 
-Before plan mode, implementation meant constant context switching: *"Did I remember to add error handling? Which file pattern should I follow? Wait, I need to update tests too—where were those again?"* Integration issues surfaced late, requiring 25 minutes of debugging per feature to resolve conflicts between frontend, backend, and database layers.
-
-With a validated plan, Marcus has a clear roadmap: exactly which files to modify, in what order, with dependencies mapped. Elena knows tests are included from the start, not bolted on later. The team expects implementation to be faster, more focused, and with fewer integration issues.
-
-The question: Does execution match the promise of planning?
+*"The plan creates the table and reads from it,"* David says. *"But how do entries ever get in there?"*
 
 #### 🔄 The Transformation
 
 | Before ❌ | After ✨ |
 |-----------|----------|
-| Implement without clear roadmap → context switch between files → forget error handling → realize tests missing → integration conflicts require 25 min debugging | Follow validated plan step-by-step → clear file paths and order → tests included from start → integration works immediately |
-| **Debugging integration issues:** 25 min<br>**Test coverage gaps:** 40%<br>**Forgotten requirements:** 3 per feature | **Debugging integration issues:** 5 min<br>**Test coverage gaps:** 15% (85% coverage)<br>**Forgotten requirements:** 0 per feature |
+| Plan the form independently → different table name assumed, form posts to wrong endpoint, conflict discovered during integration | Run the second plan with Jessica's plan file open → Copilot detects context, references `lore_entries` correctly, proposes `POST /api/lore-entries` as the connected endpoint |
+| **Integration conflicts from drift:** 1–2 per feature pair<br>**Time to discover:** During testing, 45 min in | **Integration conflicts:** 0<br>**Human judgment calls surfaced:** 1–2 deliberately<br>**Rework required:** None |
+
+**Time saved:** 45 min integration debugging → 0, replaced by 2 min reading the combined plan
 
 #### 🎯 Your Goal
 
-Execute the validated character detail feature plan, implementing frontend, backend, database, and test components with confidence.
+With Jessica's plan file open in VS Code, run a second plan mode prompt to design the Show Lore quick-add form. Verify the combined plan correctly references `lore_entries` — and identify at least one decision the plan surfaced that required your judgment.
 
 #### 📋 Steps
 
-1. **Start Plan Execution in Chat**
-   
-   In the same plan mode chat where you refined the plan (Exercise 2.2), tell the plan agent you're ready to implement:
-   
-   ```
-   Execute the plan. Start with database and backend implementation (steps 1-3), then I'll review before doing frontend.
-   ```
-   
-   **Key options:**
-   - **Execute in chat:** AI implements in the current session, you see each change
-   - **Background agent:** AI works autonomously in background, you get notifications on progress
-   - **Selective execution:** *"Only steps 1 and 2"* or *"Start with the UI"* for phased implementation
-   
-   For this exercise, choose **execute in chat** with selective execution (database + backend first) so you can observe and verify each step.
-   
-   **What happens:** Copilot switches from plan mode to implementation mode, using the plan as a detailed specification. You'll see file changes proposed step-by-step.
+1. **Open Jessica's Plan File in VS Code**
 
-2. **Review Backend Implementation**
-   
-   As the AI implements steps 1-3 (database query, API endpoint, error handling), review the changes:
-   
-   **Verify against plan:**
-   - [ ] Database query in `backend/src/database/queries.js` includes character details
-   - [ ] API endpoint in `backend/src/routes/characters.js` handles GET `/api/characters/:id`
-   - [ ] Error handling returns 404 for invalid IDs (as refined in Exercise 2.2)
-   - [ ] Caching layer added (Redis with 5-min TTL, as refined)
-   - [ ] Input validation prevents SQL injection
-   
-   **Verify against standards:**
-   - [ ] Uses async/await pattern (from copilot-instructions.md)
-   - [ ] Error responses match existing format (from backend/src/routes/shows.js)
-   - [ ] Follows folder structure (from ARCHITECTURE.md)
-   
-   **Check test files:**
-   - [ ] `backend/__tests__/routes/characters.test.js` created with tests for success, 404, and edge cases
-   
-   **What to observe:** Because the plan was validated and included specific requirements (error handling, caching, testing), the implementation includes these from the start—not as afterthoughts. This is the value of planning: complete implementation, not iterative patching.
+   Open the `.prompt.md` file Jessica saved in Exercise 2.2. Having this file open is how VS Code detects the existing plan context. You do not need to be in the same chat session — the file is the context.
 
-3. **Execute Frontend Implementation**
-   
-   Once backend is verified, continue execution:
-   
-   ```
-   Backend looks good. Now implement the frontend (steps 4-6).
-   ```
-   
-   The AI continues with frontend components, routing, and styling. Review:
-   
-   **Verify frontend implementation:**
-   - [ ] Component created at `frontend/src/pages/CharacterDetail.jsx`
-   - [ ] Fetches character data from API endpoint you just created
-   - [ ] Displays name, role, biography, episode count
-   - [ ] Error state UI for 404 or network failures
-   - [ ] Loading state while fetching data
-   - [ ] Styling matches existing components (from copilot-instructions.md patterns)
-   
-   **Check frontend tests:**
-   - [ ] `frontend/__tests__/pages/CharacterDetail.test.jsx` includes tests for rendering, loading state, error state, data display
-   
-   **Verify integration:**
-   - [ ] Frontend calls correct API endpoint (`/api/characters/:id`)
-   - [ ] Error handling on frontend matches backend error responses
-   - [ ] No hardcoded IDs or test data left in production code
+2. **Enter the Form Plan Prompt**
 
-4. **Verify End-to-End Functionality**
-   
-   Test the complete feature:
-   
-   ```bash
-   cd fanhub
-   docker-compose up
+   Enter this prompt in plan mode:
+
    ```
-   
-   Then test in browser or with curl:
-   
-   ```bash
-   # Test API endpoint
-   curl http://localhost:3001/api/characters/1
-   
-   # Should return character JSON with name, role, biography, episode count
-   # Test 404 handling
-   curl http://localhost:3001/api/characters/999
-   # Should return 404 error in standard format
+   /plan Add a form to the /lore page that lets me add a new lore entry. The form should have a title and description field. On submit, save the new entry and refresh the list so the new card appears immediately. The Lore count on the homepage card should also update.
    ```
-   
-   Open the frontend (`http://localhost:3000`), navigate to character detail page, verify:
-   - Character data displays correctly
-   - Loading state appears while fetching
-   - 404 error message appears for invalid character IDs
-   - UI matches existing design patterns
-   
-   Run tests:
-   
-   ```bash
-   # Backend tests
-   cd backend && npm test
-   
-   # Frontend tests
-   cd frontend && npm test
-   ```
-   
-   **Success metrics:**
-   - All tests pass
-   - Feature works end-to-end
-   - No integration debugging required (or minimal—under 5 minutes)
-   - Test coverage at 85%+ for new code
+
+   When the plan generates, VS Code will ask whether to combine with the open plan or keep them separate. Choose **Combine**.
+
+3. **Run the Continuity Check**
+
+   When the combined plan arrives, search for `lore_entries`. The plan should:
+
+   - Reference `lore_entries` as the target table (not a new table)
+   - Propose a `POST /api/lore-entries` endpoint
+   - Use the same `type` column enum values defined in Jessica's plan
+
+   If the plan proposes a different table name — that's drift. Note it. This is the exact failure mode David described.
+
+4. **Find the Open Question**
+
+   Every good plan surfaces at least one decision it couldn't make without human input:
+
+   - *"Should the counter refresh optimistically or wait for the POST to return success?"*
+   - *"What should happen if a duplicate lore entry title is submitted?"*
+   - *"Should the form stay open or close after a successful add?"*
+
+   Pick one. Write your answer. This is the human judgment that plan mode deliberately leaves for you.
+
+5. **Save the Combined Plan**
+
+   Click **Open in Editor**, then click **Save As Prompt File** (lower-right of the document). This combined plan is what Sarah will execute in Exercise 2.4.
 
 #### ✅ Success Criteria
 
-- [ ] Database query, API endpoint, and caching implemented per plan
-- [ ] Frontend component renders character details with loading and error states
-- [ ] All test files created and passing (backend + frontend)
-- [ ] Error handling works correctly (404 for invalid IDs)
-- [ ] Edge cases handled (empty biographies, zero episodes)
-- [ ] End-to-end functionality verified in running application
-- [ ] Implementation completed with minimal integration debugging (under 5 minutes)
-
-> 📂 **Compare Your Work**: See example implementation in [`fanhub/`](../../fanhub/) directory—compare your character detail files against the completed structure
+- [ ] Jessica's plan file open in VS Code before running the second plan
+- [ ] Combined plan references `lore_entries` — no new table invented
+- [ ] `POST /api/lore-entries` endpoint identified in the plan
+- [ ] At least one open question answered with your own judgment
+- [ ] Combined plan saved as a `.prompt.md` file
 
 #### 📚 Official Docs
 
-- [Planning in VS Code Chat - Execution](https://code.visualstudio.com/docs/copilot/chat/chat-planning#_how-to-plan-a-task) — Options for executing plans (chat, background, selective)
-- [Context Engineering Guide](https://code.visualstudio.com/docs/copilot/guides/context-engineering-guide) — How validated plans maintain context through implementation
+- [Planning in VS Code Chat](https://code.visualstudio.com/docs/copilot/chat/chat-planning#_how-to-plan-a-task) — Iterating on plans and maintaining context
+- [Configure Tools for Agents](https://code.visualstudio.com/docs/copilot/chat/chat-tools) — Understanding what plan mode can and cannot infer
 
 ---
 
 ## 🔗 What You Built
 
 **In this exercise:**
-- `backend/src/database/queries.js` — Character detail query with optimized database access
-- `backend/src/routes/characters.js` — API endpoint with error handling, validation, and caching
-- `frontend/src/pages/CharacterDetail.jsx` — React component with loading, error, and data display states
-- `backend/__tests__/routes/characters.test.js` — Backend API tests (success, 404, edge cases)
-- `frontend/__tests__/pages/CharacterDetail.test.jsx` — Frontend component tests (rendering, states, integration)
+- A second plan covering the Show Lore form, `POST /api/lore-entries`, form state, and counter-refresh pattern
+- A continuity check result: the combined plan references the same `lore_entries` table from Exercise 2.2
 
 **How it compounds:**
 
-| Previous Modules | This Module | Combined Power |
-|------------------|-------------|----------------|
-| ARCHITECTURE.md (Module 1) | Plan execution | Implementation follows documented architecture automatically |
-| copilot-instructions.md (Module 1) | Plan execution | Code follows standards without manual enforcement |
-| Exercise 2.1 (Plan generation) | Validated execution | Clear roadmap eliminates guesswork during implementation |
-| Exercise 2.2 (Plan validation) | Complete implementation | Tests, error handling, edge cases included from start |
+| Previous Modules | This Exercise | Combined Power |
+|------------------|---------------|----------------|
+| `copilot-instructions.md` (Module 1) | Form naming conventions | The plan proposes endpoint names that match your team's conventions — without you specifying them |
+| Exercise 2.2 plan | Plan continuity | The Show Lore form plan inherits the table schema from the stat card plan — one decision, not two |
+
+**Why this matters:** David didn't run the app — he read the plan. A read-only feature with no write path is a gap you can catch in 60 seconds of careful reading, before a single file is touched. That's the habit plan mode is training.
 
 ---
 
-## ➡️ Next Module
+## ➡️ Next Exercise
 
-**[Module 3: Custom Prompts](../03-custom-prompts/README.md)** — Turn repeated planning workflows into reusable prompt templates that capture your team's domain expertise.
+**[Exercise 2.4: Execute the Plan](exercise-2.4.md)** — Sarah runs the combined plan in agent mode and watches every file change. When it's done, she adds Show Lore entries from her show and watches the counter go from 0 to real numbers.
 
-> *"I just ran this same planning request three times for different features. Can I save this workflow as a template?"*  
-> — Sarah, recognizing the next level of efficiency
+> *"Plans don't ship product. But a plan this specific makes execution calmer."*
+> — Sarah, ready to execute
 
 ---

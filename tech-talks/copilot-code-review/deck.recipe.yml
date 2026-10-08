@@ -1,0 +1,92 @@
+# Refresh 2026-08-10 | Council: REVISE | Add risk-calibrated review effort without changing the arc.
+
+version: 1
+
+deck:
+  title: GitHub Copilot Code Review
+  subtitle: From Bottleneck to Accelerator
+  tagline: Reduce PR review time while maintaining code quality and compliance
+
+
+
+  agenda:
+    - title: "Review Capacity"
+      takeaway: "Match Lite or Balanced effort to change risk, then offload routine checks."
+      whyItMatters: "Human reviewers regain time for architecture and judgment."
+    - title: "Evidence for ROI"
+      takeaway: "Measure review time recovery across a team."
+      whyItMatters: "Credible numbers turn an experiment into an investment case."
+    - title: "Compliance at Scale"
+      takeaway: "Apply policy and audit patterns in regulated repositories."
+      whyItMatters: "Strong evidence paths make adoption possible in high-trust settings."
+
+  arcToc: "Configure fast → Master the signal → Prove the value → Scale to enterprise"
+  arcNarrative: >
+    Opens with a 5-minute setup win and risk-calibrated Lite or Balanced review effort, builds
+    capability understanding, lands ROI proof before introducing compliance depth — so the audience
+    is already convinced before complexity arrives.
+  sectionOrder:
+    - Configuration and Quick Start           # Part 1: 4 slides — zero-to-first-review in 5 min
+    - Best Practices and Team Adoption        # Part 2: 3 slides — six capabilities + hybrid analysis
+    - Measuring ROI and Business Impact       # Part 3: 3 slides — interactive calculator + metrics
+    - Advanced Patterns: Compliance and Regulatory Guidance  # Part 4: 4 slides — HIPAA, PCI-DSS, audit trail
+
+  sectionModes:
+    "Configuration and Quick Start":
+      emphasis: high
+      note: >
+        Opens with a live 5-minute setup walk-through that gives the audience an immediate
+        win — credibility through speed before any conceptual depth is introduced. Covers Low and
+        Medium carry-forward to Lite and Balanced, inherited organization defaults with repository
+        override, per-review-only selection, visible timeline and pull request labels, and availability
+        on Copilot Pro, Pro+, Max, Business, and Enterprise plans.
+    "Best Practices and Team Adoption":
+      emphasis: medium-high
+      note: >
+        The six capability categories framework and hybrid analysis approach; concept-heavy
+        section that equips teams to own the rollout and frame it for stakeholders.
+    "Measuring ROI and Business Impact":
+      emphasis: high
+      note: >
+        The persuasion peak — interactive calculator slide with 40-60% cycle-time reduction
+        and 90%+ security-violation stats lands the executive business case.
+    "Advanced Patterns: Compliance and Regulatory Guidance":
+      emphasis: medium
+      note: >
+        HIPAA, PCI-DSS, and SOC2 custom instruction patterns with audit trail; important for
+        regulated-industry teams but deliberately paced to avoid overshadowing the ROI close.
+
+  highlightMoments:
+    - Code review shifts from bottleneck to accelerator — AI handles style so humans focus on substance
+    - Lite and Balanced match review depth to change risk, inherit organization defaults with repository override, and leave visible timeline and pull request audit signals
+    - 40-60% reduction in PR review cycle time with an interactive calculator that generates exec-ready savings
+    - 90%+ reduction in security violations reaching production via automated detection and inline remediation
+    - Custom instruction files enforce HIPAA, PCI-DSS, and SOC2 requirements with a full audit trail
+
+  # Closing / supporting slides
+  references:
+    enabled: true
+    mode: standard # Full reference list with 17 citations
+
+  thankYou:
+    enabled: true
+    variant: standard # Standard closing slide
+
+# ── OPEN DECISION ────────────────────────────────────────────────────────────
+# Should "The Solution: GitHub Copilot Code Review" replace
+# "Best Practices and Team Adoption" as section 2?
+#
+# FOR: That README section owns the six-capability framework — the conceptual
+#      anchor for the whole talk — and its title signals what Copilot *is*,
+#      not just how to adopt it. Slides "Six Capability Categories" and
+#      "The Hybrid Analysis Approach" map more naturally to it.
+#
+# AGAINST: "Best Practices and Team Adoption" frames the same content from the
+#           audience's action perspective ("what do I do with this?"), which is
+#           more useful for practitioners who will own rollout. It also sets up
+#           the ROI section naturally: adopt → measure.
+#
+# Resolve when: presenter profile is confirmed (practitioner vs. decision-maker
+# majority). Practitioner → keep "Best Practices"; decision-maker → swap to
+# "The Solution: GitHub Copilot Code Review".
+# ─────────────────────────────────────────────────────────────────────────────

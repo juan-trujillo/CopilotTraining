@@ -1,0 +1,92 @@
+# exec.recipe.yml - executive talk generation guidance
+# Fresh review completed 2026-09-16 with independent Rubber Duck and cross-model critiques.
+
+version: 1
+
+deck:
+  title: "The Agentic Operating Model"
+  subtitle: "Where agents create value, where humans retain authority, and how leadership proves the return"
+  tagline: "One controlled pilot. One decision record. Scale once, adjust once, or stop."
+
+  agenda:
+    - title: "Authorize the Test"
+      takeaway: "Define the decision, owner, authority boundary, and local commitments first."
+      whyItMatters: "Leadership can evaluate the complete authorization before examining supporting detail."
+    - title: "Earn the Evidence"
+      takeaway: "Use external variance to design a credible local test."
+      whyItMatters: "Current studies do not directly test bounded agent execution."
+    - title: "Make the Gate Real"
+      takeaway: "Predeclare thresholds, measurement custody, and stop conditions."
+      whyItMatters: "A falsifiable gate turns a pilot into a controlled decision process."
+
+  arcToc: "The Decision -> The Evidence -> Guardrails and Economics -> The Gate"
+
+  arcNarrative: >
+    The briefing states the authorization first so an executive who leaves early can still
+    identify the decision, owner, authority boundary, and required local fields. The Evidence
+    then earns credibility by showing outcome variance and naming the central limitation: current
+    research does not directly test bounded agent execution with post-hoc verification. Guardrails
+    and Economics establish the controlled downside, retained human authority, and fully burdened
+    local scenario without drifting into implementation design or universal ROI. The Gate receives
+    the strongest emphasis because the investment becomes decision-ready only when local thresholds,
+    measurement custody, stop conditions, and the single-adjustment limit are explicit. This order
+    turns three overlapping executive arguments into one authorization for a falsifiable operating-model
+    test.
+
+  sectionOrder:
+    - "The Decision"
+    - "The Evidence"
+    - "The Guardrails and Economics"
+    - "The Gate"
+
+  sectionModes:
+    "The Decision":
+      emphasis: medium
+      note: >
+        Open with the complete decision on one page: authorizing body, CTO sponsor, VP Engineering
+        owner, one team and workflow, local budget ceiling, cross-functional capacity, bounded
+        non-human permissions, independent measurement custody, and a dated return aligned to a
+        real planning cycle. Explain that leadership is pre-authorizing a controlled decision
+        process. Keep the charter readable; do not reproduce every README row.
+    "The Evidence":
+      emphasis: high
+      note: >
+        Juxtapose the commercially interested GitHub and Accenture positive outcomes with METR's
+        independent small-cohort slowdown. State only the defensible inference: outcomes vary by
+        task, context, and intervention. Make the evidence gap explicit: both studies concern
+        assistant-era work under human authorship, while this pilot tests bounded agent execution.
+        Preserve the closed four-part evidence vocabulary and label Control, Coordination, and
+        Context as an editorial decision framework. Keep the excluded conclusions visible.
+    "The Guardrails and Economics":
+      emphasis: medium
+      note: >
+        Compress the operating model to executive-owned content: least privilege, reviewable
+        evidence, retained authority for production and risk acceptance, named control owners,
+        and immediate stop on boundary or control failure. Show a fully burdened local scenario
+        and downside case using organization-specific inputs. Do not recreate the detailed handoff,
+        six-instrument, or formula tables, and do not invent a budget, savings figure, or universal ROI.
+    "The Gate":
+      emphasis: high
+      note: >
+        Make falsifiability the credibility peak. The dated threshold memo must declare minimum
+        outcome volume, comparability, one workflow-specific primary outcome, economic and
+        directional thresholds, guardrail floors, independent measurement custody, an arbiter,
+        and the calendar return date before assisted execution. Scale requires every threshold;
+        Adjust is available once only when its directional floor holds and controls remain intact;
+        Stop covers every other result and any immediate-stop condition. End on the single recorded
+        authorization, not a list of recommendations.
+
+  preamble: []
+
+  appendix: []
+
+  highlightMoments:
+    - "The authorization buys one controlled decision process: one team, one workflow, independent measurement, and a dated scale-once, adjust-once, or stop gate."
+    - "Assistant-era studies report materially different outcomes; neither directly tests bounded agent execution with post-hoc human verification."
+    - "Local authorization rests on four distinct evidence classes: external observation, internal baseline, modeled scenario, and proposed threshold."
+    - "Any authority-boundary or control failure stops the pilot immediately; adjustment is available once and only above a predeclared directional floor."
+    - "Enterprise ROI, universal productivity, headcount reduction, and autonomous production authority remain explicitly outside the pilot's conclusions."
+
+# OPEN DECISION: Will a live delivery use the reusable blank charter or an organization-specific
+# completed charter? The reusable version supports portfolio use; a live authorization requires
+# local budget, thresholds, outcome volume, signatory, and return date before assisted execution.
