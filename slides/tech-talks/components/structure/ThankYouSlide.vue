@@ -118,7 +118,9 @@ const t = computed(() => isDark.value ? DARK_THEME : LIGHT_THEME)
       <!-- ===== LOGO SECTION ===== -->
       <!-- Logo with glow effect -->
       <div class="relative mb-3">
-        <img src="../../sdp-logo.png" class="w-20 relative" alt="SDP Logo" />
+        <slot name="logo">
+          <img src="../../sdp-logo.png" class="w-20 relative" alt="SDP Logo" />
+        </slot>
       </div>
 
       <!-- ===== HEADING ===== -->

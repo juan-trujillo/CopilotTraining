@@ -1,0 +1,2 @@
+/* Load the deck-scoped theme before slide navigation, including deep links. */
+@import "../../../copilot-primitives.css";

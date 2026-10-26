@@ -49,7 +49,9 @@
 
     <!-- Compact brand lockup -->
     <div class="sv-title-brand">
-      <img src="../../sdp-logo.png" class="sv-title-logo" alt="SDP Logo" />
+      <slot name="logo">
+        <img src="../../sdp-logo.png" class="sv-title-logo" alt="SDP Logo" />
+      </slot>
       <div class="sv-title-brand-copy">
         <span>CopilotTraining</span>
         <span>Technical briefing</span>
