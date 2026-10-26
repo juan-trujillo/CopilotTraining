@@ -1,0 +1,90 @@
+# 2026-10-26: restructure following the user's explicit persona-free rebuild.
+# Independent Rubber Duck review: hydrafusion-mechanism-review.
+# Accepted: assign dense mechanics to specific slides and keep examples concise.
+# Rejected: equating three outcome promises with four navigation sections.
+# The schema requires three agenda outcomes; TocSlide displays all four sections.
+# Resolved delivery choice: CLI commands; optional live call, no required live run.
+version: 1
+
+deck:
+  title: "HydraFusion: How It Works and How to Use It"
+  subtitle: "Patterns, reasoning effort, and practical use"
+  tagline: "Understand the runtime, enable it in Copilot, and try a few examples"
+  agenda:
+    - title: Understand model orchestration
+      takeaway: "Compare Auto, HydraFusion and Max, then trace Single, Cascade and Critique."
+      whyItMatters: "Connect the picker choice to the workflow that runs."
+    - title: Use HydraFusion in Copilot
+      takeaway: "Enable the preview in CLI, VS Code or the app and try representative prompts."
+      whyItMatters: "Turn the execution model into a usable client workflow."
+    - title: Read the outcome
+      takeaway: "Inspect actual progress, results, workspace changes and model usage."
+      whyItMatters: "Understand what ran and what still needs verification."
+  arcToc: "Understand → Follow → Use → Evaluate"
+  arcNarrative: >
+    Open with a concise technical definition. Understand establishes the roles
+    of Auto, HydraFusion and Max. Follow exposes the three execution patterns
+    and stage-specific reasoning. Use gives concrete settings, commands and
+    three representative prompts. Evaluate explains progress, usage and the
+    workspace boundary. A command-first alternate was considered; mechanism
+    first better serves the user's explicit request for understanding.
+    Three agenda outcomes group the first two sections; the navigation lists
+    all four sections. Keep twenty slides and twenty minutes including discussion.
+    Intro and closing material share the section budgets; discussion gets two
+    minutes. Use has six minutes, with an optional live call capped at two.
+  sectionOrder:
+    - Understand the orchestrator
+    - Follow the execution
+    - Use HydraFusion
+    - Evaluate the result
+  sectionModes:
+    Understand the orchestrator:
+      emphasis: medium
+      note: >
+        Two body slides in three minutes: Auto versus orchestration; then
+        HydraFusion versus Max and per-stage reasoning. No persona, named
+        character, user story, role-playing or case-study narrative anywhere.
+        Explain that the picker entry is a system, and extra passes are selective.
+        Put Auto tiers and the dated model roster in notes.
+    Follow the execution:
+      emphasis: medium
+      note: >
+        Two body slides in four minutes. First use the dedicated
+        HydraFusionExecutionPathsSlide diagram for Single, Cascade and Critique,
+        including Cascade's accept/repair/escalate branch and Critique revision.
+        Attribute the diagram to official docs and label it conceptual.
+        Second show October's judge/repair and workspace-aware parallel critics,
+        with draft medium, review high and Max extra-high reasoning.
+        Keep detailed cache/context explanations in notes and one brief callout.
+        Put persistent workspace edits in Evaluate. State that HydraFusion's
+        orchestration is separate from subagents.
+    Use HydraFusion:
+      emphasis: high
+      note: >
+        Three body slides in six minutes: client enablement; exact CLI commands
+        and visible execution; three concise example prompts for explanation,
+        bounded implementation and demanding analysis. Examples are prompts
+        and inspection goals, with no guaranteed pattern assignments.
+        Examples use existing repository context; no bundled exercise files
+        or setup-dependent acceptance table. Do not turn this into a workshop.
+        No HydraFusion task run is claimed. Label diagrams explicitly.
+        Live execution is optional and capped at two minutes, preserving
+        inspection/fallback time inside the six-minute section.
+    Evaluate the result:
+      emphasis: medium
+      note: >
+        Two body slides in four minutes: inspect actual pattern/progress,
+        response models, workspace diff and usage; then show persistent draft
+        edits, per-model billing/no Auto discount, preview access and no-SLA
+        non-production boundary. Explain normal permissions stay in force.
+        Historical benchmark table belongs in notes; one visible caveat states
+        that old offline results do not forecast Max or local savings.
+        Keep closing recap/actions/references brief and reserve two minutes
+        for discussion. No persona callbacks or narrative acceptance-contract arc.
+  preamble: []
+  appendix: []
+  highlightMoments:
+    - "HydraFusion selects a workflow, models and reasoning effort for each prompt."
+    - "Single, Cascade and Critique add solving or review passes selectively."
+    - "CLI, VS Code and the Copilot app expose the same research-preview options."
+    - "Progress, actual results and per-model usage make the execution inspectable."

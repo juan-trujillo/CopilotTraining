@@ -1,0 +1,147 @@
+version: 1
+
+refresh:
+  talk: tech-talks/copilot-auto-mode
+  cutoff: "2026-06-23"
+  feed:
+    url: https://developer.microsoft.com/api/changelog/rss
+    checked: "2026-10-26"
+    lastBuildDate: "Mon, 26 Oct 2026 12:00:17 GMT"
+  status: approved
+  approved: "2026-10-26"
+  updateLevel: structural
+  rationale: >
+    Teach HydraFusion through a direct technical walkthrough of its runtime
+    architecture, execution patterns, client setup and representative examples.
+    The user explicitly rejected persona-led framing and requested a rebuild.
+    Keep concise prompts and verification boundaries as supporting examples
+    within the twenty-minute slot; use existing repository context.
+  userEmphasis:
+    - Current HydraFusion and Max behavior, verified through 2026-10-26
+    - Public and accessible private official documentation
+    - Twenty-minute delivery and a locally runnable GitHub-themed deck
+    - Persona-free technical explanation: how it works, how to use it, and examples
+    - Diagram of Single, Cascade and Critique execution paths based on official documentation
+    - No bundled exercise files; examples use existing repository context
+  accepted:
+    - title: HydraFusion updates and new Max option
+      feedEventId: adfdf12a2e68ad87
+      published: "2026-10-14"
+      source: https://github.blog/changelog/2026-10-14-hydrafusion-updates-and-new-max-option/
+      verified: "2026-10-26"
+      releaseStatus: research-preview
+      importance: headline
+      targetSection: Understand the orchestrator
+      action: replace
+      summary: >
+        Add Max, stage-specific reasoning, judging in Cascade, and workspace-aware
+        parallel critics. The October model pool is a dated snapshot.
+      limitations:
+        - Research preview; models and workflows can change.
+        - Plan and administrator model policies govern access.
+      recipeImpact: restructure
+      slideImpact: regenerate
+    - title: HydraFusion in VS Code and the GitHub Copilot app
+      feedEventId: e68cd7cdd9971f7a
+      published: "2026-09-30"
+      source: https://github.blog/changelog/2026-09-30-hydrafusion-in-vs-code-and-the-github-copilot-app/
+      verified: "2026-10-26"
+      releaseStatus: research-preview
+      importance: supporting
+      targetSection: Use HydraFusion
+      action: update
+      summary: >
+        Preview expanded beyond CLI to VS Code and the Copilot app, with
+        clearer progress reporting. Current docs supply the setup instructions.
+      limitations:
+        - Business and Enterprise require administrator preview enablement.
+      recipeImpact: confirm
+      slideImpact: regenerate
+    - title: Using HydraFusion
+      source: https://docs.github.com/en/enterprise-cloud@latest/early-access/copilot/hydrafusion
+      verified: "2026-10-26"
+      releaseStatus: research-preview
+      importance: supporting
+      targetSection: Follow the execution
+      action: replace
+      summary: >
+        Teach per-prompt Single, Cascade and Critique selection; client setup;
+        per-model billing; conservative context limits; progress and usage
+        inspection; and persistent workspace edits after discarded drafts.
+      limitations:
+        - No SLA; not intended for production workloads.
+        - HydraFusion does not start subagents.
+        - No user-selected pattern or fixed model roster.
+        - Auto discount does not apply.
+      recipeImpact: restructure
+      slideImpact: regenerate
+    - title: Project HydraFusion architecture and evaluations
+      source: https://github.blog/ai-and-ml/github-copilot/project-hydrafusion-frontier-quality-via-multi-model-orchestration/
+      verified: "2026-10-26"
+      releaseStatus: research-preview
+      importance: supporting
+      targetSection: Evaluate the result
+      action: replace
+      summary: >
+        Explain selective orchestration. Include all three offline benchmark
+        comparisons with their quality tradeoffs and historical configuration caveat.
+      limitations:
+        - Historical medium-effort evaluations do not benchmark October Max.
+        - Current docs supersede launch-era tool-less review and patch-safety wording.
+      recipeImpact: restructure
+      slideImpact: regenerate
+    - title: About Copilot auto model selection
+      source: https://docs.github.com/en/copilot/concepts/models/auto-model-selection
+      verified: "2026-10-26"
+      releaseStatus: ga
+      importance: supporting
+      targetSection: Understand the orchestrator
+      action: update
+      summary: >
+        Keep Auto as the everyday baseline, acknowledge Efficiency, Balance and
+        Intelligence tiers, and correct absolute cache-boundary claims.
+      limitations:
+        - Tiers currently apply to VS Code, CLI and the Copilot app.
+        - Discount details are time-sensitive; link current billing documentation.
+      recipeImpact: revise
+      slideImpact: regenerate
+  ignored:
+    - title: Private official-source discovery
+      source: Microsoft 365 WorkIQ search, 2026-10-26
+      reason: >
+        Accessible insider newsletters corroborate public research-preview
+        updates. Private-only roadmap, meeting and release details are excluded
+        from repository content; every teaching claim uses a public official source.
+      relatedTalks: []
+    - title: General CLI, SDK and VS Code release changes
+      source: https://developer.microsoft.com/api/changelog/rss
+      reason: Unrelated surface changes do not improve this twenty-minute routing decision.
+      relatedTalks: [copilot-cli, vscode-latest]
+  removals:
+    - Unsupported universal Free/Student and forced-Auto availability claims
+    - Absolute claims that routing only happens at first turn or compaction
+    - Old HyDRA research metrics and six-habit feature inventory
+    - Launch-era implication that discarded drafts automatically restore workspace state
+    - README slide inventory and stale related-pattern paths
+  anomalies:
+    - >
+      No existing deck.recipe.yml or matching proposal-created ledger decision.
+      The named-talk refresh proceeds without inventing ledger events.
+    - >
+      GitHub CLI release API lookup returned HTTP 403 due to organization SAML
+      enforcement. Supplied public documentation and official blog pages succeeded.
+    - >
+      Launch architecture describes tool-less critics and fail-safe patch application.
+      October update and current documentation describe workspace tools and persistent
+      draft edits; use current behavior for operating guidance.
+  recipeReview:
+    required: true
+    question: >
+      Does this persona-free, mechanism-first walkthrough clearly explain
+      architecture, usage and examples within twenty minutes?
+  validation:
+    firstPartySourcesVerified: true
+    readmePatched: true
+    recipeApproved: true
+    slidesRegenerated: true
+    deckBuildPassed: true

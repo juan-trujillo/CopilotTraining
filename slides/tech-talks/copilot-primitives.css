@@ -1,0 +1,209 @@
+/*
+ * Deck-local theme: https://brand.github.com/brand-identity/copilot
+ * Fonts: github/mona-sans v2.0.27; SIL OFL in ../assets/fonts/mona-sans/OFL.txt.
+ */
+@font-face {
+  font-family: "Mona Sans";
+  src: url("../assets/fonts/mona-sans/MonaSansVF.woff2") format("woff2");
+  font-weight: 200 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Mona Sans Mono";
+  src: url("../assets/fonts/mona-sans/MonaSansMonoVF.woff2") format("woff2");
+  font-weight: 200 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+html:has(.gh-copilot-brand) {
+  --gh-canvas: #ffffff;
+  --gh-panel: #f6f8fa;
+  --gh-border: #d1d9e0;
+  --gh-text: #1f2328;
+  --gh-muted: #59636e;
+  --gh-purple: #8534f3;
+  --gh-green: #116329;
+}
+
+.slidev-layout.gh-copilot-brand {
+  background: var(--gh-canvas);
+  color: var(--gh-text);
+  font-family: "Mona Sans", "Segoe UI", sans-serif;
+  font-optical-sizing: auto;
+  font-variant-ligatures: none;
+  letter-spacing: 0;
+}
+
+html.dark:has(.gh-copilot-brand) {
+  --gh-canvas: #101411;
+  --gh-panel: #232925;
+  --gh-border: #3d444d;
+  --gh-text: #f0f6fc;
+  --gh-muted: #a4aeb8;
+  --gh-purple: #b870ff;
+  --gh-green: #0fbf3e;
+}
+
+.slidev-layout.gh-copilot-brand :is(code, pre, .font-mono) {
+  font-family: "Mona Sans Mono", Consolas, monospace;
+  font-variant-ligatures: none;
+}
+
+.gh-copilot-brand pre {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+html:has(.gh-copilot-brand) footer.font-light {
+  color: var(--gh-muted);
+  font-family: "Mona Sans", "Segoe UI", sans-serif;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+
+html:has(.gh-copilot-brand) footer.right-4 {
+  right: 3.5rem;
+}
+
+.gh-copilot-footer-logo {
+  position: absolute;
+  right: 1rem;
+  bottom: 0.5rem;
+  z-index: 100;
+  width: 1.75rem;
+  height: 1.75rem;
+  object-fit: contain;
+}
+
+.gh-copilot-brand :is(.sv-slide-surface-dark, .sv-slide-surface-light, .sv-title-bg, .sv-thanks-bg) {
+  background: var(--gh-canvas) !important;
+}
+
+.gh-copilot-brand :is(.sv-card-surface-dark, .sv-card-surface-light, .rounded-xl.border, .rounded-lg.border) {
+  background: var(--gh-panel) !important;
+  border-color: var(--gh-border) !important;
+  box-shadow: none;
+}
+
+.gh-copilot-brand [class*="bg-gradient-"] {
+  background-image: none !important;
+}
+
+.gh-copilot-brand .bg-clip-text.text-transparent {
+  color: var(--gh-text) !important;
+  -webkit-text-fill-color: var(--gh-text);
+}
+
+.gh-copilot-brand :is(.sv-title-grid, .sv-thanks-orb, .sv-thanks-accent-orb) {
+  display: none;
+}
+
+.gh-copilot-brand :is(.sv-title-rule, .sv-title-meta-mark) {
+  background: var(--gh-green) !important;
+}
+
+.gh-copilot-brand .sv-title-subtitle {
+  border-left: 0;
+  padding-left: 0;
+  color: var(--gh-text);
+}
+
+.gh-copilot-brand :is(.sv-section-kicker, .sv-title-brand-copy, [class*="tracking-"]) {
+  text-transform: none;
+  letter-spacing: 0 !important;
+}
+
+.gh-copilot-brand .sv-section-kicker {
+  background: var(--gh-panel) !important;
+  border-color: var(--gh-border) !important;
+  color: var(--gh-purple) !important;
+}
+
+.gh-copilot-brand .bg-clip-text + h2 {
+  padding-bottom: 1rem;
+}
+
+.gh-copilot-brand :is(
+  [class*="text-cyan-"],
+  [class*="text-blue-"],
+  [class*="text-indigo-"],
+  [class*="text-purple-"],
+  [class*="text-pink-"],
+  [class*="text-rose-"]
+) {
+  color: var(--gh-purple) !important;
+}
+
+.gh-copilot-brand :is(.rounded-xl.border, .rounded-lg.border) :is(.text-xs, .text-sm):not(.font-semibold):not(.font-bold) {
+  color: var(--gh-text) !important;
+}
+
+.gh-copilot-brand :is(
+  [class*="bg-cyan-"],
+  [class*="bg-blue-"],
+  [class*="bg-indigo-"],
+  [class*="bg-purple-"],
+  [class*="bg-pink-"],
+  [class*="bg-rose-"]
+).rounded-full {
+  background: var(--gh-purple) !important;
+  box-shadow: none;
+}
+
+.gh-copilot-brand .h-px.bg-gradient-to-r {
+  background: var(--gh-border);
+}
+
+/* Terminals remain dark in both modes, with their outcome colors intact. */
+.gh-copilot-brand :is(.font-mono.border, .rounded-xl.border:has(> pre)) {
+  --gh-text: #f0f6fc;
+  --gh-muted: #a4aeb8;
+  --gh-purple: #b870ff;
+  background: #101411 !important;
+  color: var(--gh-text);
+}
+
+.gh-copilot-brand .grid-rows-2 > .rounded-xl.border {
+  padding: 0.75rem;
+}
+
+.gh-copilot-brand .grid-rows-2 > .rounded-xl.border > .text-3xl {
+  font-size: 1.25rem;
+  line-height: 1.5rem;
+  margin-bottom: 0.25rem;
+}
+
+.gh-copilot-brand .grid-rows-2 > .rounded-xl.border > .text-lg {
+  margin-bottom: 0.25rem;
+}
+
+.gh-copilot-brand .rounded-xl.border:has(> .space-y-2) {
+  padding: 0.75rem;
+}
+
+.gh-copilot-brand .rounded-xl.border > .space-y-2 {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.gh-copilot-brand .rounded-xl.border > .space-y-2 > .rounded.border {
+  margin: 0;
+  padding: 0.375rem 0.5rem;
+}
+
+.gh-copilot-brand .text-xs.italic {
+  color: var(--gh-muted) !important;
+}
+
+.gh-copilot-brand :is(.sv-title-tagline, .sv-title-brand-copy, .sv-title-meta) {
+  color: var(--gh-muted);
+  opacity: 1;
+}
+
+.gh-copilot-brand .sv-title-meta {
+  border-color: var(--gh-border);
+}

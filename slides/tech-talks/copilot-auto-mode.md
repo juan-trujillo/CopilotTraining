@@ -1,826 +1,645 @@
 ---
 theme: default
+addons:
+  - "@/addons/github-copilot"
 colorSchema: dark
-class: text-center
+class: gh-copilot-brand text-center
+defaults:
+  class: gh-copilot-brand
 highlighter: shiki
 lineNumbers: false
+fonts:
+  sans: Mona Sans
+  mono: Mona Sans Mono
+  local: Mona Sans,Mona Sans Mono
 info: |
-  ## Copilot Auto Mode: Smarter Tokens, Smarter Routing
+  ## HydraFusion: How It Works and How to Use It
   CopilotTraining Tech Talk
 drawings:
   persist: false
 transition: slide-left
-title: Copilot Auto Mode - Smarter Tokens, Smarter Routing
+title: "HydraFusion: How It Works and How to Use It"
 module: tech-talks/copilot-auto-mode
 mdc: true
+section: Choose and Configure
 status: active
-updated: 2026-06-23
+updated: 2026-10-26
 ---
 
-<div class="h-full flex flex-col items-center justify-center relative overflow-hidden" style="background: #0d1117;">
-  <div class="flex items-center gap-2 mb-6">
-    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 16 16" fill="#e6edf3"><path d="M6.766 11.695C4.703 11.437 3.25 9.904 3.25 7.92c0-.806.281-1.677.75-2.258-.203-.532-.172-1.662.062-2.129.626-.081 1.469.258 1.969.726.594-.194 1.219-.291 1.985-.291.765 0 1.39.097 1.953.274.484-.451 1.343-.79 1.969-.709.218.435.25 1.564.046 2.113.5.613.766 1.436.766 2.274 0 1.984-1.453 3.485-3.547 3.759.531.355.891 1.129.891 2.016v1.678c0 .484.39.758.859.564C13.781 14.824 16 11.905 16 8.291 16 3.726 12.406 0 7.984 0 3.562 0 0 3.726 0 8.291c0 3.581 2.203 6.55 5.172 7.663A.595.595 0 0 0 6 15.389v-1.291c-.219.097-.5.162-.75.162-1.031 0-1.641-.581-2.078-1.662-.172-.435-.36-.693-.719-.742-.187-.016-.25-.097-.25-.193 0-.194.313-.339.625-.339.453 0 .844.29 1.25.887.313.468.641.678 1.031.678.391 0 .641-.146 1-.516.266-.275.469-.517.657-.678Z"/></svg>
-    <span class="text-sm font-medium tracking-wide uppercase" style="color: #8b949e;">GitHub Copilot</span>
-  </div>
-  <h1 class="!text-6xl !font-bold !leading-tight text-center max-w-4xl" style="color: #e6edf3;">
-    Copilot Auto Mode
-  </h1>
-  <p class="mt-6 text-xl text-center max-w-2xl" style="color: #8b949e;">
-    Smarter Tokens, Smarter Routing
-  </p>
-  <div class="mt-8 flex gap-4">
-    <div class="px-5 py-2 rounded-md text-sm font-medium" style="background: #238636; color: #ffffff;">
-      20 Minutes
-    </div>
-    <div class="px-5 py-2 rounded-md text-sm font-medium border" style="border-color: #30363d; color: #e6edf3;">
-      Developers
-    </div>
-    <div class="px-5 py-2 rounded-md text-sm font-medium border" style="border-color: #30363d; color: #e6edf3;">
-      Architects
-    </div>
-    <div class="px-5 py-2 rounded-md text-sm font-medium border" style="border-color: #30363d; color: #e6edf3;">
-      AI Practitioners
-    </div>
-  </div>
-</div>
+<script setup>
+import TitleSlide from './components/structure/TitleSlide.vue'
+import CoreQuestionSlide from './components/structure/CoreQuestionSlide.vue'
+import TocSlide from './components/structure/TocSlide.vue'
+import SectionOpenerSlide from './components/structure/SectionOpenerSlide.vue'
+import BeforeAfterSlide from './components/structure/BeforeAfterSlide.vue'
+import WhatYouCanDoTodaySlide from './components/structure/WhatYouCanDoTodaySlide.vue'
+import ReferencesSlide from './components/structure/ReferencesSlide.vue'
+import ThankYouSlide from './components/structure/ThankYouSlide.vue'
+import GitHubBrandMark from './components/GitHubBrandMark.vue'
+import ThreeColumnCardSlide from './components/ThreeColumnCardSlide.vue'
+import HydraFusionExecutionPathsSlide from './components/HydraFusionExecutionPathsSlide.vue'
+import FourCardGridSlide from './components/FourCardGridSlide.vue'
+import CodeWithFeaturesSlide from './components/CodeWithFeaturesSlide.vue'
+import TwoColPairedConceptsSlide from './components/TwoColPairedConceptsSlide.vue'
+import { isDark } from './components/useTheme'
+import githubLogoWhite from '../assets/brand/github/GitHub_Invertocat_White_Clearspace.svg'
+import githubLogoBlack from '../assets/brand/github/GitHub_Invertocat_Black_Clearspace.svg'
+</script>
 
----
+<!-- SLIDE: Title -->
+# HydraFusion
+<TitleSlide
+  title="HydraFusion"
+  subtitle="How It Works and How to Use It"
+  tagline="Patterns, reasoning effort, and practical use"
+  meta="GitHub Copilot · 20 minutes · Research preview · October 26, 2026"
+>
+  <template #logo>
+    <img :src="isDark ? githubLogoWhite : githubLogoBlack" class="sv-title-logo" alt="GitHub" />
+  </template>
+</TitleSlide>
 
-# The Question
-
-<div class="h-full flex items-center justify-center" style="background: #0d1117;">
-<div class="max-w-4xl">
-<div class="text-6xl text-center mb-8">🤔</div>
-<div class="text-3xl font-bold text-center mb-6 leading-snug" style="color: #e6edf3;">
-"What is Auto actually doing under the hood — and when should I let it pick the model instead of pinning one myself?"
-</div>
-<div class="mt-8 flex gap-6 justify-center text-sm">
-<div class="px-4 py-2 rounded-lg border text-center" style="background: #161b22; border-color: #30363d;">
-<div class="font-bold" style="color: #3fb950;">🧠 Routing</div>
-<div class="text-xs mt-1" style="color: #8b949e;">HyDRA + model health</div>
-</div>
-<div class="px-4 py-2 rounded-lg border text-center" style="background: #161b22; border-color: #30363d;">
-<div class="font-bold" style="color: #58a6ff;">⚙️ Harness</div>
-<div class="text-xs mt-1" style="color: #8b949e;">Prompt caching + tool search</div>
-</div>
-<div class="px-4 py-2 rounded-lg border text-center" style="background: #161b22; border-color: #30363d;">
-<div class="font-bold" style="color: #d29922;">💰 Credits</div>
-<div class="text-xs mt-1" style="color: #8b949e;">Six habits that compound</div>
-</div>
-</div>
-</div>
-</div>
-
----
-layout: center
----
-
-# 📖 Table of Contents
-
-<div class="grid grid-cols-2 gap-4 mt-6 max-w-5xl mx-auto">
-  <div @click="$nav.go(7)" class="cursor-pointer p-4 rounded-xl border transition-all hover:scale-105" style="background: #161b22; border-color: #30363d;">
-    <div class="text-2xl mb-2">🎯</div>
-    <div class="font-semibold" style="color: #e6edf3;">The Shift &amp; When to Use Auto</div>
-    <div class="text-xs mt-1" style="color: #8b949e;">Mental model + decision rubric</div>
-  </div>
-
-  <div @click="$nav.go(9)" class="cursor-pointer p-4 rounded-xl border transition-all hover:scale-105" style="background: #161b22; border-color: #30363d;">
-    <div class="text-2xl mb-2">⚙️</div>
-    <div class="font-semibold" style="color: #e6edf3;">Harness Efficiency</div>
-    <div class="text-xs mt-1" style="color: #8b949e;">Prompt caching &amp; on-demand tool search</div>
-  </div>
-
-  <div @click="$nav.go(13)" class="cursor-pointer p-4 rounded-xl border transition-all hover:scale-105" style="background: #161b22; border-color: #30363d;">
-    <div class="text-2xl mb-2">🧭</div>
-    <div class="font-semibold" style="color: #e6edf3;">Smart Routing</div>
-    <div class="text-xs mt-1" style="color: #8b949e;">HyDRA, model health, cache-aware boundaries</div>
-  </div>
-
-  <div @click="$nav.go(19)" class="cursor-pointer p-4 rounded-xl border transition-all hover:scale-105" style="background: #161b22; border-color: #30363d;">
-    <div class="text-2xl mb-2">💡</div>
-    <div class="font-semibold" style="color: #e6edf3;">Practical Habits</div>
-    <div class="text-xs mt-1" style="color: #8b949e;">Six habits to stretch credits</div>
-  </div>
-
-  <div @click="$nav.go(22)" class="cursor-pointer p-4 rounded-xl border transition-all hover:scale-105" style="background: #161b22; border-color: #30363d;">
-    <div class="text-2xl mb-2">✅</div>
-    <div class="font-semibold" style="color: #e6edf3;">What You Can Do Today</div>
-    <div class="text-xs mt-1" style="color: #8b949e;">Concrete next steps</div>
-  </div>
-
-  <div @click="$nav.go(23)" class="cursor-pointer p-4 rounded-xl border transition-all hover:scale-105" style="background: #161b22; border-color: #30363d;">
-    <div class="text-2xl mb-2">📖</div>
-    <div class="font-semibold" style="color: #e6edf3;">References</div>
-    <div class="text-xs mt-1" style="color: #8b949e;">GitHub Blog, Docs, VS Code, HyDRA paper</div>
-  </div>
-</div>
+<!--
+Duration: 0:20. Cumulative: 0:20.
+Audience question: What is HydraFusion?
+Define it immediately: a runtime orchestrator available through the Copilot model
+picker. It chooses the execution pattern, models and reasoning effort per step,
+then returns one final response. It is a system rather than a foundation model.
+This presentation explains the mechanism and client workflow. Live execution is
+optional; no HydraFusion task run or generated product output is claimed here.
+Source: https://docs.github.com/en/enterprise-cloud@latest/early-access/copilot/hydrafusion
+-->
 
 ---
 
-# The Problem
+<!-- SLIDE: Core Question -->
+# Core Question
+<CoreQuestionSlide
+  question="How does HydraFusion orchestrate models, and how do we use it?"
+  subtext="Understand the runtime, enable it in Copilot, and try representative prompts."
+  highlight="Read the execution and verify the result."
+  :cards='[
+    {icon: "⚙️", title: "Understand orchestration", description: "Compare Auto, HydraFusion and Max; trace the execution paths."},
+    {icon: "💻", title: "Use it in Copilot", description: "Enable the preview and try explanation, implementation or analysis."},
+    {icon: "🔍", title: "Read the outcome", description: "Inspect actual progress, changes and per-model usage."},
+    {title: "3 patterns", description: "Single, Cascade and Critique; chosen for each prompt."},
+    {title: "3 clients", description: "CLI, VS Code and the Copilot app."},
+    {title: "Research preview", description: "No SLA; not intended for production workloads."}
+  ]'
+/>
 
-<div class="grid grid-cols-2 gap-4 mt-4 text-xs" style="background: #0d1117;">
-<div class="p-4 rounded-lg" style="background: #161b22; border-left: 4px solid #f85149;">
-<div class="font-bold mb-2" style="color: #f85149;">🔁 Agentic Loops Repeat Tokens</div>
-<div style="color: #8b949e;">Plan → edit → test → debug carries the same system prompt, repo context, tool schemas, and history every turn. Most of that payload is identical to the turn before — and the model pays to "read" it again.</div>
-</div>
-<div class="p-4 rounded-lg" style="background: #161b22; border-left: 4px solid #f85149;">
-<div class="font-bold mb-2" style="color: #f85149;">🧠 One Model ≠ Right for Every Task</div>
-<div style="color: #8b949e;">A quick explanation, a focused edit, and a 15-file refactor have wildly different reasoning needs — but you pay premium-model rates for every one of them when you pin a single model.</div>
-</div>
-<div class="p-4 rounded-lg" style="background: #161b22; border-left: 4px solid #d29922;">
-<div class="font-bold mb-2" style="color: #d29922;">🤷 Manual Picking Doesn't Scale</div>
-<div style="color: #8b949e;">No human can re-evaluate "which model is best, right now, for this turn?" hundreds of times a day across a team. The result: over-pay or under-deliver.</div>
-</div>
-<div class="p-4 rounded-lg" style="background: #161b22; border-left: 4px solid #d29922;">
-<div class="font-bold mb-2" style="color: #d29922;">💥 Switching Mid-Session Breaks Cache</div>
-<div style="color: #8b949e;">Flipping models or tool settings invalidates the prompt prefix cache — the "optimization" can cost <i>more</i> than the original waste.</div>
-</div>
-</div>
-<div class="mt-4 p-3 rounded-xl border text-center text-sm" style="background: #161b22; border-color: #f85149;">
-<div class="font-bold" style="color: #e6edf3;">You don't need a better model. You need a smarter system around the model.</div>
-</div>
-
----
-
-# The Solution: Two Coordinated Levers
-
-<div class="grid grid-cols-2 gap-5 mt-6 text-sm" style="background: #0d1117;">
-
-<div class="p-5 rounded-lg border" style="background: #161b22; border-color: #58a6ff;">
-<div class="text-2xl mb-2">⚙️</div>
-<div class="text-lg font-bold mb-2" style="color: #58a6ff;">Harness Efficiency</div>
-<div class="space-y-2" style="color: #e6edf3;">
-<div>• <b>Prompt caching</b> reuses model state for repeated prompt prefixes</div>
-<div>• <b>Tool search</b> loads tool definitions on demand, not upfront</div>
-<div>• Result: each turn carries less repeat freight</div>
-</div>
-</div>
-
-<div class="p-5 rounded-lg border" style="background: #161b22; border-color: #3fb950;">
-<div class="text-2xl mb-2">🧭</div>
-<div class="text-lg font-bold mb-2" style="color: #3fb950;">Smart Routing (Auto)</div>
-<div class="space-y-2" style="color: #e6edf3;">
-<div>• <b>HyDRA</b> learned router scores task fit per turn</div>
-<div>• <b>Real-time model health</b> avoids degraded models</div>
-<div>• Routes <i>up</i> when reasoning helps, stays efficient when it doesn't</div>
-</div>
-</div>
-
-</div>
-
-<div class="mt-5 p-3 rounded-lg text-center text-sm" style="background: #161b22; border-left: 4px solid #238636;">
-<span style="color: #e6edf3;">Together: <b>more of each session goes toward the task itself</b> — not toward re-ingesting the same prefix or paying premium rates for trivial turns.</span>
-</div>
-
----
-layout: center
----
-
-# 🧠 The Shift
-
-<div class="max-w-4xl mx-auto mt-4">
-
-<div class="text-2xl text-center font-bold mb-6" style="color: #e6edf3;">
-Stop choosing models. Choose a <span style="color: #3fb950;">strategy</span>, and let Auto choose models.
-</div>
-
-<div class="grid grid-cols-2 gap-4 text-sm">
-<div class="p-4 rounded-lg" style="background: #161b22; border-left: 4px solid #f85149;">
-<div class="text-xs uppercase tracking-wide mb-1" style="color: #8b949e;">From</div>
-<div style="color: #e6edf3;">"Pin the strongest model so I never under-deliver"</div>
-</div>
-<div class="p-4 rounded-lg" style="background: #161b22; border-left: 4px solid #3fb950;">
-<div class="text-xs uppercase tracking-wide mb-1" style="color: #8b949e;">To</div>
-<div style="color: #e6edf3;">"Let Auto route per turn; override only at known-hard boundaries"</div>
-</div>
-<div class="p-4 rounded-lg" style="background: #161b22; border-left: 4px solid #f85149;">
-<div class="text-xs uppercase tracking-wide mb-1" style="color: #8b949e;">From</div>
-<div style="color: #e6edf3;">"Switch models when it feels slow or dumb"</div>
-</div>
-<div class="p-4 rounded-lg" style="background: #161b22; border-left: 4px solid #3fb950;">
-<div class="text-xs uppercase tracking-wide mb-1" style="color: #8b949e;">To</div>
-<div style="color: #e6edf3;">"Keep the session stable so the prefix cache compounds"</div>
-</div>
-</div>
-
-</div>
+<!--
+Duration: 0:25. Cumulative: 0:45.
+Audience question: What will I be able to understand and use?
+The three top cards are outcome promises: understand orchestration, use it in
+Copilot, and read the outcome. The bottom cards are documented operating facts,
+not performance measurements. There are no required live calls.
+Sources: https://docs.github.com/en/enterprise-cloud@latest/early-access/copilot/hydrafusion
+https://github.blog/changelog/2026-10-14-hydrafusion-updates-and-new-max-option/
+-->
 
 ---
 
-# When to Use Auto
+<!-- SLIDE: Table of Contents -->
+# Table of Contents
+<TocSlide
+  :sections='[
+    {icon: "⚙️", title: "Understand the orchestrator", subtitle: "Auto, HydraFusion and Max", blurb: "Separate model routing from workflow orchestration.", slide: 4},
+    {icon: "🔀", title: "Follow the execution", subtitle: "Single, Cascade and Critique", blurb: "Trace selective solving and review passes.", slide: 7},
+    {icon: "💻", title: "Use HydraFusion", subtitle: "Enable, select and prompt", blurb: "Use exact commands and representative examples.", slide: 10},
+    {icon: "🔍", title: "Evaluate the result", subtitle: "Progress, changes and usage", blurb: "Read what ran and what still needs verification.", slide: 14}
+  ]'
+/>
 
-<div class="text-xs mt-4" style="background: #0d1117;">
-
-<table class="w-full">
-<thead>
-<tr>
-<th class="text-left">Scenario</th>
-<th class="text-left">Use Auto?</th>
-<th class="text-left">Why</th>
-</tr>
-</thead>
-<tbody>
-<tr><td>Day-to-day chat, edits, explanations</td><td>✅ Yes</td><td>Auto's sweet spot — cache + routing both pay off</td></tr>
-<tr><td>Long agentic coding-agent session</td><td>✅ Yes</td><td>Harness benefits compound across many turns</td></tr>
-<tr><td>Multilingual codebases / prompts</td><td>✅ Yes</td><td>Routing parity proven across CJK / European / Other</td></tr>
-<tr><td>Known-hard reasoning (architecture, security review)</td><td>⚠️ Override</td><td>Pin a reasoning-grade model for the <i>whole</i> session — don't flip mid-way</td></tr>
-<tr><td>Compliance / reproducibility (same model end-to-end)</td><td>⚠️ Override</td><td>Pin for audit trail; document the choice</td></tr>
-<tr><td>Free / Student plan</td><td>✅ Forced</td><td>Auto is the only option going forward</td></tr>
-<tr><td>Org wants standardized behavior</td><td>✅ Admin-enforced</td><td>New controls let orgs set Auto as default or only option</td></tr>
-</tbody>
-</table>
-
-</div>
-
-<div class="mt-4 p-3 rounded-lg text-xs text-center" style="background: #161b22; border-left: 3px solid #238636; color: #8b949e;">
-Heuristic: <b style="color: #e6edf3;">override Auto for the <i>whole</i> session</b>, never mid-conversation.
-</div>
-
----
-layout: section
----
-
-<div class="h-full flex flex-col items-center justify-center" style="background: #0d1117;">
-  <div class="text-7xl mb-6">⚙️</div>
-  <h1 class="!text-5xl !font-bold" style="color: #e6edf3;">Harness Efficiency</h1>
-  <p class="mt-4 text-lg" style="color: #8b949e;">Less repeat freight per turn</p>
-</div>
+<!--
+Duration: 0:15. Cumulative: 1:00.
+Audience question: How is the technical explanation organized?
+Understand → Follow → Use → Evaluate. Four navigation sections support three
+outcomes; Understand and Follow both serve the orchestration outcome.
+Budgets: introduction one minute; sections three, four, six and four minutes;
+discussion two minutes. The four-minute Evaluate allocation includes recap,
+actions and references. Live scan confirmed TOC destinations at 4, 7, 10 and 14.
+Source: https://docs.github.com/en/enterprise-cloud@latest/early-access/copilot/hydrafusion
+-->
 
 ---
 
-# Prompt Caching
+<!-- SLIDE: Part 1 — Understand the orchestrator -->
+# Part 1 — Understand the orchestrator
+<SectionOpenerSlide
+  :partNumber="1"
+  title="Understand the orchestrator"
+  subtitle="A model-picker entry delegates workflow, models and reasoning effort."
+  :cards='[
+    {icon: "➡️", title: "Auto", blurb: "Route the task to one model."},
+    {icon: "⚙️", title: "HydraFusion", blurb: "Select a workflow for the prompt."},
+    {icon: "🧠", title: "Max", blurb: "Apply depth-oriented orchestration."}
+  ]'
+  :terminal='{context: "HydraFusion is a runtime orchestrator.", detail: "Extra passes are selective; one solver can be enough."}'
+/>
 
-<div class="grid grid-cols-2 gap-5 mt-4 text-sm" style="background: #0d1117;">
-
-<div>
-<div class="p-4 rounded-lg" style="background: #161b22; border-left: 4px solid #58a6ff;">
-<div class="text-xs uppercase tracking-wide mb-1" style="color: #8b949e;">What it is</div>
-<div style="color: #e6edf3;">The harness marks <b>cache-control breakpoints</b> in the prompt. The provider reuses the computed state for the repeated prefix on the next turn — no recompute.</div>
-</div>
-
-<div class="mt-3 p-4 rounded-lg" style="background: #161b22; border-left: 4px solid #3fb950;">
-<div class="text-xs uppercase tracking-wide mb-1" style="color: #8b949e;">Why it pays off</div>
-<div style="color: #e6edf3;">The <b>repeating prefix</b> in an agentic loop — system prompt, instructions, project context, history — gets larger every turn. Caching turns "O(N) per turn" into "O(Δ) per turn."</div>
-</div>
-</div>
-
-<div class="p-4 rounded-lg" style="background: #161b22; border: 1px solid #30363d; font-family: monospace; font-size: 0.7rem; color: #e6edf3;">
-<div style="color: #8b949e;">// Per turn payload, conceptual</div>
-<br/>
-<div><span style="color: #f85149;">[ system prompt    ]</span>  ← <span style="color: #3fb950;">cached</span></div>
-<div><span style="color: #f85149;">[ repo context     ]</span>  ← <span style="color: #3fb950;">cached</span></div>
-<div><span style="color: #f85149;">[ instructions     ]</span>  ← <span style="color: #3fb950;">cached</span></div>
-<div><span style="color: #d29922;">[ turn 1 ... N-1  ]</span>  ← <span style="color: #3fb950;">cached</span></div>
-<div><span style="color: #58a6ff;">[ turn N (new)    ]</span>  ← <span style="color: #d29922;">computed</span></div>
-<br/>
-<div style="color: #8b949e;">Only the delta is "new work" for the model.</div>
-</div>
-
-</div>
-
-<div class="mt-3 text-xs text-center" style="color: #8b949e;">
-Source: <a href="https://aka.ms/vscode/blog/token-efficiency">VS Code — Token Efficiency Deep Dive</a>
-</div>
+<!--
+Duration: 0:20. Cumulative: 1:20.
+Audience question: What does selecting HydraFusion delegate to the system?
+Separate one-model routing from selective orchestration. Straightforward work
+can still get one solving pass; additional review is selected when useful.
+Source: https://docs.github.com/en/enterprise-cloud@latest/early-access/copilot/hydrafusion
+-->
 
 ---
 
-# Tool Search (Deferred Tool Loading)
+<!-- SLIDE: Auto routes a model HydraFusion selects a workflow -->
+# Auto routes a model HydraFusion selects a workflow
+<TwoColPairedConceptsSlide
+  :partNumber="1"
+  pillIcon="⚙️"
+  pillLabel="Understand · Routing and orchestration"
+  title="Auto routes a model; HydraFusion selects a workflow"
+  :left='{header: "Auto · one-model routing", icon: "➡️", items: [
+    {title: "Input: a normal prompt", detail: "Auto considers task fit and service health."},
+    {title: "System decision", detail: "Select one model to handle the task."},
+    {title: "Useful baseline", detail: "Routine explanations and focused coding work."}
+  ]}'
+  :right='{header: "HydraFusion · runtime orchestration", icon: "🔀", items: [
+    {title: "Input: a normal prompt", detail: "The orchestrator selects how to solve it."},
+    {title: "System decisions", detail: "Execution pattern, participating models and stage effort."},
+    {title: "Selective passes", detail: "One solver, conditional escalation or independent review."}
+  ]}'
+  :insight='{icon: "💡", text: "HydraFusion is a system behind a picker entry, not a new foundation model."}'
+  :progressDots='{current: 1, total: 2, activeColor: "bg-cyan-400 shadow-lg shadow-cyan-500/50"}'
+/>
 
-<div class="grid grid-cols-2 gap-5 mt-4 text-sm" style="background: #0d1117;">
-
-<div class="p-4 rounded-lg" style="background: #161b22; border-left: 4px solid #f85149;">
-<div class="font-bold mb-2" style="color: #f85149;">❌ Before</div>
-<div style="color: #e6edf3;">Every tool definition (MCP servers, terminal, file ops, workspace search, product actions) shipped <b>upfront on every turn</b>.</div>
-<div class="mt-2 text-xs" style="color: #8b949e;">A "40 MCP servers enabled" workspace pays for 40 schemas every single request — even when only one is relevant.</div>
-</div>
-
-<div class="p-4 rounded-lg" style="background: #161b22; border-left: 4px solid #3fb950;">
-<div class="font-bold mb-2" style="color: #3fb950;">✨ With Tool Search</div>
-<div style="color: #e6edf3;">The model <b>searches and loads tool definitions on demand</b> from a broad catalog — the full schemas don't ride in context unless they're needed.</div>
-<div class="mt-2 text-xs" style="color: #8b949e;">Keep the available toolset broad; pay tokens only for the tools actually relevant to this turn.</div>
-</div>
-
-</div>
-
-<div class="mt-4 grid grid-cols-3 gap-3 text-xs">
-<div class="p-3 rounded-lg text-center" style="background: #161b22; border: 1px solid #30363d; color: #e6edf3;">
-<div class="text-xl mb-1">🧰</div>
-<b>MCP scales</b><br/>
-<span style="color: #8b949e;">Add servers without inflating every turn</span>
-</div>
-<div class="p-3 rounded-lg text-center" style="background: #161b22; border: 1px solid #30363d; color: #e6edf3;">
-<div class="text-xl mb-1">🎯</div>
-<b>Relevance, not volume</b><br/>
-<span style="color: #8b949e;">Model sees the tools it needs, when it needs them</span>
-</div>
-<div class="p-3 rounded-lg text-center" style="background: #161b22; border: 1px solid #30363d; color: #e6edf3;">
-<div class="text-xl mb-1">💰</div>
-<b>Fixed-cost reduction</b><br/>
-<span style="color: #8b949e;">Removes baseline tool-schema tax</span>
-</div>
-</div>
-
----
-
-# Why This Matters in Agentic Loops
-
-<div class="mt-4 text-sm" style="background: #0d1117;">
-
-<div class="p-4 rounded-lg" style="background: #161b22; border: 1px solid #30363d;">
-<div class="font-bold mb-3 text-center" style="color: #e6edf3;">A 30-turn coding-agent session, conceptual cost shape</div>
-
-<div class="grid grid-cols-2 gap-4 text-xs">
-<div class="p-3 rounded-lg" style="background: #0d1117; border-left: 4px solid #f85149;">
-<div class="font-bold mb-2" style="color: #f85149;">Without caching + tool search</div>
-<div style="color: #8b949e;">Every turn re-sends the full prefix + every tool schema. Per-turn token cost <b>grows with history</b> and stays high.</div>
-<div class="mt-2 font-mono" style="color: #e6edf3;">cost(turn N) ≈ prefix + tools + history(N) + new</div>
-</div>
-
-<div class="p-3 rounded-lg" style="background: #0d1117; border-left: 4px solid #3fb950;">
-<div class="font-bold mb-2" style="color: #3fb950;">With caching + tool search</div>
-<div style="color: #8b949e;">Cached prefix + on-demand tools. Per-turn token cost <b>tracks just the delta</b> of new work.</div>
-<div class="mt-2 font-mono" style="color: #e6edf3;">cost(turn N) ≈ new + Δhistory + relevant_tools</div>
-</div>
-</div>
-</div>
-
-<div class="mt-4 p-3 rounded-lg text-center" style="background: #161b22; border-left: 4px solid #d29922; color: #e6edf3;">
-The longer the session, the bigger the win — which is exactly the workload pattern of agentic coding.
-</div>
-
-</div>
-
----
-layout: section
----
-
-<div class="h-full flex flex-col items-center justify-center" style="background: #0d1117;">
-  <div class="text-7xl mb-6">🧭</div>
-  <h1 class="!text-5xl !font-bold" style="color: #e6edf3;">Smart Routing</h1>
-  <p class="mt-4 text-lg" style="color: #8b949e;">Auto picks the model that fits — per turn, in context</p>
-</div>
+<!--
+Duration: 1:10. Cumulative: 2:30.
+Audience question: What changes when I select HydraFusion instead of Auto?
+Follow the same prompt through two different system decisions. Auto chooses a
+model; HydraFusion also chooses a workflow and reasoning effort. This is a
+conceptual comparison, not an observed routing trace. Extra passes are selective.
+Auto tiers Efficiency, Balance and Intelligence apply in VS Code, CLI and the
+Copilot app. They adjust routing preferences rather than adding execution
+patterns. Routing considers cache boundaries and significant task-complexity
+changes; avoid claiming selection happens only at the first turn or compaction.
+A pinned model identifies the selected model but does not make output deterministic.
+Sources: https://docs.github.com/en/copilot/concepts/models/auto-model-selection
+https://docs.github.com/en/enterprise-cloud@latest/early-access/copilot/hydrafusion
+-->
 
 ---
 
-# How Auto Chooses a Model
+<!-- SLIDE: HydraFusion and Max share the orchestration architecture -->
+# HydraFusion and Max share the orchestration architecture
+<TwoColPairedConceptsSlide
+  :partNumber="1"
+  pillIcon="🧠"
+  pillLabel="Understand · HydraFusion and Max"
+  title="Max tunes the same architecture for deeper reasoning"
+  :left='{header: "HydraFusion", icon: "⚖️", items: [
+    {title: "Balanced execution", detail: "Coordinate solving and review with token efficiency in mind."},
+    {title: "Stage-specific reasoning", detail: "Drafting uses medium; reviews use high effort."},
+    {title: "Starting point", detail: "Well-scoped coding work where review may help."}
+  ]}'
+  :right='{header: "HydraFusion Max", icon: "🧠", items: [
+    {title: "Depth-oriented tuning", detail: "Use the same workflow architecture for demanding tasks."},
+    {title: "Higher effort where useful", detail: "Max can use extra-high reasoning."},
+    {title: "When to evaluate it", detail: "Complex analysis where thoroughness justifies more execution."}
+  ]}'
+  :insight='{icon: "🔀", text: "The system chooses models and effort. Users cannot force a pattern or constituent model."}'
+  :progressDots='{current: 2, total: 2, activeColor: "bg-cyan-400 shadow-lg shadow-cyan-500/50"}'
+/>
 
-<div class="text-sm mt-4" style="background: #0d1117;">
-
-<div class="text-center mb-4" style="color: #e6edf3;">
-Auto combines <b>two signals</b> on every routable turn:
-</div>
-
-<div class="grid grid-cols-2 gap-5">
-
-<div class="p-5 rounded-lg border" style="background: #161b22; border-color: #58a6ff;">
-<div class="text-2xl mb-2">❤️</div>
-<div class="font-bold mb-2" style="color: #58a6ff;">Real-Time Model Health</div>
-<div class="text-xs" style="color: #e6edf3;">
-A dynamic engine tracks per-model:
-<ul class="mt-2 list-disc list-inside" style="color: #8b949e;">
-<li>Availability &amp; utilization</li>
-<li>Latency / speed</li>
-<li>Error rate</li>
-<li>Cost</li>
-</ul>
-<div class="mt-2">A model can be <i>capable</i> for the task but still wrong if it's degraded right now.</div>
-</div>
-</div>
-
-<div class="p-5 rounded-lg border" style="background: #161b22; border-color: #3fb950;">
-<div class="text-2xl mb-2">🧠</div>
-<div class="font-bold mb-2" style="color: #3fb950;">Task-Aware Routing (HyDRA)</div>
-<div class="text-xs" style="color: #e6edf3;">
-A learned router that considers:
-<ul class="mt-2 list-disc list-inside" style="color: #8b949e;">
-<li>Reasoning depth required</li>
-<li>Code complexity</li>
-<li>Debugging difficulty</li>
-<li>Tool orchestration needs</li>
-</ul>
-<div class="mt-2">Identifies models that meet the quality bar, then picks the best fit among them.</div>
-</div>
-</div>
-
-</div>
-
-<div class="mt-4 p-2 text-xs text-center rounded" style="background: #0d1117; border-left: 3px solid #238636; color: #8b949e;">
-First-turn intent + healthy candidates → routing decision. Stays put until a natural cache reset.
-</div>
-
-</div>
+<!--
+Duration: 1:30. Cumulative: 4:00.
+Audience question: What does Max change?
+Both options use the same orchestration architecture. Max applies depth-oriented
+tuning and can use extra-high reasoning while still considering token efficiency.
+Do not imply every stage runs at extra-high effort or every prompt adds passes.
+The October 14 announced pool included Claude Opus 5.5, GPT-6 Astra, GPT-6.1 Sol
+and GPT-6 Luna. This is a dated snapshot, not a fixed roster or an administrator
+allowlist. Models and workflows can change; organization policies constrain access.
+The extra analysis budget is something to evaluate against a task, not a quality
+guarantee. Runtime assignments remain system decisions.
+Sources: https://github.blog/changelog/2026-10-14-hydrafusion-updates-and-new-max-option/
+https://docs.github.com/en/enterprise-cloud@latest/early-access/copilot/hydrafusion
+-->
 
 ---
 
-# HyDRA in One Slide
+<!-- SLIDE: Part 2 — Follow the execution -->
+# Part 2 — Follow the execution
+<SectionOpenerSlide
+  :partNumber="2"
+  title="Follow the execution"
+  subtitle="The system chooses a path for each prompt and returns one final response."
+  :cards='[
+    {icon: "➡️", title: "Single", blurb: "One solving pass."},
+    {icon: "⚖️", title: "Cascade", blurb: "Draft, judge, then further work if needed."},
+    {icon: "🔍", title: "Critique", blurb: "Independent review and solver revision."}
+  ]'
+  :terminal='{context: "The following paths are conceptual architecture.", detail: "A follow-up can select a different path."}'
+/>
 
-<div class="grid grid-cols-2 gap-5 mt-4 text-sm" style="background: #0d1117;">
-
-<div>
-<div class="p-4 rounded-lg" style="background: #161b22; border-left: 4px solid #3fb950;">
-<div class="font-bold mb-2" style="color: #3fb950;">Trained on Divergence, Not Difficulty</div>
-<div class="text-xs" style="color: #e6edf3;">
-For each training query, responses from a <b>less capable</b> and a <b>more capable</b> model are quality-scored.
-<div class="mt-2">The router learns <i>when</i> the stronger model adds value — not whether the task is subjectively "hard."</div>
-</div>
-</div>
-
-<div class="mt-3 p-4 rounded-lg" style="background: #161b22; border-left: 4px solid #58a6ff;">
-<div class="font-bold mb-2" style="color: #58a6ff;">Context-Aware</div>
-<div class="text-xs" style="color: #e6edf3;">
-For multi-turn sessions, HyDRA looks at:
-<ul class="mt-1 list-disc list-inside" style="color: #8b949e;">
-<li>Original user intent</li>
-<li>Recent assistant responses</li>
-<li>Conversation metadata</li>
-</ul>
-</div>
-</div>
-</div>
-
-<div class="p-4 rounded-lg" style="background: #161b22; border: 1px solid #30363d;">
-<div class="font-bold mb-2 text-center" style="color: #e6edf3;">The Routing Frontier</div>
-<div class="text-xs text-center" style="color: #8b949e;">
-quality ↑ vs. cost ↓ — three operating points
-</div>
-<div class="mt-3 space-y-2 text-xs">
-<div class="p-2 rounded" style="background: #0d1117; border-left: 3px solid #d29922;">
-<b style="color: #d29922;">Peak</b> — exceeds Sonnet baseline at <b style="color: #e6edf3;">12.9% savings</b>
-</div>
-<div class="p-2 rounded" style="background: #0d1117; border-left: 3px solid #58a6ff;">
-<b style="color: #58a6ff;">Conservative</b> — ties OpenRouter Auto (70.8% SWE-bench) at <b style="color: #e6edf3;">3.3× the savings</b>
-</div>
-<div class="p-2 rounded" style="background: #0d1117; border-left: 3px solid #3fb950;">
-<b style="color: #3fb950;">Aggressive</b> — balances quality for <b style="color: #e6edf3;">72.5% savings</b>; outperforms both Azure Foundry modes
-</div>
-</div>
-</div>
-
-</div>
-
-<div class="mt-3 text-xs text-center" style="color: #8b949e;">
-Source: <a href="https://github.blog/ai-and-ml/github-copilot/getting-more-from-each-token-how-copilot-improves-context-handling-and-model-routing/">GitHub Blog</a> · <a href="https://arxiv.org/pdf/2605.17106">HyDRA paper</a>
-</div>
+<!--
+Duration: 0:20. Cumulative: 4:20.
+Audience question: What happens between a prompt and the final response?
+Introduce the three conceptual paths. Each prompt gets a fresh pattern choice,
+so a follow-up can take a different path in the same conversation.
+Source: https://docs.github.com/en/enterprise-cloud@latest/early-access/copilot/hydrafusion
+-->
 
 ---
 
-# Cache-Aware Routing
+<!-- SLIDE: Three conceptual execution paths -->
+# Three conceptual execution paths
+<HydraFusionExecutionPathsSlide />
 
-<div class="mt-4 text-sm" style="background: #0d1117;">
-
-<div class="p-4 rounded-lg mb-4" style="background: #161b22; border-left: 4px solid #f85149;">
-<div class="font-bold mb-1" style="color: #f85149;">The trap</div>
-<div style="color: #e6edf3;">Switching models on every turn <i>sounds</i> flexible — but it <b>breaks the prompt prefix cache</b>. The recompute cost can dwarf the routing benefit.</div>
-</div>
-
-<div class="p-4 rounded-lg mb-4" style="background: #161b22; border-left: 4px solid #3fb950;">
-<div class="font-bold mb-1" style="color: #3fb950;">Auto's answer</div>
-<div style="color: #e6edf3;">Route only at <b>natural cache boundaries</b>:</div>
-</div>
-
-<div class="grid grid-cols-2 gap-4 text-xs">
-<div class="p-3 rounded-lg text-center" style="background: #161b22; border: 1px solid #30363d; color: #e6edf3;">
-<div class="text-2xl mb-1">🆕</div>
-<b>First turn of a session</b><br/>
-<span style="color: #8b949e;">No cache to lose</span>
-</div>
-<div class="p-3 rounded-lg text-center" style="background: #161b22; border: 1px solid #30363d; color: #e6edf3;">
-<div class="text-2xl mb-1">📦</div>
-<b>After compaction</b><br/>
-<span style="color: #8b949e;">Prefix resets when older turns are summarized</span>
-</div>
-</div>
-
-<div class="mt-4 p-3 rounded-lg text-center text-xs" style="background: #161b22; border-left: 3px solid #d29922; color: #e6edf3;">
-Between those points, the selected model <b>stays in place</b> so the cache can keep building.
-</div>
-
-</div>
+<!--
+Duration: 1:50. Cumulative: 6:10.
+Audience question: How do the three patterns differ?
+Trace the actors: orchestrator chooses; solver drafts; judge decides whether
+further work is needed; critic reviews; original solver revises. These are
+conceptual architecture diagrams rather than captured product progress.
+Cascade adds evaluation and reserves repair/escalation for work that needs it.
+Critique adds an independent perspective and review latency. The selection step
+is lightweight; solving, review and revision account for the additional passes.
+A different prompt in the same conversation can get another path. Never treat a
+prompt category or an application-level fallback value as evidence of routing.
+Source: https://docs.github.com/en/enterprise-cloud@latest/early-access/copilot/hydrafusion
+Architecture: https://github.blog/ai-and-ml/github-copilot/project-hydrafusion-frontier-quality-via-multi-model-orchestration/
+-->
 
 ---
 
-# Multilingual Routing
+<!-- SLIDE: October review stages inspect the workspace -->
+# October review stages inspect the workspace
+<FourCardGridSlide
+  :partNumber="2"
+  pillIcon="🔍"
+  pillLabel="Follow · October 14 mechanisms"
+  title="Judges and critics inspect work at review depth"
+  :cards='[
+    {icon: "⚖️", title: "Cascade judge and repair", description: "The judge evaluates the draft and can request repair or escalation when needed."},
+    {icon: "📁", title: "Workspace-aware critics", description: "Critics use tools to inspect actual files. Parallel critics can review the work."},
+    {icon: "🧠", title: "Reasoning per stage", description: "Medium for drafting, high for review; Max can use extra-high reasoning."},
+    {icon: "🔀", title: "Separate from subagents", description: "HydraFusion coordinates its internal passes. It does not start subagents."}
+  ]'
+  :insight='{icon: "", text: "Context display is conservative across constituent models; HydraFusion has no independent context window."}'
+  :progressDots='{current: 2, total: 2, activeColor: "bg-blue-400 shadow-lg shadow-blue-500/50"}'
+/>
 
-<div class="text-sm mt-4" style="background: #0d1117;">
-
-<div class="p-4 rounded-lg mb-3" style="background: #161b22; border-left: 4px solid #58a6ff;">
-<div style="color: #e6edf3;">Trained on conversations across <b>16 language families</b> — CJK, European, and others.</div>
-</div>
-
-<div class="grid grid-cols-4 gap-3 mt-4 text-xs">
-<div class="p-3 rounded-lg text-center" style="background: #161b22; border: 1px solid #30363d;">
-<div class="text-2xl mb-1" style="color: #3fb950;">✅</div>
-<b style="color: #e6edf3;">English</b>
-<div style="color: #8b949e;">baseline</div>
-</div>
-<div class="p-3 rounded-lg text-center" style="background: #161b22; border: 1px solid #30363d;">
-<div class="text-2xl mb-1" style="color: #3fb950;">≤ 4 pts</div>
-<b style="color: #e6edf3;">European</b>
-<div style="color: #8b949e;">within baseline</div>
-</div>
-<div class="p-3 rounded-lg text-center" style="background: #161b22; border: 1px solid #30363d;">
-<div class="text-2xl mb-1" style="color: #3fb950;">≤ 4 pts</div>
-<b style="color: #e6edf3;">CJK</b>
-<div style="color: #8b949e;">within baseline</div>
-</div>
-<div class="p-3 rounded-lg text-center" style="background: #161b22; border: 1px solid #30363d;">
-<div class="text-2xl mb-1" style="color: #3fb950;">≤ 4 pts</div>
-<b style="color: #e6edf3;">Other scripts</b>
-<div style="color: #8b949e;">within baseline</div>
-</div>
-</div>
-
-<div class="mt-4 p-3 rounded-lg text-center text-xs" style="background: #161b22; border-left: 3px solid #238636; color: #e6edf3;">
-<b>No statistically significant quality gap</b> across language groups — evaluated on a held-out set sampled from 19-language production VS Code chat telemetry.
-</div>
-
-</div>
-
----
-layout: section
----
-
-<div class="h-full flex flex-col items-center justify-center" style="background: #0d1117;">
-  <div class="text-7xl mb-6">💡</div>
-  <h1 class="!text-5xl !font-bold" style="color: #e6edf3;">Practical Habits</h1>
-  <p class="mt-4 text-lg" style="color: #8b949e;">Six habits that compound with Auto</p>
-</div>
+<!--
+Duration: 1:50. Cumulative: 8:00.
+Audience question: How does the current review stage get better evidence?
+Explain judge/repair, tool-using critics and potentially parallel independent
+reviews. The simple draft/review/revision path remains useful but does not
+describe every possible current internal arrangement.
+The main conversation stays on the same model where possible for caching;
+helpers receive the relevant context they need. The displayed context limit is
+conservative and reflects constituent models. Compact when the client requires
+it before switching a long conversation.
+Current docs and October updates supersede launch-era tool-less-review wording.
+Persistent workspace-edit behavior belongs in Evaluate, after client usage.
+Sources: https://github.blog/changelog/2026-10-14-hydrafusion-updates-and-new-max-option/
+https://docs.github.com/en/enterprise-cloud@latest/early-access/copilot/hydrafusion
+-->
 
 ---
 
-# Six Habits to Stretch Credits
+<!-- SLIDE: Part 3 — Use HydraFusion -->
+# Part 3 — Use HydraFusion
+<SectionOpenerSlide
+  :partNumber="3"
+  title="Use HydraFusion"
+  subtitle="Enable the preview, select an option, and send a normal Copilot prompt."
+  :cards='[
+    {icon: "💻", title: "Enable", blurb: "CLI, VS Code or Copilot app."},
+    {icon: "⚙️", title: "Select", blurb: "HydraFusion or HydraFusion Max."},
+    {icon: "💬", title: "Prompt", blurb: "Explain, implement or analyze."}
+  ]'
+  :terminal='{context: "Send a normal Copilot prompt.", detail: "Inspect the path, response and workspace changes."}'
+/>
 
-<div class="grid grid-cols-2 gap-3 mt-4 text-xs" style="background: #0d1117;">
-
-<div class="p-3 rounded-lg" style="background: #161b22; border-left: 4px solid #3fb950;">
-<div class="font-bold mb-1" style="color: #3fb950;">1. Start with Auto</div>
-<div style="color: #8b949e;">Strong default. Routes based on what you're actually trying to do, every time.</div>
-</div>
-
-<div class="p-3 rounded-lg" style="background: #161b22; border-left: 4px solid #3fb950;">
-<div class="font-bold mb-1" style="color: #3fb950;">2. Keep context focused</div>
-<div style="color: #8b949e;">New session per task. Compact long ones. <b>@mention</b> files you already know are relevant.</div>
-</div>
-
-<div class="p-3 rounded-lg" style="background: #161b22; border-left: 4px solid #58a6ff;">
-<div class="font-bold mb-1" style="color: #58a6ff;">3. Don't change models/settings mid-session</div>
-<div style="color: #8b949e;">Switches break the prefix cache. Set up the session once; keep related work together.</div>
-</div>
-
-<div class="p-3 rounded-lg" style="background: #161b22; border-left: 4px solid #58a6ff;">
-<div class="font-bold mb-1" style="color: #58a6ff;">4. Plan before parallelizing</div>
-<div style="color: #8b949e;">Parallel agents burn credits in parallel. Have Copilot plan first, then split deliberately.</div>
-</div>
-
-<div class="p-3 rounded-lg" style="background: #161b22; border-left: 4px solid #d29922;">
-<div class="font-bold mb-1" style="color: #d29922;">5. Use only the tools you need</div>
-<div style="color: #8b949e;">Broad MCP surfaces still add baseline. Use <a href="https://aka.ms/agent-finder/changelog">Agent Finder</a> to curate per task.</div>
-</div>
-
-<div class="p-3 rounded-lg" style="background: #161b22; border-left: 4px solid #d29922;">
-<div class="font-bold mb-1" style="color: #d29922;">6. Check your usage</div>
-<div style="color: #8b949e;">AI Usage page surfaces feature/model breakdown. In Copilot CLI, watch session-level usage live.</div>
-</div>
-
-</div>
-
-<div class="mt-3 text-xs text-center" style="color: #8b949e;">
-Source: <a href="https://docs.github.com/en/copilot/how-tos/manage-and-track-spending/manage-company-spending">How to get more out of your AI credits</a>
-</div>
+<!--
+Duration: 0:15. Cumulative: 8:15.
+Audience question: How do I start using it?
+This six-minute section covers client setup, CLI workflow and three example
+prompts. Live execution is optional and capped at two minutes. Keep the final
+two minutes available for example discussion plus inspection or fallback.
+Source: https://docs.github.com/en/enterprise-cloud@latest/early-access/copilot/hydrafusion
+-->
 
 ---
 
-# What's Expanding
+<!-- SLIDE: Enable the preview in one client -->
+# Enable the preview in one client
+<ThreeColumnCardSlide
+  :partNumber="3"
+  pillIcon="💻"
+  pillLabel="Use · Enable and select"
+  title="Enable HydraFusion, then select it in the picker"
+  :columns='[
+    {icon: "⌨️", title: "Copilot CLI", description: "Start copilot --experimental.", items: ["Use /model.", "Select HydraFusion or HydraFusion Max (Research Preview)."]},
+    {icon: "💻", title: "VS Code", description: "Use version 1.140+ or Insiders.", items: ["Enable chat.copilot.hydraFusion.enabled.", "Select HydraFusion or Max in Chat."]},
+    {icon: "🪟", title: "Copilot app", description: "Use the current app.", items: ["Settings → Experimental → HydraFusion.", "Select HydraFusion or Max."]}
+  ]'
+  :insight='{icon: "🛡️", text: "Availability depends on plan, preview access and allowed-model policy. Check settings and administrator access."}'
+  :progressDots='{current: 1, total: 3, activeColor: "bg-indigo-400 shadow-lg shadow-indigo-500/50"}'
+/>
 
-<div class="text-sm mt-4" style="background: #0d1117;">
-
-<div class="mb-3 p-3 rounded-lg" style="background: #161b22; border-left: 4px solid #3fb950;">
-<b style="color: #3fb950;">Live today:</b> <span style="color: #e6edf3;">Auto with task intent in VS Code, github.com, and mobile.</span>
-</div>
-
-<div class="grid grid-cols-3 gap-3 mt-4 text-xs">
-
-<div class="p-4 rounded-lg" style="background: #161b22; border: 1px solid #30363d;">
-<div class="text-2xl mb-2">🛠️</div>
-<b style="color: #e6edf3;">More surfaces</b>
-<div class="mt-1" style="color: #8b949e;">Auto with task intent coming to <b>Copilot CLI</b>, <b>GitHub App</b>, and additional IDEs.</div>
-</div>
-
-<div class="p-4 rounded-lg" style="background: #161b22; border: 1px solid #30363d;">
-<div class="text-2xl mb-2">🎓</div>
-<b style="color: #e6edf3;">Free / Student plans</b>
-<div class="mt-1" style="color: #8b949e;">Simplified to use <b>Auto as the only model selection</b> option.</div>
-</div>
-
-<div class="p-4 rounded-lg" style="background: #161b22; border: 1px solid #30363d;">
-<div class="text-2xl mb-2">🏛️</div>
-<b style="color: #e6edf3;">Admin controls</b>
-<div class="mt-1" style="color: #8b949e;">Organizations can <b>set Auto as default</b> or <b>enforce Auto as the only option</b>.</div>
-</div>
-
-</div>
-
-<div class="mt-4 p-3 rounded-lg text-center text-xs" style="background: #161b22; border-left: 3px solid #d29922; color: #e6edf3;">
-Strategic read: <b>Auto is becoming the path of least resistance</b> across the entire Copilot surface. Build habits that compound with it.
-</div>
-
-</div>
-
----
-layout: center
----
-
-# 🧠 Mental Model Shift
-
-<div class="grid grid-cols-3 gap-4 mt-6 max-w-6xl mx-auto text-xs">
-
-<div class="p-4 rounded-lg" style="background: #161b22; border-top: 3px solid #3fb950;">
-<div class="font-bold mb-3" style="color: #3fb950;">✅ Move Toward</div>
-<ul class="space-y-2" style="color: #e6edf3;">
-<li>• <b>Auto as default</b>, especially on first turn</li>
-<li>• <b>Stable session settings</b> — pick once, then build cache</li>
-<li>• <b>Compaction at task boundaries</b> (also a re-route opportunity)</li>
-<li>• <b>Curated tool surfaces</b> via Agent Finder</li>
-</ul>
-</div>
-
-<div class="p-4 rounded-lg" style="background: #161b22; border-top: 3px solid #d29922;">
-<div class="font-bold mb-3" style="color: #d29922;">⚠️ Move Away From</div>
-<ul class="space-y-2" style="color: #e6edf3;">
-<li>• Switching models mid-conversation to "try" something different</li>
-<li>• Pinning the most expensive model "to be safe"</li>
-<li>• One mega-session for unrelated tasks</li>
-<li>• Manual reasoning-depth re-tuning per turn</li>
-</ul>
-</div>
-
-<div class="p-4 rounded-lg" style="background: #161b22; border-top: 3px solid #f85149;">
-<div class="font-bold mb-3" style="color: #f85149;">🛑 Move Against</div>
-<ul class="space-y-2" style="color: #e6edf3;">
-<li>• Enabling every MCP server "just in case"</li>
-<li>• Assuming Auto = cheap — it routes <i>up</i> when the task demands it</li>
-<li>• Bypassing Auto out of habit on tasks where it would win</li>
-<li>• Optimizing tokens by hand and breaking the cache</li>
-</ul>
-</div>
-
-</div>
-
-<div class="mt-6 text-center text-sm" style="color: #8b949e;">
-The whole point: <span style="color: #e6edf3;"><b>use the model that fits the work</b></span> — not the biggest, not the cheapest.
-</div>
+<!--
+Duration: 1:25. Cumulative: 9:40.
+Audience question: Which settings expose the options?
+Read each client's enable/select steps. The October announcement lists Pro,
+Pro+, Business and Enterprise; current plan and administrator policy govern
+availability. Missing options call for an access check, not a permission bypass.
+CLI updates use copilot update when needed. Enabling /experimental on inside
+an existing CLI session requires restarting. In VS Code/app, hover the completed
+response/footer for participating models. Keep ordinary tool permissions.
+The deck itself requires no preview access or model call. Verified local server:
+Set-Location C:\code\CopilotTraining\slides
+$env:CI='true'
+node .\node_modules\@slidev\cli\bin\slidev.mjs .\tech-talks\copilot-auto-mode.md --remote --port 3047
+This invocation served HTTP 200 and the twenty-slide live scan. CI=true kept
+the helper responsive in the noninteractive host; choose a free local port.
+Sources: https://docs.github.com/en/enterprise-cloud@latest/early-access/copilot/hydrafusion
+https://github.blog/changelog/2026-10-14-hydrafusion-updates-and-new-max-option/
+-->
 
 ---
 
-# ✅ What You Can Do Today
+<!-- SLIDE: Start select prompt and inspect in CLI -->
+# Start select prompt and inspect in CLI
+<CodeWithFeaturesSlide
+  :partNumber="3"
+  pillIcon="⌨️"
+  pillLabel="Use · Exact CLI workflow"
+  title="Start, select, prompt, then inspect progress"
+  codePosition="left"
+  :code='{language: "powershell", filename: "Interactive CLI workflow", content: "copilot --experimental\n\n# Inside the session:\n/model\n# Select HydraFusion or HydraFusion Max\n\n# Send a normal prompt; watch progress.\n/usage"}'
+  :features='[
+    {icon: "👁️", title: "Visible execution", description: "Watch actual pattern, planned passes, progress and elapsed time."},
+    {icon: "📊", title: "Per-model usage", description: "/usage reports session consumption. Record a starting point for prompt comparisons."},
+    {icon: "⏱️", title: "Optional live call", description: "Cap execution at two minutes. Then inspect or disclose what remains unverified."}
+  ]'
+  :progressDots='{current: 2, total: 3, activeColor: "bg-indigo-400 shadow-lg shadow-indigo-500/50"}'
+/>
 
-<div class="text-sm mt-4 space-y-3" style="background: #0d1117;">
+<!--
+Duration: 2:20. Cumulative: 12:00.
+Audience question: What commands do I run and what should I see?
+Use the first twenty seconds for the interactive sequence. Optionally use the
+remaining two minutes for ONE live call; do not run interactive and single-prompt
+examples as two competing calls. These commands were not executed by the deck
+generator. Model calls consume AI credits and require preview access.
+Exact optional single-prompt command, executed only by a presenter choosing to:
+Run from an existing repository with a README:
+copilot --experimental --model hydrafusion -p "Summarize this repository's README and list any setup assumptions. Do not edit files."
+The command is documented; its response is generated at runtime. Do not invent
+a captured trace, planned pattern, elapsed time, credit value or successful result.
+Use actual progress: selected pattern, passes, warnings and elapsed time.
+At two minutes, press Esc if unfinished. Reserve the next two minutes for
+inspection/fallback and example prompts. If not running live, walk through
+commands and discuss which fields would be inspected without simulating output.
+The presentation remains complete with no call. Auto can run the same examples
+if explicitly labeled Auto; it is not evidence of HydraFusion execution.
+Source: https://docs.github.com/en/enterprise-cloud@latest/early-access/copilot/hydrafusion
+-->
 
-<div class="p-3 rounded-lg" style="background: #161b22; border-left: 4px solid #3fb950;">
-<b style="color: #3fb950;">⏱️ This afternoon</b>
-<ul class="mt-1 text-xs list-disc list-inside" style="color: #e6edf3;">
-<li>Switch your default to <b>Auto</b> for the next 5 sessions; note where it routes you and where it surprises you.</li>
-<li>Open the <b>AI Usage page</b> and identify your single most expensive pattern this week.</li>
-</ul>
-</div>
+---
 
-<div class="p-3 rounded-lg" style="background: #161b22; border-left: 4px solid #58a6ff;">
-<b style="color: #58a6ff;">📅 This week</b>
-<ul class="mt-1 text-xs list-disc list-inside" style="color: #e6edf3;">
-<li>Stop mid-session model switching. Pick once, finish the task, then start fresh.</li>
-<li>Compact long sessions at <b>task boundaries</b>, not arbitrary points — that's a free re-route opportunity.</li>
-<li>Run <b>Agent Finder</b> over your enabled MCP tools and disable anything not in active use for your current task type.</li>
-</ul>
-</div>
+<!-- SLIDE: Three prompts and what to inspect -->
+# Three prompts and what to inspect
+<ThreeColumnCardSlide
+  :partNumber="3"
+  pillIcon="💬"
+  pillLabel="Use · Representative prompts"
+  title="Try explanation, implementation or demanding analysis"
+  :columns='[
+    {icon: "📖", title: "Explain", description: "Explain this function and list its boundary cases. Do not edit files.", items: ["Inspect: explanation against actual code.", "Observe: the selected pattern."]},
+    {icon: "🔧", title: "Implement", description: "Add an optional timeout; preserve callers, add edge-case tests and run them.", items: ["Inspect: changed files and regressions.", "Verify: actual test results."]},
+    {icon: "🧠", title: "Analyze", description: "Compare two recovery designs against these failure scenarios. State assumptions and tradeoffs.", items: ["Inspect: coverage and unresolved questions.", "Consider Max when depth matters."]}
+  ]'
+  :insight='{icon: "🔀", text: "Prompts and inspection goals, not observed outputs or routing guarantees. Single remains a valid outcome."}'
+  :progressDots='{current: 3, total: 3, activeColor: "bg-indigo-400 shadow-lg shadow-indigo-500/50"}'
+/>
 
-<div class="p-3 rounded-lg" style="background: #161b22; border-left: 4px solid #d29922;">
-<b style="color: #d29922;">🎯 This month</b>
-<ul class="mt-1 text-xs list-disc list-inside" style="color: #e6edf3;">
-<li>For known-hard tasks (deep refactor, security review), <b>pin a reasoning-grade model for the whole session</b> — don't flip in the middle.</li>
-<li>If you admin a Copilot org: evaluate the new admin controls (Auto as default / enforce-only).</li>
-<li>Read the <a href="https://aka.ms/vscode/blog/token-efficiency">VS Code token-efficiency deep dive</a> to see the harness changes in detail.</li>
-</ul>
-</div>
-
-</div>
+<!--
+Duration: 2:00. Cumulative: 14:00.
+Audience question: What useful prompts can I try?
+Discuss the prompt and inspection goal together. Prompt category does not force
+an execution pattern. Use this time to inspect any optional live result or
+disclose incomplete checks; keep discussion of all three prompts concise.
+Use a function already available in the current repository for the explanation
+prompt. For implementation, name the relevant files, compatibility requirements
+and checks. For analysis, provide the designs and failure scenarios.
+These examples require repository context, not separate exercise files.
+If no live call ran, discuss what a correct response would cover without
+fabricating output. If code changed, inspect the files and independently run
+the repository's relevant checks.
+Source: https://docs.github.com/en/enterprise-cloud@latest/early-access/copilot/hydrafusion
+-->
 
 ---
 
-# 📖 References
+<!-- SLIDE: Part 4 — Evaluate the result -->
+# Part 4 — Evaluate the result
+<SectionOpenerSlide
+  :partNumber="4"
+  title="Evaluate the result"
+  subtitle="Use actual progress, file changes and usage to understand what ran."
+  :cards='[
+    {icon: "👁️", title: "Progress", blurb: "Inspect actual pattern and passes."},
+    {icon: "📁", title: "Result", blurb: "Verify behavior and workspace changes."},
+    {icon: "📊", title: "Usage", blurb: "Read participating-model consumption."}
+  ]'
+  :terminal='{context: "A review pass contributes analysis.", detail: "Correctness still needs independent checks."}'
+/>
 
-<div class="text-sm mt-4 space-y-2" style="background: #0d1117;">
-
-<div class="p-3 rounded-lg" style="background: #161b22; border: 1px solid #30363d;">
-<b style="color: #e6edf3;">🔗 Primary source</b>
-<div class="text-xs mt-1">
-<a href="https://github.blog/ai-and-ml/github-copilot/getting-more-from-each-token-how-copilot-improves-context-handling-and-model-routing/">github.blog — Getting more from each token: how Copilot improves context handling and model routing</a>
-</div>
-</div>
-
-<div class="p-3 rounded-lg" style="background: #161b22; border: 1px solid #30363d;">
-<b style="color: #e6edf3;">📚 Official docs</b>
-<ul class="text-xs mt-1 list-disc list-inside space-y-1">
-<li><a href="https://docs.github.com/en/copilot/concepts/auto-model-selection">docs.github.com — Auto model selection (concepts)</a></li>
-<li><a href="https://docs.github.com/en/copilot/how-tos/manage-and-track-spending/manage-company-spending">docs.github.com — How to get more out of your AI credits</a></li>
-</ul>
-</div>
-
-<div class="p-3 rounded-lg" style="background: #161b22; border: 1px solid #30363d;">
-<b style="color: #e6edf3;">🔬 Technical deep dives</b>
-<ul class="text-xs mt-1 list-disc list-inside space-y-1">
-<li><a href="https://aka.ms/vscode/blog/token-efficiency">VS Code — Token efficiency: prompt caching, cache-control breakpoints, provider-specific tool search</a></li>
-<li><a href="https://arxiv.org/pdf/2605.17106">arXiv — HyDRA routing paper (PDF)</a></li>
-</ul>
-</div>
-
-<div class="p-3 rounded-lg" style="background: #161b22; border: 1px solid #30363d;">
-<b style="color: #e6edf3;">🛠️ Companion tools</b>
-<ul class="text-xs mt-1 list-disc list-inside space-y-1">
-<li><a href="https://aka.ms/agent-finder/changelog">Agent Finder in GitHub Copilot — changelog</a></li>
-<li><a href="https://github.com/orgs/community/discussions/categories/copilot-conversations">GitHub Community — Copilot discussions</a></li>
-</ul>
-</div>
-
-</div>
+<!--
+Duration: 0:15. Cumulative: 14:15.
+Audience question: What can I inspect after execution?
+Connect actual progress to the final result and usage. This four-minute section
+includes the two body slides plus brief recap, actions and references.
+Source: https://docs.github.com/en/enterprise-cloud@latest/early-access/copilot/hydrafusion
+-->
 
 ---
-layout: end
+
+<!-- SLIDE: Inspect progress result workspace and usage -->
+# Inspect progress result workspace and usage
+<FourCardGridSlide
+  :partNumber="4"
+  pillIcon="👁️"
+  pillLabel="Evaluate · Observable evidence"
+  title="Inspect what ran and whether the result fits"
+  :cards='[
+    {icon: "🔀", title: "Actual execution", description: "Read the selected pattern, planned passes, progress, elapsed time and warnings."},
+    {icon: "💬", title: "Response and models", description: "Inspect the final response. In VS Code or the app, hover the response for model details."},
+    {icon: "📁", title: "Workspace and behavior", description: "Read changed files, verify relevant behavior and independently rerun appropriate checks."},
+    {icon: "📊", title: "Session usage", description: "Use /usage for per-model session consumption. Record a starting point for comparisons."}
+  ]'
+  :insight='{icon: "", text: "If a result is wrong: give one precise failing example, narrow the task, and rerun relevant checks."}'
+  :progressDots='{current: 1, total: 2, activeColor: "bg-purple-400 shadow-lg shadow-purple-500/50"}'
+/>
+
+<!--
+Duration: 1:15. Cumulative: 15:30.
+Audience question: How do I read a completed or incomplete execution?
+Use actual client evidence. A completed conversation retains a summary and any
+warnings. Do not infer the execution path from answer quality or prompt wording.
+CLI /usage is session consumption; compare starting and ending states before
+attributing usage to a prompt. Inspect behavior separately from test-runner status.
+If unfinished, record what is and is not verified. An extra review pass supplies
+analysis, not automatic acceptance. Narrow the task when assumptions remain unclear.
+/collect-debug-logs creates a diagnostic archive. Inspect/redact it before
+sharing through an approved channel; do not publish it automatically.
+For comparison use identical inputs and matching repository revisions in separate sessions.
+Record option, observed pattern, accepted checks, actual time and AI credits.
+One run illustrates behavior; repeated comparable runs assess consistency.
+Source: https://docs.github.com/en/enterprise-cloud@latest/early-access/copilot/hydrafusion
+-->
+
 ---
 
-<div class="h-full flex flex-col items-center justify-center" style="background: #0d1117;">
-  <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 16 16" fill="#e6edf3"><path d="M6.766 11.695C4.703 11.437 3.25 9.904 3.25 7.92c0-.806.281-1.677.75-2.258-.203-.532-.172-1.662.062-2.129.626-.081 1.469.258 1.969.726.594-.194 1.219-.291 1.985-.291.765 0 1.39.097 1.953.274.484-.451 1.343-.79 1.969-.709.218.435.25 1.564.046 2.113.5.613.766 1.436.766 2.274 0 1.984-1.453 3.485-3.547 3.759.531.355.891 1.129.891 2.016v1.678c0 .484.39.758.859.564C13.781 14.824 16 11.905 16 8.291 16 3.726 12.406 0 7.984 0 3.562 0 0 3.726 0 8.291c0 3.581 2.203 6.55 5.172 7.663A.595.595 0 0 0 6 15.389v-1.291c-.219.097-.5.162-.75.162-1.031 0-1.641-.581-2.078-1.662-.172-.435-.36-.693-.719-.742-.187-.016-.25-.097-.25-.193 0-.194.313-.339.625-.339.453 0 .844.29 1.25.887.313.468.641.678 1.031.678.391 0 .641-.146 1-.516.266-.275.469-.517.657-.678Z"/></svg>
-  <h1 class="!text-4xl !font-bold mt-6" style="color: #e6edf3;">
-    Copilot Auto Mode
-  </h1>
-  <p class="mt-4" style="color: #8b949e;">Smarter Tokens, Smarter Routing</p>
-  <div class="mt-8 text-sm" style="color: #484f58;">CopilotTraining · Tech Talk</div>
-</div>
+<!-- SLIDE: Workspace billing and preview boundaries -->
+# Workspace billing and preview boundaries
+<FourCardGridSlide
+  :partNumber="4"
+  pillIcon="🛡️"
+  pillLabel="Evaluate · Operating boundaries"
+  title="Keep workspace changes, billing and preview limits visible"
+  :cards='[
+    {icon: "📁", title: "Draft edits can persist", description: "Discarding a draft does not undo edits automatically. Inspect files after stops or failures."},
+    {icon: "📊", title: "Per-model billing", description: "Each model uses its standard rate. No orchestration surcharge; no Auto discount."},
+    {icon: "🛡️", title: "Access and permissions", description: "Administrator policy governs models and preview access. Normal tool permissions stay in force."},
+    {icon: "🔬", title: "Research preview", description: "HydraFusion and Max have no SLA and are not intended for production workloads."}
+  ]'
+  :insight='{icon: "", text: "Historical offline results show quality/cost tradeoffs; they do not forecast Max or local savings."}'
+  :progressDots='{current: 2, total: 2, activeColor: "bg-purple-400 shadow-lg shadow-purple-500/50"}'
+/>
 
-<style>
-/* GitHub Primer Brand — Dark Theme Override */
-:root {
-  --slidev-theme-background: #0d1117;
-  --slidev-theme-foreground: #e6edf3;
-}
+<!--
+Duration: 1:20. Cumulative: 16:50.
+Audience question: Which operating boundaries change how I use the preview?
+Discarding a draft and reverting its file edits are different events. Inspect
+the workspace after completion, interruption or failure. Preserve unrelated
+changes and recover deliberately. Current docs supersede launch patch-safety
+and tool-less-critic wording.
+Every participating model bills at its standard rate. No separate orchestration
+charge and no Auto discount. Extra passes can increase latency and AI credits.
+Do not supply fabricated timings, credit amounts or projected local savings.
+Full historical offline comparisons against Opus 5, notes only:
+| Benchmark | Estimated workflow cost | Verified quality difference |
+| TerminalBench 2.1 | 67% lower | +4.9 percentage points |
+| DeepSWE | 36% lower | -1.5 percentage points |
+| CheckpointBench | 65% lower | -0.1 percentage points |
+These historical policies, pools, pricing assumptions and medium-effort runs
+show tradeoffs. Quality was not uniformly higher. They do not benchmark October
+Max or forecast a local workload. Evaluate actual repeated comparable tasks.
+Sources: https://docs.github.com/en/enterprise-cloud@latest/early-access/copilot/hydrafusion#billing-for-hydrafusion
+https://github.blog/changelog/2026-10-14-hydrafusion-updates-and-new-max-option/
+https://github.blog/ai-and-ml/github-copilot/project-hydrafusion-frontier-quality-via-multi-model-orchestration/
+-->
 
-.slidev-layout {
-  background: #0d1117 !important;
-  color: #e6edf3 !important;
-}
+---
 
-.slidev-page {
-  background: #0d1117 !important;
-}
+<!-- SLIDE: Before and After -->
+# Before and After
+<BeforeAfterSlide
+  header="From a picker entry to an inspectable runtime"
+  :leftItems='["Identify the selected option", "Read the final response", "Inspect changed code", "Estimate execution cost"]'
+  :rightItems='["Distinguish routing from orchestration", "Read the actual pattern and passes", "Verify behavior and workspace state", "Inspect per-model session usage"]'
+  :metrics='[
+    {value: "3", detail: "conceptual execution patterns"},
+    {value: "3", detail: "supported client surfaces"},
+    {value: "1", detail: "final response per prompt"}
+  ]'
+/>
 
-h1, h2, h3 {
-  color: #e6edf3 !important;
-}
+<!--
+Duration: 0:30. Cumulative: 17:20.
+Audience question: What understanding should I retain?
+Recap the technical progression: one-model routing versus workflow selection;
+per-prompt paths; client use; inspection of actual execution and result.
+The three metrics are documented structural facts, not measured improvements.
+Source: https://docs.github.com/en/enterprise-cloud@latest/early-access/copilot/hydrafusion
+-->
 
-p, li, span {
-  color: #e6edf3;
-}
+---
 
-a {
-  color: #58a6ff !important;
-}
+<!-- SLIDE: What You Can Do Today -->
+# What You Can Do Today
+<WhatYouCanDoTodaySlide
+  :today='["Enable the preview in one client.", "Try a read-only explanation.", "Observe actual progress and models."]'
+  :thisWeek='["Try one bounded non-production edit.", "Inspect files and rerun relevant checks.", "Record real elapsed time and usage."]'
+  :thisMonth='["Compare identical inputs across sessions.", "Evaluate Max on demanding analysis.", "Recheck changing preview guidance."]'
+  footer="Understand the workflow, use normal Copilot prompts, and verify the actual result."
+/>
 
-table {
-  border-collapse: collapse;
-  width: 100%;
-}
+<!--
+Duration: 0:30. Cumulative: 17:50.
+Audience question: What is a useful next experiment?
+Enable one client and start read-only. Then try a bounded non-production edit
+with explicit checks. Evaluate Max where depth matters. Use comparable initial
+inputs, retain normal permissions, and inspect actual files and usage.
+Source: https://docs.github.com/en/enterprise-cloud@latest/early-access/copilot/hydrafusion
+-->
 
-th {
-  color: #e6edf3 !important;
-  background: #161b22 !important;
-  border-bottom: 2px solid #30363d !important;
-  padding: 0.5rem 0.75rem;
-}
+---
 
-td {
-  color: #8b949e !important;
-  background: #0d1117 !important;
-  border-bottom: 1px solid #21262d !important;
-  padding: 0.5rem 0.75rem;
-}
+<!-- SLIDE: References -->
+# References
+<ReferencesSlide
+  :groups='[
+    {title: "Current operating guidance", color: "purple", items: [
+      {href: "https://docs.github.com/en/enterprise-cloud@latest/early-access/copilot/hydrafusion", label: "Using HydraFusion", description: "Setup, patterns, progress, billing and limitations."},
+      {href: "https://docs.github.com/en/copilot/concepts/models/auto-model-selection", label: "Auto model selection", description: "Routing behavior and Auto tiers."}
+    ]},
+    {title: "Mechanism and dated evidence", color: "green", items: [
+      {href: "https://github.blog/changelog/2026-10-14-hydrafusion-updates-and-new-max-option/", label: "October 14 update and Max", description: "Stage effort, judge/repair and workspace-aware critics."},
+      {href: "https://github.blog/ai-and-ml/github-copilot/project-hydrafusion-frontier-quality-via-multi-model-orchestration/", label: "Project HydraFusion", description: "Architecture and historical offline evaluations."}
+    ]}
+  ]'
+/>
 
-tr:hover td {
-  background: #161b22 !important;
-}
+<!--
+Duration: 0:10. Cumulative: 18:00.
+Audience question: Where can I verify the mechanism and operating details?
+Current documentation governs behavior; October update explains new mechanisms.
+Launch evaluations are historical evidence. Canonical source verified October 26.
+https://docs.github.com/en/enterprise-cloud@latest/early-access/copilot/hydrafusion
+https://docs.github.com/en/copilot/concepts/models/auto-model-selection
+https://github.blog/changelog/2026-10-14-hydrafusion-updates-and-new-max-option/
+https://github.blog/ai-and-ml/github-copilot/project-hydrafusion-frontier-quality-via-multi-model-orchestration/
+-->
 
-code {
-  background: #161b22 !important;
-  color: #e6edf3 !important;
-  border-radius: 6px;
-}
+---
 
-.slidev-page::after {
-  background: #161b22 !important;
-  color: #8b949e !important;
-  border: 1px solid #30363d;
-}
+<!-- SLIDE: Thank You -->
+# Thank You
+<ThankYouSlide
+  title="Understand. Follow. Use. Evaluate."
+  subtitle="HydraFusion: How It Works and How to Use It"
+  :cards='[
+    {value: "Workflow", detail: "Selected for each prompt."},
+    {value: "Use", detail: "Enable, select and prompt."},
+    {value: "Evidence", detail: "Inspect progress, results and usage."}
+  ]'
+  prompt="Which existing task would make a useful comparison because its result is easy to verify?"
+>
+  <template #logo>
+    <GitHubBrandMark class="sv-thanks-logo" />
+  </template>
+</ThankYouSlide>
 
-strong, b {
-  color: #e6edf3;
-}
-</style>
+<!--
+Duration: 2:00 discussion. Cumulative: 20:00.
+Audience question: Which task makes a useful local comparison?
+Invite concrete examples of explanation, implementation or demanding analysis.
+Ask which evidence would establish a useful result and which unresolved
+assumptions would justify a follow-up. Clarify that prompts cannot force a
+pattern; Max adds depth-oriented execution rather than a correctness guarantee.
+Reiterate research-preview/no-SLA/non-production boundaries if relevant.
+Close at twenty minutes, including discussion.
+Sources: https://docs.github.com/en/enterprise-cloud@latest/early-access/copilot/hydrafusion
+https://docs.github.com/en/copilot/concepts/models/auto-model-selection
+-->

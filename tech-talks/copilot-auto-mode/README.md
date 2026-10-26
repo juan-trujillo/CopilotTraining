@@ -1,200 +1,180 @@
 ---
 status: active
-updated: 2026-06-23
+updated: 2026-10-26
 section: "Agent Architecture"
 references:
-  - url: https://github.blog/ai-and-ml/github-copilot/getting-more-from-each-token-how-copilot-improves-context-handling-and-model-routing/
-    label: "GitHub Blog — Getting more from each token: how Copilot improves context handling and model routing"
-    verified: 2026-06-23
-  - url: https://docs.github.com/en/copilot/concepts/auto-model-selection
-    label: "GitHub Docs — Auto model selection"
-    verified: 2026-06-23
-  - url: https://aka.ms/vscode/blog/token-efficiency
-    label: "VS Code — Token efficiency technical deep dive (prompt caching & tool search)"
-    verified: 2026-06-23
-  - url: https://arxiv.org/pdf/2605.17106
-    label: "HyDRA routing research paper (arXiv)"
-    verified: 2026-06-23
-  - url: https://docs.github.com/en/copilot/how-tos/manage-and-track-spending/manage-company-spending
-    label: "GitHub Docs — How to get more out of your AI credits"
-    verified: 2026-06-23
-  - url: https://aka.ms/agent-finder/changelog
-    label: "Agent Finder changelog (tool curation in Copilot)"
-    verified: 2026-06-23
+  - url: https://github.blog/changelog/2026-10-14-hydrafusion-updates-and-new-max-option/
+    label: "October 14: HydraFusion updates and Max"
+    verified: 2026-10-26
+  - url: https://docs.github.com/en/enterprise-cloud@latest/early-access/copilot/hydrafusion
+    label: "Using HydraFusion: setup, execution, billing and limitations"
+    verified: 2026-10-26
+  - url: https://github.blog/ai-and-ml/github-copilot/project-hydrafusion-frontier-quality-via-multi-model-orchestration/
+    label: "Project HydraFusion: architecture and offline evaluations"
+    verified: 2026-10-26
+  - url: https://docs.github.com/en/copilot/concepts/models/auto-model-selection
+    label: "Auto model selection and routing tiers"
+    verified: 2026-10-26
 ---
 
-# Copilot Auto Mode: Smarter Tokens, Smarter Routing
+# HydraFusion: How It Works and How to Use It
 
 > **The Question This Talk Answers:**
-> *"What is Copilot's Auto mode actually doing under the hood — and when should I let it pick the model for me instead of pinning one myself?"*
+> *"How does HydraFusion orchestrate models, how do we use it, and when does Max fit?"*
 
-**Duration:** 20 minutes | **Target Audience:** Developers / Architects / AI-engineering practitioners
+**Duration:** 20 minutes, including examples and two minutes of discussion.
+**Audience:** Developers and architects using Copilot.
+**Verified:** October 26, 2026. HydraFusion and HydraFusion Max remain **research preview**, with no SLA, and are not intended for production workloads.
 
----
+HydraFusion is a runtime orchestrator available through Copilot's model picker. It chooses how to solve a prompt: which execution pattern to use, which models run the steps, and how much reasoning effort each step receives. The result is one final response backed by the selected workflow.[^1]
 
-## 📊 Content Fitness
+**Local presentation:**
 
-| Criterion | Assessment | Notes |
-|-----------|-----------|-------|
-| **Relevant** | 🟢 High | Auto is now the default surface for Free/Student plans and is rolling out to CLI, IDEs, and GitHub App — every Copilot user will hit it |
-| **Compelling** | 🟢 High | Demystifies HyDRA routing, cache-aware decisions, and the prompt-caching + tool-search harness changes — pulled directly from the GitHub blog and VS Code deep dive |
-| **Actionable** | 🟢 High | Six concrete habits to preserve cache and stretch credits, plus a "when to override Auto" decision rubric |
+```powershell
+Set-Location C:\code\CopilotTraining\slides
+npm run dev -- .\tech-talks\copilot-auto-mode.md
+```
 
-**Overall Status:** 🟢 Ready to use
+The presentation works without HydraFusion access. Optional live Copilot calls require preview access and consume AI credits.
 
----
+**Presenter reference:** [Timed, slide-by-slide talk track](talktrack.md) for the 20-minute deck.
 
-## The Problem
+<!-- 🎬 MAJOR SECTION: Understand the orchestrator -->
+## Understand the orchestrator
 
-### Key Points
+**Time budget: 3 minutes**, following a one-minute introduction.
 
-- **Long agentic sessions waste tokens on repetition.** Instructions, repo context, tool schemas, and conversation history get re-sent on every turn — even when nothing relevant has changed.
-- **One model for every task is the wrong default.** A quick explanation, a focused edit, and a 15-file refactor have wildly different reasoning needs but get billed at the same rate when you pin a single premium model.
-- **Manual model picking is friction.** Developers either over-pay (always pick the strongest model) or under-deliver (always pick the cheapest), because there's no scalable way to evaluate fit per turn.
-- **Switching models mid-session breaks the cache.** The very act of "optimizing" by hand can cost more than it saves when it invalidates the prompt prefix.
+### Auto, HydraFusion and Max
 
-### Narrative
+| Option | What the system selects | Typical use |
+|---|---|---|
+| **Auto** | One model based on task fit and service health. | Routine coding, explanations and focused edits. |
+| **HydraFusion** | Execution pattern, models and reasoning effort per step. | Substantial, well-scoped work where review or escalation may help. |
+| **HydraFusion Max** | The same orchestration architecture, tuned for deeper reasoning. | Demanding tasks where depth and thoroughness justify additional execution. |
 
-Agentic Copilot workloads aren't "one prompt, one answer" anymore. A coding agent session loops through plan → edit → test → debug, each turn carrying along the same system prompt, repo context, tool definitions, and history. Most of that payload is identical from turn N to turn N+1 — and the model is paying to "read" it again every time.
+HydraFusion is a system behind a picker entry, not a new foundation model. Selecting it delegates workflow and model coordination. Extra passes are selective: straightforward work can still use one solving model.[^1]
 
-The article frames this as two distinct levers GitHub is pulling: **harness efficiency** (prompt caching + on-demand tool search, so each turn carries less repeat freight) and **smart routing** (Auto picks the model that fits the current task using HyDRA + live model health). Together they're the reason Copilot can feel faster, cheaper, and *better* at once — but only if you let the system make decisions instead of fighting it with manual overrides.
+Auto's Efficiency, Balance and Intelligence tiers adjust routing preferences in VS Code, CLI and the Copilot app. They continue to select a model for the task. HydraFusion adds execution-pattern selection.[^2]
 
----
+### What Max changes
 
-## The Solution: Auto Mode (Harness + Routing)
+The October 14 update introduces HydraFusion Max alongside the balanced HydraFusion option. Drafting uses medium reasoning, reviews use high reasoning, and Max can use extra-high reasoning. Max applies depth-oriented tuning while continuing to consider token efficiency through orchestration.[^3]
 
-### What It Does
+The announced model pool included Claude Opus 5.5, GPT-6 Astra, GPT-6.1 Sol and GPT-6 Luna. This is an **October 14 snapshot**. Models can change, and organization policies limit the eligible pool. The user cannot choose HydraFusion's constituent models or force a particular pattern.[^1][^3]
 
-Auto mode is two coordinated systems. First, the VS Code Copilot harness reuses model state across turns (prompt caching) and loads tool definitions on demand (tool search), so the model isn't re-ingesting the same prefix and the same 40-tool schema every request. Second, Auto's router uses HyDRA (a learned task-aware routing model) plus real-time model health to pick the model that fits *this* turn — escalating to stronger reasoning only when it actually changes the answer.
+<!-- 🎬 MAJOR SECTION: Follow the execution -->
+## Follow the execution
 
-### Key Capabilities
+**Time budget: 4 minutes.**
 
-- **Prompt caching with cache-control breakpoints.** Reuses computed model state for repeated prompt prefixes instead of recomputing each turn.
-- **Tool search (deferred tool loading).** Sends tool definitions on demand, not the entire schema upfront — critical as MCP/tool counts grow.
-- **HyDRA task-aware routing.** A learned router that scores reasoning depth, code complexity, debugging difficulty, and tool orchestration needs to pick the smallest model that meets quality.
-- **Real-time model health signals.** Availability, utilization, speed, error rate, and cost — Auto won't route to a "best" model that's degraded right now.
-- **Cache-aware routing boundaries.** Auto only switches models at natural cache resets (first turn, post-compaction) — never mid-conversation where the cache cost would dwarf the routing win.
-- **Multilingual routing parity.** Trained across 16 language families; routing accuracy stays within 4 points of the English baseline (no statistically significant gap across CJK / European / Other).
-- **Escalation learned from divergence.** Trained on quality-scored pairs of weaker-vs-stronger model responses, so the router learns *when* stronger models actually help.
+### Three patterns, one final response
 
----
+These paths are **conceptual architecture**, not captured product output:
 
-## Key Artifacts (Slide Inventory)
+```text
+Single:   selected model -> final response
+Cascade:  efficient draft -> judge -> accept, repair or escalate
+Critique: draft -> independent review -> original solver revises once
+```
 
-| # | Slide | Purpose |
-|---|-------|---------|
-| 1 | Title | Hook |
-| 2 | The Question | Frame the talk |
-| 3 | Table of Contents | Navigation |
-| 4 | The Problem | Why repetition + manual picking hurts |
-| 5 | The Solution | Harness + router, the two levers |
-| 6 | 🧠 The Shift (preview) | "Stop picking models. Pick a strategy." |
-| 7 | When Auto wins / when to override | Decision tree |
-| 8 | 🎬 Harness Efficiency divider | Section card |
-| 9 | Prompt caching | What it is, why prefix matters |
-| 10 | Tool search | Deferred tool definitions, why it scales with MCP |
-| 11 | Why this matters in agentic loops | Plan→edit→test→debug repeat-tax visual |
-| 12 | 🎬 Smart Routing divider | Section card |
-| 13 | How Auto chooses a model | Two signals: task intent + health |
-| 14 | HyDRA in one slide | Learned router, quality vs cost frontier |
-| 15 | Benchmarks: HyDRA peak / aggressive / conservative | Real chart data from the article |
-| 16 | Cache-aware routing | Why models *don't* switch mid-conversation |
-| 17 | Multilingual routing | Within 4 points of English |
-| 18 | 🎬 Practical Habits divider | Section card |
-| 19 | Six habits to stretch credits | Action checklist from the article |
-| 20 | What's expanding | CLI, IDEs, GitHub App, admin enforce |
-| 21 | 🧠 Mental Model Shift (full) | Move-Toward / Away / Against grid |
-| 22 | What You Can Do Today | Concrete next steps |
-| 23 | 📖 References | Clickable sources |
-| 24 | End | Branded close |
+| Pattern | Mechanism | Tradeoff |
+|---|---|---|
+| **Single** | One selected model solves the task. | Preserves the latency and efficiency of a direct solving pass. |
+| **Cascade** | A judge inspects the initial work and can request repair or escalation to stronger inference. | Adds evaluation while reserving further solving for work that needs it. |
+| **Critique** | A separate model reviews the draft, and the original solver revises once using the feedback. | Adds an independent perspective and review latency. |
 
-Target length: ~22-24 slides for a 20-minute slot (≈50 sec/slide average; allow buffer for Q&A).
+HydraFusion chooses a pattern **for each prompt**. Different prompts in one conversation can follow different paths. The selection step is lightweight; review and revision account for the extra passes. Intermediate drafts may be changed or discarded, while the user receives the final response and visible progress.[^1]
 
----
+### October's workspace-aware review
 
-## Major Sections
+The October update makes Cascade's judging and repair more explicit. Critique uses tools to inspect the actual workspace and can use parallel critics. Reasoning effort is assigned per stage, so solving and reviewing can receive different effort levels.[^3]
 
-<!-- 🎬 MAJOR SECTION: Harness Efficiency -->
-<!-- 🎬 MAJOR SECTION: Smart Routing -->
-<!-- 🎬 MAJOR SECTION: Practical Habits -->
+HydraFusion's internal orchestration is separate from subagents; HydraFusion does not start them. Its main conversation stays on the same model where possible to benefit from caching, while helpers receive the context they need. It has no independent context window: the displayed limit is conservative and reflects the constituent models' limits.[^1]
 
----
+**Current operating boundary:** Discarding a draft does not automatically undo edits it already made. Inspect workspace state after completion, interruption or failure. The launch article's earlier descriptions of tool-less review and fail-safe patch application are historical; current documentation governs the preview's operating behavior.[^1][^4]
 
-## 🧠 The Shift
+<!-- 🎬 MAJOR SECTION: Use HydraFusion -->
+## Use HydraFusion
 
-**Core insight:** *Stop choosing models. Choose a strategy and let Auto choose models.*
+**Time budget: 6 minutes**, including one optional short example.
 
-| From | To |
-|------|----|
-| "Pin GPT-5.5 / Opus for everything safe" | Let Auto route; only override at known-hard boundaries |
-| "Manually switch models when it feels too slow / too dumb" | Trust cache-aware routing; switching breaks the prefix cache |
-| "Load every MCP tool, just in case" | Curate tools per task; tool search defers what isn't needed |
-| "One long mega-session for everything" | Compact at natural boundaries — that's where the router gets fresh signal |
+### Enable it in the client
 
----
+| Client | Enable and select | Inspect execution |
+|---|---|---|
+| **CLI** | Start `copilot --experimental`; use `/model` to select HydraFusion or HydraFusion Max (Research Preview). | Watch the pattern and pass progress; `/usage` shows per-model session consumption. |
+| **VS Code** | Version 1.140+ or Insiders; enable `chat.copilot.hydraFusion.enabled`; select HydraFusion or Max in Chat. | Watch steps; hover over a completed-response footer for models. |
+| **Copilot app** | Current app; Settings → Experimental → HydraFusion; select HydraFusion or Max. | Watch progress; hover over the response for models. |
 
-## 📊 Mental Model Shift
+If CLI requires an update, the documented command is `copilot update`. Enabling `/experimental on` inside an existing CLI session requires restarting. A single-prompt invocation is also documented:[^1]
 
-### ✅ Move Toward
+```powershell
+copilot --experimental --model hydrafusion -p "Summarize this repository's README and list any setup assumptions. Do not edit files."
+```
 
-- **Auto as the default**, especially on first turn — that's where routing has the cleanest signal.
-- **Stable session settings**: pick model/reasoning/tools once, then keep related work together so the cache compounds.
-- **Compaction at task boundaries**, not arbitrary points — that's also where Auto can safely re-route.
-- **Curated tool surfaces** (use Agent Finder) instead of "all MCPs enabled all the time."
+Run this command from an existing repository with a README. It is an optional live call and consumes AI credits; its result is generated at runtime.
 
-### ⚠️ Move Away From
+The October announcement lists Pro, Pro+, Business and Enterprise. Preview enablement and allowed-model policies govern availability. If the option is absent, verify the client setting and administrator policy. Auto can run the same examples, with the selected option clearly labeled.[^1][^3]
 
-- Switching models mid-conversation to "try" a different one — the cache cost usually exceeds the routing benefit.
-- Pinning the most expensive model "to be safe" — Auto's evaluations show no single model wins across tasks.
-- Treating every long-running session as one unit — split when intent changes.
+### Three example prompts
 
-### 🛑 Move Against
+| Example | Representative prompt | What to inspect |
+|---|---|---|
+| **Explain a function** | "Explain this function and list its boundary cases. Do not edit files." | Whether the explanation matches the code; observe the selected pattern. |
+| **Implement a bounded change** | "Add an optional timeout, preserve existing callers, add edge-case tests and run them." | Modified files, regression tests and actual execution progress. |
+| **Analyze a difficult design** | "Compare two recovery designs using these failure scenarios. State assumptions, tradeoffs and unresolved questions." | Completeness of assumptions and reasoning; Max is a candidate when deeper analysis matters. |
 
-- Adding every MCP server you can find — broad tool surfaces inflate every turn even with tool search.
-- Manually re-tuning reasoning depth per turn — that's exactly the loop Auto is trained to handle.
-- Assuming Auto = "cheap." Auto routes *up* when the task demands it; the goal is fit, not cost.
+These prompts illustrate uses, **not guaranteed routing outcomes**. Single is a valid result even for an example that sounds review-worthy. A prompt cannot force Cascade or Critique.[^1]
 
----
+### Use the examples with existing repository context
 
-## When to Use This Pattern
+For an explanation, supply a function already available in the current repository. For an implementation, name the relevant files, compatibility requirements and checks. For design analysis, provide the candidate designs and failure scenarios. The prompts need that context; no separate exercise files are required.
 
-| Scenario | Use Auto? | Why |
-|----------|-----------|-----|
-| Day-to-day chat, edits, explanations | ✅ Yes | Auto's sweet spot; cache + routing both pay off |
-| Long agentic coding-agent session | ✅ Yes | Harness benefits compound across many turns |
-| Multilingual codebases / prompts | ✅ Yes | Routing parity proven across CJK/European/Other |
-| You have a known-hard reasoning task (architecture, security review) | ⚠️ Override | Pin a reasoning-grade model for the *whole* session, don't flip mid-way |
-| Compliance / reproducibility requirements (need same model end-to-end) | ⚠️ Override | Pin for audit trail; document the choice |
-| Free / Student plan | ✅ Forced | Auto is the only option going forward |
-| Org wants standardized behavior | ✅ Admin-enforced | New admin controls let orgs set Auto as default or only option |
+**Presentation timebox:** Allow two minutes of setup, two minutes of optional live model execution, and two minutes of inspection or discussion. If execution reaches its limit, press Esc, inspect the current files and state which checks remain unverified. Without a live call, discuss the prompts and inspection goals without inventing a response.
 
----
+<!-- 🎬 MAJOR SECTION: Evaluate the result -->
+## Evaluate the result
 
-## What You Can Do Today
+**Time budget: 4 minutes**, followed by two minutes of discussion.
 
-- [ ] **Default to Auto** on your next 5 sessions; compare credit burn against your previous baseline.
-- [ ] **Stop mid-session model switching.** Pick once, finish the task, then start fresh.
-- [ ] **Compact at task boundaries** — that's a free re-route opportunity for Auto.
-- [ ] **Audit your enabled MCP tools.** Run Agent Finder, disable anything not in active use for this task type.
-- [ ] **Open the AI Usage page** and identify your top 1 expensive pattern this week.
-- [ ] **For known-hard tasks** (deep refactor, security review), pin a reasoning-grade model *for the whole session* rather than flipping in the middle.
+### Inspect progress, changes and usage
 
----
+CLI reports the selected pattern, planned passes, progress and elapsed time. Completed conversations retain a summary, including warnings. Use the actual display to understand what ran. `/usage` exposes per-model session consumption; `/collect-debug-logs` creates a more detailed diagnostic archive. Inspect and redact that archive before sharing through an approved channel.[^1]
 
-## Related Patterns
+Acceptance still comes from the actual result: correct behavior, relevant tests, the workspace diff and any unresolved cases. If the result differs from the contract, supply a precise failing example, narrow the task and rerun. More review passes provide additional analysis; a model's approval does not replace the acceptance checks.
 
-- **Model Selection** (`tech-talks/model-selection/`) — when you *do* override Auto, this is the framework for picking the right pin.
-- **Multi-Step Tasks** (`tech-talks/multi-step-tasks/`) — context isolation via subagents complements cache-aware routing.
-- **Copilot Memory** (`tech-talks/copilot-memory/`) — another lever for reducing per-turn repetition.
-- **Customization Best Practices** (`tech-talks/customization-best-practices/`) — instructions/prompts that survive caching efficiently.
+HydraFusion bills each participating model at its standard rate. There is no separate orchestration charge, and the Auto discount does not apply. Multiple passes can increase AI credits and elapsed time. Use measured usage for local comparisons; organization administrators own model and preview policies.[^1]
 
----
+### Interpret the performance evidence
+
+GitHub's launch article reports controlled offline comparisons against Opus 5:[^4]
+
+| Benchmark | Estimated workflow cost | Verified quality difference |
+|---|---|---|
+| TerminalBench 2.1 | 67% lower | +4.9 percentage points |
+| DeepSWE | 36% lower | -1.5 percentage points |
+| CheckpointBench | 65% lower | -0.1 percentage points |
+
+These historical runs used specific policies, model pools, pricing assumptions and medium reasoning. They demonstrate quality/cost tradeoffs. They are **not a benchmark of October Max or a forecast of local savings**. The full table is reference material; the presentation needs only the caveat.
+
+For a local comparison, use identical task inputs and matching repository revisions in separate sessions. Record the selected option, observed pattern, acceptance checks, elapsed time and AI credits. One run illustrates behavior; repeated comparable runs are needed to assess consistency.
+
+### A practical starting point
+
+Use Auto for routine work. Try HydraFusion on a well-scoped, non-production task with explicit checks. Try Max when deeper reasoning is worth evaluating. Keep normal tool permissions, inspect edits after interruptions, and use current documentation to recheck preview behavior before delivery.
+
+**Closing question:** Which existing task would make a useful comparison because its result is easy to verify?
 
 ## 📖 References
 
-1. **[Getting more from each token: how Copilot improves context handling and model routing](https://github.blog/ai-and-ml/github-copilot/getting-more-from-each-token-how-copilot-improves-context-handling-and-model-routing/)** — GitHub Blog. Primary source for this talk.
-2. **[Auto model selection (concepts)](https://docs.github.com/en/copilot/concepts/auto-model-selection)** — GitHub Docs.
-3. **[Token efficiency technical deep dive](https://aka.ms/vscode/blog/token-efficiency)** — VS Code blog: prompt caching, cache-control breakpoints, provider-specific tool search.
-4. **[HyDRA routing paper](https://arxiv.org/pdf/2605.17106)** — arXiv (the routing model behind Auto).
-5. **[How to get more out of your AI credits](https://docs.github.com/en/copilot/how-tos/manage-and-track-spending/manage-company-spending)** — GitHub Docs.
-6. **[Agent Finder in Copilot](https://aka.ms/agent-finder/changelog)** — tool-curation companion to Auto.
+### Official documentation
+
+[^1]: [Using HydraFusion](https://docs.github.com/en/enterprise-cloud@latest/early-access/copilot/hydrafusion) — current setup, patterns, billing, progress and limitations.
+[^2]: [Auto model selection](https://docs.github.com/en/copilot/concepts/models/auto-model-selection) — task routing and Auto tiers.
+
+### Official announcements and research
+
+[^3]: [October 14 update and Max](https://github.blog/changelog/2026-10-14-hydrafusion-updates-and-new-max-option/) — stage-specific reasoning and updated workflows.
+[^4]: [Project HydraFusion](https://github.blog/ai-and-ml/github-copilot/project-hydrafusion-frontier-quality-via-multi-model-orchestration/) — architecture and historical offline evaluations.
+
+Private official-source discovery was used to cross-check the topic. All published claims use public official sources; private-only roadmap details are excluded.
