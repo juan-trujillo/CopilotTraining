@@ -1,0 +1,339 @@
+{
+  "format": 1,
+  "restore": {
+    "C:\\code\\CopilotTraining\\tech-talks\\copilot-primitives\\examples\\dotnet\\tests\\Orders.Tests\\Orders.Tests.csproj": {}
+  },
+  "projects": {
+    "C:\\code\\CopilotTraining\\tech-talks\\copilot-primitives\\examples\\dotnet\\src\\Orders.Api\\Orders.Api.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\code\\CopilotTraining\\tech-talks\\copilot-primitives\\examples\\dotnet\\src\\Orders.Api\\Orders.Api.csproj",
+        "projectName": "Orders.Api",
+        "projectPath": "C:\\code\\CopilotTraining\\tech-talks\\copilot-primitives\\examples\\dotnet\\src\\Orders.Api\\Orders.Api.csproj",
+        "packagesPath": "C:\\Users\\juantrujillo\\.copilot\\session-state\\555dc791-db38-4cc6-9a8e-a6d6bfce5941\\files\\nuget-packages",
+        "outputPath": "C:\\code\\CopilotTraining\\tech-talks\\copilot-primitives\\examples\\dotnet\\src\\Orders.Api\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\juantrujillo\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "https://packagefeedproxy.microsoft.io/nuget/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {
+              "C:\\code\\CopilotTraining\\tech-talks\\copilot-primitives\\examples\\dotnet\\src\\Orders.Contracts\\Orders.Contracts.csproj": {
+                "projectPath": "C:\\code\\CopilotTraining\\tech-talks\\copilot-primitives\\examples\\dotnet\\src\\Orders.Contracts\\Orders.Contracts.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Users\\juantrujillo\\.copilot\\session-state\\555dc791-db38-4cc6-9a8e-a6d6bfce5941\\files\\dotnet-sdk\\sdk\\8.0.426/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\code\\CopilotTraining\\tech-talks\\copilot-primitives\\examples\\dotnet\\src\\Orders.Contracts\\Orders.Contracts.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\code\\CopilotTraining\\tech-talks\\copilot-primitives\\examples\\dotnet\\src\\Orders.Contracts\\Orders.Contracts.csproj",
+        "projectName": "Orders.Contracts",
+        "projectPath": "C:\\code\\CopilotTraining\\tech-talks\\copilot-primitives\\examples\\dotnet\\src\\Orders.Contracts\\Orders.Contracts.csproj",
+        "packagesPath": "C:\\Users\\juantrujillo\\.copilot\\session-state\\555dc791-db38-4cc6-9a8e-a6d6bfce5941\\files\\nuget-packages",
+        "outputPath": "C:\\code\\CopilotTraining\\tech-talks\\copilot-primitives\\examples\\dotnet\\src\\Orders.Contracts\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\juantrujillo\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "https://packagefeedproxy.microsoft.io/nuget/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Users\\juantrujillo\\.copilot\\session-state\\555dc791-db38-4cc6-9a8e-a6d6bfce5941\\files\\dotnet-sdk\\sdk\\8.0.426/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\code\\CopilotTraining\\tech-talks\\copilot-primitives\\examples\\dotnet\\src\\Orders.Web\\Orders.Web.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\code\\CopilotTraining\\tech-talks\\copilot-primitives\\examples\\dotnet\\src\\Orders.Web\\Orders.Web.csproj",
+        "projectName": "Orders.Web",
+        "projectPath": "C:\\code\\CopilotTraining\\tech-talks\\copilot-primitives\\examples\\dotnet\\src\\Orders.Web\\Orders.Web.csproj",
+        "packagesPath": "C:\\Users\\juantrujillo\\.copilot\\session-state\\555dc791-db38-4cc6-9a8e-a6d6bfce5941\\files\\nuget-packages",
+        "outputPath": "C:\\code\\CopilotTraining\\tech-talks\\copilot-primitives\\examples\\dotnet\\src\\Orders.Web\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\juantrujillo\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "https://packagefeedproxy.microsoft.io/nuget/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {
+              "C:\\code\\CopilotTraining\\tech-talks\\copilot-primitives\\examples\\dotnet\\src\\Orders.Contracts\\Orders.Contracts.csproj": {
+                "projectPath": "C:\\code\\CopilotTraining\\tech-talks\\copilot-primitives\\examples\\dotnet\\src\\Orders.Contracts\\Orders.Contracts.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Users\\juantrujillo\\.copilot\\session-state\\555dc791-db38-4cc6-9a8e-a6d6bfce5941\\files\\dotnet-sdk\\sdk\\8.0.426/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\code\\CopilotTraining\\tech-talks\\copilot-primitives\\examples\\dotnet\\src\\Orders.Worker\\Orders.Worker.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\code\\CopilotTraining\\tech-talks\\copilot-primitives\\examples\\dotnet\\src\\Orders.Worker\\Orders.Worker.csproj",
+        "projectName": "Orders.Worker",
+        "projectPath": "C:\\code\\CopilotTraining\\tech-talks\\copilot-primitives\\examples\\dotnet\\src\\Orders.Worker\\Orders.Worker.csproj",
+        "packagesPath": "C:\\Users\\juantrujillo\\.copilot\\session-state\\555dc791-db38-4cc6-9a8e-a6d6bfce5941\\files\\nuget-packages",
+        "outputPath": "C:\\code\\CopilotTraining\\tech-talks\\copilot-primitives\\examples\\dotnet\\src\\Orders.Worker\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\juantrujillo\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "https://packagefeedproxy.microsoft.io/nuget/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {
+              "C:\\code\\CopilotTraining\\tech-talks\\copilot-primitives\\examples\\dotnet\\src\\Orders.Contracts\\Orders.Contracts.csproj": {
+                "projectPath": "C:\\code\\CopilotTraining\\tech-talks\\copilot-primitives\\examples\\dotnet\\src\\Orders.Contracts\\Orders.Contracts.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Users\\juantrujillo\\.copilot\\session-state\\555dc791-db38-4cc6-9a8e-a6d6bfce5941\\files\\dotnet-sdk\\sdk\\8.0.426/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\code\\CopilotTraining\\tech-talks\\copilot-primitives\\examples\\dotnet\\tests\\Orders.Tests\\Orders.Tests.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\code\\CopilotTraining\\tech-talks\\copilot-primitives\\examples\\dotnet\\tests\\Orders.Tests\\Orders.Tests.csproj",
+        "projectName": "Orders.Tests",
+        "projectPath": "C:\\code\\CopilotTraining\\tech-talks\\copilot-primitives\\examples\\dotnet\\tests\\Orders.Tests\\Orders.Tests.csproj",
+        "packagesPath": "C:\\Users\\juantrujillo\\.copilot\\session-state\\555dc791-db38-4cc6-9a8e-a6d6bfce5941\\files\\nuget-packages",
+        "outputPath": "C:\\code\\CopilotTraining\\tech-talks\\copilot-primitives\\examples\\dotnet\\tests\\Orders.Tests\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\juantrujillo\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "https://packagefeedproxy.microsoft.io/nuget/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {
+              "C:\\code\\CopilotTraining\\tech-talks\\copilot-primitives\\examples\\dotnet\\src\\Orders.Api\\Orders.Api.csproj": {
+                "projectPath": "C:\\code\\CopilotTraining\\tech-talks\\copilot-primitives\\examples\\dotnet\\src\\Orders.Api\\Orders.Api.csproj"
+              },
+              "C:\\code\\CopilotTraining\\tech-talks\\copilot-primitives\\examples\\dotnet\\src\\Orders.Contracts\\Orders.Contracts.csproj": {
+                "projectPath": "C:\\code\\CopilotTraining\\tech-talks\\copilot-primitives\\examples\\dotnet\\src\\Orders.Contracts\\Orders.Contracts.csproj"
+              },
+              "C:\\code\\CopilotTraining\\tech-talks\\copilot-primitives\\examples\\dotnet\\src\\Orders.Web\\Orders.Web.csproj": {
+                "projectPath": "C:\\code\\CopilotTraining\\tech-talks\\copilot-primitives\\examples\\dotnet\\src\\Orders.Web\\Orders.Web.csproj"
+              },
+              "C:\\code\\CopilotTraining\\tech-talks\\copilot-primitives\\examples\\dotnet\\src\\Orders.Worker\\Orders.Worker.csproj": {
+                "projectPath": "C:\\code\\CopilotTraining\\tech-talks\\copilot-primitives\\examples\\dotnet\\src\\Orders.Worker\\Orders.Worker.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "dependencies": {
+            "Microsoft.NET.Test.Sdk": {
+              "target": "Package",
+              "version": "[17.11.1, )"
+            },
+            "xunit": {
+              "target": "Package",
+              "version": "[2.9.2, )"
+            },
+            "xunit.runner.visualstudio": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.8.2, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Users\\juantrujillo\\.copilot\\session-state\\555dc791-db38-4cc6-9a8e-a6d6bfce5941\\files\\dotnet-sdk\\sdk\\8.0.426/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

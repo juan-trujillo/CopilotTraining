@@ -1,0 +1,16 @@
+C:\code\CopilotTraining\tech-talks\copilot-primitives\examples\dotnet\src\Orders.Web\bin\Debug\net8.0\Orders.Web.deps.json
+C:\code\CopilotTraining\tech-talks\copilot-primitives\examples\dotnet\src\Orders.Web\bin\Debug\net8.0\Orders.Web.dll
+C:\code\CopilotTraining\tech-talks\copilot-primitives\examples\dotnet\src\Orders.Web\bin\Debug\net8.0\Orders.Web.pdb
+C:\code\CopilotTraining\tech-talks\copilot-primitives\examples\dotnet\src\Orders.Web\bin\Debug\net8.0\Orders.Contracts.dll
+C:\code\CopilotTraining\tech-talks\copilot-primitives\examples\dotnet\src\Orders.Web\bin\Debug\net8.0\Orders.Contracts.pdb
+C:\code\CopilotTraining\tech-talks\copilot-primitives\examples\dotnet\src\Orders.Web\obj\Debug\net8.0\Orders.Web.csproj.AssemblyReference.cache
+C:\code\CopilotTraining\tech-talks\copilot-primitives\examples\dotnet\src\Orders.Web\obj\Debug\net8.0\Orders.Web.GeneratedMSBuildEditorConfig.editorconfig
+C:\code\CopilotTraining\tech-talks\copilot-primitives\examples\dotnet\src\Orders.Web\obj\Debug\net8.0\Orders.Web.AssemblyInfoInputs.cache
+C:\code\CopilotTraining\tech-talks\copilot-primitives\examples\dotnet\src\Orders.Web\obj\Debug\net8.0\Orders.Web.AssemblyInfo.cs
+C:\code\CopilotTraining\tech-talks\copilot-primitives\examples\dotnet\src\Orders.Web\obj\Debug\net8.0\Orders.Web.csproj.CoreCompileInputs.cache
+C:\code\CopilotTraining\tech-talks\copilot-primitives\examples\dotnet\src\Orders.Web\obj\Debug\net8.0\Orders.Web.sourcelink.json
+C:\code\CopilotTraining\tech-talks\copilot-primitives\examples\dotnet\src\Orders.Web\obj\Debug\net8.0\Orders.Web.csproj.Up2Date
+C:\code\CopilotTraining\tech-talks\copilot-primitives\examples\dotnet\src\Orders.Web\obj\Debug\net8.0\Orders.Web.dll
+C:\code\CopilotTraining\tech-talks\copilot-primitives\examples\dotnet\src\Orders.Web\obj\Debug\net8.0\refint\Orders.Web.dll
+C:\code\CopilotTraining\tech-talks\copilot-primitives\examples\dotnet\src\Orders.Web\obj\Debug\net8.0\Orders.Web.pdb
+C:\code\CopilotTraining\tech-talks\copilot-primitives\examples\dotnet\src\Orders.Web\obj\Debug\net8.0\ref\Orders.Web.dll

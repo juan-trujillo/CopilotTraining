@@ -1,0 +1,12 @@
+C:\code\CopilotTraining\tech-talks\copilot-primitives\examples\dotnet\src\Orders.Contracts\bin\Debug\net8.0\Orders.Contracts.deps.json
+C:\code\CopilotTraining\tech-talks\copilot-primitives\examples\dotnet\src\Orders.Contracts\bin\Debug\net8.0\Orders.Contracts.dll
+C:\code\CopilotTraining\tech-talks\copilot-primitives\examples\dotnet\src\Orders.Contracts\bin\Debug\net8.0\Orders.Contracts.pdb
+C:\code\CopilotTraining\tech-talks\copilot-primitives\examples\dotnet\src\Orders.Contracts\obj\Debug\net8.0\Orders.Contracts.GeneratedMSBuildEditorConfig.editorconfig
+C:\code\CopilotTraining\tech-talks\copilot-primitives\examples\dotnet\src\Orders.Contracts\obj\Debug\net8.0\Orders.Contracts.AssemblyInfoInputs.cache
+C:\code\CopilotTraining\tech-talks\copilot-primitives\examples\dotnet\src\Orders.Contracts\obj\Debug\net8.0\Orders.Contracts.AssemblyInfo.cs
+C:\code\CopilotTraining\tech-talks\copilot-primitives\examples\dotnet\src\Orders.Contracts\obj\Debug\net8.0\Orders.Contracts.csproj.CoreCompileInputs.cache
+C:\code\CopilotTraining\tech-talks\copilot-primitives\examples\dotnet\src\Orders.Contracts\obj\Debug\net8.0\Orders.Contracts.sourcelink.json
+C:\code\CopilotTraining\tech-talks\copilot-primitives\examples\dotnet\src\Orders.Contracts\obj\Debug\net8.0\Orders.Contracts.dll
+C:\code\CopilotTraining\tech-talks\copilot-primitives\examples\dotnet\src\Orders.Contracts\obj\Debug\net8.0\refint\Orders.Contracts.dll
+C:\code\CopilotTraining\tech-talks\copilot-primitives\examples\dotnet\src\Orders.Contracts\obj\Debug\net8.0\Orders.Contracts.pdb
+C:\code\CopilotTraining\tech-talks\copilot-primitives\examples\dotnet\src\Orders.Contracts\obj\Debug\net8.0\ref\Orders.Contracts.dll
