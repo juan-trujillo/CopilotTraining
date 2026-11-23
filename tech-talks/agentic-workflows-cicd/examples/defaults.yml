@@ -1,0 +1,11 @@
+# Organization-wide guardrails for agentic workflows.
+# Preview, then apply:
+#   gh aw env update defaults.yml --scope org --org MY_ORG --dry-run
+#   gh aw env update defaults.yml --scope org --org MY_ORG
+#
+# Precedence: workflow frontmatter > repository > organization > enterprise > compiler default.
+default_max_ai_credits: "1K"            # per run; 1 AIC = $0.01
+default_max_daily_ai_credits: "5K"      # per workflow, per 24 hours
+default_timeout_minutes: "20"
+default_agent_job_timeout_minutes: "60"
+default_detection_job_timeout_minutes: "10"

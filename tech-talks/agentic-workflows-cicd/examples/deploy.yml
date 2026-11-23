@@ -1,0 +1,27 @@
+name: Deploy
+
+# Deterministic CD. The agentic workflows in this folder observe this pipeline;
+# they never run it. The environment's required reviewers remain the approval gate.
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  id-token: write   # OIDC token for azure/login
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: production   # protection rules + required reviewers apply here
+    steps:
+      - uses: actions/checkout@v5
+      - name: Azure login (OIDC)
+        uses: azure/login@v2
+        with:
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+      - name: Deploy
+        run: ./scripts/deploy.sh   # your build and az / azd deploy steps
