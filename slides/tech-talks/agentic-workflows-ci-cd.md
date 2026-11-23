@@ -117,10 +117,10 @@ import GitHubBrandMark from './components/GitHubBrandMark.vue'
   <div class="gh-kicker">Reusable judgment model</div>
   <h1>Give each actor a distinct verb</h1>
   <div class="gh-flow">
-    <div class="gh-step"><span class="gh-label">Agent</span><strong>Interpret</strong><p>Explain what the evidence may mean.</p></div>
-    <div class="gh-step"><span class="gh-label">Agent</span><strong>Propose</strong><p>Request one bounded, reviewable output.</p></div>
-    <div class="gh-step"><span class="gh-label">CI / policy</span><strong>Verify</strong><p>Evaluate a reproducible condition.</p></div>
-    <div class="gh-step"><span class="gh-label">Owner / controls</span><strong>Authorize</strong><p>Approve or deny the consequential action.</p></div>
+    <div class="gh-step"><span class="gh-label"><span class="i-carbon-search gh-icon" aria-hidden="true"></span>Agent</span><strong>Interpret</strong><p>Explain what the evidence may mean.</p></div>
+    <div class="gh-step"><span class="gh-label"><span class="i-carbon-send gh-icon" aria-hidden="true"></span>Agent</span><strong>Propose</strong><p>Request one bounded, reviewable output.</p></div>
+    <div class="gh-step"><span class="gh-label"><span class="i-carbon-checkmark-outline gh-icon" aria-hidden="true"></span>CI / policy</span><strong>Verify</strong><p>Evaluate a reproducible condition.</p></div>
+    <div class="gh-step"><span class="gh-label"><span class="i-carbon-user gh-icon" aria-hidden="true"></span>Owner / controls</span><strong>Authorize</strong><p>Approve or deny the consequential action.</p></div>
   </div>
   <div class="gh-note">Name the actor, evidence, and authority in workflow source, PRs, run summaries, and operational dashboards.</div>
 </div>
@@ -149,10 +149,10 @@ import GitHubBrandMark from './components/GitHubBrandMark.vue'
   <div class="gh-kicker">Product mechanism</div>
   <h1>Author intent, compile controls, run in GitHub Actions</h1>
   <div class="gh-flow">
-    <div class="gh-step"><span class="gh-label">Source</span><strong>Markdown + YAML frontmatter</strong><p>Trigger, permissions, tools, instructions.</p></div>
-    <div class="gh-step"><span class="gh-label">Compile</span><strong><code>gh aw compile</code></strong><p>Validate and generate the workflow lock.</p></div>
-    <div class="gh-step"><span class="gh-label">Execute</span><strong>GitHub Actions</strong><p>Agent reads bounded repository context.</p></div>
-    <div class="gh-step"><span class="gh-label">Observe</span><strong>Evidence + output</strong><p>Inspect logs, run result, and safe-output jobs.</p></div>
+    <div class="gh-step"><span class="gh-label"><span class="i-carbon-document gh-icon" aria-hidden="true"></span>Source</span><strong>Markdown + YAML frontmatter</strong><p>Trigger, permissions, tools, instructions.</p></div>
+    <div class="gh-step"><span class="gh-label"><span class="i-carbon-terminal gh-icon" aria-hidden="true"></span>Compile</span><strong><code>gh aw compile</code></strong><p>Validate and generate the workflow lock.</p></div>
+    <div class="gh-step"><span class="gh-label"><span class="i-carbon-play gh-icon" aria-hidden="true"></span>Execute</span><strong>GitHub Actions</strong><p>Agent reads bounded repository context.</p></div>
+    <div class="gh-step"><span class="gh-label"><span class="i-carbon-search gh-icon" aria-hidden="true"></span>Observe</span><strong>Evidence + output</strong><p>Inspect logs, run result, and safe-output jobs.</p></div>
   </div>
   <div class="gh-note">Version both the authored <code>.md</code> and generated <code>.lock.yml</code>; review the compiled workflow as executable policy.</div>
   <p class="gh-source">github/gh-aw · What are Agentic Workflows?</p>
@@ -206,10 +206,10 @@ If evidence or a PR target is missing, report missing data.</code></pre>
   <div class="gh-kicker">Workflow lifecycle</div>
   <h1>The lock file is part of the review</h1>
   <div class="gh-grid">
-    <div class="gh-card"><div class="gh-label">Author</div><h2>Describe a bounded task</h2><p>Keep source in <code>.github/workflows/*.md</code>.</p></div>
-    <div class="gh-card"><div class="gh-label">Compile</div><h2>Validate generated behavior</h2><p>Run <code>gh aw compile --validate</code>.</p></div>
-    <div class="gh-card"><div class="gh-label">Inspect</div><h2>Review event and authority</h2><p>Check triggers, permissions, tools, pins, outputs, and trusted custom steps.</p></div>
-    <div class="gh-card"><div class="gh-label">Activate</div><h2>Merge source + lock together</h2><p>Review run logs, output target, and failure behavior before broadening scope.</p></div>
+    <div class="gh-card"><div class="gh-label"><span class="i-carbon-edit gh-icon" aria-hidden="true"></span>Author</div><h2>Describe a bounded task</h2><p>Keep source in <code>.github/workflows/*.md</code>.</p></div>
+    <div class="gh-card"><div class="gh-label"><span class="i-carbon-terminal gh-icon" aria-hidden="true"></span>Compile</div><h2>Validate generated behavior</h2><p>Run <code>gh aw compile --validate</code>.</p></div>
+    <div class="gh-card"><div class="gh-label"><span class="i-carbon-search gh-icon" aria-hidden="true"></span>Inspect</div><h2>Review event and authority</h2><p>Check triggers, permissions, tools, pins, outputs, and trusted custom steps.</p></div>
+    <div class="gh-card"><div class="gh-label"><span class="i-carbon-play gh-icon" aria-hidden="true"></span>Activate</div><h2>Merge source + lock together</h2><p>Review run logs, output target, and failure behavior before broadening scope.</p></div>
   </div>
   <div class="gh-note">A valid compile checks configuration; it does not prove that the agent's conclusion is correct or that a runner host is trustworthy.</div>
 </div>
@@ -267,10 +267,10 @@ If evidence or a PR target is missing, report missing data.</code></pre>
   <div class="gh-kicker">Write boundary</div>
   <h1>The agent requests; a scoped handler processes</h1>
   <div class="gh-flow">
-    <div class="gh-step"><span class="gh-label">Agent job</span><strong>Read + reason</strong><p>Produces structured request.</p></div>
-    <div class="gh-step"><span class="gh-label">Artifact</span><strong>Buffer output</strong><p>Request is not yet a GitHub write.</p></div>
-    <div class="gh-step"><span class="gh-label">Policy</span><strong>Validate + inspect</strong><p>Filters, limits, sanitization, detection.</p></div>
-    <div class="gh-step"><span class="gh-label">Safe-output job</span><strong>Scoped write</strong><p>Only configured operation and target.</p></div>
+    <div class="gh-step"><span class="gh-label"><span class="i-carbon-search gh-icon" aria-hidden="true"></span>Agent job</span><strong>Read + reason</strong><p>Produces structured request.</p></div>
+    <div class="gh-step"><span class="gh-label"><span class="i-carbon-package gh-icon" aria-hidden="true"></span>Artifact</span><strong>Buffer output</strong><p>Request is not yet a GitHub write.</p></div>
+    <div class="gh-step"><span class="gh-label"><span class="i-carbon-security gh-icon" aria-hidden="true"></span>Policy</span><strong>Validate + inspect</strong><p>Filters, limits, sanitization, detection.</p></div>
+    <div class="gh-step"><span class="gh-label"><span class="i-carbon-send gh-icon" aria-hidden="true"></span>Safe-output job</span><strong>Scoped write</strong><p>Only configured operation and target.</p></div>
   </div>
   <div class="gh-note">Safe outputs may be configured for different behaviors, including merges. Inspect the selected policy; do not assume every output requires human approval.</div>
 </div>
@@ -283,9 +283,9 @@ If evidence or a PR target is missing, report missing data.</code></pre>
   <div class="gh-kicker">Admin review</div>
   <h1>Controls reduce blast radius; they do not erase trust</h1>
   <div class="gh-grid3 gh-stat-grid">
-    <div class="gh-card"><div class="gh-label">Substrate</div><h2>Where it runs</h2><p>Runner, container or microVM, firewall, proxy, MCP gateway.</p></div>
-    <div class="gh-card"><div class="gh-label">Configuration</div><h2>What it can use</h2><p>Permissions, tools, network destinations, secrets, pins, custom steps.</p></div>
-    <div class="gh-card"><div class="gh-label">Plan</div><h2>How effects cross stages</h2><p>Staged outputs, filters, detection, scoped handler jobs.</p></div>
+    <div class="gh-card"><div class="gh-label"><span class="i-carbon-cloud gh-icon" aria-hidden="true"></span>Substrate</div><h2>Where it runs</h2><p>Runner, container or microVM, firewall, proxy, MCP gateway.</p></div>
+    <div class="gh-card"><div class="gh-label"><span class="i-carbon-settings gh-icon" aria-hidden="true"></span>Configuration</div><h2>What it can use</h2><p>Permissions, tools, network destinations, secrets, pins, custom steps.</p></div>
+    <div class="gh-card"><div class="gh-label"><span class="i-carbon-flow gh-icon" aria-hidden="true"></span>Plan</div><h2>How effects cross stages</h2><p>Staged outputs, filters, detection, scoped handler jobs.</p></div>
   </div>
   <div class="gh-note">Threat detection is defense in depth, not proof of safety. Review its configured warn/strict behavior and the jobs that execute trusted custom code.</div>
 </div>
@@ -298,8 +298,8 @@ If evidence or a PR target is missing, report missing data.</code></pre>
   <div class="gh-kicker">Operational gotcha</div>
   <h1>Default <code>GITHUB_TOKEN</code> PRs do not start CI</h1>
   <div class="gh-grid">
-    <div class="gh-card"><div class="gh-label">Expected</div><h2>Agent opens a PR</h2><p>Team expects ordinary <code>push</code> / <code>pull_request</code> checks to run.</p></div>
-    <div class="gh-card"><div class="gh-label">Observed</div><h2>No downstream run</h2><p>GitHub suppresses event cascades for PRs created with the default Actions token.</p></div>
+    <div class="gh-card"><div class="gh-label"><span class="i-carbon-branch gh-icon" aria-hidden="true"></span>Expected</div><h2>Agent opens a PR</h2><p>Team expects ordinary <code>push</code> / <code>pull_request</code> checks to run.</p></div>
+    <div class="gh-card"><div class="gh-label"><span class="i-carbon-warning gh-icon" aria-hidden="true"></span>Observed</div><h2>No downstream run</h2><p>GitHub suppresses event cascades for PRs created with the default Actions token.</p></div>
   </div>
   <div class="gh-note">If required, configure a narrowly scoped PAT or GitHub App for the extra empty-commit trigger documented by <code>gh-aw</code>. Confirm run actor and SHA. Never paste a token into workflow source.</div>
 </div>
@@ -368,10 +368,10 @@ jobs:
   <div class="gh-kicker">Operate the workflow</div>
   <h1>Every boundary needs evidence and a recovery path</h1>
   <div class="gh-grid">
-    <div class="gh-card"><div class="gh-label">Trigger / evidence missing</div><p>Check source run, repository, branch, conclusion, PR association, and head SHA. Report missing data; don't infer.</p></div>
-    <div class="gh-card"><div class="gh-label">Diagnosis / unsupported claim</div><p>Inspect citations and logs. Tighten the instruction or tool scope; keep CI status authoritative.</p></div>
-    <div class="gh-card"><div class="gh-label">Safe output / denied</div><p>Inspect the safe-output job and policy. Correct the target or permission; retry deliberately.</p></div>
-    <div class="gh-card"><div class="gh-label">Promotion / gate blocked</div><p>Keep production blocked. Resolve the deterministic check or route to the named release owner.</p></div>
+    <div class="gh-card"><div class="gh-label"><span class="i-carbon-warning gh-icon" aria-hidden="true"></span>Trigger / evidence missing</div><p>Check source run, repository, branch, conclusion, PR association, and head SHA. Report missing data; don't infer.</p></div>
+    <div class="gh-card"><div class="gh-label"><span class="i-carbon-search gh-icon" aria-hidden="true"></span>Diagnosis / unsupported claim</div><p>Inspect citations and logs. Tighten the instruction or tool scope; keep CI status authoritative.</p></div>
+    <div class="gh-card"><div class="gh-label"><span class="i-carbon-error gh-icon" aria-hidden="true"></span>Safe output / denied</div><p>Inspect the safe-output job and policy. Correct the target or permission; retry deliberately.</p></div>
+    <div class="gh-card"><div class="gh-label"><span class="i-carbon-locked gh-icon" aria-hidden="true"></span>Promotion / gate blocked</div><p>Keep production blocked. Resolve the deterministic check or route to the named release owner.</p></div>
   </div>
 </div>
 
@@ -383,8 +383,8 @@ jobs:
   <div class="gh-kicker">October 28, 2026</div>
   <h1>Agentic Workflows GA; Automations learn from outcomes</h1>
   <div class="gh-grid">
-    <div class="gh-card"><div class="gh-label">GitHub Agentic Workflows</div><h2>Generally available</h2><p>GitHub announced GA for the open-source project that runs Markdown-defined agent workflows through GitHub Actions.</p></div>
-    <div class="gh-card"><div class="gh-label">Copilot Automations</div><h2>Outcome-based proposals</h2><p>GitHub announced automations can use real outcomes to propose improvements for people to review.</p></div>
+    <div class="gh-card"><div class="gh-label"><span class="i-carbon-flow gh-icon" aria-hidden="true"></span>GitHub Agentic Workflows</div><h2>Generally available</h2><p>GitHub announced GA for the open-source project that runs Markdown-defined agent workflows through GitHub Actions.</p></div>
+    <div class="gh-card"><div class="gh-label"><span class="i-carbon-renew gh-icon" aria-hidden="true"></span>Copilot Automations</div><h2>Outcome-based proposals</h2><p>GitHub announced automations can use real outcomes to propose improvements for people to review.</p></div>
   </div>
   <div class="gh-note">Related product direction, distinct products and control planes. Outcome-based Copilot Automations are not a feature of the <code>gh-aw</code> sample workflow.</div>
   <p class="gh-source">Sources: GitHub Changelog · GitHub Universe 2026 announcement</p>
@@ -398,9 +398,9 @@ jobs:
   <div class="gh-kicker">Design choice</div>
   <h1>Choose by the kind of authority the job needs</h1>
   <div class="gh-grid3">
-    <div class="gh-card"><div class="gh-label">`gh-aw`</div><h2>Repo-owned workflow</h2><p>Versioned Markdown, compiled Actions, explicit inputs and safe outputs.</p></div>
-    <div class="gh-card"><div class="gh-label">Copilot Automations</div><h2>Shared team automation</h2><p>Team-managed Copilot workflows with outcome-based improvement proposals.</p></div>
-    <div class="gh-card"><div class="gh-label">GitHub Actions</div><h2>Deterministic gate</h2><p>Build, test, attest, approve, deploy, and report exact policy outcomes.</p></div>
+    <div class="gh-card"><div class="gh-label"><span class="i-carbon-code gh-icon" aria-hidden="true"></span>`gh-aw`</div><h2>Repo-owned workflow</h2><p>Versioned Markdown, compiled Actions, explicit inputs and safe outputs.</p></div>
+    <div class="gh-card"><div class="gh-label"><span class="i-carbon-user-multiple gh-icon" aria-hidden="true"></span>Copilot Automations</div><h2>Shared team automation</h2><p>Team-managed Copilot workflows with outcome-based improvement proposals.</p></div>
+    <div class="gh-card"><div class="gh-label"><span class="i-carbon-checkmark-outline gh-icon" aria-hidden="true"></span>GitHub Actions</div><h2>Deterministic gate</h2><p>Build, test, attest, approve, deploy, and report exact policy outcomes.</p></div>
   </div>
   <div class="gh-note">These mechanisms can coexist. Make handoffs, identities, run links, and human decisions visible.</div>
 </div>
@@ -413,10 +413,10 @@ jobs:
   <div class="gh-kicker">Start small · measure what happens</div>
   <h1>Begin read-only; earn a bounded write from evidence</h1>
   <div class="gh-flow">
-    <div class="gh-step"><span class="gh-label">1 · Select</span><strong>One failure class</strong><p>Pick a low-risk repo and a repeatable diagnosis need.</p></div>
-    <div class="gh-step"><span class="gh-label">2 · Baseline</span><strong>Record current flow</strong><p>Time to first useful action, maintainer effort, and false leads.</p></div>
-    <div class="gh-step"><span class="gh-label">3 · Pilot</span><strong>Read-only report</strong><p>Review sample runs, claims, permissions, and missing-data behavior.</p></div>
-    <div class="gh-step"><span class="gh-label">4 · Decide</span><strong>Change one boundary</strong><p>Only add a scoped output if the observed evidence warrants it.</p></div>
+    <div class="gh-step"><span class="gh-label"><span class="i-carbon-target gh-icon" aria-hidden="true"></span>1 · Select</span><strong>One failure class</strong><p>Pick a low-risk repo and a repeatable diagnosis need.</p></div>
+    <div class="gh-step"><span class="gh-label"><span class="i-carbon-chart-line gh-icon" aria-hidden="true"></span>2 · Baseline</span><strong>Record current flow</strong><p>Time to first useful action, maintainer effort, and false leads.</p></div>
+    <div class="gh-step"><span class="gh-label"><span class="i-carbon-document gh-icon" aria-hidden="true"></span>3 · Pilot</span><strong>Read-only report</strong><p>Review sample runs, claims, permissions, and missing-data behavior.</p></div>
+    <div class="gh-step"><span class="gh-label"><span class="i-carbon-checkmark-outline gh-icon" aria-hidden="true"></span>4 · Decide</span><strong>Change one boundary</strong><p>Only add a scoped output if the observed evidence warrants it.</p></div>
   </div>
   <p class="gh-source">Treat all targets as proposals until the team measures them in its own repository.</p>
 </div>
