@@ -42,6 +42,7 @@ Release-specific VS Code changes are routed through [rolling release briefs](../
 | Split, steer, and integrate multi-agent work | [Multi-Agent Coordination](multi-agent-coordination/) | A coordination contract, isolated evidence, and a named integration owner |
 | Build loops that stop safely | [Loop Engineering](loopy-agents/) | Progress state, verification signal, limit, and escalation path |
 | Automate recurring judgments across a lifecycle | [Agentic Lifecycle Orchestration](agentic-lifecycle/) | Compiled workflow candidates with explicit handoffs, safe outputs, and approval gates |
+| Put agents on CI and CD log-reading work | [Agentic Workflows for CI/CD](agentic-workflows-cicd/) | A compiled lock file that separates the read-only agent job from the safe-outputs job, plus a staged preview |
 
 ## Verify and Govern
 

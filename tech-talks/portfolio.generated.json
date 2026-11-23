@@ -1,15 +1,15 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-08T15:27:57.944Z",
+  "generatedAt": "2026-11-23T15:46:35.470Z",
   "source": "tech-talks/*/README.md",
   "counts": {
-    "totalTalks": 29,
-    "practitionerTalks": 20,
+    "totalTalks": 30,
+    "practitionerTalks": 21,
     "archivedTalks": 9,
-    "deployedTalks": 19,
+    "deployedTalks": 20,
     "candidateTalks": 1,
-    "catalogCards": 20,
-    "validTalks": 29
+    "catalogCards": 21,
+    "validTalks": 30
   },
   "warnings": [],
   "ghostDirectories": [],
@@ -478,6 +478,71 @@
           "exists": true,
           "bytes": 2042045,
           "modified": "2026-10-08T14:59:44.580Z"
+        }
+      },
+      "errors": []
+    },
+    {
+      "slug": "agentic-workflows-cicd",
+      "title": "Agentic Workflows for CI/CD: Agents Investigate, the Pipeline Decides",
+      "status": "active",
+      "portfolioState": "deployed",
+      "updated": "2026-11-23",
+      "section": "Delegate and Coordinate",
+      "audience": [
+        "team-lead",
+        "platform-engineer",
+        "developer"
+      ],
+      "level": "advanced",
+      "duration": 42,
+      "format": "core-talk",
+      "decision": "Which CI/CD judgments get an agent, and what write authority does that agent hold?",
+      "prerequisites": [],
+      "related": [
+        "agentic-lifecycle",
+        "pr-trust-stack",
+        "copilot-governance",
+        "agentic-workflows-ci-cd"
+      ],
+      "deckSection": "Delegate and Coordinate",
+      "cataloged": true,
+      "files": {
+        "readme": {
+          "path": "tech-talks/agentic-workflows-cicd/README.md",
+          "exists": true,
+          "bytes": 31193,
+          "modified": "2026-11-23T15:41:28.891Z"
+        },
+        "recipe": {
+          "path": "tech-talks/agentic-workflows-cicd/deck.recipe.yml",
+          "exists": true,
+          "bytes": 6737,
+          "modified": "2026-11-23T15:29:55.191Z"
+        },
+        "deck": {
+          "path": "slides/tech-talks/agentic-workflows-cicd.md",
+          "exists": true,
+          "bytes": 54652,
+          "modified": "2026-11-23T15:44:47.131Z"
+        },
+        "agendaMarkdown": {
+          "path": "slides/companions/tech-talks/agentic-workflows-cicd/agenda.md",
+          "exists": true,
+          "bytes": 771,
+          "modified": "2026-11-23T15:45:25.864Z"
+        },
+        "agendaHtml": {
+          "path": "slides/companions/tech-talks/agentic-workflows-cicd/agenda.html",
+          "exists": true,
+          "bytes": 6248,
+          "modified": "2026-11-23T15:45:26.008Z"
+        },
+        "deckPdf": {
+          "path": "slides/companions/tech-talks/agentic-workflows-cicd/deck.pdf",
+          "exists": true,
+          "bytes": 2465405,
+          "modified": "2026-11-23T15:46:22.795Z"
         }
       },
       "errors": []

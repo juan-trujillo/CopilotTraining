@@ -1,0 +1,101 @@
+# deck.recipe.yml — Agentic Workflows for CI/CD
+#
+# Cross-model critique (2026-11-23): an independent reviewer flagged (1) timing that summed
+# to 45 minutes, (2) a deployment trigger that may not fire for Actions-native deploys,
+# (3) an environment gate that needs explicit protection-rule configuration, (4) governance
+# defaults that guide behavior while review and policy enforce it, and (5) a need for a
+# concrete untrusted-log scenario. Each item is reflected below and in the README.
+
+version: 1
+
+deck:
+  title: "Agentic Workflows for CI/CD"
+  subtitle: "Agents Investigate, the Pipeline Decides"
+  tagline: "Read-only agents, gated outputs, and human-owned deployments"
+
+  agenda:
+    - title: "See how a Markdown file becomes a hardened job"
+      takeaway: "Compile a 65-line workflow and read the read-only agent job beside the write-scoped safe_outputs job."
+      whyItMatters: "The permission split is the review artifact a lead and an admin both sign off on."
+    - title: "Put agents on the CI and CD log-reading work"
+      takeaway: "Run CI Doctor, PR Fix, CI Coach, and an incident monitor with the code that configures each."
+      whyItMatters: "Each example names a trigger, a read scope, one write, and a reviewer."
+    - title: "Operate agents with limits you can inspect"
+      takeaway: "Apply staged mode, protected files, integrity levels, credit caps, and org defaults."
+      whyItMatters: "Admins gain evidence to expand autonomy one rung at a time."
+
+  arcToc: "Anatomy → CI → CD → Operate"
+
+  arcNarrative: >
+    The talk follows a Developer Lead and a GitHub admin through one question: which CI/CD
+    judgments get an agent, and what may that agent write? Part 1 establishes the mechanism and
+    lands the anchor: a 65-line Markdown file compiles to a 2,426-line lock file where the agent
+    job holds read permissions and the safe_outputs job holds the writes. Part 2 applies the
+    mechanism to CI, escalating the authority of each example: CI Doctor writes an issue, PR Fix
+    pushes to a PR branch on a maintainer's command, CI Coach proposes a draft PR behind a
+    deterministic capacity check, and the CI trigger slide closes the practical gap for agent PRs.
+    Part 3 turns to CD and keeps the deployment deterministic: the environment's protection rules
+    and OIDC trust hold the gate, the agent observes and reports, and an authority map shows who
+    proposes, executes, and approves each action. Part 4 gives admins the operating model:
+    layered defenses, staged mode, protected files, guardrails, governance defaults with
+    review-based enforcement, measurement, a rollout ladder, the Universe 2026 launches, and the
+    boundaries where the pattern stops fitting. The deepest time goes to the compile reveal, the
+    CI Doctor protocol with its untrusted-log boundary, and the authority map.
+
+  sectionOrder:
+    - "Anatomy of an Agentic Workflow"
+    - "CI: From Red Build to Reviewed Fix"
+    - "CD: Observe the Release, Own the Gate"
+    - "Operate It: Trust, Govern, Measure"
+
+  sectionModes:
+    "Anatomy of an Agentic Workflow":
+      emphasis: medium
+      note: >
+        Three body slides. Slide A shows the issue-clarifier Markdown with the compile step.
+        Slide B maps the work: standard Actions for build, test, and deploy; agentic workflows
+        for investigation, triage, and drafting. Slide C is the anchor: ci-doctor.md at 65 lines
+        compiles to 2,426 lines with six jobs, with the agent job reading and the safe_outputs job
+        writing. Show the compile commands and the safe-update-mode approval.
+    "CI: From Red Build to Reviewed Fix":
+      emphasis: high
+      note: >
+        Five body slides in escalating write authority. CI Doctor trigger and permissions with
+        real frontmatter. CI Doctor protocol, the sourced output from github/gh-aw#14295, and the
+        untrusted-log containment table with its limit: safe outputs bound actions and the issue's
+        evidence lets a human verify the diagnosis. PR Fix with push-to-pull-request-branch named
+        as a real write. CI Coach with the deterministic capacity pre-check and the
+        fallback-to-issue policy for protected files. A slide on starting CI for agent PRs with the
+        three token options and their scope.
+    "CD: Observe the Release, Own the Gate":
+      emphasis: medium
+      note: >
+        Three body slides. The deploy workflow with environment protection rules, OIDC federated
+        credential scoped to the environment, and plan prerequisites. The incident monitor with
+        workflow_run, skip-if-match, close-older-issues, and a note that deployment_status serves
+        external deployment systems. Release notes as a draft issue, then the authority map table
+        (proposes, executes, approves) and the Actions workflow lockfiles GA as the supply-chain
+        companion. Merge release notes and the authority map into one slide if the budget is tight.
+    "Operate It: Trust, Govern, Measure":
+      emphasis: high
+      note: >
+        Eight body slides. Defense in depth as six layers. Safe outputs, staged mode, and
+        protected files with the real YAML. Frontmatter guardrails: network, min-integrity,
+        max-ai-credits, roles, and the default limits. Governance with gh aw env and the
+        precedence order, stating that defaults set the baseline and CODEOWNERS, required review,
+        and the Require lockfile policy enforce it. Measurement with logs, audit, forecast, and
+        adoption. The four-rung rollout ladder with the try-it commands. The Universe 2026
+        launches that strengthen the product. A boundaries slide covering fixed rules, deployment
+        authority, topology prerequisites, Copilot Automations as a managed alternative, and low
+        acceptance as a retirement signal.
+
+  preamble: []
+  appendix: []
+
+  highlightMoments:
+    - "A 65-line ci-doctor.md compiles to a 2,426-line lock file in which the agent job holds read permissions and the safe_outputs job holds issues and pull-requests write."
+    - "CI Doctor turns a failed run into one deduplicated, evidence-backed issue; the sourced example is github/gh-aw#14295."
+    - "Deployment stays deterministic: the environment's required reviewers and OIDC trust hold the gate, and the incident monitor only reports."
+    - "Staged mode previews every write before it happens, and protected files route changes to .github/ to a human."
+    - "Default guardrails of 1,000 AI Credits per run and 5,000 per workflow per day, with gh aw forecast to budget before rollout."
+    - "Agentic Workflows reached general availability on October 28, 2026, alongside Actions workflow lockfiles and Copilot Automations updates."
