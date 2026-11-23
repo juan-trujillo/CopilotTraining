@@ -11,9 +11,9 @@ updated: 2026-11-23
 
 Agenda (44 min)
 
-1. Find the right task (5 min)
-2. Inspect the workflow (12 min)
-3. Bound effects (7 min)
-4. Carry it into CD (14 min)
-5. Before/After & What You Can Do Today (4 min)
-6. References (2 min)
+1. Find the right task (7 min)
+2. Inspect the workflow (14 min)
+3. Bound effects (6 min)
+4. Carry it into CD (13 min)
+5. Take the decision back to your repo (2 min)
+6. Q&A (2 min)

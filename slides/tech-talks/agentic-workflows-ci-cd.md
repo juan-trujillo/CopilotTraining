@@ -74,8 +74,8 @@ import GitHubBrandMark from './components/GitHubBrandMark.vue'
   :sections='[
     { icon: "1", title: "Find the right task", subtitle: "Reasoning beside CI", blurb: "Separate interpretation from deterministic checks and policy", slide: 4 },
     { icon: "2", title: "Inspect the workflow", subtitle: "Markdown to Actions", blurb: "Follow a failed run through source, compilation, and evidence", slide: 7 },
-    { icon: "3", title: "Bound effects", subtitle: "Security and CI", blurb: "Keep permissions, outputs, and event behavior visible", slide: 14 },
-    { icon: "4", title: "Carry it into CD", subtitle: "Readiness to release", blurb: "Prepare evidence while protected jobs keep deployment authority", slide: 18 }
+    { icon: "3", title: "Bound effects", subtitle: "Security and CI", blurb: "Keep permissions, outputs, and event behavior visible", slide: 16 },
+    { icon: "4", title: "Carry it into CD", subtitle: "Readiness to release", blurb: "Prepare evidence while protected jobs keep deployment authority", slide: 20 }
   ]'
 />
 
@@ -146,16 +146,63 @@ import GitHubBrandMark from './components/GitHubBrandMark.vue'
 # Markdown in, Actions workflow out
 <!-- SLIDE: What GitHub Agentic Workflows Does -->
 <div class="gh-slide">
-  <div class="gh-kicker">Product mechanism</div>
-  <h1>Author intent, compile controls, run in GitHub Actions</h1>
-  <div class="gh-flow">
-    <div class="gh-step"><span class="gh-label"><span class="i-carbon-document gh-icon" aria-hidden="true"></span>Source</span><strong>Markdown + YAML frontmatter</strong><p>Trigger, permissions, tools, instructions.</p></div>
-    <div class="gh-step"><span class="gh-label"><span class="i-carbon-terminal gh-icon" aria-hidden="true"></span>Compile</span><strong><code>gh aw compile</code></strong><p>Validate and generate the workflow lock.</p></div>
-    <div class="gh-step"><span class="gh-label"><span class="i-carbon-play gh-icon" aria-hidden="true"></span>Execute</span><strong>GitHub Actions</strong><p>Agent reads bounded repository context.</p></div>
-    <div class="gh-step"><span class="gh-label"><span class="i-carbon-search gh-icon" aria-hidden="true"></span>Observe</span><strong>Evidence + output</strong><p>Inspect logs, run result, and safe-output jobs.</p></div>
+  <div class="gh-kicker">What are GitHub Agentic Workflows?</div>
+  <h1>Give an Actions workflow an AI agent for context-aware tasks</h1>
+  <p class="gh-proposal">GitHub Agentic Workflows (<code>gh-aw</code>) is an open-source project for defining AI-powered repository automation in Markdown and running it through GitHub Actions.</p>
+  <div class="gh-grid3 gh-top-gap">
+    <div class="gh-card"><div class="gh-label"><span class="i-carbon-edit gh-icon" aria-hidden="true"></span>Developer defines</div><h2>Task and boundaries</h2><p>Describe the task in natural language; configure the trigger, tools, permissions, and allowed outputs.</p></div>
+    <div class="gh-card"><div class="gh-label"><span class="i-carbon-search gh-icon" aria-hidden="true"></span>Agent investigates</div><h2>Context and evidence</h2><p>The selected AI engine uses permitted tools to inspect the repository and reason about the task.</p></div>
+    <div class="gh-card"><div class="gh-label"><span class="i-carbon-send gh-icon" aria-hidden="true"></span>Workflow produces</div><h2>A bounded result</h2><p>The agent reports findings or requests an allowed output; review the run and its evidence.</p></div>
   </div>
-  <div class="gh-note">Version both the authored <code>.md</code> and generated <code>.lock.yml</code>; review the compiled workflow as executable policy.</div>
+  <div class="gh-note">Example: CI fails → the agent inspects logs and code → it proposes an evidence-linked diagnosis. The existing CI check still determines pass or fail.</div>
   <p class="gh-source">github/gh-aw · What are Agentic Workflows?</p>
+</div>
+
+---
+
+# One authored file becomes an Actions workflow
+<!-- SLIDE: Source and Compiled Workflow -->
+<div class="gh-slide">
+  <div class="gh-kicker"><span class="i-carbon-document gh-icon" aria-hidden="true"></span>Author and compile · illustrative excerpt</div>
+  <h1>Frontmatter and instructions share one Markdown file</h1>
+  <div class="gh-grid">
+    <div class="gh-card">
+      <div class="gh-label"><span class="i-carbon-edit gh-icon" aria-hidden="true"></span>Developer writes ci-failure.md</div>
+      <pre class="gh-code"><code>&#45;&#45;&#45;
+on:              # when to run
+permissions:     # what the job may read
+tools:           # what the agent may use
+safe-outputs:    # permitted write requests
+&#45;&#45;&#45;
+# Diagnose the completed CI run
+Inspect the failure and report evidence.</code></pre>
+    </div>
+    <div class="gh-card">
+      <div class="gh-label"><span class="i-carbon-terminal gh-icon" aria-hidden="true"></span>Developer runs gh aw compile</div>
+      <h2>ci-failure.md → ci-failure.lock.yml</h2>
+      <p>The CLI validates configuration and generates the Actions workflow. At runtime, the workflow loads the Markdown instructions.</p>
+      <p class="gh-top-gap">Review and commit the source and generated lock together.</p>
+    </div>
+  </div>
+  <div class="gh-note">This is a schematic excerpt, not a runnable file. The next code slides show the frontmatter and body of this same example.</div>
+  <p class="gh-source">Source: github.github.com/gh-aw/introduction/overview/</p>
+</div>
+
+---
+
+# An event starts an agent with bounded tools
+<!-- SLIDE: Agentic Workflow at Runtime -->
+<div class="gh-slide">
+  <div class="gh-kicker"><span class="i-carbon-flow gh-icon" aria-hidden="true"></span>Runtime · illustrative CI diagnosis</div>
+  <h1>GitHub Actions runs the agent when the event matches</h1>
+  <div class="gh-flow">
+    <div class="gh-step"><span class="gh-label"><span class="i-carbon-play gh-icon" aria-hidden="true"></span>Event</span><strong>CI completes</strong><p>A matching failed run starts the compiled workflow.</p></div>
+    <div class="gh-step"><span class="gh-label"><span class="i-carbon-search gh-icon" aria-hidden="true"></span>Agent</span><strong>Inspect evidence</strong><p>The selected AI engine uses allowed tools to read logs and repository context.</p></div>
+    <div class="gh-step"><span class="gh-label"><span class="i-carbon-send gh-icon" aria-hidden="true"></span>Request</span><strong>Propose a report</strong><p>The agent requests a comment only if the workflow allows it and has a target.</p></div>
+    <div class="gh-step"><span class="gh-label"><span class="i-carbon-security gh-icon" aria-hidden="true"></span>Handler</span><strong>Apply the boundary</strong><p>A separate safe-output job processes the allowed write under its scoped permissions.</p></div>
+  </div>
+  <div class="gh-note">Illustrative result: a linked run, evidence, and a hypothesis. If evidence or the PR target is missing, report the gap; the original CI result remains authoritative.</div>
+  <p class="gh-source">Source: github.github.com/gh-aw/introduction/overview/ · reference/safe-outputs/</p>
 </div>
 
 ---
@@ -165,7 +212,7 @@ import GitHubBrandMark from './components/GitHubBrandMark.vue'
 <CodeWithFeaturesSlide
   :partNumber="2"
   pillIcon="2"
-  pillLabel="YAML frontmatter excerpt"
+  pillLabel="ci-failure.md · YAML frontmatter"
   title="Scope the event, reads, and one possible write"
   codePosition="left"
   :code='{ language: "yaml", filename: "ci-failure.md · frontmatter excerpt", content: "on:\n  workflow_run:\n    workflows: [CI]\n    types: [completed]\n    branches: [main]\n    conclusion: [failure]\npermissions:\n  actions: read\n  contents: read\n  pull-requests: read\n  copilot-requests: write\ntools:\n  github:\n    toolsets: [actions, repos, pull_requests]\n  agentic-workflows:\nsafe-outputs:\n  add-comment:\n    target: \"*\"\n    max: 1" }'
@@ -182,7 +229,7 @@ import GitHubBrandMark from './components/GitHubBrandMark.vue'
 # Give the agent a testable assignment
 <!-- SLIDE: CI Diagnosis Instruction Contract -->
 <div class="gh-slide">
-  <div class="gh-kicker">Code · Markdown body</div>
+  <div class="gh-kicker">ci-failure.md · Markdown body</div>
   <h1>Ask for evidence, uncertainty, and an explicit stop</h1>
   <pre class="gh-code"><code>Diagnose only the completed run selected by this event.
 Identify its run ID, head SHA, failed job, and associated PR.

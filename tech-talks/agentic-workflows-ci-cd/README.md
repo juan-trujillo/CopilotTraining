@@ -1,6 +1,6 @@
 ---
 status: active
-updated: 2026-11-20
+updated: 2026-11-23
 section: "Delegate and Coordinate"
 audience: [developer-lead, github-admin, platform-engineer]
 level: advanced
@@ -58,7 +58,9 @@ references:
 
 ## The argument
 
-CI is already good at running deterministic checks. The opportunity for an agent is the reasoning work around those checks: correlate a failure with recent changes, explain evidence and uncertainty, or assemble release-readiness context. GitHub Agentic Workflows (`gh-aw`) puts that work in GitHub Actions, with Markdown instructions compiled into a standard Actions workflow.
+CI is already good at running deterministic checks. The opportunity for an agent is the reasoning work around those checks: correlate a failure with recent changes, explain evidence and uncertainty, or assemble release-readiness context. GitHub Agentic Workflows (`gh-aw`) is an open-source project for defining AI-powered repository automation in Markdown and running it through GitHub Actions. The selected AI engine uses configured tools to inspect context, reason about the task, and report findings or request an allowed output.
+
+A developer authors a single Markdown workflow: YAML frontmatter defines its trigger, permissions, tools, and allowed outputs, while the Markdown body gives the agent its task. `gh aw compile` validates the configuration and generates a `.lock.yml` Actions workflow; at runtime that workflow loads the Markdown instructions and runs the selected AI engine with the configured tools. A separate safe-output job can process an allowed write request. Review the source and generated lock together, and inspect the run's evidence rather than treating an agent's hypothesis as a CI result.
 
 The operating boundary is the central design decision: **let an agent interpret and prepare evidence; keep pass/fail policy, production credentials, and deployment authority in deterministic jobs and approved human controls.** An agent’s explanation is a useful input to engineering judgment, not a new check-run result or deployment approval.
 
@@ -78,13 +80,13 @@ By the end, attendees can:
 
 | Slides | Question | Minutes |
 |---|---|---:|
-| 1–6 | What CI/CD judgment is worth delegating? | 6 |
-| 7–13 | How does `gh-aw` turn repository intent into an observable run? | 14 |
-| 14–17 | How do evidence, safe outputs, and CI triggers bound that run? | 6 |
-| 18–24 | How does the pattern support release readiness safely? | 13 |
-| 25–26 | What should the team pilot and take back to its repo? | 3 |
-| 27 | References (untimed) | — |
-| 28 | Q&A | 2 |
+| 1–6 | What CI/CD judgment is worth delegating? | 7 |
+| 7–15 | How does `gh-aw` turn repository intent into an observable run? | 14.5 |
+| 16–19 | How do evidence, safe outputs, and CI triggers bound that run? | 6 |
+| 20–26 | How does the pattern support release readiness safely? | 12.5 |
+| 27–28 | What should the team pilot and take back to its repo? | 2 |
+| 29 | References (untimed) | — |
+| 30 | Q&A | 2 |
 | **Total** | **Talk + Q&A** | **44** |
 
 Use the matching [`talk-track.md`](talk-track.md) for slide objectives, timings, and speaker cues. The Slidev source is [`slides/tech-talks/agentic-workflows-ci-cd.md`](../../slides/tech-talks/agentic-workflows-ci-cd.md).

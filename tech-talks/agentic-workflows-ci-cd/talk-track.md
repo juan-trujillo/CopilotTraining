@@ -23,26 +23,28 @@ Use each objective to make the slide's answer explicit. Durations are speaker-ti
 | 6. The boundary: interpret, propose, verify, authorize | Give the audience a reusable four-part judgment model. | 2 min |
 | 7. Analyze and Report CI Failure | Introduce the diagnosis example and its source and lock artifacts. | 0.5 min |
 | 8. Markdown in, Actions workflow out | Define the product and its source/compiled artifact relationship. | 1.5 min |
-| 9. A workflow declares trigger, reads, and writes | Read the example frontmatter and identify its permissions and output scope. | 3 min |
-| 10. Give the agent a testable assignment | Show how instructions require evidence, uncertainty, and an explicit stop. | 2 min |
-| 11. Compile, inspect, then activate | Make generated workflow review part of the development loop. | 2 min |
-| 12. CI failure diagnosis, with evidence | Walk through one imagined failure report without presenting a hypothesis as a result. | 3 min |
-| 13. Separate the runner result from the domain result | Clarify what a successful agent run does—and does not—prove. | 2 min |
-| 14. Bound Effects | Introduce the write boundary, runtime trust, and downstream CI. | 0.5 min |
-| 15. Safe outputs separate request from authority | Explain buffered requests and separate scoped write jobs. | 1.5 min |
-| 16. Defense in depth has explicit trust boundaries | Name the runtime, config, and plan trust layers and what admins still review. | 2 min |
-| 17. Generated PRs need an intentional CI trigger | Surface the default-token event behavior and narrow recovery option. | 2 min |
-| 18. Readiness to Release | Introduce the move from CI diagnosis to release evidence. | 0.5 min |
-| 19. Carry the pattern into CD as readiness evidence | Assemble release evidence without delegating production deployment. | 2.5 min |
-| 20. Keep production promotion in a protected job | Explain the example Environment gate, reviewer, ref condition, and OIDC role. | 2 min |
-| 21. Make failure and recovery visible | Apply the checklist to a missing run, weak diagnosis, denied output, or blocked release. | 2 min |
-| 22. Universe 2026: two related launches | Report `gh-aw` GA and outcome-based Copilot Automations, keeping products distinct. | 2 min |
-| 23. Pick the control plane that fits the job | Compare `gh-aw`, Copilot Automations, and deterministic Actions by need. | 2 min |
-| 24. Pilot with one bounded workflow | Give leads and admins a staged, evidence-based adoption plan. | 2 min |
-| 25. Take the decision back to your repo | Recap what to delegate and what must remain a gate. | 1 min |
-| 26. What You Can Do Today | Translate the pilot into actions for today, this week, and this month. | 1 min |
-| 27. References | Keep official docs available for follow-up. | — |
-| 28. Thank you + Q&A | Take one or two short questions; return longer design questions to the team's review. | 2 min |
+| 9. One authored file becomes an Actions workflow | Connect frontmatter and instructions to the generated lock. | 1 min |
+| 10. An event starts an agent with bounded tools | Trace a CI event through the agent and a scoped output. | 1 min |
+| 11. A workflow declares trigger, reads, and writes | Read the example frontmatter and identify its permissions and output scope. | 2.5 min |
+| 12. Give the agent a testable assignment | Show how instructions require evidence, uncertainty, and an explicit stop. | 1.5 min |
+| 13. Compile, inspect, then activate | Make generated workflow review part of the development loop. | 2 min |
+| 14. CI failure diagnosis, with evidence | Walk through one imagined failure report without presenting a hypothesis as a result. | 2.5 min |
+| 15. Separate the runner result from the domain result | Clarify what a successful agent run does—and does not—prove. | 2 min |
+| 16. Bound Effects | Introduce the write boundary, runtime trust, and downstream CI. | 0.5 min |
+| 17. Safe outputs separate request from authority | Explain buffered requests and separate scoped write jobs. | 1.5 min |
+| 18. Defense in depth has explicit trust boundaries | Name the runtime, config, and plan trust layers and what admins still review. | 2 min |
+| 19. Generated PRs need an intentional CI trigger | Surface the default-token event behavior and narrow recovery option. | 2 min |
+| 20. Readiness to Release | Introduce the move from CI diagnosis to release evidence. | 0.5 min |
+| 21. Carry the pattern into CD as readiness evidence | Assemble release evidence without delegating production deployment. | 2.5 min |
+| 22. Keep production promotion in a protected job | Explain the example Environment gate, reviewer, ref condition, and OIDC role. | 2 min |
+| 23. Make failure and recovery visible | Apply the checklist to a missing run, weak diagnosis, denied output, or blocked release. | 2 min |
+| 24. Universe 2026: two related launches | Report `gh-aw` GA and outcome-based Copilot Automations, keeping products distinct. | 1.5 min |
+| 25. Pick the control plane that fits the job | Compare `gh-aw`, Copilot Automations, and deterministic Actions by need. | 2 min |
+| 26. Pilot with one bounded workflow | Give leads and admins a staged, evidence-based adoption plan. | 2 min |
+| 27. Take the decision back to your repo | Recap what to delegate and what must remain a gate. | 1 min |
+| 28. What You Can Do Today | Translate the pilot into actions for today, this week, and this month. | 1 min |
+| 29. References | Keep official docs available for follow-up. | — |
+| 30. Thank you + Q&A | Take one or two short questions; return longer design questions to the team's review. | 2 min |
 
 ## Slide-by-slide speaker cues
 
@@ -90,32 +92,48 @@ Use each objective to make the slide's answer explicit. Durations are speaker-ti
 
 ### Slide 8 — Markdown in, Actions workflow out
 
-**Objective:** Define the mechanism before the audience sees code.
+**Objective:** Define Agentic Workflows for an audience already familiar with Actions.
 
-**Say:** “An agentic workflow has YAML frontmatter for trigger and controls, plus Markdown instructions for the task. The `gh aw` CLI compiles it into a `.lock.yml` Actions workflow. You review and version both files.”
+**Say:** “GitHub Agentic Workflows is an open-source project for running AI-powered repository automation through Actions. You describe a task in natural language and configure the trigger, tools, permissions, and allowed outputs. The selected AI engine can use those tools to inspect context and reason about the task. For example, after a CI failure it can examine logs and code and propose an evidence-linked diagnosis. Your existing CI check still determines pass or fail. Next, we will see how that definition becomes an Actions workflow.”
 
-### Slide 9 — A workflow declares trigger, reads, and writes
+### Slide 9 — One authored file becomes an Actions workflow
+
+**Objective:** Show where the frontmatter, instructions, and generated workflow belong.
+
+**Say:** “This is a schematic of one authored file, `ci-failure.md`. The YAML frontmatter defines when it runs and its boundaries; the Markdown body tells the agent what to do. `gh aw compile` validates the configuration and generates `ci-failure.lock.yml`. Actions executes the lock, which loads the Markdown instructions at runtime. Review both files together.”
+
+**Transition:** “The next two code slides expand the frontmatter and body of this same illustrative file; neither is the generated lock.”
+
+### Slide 10 — An event starts an agent with bounded tools
+
+**Objective:** Trace one event through the runtime and distinguish a request from a write.
+
+**Say:** “Suppose the selected CI run fails. GitHub Actions starts the compiled workflow and the configured AI engine uses its permitted tools to inspect the logs and repository context. If configured and a PR target exists, the agent can request a comment; a separate safe-output job processes the allowed write. Inspect the run and its evidence. If evidence or the target is missing, report that gap rather than guessing.”
+
+**Emphasize:** This is an illustrative outcome, not a recorded run; a diagnosis does not change the original CI result.
+
+### Slide 11 — A workflow declares trigger, reads, and writes
 
 **Objective:** Read the representative failed-run configuration line by line.
 
-**Say:** “The event narrows the source to completed `CI` runs on `main` with a failure conclusion. The agent reads Actions and PR context. The separate safe-output handler can post at most one comment to an identified PR. That scope is the contract, not a promise that every run has enough context.”
+**Say:** “This is the frontmatter of the source file we just saw, not the compiled workflow. The event narrows the source to completed `CI` runs on `main` with a failure conclusion. The agent reads Actions and PR context. The separate safe-output handler can post at most one comment to an identified PR. That scope is the contract, not a promise that every run has enough context.”
 
 **Emphasize:** The example must be compiled and the lock reviewed before use. `workflow_run` is a privileged boundary in GitHub Actions; the security checks and branch/ref scope matter.
 For a first pilot, disable the comment output and inspect read-only reports before enabling this one bounded write.
 
-### Slide 10 — Give the agent a testable assignment
+### Slide 12 — Give the agent a testable assignment
 
 **Objective:** Show that natural-language instructions can require observable proof and bound the action.
 
-**Say:** “The prompt asks for the first useful error, exact run and head SHA, a bounded hypothesis, confidence, and the next deterministic check. It explicitly prohibits code edits, check reruns, approvals, and unsupported claims.”
+**Say:** “This is the Markdown body of that same source file, below its YAML frontmatter. The prompt asks for the first useful error, exact run and head SHA, a bounded hypothesis, confidence, and the next deterministic check. It explicitly prohibits code edits, check reruns, approvals, and unsupported claims.”
 
-### Slide 11 — Compile, inspect, then activate
+### Slide 13 — Compile, inspect, then activate
 
 **Objective:** Make safe development lifecycle part of the practice.
 
 **Say:** “The Markdown file is the authoring surface; the generated lock is what Actions executes. Compile with validation, inspect the event and effective permissions, then open a PR containing both artifacts. Review any added custom step as executable trusted code.”
 
-### Slide 12 — CI failure diagnosis, with evidence
+### Slide 14 — CI failure diagnosis, with evidence
 
 **Objective:** Demonstrate the expected output shape, not an invented success metric.
 
@@ -123,19 +141,19 @@ For a first pilot, disable the comment output and inspect read-only reports befo
 
 **Ask the room:** “Which evidence would make this diagnosis useful enough to act on in your repo?”
 
-### Slide 13 — Separate the runner result from the domain result
+### Slide 15 — Separate the runner result from the domain result
 
 **Objective:** Prevent a green agent job from being mistaken for a passed test or accepted diagnosis.
 
 **Say:** “The job can succeed because it posted a report. That is a runner result. The test may still be red; the diagnosis may still be wrong. Put those states in separate fields and links.”
 
-### Slide 14 — Bound Effects
+### Slide 16 — Bound Effects
 
 **Objective:** Introduce the boundaries around writes, runtime trust, and downstream CI.
 
 **Say:** “The next question is how the agent's request crosses into an actual write. We will inspect the handler, the runtime assumptions, and the identity that triggers downstream CI.”
 
-### Slide 15 — Safe outputs separate request from authority
+### Slide 17 — Safe outputs separate request from authority
 
 **Objective:** Explain why an agent should ask for a write rather than receive a general-purpose token.
 
@@ -143,7 +161,7 @@ For a first pilot, disable the comment output and inspect read-only reports befo
 
 **Caveat:** Safe outputs may be configured for different operations, including merge behavior. Do not imply they always enforce human approval; inspect the actual config and organization policy.
 
-### Slide 16 — Defense in depth has explicit trust boundaries
+### Slide 18 — Defense in depth has explicit trust boundaries
 
 **Objective:** Give GitHub admins an accurate security review checklist.
 
@@ -151,7 +169,7 @@ For a first pilot, disable the comment output and inspect read-only reports befo
 
 **Caveat:** Threat detection is another control, not a proof of safety. In the documented default warn mode, detection findings do not simply mean every action is blocked; know the configured policy.
 
-### Slide 17 — Generated PRs need an intentional CI trigger
+### Slide 19 — Generated PRs need an intentional CI trigger
 
 **Objective:** Expose the common event-cascade behavior and a least-privilege recovery.
 
@@ -159,67 +177,67 @@ For a first pilot, disable the comment output and inspect read-only reports befo
 
 **Do not:** Show a real token or normalize broad PAT use.
 
-### Slide 18 — Readiness to Release
+### Slide 20 — Readiness to Release
 
 **Objective:** Introduce release readiness as an evidence-gathering task, with promotion controlled separately.
 
 **Say:** “We can carry the same pattern into CD: assemble the evidence, expose gaps, and let the protected production job control promotion.”
 
-### Slide 19 — Carry the pattern into CD as readiness evidence
+### Slide 21 — Carry the pattern into CD as readiness evidence
 
 **Objective:** Show the safe extension from CI diagnosis to release preparation.
 
 **Say:** “Before a release, an agent can assemble what changed, link required checks, identify the staged artifact, and summarize staging evidence. That makes a human decision better informed. The proposed pattern keeps deployment in a conventional workflow with its own immutable artifact and policy.”
 
-### Slide 20 — Keep production promotion in a protected job
+### Slide 22 — Keep production promotion in a protected job
 
 **Objective:** Explain the conventional Actions control plane that remains authoritative.
 
 **Say:** “The example pins promotion to `main` and references the `production` Environment. Configure reviewers and branch rules there. A short-lived OIDC identity can reach a narrowly scoped cloud role in the deploy job. The agent never receives that authority or an input that bypasses it.”
 
-### Slide 21 — Make failure and recovery visible
+### Slide 23 — Make failure and recovery visible
 
 **Objective:** Leave the audience with an operational response for partial or incorrect outcomes.
 
 **Say:** “When evidence is missing, report that. When an output is denied, inspect the safe-output job and its policy. When CI does not start, check the actor and head SHA. When a release check fails, the protected deployment job remains blocked. Never convert an analysis outage into a deployment success.”
 
-### Slide 22 — Universe 2026: two related launches
+### Slide 24 — Universe 2026: two related launches
 
 **Objective:** Tie the design discussion to the current product landscape with exact distinctions.
 
 **Say:** “On October 28, GitHub announced Agentic Workflows GA. It also announced that Copilot Automations can use outcomes to propose improvements for review. Those are related developments, but separate products and control planes. The `gh-aw` sample remains source-controlled Markdown compiled to Actions.”
 
-### Slide 23 — Pick the control plane that fits the job
+### Slide 25 — Pick the control plane that fits the job
 
 **Objective:** Give leads and admins a practical selection heuristic.
 
 **Say:** “Choose `gh-aw` when workflow source and compiled Actions behavior need repo review. Consider Copilot Automations when the need is team-managed Copilot automation and outcome-based proposals. Keep deterministic Actions for assertions, promotion, and deploy. Some systems can combine all three, but draw their handoffs explicitly.”
 
-### Slide 24 — Pilot with one bounded workflow
+### Slide 26 — Pilot with one bounded workflow
 
 **Objective:** Convert the talk into a small pilot with measurable, non-invented outcomes.
 
 **Say:** “Start in a low-risk repo, read-only on a single failure class. Baseline diagnosis latency, maintainer time to first useful action, false or unsupported claims, output denials, and CI event behavior. Decide whether to proceed from those observations; do not set an adoption target before you have a baseline.”
 
-### Slide 25 — Take the decision back to your repo
+### Slide 27 — Take the decision back to your repo
 
 **Objective:** Close on the transferable principle.
 
 **Say:** “Choose one reasoning task, one evidence contract, one bounded output, and one human recovery path. Let the existing checks continue to decide whether code passed. Let the configured deployment policy decide who can promote.”
 
-### Slide 26 — What You Can Do Today
+### Slide 28 — What You Can Do Today
 
 **Objective:** Turn the pilot into concrete steps for today, this week, and this month.
 
 **Say:** “Today, pick a low-risk failure class and record the current effort. This week, try a read-only diagnosis and inspect the compiled lock and its evidence. This month, consider one safe output only if the pilot supports it, and keep deployment separate.”
 
-### Slide 27 — References
+### Slide 29 — References
 
 **Objective:** Make primary and supporting sources easy to find after the talk.
 
 **Say:** No narration needed; leave the links visible briefly.
 
-### Slide 28 — Thank you + Q&A
+### Slide 30 — Thank you + Q&A
 
 **Objective:** Take focused questions without obscuring the core boundary.
 
