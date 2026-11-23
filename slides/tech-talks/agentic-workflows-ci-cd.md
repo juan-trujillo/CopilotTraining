@@ -1,8 +1,18 @@
 ---
 theme: default
-class: gh-copilot-brand
+addons:
+  - "@/addons/github-copilot"
+  - "@/addons/agentic-workflows-ci-cd"
+colorSchema: dark
+class: gh-copilot-brand gh-ci-cd
+defaults:
+  class: gh-copilot-brand gh-ci-cd
 highlighter: shiki
 lineNumbers: false
+fonts:
+  sans: Mona Sans
+  mono: Mona Sans Mono
+  local: Mona Sans,Mona Sans Mono
 info: Agentic Workflows in CI/CD — CopilotTraining Tech Talk
 drawings: { persist: false }
 transition: slide-left
@@ -11,7 +21,7 @@ duration: 44
 mdc: true
 section: Delegate and Coordinate
 status: active
-updated: 2026-11-20
+updated: 2026-11-23
 ---
 
 <script setup>
@@ -26,42 +36,6 @@ import ThankYouSlide from './components/structure/ThankYouSlide.vue'
 import CodeWithFeaturesSlide from './components/CodeWithFeaturesSlide.vue'
 import GitHubBrandMark from './components/GitHubBrandMark.vue'
 </script>
-
-<style>
-@import './copilot-primitives.css';
-
-.gh-slide { height: 100%; padding: 2rem 3.5rem; display: flex; flex-direction: column; color: var(--gh-text); }
-.gh-kicker { color: var(--gh-purple); font: 700 0.75rem "Mona Sans Mono", monospace; letter-spacing: .08em; text-transform: uppercase; }
-.gh-slide h1 { font-size: 2rem; line-height: 1.12; font-weight: 750; margin: .55rem 0 1.2rem; color: var(--gh-text); }
-.gh-slide p { color: var(--gh-muted); font-size: 1.02rem; line-height: 1.5; }
-.gh-lead { color: var(--gh-text) !important; font-size: 1.35rem !important; line-height: 1.4 !important; max-width: 52rem; }
-.gh-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
-.gh-grid3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .8rem; }
-.gh-card { background: var(--gh-panel); border: 1px solid var(--gh-border); border-radius: .75rem; padding: 1rem 1.1rem; }
-.gh-card h2,.gh-card h3 { margin: 0 0 .45rem; color: var(--gh-text); font-size: 1.05rem; }
-.gh-card p { margin: 0; font-size: .92rem; }
-.gh-label { color: var(--gh-purple); font: 700 .72rem "Mona Sans Mono", monospace; text-transform: uppercase; }
-.gh-blue { color: #0969da; }
-.gh-green { color: #1a7f37; }
-.gh-purple { color: var(--gh-purple); }
-.gh-red { color: #cf222e; }
-.gh-flow { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: .65rem; margin-top: 1.5rem; }
-.gh-step { min-height: 8rem; padding: .95rem; border: 1px solid var(--gh-border); background: var(--gh-panel); border-radius: .7rem; }
-.gh-step strong { display: block; margin: .35rem 0; color: var(--gh-text); font-size: 1rem; }
-.gh-code { background: #0d1117; color: #e6edf3; border: 1px solid #30363d; border-radius: .7rem; padding: .9rem 1rem; font: .78rem/1.35 "Mona Sans Mono", Consolas, monospace; white-space: pre-wrap; overflow-wrap: anywhere; }
-.gh-code.tight { font-size: .7rem; line-height: 1.3; }
-.gh-note { border-left: 3px solid #8250df; background: var(--gh-panel); padding: .7rem .9rem; margin-top: .8rem; color: var(--gh-text); font-size: .9rem; }
-.gh-list { margin: .35rem 0 0; padding-left: 1.2rem; color: var(--gh-muted); line-height: 1.55; }
-.gh-list li { padding: .15rem 0; }
-.gh-stat { font-size: 1.5rem; font-weight: 750; color: var(--gh-text); }
-.gh-brand-mark { width: 2rem; height: 2rem; filter: brightness(0); }
-.gh-brand-lockup { display: flex; gap: .7rem; align-items: center; color: var(--gh-muted); font-size: .82rem; }
-.gh-spacer { flex: 1; }
-.gh-source { font: .7rem "Mona Sans Mono", monospace; color: var(--gh-muted); margin-top: .55rem; }
-.gh-top-gap { margin-top: .7rem; }
-.gh-stat-grid { margin-top: .5rem; }
-.gh-proposal { color: var(--gh-text) !important; }
-</style>
 
 # Agentic Workflows in CI/CD
 <!-- SLIDE: Title -->
@@ -114,9 +88,9 @@ import GitHubBrandMark from './components/GitHubBrandMark.vue'
   title="Find the Right Task"
   subtitle="Start with a CI/CD decision where repository context can improve the explanation."
   :cards='[
-    { icon: "1", title: "Observe", blurb: "Locate the run, SHA, and check" },
-    { icon: "2", title: "Interpret", blurb: "Explain evidence and uncertainty" },
-    { icon: "3", title: "Keep authority", blurb: "Preserve deterministic gates" }
+    { icon: "🔎", title: "Observe", blurb: "Locate the run, SHA, and check" },
+    { icon: "🧠", title: "Interpret", blurb: "Explain evidence and uncertainty" },
+    { icon: "🛡️", title: "Keep authority", blurb: "Preserve deterministic gates" }
   ]'
   :terminal='{ context: "CI → release", detail: "Reasoning can clarify the result; it does not replace the gate." }'
 />
@@ -129,8 +103,8 @@ import GitHubBrandMark from './components/GitHubBrandMark.vue'
   <div class="gh-kicker">Choose the task</div>
   <h1>Where can an agent add value?</h1>
   <div class="gh-grid gh-top-gap">
-    <div class="gh-card"><div class="gh-label">Good reasoning candidates</div><ul class="gh-list"><li>Explain unfamiliar CI failures</li><li>Correlate logs with recent changes</li><li>Summarize release evidence and gaps</li><li>Suggest the next diagnostic check</li></ul></div>
-    <div class="gh-card"><div class="gh-label">Keep as deterministic checks</div><ul class="gh-list"><li>Test pass/fail and coverage thresholds</li><li>Signature, provenance, and policy checks</li><li>Required status checks and branch rules</li><li>Environment approval and deployment job</li></ul></div>
+    <div class="gh-card"><div class="gh-label"><span class="i-carbon-search gh-icon" aria-hidden="true"></span>Good reasoning candidates</div><ul class="gh-list"><li>Explain unfamiliar CI failures</li><li>Correlate logs with recent changes</li><li>Summarize release evidence and gaps</li><li>Suggest the next diagnostic check</li></ul></div>
+    <div class="gh-card"><div class="gh-label"><span class="i-carbon-checkmark-outline gh-icon" aria-hidden="true"></span>Keep as deterministic checks</div><ul class="gh-list"><li>Test pass/fail and coverage thresholds</li><li>Signature, provenance, and policy checks</li><li>Required status checks and branch rules</li><li>Environment approval and deployment job</li></ul></div>
   </div>
   <p class="gh-source">Decision test: would varied context change the useful answer, or should the same input always produce the same assertion?</p>
 </div>
@@ -160,9 +134,9 @@ import GitHubBrandMark from './components/GitHubBrandMark.vue'
   title="Analyze and Report CI Failure"
   subtitle="Build a traceable diagnosis from the exact run and commit that failed."
   :cards='[
-    { icon: "1", title: "Trigger", blurb: "Select a completed failed run" },
-    { icon: "2", title: "Read", blurb: "Inspect logs and repository context" },
-    { icon: "3", title: "Report", blurb: "Propose a next deterministic check" }
+    { icon: "⚡", title: "Trigger", blurb: "Select a completed failed run" },
+    { icon: "📖", title: "Read", blurb: "Inspect logs and repository context" },
+    { icon: "📝", title: "Report", blurb: "Propose a next deterministic check" }
   ]'
   :terminal='{ context: "Source .md + compiled .lock.yml", detail: "Review both artifacts before enabling the workflow." }'
 />
@@ -248,8 +222,8 @@ If evidence or a PR target is missing, report missing data.</code></pre>
   <div class="gh-kicker">Walkthrough · illustrative output</div>
   <h1>Make a hypothesis useful without calling it a result</h1>
   <div class="gh-grid">
-    <div class="gh-card"><div class="gh-label">Observed</div><ul class="gh-list"><li>Run: CI #4812 · head <code>7ac41d2</code></li><li>Failed: <code>test/parser.spec.ts</code></li><li>Error: expected 3 tokens, received 4</li><li>Inspected parser and fixture; no files changed</li></ul></div>
-    <div class="gh-card"><div class="gh-label">Provisional hypothesis</div><p class="gh-proposal">A new delimiter may be tokenized differently from the fixture's expectation.</p><p><strong>Confidence: medium.</strong> Run the focused parser test on this SHA before changing the fixture.</p></div>
+    <div class="gh-card"><div class="gh-label"><span class="i-carbon-search-locate gh-icon" aria-hidden="true"></span>Observed</div><ul class="gh-list"><li>Run: CI #4812 · head <code>7ac41d2</code></li><li>Failed: <code>test/parser.spec.ts</code></li><li>Error: expected 3 tokens, received 4</li><li>Inspected parser and fixture; no files changed</li></ul></div>
+    <div class="gh-card"><div class="gh-label"><span class="i-carbon-idea gh-icon" aria-hidden="true"></span>Provisional hypothesis</div><p class="gh-proposal">A new delimiter may be tokenized differently from the fixture's expectation.</p><p><strong>Confidence: medium.</strong> Run the focused parser test on this SHA before changing the fixture.</p></div>
   </div>
   <div class="gh-note">Example data only. The agent report is not a test result; the next deterministic check decides whether the hypothesis holds.</div>
 </div>
@@ -262,9 +236,9 @@ If evidence or a PR target is missing, report missing data.</code></pre>
   <div class="gh-kicker">Read the evidence</div>
   <h1>A green analysis job can report a red test run</h1>
   <div class="gh-grid3 gh-stat-grid">
-    <div class="gh-card"><div class="gh-label">Runner status</div><div class="gh-stat gh-green">Succeeded</div><p>Agent job completed and published its report.</p></div>
-    <div class="gh-card"><div class="gh-label">Domain status</div><div class="gh-stat gh-red">Failed</div><p>Original CI check remains red at the source SHA.</p></div>
-    <div class="gh-card"><div class="gh-label">Decision</div><div class="gh-stat gh-blue">Investigate</div><p>Developer decides whether to change code, tests, or expectations.</p></div>
+    <div class="gh-card"><div class="gh-label"><span class="i-carbon-checkmark-outline gh-icon" aria-hidden="true"></span>Runner status</div><div class="gh-stat gh-green">Succeeded</div><p>Agent job completed and published its report.</p></div>
+    <div class="gh-card"><div class="gh-label"><span class="i-carbon-error gh-icon" aria-hidden="true"></span>Domain status</div><div class="gh-stat gh-red">Failed</div><p>Original CI check remains red at the source SHA.</p></div>
+    <div class="gh-card"><div class="gh-label"><span class="i-carbon-search gh-icon" aria-hidden="true"></span>Decision</div><div class="gh-stat gh-blue">Investigate</div><p>Developer decides whether to change code, tests, or expectations.</p></div>
   </div>
   <div class="gh-note">Link the source run and SHA. Never present “analysis succeeded” as “the change passed CI.”</div>
 </div>
@@ -278,9 +252,9 @@ If evidence or a PR target is missing, report missing data.</code></pre>
   title="Bound Effects"
   subtitle="Make the write boundary, runtime assumptions, and downstream CI behavior visible."
   :cards='[
-    { icon: "1", title: "Stage outputs", blurb: "Agent request is not yet a write" },
-    { icon: "2", title: "Review trust", blurb: "Inspect runner and configuration" },
-    { icon: "3", title: "Trace CI", blurb: "Check identity and source SHA" }
+    { icon: "📦", title: "Stage outputs", blurb: "Agent request is not yet a write" },
+    { icon: "🛡️", title: "Review trust", blurb: "Inspect runner and configuration" },
+    { icon: "🔎", title: "Trace CI", blurb: "Check identity and source SHA" }
   ]'
   :terminal='{ context: "Agent job ≠ safe-output job", detail: "Scoped writes still require policy review." }'
 />
@@ -339,9 +313,9 @@ If evidence or a PR target is missing, report missing data.</code></pre>
   title="Readiness to Release"
   subtitle="Let the agent gather evidence; keep production promotion in a protected job."
   :cards='[
-    { icon: "1", title: "Assemble", blurb: "Changes, checks, artifact, staging" },
-    { icon: "2", title: "Expose gaps", blurb: "Name missing or conflicting evidence" },
-    { icon: "3", title: "Protect", blurb: "Environment policy controls promotion" }
+    { icon: "📋", title: "Assemble", blurb: "Changes, checks, artifact, staging" },
+    { icon: "🔎", title: "Expose gaps", blurb: "Name missing or conflicting evidence" },
+    { icon: "🛡️", title: "Protect", blurb: "Environment policy controls promotion" }
   ]'
   :terminal='{ context: "Evidence → release owner", detail: "The agent cannot approve its own recommendation." }'
 />
@@ -354,8 +328,8 @@ If evidence or a PR target is missing, report missing data.</code></pre>
   <div class="gh-kicker">CD · evidence before authority</div>
   <h1>Let an agent assemble the release story</h1>
   <div class="gh-grid">
-    <div class="gh-card"><div class="gh-label">Inputs to summarize</div><ul class="gh-list"><li>Changes included in the release</li><li>Required check outcomes and source SHA</li><li>Artifact identifier or digest</li><li>Staging result, open risk, and rollback reference</li></ul></div>
-    <div class="gh-card"><div class="gh-label">Output to review</div><ul class="gh-list"><li>Evidence links, not copied secrets</li><li>Missing or conflicting signals</li><li>Clear uncertainty and next action</li><li>No deployment credential or approval claim</li></ul></div>
+    <div class="gh-card"><div class="gh-label"><span class="i-carbon-document gh-icon" aria-hidden="true"></span>Inputs to summarize</div><ul class="gh-list"><li>Changes included in the release</li><li>Required check outcomes and source SHA</li><li>Artifact identifier or digest</li><li>Staging result, open risk, and rollback reference</li></ul></div>
+    <div class="gh-card"><div class="gh-label"><span class="i-carbon-task-view gh-icon" aria-hidden="true"></span>Output to review</div><ul class="gh-list"><li>Evidence links, not copied secrets</li><li>Missing or conflicting signals</li><li>Clear uncertainty and next action</li><li>No deployment credential or approval claim</li></ul></div>
   </div>
   <div class="gh-note">This readiness-summary pattern is a design recommendation. Keep deployment execution in its own protected, deterministic Actions job.</div>
 </div>
@@ -499,6 +473,7 @@ jobs:
 # References
 <!-- SLIDE: References -->
 <ReferencesSlide
+  class="gh-reference-slide"
   :groups='[
     { title: "📖 Agentic Workflows", color: "purple", items: [
       { href: "https://github.com/github/gh-aw", label: "github/gh-aw", description: "Source repository and project" },
@@ -534,4 +509,6 @@ jobs:
     { value: "Verify", detail: "keep deterministic checks" },
     { value: "Authorize", detail: "protect production promotion" }
   ]'
-/>
+>
+  <template #logo><GitHubBrandMark class="gh-brand-mark" /></template>
+</ThankYouSlide>

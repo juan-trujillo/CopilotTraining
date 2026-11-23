@@ -1,0 +1,183 @@
+html.dark:has(.gh-ci-cd) {
+  --gh-canvas: #0d1117;
+  --gh-panel: #161b22;
+  --gh-border: #30363d;
+  --gh-text: #f0f6fc;
+  --gh-muted: #a4afbd;
+  --gh-purple: #bc8cff;
+}
+
+.slidev-layout.gh-ci-cd {
+  position: relative;
+}
+
+.slidev-layout.gh-ci-cd::after {
+  content: "";
+  position: absolute;
+  right: 0.75rem;
+  bottom: 0.35rem;
+  width: 2rem;
+  height: 2rem;
+  background: url("../../../../assets/brand/github/GitHub_Invertocat_White_Clearspace.svg") center / contain no-repeat;
+  opacity: 0.8;
+  pointer-events: none;
+}
+
+.gh-ci-cd .gh-brand-mark {
+  width: 2rem;
+  height: 2rem;
+  filter: brightness(0) invert(1);
+}
+
+.gh-ci-cd .gh-slide {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  color: var(--gh-text);
+}
+
+.gh-ci-cd .gh-kicker,
+.gh-ci-cd .gh-label {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: var(--gh-purple);
+  font: 700 0.72rem "Mona Sans Mono", monospace;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.gh-ci-cd .gh-kicker {
+  margin-bottom: 0.5rem;
+}
+
+.gh-ci-cd .gh-icon {
+  display: inline-block;
+  flex: none;
+  width: 1.1rem;
+  height: 1.1rem;
+}
+
+.gh-ci-cd .gh-slide h1 {
+  color: var(--gh-text);
+  font-size: 2rem;
+  line-height: 1.12;
+  font-weight: 750;
+  margin: 0 0 1.2rem;
+}
+
+.gh-ci-cd .gh-slide p {
+  color: var(--gh-muted);
+  font-size: 1rem;
+  line-height: 1.45;
+}
+
+.gh-ci-cd .gh-grid,
+.gh-ci-cd .gh-grid3,
+.gh-ci-cd .gh-flow {
+  display: grid;
+  gap: 0.8rem;
+}
+
+.gh-ci-cd .gh-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.gh-ci-cd .gh-grid3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.gh-ci-cd .gh-flow {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  margin-top: 1rem;
+}
+
+.gh-ci-cd .gh-card,
+.gh-ci-cd .gh-step {
+  background: var(--gh-panel);
+  border: 1px solid var(--gh-border);
+  border-radius: 0.6rem;
+  padding: 1rem;
+}
+
+.gh-ci-cd .gh-card h2,
+.gh-ci-cd .gh-card h3 {
+  margin: 0.35rem 0 0.45rem;
+  color: var(--gh-text);
+  font-size: 1.05rem;
+}
+
+.gh-ci-cd .gh-card p,
+.gh-ci-cd .gh-step p {
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+.gh-ci-cd .gh-step {
+  min-height: 8rem;
+}
+
+.gh-ci-cd .gh-step strong {
+  display: block;
+  margin: 0.5rem 0;
+  color: var(--gh-text);
+  font-size: 1rem;
+}
+
+.gh-ci-cd .gh-code {
+  background: #010409;
+  color: #e6edf3;
+  border: 1px solid var(--gh-border);
+  border-radius: 0.6rem;
+  padding: 0.85rem 1rem;
+  font: 0.78rem / 1.35 "Mona Sans Mono", monospace;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.gh-ci-cd .gh-code.tight {
+  font-size: 0.7rem;
+  line-height: 1.3;
+}
+
+.gh-ci-cd .gh-note {
+  border-left: 3px solid #a371f7;
+  background: var(--gh-panel);
+  border-radius: 0 0.4rem 0.4rem 0;
+  padding: 0.7rem 0.9rem;
+  margin-top: 0.8rem;
+  color: var(--gh-text);
+  font-size: 0.9rem;
+}
+
+.gh-ci-cd .gh-list {
+  margin: 0.5rem 0 0;
+  padding-left: 1.2rem;
+  color: var(--gh-muted);
+  line-height: 1.5;
+}
+
+.gh-ci-cd .gh-list li {
+  padding: 0.12rem 0;
+}
+
+.gh-ci-cd .gh-stat {
+  font-size: 1.5rem;
+  font-weight: 750;
+}
+
+.gh-ci-cd .gh-blue { color: #79c0ff; }
+.gh-ci-cd .gh-green { color: #3fb950; }
+.gh-ci-cd .gh-red { color: #ff7b72; }
+.gh-ci-cd .gh-source {
+  color: var(--gh-muted);
+  font: 0.7rem / 1.4 "Mona Sans Mono", monospace;
+  margin-top: 0.7rem;
+}
+.gh-ci-cd .gh-top-gap,
+.gh-ci-cd .gh-stat-grid { margin-top: 0.5rem; }
+.gh-ci-cd .gh-proposal { color: var(--gh-text) !important; }
+
+.gh-ci-cd .gh-reference-slide .grid.grid-cols-2 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
