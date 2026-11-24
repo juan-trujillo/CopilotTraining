@@ -1,6 +1,6 @@
 ---
 status: active
-updated: 2026-11-23
+updated: 2026-11-24
 section: "Delegate and Coordinate"
 audience: [developer-lead, github-admin, platform-engineer]
 level: advanced
@@ -184,7 +184,7 @@ Pass the immutable digest of the artifact that passed CI and staging to the depl
 | Trigger | Source workflow, branch, conclusion, run ID, head SHA | Re-run only after confirming the intended producer event and repository/ref |
 | Agent analysis | Run logs, selected files, cited evidence, uncertainty | Correct missing context or tool scope; do not convert a guess into a blocking check |
 | Safe output | Compiled `.lock.yml`, allowed operation, target, limits, detector result | Tighten output policy; inspect detector and safe-output job logs before retry |
-| CI rerun | New run SHA and actor | `GITHUB_TOKEN`-created PRs do not trigger CI by default; configure a dedicated PAT/GitHub App only when required |
+| CI rerun | Run approval state, SHA, and actor | For `GITHUB_TOKEN`-created PRs, `opened`, `synchronize`, and `reopened` can produce approval-required runs; token-created pushes generally do not start a new run. Check the [Actions event rules](https://docs.github.com/en/actions/how-tos/write-workflows/choose-when-workflows-run/trigger-a-workflow#triggering-a-workflow-from-a-workflow); use a narrowly scoped PAT/GitHub App only when automatic triggering is required |
 | CD promotion | Environment rules, artifact digest, checks, reviewer, deployment record | Block promotion; fix the deterministic check or ask the named release owner to resolve policy |
 
 Safe outputs and threat detection are defense-in-depth controls, not proof that arbitrary content is safe. Review the compiled workflow and the trusted executable steps, permissions, credentials, runner, and network policy. A failed or missing agent analysis should remain visible as an analysis failure; the existing required CI checks stay authoritative.

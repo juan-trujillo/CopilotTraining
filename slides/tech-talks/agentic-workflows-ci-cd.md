@@ -356,12 +356,13 @@ If evidence or a PR target is missing, report missing data.</code></pre>
 <!-- SLIDE: CI Triggering Behavior -->
 <div class="gh-slide">
   <div class="gh-kicker">Operational gotcha</div>
-  <h1>Default <code>GITHUB_TOKEN</code> PRs do not start CI</h1>
+  <h1>Default-token PRs may require approval to run CI</h1>
   <div class="gh-grid">
-    <div class="gh-card"><div class="gh-label"><span class="i-carbon-branch gh-icon" aria-hidden="true"></span>Expected</div><h2>Agent opens a PR</h2><p>Team expects ordinary <code>push</code> / <code>pull_request</code> checks to run.</p></div>
-    <div class="gh-card"><div class="gh-label"><span class="i-carbon-warning gh-icon" aria-hidden="true"></span>Observed</div><h2>No downstream run</h2><p>GitHub suppresses event cascades for PRs created with the default Actions token.</p></div>
+    <div class="gh-card"><div class="gh-label"><span class="i-carbon-branch gh-icon" aria-hidden="true"></span>Pull request events</div><h2>Runs can await approval</h2><p>For <code>opened</code>, <code>synchronize</code>, or <code>reopened</code>, a user with write access can approve the workflow runs.</p></div>
+    <div class="gh-card"><div class="gh-label"><span class="i-carbon-warning gh-icon" aria-hidden="true"></span>Push events</div><h2>New runs generally suppressed</h2><p>A push made with <code>GITHUB_TOKEN</code> generally does not trigger a new workflow run.</p></div>
   </div>
-  <div class="gh-note">If required, configure a narrowly scoped PAT or GitHub App for the extra empty-commit trigger documented by <code>gh-aw</code>. Confirm run actor and SHA. Never paste a token into workflow source.</div>
+  <div class="gh-note">Check for an approval-required run and its SHA. If automatic CI is needed, consider the documented, narrowly scoped GitHub App or PAT trigger.</div>
+  <p class="gh-source">GitHub Actions · Triggering a workflow from a workflow</p>
 </div>
 
 ---
