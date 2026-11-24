@@ -178,6 +178,87 @@ html.dark:has(.gh-ci-cd) {
 .gh-ci-cd .gh-stat-grid { margin-top: 0.5rem; }
 .gh-ci-cd .gh-proposal { color: var(--gh-text) !important; }
 
+.gh-ci-cd .gh-overview h1 {
+  font-size: 2.3rem;
+  margin-bottom: 0.6rem;
+}
+
+.gh-ci-cd .gh-overview .gh-overview-subtitle {
+  margin: 0;
+  color: #b6c1cf;
+  opacity: 1;
+}
+
+.gh-ci-cd .gh-overview-flow {
+  display: grid;
+  grid-template-columns: 1fr 3.8rem 1fr 3.8rem 1.08fr;
+  align-items: center;
+  margin-top: 2rem;
+}
+
+.gh-ci-cd .gh-overview-box,
+.gh-ci-cd .gh-overview-sandbox {
+  background: var(--gh-panel);
+  border: 1px solid #484f58;
+  border-radius: 0.9rem;
+  padding: 1.2rem;
+}
+
+.gh-ci-cd .gh-overview-box {
+  height: 12.7rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.gh-ci-cd .gh-overview-flow strong {
+  font-size: 1.55rem;
+  line-height: 1.1;
+}
+
+.gh-ci-cd .gh-overview-flow p {
+  color: #b6c1cf;
+  font-size: 0.9rem;
+  line-height: 1.35;
+  margin: 0;
+}
+
+.gh-ci-cd .gh-overview-arrow {
+  text-align: center;
+  color: var(--gh-purple);
+  font: 700 0.65rem "Mona Sans Mono", monospace;
+}
+
+.gh-ci-cd .gh-overview-arrow b {
+  display: block;
+  font: 400 1.7rem "Mona Sans", sans-serif;
+  margin: 0.25rem 0;
+}
+
+.gh-ci-cd .gh-overview-sandbox {
+  height: 15.2rem;
+  border-color: #8b70cb;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.gh-ci-cd .gh-overview-agent {
+  background: #211b2e;
+  border: 1px solid #6e5a9a;
+  border-radius: 0.6rem;
+  flex: 1;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.6rem;
+}
+
+.gh-ci-cd .gh-overview .gh-note {
+  margin-top: 1.7rem;
+}
+
 .gh-ci-cd .gh-reference-slide .grid.grid-cols-2 {
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }

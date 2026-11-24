@@ -1,6 +1,6 @@
 ---
 status: active
-updated: 2026-11-23
+updated: 2026-11-24
 section: "Delegate and Coordinate"
 ---
 
@@ -22,7 +22,7 @@ Use each objective to make the slide's answer explicit. Durations are speaker-ti
 | 5. Reason over varied evidence; keep assertions deterministic | Separate deterministic verification from context-heavy interpretation. | 1.5 min |
 | 6. The boundary: interpret, propose, verify, authorize | Give the audience a reusable four-part judgment model. | 2 min |
 | 7. Analyze and Report CI Failure | Introduce the diagnosis example and its source and lock artifacts. | 0.5 min |
-| 8. Markdown in, Actions workflow out | Define the product and its source/compiled artifact relationship. | 1.5 min |
+| 8. GitHub Agentic Workflows | Trace Markdown through compilation, Actions, and the sandboxed agent. | 1.5 min |
 | 9. One authored file becomes an Actions workflow | Connect frontmatter and instructions to the generated lock. | 1 min |
 | 10. An event starts an agent with bounded tools | Trace a CI event through the agent and a scoped output. | 1 min |
 | 11. A workflow declares trigger, reads, and writes | Read the example frontmatter and identify its permissions and output scope. | 2.5 min |
@@ -90,11 +90,13 @@ Use each objective to make the slide's answer explicit. Durations are speaker-ti
 
 **Say:** “Now we will follow a failed CI run: select it, read the relevant evidence, and report a next check. The Markdown source and compiled lock are both part of the review.”
 
-### Slide 8 — Markdown in, Actions workflow out
+### Slide 8 — GitHub Agentic Workflows
 
-**Objective:** Define Agentic Workflows for an audience already familiar with Actions.
+**Objective:** Explain how Agentic Workflows adds a bounded AI agent to GitHub Actions.
 
-**Say:** “GitHub Agentic Workflows is an open-source project for running AI-powered repository automation through Actions. You describe a task in natural language and configure the trigger, tools, permissions, and allowed outputs. The selected AI engine can use those tools to inspect context and reason about the task. For example, after a CI failure it can examine logs and code and propose an evidence-linked diagnosis. Your existing CI check still determines pass or fail. Next, we will see how that definition becomes an Actions workflow.”
+**Say:** “GitHub Agentic Workflows is an open-source project for running AI-powered repository automation through Actions. Starting on the left, a developer writes the task and its boundaries in Markdown. The `gh aw` CLI compiles that source into an Actions workflow, which runs when its event matches. Actions starts the selected AI agent in a sandboxed runtime; it uses permitted tools to inspect context and report findings. For example, after a CI failure the agent can examine logs and propose a diagnosis. The CI check still determines pass or fail.”
+
+**Transition:** “Let's open the Markdown source and see how it relates to the generated workflow.”
 
 ### Slide 9 — One authored file becomes an Actions workflow
 

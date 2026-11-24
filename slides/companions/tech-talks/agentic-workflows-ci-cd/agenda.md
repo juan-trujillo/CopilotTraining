@@ -4,7 +4,7 @@ subtitle: "Reasoning beside the pipeline; authority stays explicit"
 slug: agentic-workflows-ci-cd
 category: tech-talks
 duration: 44
-updated: 2026-11-23
+updated: 2026-11-24
 ---
 
 # Agentic Workflows in CI/CD

@@ -21,7 +21,7 @@ duration: 44
 mdc: true
 section: Delegate and Coordinate
 status: active
-updated: 2026-11-23
+updated: 2026-11-24
 ---
 
 <script setup>
@@ -143,19 +143,32 @@ import GitHubBrandMark from './components/GitHubBrandMark.vue'
 
 ---
 
-# Markdown in, Actions workflow out
+# GitHub Agentic Workflows
 <!-- SLIDE: What GitHub Agentic Workflows Does -->
-<div class="gh-slide">
+<div class="gh-slide gh-overview">
   <div class="gh-kicker">What are GitHub Agentic Workflows?</div>
-  <h1>Give an Actions workflow an AI agent for context-aware tasks</h1>
-  <p class="gh-proposal">GitHub Agentic Workflows (<code>gh-aw</code>) is an open-source project for defining AI-powered repository automation in Markdown and running it through GitHub Actions.</p>
-  <div class="gh-grid3 gh-top-gap">
-    <div class="gh-card"><div class="gh-label"><span class="i-carbon-edit gh-icon" aria-hidden="true"></span>Developer defines</div><h2>Task and boundaries</h2><p>Describe the task in natural language; configure the trigger, tools, permissions, and allowed outputs.</p></div>
-    <div class="gh-card"><div class="gh-label"><span class="i-carbon-search gh-icon" aria-hidden="true"></span>Agent investigates</div><h2>Context and evidence</h2><p>The selected AI engine uses permitted tools to inspect the repository and reason about the task.</p></div>
-    <div class="gh-card"><div class="gh-label"><span class="i-carbon-send gh-icon" aria-hidden="true"></span>Workflow produces</div><h2>A bounded result</h2><p>The agent reports findings or requests an allowed output; review the run and its evidence.</p></div>
+  <h1>GitHub Agentic Workflows</h1>
+  <p class="gh-overview-subtitle">Define a task in Markdown. Run an AI agent through GitHub Actions.</p>
+  <div class="gh-overview-flow">
+    <div class="gh-overview-box">
+      <div class="gh-label">Developer authors</div>
+      <strong>Markdown</strong>
+      <p>Task instructions, trigger, tools and permissions</p>
+    </div>
+    <div class="gh-overview-arrow"><span>gh aw</span><b>→</b><span>compile</span></div>
+    <div class="gh-overview-box">
+      <div class="gh-label">Workflow runs</div>
+      <strong>GitHub Actions</strong>
+      <p>Runs the generated <code>.lock.yml</code> on a matching event</p>
+    </div>
+    <div class="gh-overview-arrow"><span>starts</span><b>→</b><span>agent</span></div>
+    <div class="gh-overview-sandbox">
+      <div class="gh-label">Sandboxed agent runtime</div>
+      <div class="gh-overview-agent"><strong>AI agent</strong><p>Uses permitted tools to inspect context and report findings</p></div>
+      <div class="gh-label">Configured boundaries</div>
+    </div>
   </div>
-  <div class="gh-note">Example: CI fails → the agent inspects logs and code → it proposes an evidence-linked diagnosis. The existing CI check still determines pass or fail.</div>
-  <p class="gh-source">github/gh-aw · What are Agentic Workflows?</p>
+  <div class="gh-note"><strong>Example:</strong> CI fails → the agent examines logs and proposes a diagnosis. The CI check still determines pass or fail.</div>
 </div>
 
 ---
